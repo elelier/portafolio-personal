@@ -1,6 +1,6 @@
 {
   "homepage": "https://elelier.github.io/portafolio-personal",
-  "name": "portafolio-personal",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
