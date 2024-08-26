@@ -1,9 +1,10 @@
 import React from 'react';
+import './css/HeroBanner.css'; // Asegúrate de importar el archivo CSS
 
 function HeroBanner() {
   return (
-    <header id="inicio" className="main-header">
-      <div className="header-content">
+    <header id="inicio" className="hero-banner">
+      <div className="hero-content">
         <h1>Elier Loya</h1>
         <h2>Impulsando tu negocio hacia el futuro</h2>
         <p>
