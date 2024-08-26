@@ -1,0 +1,97 @@
+/* Estilos para el Portafolio Detallado */
+.portafolio-detallado {
+    margin: 60px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  
+  .portafolio-detallado h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  
+  .proyecto-detalle {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .proyecto-detalle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .proyecto-detalle h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .proyecto-detalle p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .proyecto-detalle h3 {
+    color: #2c3e50;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .proyecto-detalle ul {
+    padding-left: 20px;
+    color: #555;
+  }
+  
+  .proyecto-detalle li {
+    margin-bottom: 5px;
+  }
+  
+  /* Estilos para proyectos destacados */
+  .proyecto-detalle.destacado {
+    border: 2px solid #3498db;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .proyecto-detalle.destacado::before {
+    content: '🌟 Destacado';
+    position: absolute;
+    top: 10px;
+    right: -30px;
+    background: #3498db;
+    color: white;
+    padding: 5px 30px;
+    transform: rotate(45deg);
+    font-size: 0.8em;
+  }
+  
+  /* Estilos para proyectos de IA */
+  .proyecto-detalle.ia {
+    background: linear-gradient(145deg, #ffffff, #e6f7ff);
+  }
+  
+  .proyecto-detalle.ia h2 {
+    color: #0056b3;
+  }
+  
+  /* Animación para fade in */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .proyecto-detalle {
+    animation: fadeInUp 0.5s ease-out;
+  }
+  
