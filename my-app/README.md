@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Elier Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Elier Portfolio** is a personal portfolio website showcasing the work and skills of the developer. The project is built using modern web technologies and is hosted on GitHub Pages.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Deployment](#deployment)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project is organized as follows:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+/
+├── public/                 # Public assets and index.html
+├── src/                    # Source files (components, assets, styles)
+├── .github/                # GitHub-specific files (Actions, Pages configuration)
+├── README.md               # Project documentation
+├── package.json            # Project dependencies and scripts
+└── .gitignore              # Files and folders to ignore in version control
+```
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **HTML/CSS**: For the structure and responsive design of the site.
+- **JavaScript (React)**: To add interactivity and dynamic content.
+- **Git/GitHub**: For version control and project management.
+- **GitHub Pages**: Used for hosting the portfolio website.
+- **Custom Domain**: Configured for personalized URL.
 
-### `npm run build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The portfolio is deployed using GitHub Pages. You can view it live at [Elier Portfolio](https://elelier.github.io/elier-portfolio).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### GitHub Pages Configuration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The project is configured to deploy from the `main` branch. Ensure that:
 
-### `npm run eject`
+- The content is served from the `/src` folder.
+- GitHub Pages is set to deploy from the root (`/`).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Make sure you have [Node.js](https://nodejs.org/) installed.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Installation
 
-## Learn More
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/elelier/elier-portfolio.git
+    cd elier-portfolio
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Running the App Locally
 
-### Code Splitting
+To run the application in development mode:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm start
+```
 
-### Analyzing the Bundle Size
+This will start the app and open it in your browser at [http://localhost:3000](http://localhost:3000). The page will automatically reload if you make changes to the code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Building for Production
 
-### Making a Progressive Web App
+To create an optimized production build:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm run build
+```
 
-### Advanced Configuration
+This will output the production files to the `build` directory, ready for deployment.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contributing
 
-### Deployment
+Contributions are welcome! Follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Fork the repository.
+2. Create a new branch:
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3. Make your changes and commit them:
+    ```bash
+    git commit -m "Add feature: your feature name"
+    ```
+4. Push to the branch:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+5. Open a Pull Request.
 
-### `npm run build` fails to minify
+Please ensure that your code follows the project's coding standards and is well-documented.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+---
