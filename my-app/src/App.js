@@ -22,6 +22,7 @@ function App() {
           title="Elier Loya - Transformando negocios con tecnología e innovación" 
           description="Portafolio de Elier Loya, especialista en transformación digital, e-commerce y optimización de operaciones."
         />
+        <p>Hello World</p> {/* Mensaje de prueba */}
         <Navegacion />
         <Routes>
           <Route path="/" element={
@@ -38,7 +39,6 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/entradas/2408_IA_Transforma_ecommerce" element={<Entrada />} />
-          {/* Añade más rutas para otras entradas del blog si es necesario */}
         </Routes>
         <Footer />
       </div>
