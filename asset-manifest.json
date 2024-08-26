@@ -1,16 +1,14 @@
 {
   "files": {
     "main.css": "/portafolio-personal/static/css/main.e7a2a761.css",
-    "main.js": "/portafolio-personal/static/js/main.183bc62c.js",
-    "static/js/453.1afb33d2.chunk.js": "/portafolio-personal/static/js/453.1afb33d2.chunk.js",
+    "main.js": "/portafolio-personal/static/js/main.d28d07d2.js",
     "static/media/2408_IA_Transforma_ecommerce": "/portafolio-personal/static/media/2408_IA_Transforma_ecommerce.a2d4efba93728866acc9",
     "index.html": "/portafolio-personal/index.html",
     "main.e7a2a761.css.map": "/portafolio-personal/static/css/main.e7a2a761.css.map",
-    "main.183bc62c.js.map": "/portafolio-personal/static/js/main.183bc62c.js.map",
-    "453.1afb33d2.chunk.js.map": "/portafolio-personal/static/js/453.1afb33d2.chunk.js.map"
+    "main.d28d07d2.js.map": "/portafolio-personal/static/js/main.d28d07d2.js.map"
   },
   "entrypoints": [
     "static/css/main.e7a2a761.css",
-    "static/js/main.183bc62c.js"
+    "static/js/main.d28d07d2.js"
   ]
 }
