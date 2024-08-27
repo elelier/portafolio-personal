@@ -1,6 +1,3 @@
-Aquí tienes la traducción completa al español:
-
-```
 # Elier Portfolio
 
 **Elier Portfolio** es un sitio web de portafolio personal que muestra el trabajo y las habilidades del desarrollador. El proyecto está construido utilizando tecnologías web modernas y está alojado en GitHub Pages.
@@ -112,4 +109,3 @@ Por favor, asegúrate de que tu código siga los estándares de codificación de
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
-```
