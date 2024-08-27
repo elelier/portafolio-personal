@@ -2,16 +2,16 @@
 
 **Elier Portfolio** es un sitio web de portafolio personal que muestra el trabajo y las habilidades del desarrollador. El proyecto está construido utilizando tecnologías web modernas y está alojado en GitHub Pages.
 
-## Tabla de Contenidos
+## 🗂️ Tabla de Contenidos
 
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [Despliegue](#despliegue)
-- [Comenzando](#comenzando)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
+- [📁 Estructura del Proyecto](#estructura-del-proyecto)
+- [🛠️ Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [🚀 Despliegue](#despliegue)
+- [🚧 Comenzando](#comenzando)
+- [🤝 Contribuciones](#contribuciones)
+- [📜 Licencia](#licencia)
 
-## Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
 El proyecto está organizado de la siguiente manera:
 
@@ -25,32 +25,32 @@ El proyecto está organizado de la siguiente manera:
 └── .gitignore              # Archivos y carpetas a ignorar en el control de versiones
 ```
 
-## Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
 - **HTML/CSS**: Para la estructura y el diseño responsivo del sitio.
 - **JavaScript (React)**: Para agregar interactividad y contenido dinámico.
 - **Git/GitHub**: Para el control de versiones y la gestión del proyecto.
 - **GitHub Pages**: Utilizado para alojar el sitio web del portafolio.
-- **Dominio Personalizado**: Configurado para una URL personalizada.
+- **🌐 Dominio Personalizado**: Configurado para una URL personalizada.
 
-## Despliegue
+## 🚀 Despliegue
 
 El portafolio está desplegado utilizando GitHub Pages. Puedes verlo en vivo en [Elier Portfolio](https://elelier.github.io/elier-portfolio).
 
-### Configuración de GitHub Pages
+### ⚙️ Configuración de GitHub Pages
 
 El proyecto está configurado para desplegarse desde la rama `main`. Asegúrate de que:
 
 - El contenido se sirva desde la carpeta `/src`.
 - GitHub Pages esté configurado para desplegar desde la raíz (`/`).
 
-## Comenzando
+## 🚧 Comenzando
 
-### Prerrequisitos
+### 📋 Prerrequisitos
 
 Asegúrate de tener [Node.js](https://nodejs.org/) instalado.
 
-### Instalación
+### 💻 Instalación
 
 1. Clona el repositorio:
     ```bash
@@ -63,7 +63,7 @@ Asegúrate de tener [Node.js](https://nodejs.org/) instalado.
     npm install
     ```
 
-### Ejecutando la Aplicación Localmente
+### ▶️ Ejecutando la Aplicación Localmente
 
 Para ejecutar la aplicación en modo de desarrollo:
 
@@ -73,7 +73,7 @@ npm start
 
 Esto iniciará la aplicación y la abrirá en tu navegador en [http://localhost:3000](http://localhost:3000). La página se recargará automáticamente si realizas cambios en el código.
 
-### Construcción para Producción
+### 🏗️ Construcción para Producción
 
 Para crear una versión optimizada para producción:
 
@@ -83,7 +83,7 @@ npm run build
 
 Esto generará los archivos de producción en el directorio `build`, listos para ser desplegados.
 
-## Contribuciones
+## 🤝 Contribuciones
 
 ¡Las contribuciones son bienvenidas! Sigue estos pasos:
 
@@ -104,7 +104,7 @@ Esto generará los archivos de producción en el directorio `build`, listos para
 
 Por favor, asegúrate de que tu código siga los estándares de codificación del proyecto y esté bien documentado.
 
-## Licencia
+## 📜 Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
