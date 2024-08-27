@@ -11,7 +11,8 @@ function Portafolio() {
         "Implementación de campañas para distintas redes sociales",
         "Integración de IA para generar cuentos personalizados"
       ],
-      tecnologias: ["React", "Node.js", "API development", "IA generativa", "Marketing digital"]
+      tecnologias: ["React", "Node.js", "API development", "IA generativa", "Marketing digital"],
+      link: "https://wonderlabs.studio"
     },
     {
       nombre: "Asistentes Virtuales",
@@ -22,7 +23,8 @@ function Portafolio() {
         "Desarrollo de un asistente para planificar, actualizar y evaluar proyectos",
         "Implementación de funciones para mantener la motivación y el enfoque en los logros"
       ],
-      tecnologias: ["HuggingFace", "Procesamiento de Lenguaje Natural", "Machine Learning", "Python"]
+      tecnologias: ["HuggingFace", "Procesamiento de Lenguaje Natural", "Machine Learning", "Python"],
+      link: "https://huggingface.co/chat/assistants?user=Elelier"
     },
     {
       nombre: "GoFarma",
@@ -33,7 +35,8 @@ function Portafolio() {
         "Tiempo de procesamiento por pedido de 2 minutos",
         "Optimización de envíos locales y nacionales"
       ],
-      tecnologias: ["ERP Olimpo", "Automatización de procesos", "Gestión de inventarios"]
+      tecnologias: ["ERP Olimpo", "Automatización de procesos", "Gestión de inventarios"],
+      link: "http://www.gofarma.com"
     },
     {
       nombre: "Farmalisto",
@@ -44,7 +47,8 @@ function Portafolio() {
         "Incremento del 144% en ventas",
         "Aumento del 58% en ticket promedio"
       ],
-      tecnologias: ["Mercado Libre", "Amazon", "Shopify", "NetSuite ERP", "IA para atención al cliente"]
+      tecnologias: ["Mercado Libre", "Amazon", "Shopify", "NetSuite ERP", "IA para atención al cliente"],
+      link: "https://www.farmalisto.com.mx/"
     },
     {
       nombre: "PepsiCo",
@@ -86,11 +90,19 @@ function Portafolio() {
                 ))}
               </ul>
             </div>
+            {proyecto.link && (
+              <div className="proyecto-cta">
+                <a href={proyecto.link} className="cta-button" target="_blank" rel="noopener noreferrer">
+                  ¡Descubre y Compra Ahora!
+                </a>
+              </div>
+            )}
           </div>
         ))}
       </div>
     </section>
   );
 }
+
 
 export default Portafolio;

@@ -742,3 +742,42 @@ body, html {
 .resultados, .tecnologias, .retos {
   margin-top: 20px;
 }
+
+/* Contenedor principal del proyecto */
+.proyecto-card {
+  position: relative; /* Necesario para que el botón se posicione correctamente */
+  padding-bottom: 60px; /* Espacio suficiente para el botón en la parte inferior */
+}
+
+/* Contenedor del botón de llamada a la acción */
+.proyecto-cta {
+  position: absolute;
+  bottom: 20px; /* Coloca el botón en la parte inferior */
+  right: 20px; /* Coloca el botón en la esquina derecha */
+}
+
+/* Estilo para el botón de llamada a la acción */
+.cta-button {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  background-color: #00cc99; /* Color verde neón para el botón */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-button:hover {
+  background-color: #009966; /* Color verde más oscuro al pasar el ratón */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+}

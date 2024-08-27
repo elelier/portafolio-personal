@@ -19,7 +19,8 @@ function Contacto() {
           <div className="redes-sociales">
             <a href="https://linkedin.com/in/elier/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://github.com/elelier" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="/public/assets/files/file_1.pdf" download>Descargar CV</a>
+            <a href="https://calendly.com/loya-elier/30min" target="_blank" rel="noopener noreferrer">Agenda 30 minutos</a>
+            <a href="/assets/files/file_1.pdf" download>Descargar CV</a>
           </div>
         </div>
       </div>
