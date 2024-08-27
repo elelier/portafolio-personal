@@ -93,7 +93,7 @@ function Portafolio() {
             {proyecto.link && (
               <div className="proyecto-cta">
                 <a href={proyecto.link} className="cta-button" target="_blank" rel="noopener noreferrer">
-                  ¡Descubre y Compra Ahora!
+                  ¡Conoce más aquí!
                 </a>
               </div>
             )}
