@@ -1,111 +1,115 @@
+Aquí tienes la traducción completa al español:
+
+```
 # Elier Portfolio
 
-**Elier Portfolio** is a personal portfolio website showcasing the work and skills of the developer. The project is built using modern web technologies and is hosted on GitHub Pages.
+**Elier Portfolio** es un sitio web de portafolio personal que muestra el trabajo y las habilidades del desarrollador. El proyecto está construido utilizando tecnologías web modernas y está alojado en GitHub Pages.
 
-## Table of Contents
+## Tabla de Contenidos
 
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Deployment](#deployment)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Despliegue](#despliegue)
+- [Comenzando](#comenzando)
+- [Contribuciones](#contribuciones)
+- [Licencia](#licencia)
 
-## Project Structure
+## Estructura del Proyecto
 
-The project is organized as follows:
+El proyecto está organizado de la siguiente manera:
 
 ```bash
 /
-├── public/                 # Public assets and index.html
-├── src/                    # Source files (components, assets, styles)
-├── .github/                # GitHub-specific files (Actions, Pages configuration)
-├── README.md               # Project documentation
-├── package.json            # Project dependencies and scripts
-└── .gitignore              # Files and folders to ignore in version control
+├── public/                 # Archivos públicos e index.html
+├── src/                    # Archivos fuente (componentes, recursos, estilos)
+├── .github/                # Archivos específicos de GitHub (Actions, configuración de Pages)
+├── README.md               # Documentación del proyecto
+├── package.json            # Dependencias y scripts del proyecto
+└── .gitignore              # Archivos y carpetas a ignorar en el control de versiones
 ```
 
-## Tech Stack
+## Tecnologías Utilizadas
 
-- **HTML/CSS**: For the structure and responsive design of the site.
-- **JavaScript (React)**: To add interactivity and dynamic content.
-- **Git/GitHub**: For version control and project management.
-- **GitHub Pages**: Used for hosting the portfolio website.
-- **Custom Domain**: Configured for personalized URL.
+- **HTML/CSS**: Para la estructura y el diseño responsivo del sitio.
+- **JavaScript (React)**: Para agregar interactividad y contenido dinámico.
+- **Git/GitHub**: Para el control de versiones y la gestión del proyecto.
+- **GitHub Pages**: Utilizado para alojar el sitio web del portafolio.
+- **Dominio Personalizado**: Configurado para una URL personalizada.
 
-## Deployment
+## Despliegue
 
-The portfolio is deployed using GitHub Pages. You can view it live at [Elier Portfolio](https://elelier.github.io/elier-portfolio).
+El portafolio está desplegado utilizando GitHub Pages. Puedes verlo en vivo en [Elier Portfolio](https://elelier.github.io/elier-portfolio).
 
-### GitHub Pages Configuration
+### Configuración de GitHub Pages
 
-The project is configured to deploy from the `main` branch. Ensure that:
+El proyecto está configurado para desplegarse desde la rama `main`. Asegúrate de que:
 
-- The content is served from the `/src` folder.
-- GitHub Pages is set to deploy from the root (`/`).
+- El contenido se sirva desde la carpeta `/src`.
+- GitHub Pages esté configurado para desplegar desde la raíz (`/`).
 
-## Getting Started
+## Comenzando
 
-### Prerequisites
+### Prerrequisitos
 
-Make sure you have [Node.js](https://nodejs.org/) installed.
+Asegúrate de tener [Node.js](https://nodejs.org/) instalado.
 
-### Installation
+### Instalación
 
-1. Clone the repository:
+1. Clona el repositorio:
     ```bash
     git clone https://github.com/elelier/elier-portfolio.git
     cd elier-portfolio
     ```
 
-2. Install dependencies:
+2. Instala las dependencias:
     ```bash
     npm install
     ```
 
-### Running the App Locally
+### Ejecutando la Aplicación Localmente
 
-To run the application in development mode:
+Para ejecutar la aplicación en modo de desarrollo:
 
 ```bash
 npm start
 ```
 
-This will start the app and open it in your browser at [http://localhost:3000](http://localhost:3000). The page will automatically reload if you make changes to the code.
+Esto iniciará la aplicación y la abrirá en tu navegador en [http://localhost:3000](http://localhost:3000). La página se recargará automáticamente si realizas cambios en el código.
 
-### Building for Production
+### Construcción para Producción
 
-To create an optimized production build:
+Para crear una versión optimizada para producción:
 
 ```bash
 npm run build
 ```
 
-This will output the production files to the `build` directory, ready for deployment.
+Esto generará los archivos de producción en el directorio `build`, listos para ser desplegados.
 
-## Contributing
+## Contribuciones
 
-Contributions are welcome! Follow these steps:
+¡Las contribuciones son bienvenidas! Sigue estos pasos:
 
-1. Fork the repository.
-2. Create a new branch:
+1. Haz un fork del repositorio.
+2. Crea una nueva rama:
     ```bash
-    git checkout -b feature/your-feature-name
+    git checkout -b feature/tu-nombre-de-característica
     ```
-3. Make your changes and commit them:
+3. Realiza tus cambios y haz commit:
     ```bash
-    git commit -m "Add feature: your feature name"
+    git commit -m "Agregar característica: tu nombre de característica"
     ```
-4. Push to the branch:
+4. Empuja la rama:
     ```bash
-    git push origin feature/your-feature-name
+    git push origin feature/tu-nombre-de-característica
     ```
-5. Open a Pull Request.
+5. Abre un Pull Request.
 
-Please ensure that your code follows the project's coding standards and is well-documented.
+Por favor, asegúrate de que tu código siga los estándares de codificación del proyecto y esté bien documentado.
 
-## License
+## Licencia
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
+```
