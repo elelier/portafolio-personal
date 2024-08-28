@@ -4,46 +4,7 @@ import './css/Blog.css'; // Importa los estilos del blog desde la carpeta css de
 
 function Blog() {
   const articulos = [
-    {
-      titulo: "Cómo la IA está Transformando el E-commerce",
-      fecha: "15 de Mayo, 2024",
-      resumen: "Exploramos las diversas formas en que la Inteligencia Artificial está revolucionando la industria del comercio electrónico, desde la personalización hasta la optimización de inventarios.",
-      link: "/entradas/2408_IA_Transforma_ecommerce", // Enlace a la entrada
-      etiquetas: ["IA", "E-commerce", "Tecnología"],
-      imagen: "https://via.placeholder.com/400x250?text=IA+en+E-commerce"
-    },
-    {
-      titulo: "5 Estrategias Clave para la Transformación Digital en 2024",
-      fecha: "3 de Abril, 2024",
-      resumen: "Analizamos las tendencias más importantes en transformación digital y cómo las empresas pueden implementarlas para mantenerse competitivas.",
-      link: "/entradas/entrada2", // Enlace a otra entrada de blog
-      etiquetas: ["Transformación Digital", "Estrategias", "2024"],
-      imagen: "https://via.placeholder.com/400x250?text=Transformación+Digital"
-    },
-    {
-      titulo: "Optimización de la Cadena de Suministro con Machine Learning",
-      fecha: "20 de Marzo, 2024",
-      resumen: "Descubre cómo el aprendizaje automático está mejorando la eficiencia y reduciendo costos en la gestión de la cadena de suministro.",
-      link: "/entradas/entrada3", // Enlace a otra entrada de blog
-      etiquetas: ["Machine Learning", "Cadena de Suministro", "Optimización"],
-      imagen: "https://via.placeholder.com/400x250?text=Machine+Learning"
-    },
-    {
-      titulo: "Innovaciones en Salud Digital: Lo Que Nos Traerá el Futuro",
-      fecha: "12 de Febrero, 2024",
-      resumen: "Explora las últimas innovaciones en tecnología de salud digital y cómo están cambiando la manera en que se brinda atención médica.",
-      link: "/entradas/entrada4", // Enlace a otra entrada de blog
-      etiquetas: ["Salud Digital", "Innovaciones", "Tecnología"],
-      imagen: "https://via.placeholder.com/400x250?text=Salud+Digital"
-    },
-    {
-      titulo: "Automatización en el Logística: Más Allá del Simple Transporte",
-      fecha: "5 de Enero, 2024",
-      resumen: "Analizamos cómo la automatización está revolucionando la logística, desde el almacenamiento hasta la entrega final.",
-      link: "/entradas/entrada5", // Enlace a otra entrada de blog
-      etiquetas: ["Automatización", "Logística", "Transporte"],
-      imagen: "https://via.placeholder.com/400x250?text=Automatización+Logística"
-    }
+    
   ];
 
   return (
@@ -81,3 +42,43 @@ function Blog() {
 }
 
 export default Blog;
+/* {
+      titulo: "Cómo la IA está Transformando el E-commerce",
+      fecha: "15 de Mayo, 2024",
+      resumen: "Exploramos las diversas formas en que la Inteligencia Artificial está revolucionando la industria del comercio electrónico, desde la personalización hasta la optimización de inventarios.",
+      link: "/entradas/entrada1", // Enlace a la entrada
+      etiquetas: ["IA", "E-commerce", "Tecnología"],
+      imagen: "https://via.placeholder.com/400x250?text=IA+en+E-commerce"
+    },
+    {
+      titulo: "5 Estrategias Clave para la Transformación Digital en 2024",
+      fecha: "3 de Abril, 2024",
+      resumen: "Analizamos las tendencias más importantes en transformación digital y cómo las empresas pueden implementarlas para mantenerse competitivas.",
+      link: "/entradas/entrada2", // Enlace a otra entrada de blog
+      etiquetas: ["Transformación Digital", "Estrategias", "2024"],
+      imagen: "https://via.placeholder.com/400x250?text=Transformación+Digital"
+    },
+    {
+      titulo: "Optimización de la Cadena de Suministro con Machine Learning",
+      fecha: "20 de Marzo, 2024",
+      resumen: "Descubre cómo el aprendizaje automático está mejorando la eficiencia y reduciendo costos en la gestión de la cadena de suministro.",
+      link: "/entradas/entrada3", // Enlace a otra entrada de blog
+      etiquetas: ["Machine Learning", "Cadena de Suministro", "Optimización"],
+      imagen: "https://via.placeholder.com/400x250?text=Machine+Learning"
+    },
+    {
+      titulo: "Innovaciones en Salud Digital: Lo Que Nos Traerá el Futuro",
+      fecha: "12 de Febrero, 2024",
+      resumen: "Explora las últimas innovaciones en tecnología de salud digital y cómo están cambiando la manera en que se brinda atención médica.",
+      link: "/entradas/entrada4", // Enlace a otra entrada de blog
+      etiquetas: ["Salud Digital", "Innovaciones", "Tecnología"],
+      imagen: "https://via.placeholder.com/400x250?text=Salud+Digital"
+    },
+    {
+      titulo: "Automatización en el Logística: Más Allá del Simple Transporte",
+      fecha: "5 de Enero, 2024",
+      resumen: "Analizamos cómo la automatización está revolucionando la logística, desde el almacenamiento hasta la entrega final.",
+      link: "/entradas/entrada5", // Enlace a otra entrada de blog
+      etiquetas: ["Automatización", "Logística", "Transporte"],
+      imagen: "https://via.placeholder.com/400x250?text=Automatización+Logística"
+    } */

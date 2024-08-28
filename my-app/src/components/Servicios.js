@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/Servicios.css'; // Asegúrate de que este archivo CSS esté en la misma carpeta
+import { Link } from 'react-router-dom';
 
 function Servicios() {
   const servicios = [
@@ -63,6 +64,7 @@ function Servicios() {
               <li key={i}>{beneficio}</li>
             ))}
           </ul>
+          <Link to="/contacto" className="cta-button">Contáctame</Link>
         </div>
       ))}
     </div>

@@ -12,7 +12,7 @@ import Servicios from './components/Servicios';
 import Blog from './components/Blog';
 import Contacto from './components/Contacto';
 import Footer from './components/Footer';
-import Entrada from './components/Entradas/2408_IA_Transforma_ecommerce'; // Importa el componente de entrada
+import Entrada from './components/entradas/entrada1'; // Importa el componente de entrada
 
 function App() {
   return (

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import './css/Navegacion.css';
 
 
-const navBackground = '#333'; // Define el color de fondo aquí
-
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -13,7 +11,7 @@ function Navegacion() {
   };
 
   return (
-    <nav className="navegacion" style={{ backgroundColor: navBackground }} role="navigation" aria-label="Navegación principal">
+    <nav className="navegacion" role="navigation" aria-label="Navegación principal">
       <div className="nav-content">
         <div className="logo">EL</div>
         <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
