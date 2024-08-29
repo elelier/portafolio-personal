@@ -52,7 +52,6 @@ const DynamicHeroBanner = () => {
   ];
 
   useEffect(() => {
-    // Cambia el contenido de manera rotativa
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
@@ -61,13 +60,11 @@ const DynamicHeroBanner = () => {
       }, 500);
     }, 8000);
 
-    // Maneja el desplazamiento para ajustar el estilo del banner
     const handleScroll = () => {
       const position = window.pageYOffset;
       setScrollPosition(position);
     };
 
-    // Inicializa el canvas para las estrellas
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
     const stars = [];
@@ -84,7 +81,7 @@ const DynamicHeroBanner = () => {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: Math.random() * 1.5,
-          speed: Math.random() * 0.05 + 0.02, // Velocidad de la estrella
+          speed: Math.random() * 0.001 + 0.01,
         });
       }
     };
@@ -94,14 +91,12 @@ const DynamicHeroBanner = () => {
 
       stars.forEach(star => {
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 0.8);
         ctx.fillStyle = 'white';
         ctx.fill();
 
-        // Movimiento hacia la izquierda
         star.x -= star.speed;
 
-        // Reaparece en el lado derecho si sale de la pantalla
         if (star.x < 0) {
           star.x = canvas.width;
           star.y = Math.random() * canvas.height;
@@ -127,15 +122,21 @@ const DynamicHeroBanner = () => {
 
   const currentContent = heroContent[currentIndex];
 
-  // Define las clases para ocultar o mostrar elementos
   const getFadeClass = (position) => {
     return position > 100 ? 'fade-out' : 'fade-in';
   };
 
+  // Función para manejar el clic y hacer scroll a la sección "SobreMi"
+  const scrollToSobreMi = () => {
+    const sobreMiSection = document.getElementById('sobre-mi');
+    if (sobreMiSection) {
+      sobreMiSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <header className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''}`}>
-      {/* Canvas para las estrellas */}
-      <canvas id="star-canvas" ></canvas>
+    <header id="hero-banner" className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''}`}>
+      <canvas id="star-canvas"></canvas>
 
       <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass(scrollPosition)}`}>
         <h2 className="hero-title shiny">{currentContent.title}</h2>
@@ -148,7 +149,7 @@ const DynamicHeroBanner = () => {
         </Link>
       </div>
 
-      <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`}>
+      <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`} onClick={scrollToSobreMi}>
         Más sobre mi
         <div className="scroll-arrow">▼</div>
       </div>

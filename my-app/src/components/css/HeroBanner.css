@@ -6,6 +6,11 @@
   --hero-button-bg-color: #ffffff;
   --hero-button-color: #020817;
   --hero-button-hover-bg-color: #7dd3fc;
+  --hero-button-active-bg-color: #558094;
+}
+
+html {
+  scroll-behavior: smooth; /* Asegura que todos los desplazamientos sean suaves */
 }
 
 /* Contenedor principal del banner */
@@ -69,12 +74,23 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .hero-button:hover {
   background-color: var(--hero-button-hover-bg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
 }
+
+.hero-button:active {
+  background-color: var(--hero-button-active-bg-color);
+  transform: scale(0.95);
+   
+}
+
+
+
 
 /* Indicador de desplazamiento */
 .scroll-indicator {
@@ -85,13 +101,32 @@
   z-index: 1;
   text-align: center;
   width: 100%; /* Asegura que el texto esté centrado */
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
 
 /* Flecha de desplazamiento animada */
 .scroll-arrow {
   animation: bounce 2s infinite;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
+
+/* Hover en el indicador de desplazamiento */
+.scroll-indicator:hover {
+  color: var(--hero-subtitle-color); /* Cambia el color al hacer hover */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  animation: none;
+}
+
+/* Hover en la flecha de desplazamiento */
+.scroll-arrow:hover {
+  color: var(--hero-subtitle-color); /* Cambia el color al hacer hover */
+  transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+  animation: none;
+}
+
+
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -129,15 +164,25 @@
     font-size: 2.5rem;
     margin-top: -1rem;
     justify-content: left;
-  align-items: left;
+    align-items: left;
   }
 
   .hero-subtitle {
     font-size: 1.3rem;
   }
+
   .hero-description {
     font-size: 0.8rem;
     text-align: justify;
+  }
+
+  /* Ajustes para el scroll-arrow y scroll-indicator */
+  .scroll-indicator {
+    bottom: 100px; /* Ajusta esta propiedad para que el indicador esté más arriba en móviles */
+  }
+
+  .scroll-arrow {
+    bottom: 120px; /* Ajusta esta propiedad para que la flecha esté más arriba en móviles */
   }
 }
 

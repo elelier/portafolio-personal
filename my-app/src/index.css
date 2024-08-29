@@ -1,18 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 :root {
-  --color-bg: #f8f9fa;
-  --color-text: #212529;
-  --color-primary: #007bff;
+  --color-bg: #272829;
+  --color-text: #f6f9fc;
+  --color-primary: #7dd3fc;
   --color-secondary: #6c757d;
   --color-accent: #28a745;
+
+  /* Variables del widget de chat */
+  /* Variable de color de fondo del widget */
+  --buildship-chat-widget-bg-color: linear-gradient(to top, #020817, #020817);
+  --buildship-chat-widget-border-color: #7dd3fc;
+  --buildship-chat-widget-shadow: rgba(7, 0, 20, 0.06) 0px 0px 0px 1px,
+    rgba(7, 0, 20, 0.1) 0px 10px 15px -3px, rgba(7, 0, 20, 0.05) 0px 4px 6px,
+    rgba(7, 0, 20, 0.05) 0px 30px 40px;
+  --buildship-chat-widget-primary-color: var(--color-primary);
+  --buildship-chat-widget-primary-color-text: var(--color-text);
+  --buildship-chat-widget-secondary-color-text: var(--color-secondary);
+  --buildship-chat-widget-user-message-text-color: #fff;
+  --buildship-chat-widget-user-message-bg-color: #19191a;
+  --buildship-chat-widget-system-message-text-color: var(--color-text);
+  --buildship-chat-widget-system-message-bg-color: #19191a;
+  --buildship-chat-widget-header-height: 4rem;
+  --buildship-chat-widget-border-radius: 1rem;
 }
 
+
+/* General styles */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-bg);
   color: var(--color-text);
 }
@@ -20,3 +37,149 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Estilos para el botón del widget de chat */
+[data-buildship-chat-widget-button] {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9998;
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%; /* Expande el gradiente para el efecto de movimiento */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  display: flex;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  animation: gradientBG 10s ease infinite; /* Aplicar el gradiente en movimiento fluido */
+}
+[data-buildship-chat-widget-button] i {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  font-size: 22px; /* Ajusta el tamaño del ícono si es necesario */
+  animation: blink 2s infinite; /* Aplicar animación de parpadeo */
+}
+
+/* Cambiar estilo del botón en pantallas pequeñas */
+@media (max-width: 600px) {
+  [data-buildship-chat-widget-button] {
+    padding: 10px; /* Hacer el botón más pequeño y redondo */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 0; /* Ocultar texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  [data-buildship-chat-widget-button] i {
+    margin-right: 8px; /* Espacio entre el ícono y el texto */
+    font-size: 0px; /* Ajusta el tamaño del ícono si es necesario */
+    animation: blink 2s infinite; /* Aplicar animación de parpadeo */
+  }
+
+  /* Utiliza el ícono de robot con un signo de exclamación */
+  /* Utiliza el ícono de robot con un signo de exclamación */
+  [data-buildship-chat-widget-button]::before {
+    content: '\f544 !'; /* Ícono de robot de Font Awesome seguido por un signo de exclamación */
+    font-family: "Font Awesome 5 Free"; /* Especifica la fuente */
+    font-weight: 900; /* Asegura que sea el ícono sólido */
+    font-size: 22px; /* Ajustar tamaño del ícono */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(8px, -1.5px);
+    animation: blink 2s infinite
+  }
+
+/* Definición de la animación parpadeante */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; } /* Cambia el nivel de opacidad a 20% */
+}
+
+
+  
+
+  /* Alternativamente, puedes usar el ícono de comentarios */
+  /* [data-buildship-chat-widget-button]::before {
+    content: '\f086'; /* Ícono de comentarios de Font Awesome */
+  /*   font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+}
+
+/* Detener el zumbido al pasar el ratón sobre el botón */
+[data-buildship-chat-widget-button]:hover {
+  background: linear-gradient(1deg, #a80c9b, #7bcff8, #00cc99,);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  animation: gradientBG 18s ease infinite;
+}
+
+/* Efecto de clic */
+[data-buildship-chat-widget-button]:active {
+  transform: scale(0.95);
+  background-color: #007d66; /* Un tono aún más oscuro al hacer clic */
+  animation: none;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 600px) {
+  #buildship-chat-widget__container {
+    max-width: 100vw; /* Ajusta para pantallas más pequeñas */
+    max-height: 100vh; /* Ajusta para pantallas más pequeñas */
+  }
+}
+/* Estilos para el contenedor del widget de chat con degradado */
+#buildship-chat-widget__container {
+  position: fixed;
+  top: calc(20px + 60px); /* Ajusta el valor aquí para dar espacio suficiente por encima del botón */
+  right: 20px;
+  z-index: 9999; /* Asegúrate de que el contenedor del chat esté por encima del botón */
+  max-width: 90vw;
+  max-height: 90vh;
+  box-sizing: border-box;
+  background: linear-gradient(to top, #020817, #19191a); /* Degradado de fondo, usando el mismo color para mantenerlo sólido */
+  box-shadow: var(--buildship-chat-widget-shadow);
+  border-radius: var(--buildship-chat-widget-border-radius);
+  color: var(--buildship-chat-widget-primary-color-text);
+  overflow: hidden;
+  display: none; /* Oculta el contenedor por defecto */
+}
+
+
+/* Cambia el color de los enlaces dentro del widget */
+#buildship-chat-widget__container a {
+  color: #7dd3fc; /* Color de los enlaces */
+  text-decoration: none; /* Opcional: quita el subrayado de los enlaces */
+}
+
+#buildship-chat-widget__container a:hover {
+  text-decoration: underline; /* Opcional: añade subrayado en el hover */
+}
+
+
+.buildship-chat-widget__title {
+  visibility: hidden;
+}
+
+

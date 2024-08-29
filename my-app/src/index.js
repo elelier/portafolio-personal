@@ -15,3 +15,35 @@ root.render(
     <App />
   //</React.StrictMode>
 );
+
+// Agregar el script de manejo de la animación
+window.addEventListener("load", () => {
+  const chatButton = document.querySelector('[data-buildship-chat-widget-button]');
+  const chatContainer = document.querySelector('#buildship-chat-widget__container');
+
+  if (chatButton && chatContainer) {
+    // Función para abrir el contenedor del chat
+    function openChatContainer() {
+      chatContainer.style.display = 'block'; // Muestra el contenedor del chat
+      chatButton.classList.add('no-bounce'); // Desactiva la animación del botón
+    }
+
+    // Función para cerrar el contenedor del chat
+    function closeChatContainer() {
+      chatContainer.style.display = 'none'; // Oculta el contenedor del chat
+      chatButton.classList.remove('no-bounce'); // Reactiva la animación del botón
+    }
+
+    // Configura el botón para alternar el estado del contenedor
+    chatButton.addEventListener('click', () => {
+      if (chatContainer.style.display === 'block') {
+        closeChatContainer();
+      } else {
+        openChatContainer();
+      }
+    });
+
+    // Inicializa el contenedor como oculto al cargar la página
+    chatContainer.style.display = 'none';
+  }
+});
