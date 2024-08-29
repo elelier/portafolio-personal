@@ -9,7 +9,7 @@ const DynamicHeroBanner = () => {
 
   const heroContent = [
     {
-      title: "Director de Optimización de Operaciones",
+      title: "Especialista en Optimización de Operaciones",
       subtitle: "Transformando operaciones para un crecimiento exponencial",
       description: "Con una experiencia sólida en la creación e implementación de estrategias para maximizar la eficiencia y rentabilidad, ofrezco soluciones innovadoras que potencian el éxito empresarial.",
       icon: "📊",
@@ -67,23 +67,77 @@ const DynamicHeroBanner = () => {
       setScrollPosition(position);
     };
 
+    // Inicializa el canvas para las estrellas
+    const canvas = document.getElementById('star-canvas');
+    const ctx = canvas.getContext('2d');
+    const stars = [];
+    const numStars = 300;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    const createStars = () => {
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          speed: Math.random() * 0.05 + 0.02, // Velocidad de la estrella
+        });
+      }
+    };
+
+    const drawStars = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+
+        // Movimiento hacia la izquierda
+        star.x -= star.speed;
+
+        // Reaparece en el lado derecho si sale de la pantalla
+        if (star.x < 0) {
+          star.x = canvas.width;
+          star.y = Math.random() * canvas.height;
+        }
+      });
+
+      requestAnimationFrame(drawStars);
+    };
+
+    resizeCanvas();
+    createStars();
+    drawStars();
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', resizeCanvas);
+
     return () => {
       clearInterval(timer);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, [heroContent.length]);
 
   const currentContent = heroContent[currentIndex];
-  
+
   // Define las clases para ocultar o mostrar elementos
   const getFadeClass = (position) => {
-    return position > 100 ? 'fade-out' : 'fade-in'; // Ajusta el valor según sea necesario
+    return position > 100 ? 'fade-out' : 'fade-in';
   };
 
   return (
     <header className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''}`}>
-        <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass(scrollPosition)}`}>
+      {/* Canvas para las estrellas */}
+      <canvas id="star-canvas" ></canvas>
+
+      <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass(scrollPosition)}`}>
         <h2 className="hero-title shiny">{currentContent.title}</h2>
         <h3 className="hero-subtitle">{currentContent.subtitle}</h3>
         <p className="hero-description">{currentContent.description}</p>
