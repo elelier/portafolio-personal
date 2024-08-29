@@ -1,6 +1,9 @@
 /* Estilos generales para Servicios */
 .servicios {
-  margin: 60px auto;
+  margin-top: 60px;
+  padding: 40px 0;
+  background-color: #f9f9f9;
+  
   max-width: 1200px;
   padding: 0 20px;
   display: flex;
@@ -11,7 +14,8 @@
 .servicios h1 {
   text-align: center;
   color: #333;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  margin-top: 60px;
   width: 100%; /* Asegura que el título ocupe toda la línea */
 }
 

@@ -1,14 +1,16 @@
 /* Estilos para el Portafolio Detallado */
-.portafolio-detallado {
-    margin: 60px auto;
-    max-width: 1200px;
-    padding: 0 20px;
+.portafolio {
+    margin-top: 60px;
+    padding: 40px 0;
+    background-color: #f9f9f9;
+    padding: 40px 20px;
+    
   }
   
   .portafolio-detallado h1 {
     text-align: center;
     color: #333;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   
   .proyecto-detalle {

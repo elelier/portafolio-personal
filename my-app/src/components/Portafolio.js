@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/Portafolio.css'; // Importa los estilos del blog desde la carpeta css dentro de components
 
 function Portafolio() {
   const proyectos = [

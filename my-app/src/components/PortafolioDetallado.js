@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/Portafolio.css'
 
 function Portafolio() {
   const proyectos = [

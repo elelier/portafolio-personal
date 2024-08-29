@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './css/HeroBanner.css';
 import { Link } from 'react-router-dom';
+import './css/HeroBanner.css';
 
 const DynamicHeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,17 +48,20 @@ const DynamicHeroBanner = () => {
       cta: "Potencia tus Datos",
       target: "CEO's, Analistas de Datos"
     }
+
   ];
 
   useEffect(() => {
+    // Cambia el contenido de manera rotativa
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % heroContent.length);
         setIsTransitioning(false);
       }, 500);
-    }, 8000); /* Aumenta el tiempo de transición */
+    }, 8000);
 
+    // Maneja el desplazamiento para ajustar el estilo del banner
     const handleScroll = () => {
       const position = window.pageYOffset;
       setScrollPosition(position);
@@ -72,28 +75,28 @@ const DynamicHeroBanner = () => {
   }, [heroContent.length]);
 
   const currentContent = heroContent[currentIndex];
+  
+  // Define las clases para ocultar o mostrar elementos
+  const getFadeClass = (position) => {
+    return position > 100 ? 'fade-out' : 'fade-in'; // Ajusta el valor según sea necesario
+  };
 
   return (
     <header className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''}`}>
-      <h1 className="hero-title">
-        Elier Loya Mata
-      </h1>
-      <div className={`info-container`}>
-        <div className={`icon-title-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'}`}>
-          <div className="hero-icon">{currentContent.icon}</div>
-          <h2 className="hero-subtitle">{currentContent.title}</h2>
-        </div>
-        <h3 className={`${isTransitioning ? 'fade-out-content' : 'fade-in-content'}`}>{currentContent.subtitle}</h3>
-        <p className={`${isTransitioning ? 'fade-out-content' : 'fade-in-content'}`}>
-          {currentContent.description}
-        </p>
+        <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass(scrollPosition)}`}>
+        <h2 className="hero-title shiny">{currentContent.title}</h2>
+        <h3 className="hero-subtitle">{currentContent.subtitle}</h3>
+        <p className="hero-description">{currentContent.description}</p>
         <Link to="/servicios">
-          <button 
-            className={`cta-button ${isTransitioning ? 'fade-out-content' : 'fade-in-content'}`}
-          >
+          <button className="hero-button">
             {currentContent.cta} →
           </button>
         </Link>
+      </div>
+
+      <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`}>
+        Más sobre mi
+        <div className="scroll-arrow">▼</div>
       </div>
     </header>
   );

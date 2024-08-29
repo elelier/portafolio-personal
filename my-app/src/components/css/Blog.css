@@ -1,9 +1,11 @@
 /* Estilos generales para la página del Blog */
 .blog {
-    margin: 60px auto;
-    max-width: 1200px;
-    padding: 0 20px;
+    margin-top: 60px;
+    padding: 40px 0;
+    background-color: #f9f9f9;
+    
   }
+    
   
   /* Estilos para la introducción del blog */
   .blog-intro {
@@ -11,9 +13,9 @@
   }
   
   .blog-intro h1 {
+    text-align: center;
     color: #333;
-    font-size: 2.5em;
-    text-align: left;
+    margin-bottom: 30px;
   }
   
   .blog-intro .intro {
@@ -22,6 +24,8 @@
     text-align: left;
     line-height: 1.6;
     margin-bottom: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   
   /* Estilos para los botones CTA */
@@ -29,6 +33,8 @@
     display: flex;
     gap: 10px;
     justify-content: flex-start;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   
   .cta-button {

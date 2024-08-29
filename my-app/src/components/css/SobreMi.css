@@ -1,0 +1,54 @@
+/* SobreMi.css */
+
+/* Estilos generales para el contenedor */
+.sobre-mi {
+    padding: 60px 20px;
+  }
+  
+  .sobre-mi h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 40px;
+  }
+  
+  .contenido-sobre-mi {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .historia-personal, .experiencia-destacada, .vision-tecnologica {
+    margin-bottom: 40px;
+  }
+  
+  .sobre-mi h3 {
+    color: #7dd3fc;
+    margin-bottom: 20px;
+  }
+  
+  .sobre-mi h4 {
+    color: #00cc99;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .sobre-mi p {
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-align: justify;
+  }
+  
+  /* Efecto de brillo en el texto */
+  .shiny {
+    background: linear-gradient(to right, #ffffff 0%, #7dd3fc 50%, #ffffff 100%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 3s linear infinite;
+  }
+  
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+  

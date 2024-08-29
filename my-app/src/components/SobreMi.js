@@ -1,11 +1,12 @@
 import React from 'react';
+import './css/SobreMi.css'; // Asegúrate de importar el archivo CSS
 
 function SobreMi() {
   return (
     <section id="sobre-mi" className="sobre-mi">
       <h2>Sobre Mí</h2>
       <div className="contenido-sobre-mi">
-        <div className="historia-personal">
+        <div className="historia-personal shiny"> {/* Agrega la clase shiny aquí */}
           <h3>Mi Historia</h3>
           <p>
             Soy Elier Loya, un Ingeniero Industrial y de Sistemas con más de 10 años de experiencia 
@@ -18,7 +19,7 @@ function SobreMi() {
             automatización y escalabilidad de procesos complejos.
           </p>
         </div>
-        <div className="experiencia-destacada">
+        <div className="experiencia-destacada shiny"> {/* Agrega la clase shiny aquí */}
           <h3>Experiencia Destacada</h3>
           <h4>GoFarma</h4>
           <p>
@@ -33,7 +34,7 @@ function SobreMi() {
             significativa en reclamos y cancelaciones.
           </p>
         </div>
-        <div className="vision-tecnologica">
+        <div className="vision-tecnologica shiny"> {/* Agrega la clase shiny aquí */}
           <h3>Mi Visión Tecnológica</h3>
           <p>
             Creo firmemente en el poder transformador de la tecnología en los negocios. Mi enfoque 

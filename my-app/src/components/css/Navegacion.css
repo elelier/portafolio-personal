@@ -1,23 +1,28 @@
 /* Estilos para la sección de Navegacion */
+
 .navegacion {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px; /* Altura fija para la barra de navegación */
+  height: 60px;
   z-index: 1000;
-  background-color: #151419; /* Color sólido negro */
-  transition: background-color 0.3s ease;
-  color: white; /* Asegúrate de que el texto sea blanco para contraste */
-  opacity: 1; /* Asegúrate de que la opacidad esté al 100% */
+  background-color: #020817;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.navegacion.fade-out {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.navegacion.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .navegacion:hover {
-  opacity: 1; /* Totalmente opaco al hacer hover */
-}
-
-.navegacion.scrolled {
-  opacity: 1; /* Totalmente opaco cuando se hace scroll */
+  opacity: 1;
 }
 
 .nav-content {
@@ -27,7 +32,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 15px 20px;
-  background: transparent; /* Asegúrate de que el fondo sea transparente aquí */
+  background: transparent;
 }
 
 .logo {
@@ -41,7 +46,7 @@
   display: flex;
   margin: 0;
   padding: 0;
-  background: transparent; /* Asegúrate de que el fondo sea transparente aquí */
+  background: transparent;
 }
 
 .nav-links li {
@@ -59,19 +64,21 @@
   color: #3498db;
 }
 
+/* Estilo para el botón de menú en móvil */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   color: #FFFFFF;
   cursor: pointer;
-  font-size: 24px; /* Tamaño del ícono de menú */
+  font-size: 24px;
   position: absolute;
   top: 15px;
   right: 20px;
-  z-index: 1100; /* Asegura que esté por encima del menú */
+  z-index: 1100;
 }
 
+/* Estilo para pantallas pequeñas */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -80,19 +87,19 @@
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -100%; /* Inicialmente fuera de la vista */
     width: 70%;
     height: 100vh;
-    background-color: #cbcbe0; /* Fondo negro para el menú móvil */
+    background-color: #020817;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: right 0.3s ease;
-    z-index: 1000; /* Por debajo del ícono de cierre */
+    z-index: 1000;
   }
 
   .nav-links.open {
-    right: 0;
+    right: 0; /* Menú desliza hacia adentro */
   }
 
   .nav-links li {
