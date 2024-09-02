@@ -77,17 +77,23 @@ html {
   border-radius: 20px;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
+  font-weight: bold;
 }
 
 .hero-button:hover {
   background-color: var(--hero-button-hover-bg-color);
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  animation: gradientBG 18s ease infinite;
 }
 
+
 .hero-button:active {
-  background-color: var(--hero-button-active-bg-color);
   transform: scale(0.95);
+  background-color: #007d66; /* Un tono aún más oscuro al hacer clic */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
+  animation: none;
    
 }
 

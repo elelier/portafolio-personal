@@ -1,6 +1,11 @@
-// SobreMi.js
 import React, { useState, useEffect } from 'react';
 import './css/SobreMi.css';
+import personal_story from './assets/files/childhood.png';
+import professional from './assets/files/ecommerce_marketing.png';
+import tech_vision from './assets/files/technologic_vision.png';
+import { Link } from 'react-router-dom';
+import { useSwipeable } from 'react-swipeable';
+import { useSpring, animated } from '@react-spring/web';
 
 function SobreMi() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -8,13 +13,11 @@ function SobreMi() {
   const sections = [
     {
       title: 'Historia Personal',
-      image: 'ruta_de_la_imagen_historia_personal.jpg',
+      image: personal_story,
       alt: 'Historia Personal',
+      subtitle: 'Desde que tengo memoria, siempre he sentido una gran curiosidad por cómo funcionan las cosas.',
       content: (
         <>
-          <p className="gancho-emocional">
-            Desde que tengo memoria, siempre he sentido una gran curiosidad por cómo funcionan las cosas.
-          </p>
           <p>
             Esa curiosidad me llevó a desarmar juguetes, estudiar ingeniería, y finalmente, transformar empresas a través de la tecnología.
           </p>
@@ -29,8 +32,9 @@ function SobreMi() {
     },
     {
       title: 'Experiencia Destacada',
-      image: 'ruta_de_la_imagen_experiencia_destacada.jpg',
+      image: professional,
       alt: 'Experiencia Destacada',
+      subtitle: 'Mis logros reflejan mi compromiso con la excelencia operativa y mi pasión por transformar empresas.',
       content: (
         <>
           <h3>GoFarma</h3>
@@ -46,8 +50,9 @@ function SobreMi() {
     },
     {
       title: 'Visión Tecnológica',
-      image: 'ruta_de_la_imagen_vision_tecnologica.jpg',
+      image: tech_vision,
       alt: 'Visión Tecnológica',
+      subtitle: 'Creo en el poder de la tecnología para transformar negocios y construir un futuro más eficiente.',
       content: (
         <>
           <p>
@@ -64,19 +69,39 @@ function SobreMi() {
     },
   ];
 
+  const handleSwipe = (eventData) => {
+    if (eventData && eventData.dir) {
+      const { dir } = eventData;
+      if (dir === 'Left') {
+        setCurrentSection((prevSection) => (prevSection + 1) % sections.length);
+      } else if (dir === 'Right') {
+        setCurrentSection((prevSection) => (prevSection - 1 + sections.length) % sections.length);
+      }
+    } else {
+      console.warn('Swipe eventData is missing or does not have the dir property');
+    }
+  };
+
+  const [props, api] = useSpring(() => ({
+    opacity: 0,
+  }));
+
   useEffect(() => {
-    const nav = document.querySelector('.navegacion');
-    nav.classList.add('no-hide');
-  
-    const timeout = setTimeout(() => {
-      nav.classList.remove('no-hide');
-    }, 2000); // Desactivar la desaparición por 2 segundos
-  
-    return () => clearTimeout(timeout);
-  }, [currentSection]); // Se ejecuta cada vez que cambia la sección
-  
+    api.start({
+      opacity: 1,
+      reset: true,
+      from: { opacity: 0 },
+    });
+  }, [currentSection, api]);
+
+  const swipeHandlers = useSwipeable({
+    onSwiped: handleSwipe,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
-    <section id="sobre-mi" className="sobre-mi">
+    <section id="sobre-mi" className="sobre-mi" {...swipeHandlers}>
       <div className="contenido-sobre-mi">
         <h2>Sobre Mí</h2>
         <div className="tabs">
@@ -90,13 +115,26 @@ function SobreMi() {
             </button>
           ))}
         </div>
-        <div className="section-content">
+        <animated.div style={props} className="section-content">
+          <div className="sub-title-container shinyy">{sections[currentSection].subtitle}</div>
           <div className="image-container">
             <img src={sections[currentSection].image} alt={sections[currentSection].alt} />
           </div>
           <div className="text-content">
             {sections[currentSection].content}
           </div>
+        </animated.div>
+        <div className="cta-seccion-sobre-mi">
+          <Link to="/servicios" className="cta-button-2">Mis Servicios</Link>
+          <Link to="/contacto" className="cta-button-2">Contáctame</Link>
+        </div>
+        <div className="horizontal-scroll-indicator">
+          {sections.map((_, index) => (
+            <div
+              key={index}
+              className={`indicator ${currentSection === index ? 'active-indicator' : ''}`}
+            />
+          ))}
         </div>
       </div>
     </section>

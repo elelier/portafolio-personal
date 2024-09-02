@@ -3,8 +3,7 @@
 /* Estilos generales para el contenedor */
 .sobre-mi {
   position: relative;
-  margin-top: 0px; /* Ajusta este valor según necesites */
-  padding: 20px;
+  padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
   background-color: #333; /* Color del fondo del contenedor */
   border-radius: 15px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
@@ -13,24 +12,52 @@
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centro vertical */
+  justify-content: flex-start; /* Alinea desde la parte superior */
   min-height: 100vh; /* Altura mínima de la pantalla */
+  overflow: hidden; /* Evita que el contenido se desborde */
 }
+
+/* Título y pestañas fijas */
 .sobre-mi h2 {
-  margin-top: 60; /* Elimina el espacio extra arriba del título */
+  margin: 20px 0; /* Espaciado fijo alrededor del título */
   text-align: center;
   font-size: 2rem; /* Ajusta el tamaño del texto según necesites */
   color: #fff;
+  position: sticky; /* Fija el título en la parte superior */
+  top: 0;
+  background-color: #333; /* Fondo para mantener la legibilidad */
+  z-index: 100; /* Asegura que esté encima del contenido */
 }
 
 .contenido-sobre-mi {
+  position: relative;
   width: 100%;
-  text-align: center;
+  text-align: justify;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100%;
 }
+
+/* Ajustes para el subtítulo */
+.sub-title-container {
+  font-size: 1.8rem; /* Tamaño de la fuente del subtítulo */
+  font-weight: bold;
+  color: #ffdd57; /* Color del subtítulo */
+  padding-left:60px;
+  padding-right:20px;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.sub-title-container::before {
+  content: '“';
+  font-size: 3rem;
+  left: 0;
+  top: -10px;
+  color: #ffdd57;
+}
+
 
 .contenido-sobre-mi h2 {
   font-size: 3rem;
@@ -52,6 +79,10 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  position: sticky; /* Fija las pestañas en la parte superior */
+  top: 60px; /* Ajusta este valor para que esté debajo del título */
+  background-color: #333; /* Fondo para mantener la legibilidad */
+  z-index: 100; /* Asegura que esté encima del contenido */
 }
 
 .tab-button {
@@ -92,20 +123,36 @@
   color: #ffdd57;
 }
 
-/* Estilos del contenido de la sección */
 .section-content {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Alinea el contenido en la parte superior */
   justify-content: center;
   gap: 50px;
   flex-wrap: wrap;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  min-height: 500px; /* Ajusta esta altura según el contenido más grande */
 }
 
+/* Cambios en las transiciones */
+.section-content {
+  opacity: 0; /* Oculta el contenido por defecto */
+}
+
+.section-content.entering {
+  opacity: 1;
+  transform: translateX(0%); /* Muestra el contenido y lo coloca en su lugar */
+}
+
+.section-content.exiting {
+  opacity: 0;
+  transform: translateX(-50%); /* Mueve el contenido hacia la izquierda al salir */
+}
 .image-container {
-  flex: 1 1 400px;
+
   max-width: 500px;
   text-align: center;
+  min-height: 100%; /* Asegura que la imagen contenedor tenga al menos la altura del contenedor */
+  flex: 1 1 auto;
 }
 
 .image-container img {
@@ -116,49 +163,72 @@
 }
 
 .text-content {
-  flex: 1 1 400px;
+
   max-width: 600px;
-  text-align: left;
+  text-align: justify;
+  min-height: 100%; /* Asegura que el texto contenedor tenga al menos la altura del contenedor */
+  flex: 1 1 auto;
 }
 
 .text-content h3 {
   font-size: 2rem;
   margin-bottom: 20px;
   color: #ffdd57;
+  text-align: justify
 }
 
 .text-content p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 15px;
+  text-align: justify
 }
 
-.gancho-emocional {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 25px;
-  position: relative;
-  padding-left: 20px;
-}
-
-.gancho-emocional::before {
-  content: '“';
-  font-size: 3rem;
-  position: absolute;
-  left: 0;
-  top: -10px;
-  color: #ffdd57;
-}
 
 /* Responsividad */
 @media (max-width: 768px) {
+  .sobre-mi {
+    padding: 30px 10px; /* Ajusta el padding para móviles */
+    max-width: 100%;
+    min-height: 160vh;
+  }
+
   .section-content {
     flex-direction: column;
     text-align: center;
+    box-sizing: border-box; /* Incluye el padding en el ancho total del contenedor */
   }
+
+  .section-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px; /* Añade un espacio entre los elementos */
+    padding: 10px; /* Añade algo de padding para que el contenido no esté tan pegado a los bordes */
+  }
+
+  .image-container,
+  .text-content {
+    max-width: 100%; /* Asegura que los contenedores no excedan el ancho disponible */
+    flex: 1 1 auto;
+  }
+
+
+  .sub-title-container {
+    text-align: left;
+    font-size: 1.5rem; /* Tamaño de la fuente del subtítulo */
+    font-weight: bold;
+    color: #ffdd57; /* Color del subtítulo */
+    padding-left:5px;
+    padding-right:0px;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+
 
   .text-content {
     text-align: center;
+    font-size: 1rem;
   }
 
   .gancho-emocional {
@@ -169,4 +239,81 @@
     left: 50%;
     transform: translateX(-50%);
   }
+}
+
+
+.shinyy {
+  background: linear-gradient(to right, #fdeeaf 0%, #ffdd57 50%, #fdeeaf 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+/* Contenedor para los botones CTA */
+.cta-seccion-sobre-mi {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 20px; /* Asegúrate de dejar espacio debajo de los botones CTA */
+}
+
+/* Estilos para los botones CTA */
+.cta-button-2 {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%;
+  animation: gradientBG 10s ease infinite;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-button-2:hover {
+  background-color: var(--hero-button-hover-bg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  animation: gradientBG 18s ease infinite;
+}
+
+.cta-button-2:active {
+  transform: scale(0.95);
+  background-color: #007d66;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  animation: none;
+}
+
+/* Indicadores de bolitas */
+.horizontal-scroll-indicator {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 20px;
+}
+
+.indicator {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: #00000044;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.active-indicator {
+  background-color: #fff;
 }
