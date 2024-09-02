@@ -3,7 +3,7 @@
 /* Estilos generales para el contenedor */
 .sobre-mi {
   position: relative;
-  margin-top: 20px; /* Ajusta este valor según necesites */
+  margin-top: 0px; /* Ajusta este valor según necesites */
   padding: 20px;
   background-color: #333; /* Color del fondo del contenedor */
   border-radius: 15px; /* Bordes redondeados */

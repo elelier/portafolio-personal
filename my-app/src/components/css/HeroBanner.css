@@ -3,8 +3,8 @@
   --hero-title-color: #ffffff;
   --hero-subtitle-color: #7dd3fc;
   --hero-description-color: #ffffff;
-  --hero-button-bg-color: #ffffff;
-  --hero-button-color: #020817;
+  --hero-button-bg-color: #caba27;
+  --hero-button-color: #ffffff;
   --hero-button-hover-bg-color: #7dd3fc;
   --hero-button-active-bg-color: #558094;
 }
@@ -67,7 +67,9 @@ html {
 
 /* Botón de llamada a la acción */
 .hero-button {
-  background-color: var(--hero-button-bg-color);
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%;
+  animation: gradientBG 10s ease infinite; /* Animación del gradiente */
   color: var(--hero-button-color);
   padding: 10px 20px;
   font-size: 1rem;
@@ -161,29 +163,22 @@ html {
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-top: -1rem;
     justify-content: left;
     align-items: left;
   }
 
   .hero-subtitle {
-    font-size: 1.3rem;
+    font-size: 2rem;
   }
 
   .hero-description {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     text-align: justify;
   }
 
-  /* Ajustes para el scroll-arrow y scroll-indicator */
-  .scroll-indicator {
-    bottom: 100px; /* Ajusta esta propiedad para que el indicador esté más arriba en móviles */
-  }
 
-  .scroll-arrow {
-    bottom: 120px; /* Ajusta esta propiedad para que la flecha esté más arriba en móviles */
-  }
 }
 
 /* Efecto de brillo en el texto */

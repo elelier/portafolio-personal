@@ -5,7 +5,7 @@ import './css/Navegacion.css';
 
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [isScrolling] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => {

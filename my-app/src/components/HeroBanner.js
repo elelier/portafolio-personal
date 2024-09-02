@@ -48,7 +48,6 @@ const DynamicHeroBanner = () => {
       cta: "Potencia tus Datos",
       target: "CEO's, Analistas de Datos"
     }
-
   ];
 
   useEffect(() => {
@@ -126,7 +125,6 @@ const DynamicHeroBanner = () => {
     return position > 100 ? 'fade-out' : 'fade-in';
   };
 
-  // Función para manejar el clic y hacer scroll a la sección "SobreMi"
   const scrollToSobreMi = () => {
     const sobreMiSection = document.getElementById('sobre-mi');
     if (sobreMiSection) {
