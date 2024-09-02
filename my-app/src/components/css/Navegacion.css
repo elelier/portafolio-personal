@@ -1,5 +1,4 @@
-/* Estilos para la sección de Navegacion */
-
+/* Estilos para la barra de navegación principal */
 .navegacion {
   position: fixed;
   top: 0;
@@ -7,50 +6,65 @@
   right: 0;
   height: 60px;
   z-index: 1000;
-  background-color: #020817;
+  background-color: transparent; /* Fondo transparente para la barra de navegación */
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.navegacion.fade-out {
-  opacity: 0;
-  transform: translateY(-100%);
+/* Estilo para el logo */
+.logo-container {
+  flex-shrink: 0; /* Evita que el logo se reduzca en tamaño */
 }
 
-.navegacion.fade-in {
-  opacity: 1;
-  transform: translateY(0);
+
+/* Estilo para el logo dentro de un enlace */
+.logo {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  transition: color 0.3s ease;
+  text-decoration: none !important; /* Elimina el subrayado */
 }
 
-.navegacion:hover {
-  opacity: 1;
+.logo:hover {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3498db;
+  text-decoration: none !important; /* Elimina el subrayado también en hover */
 }
 
+/* Asegura que el contenedor también no tenga subrayado si es necesario */
+.logo-container a {
+  text-decoration: none !important; /* Elimina el subrayado para enlaces dentro del contenedor */
+}
+
+
+
+/* Contenido de la barra de navegación */
 .nav-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Distribuye el espacio entre el logo y el botón de contacto */
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 15px 20px;
-  background: transparent;
+  background: #020817;
+  position: relative; /* Asegura que los elementos dentro de .nav-content se posicionen correctamente */
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-}
-
+/* Estilo de los enlaces de navegación en la barra principal */
 .nav-links {
-  list-style: none;
   display: flex;
+  justify-content:center; /* Centra los enlaces y distribuye el espacio equitativamente */
+  align-items: center; /* Alinea verticalmente los enlaces */
+  list-style: none;
   margin: 0;
   padding: 0;
-  background: transparent;
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
 }
 
+
 .nav-links li {
-  margin-left: 30px;
+  margin-left: 30px; /* Espacio entre los elementos de la lista */
 }
 
 .nav-links a {
@@ -64,7 +78,79 @@
   color: #3498db;
 }
 
-/* Estilo para el botón de menú en móvil */
+.nav-links i:hover {
+  color: #3498db;
+}
+/* Estilo para el enlace "Contacto" */
+.nav-contact {
+  position: relative; /* Asegura que este elemento no se vea afectado por los estilos globales */
+}
+
+/* Estilo para el botón de contacto en la barra principal */
+.contact-button {
+  position: relative;
+  z-index: 9999; /* Asegura que esté sobre otros elementos */
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%; /* Expande el gradiente para el efecto de movimiento */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 15px;
+  display: flex;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold !important;
+  animation: gradientBG 10s ease infinite; /* Animación del gradiente */
+}
+
+.contact-button i {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  font-size: 22px; /* Ajusta el tamaño del ícono si es necesario */
+  animation: blink 2s infinite; /* Animación de parpadeo */
+}
+
+.contact-button i:hover {
+  color: white !important; /* Forzar color blanco */
+}
+
+/* Efecto hover manteniendo la animación del gradiente */
+.contact-button:hover {
+  transform: translateY(2px) !important;
+  color: white !important; /* Forzar color blanco */
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3) !important;
+  animation: gradientBG 18s ease infinite !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2) !important;
+}
+
+/* Efecto de clic */
+.contact-button:active {
+  transform: scale(0.95) !important;
+  transform: translateY(4px) !important;
+  background-color: #007d66 !important; /* Un tono aún más oscuro al hacer clic */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2) !important; /* Sombra interior */
+  animation: none !important; /* Detener la animación del gradiente */
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Animación del gradiente */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Estilo del botón de menú en móvil */
 .menu-toggle {
   display: none;
   background: none;
@@ -78,10 +164,14 @@
   z-index: 1100;
 }
 
-/* Estilo para pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 925px) {
   .menu-toggle {
     display: block;
+    transform: translateY(-4px);
+  }
+
+  .contact-button {
+    display: none; /* Oculta el botón en su ubicación normal */
   }
 
   .nav-links {
@@ -96,6 +186,9 @@
     justify-content: center;
     transition: right 0.3s ease;
     z-index: 1000;
+    list-style: none; /* Elimina las bolitas de la lista en el menú lateral */
+    margin: 0;
+    padding: 0;
   }
 
   .nav-links.open {
@@ -104,5 +197,35 @@
 
   .nav-links li {
     margin: 20px 0;
+    font-size: 30px;
+    text-align: center; /* Centra los enlaces dentro del menú */
+  }
+
+  .nav-links .contact-button {
+    display: block; /* Mostrar el botón dentro del menú desplegable */
+    margin: 20px 0;
+    font-size: 18px;
+    position: static; /* Elimina el posicionamiento fijo para que fluya dentro del menú */
+    width: auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    transform: translateY(8px);
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .contact-button {
+    display: none; /* Oculta el botón de contacto en pantallas pequeñas */
   }
 }

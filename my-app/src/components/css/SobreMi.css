@@ -2,98 +2,171 @@
 
 /* Estilos generales para el contenedor */
 .sobre-mi {
-  padding: 60px 20px;
+  position: relative;
+  margin-top: 20px; /* Ajusta este valor según necesites */
+  padding: 20px;
+  background-color: #333; /* Color del fondo del contenedor */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+  max-width: 1200px; /* Ajusta el ancho máximo según el diseño */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centro vertical */
+  min-height: 100vh; /* Altura mínima de la pantalla */
 }
-
 .sobre-mi h2 {
-  text-align: center; /* Alinea el encabezado a la izquierda */
-  color: #ffffff;
-  margin-bottom: 40px;
+  margin-top: 60; /* Elimina el espacio extra arriba del título */
+  text-align: center;
+  font-size: 2rem; /* Ajusta el tamaño del texto según necesites */
+  color: #fff;
 }
 
 .contenido-sobre-mi {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left; /* Asegura que todo el contenido esté alineado a la izquierda */
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
 }
 
-.historia-personal, .experiencia-destacada, .vision-tecnologica {
-  margin-bottom: 40px;
+.contenido-sobre-mi h2 {
+  font-size: 3rem;
+  margin-top: 40px;
+  color: #ffdd57;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.sobre-mi h3 {
-  color: #7dd3fc;
-  margin-bottom: 20px;
-  text-align: left; /* Alinea el subtítulo a la izquierda */
+.historia-personal,
+.experiencia-destacada,
+.vision-tecnologica {
+  flex-shrink: 0; /* Evita que se reduzcan */
+  min-height: 100%; /* Asegura que cada uno tome al menos la altura del contenedor */
 }
 
-.sobre-mi h4 {
-  color: #00cc99;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  text-align: left; /* Alinea el título secundario a la izquierda */
+/* Estilos de las pestañas */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
-.sobre-mi p {
-  line-height: 1.2; /* Reduce la separación entre líneas */
+.tab-button {
+  background: transparent;
+  border: none;
   color: #ffffff;
-  margin-bottom: 10px; /* Reduce el margen inferior entre párrafos */
-  text-align: left; /* Asegura que todo el texto esté alineado a la izquierda */
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
 }
 
-/* Efecto de brillo en el texto */
-.shiny {
-  background: linear-gradient(to right, #ffffff 0%, #7dd3fc 50%, #ffffff 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: shine 3s linear infinite;
+.tab-button::after {
+  content: '';
+  display: block;
+  width: 0%;
+  height: 2px;
+  background: #ffdd57;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-@keyframes shine {
-  to { background-position: 200% center; }
+.tab-button:hover {
+  color: #ffdd57;
 }
 
-/* Estilos específicos para el gancho emocional */
+.tab-button:hover::after,
+.tab-button.active::after {
+  width: 100%;
+}
+
+.tab-button.active {
+  color: #ffdd57;
+}
+
+/* Estilos del contenido de la sección */
+.section-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.image-container {
+  flex: 1 1 400px;
+  max-width: 500px;
+  text-align: center;
+}
+
+.image-container img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.text-content {
+  flex: 1 1 400px;
+  max-width: 600px;
+  text-align: left;
+}
+
+.text-content h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffdd57;
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
 .gancho-emocional {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 1.5rem; /* Reduce el margen inferior */
-  text-align: left; /* Alinea el texto a la izquierda */
-  line-height: 1; /* Reduce aún más la separación entre líneas */
+  margin-bottom: 25px;
+  position: relative;
+  padding-left: 20px;
 }
 
-.gancho-emocional.shiny {
-  background: linear-gradient(to right, #ffffff 0%, #7dd3fc 50%, #ffffff 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: shine 3s linear infinite !important;
+.gancho-emocional::before {
+  content: '“';
+  font-size: 3rem;
+  position: absolute;
+  left: 0;
+  top: -10px;
+  color: #ffdd57;
 }
 
-/* Ajustes para pantallas pequeñas */
+/* Responsividad */
 @media (max-width: 768px) {
+  .section-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-content {
+    text-align: center;
+  }
 
   .gancho-emocional {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+    padding-left: 0;
   }
 
-  .sobre-mi h2 {
-      font-size: 2rem;
-      text-align: left;
-  }
-
-  .sobre-mi h3 {
-      font-size: 1.2rem;
-      text-align: left;
-  }
-
-  .sobre-mi p {
-      font-size: 1rem;
-      line-height: 1.2;
-      text-align: left;
+  .gancho-emocional::before {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

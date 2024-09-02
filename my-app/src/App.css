@@ -68,37 +68,10 @@ body, html {
   animation: none !important;
 }
 
-.cta-button {
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  background-color: #00cc99; /* Color verde neón para el botón */
-  color: white;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-
-.cta-button:hover {
-  background-color: #009966; /* Color verde más oscuro al pasar el ratón */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-}
-
 .inline-icon {
   width: 20px;
   height: 20px;
   transition: transform 0.3s ease;
-}
-
-.cta-button:hover .inline-icon {
-  transform: translateX(5px);
 }
 
 .animate-fade-in {
@@ -643,4 +616,47 @@ body, html {
 
 @keyframes shine {
   to { background-position: 200% center; }
+}
+
+
+/* Estilos básicos para botones */
+.button-base {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%; /* Expande el gradiente para el efecto de movimiento */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  display: flex;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  animation: gradientBG 10s ease infinite; /* Aplicar el gradiente en movimiento fluido */
+}
+
+.button-base:hover {
+  background: linear-gradient(1deg, #a80c9b, #7bcff8, #00cc99);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  animation: gradientBG 18s ease infinite;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.button-base:active {
+  transform: scale(0.95);
+  background-color: #007d66; /* Un tono aún más oscuro al hacer clic */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
+  animation: none;
+}
+
+/* Definición de la animación parpadeante */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }

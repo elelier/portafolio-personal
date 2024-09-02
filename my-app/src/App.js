@@ -4,7 +4,6 @@ import './App.css';
 import SEO from './components/SEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
-import SobreMi from './components/SobreMi';
 import ArsenalHabilidades from './components/ArsenalHabilidades';
 import Portafolio from './components/Portafolio';
 import PortafolioDetallado from './components/PortafolioDetallado';
@@ -13,6 +12,7 @@ import Blog from './components/Blog';
 import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import Entrada from './components/entradas/entrada1'; // Importa el componente de entrada
+import SobeMi from './components/SobreMi';
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="/" element={
             <>
               <HeroBanner />
-              <SobreMi />
+              <SobeMi/>
               <ArsenalHabilidades />
               <Portafolio />
               <Contacto />

@@ -1,59 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import './css/Navegacion.css';
 
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
-  const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleScrollToHero = () => {
-    navigate('/'); // Navega a la página principal
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleScrollToElement = (id) => {
+    navigate('/');
     setTimeout(() => {
-      const element = document.getElementById('hero-banner');
+      const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' }); // Desplaza suavemente a la sección
+        element.scrollIntoView({ behavior: 'smooth' });
+        closeMenu();
       }
-    }, 100); // Pequeño retraso para asegurar que la navegación se complete
+    }, 100);
   };
 
   useEffect(() => {
-    let timeoutId;
-
-    const handleScroll = () => {
-      setIsScrolling(true);
-
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setIsScrolling(false);
-      }, 1000); // 1 segundo después de detener el scroll, el menú reaparece
+    const handleClickOutside = (event) => {
+      if (menuOpen && !event.target.closest('.nav-links') && !event.target.closest('.menu-toggle')) {
+        closeMenu();
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('click', handleClickOutside);
 
     return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [menuOpen]);
 
   return (
     <nav className={`navegacion ${isScrolling ? 'fade-out' : 'fade-in'}`} role="navigation" aria-label="Navegación principal">
       <div className="nav-content">
-        <div className="logo">Elier Loya Mata</div>
+        <div className="logo-container">
+          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>
+            <div className="logo">Elier Loya Mata</div>
+          </Link>
+        </div>
         <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
           {menuOpen ? '✖' : '☰'}
         </button>
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <li><Link to="/" onClick={handleScrollToHero}>Inicio</Link></li>
-          <li><Link to="/portafolio" onClick={toggleMenu}>Portafolio</Link></li>
-          <li><Link to="/servicios" onClick={toggleMenu}>Servicios</Link></li>
-          <li><Link to="/blog" onClick={toggleMenu}>Blog</Link></li>
-          <li><Link to="/contacto" onClick={toggleMenu}>Contacto</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>Sobre Mi</Link></li>
+          <li><Link to="/portafolio" onClick={() => { closeMenu(); }}>Portafolio</Link></li>
+          <li><Link to="/servicios" onClick={() => { closeMenu(); }}>Servicios</Link></li>
+          <li><Link to="/blog" onClick={() => { closeMenu(); }}>Blog</Link></li>
+          <li><Link to="/contacto" className="contact-button" onClick={() => { closeMenu(); }}><i className="fas fa-comment-dots"></i>Contáctame</Link></li>
         </ul>
       </div>
     </nav>

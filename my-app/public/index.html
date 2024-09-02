@@ -9,7 +9,18 @@
     <!-- Agrega el script del widget de chat aquí -->
     <script src="https://unpkg.com/@buildshipapp/chat-widget@^1" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
     <script>
+        window.addEventListener("load", () => {
+            const chatButton = document.querySelector("[data-buildship-chat-widget-button]");
+            const chatContainer = document.getElementById("buildship-chat-widget__container");
+            
+            chatButton.addEventListener("click", () => {
+                if (chatContainer) {
+                    chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+                }
+            });
+        });
         window.addEventListener("load", () => {
             // Configurar el widget
             window.buildShipChatWidget.config.url = "https://z1znh9.buildship.run/wonderbot";
