@@ -13,6 +13,7 @@ function Footer() {
           <a href="#contacto">Contacto</a>
         </div>
       </div>
+      <div></div>
     </footer>
   );
 }
