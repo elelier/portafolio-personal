@@ -83,13 +83,15 @@ function Portafolio() {
                 ))}
               </ul>
             </div>
-            <div className="proyecto-tecnologias">
-              <h4>Tecnologías:</h4>
-              <ul>
-                {proyecto.tecnologias.map((tech, i) => (
-                  <li key={i}>{tech}</li>
-                ))}
-              </ul>
+            <div class="contenedor-tecnologias">
+              <div className="proyecto-tecnologias">
+                <h4>Tecnologías:</h4>
+                <ul>
+                  {proyecto.tecnologias.map((tech, i) => (
+                    <li key={i}>{tech}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
             {proyecto.link && (
               <div className="proyecto-cta">

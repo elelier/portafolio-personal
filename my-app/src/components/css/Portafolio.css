@@ -1,156 +1,165 @@
-/* Estilos para el Portafolio Detallado */
+/* Variables de color */
+:root {
+  --color-fondo-card: #020817;
+  --color-texto: #ffffff;
+  --color-texto-destacado: #7dd3fc;
+  --color-fondo-destacado: #19191a;
+  --color-fondo-ejemplos: #1c1c1c;
+  --color-enlace: #7dd3fc;
+  --color-boton: #00cc99;
+  --color-boton-hover: #009966;
+  --sombra-boton: rgba(0, 0, 0, 0.2);
+}
+
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .proyectos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Contenedor principal del portafolio */
 .portafolio {
   position: relative;
-  padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
-  background-color: #020817; /* Color del fondo del contenedor */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
-  max-width: 1200px; /* Ajusta el ancho máximo según el diseño */
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Alinea desde la parte superior */
-  min-height: 100vh; /* Altura mínima de la pantalla */
-  overflow: hidden; /* Evita que el contenido se desborde */
-  }
-  
-  .portafolio h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--color-texto);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    margin-bottom: 60px;
-  }
-  .portafolio-detallado h1 {
-    text-align: center;
-    color: #ffffff !important;
-    margin-bottom: 30px;
-  }
-  
-  .proyecto-detalle {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    margin-bottom: 30px;
-    transition: all 0.3s ease;
-  }
-  
-  .proyecto-detalle:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  .proyecto-detalle h2 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-  }
-  
-  .proyecto-detalle p {
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  .proyecto-detalle h3 {
-    color: #2c3e50;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .proyecto-detalle ul {
-    padding-left: 20px;
-    color: #555;
-  }
-  
-  .proyecto-detalle li {
-    margin-bottom: 5px;
-  }
-  
-  /* Estilos para proyectos destacados */
-  .proyecto-detalle.destacado {
-    border: 2px solid #3498db;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .proyecto-detalle.destacado::before {
-    content: '🌟 Destacado';
-    position: absolute;
-    top: 10px;
-    right: -30px;
-    background: #3498db;
-    color: white;
-    padding: 5px 30px;
-    transform: rotate(45deg);
-    font-size: 0.8em;
-  }
-  
-  /* Estilos para proyectos de IA */
-  .proyecto-detalle.ia {
-    background: linear-gradient(145deg, #ffffff, #e6f7ff);
-  }
-  
-  .proyecto-detalle.ia h2 {
-    color: #0056b3;
-  }
-  
-  /* Animación para fade in */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .proyecto-detalle {
-    animation: fadeInUp 0.5s ease-out;
-  }
-  
-  /* Estilo para el enlace de los proyectos */
-.proyecto-link {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  padding: 60px 20px;
+  background-color: var(--color-fondo-card);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Título del portafolio */
+.portafolio h2 {
+  font-size: 2.5rem;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: var(--color-texto-destacado);
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-.proyecto-link:hover {
-  background-color: #2980b9;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  transform: translateY(-3px);
-}
-
-/* Contenedor principal del proyecto */
+/* Contenedor de cada tarjeta de proyecto */
 .proyecto-card {
-  position: relative; /* Necesario para que el botón se posicione correctamente */
-  padding-bottom: 60px; /* Espacio suficiente para el botón en la parte inferior */
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(to top, var(--color-fondo-card), var(--color-fondo-destacado));
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  min-height: 350px;
 }
+
+
+.proyecto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Título del proyecto */
+.proyecto-card h3 {
+  color: var(--color-texto-destacado);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* Descripción y roles del proyecto */
+.proyecto-rol,
+.proyecto-descripcion {
+  color: var(--color-texto);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+
+/* Listado de logros y tecnologías */
+.proyecto-logros h4,
+.proyecto-tecnologias h4 {
+  color: var(--color-texto-destacado);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.proyecto-logros ul,
+.proyecto-tecnologias ul {
+  padding-left: 20px;
+  color: var(--color-texto);
+}
+
+.proyecto-logros li {
+  margin-bottom: 5px;
+}
+
+.proyecto-tecnologias li {
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Estilos adicionales para proyectos destacados */
+.proyecto-card.destacado {
+  border: 2px solid var(--color-texto-destacado);
+  position: relative;
+  overflow: hidden;
+}
+
+.proyecto-card.destacado::before {
+  content: '🌟 Popular';
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  background: var(--color-texto-destacado);
+  color: white;
+  padding: 5px 30px;
+  transform: rotate(45deg);
+  font-size: 0.8em;
+}
+
+/* Contenedor de tecnologías */
+.contenedor-tecnologias {
+  margin-bottom: 20px; /* Empuja el contenido de abajo */
+  min-height: 200px; /* Aumenta la altura mínima del contenedor */
+}
+
+/* Animación para tecnologías */
+.proyecto-tecnologias li {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.proyecto-tecnologias li:hover {
+  background: #3498db;
+  color: white;
+  transform: translateY(-3px);
+  cursor: pointer;
+}
+
 
 /* Contenedor del botón de llamada a la acción */
 .proyecto-cta {
   position: absolute;
-  bottom: 20px; /* Coloca el botón en la parte inferior */
-  right: 20px; /* Coloca el botón en la esquina derecha */
+  bottom: 20px;
+  right: 20px;
 }
 
 /* Estilo para el botón de llamada a la acción */
 .cta-button {
   padding: 8px 15px;
   font-size: 0.9rem;
-  background-color: #00cc99; /* Color verde neón para el botón */
+  background-color: var(--color-boton);
   color: white;
   border: none;
   border-radius: 25px;
@@ -161,13 +170,29 @@
   gap: 5px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px var(--sombra-boton);
   text-decoration: none;
   font-weight: bold;
 }
 
 .cta-button:hover {
-  background-color: #009966; /* Color verde más oscuro al pasar el ratón */
+  background-color: var(--color-boton-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+}
+
+/* Animación para fade in */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.proyecto-card {
+  animation: fadeInUp 0.5s ease-out;
 }
