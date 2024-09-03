@@ -15,12 +15,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
+  
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .proyectos-grid {
     grid-template-columns: 1fr;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
 
@@ -42,10 +45,88 @@
   font-size: 2.5rem;
   font-weight: bold;
   color: var(--color-texto-destacado);
-  margin-bottom: 60px;
+  margin-bottom: 20px; /* Ajusta según sea necesario */
   text-transform: uppercase;
   text-align: center;
 }
+
+.leer-mas {
+  font-size: 1rem;
+  color: #3498db;
+  background-color: transparent;
+  border: none;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leer-mas:hover {
+  color: #2980b9;
+}
+
+.leer-mas::before {
+  content: '»';
+  margin-right: 5px;
+}
+
+.leer-mas::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+  margin-top: 3px;
+}
+
+.leer-mas:hover::after {
+  width: 0%;
+}
+
+.leer-mas:active {
+  transform: translateY(4px); /* Simula el efecto de hundimiento */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.contenido-colapsable {
+  padding: 10px;
+  background: linear-gradient(to top, var(--color-fondo-destacado), var(--color-fondo-card));
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(41, 36, 36, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+  margin-top: -50px;
+  margin-left: 60px;
+  margin-right: 60px;
+  text-align: justify;
+  font-size: 1rem;
+}
+
+.contenido-colapsable.collapsed {
+  display: none;
+}
+
+.contenido-colapsable.expanded {
+  display: block;
+  max-height: 500px; /* Ajusta según el contenido */
+  overflow: hidden;
+  margin-top: -20px !important; /* Ajusta según sea necesario */
+}
+
+@media (max-width: 768px) {
+  .contenido-colapsable {
+    margin-left: 0px;
+    margin-right: 0px;
+    }
+}
+
 
 /* Contenedor de cada tarjeta de proyecto */
 .proyecto-card {
@@ -59,6 +140,37 @@
   min-height: 350px;
 }
 
+/* Efecto de brillo en las tarjetas del portafolio */
+.proyecto-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.2) 100%);
+  transform: rotate(30deg);
+  transition: all 0.5s;
+  opacity: 0;
+  pointer-events: none; /* Evitar que el efecto interfiera con la interacción */
+}
+
+.proyecto-card:hover::after {
+  opacity: 1;
+  left: -100%;
+  top: -100%;
+}
+
+/* Ajuste para escalar el ícono o imagen dentro de la tarjeta, si aplica */
+.proyecto-card:hover .habilidad-icono {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Asegúrate de que la tarjeta de proyecto tenga un overflow hidden para que el brillo no se salga */
+.proyecto-card {
+  overflow: hidden;
+}
 
 .proyecto-card:hover {
   transform: translateY(-5px);
@@ -155,32 +267,6 @@
   right: 20px;
 }
 
-/* Estilo para el botón de llamada a la acción */
-.cta-button {
-  padding: 8px 15px;
-  font-size: 0.9rem;
-  background-color: var(--color-boton);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 6px var(--sombra-boton);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.cta-button:hover {
-  background-color: var(--color-boton-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-}
-
 /* Animación para fade in */
 @keyframes fadeInUp {
   from {
@@ -195,4 +281,35 @@
 
 .proyecto-card {
   animation: fadeInUp 0.5s ease-out;
+}
+
+/* Estilos para los botones CTA */
+.cta-button-3 {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%;
+  animation: gradientBG 10s ease infinite;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-button-3:hover {
+  background-color: var(--hero-button-hover-bg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  animation: gradientBG 18s ease infinite;
+}
+
+.cta-button-3:active {
+  transform: scale(0.95) !important;
+  background-color: #007d66;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  animation: none;
 }

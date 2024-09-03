@@ -1,5 +1,5 @@
-import React from 'react';
-import './css/Portafolio.css'; // Importa los estilos del blog desde la carpeta css dentro de components
+import React, { useState } from 'react';
+import './css/Portafolio.css'; // Importa los estilos del portafolio desde la carpeta css
 
 function Portafolio() {
   const proyectos = [
@@ -13,7 +13,8 @@ function Portafolio() {
         "Integración de IA para generar cuentos personalizados"
       ],
       tecnologias: ["React", "Node.js", "API development", "IA generativa", "Marketing digital"],
-      link: "https://wonderlabs.studio"
+      link: "https://wonderlabs.studio",
+      link_u: "wonderlabs.studio"
     },
     {
       nombre: "Asistentes Virtuales",
@@ -25,7 +26,8 @@ function Portafolio() {
         "Implementación de funciones para mantener la motivación y el enfoque en los logros"
       ],
       tecnologias: ["HuggingFace", "Procesamiento de Lenguaje Natural", "Machine Learning", "Python"],
-      link: "https://huggingface.co/chat/assistants?user=Elelier"
+      link: "https://huggingface.co/chat/assistants?user=Elelier",
+      link_u: "huggingface.co"
     },
     {
       nombre: "GoFarma",
@@ -37,7 +39,8 @@ function Portafolio() {
         "Optimización de envíos locales y nacionales"
       ],
       tecnologias: ["ERP Olimpo", "Automatización de procesos", "Gestión de inventarios"],
-      link: "http://www.gofarma.com"
+      link: "http://www.gofarma.com",
+      link_u: "gofarma.com"
     },
     {
       nombre: "Farmalisto",
@@ -49,7 +52,8 @@ function Portafolio() {
         "Aumento del 58% en ticket promedio"
       ],
       tecnologias: ["Mercado Libre", "Amazon", "Shopify", "NetSuite ERP", "IA para atención al cliente"],
-      link: "https://www.farmalisto.com.mx/"
+      link: "https://www.farmalisto.com.mx/",
+      link_u: "farmalisto.com.mx"
     },
     {
       nombre: "PepsiCo",
@@ -63,9 +67,28 @@ function Portafolio() {
     }
   ];
 
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const toggleCollapse = (e) => {
+    e.preventDefault();
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
     <section id="portafolio" className="portafolio">
-      <h2>Portafolio de Proyectos</h2>
+      <div className="portafolio-header">
+        <h2>Portafolio de Proyectos</h2>
+      </div>
+      <p className="introduccion shinyh">
+        En mi trayectoria profesional, he liderado proyectos transformadores que han redefinido el éxito para diversas organizaciones.
+        <br></br>
+        <button className="leer-mas" onClick={toggleCollapse}>Leer más</button>
+      </p>
+      <div className={`contenido-colapsable ${isCollapsed ? 'collapsed' : ''}`}>
+        <p>
+        Desde aplicaciones innovadoras hasta la optimización de operaciones, mi portafolio combina estrategia, tecnología y una ejecución apasionada. Cada proyecto aborda desafíos complejos con soluciones escalables y automatizadas, ayudando a personas y organizaciones a superar obstáculos y crecer. Explora cómo estas experiencias han impulsado la transformación en cada caso.
+        </p>
+      </div>
       <div className="proyectos-grid">
         {proyectos.map((proyecto, index) => (
           <div 
@@ -95,8 +118,8 @@ function Portafolio() {
             </div>
             {proyecto.link && (
               <div className="proyecto-cta">
-                <a href={proyecto.link} className="cta-button" target="_blank" rel="noopener noreferrer">
-                  ¡Conoce más aquí!
+                <a href={proyecto.link} className="cta-button-3" target="_blank" rel="noopener noreferrer">
+                  {proyecto.link_u}
                 </a>
               </div>
             )}
@@ -106,6 +129,5 @@ function Portafolio() {
     </section>
   );
 }
-
 
 export default Portafolio;
