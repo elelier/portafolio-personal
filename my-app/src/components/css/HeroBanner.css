@@ -25,7 +25,6 @@ html {
   overflow: hidden;
   color: var(--hero-title-color);
   padding: 20px;
-  margin-top: 0rem; /* Ajusta el margen superior */
 }
 
 
@@ -155,36 +154,36 @@ html {
 
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
-  .main-title {
-    font-size: 1rem;
-    text-align: left;
+  .hero-banner {
+    padding: 10px; /* Menos padding en pantallas pequeñas */
   }
 
   .info-container {
-    top: calc(100px); /* Ajuste para pantallas pequeñas: más espacio desde el título */
-    margin-top: 4rem; /* Ajusta el margen superior */
-    justify-content: left;
-    align-items: left;
-    text-align: left; 
+    position: absolute;
+    top: 70px; /* Ajusta la distancia desde la parte superior en pantallas pequeñas */
+    width: 100%;
+    max-width: 800px;
+    text-align: center; /* Alineación del texto en el centro */
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 1rem;
   }
 
   .hero-title {
-    font-size: 3rem;
-    margin-top: -1rem;
-    justify-content: left;
-    align-items: left;
+    font-size: 2.5rem; /* Ajusta el tamaño del título */
+    margin-top: 0; /* Sin margen superior para mover el título más arriba */
+    position: relative; /* Mantén la posición relativa */
+    top: -20px; /* Ajuste adicional para mover el título hacia arriba */
   }
 
   .hero-subtitle {
-    font-size: 2rem;
+    font-size: 1.5rem; /* Ajusta el tamaño del subtítulo */
   }
 
   .hero-description {
-    font-size: 1.5rem;
-    text-align: justify;
+    font-size: 1.2rem; /* Ajusta el tamaño de la descripción */
+    text-align: center; /* Alinea el texto al centro */
   }
-
-
 }
 
 /* Efecto de brillo en el texto */

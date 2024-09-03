@@ -184,6 +184,15 @@
   text-align: justify
 }
 
+/* Contenedor para los botones CTA */
+.cta-seccion-sobre-mi {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 20px; /* Asegúrate de dejar espacio debajo de los botones CTA */
+}
 
 /* Responsividad */
 @media (max-width: 768px) {
@@ -212,7 +221,15 @@
     flex: 1 1 auto;
   }
 
-
+  .tab-button {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 0.8rem;
+    padding: 10px 20px;
+    left: 5px;
+  }
+  
   .sub-title-container {
     text-align: left;
     font-size: 1.5rem; /* Tamaño de la fuente del subtítulo */
@@ -239,6 +256,11 @@
     left: 50%;
     transform: translateX(-50%);
   }
+  .cta-seccion-sobre-mi {
+    margin-left: -10px;
+    margin-right: 20px;
+  }
+  
 }
 
 
@@ -255,15 +277,7 @@
   to { background-position: 200% center; }
 }
 
-/* Contenedor para los botones CTA */
-.cta-seccion-sobre-mi {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-bottom: 20px; /* Asegúrate de dejar espacio debajo de los botones CTA */
-}
+
 
 /* Estilos para los botones CTA */
 .cta-button-2 {

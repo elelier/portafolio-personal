@@ -84,7 +84,7 @@ function ArsenalHabilidades() {
     <section id="habilidades" className="arsenal-habilidades">
       <h2 className="titulo-seccion">Arsenal de Habilidades</h2>
       <p className="introduccion shinyh">
-        Descubre el arsenal de habilidades que utilizo para transformar y potenciar negocios. Cada habilidad es una herramienta clave en mi caja de herramientas digital, diseñada para enfrentar desafíos y ofrecer soluciones innovadoras.
+        Estas son algunas herramientas que utilizo para transformar y potenciar negocios. Cada una es clave en mi navaja suiza digital, diseñada para enfrentar desafíos y ofrecer soluciones innovadoras.
       </p>
       <div className="habilidades-grid">
         {habilidades.map((habilidad, index) => (
