@@ -6,7 +6,6 @@ import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
 import ArsenalHabilidades from './components/ArsenalHabilidades';
 import Portafolio from './components/Portafolio';
-import PortafolioDetallado from './components/PortafolioDetallado';
 import Servicios from './components/Servicios';
 import Blog from './components/Blog';
 import Contacto from './components/Contacto';
@@ -33,7 +32,7 @@ function App() {
               <Contacto />
             </>
           } />
-          <Route path="/portafolio" element={<PortafolioDetallado />} />
+          <Route path="/portafolio" element={<Portafolio />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contacto" element={<Contacto />} />

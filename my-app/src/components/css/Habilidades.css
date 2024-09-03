@@ -1,0 +1,237 @@
+/* Variables de color */
+:root {
+  --color-fondo-card: #020817;
+  --color-texto: #ffffff;
+  --color-texto-destacado: #7dd3fc;
+  --color-fondo-destacado: #19191a;
+  --color-fondo-ejemplos: #1c1c1c;
+  --color-enlace: #7dd3fc;
+}
+
+/* Contenedor de habilidades */
+.arsenal-habilidades {
+  margin-top: 10px;
+  position: relative;
+  padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
+  background-color: var(--color-fondo-card); /* Color del fondo del contenedor */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+  max-width: 1200px; /* Ajusta el ancho máximo según el diseño */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinea desde la parte superior */
+  min-height: 100vh; /* Altura mínima de la pantalla */
+  overflow: hidden; /* Evita que el contenido se desborde */
+  margin-bottom: -50px;
+}
+.arsenal-habilidades h2 {
+  margin-top: 30px; /* Aumenta este valor para separar más del margen superior */
+  text-align: center;
+  color: #7dd3fc;
+  margin-bottom: 30px;
+}
+
+.titulo-seccion {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-texto);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.introduccion {
+  font-size: 1.8rem;
+  color: var(--color-texto);
+  margin-bottom: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+/* Estilo de las tarjetas de habilidad */
+.habilidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.habilidad-card {
+  background: linear-gradient(to top, var(--color-fondo-card), var(--color-fondo-destacado));
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--color-texto); /* Color del texto inicial */
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+
+.habilidad-card {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.habilidad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to top, var(--color-fondo-destacado), var(--color-fondo-ejemplos));
+  color: var(--color-texto-destacado); /* Cambia el color del texto en hover */
+  animation: none;
+}
+
+.habilidad-card:hover .habilidad-nombre {
+  color: var(--color-texto-destacado); /* Cambia el color del nombre en hover */
+}
+
+.habilidad-card:hover .habilidad-descripcion {
+  color: var(--color-texto-destacado); /* Cambia el color de la descripción en hover */
+}
+
+.habilidad-card.active {
+  background: linear-gradient(to top, var(--color-fondo-destacado), var(--color-fondo-ejemplos));
+  color: var(--color-texto-destacado); /* Color de texto activo */
+}
+
+.habilidad-card.active:hover {
+  color: var(--color-texto-destacado); /* Cambia el color de texto al hacer hover cuando esté activo */
+}
+
+.habilidad-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.habilidad-icono {
+  font-size: 2.5rem;
+  margin-right: 15px;
+  background: none;
+}
+
+.habilidad-nombre {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-texto);
+}
+
+.habilidad-descripcion {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
+  color: var(--color-texto);
+  transition: color 0.3s;
+}
+
+.habilidad-ejemplos {
+  margin-top: 10px;
+  padding: 15px;
+  color: white !important;
+  font-size: 1rem;
+  background-color: transparent; /* Elimina el fondo de la sección de ejemplos */
+  border-radius: 8px;
+  list-style: disc;
+  text-align: left;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.habilidad-ejemplos li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: white !important
+}
+
+.habilidad-ejemplos a {
+  color: white !important;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.habilidad-ejemplos a:hover {
+  text-decoration: underline;
+  color: #7dd3fc !important
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+@media (max-width: 768px) {
+  .introduccion {
+    text-align: left;
+    font-size: 1.3rem; /* Tamaño de la fuente del subtítulo */
+    font-weight: bold;
+    color: #ffdd57; /* Color del subtítulo */
+    padding-left: 5px;
+    padding-right: 0px;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+}
+
+.shinyh {
+  background: linear-gradient(to right, #ffffff 0%, #4cacd8 50%, #ffffff 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 2s linear infinite;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 1; }
+  to { opacity: 1; }
+}
+
+/* Animaciones */
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.habilidad-card {
+  animation: floating 4s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .habilidades-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.habilidad-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.2) 100%);
+  transform: rotate(30deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.habilidad-card:hover::after {
+  opacity: 1;
+  left: -100%;
+  top: -100%;
+}
+
+.habilidad-card:hover .habilidad-icono {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}

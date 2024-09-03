@@ -55,6 +55,7 @@ function Navegacion() {
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>Sobre Mi</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>Habilidades</Link></li>
           <li><Link to="/portafolio" onClick={() => { closeMenu(); }}>Portafolio</Link></li>
           <li><Link to="/servicios" onClick={() => { closeMenu(); }}>Servicios</Link></li>
           <li><Link to="/blog" onClick={() => { closeMenu(); }}>Blog</Link></li>

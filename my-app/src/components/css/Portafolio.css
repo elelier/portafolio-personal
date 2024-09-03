@@ -1,15 +1,31 @@
 /* Estilos para el Portafolio Detallado */
 .portafolio {
-    margin-top: 60px;
-    padding: 40px 0;
-    background-color: #f9f9f9;
-    padding: 40px 20px;
-    
+  position: relative;
+  padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
+  background-color: #020817; /* Color del fondo del contenedor */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+  max-width: 1200px; /* Ajusta el ancho máximo según el diseño */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinea desde la parte superior */
+  min-height: 100vh; /* Altura mínima de la pantalla */
+  overflow: hidden; /* Evita que el contenido se desborde */
   }
   
+  .portafolio h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--color-texto);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+  }
   .portafolio-detallado h1 {
     text-align: center;
-    color: #333;
+    color: #ffffff !important;
     margin-bottom: 30px;
   }
   
