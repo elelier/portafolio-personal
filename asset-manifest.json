@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.c742547c.css",
-    "main.js": "/static/js/main.16af67ca.js",
+    "main.css": "/static/css/main.f70a17c0.css",
+    "main.js": "/static/js/main.e09261be.js",
     "static/media/childhood.png": "/static/media/childhood.5f05af19898d22b8e60d.png",
     "static/media/technologic_vision.png": "/static/media/technologic_vision.ec953b376e729e08c8aa.png",
     "static/media/ecommerce_marketing.png": "/static/media/ecommerce_marketing.c1dad67f04e06be9c101.png",
+    "static/media/2409_CV_EL.pdf": "/static/media/2409_CV_EL.8eaaefac1f39e389b143.pdf",
     "index.html": "/index.html",
-    "main.c742547c.css.map": "/static/css/main.c742547c.css.map",
-    "main.16af67ca.js.map": "/static/js/main.16af67ca.js.map"
+    "main.f70a17c0.css.map": "/static/css/main.f70a17c0.css.map",
+    "main.e09261be.js.map": "/static/js/main.e09261be.js.map"
   },
   "entrypoints": [
-    "static/css/main.c742547c.css",
-    "static/js/main.16af67ca.js"
+    "static/css/main.f70a17c0.css",
+    "static/js/main.e09261be.js"
   ]
 }
