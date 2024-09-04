@@ -1,0 +1,217 @@
+/* Variables de color */
+:root {
+    --color-fondo-card: #020817;
+    --color-texto: #ffffff;
+    --color-texto-destacado: #7dd3fc;
+    --color-fondo-destacado: #19191a;
+    --color-fondo-ejemplos: #1c1c1c;
+    --color-enlace: #7dd3fc;
+    --color-boton: #00cc99;
+    --color-boton-hover: #009966;
+    --sombra-boton: rgba(0, 0, 0, 0.2);
+}
+  
+/* Estilos para la sección de Contacto en modo oscuro */
+.contacto {
+    margin-top: 40px;
+    padding: 40px 20px;
+    background-color: var(--color-fondo-card);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilos del título de la sección */
+.contacto h2 {
+    text-align: center;
+    color: var(--color-texto);
+    margin-bottom: 30px;
+    font-size: 2rem; /* Tamaño de fuente ajustado */
+}
+
+/* Contenido del contacto */
+.contacto-contenido {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    margin: 0 auto;
+    max-width: 1000px; /* Ajusta el ancho máximo según sea necesario */
+}
+
+/* Estilos del formulario de contacto */
+.formulario-contacto {
+    flex: 2;
+    max-width: 500px;
+}
+
+/* Campos de entrada */
+.formulario-contacto input,
+.formulario-contacto textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; /* Reducido el margen inferior entre campos */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: var(--color-fondo-destacado); /* Fondo oscuro para los campos */
+    color: var(--color-texto);
+}
+
+
+
+/* Botón */
+.formulario-contacto button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    background-color: var(--color-boton); /* Verde neón */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px var(--sombra-boton);
+}
+
+.formulario-contacto button:hover {
+    background-color: var(--color-boton-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+}
+
+/* Placeholder animación */
+.input-container {
+    position: relative;
+    border-radius: 5px;
+    padding: 10px 10px;
+}
+
+.input-placeholder {
+    position: absolute;
+    left: 10px;
+    top: 30%;
+    color: var(--color-texto);
+    background-color: var(--color-fondo-card);
+    pointer-events: none;
+    transition: transform 0.2s ease, font-size 0.2s ease;
+}
+
+.input-field {
+    width: 100%;
+    font-size: 18px;
+    padding: 5px 0;
+    border: none;
+    outline: none;
+}
+
+.input-field.textarea-field {
+    width: 100%;
+    height: 150px; /* Ajusta la altura según sea necesario */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: var(--color-fondo-destacado);
+    color: var(--color-texto);
+    resize: vertical; /* Permite redimensionar verticalmente */
+    overflow-y: auto; /* Habilita el scroll interno */
+    white-space: pre-wrap; /* Mantiene los saltos de línea */
+    word-wrap: break-word; /* Rompe las palabras largas para evitar el desbordamiento */
+}
+
+.textarea-field {
+    height: 150px !important; /* Ajusta la altura del textarea para ser más grande */
+    resize: vertical !important; /* Permite redimensionar verticalmente */
+    overflow-y: auto !important; /* Habilita el scroll interno */
+}
+
+/* Animación especial para el campo Mensaje */
+.input-container.special .input-placeholder {
+    transform: translateY(-60px); /* Desplazamiento pronunciado para el campo Mensaje */
+}
+
+/* Información de contacto */
+.info-contacto {
+    flex: 1;
+    max-width: 400px;
+    margin-left: 20px; /* Separación del formulario */
+}
+
+.info-contacto h3 {
+    color: var(--color-texto);
+    margin-bottom: 20px;
+}
+
+.info-contacto p {
+    margin-bottom: 10px;
+    color: var(--color-texto);
+}
+
+/* Estilos generales para la sección de contacto */
+.info-contacto {
+    margin-top: 0px;
+}
+
+.info-contacto-links,
+.redes-sociales-links,
+.agenda-documentos-links {
+    display: flex;
+    flex-direction: column; /* Alinea los enlaces verticalmente */
+    gap: 10px;
+}
+
+.info-contacto-link,
+.redes-sociales-link,
+.agenda-documentos-link {
+    display: flex;
+    align-items: center;
+    color: var(--color-enlace);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.info-contacto-link i,
+.redes-sociales-link i,
+.agenda-documentos-link i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.info-contacto-link:hover,
+.redes-sociales-link:hover,
+.agenda-documentos-link:hover {
+    color: var(--color-texto-destacado);
+    transform: scale(1.1);
+    transform: translateX(10px)
+}
+
+/* Títulos para las categorías */
+.info-contacto h3,
+.redes-sociales h3,
+.agenda-documentos h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--color-titulo-seccion);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contacto-contenido {
+        flex-direction: column;
+    }
+
+    .info-contacto {
+        margin-left: 0;
+        margin-top: 30px;
+        max-width: 100%;
+    }
+}

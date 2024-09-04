@@ -1,30 +1,114 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CV from './assets/files/2409_CV_EL.pdf';
+import { motion } from 'framer-motion';
+import './css/Contacto.css';
 
 function Contacto() {
   return (
-    <section id="contacto" className="contacto">
-      <h2>Contáctame</h2>
-      <div className="contacto-contenido">
-        <form className="formulario-contacto">
-          <input type="text" placeholder="Nombre" required />
-          <input type="email" placeholder="Correo electrónico" required />
-          <textarea placeholder="Mensaje" required></textarea>
-          <button type="submit">Enviar mensaje</button>
-        </form>
-        <div className="info-contacto">
-          <h3>Información de contacto</h3>
-          <p>📧 loya.elier@gmail.com</p>
-          <p>📱 (+52) 811 780 1157</p>
-          <p>📍 Monterrey, México</p>
-          <div className="redes-sociales">
-            <a href="https://linkedin.com/in/elier/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/elelier" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://calendly.com/loya-elier/30min" target="_blank" rel="noopener noreferrer">Agenda 30 minutos</a>
-            <a href="../assets/files/file_1.pdf" download>Descargar CV</a>
+    <motion.section
+      id="contacto"
+      className="contacto"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="contacto">
+        <h2>Contáctame</h2>
+        <div className="contacto-contenido">
+          <form className="formulario-contacto">
+            <AnimatedInput placeholder="Nombre" type="text" maxLength={255} />
+            <AnimatedInput placeholder="Correo electrónico" type="email" maxLength={255} />
+            <AnimatedInput placeholder="Mensaje" type="textarea" special maxLength={500} />
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Enviar mensaje
+            </motion.button>
+          </form>
+          <div className="info-contacto">
+            <h3>Información de contacto</h3>
+            <div className="info-contacto-links">
+              <a href="mailto:loya.elier@gmail.com" className="info-contacto-link">
+                <i className="fas fa-envelope"></i>
+                loya.elier@gmail.com
+              </a>
+              <a href="https://wa.me/528117801157" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
+                <i className="fab fa-whatsapp"></i>
+                (+52) 811 780 1157
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Monterrey,+México" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
+                <i className="fas fa-map-marker-alt"></i>
+                Monterrey, México
+              </a>
+            </div>
+            <div className="redes-sociales">
+              <h3>Enlaces Profesionales</h3>
+              <div className="redes-sociales-links">
+                <a href="https://linkedin.com/in/elier/" target="_blank" rel="noopener noreferrer" className="redes-sociales-link">
+                  <i className="fab fa-linkedin"></i>
+                  LinkedIn
+                </a>
+                <a href="https://github.com/elelier" target="_blank" rel="noopener noreferrer" className="redes-sociales-link">
+                  <i className="fab fa-github"></i>
+                  GitHub
+                </a>
+              </div>
+              <h3>Agenda y Documentos</h3>
+              <div className="agenda-documentos-links">
+                <a href="https://calendly.com/loya-elier/30min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
+                  <i className="fas fa-calendar-check"></i>
+                  Agenda 30 minutos
+                </a>
+                <a href={CV} download className="agenda-documentos-link">
+                  <i className="fas fa-file-download"></i>
+                  Descargar CV
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
+  );
+}
+
+function AnimatedInput({ placeholder, type, special, maxLength }) {
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <div className={`input-container ${special ? 'special' : ''}`}>
+      <motion.label
+        className="input-placeholder"
+        initial={false}
+        animate={{
+          scale: isFocused ? 0.8 : 1,
+          x: 10,
+          y: isFocused ? (special ? -60 : -20) : 0,
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      >
+        {placeholder}
+      </motion.label>
+      {type === 'textarea' ? (
+        <motion.textarea
+          className="input-field textarea-field"
+          onFocus={() => setIsFocused(true)}
+          onBlur={(e) => !e.target.value && setIsFocused(false)}
+          rows="4" // Define el número de filas visibles
+          maxLength={maxLength} // Limita la cantidad de caracteres
+        />
+      ) : (
+        <motion.input
+          type={type}
+          className="input-field"
+          onFocus={() => setIsFocused(true)}
+          onBlur={(e) => !e.target.value && setIsFocused(false)}
+          maxLength={maxLength} // Limita la cantidad de caracteres
+        />
+      )}
+    </div>
   );
 }
 
