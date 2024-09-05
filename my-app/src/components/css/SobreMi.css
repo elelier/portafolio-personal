@@ -194,8 +194,9 @@
   margin-bottom: 20px; /* Asegúrate de dejar espacio debajo de los botones CTA */
 }
 
+
 /* Responsividad */
-@media (max-width: 768px) {
+@media (max-width: 1105px) {
   .sobre-mi {
     padding: 30px 10px; /* Ajusta el padding para móviles */
     max-width: 100%;
