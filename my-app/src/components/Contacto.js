@@ -1,9 +1,42 @@
+// Contacto.js
+
 import React, { useState } from 'react';
 import CV from './assets/files/2409_CV_EL.pdf';
 import { motion } from 'framer-motion';
 import './css/Contacto.css';
 
 function Contacto() {
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [message, setMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('https://81ocg9.buildship.run/contact_me', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, mail, message }),
+      });
+
+      if (response.ok) {
+        setSuccessMessage('Tu mensaje ha sido enviado correctamente, gracias por tu interés.');
+        setName('');
+        setMail('');
+        setMessage('');
+      } else {
+        setErrorMessage('Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente.');
+      }
+    } catch (error) {
+      setErrorMessage('Error en la red. Por favor, intenta nuevamente.');
+    }
+  };
+
   return (
     <motion.section
       id="contacto"
@@ -15,10 +48,29 @@ function Contacto() {
       <div className="contacto">
         <h2>Contáctame</h2>
         <div className="contacto-contenido">
-          <form className="formulario-contacto">
-            <AnimatedInput placeholder="Nombre" type="text" maxLength={255} />
-            <AnimatedInput placeholder="Correo electrónico" type="email" maxLength={255} />
-            <AnimatedInput placeholder="Mensaje" type="textarea" special maxLength={500} />
+          <form className="formulario-contacto" onSubmit={handleSubmit}>
+            <AnimatedInput
+              placeholder="Nombre"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              maxLength={255}
+            />
+            <AnimatedInput
+              placeholder="Correo electrónico"
+              type="email"
+              value={mail}
+              onChange={(e) => setMail(e.target.value)}
+              maxLength={255}
+            />
+            <AnimatedInput
+              placeholder="Mensaje"
+              type="textarea"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              special
+              maxLength={500}
+            />
             <motion.button
               type="submit"
               whileHover={{ scale: 1.1 }}
@@ -26,6 +78,10 @@ function Contacto() {
             >
               Enviar mensaje
             </motion.button>
+            <div className='buttonmessage'>
+            {successMessage && <p className="success-message">{successMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            </div>
           </form>
           <div className="info-contacto">
             <h3>Información de contacto</h3>
@@ -74,7 +130,7 @@ function Contacto() {
   );
 }
 
-function AnimatedInput({ placeholder, type, special, maxLength }) {
+function AnimatedInput({ placeholder, type, special, value, onChange, maxLength }) {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -94,6 +150,8 @@ function AnimatedInput({ placeholder, type, special, maxLength }) {
       {type === 'textarea' ? (
         <motion.textarea
           className="input-field textarea-field"
+          value={value}
+          onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={(e) => !e.target.value && setIsFocused(false)}
           rows="4" // Define el número de filas visibles
@@ -103,6 +161,8 @@ function AnimatedInput({ placeholder, type, special, maxLength }) {
         <motion.input
           type={type}
           className="input-field"
+          value={value}
+          onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={(e) => !e.target.value && setIsFocused(false)}
           maxLength={maxLength} // Limita la cantidad de caracteres
