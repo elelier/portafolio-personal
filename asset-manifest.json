@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.50acd009.css",
-    "main.js": "/static/js/main.da27d61e.js",
+    "main.js": "/static/js/main.28d6f393.js",
     "static/media/childhood.png": "/static/media/childhood.5f05af19898d22b8e60d.png",
     "static/media/technologic_vision.png": "/static/media/technologic_vision.ec953b376e729e08c8aa.png",
     "static/media/ecommerce_marketing.png": "/static/media/ecommerce_marketing.c1dad67f04e06be9c101.png",
     "static/media/2409_CV_EL.pdf": "/static/media/2409_CV_EL.8eaaefac1f39e389b143.pdf",
     "index.html": "/index.html",
     "main.50acd009.css.map": "/static/css/main.50acd009.css.map",
-    "main.da27d61e.js.map": "/static/js/main.da27d61e.js.map"
+    "main.28d6f393.js.map": "/static/js/main.28d6f393.js.map"
   },
   "entrypoints": [
     "static/css/main.50acd009.css",
-    "static/js/main.da27d61e.js"
+    "static/js/main.28d6f393.js"
   ]
 }
