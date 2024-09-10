@@ -40,6 +40,13 @@
     margin-right: 20px; /* Espacio entre imagen y título */
 }
 
+/* Estilo para la imagen del perfil */
+.contacto-banner {
+    width: 1584px; /* Ajusta el tamaño según sea necesario */
+    height: 396px;
+    margin-right: 20px; /* Espacio entre imagen y título */
+}
+
 /* Estilo para el contenedor del título */
 .contacto-titulo {
     text-align: left;
