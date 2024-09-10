@@ -1,17 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.76a2525b.css",
-    "main.js": "/static/js/main.abf92240.js",
+    "main.js": "/static/js/main.6acbf6fe.js",
+    "static/media/mail-banner-1.png": "/static/media/mail-banner-1.fe556e03732d356444ea.png",
     "static/media/technologic_vision.png": "/static/media/technologic_vision.ec953b376e729e08c8aa.png",
     "static/media/ecommerce_marketing.png": "/static/media/ecommerce_marketing.c1dad67f04e06be9c101.png",
     "static/media/profile-picture-elier2.png": "/static/media/profile-picture-elier2.bb22001998419d8c5a87.png",
     "static/media/2409_CV_EL.pdf": "/static/media/2409_CV_EL.8eaaefac1f39e389b143.pdf",
     "index.html": "/index.html",
     "main.76a2525b.css.map": "/static/css/main.76a2525b.css.map",
-    "main.abf92240.js.map": "/static/js/main.abf92240.js.map"
+    "main.6acbf6fe.js.map": "/static/js/main.6acbf6fe.js.map"
   },
   "entrypoints": [
     "static/css/main.76a2525b.css",
-    "static/js/main.abf92240.js"
+    "static/js/main.6acbf6fe.js"
   ]
 }
