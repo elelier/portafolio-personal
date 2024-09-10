@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './css/SobreMi.css';
-import personal_story from './assets/files/childhood.png';
+import personal_story from './assets/files/profile-picture-elier2.png';
 import professional from './assets/files/ecommerce_marketing.png';
 import tech_vision from './assets/files/technologic_vision.png';
 import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import { useSpring, animated } from '@react-spring/web';
 
 function SobreMi() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -69,6 +68,14 @@ function SobreMi() {
     },
   ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSection((prevSection) => (prevSection + 1) % sections.length);
+    }, 30000); // Cambia de sección cada 30 segundos
+
+    return () => clearInterval(interval);
+  }, [sections.length]);
+
   const handleSwipe = (eventData) => {
     if (eventData && eventData.dir) {
       const { dir } = eventData;
@@ -82,18 +89,6 @@ function SobreMi() {
     }
   };
 
-  const [props, api] = useSpring(() => ({
-    opacity: 0,
-  }));
-
-  useEffect(() => {
-    api.start({
-      opacity: 1,
-      reset: true,
-      from: { opacity: 0 },
-    });
-  }, [currentSection, api]);
-
   const swipeHandlers = useSwipeable({
     onSwiped: handleSwipe,
     preventDefaultTouchmoveEvent: true,
@@ -104,6 +99,20 @@ function SobreMi() {
     <section id="sobre-mi" className="sobre-mi" {...swipeHandlers}>
       <div className="contenido-sobre-mi">
         <h2>Sobre Mí</h2>
+        <div className="navigation-arrows">
+          <button
+            className="nav-arrow left"
+            onClick={() => setCurrentSection((prevSection) => (prevSection - 1 + sections.length) % sections.length)}
+          >
+            &lt;
+          </button>
+          <button
+            className="nav-arrow right"
+            onClick={() => setCurrentSection((prevSection) => (prevSection + 1) % sections.length)}
+          >
+            &gt;
+          </button>
+        </div>
         <div className="tabs">
           {sections.map((section, index) => (
             <button
@@ -115,7 +124,7 @@ function SobreMi() {
             </button>
           ))}
         </div>
-        <animated.div style={props} className="section-content">
+        <div className="section-content">
           <div className="sub-title-container shinyy">{sections[currentSection].subtitle}</div>
           <div className="image-container">
             <img src={sections[currentSection].image} alt={sections[currentSection].alt} />
@@ -123,7 +132,7 @@ function SobreMi() {
           <div className="text-content">
             {sections[currentSection].content}
           </div>
-        </animated.div>
+        </div>
         <div className="cta-seccion-sobre-mi">
           <Link to="/servicios" className="cta-button-2">Mis Servicios</Link>
           <Link to="/contacto" className="cta-button-2">Contáctame</Link>
@@ -133,6 +142,7 @@ function SobreMi() {
             <div
               key={index}
               className={`indicator ${currentSection === index ? 'active-indicator' : ''}`}
+              onClick={() => setCurrentSection(index)}
             />
           ))}
         </div>

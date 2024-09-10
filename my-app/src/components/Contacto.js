@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import CV from './assets/files/2409_CV_EL.pdf';
 import { motion } from 'framer-motion';
 import './css/Contacto.css';
+import perfilImg from './assets/files/profile-picture-elier2.png';
 
 function Contacto() {
   const [name, setName] = useState('');
@@ -46,7 +47,13 @@ function Contacto() {
       transition={{ duration: 0.5 }}
     >
       <div className="contacto">
-        <h2>Contáctame</h2>
+        <div className="contacto-header">
+          <img src={perfilImg} alt="Perfil" className="contacto-imagen" />
+          <div className="contacto-titulo">
+            <h2>Contáctame</h2>
+            <p className="contacto-frase">¡Estoy aquí para ayudarte! No dudes en ponerte en contacto.</p>
+          </div>
+        </div>
         <div className="contacto-contenido">
           <form className="formulario-contacto" onSubmit={handleSubmit}>
             <AnimatedInput

@@ -123,30 +123,6 @@
   color: #ffdd57;
 }
 
-.section-content {
-  display: flex;
-  align-items: flex-start; /* Alinea el contenido en la parte superior */
-  justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  min-height: 500px; /* Ajusta esta altura según el contenido más grande */
-}
-
-/* Cambios en las transiciones */
-.section-content {
-  opacity: 0; /* Oculta el contenido por defecto */
-}
-
-.section-content.entering {
-  opacity: 1;
-  transform: translateX(0%); /* Muestra el contenido y lo coloca en su lugar */
-}
-
-.section-content.exiting {
-  opacity: 0;
-  transform: translateX(-50%); /* Mueve el contenido hacia la izquierda al salir */
-}
 .image-container {
 
   max-width: 500px;
@@ -201,12 +177,6 @@
     padding: 30px 10px; /* Ajusta el padding para móviles */
     max-width: 100%;
     min-height: 160vh;
-  }
-
-  .section-content {
-    flex-direction: column;
-    text-align: center;
-    box-sizing: border-box; /* Incluye el padding en el ancho total del contenedor */
   }
 
   .section-content {
@@ -311,9 +281,74 @@
   animation: none;
 }
 
-/* Indicadores de bolitas */
-.horizontal-scroll-indicator {
+/* Estilos para las flechitas de navegación */
+.navigation-arrows {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: all;
+  z-index: 10; /* Asegura que las flechas estén por encima de otros elementos */
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  font-size: 40px; /* Tamaño del símbolo de la flecha */
+  color: rgba(255, 255, 255, 0.7); /* Blanco semi-transparente */
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s, text-shadow 0.3s;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Sombra de texto para el efecto flotante */
+}
+
+.nav-arrow:hover {
+  color: rgba(255, 255, 255, 1); /* Color blanco sólido al pasar el ratón */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada al pasar el ratón */
+}
+
+.nav-arrow:active {
+  transform: scale(0.9); /* Efecto de clic */
+}
+
+.nav-arrow.left {
+  margin-left: -20px; /* Espaciado hacia el borde izquierdo */
+  transform: rotate(0deg);
+  margin-top: 3px;
+}
+
+.nav-arrow.right {
+  margin-right: -20px; /* Espaciado hacia el borde derecho */
+}
+
+/* Estilos para el slider automático */
+.section-content {
   position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.section-content.hidden {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.section-content.visible {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+/* Indicadores de bolitas para la navegación */
+.horizontal-scroll-indicator {
+  position: absolute;
+  bottom: 10px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -327,8 +362,9 @@
   background-color: #00000044;
   margin: 0 5px;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.active-indicator {
+.indicator.active-indicator {
   background-color: #fff;
 }

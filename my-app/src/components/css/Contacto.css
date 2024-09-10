@@ -24,9 +24,44 @@
     margin-right: auto;
 }
 
+/* Añadido para centrar la imagen y el título en una sola línea */
+.contacto-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para la imagen del perfil */
+.contacto-imagen {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: 150px;
+    border-radius: 50%; /* Crea el efecto de círculo */
+    margin-right: 20px; /* Espacio entre imagen y título */
+}
+
+/* Estilo para el contenedor del título */
+.contacto-titulo {
+    text-align: left;
+}
+
+/* Estilo para el título */
+.contacto-titulo h2 {
+    margin: 0;
+    color: var(--color-texto);
+    font-size: 2rem;
+}
+
+/* Estilo para la frase en cursiva */
+.contacto-frase {
+    font-style: italic;
+    color: var(--color-texto-destacado);
+    margin-top: 10px;
+}
+
 /* Estilos del título de la sección */
 .contacto h2 {
-    text-align: center;
+    text-align: left;
     color: var(--color-texto);
     margin-bottom: 30px;
     font-size: 2rem; /* Tamaño de fuente ajustado */
