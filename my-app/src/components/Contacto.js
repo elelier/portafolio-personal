@@ -129,7 +129,6 @@ function Contacto() {
                   <i className="fas fa-file-download"></i>
                   Descargar CV
                 </a>
-                <img src={banner} alt="banner" className="contacto-imagen" />
               </div>
             </div>
           </div>
