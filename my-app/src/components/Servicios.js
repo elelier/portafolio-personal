@@ -11,7 +11,8 @@ function Servicios() {
         "Desarrollo de estrategias de transformación a medida",
         "Implementación y seguimiento de proyectos digitales"
       ],
-      tecnologias: ["Análisis de procesos", "Planificación estratégica", "Automatización digital"]
+      tecnologias: ["Análisis de procesos", "Planificación estratégica", "Automatización digital"],
+      link_u: "Digitaliza tu Negocio"
     },
     {
       nombre: "Optimización de Operaciones y Logística",
@@ -21,7 +22,8 @@ function Servicios() {
         "Implementación de sistemas de gestión de inventario",
         "Optimización de rutas y tiempos de entrega"
       ],
-      tecnologias: ["Gestión de inventarios", "Optimización logística", "Lean Management"]
+      tecnologias: ["Gestión de inventarios", "Optimización logística", "Lean Management"],
+      link_u: "Mejora tus Procesos"
     },
     {
       nombre: "Implementación de Soluciones IA",
@@ -31,7 +33,8 @@ function Servicios() {
         "Sistemas de predicción y análisis avanzado",
         "Automatización de procesos mediante IA"
       ],
-      tecnologias: ["Chatbots", "Aprendizaje automático", "Procesamiento de Lenguaje Natural"]
+      tecnologias: ["Chatbots", "Aprendizaje automático", "Procesamiento de Lenguaje Natural"],
+      link_u: "Innova con IA"
     },
     {
       nombre: "Desarrollo de Aplicaciones Personalizadas",
@@ -41,7 +44,8 @@ function Servicios() {
         "Integración con sistemas existentes",
         "Mejora de la eficiencia y productividad"
       ],
-      tecnologias: ["React", "Node.js", "Desarrollo de APIs", "Integración de sistemas"]
+      tecnologias: ["React", "Node.js", "Desarrollo de APIs", "Integración de sistemas"],
+      link_u: "Desarrolla tu idea"
     },
     {
       nombre: "Estrategias de E-commerce y Marketplaces",
@@ -51,7 +55,8 @@ function Servicios() {
         "Estrategias de pricing y promociones",
         "Gestión de reputación y servicio al cliente"
       ],
-      tecnologias: ["Shopify", "Amazon", "Mercado Libre", "SEO y SEM"]
+      tecnologias: ["Shopify", "Amazon", "Mercado Libre", "SEO y SEM"],
+      link_u: "Mejora tu Estrategia"
     }
   ];
 
@@ -100,7 +105,7 @@ function Servicios() {
             <div className="servicio-cta">
               {/* Desplazar hacia la sección de contacto */}
               <button className="cta-button-3" onClick={() => handleScrollToElement('contacto')}>
-                Contáctame
+              {servicio.link_u}
               </button>
             </div>
           </div>
