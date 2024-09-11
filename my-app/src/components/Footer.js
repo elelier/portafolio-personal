@@ -19,7 +19,6 @@ function Footer() {
           <Link to="/" onClick={() => handleScrollToElement('habilidades')}>Habilidades</Link>
           <Link to="/" onClick={() => handleScrollToElement('portafolio')}>Portafolio</Link>
           <Link to="/" onClick={() => handleScrollToElement('servicios')}>Servicios</Link>
-          <Link to="/blog">Blog</Link>
           <Link to="/" onClick={() => handleScrollToElement('contacto')}>Contacto</Link>
         </div>
         <div className="footer-social">
