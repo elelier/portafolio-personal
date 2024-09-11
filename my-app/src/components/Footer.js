@@ -1,8 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../LanguageContext';
 import './css/Footer.css';
 
 function Footer() {
+  const { language } = useLanguage();
+
+  const footerLinks = {
+    es: {
+      inicio: 'Inicio',
+      sobreMi: 'Sobre Mí',
+      habilidades: 'Habilidades',
+      portafolio: 'Portafolio',
+      servicios: 'Servicios',
+      contacto: 'Contacto',
+      connect: 'Conéctate conmigo en:'
+    },
+    en: {
+      inicio: 'Home',
+      sobreMi: 'About Me',
+      habilidades: 'Skills',
+      portafolio: 'Portfolio',
+      servicios: 'Services',
+      contacto: 'Contact',
+      connect: 'Connect with me on:'
+    }
+  };
+
   const handleScrollToElement = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -14,15 +38,15 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-links">
-          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>Inicio</Link>
-          <Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>Sobre Mí</Link>
-          <Link to="/" onClick={() => handleScrollToElement('habilidades')}>Habilidades</Link>
-          <Link to="/" onClick={() => handleScrollToElement('portafolio')}>Portafolio</Link>
-          <Link to="/" onClick={() => handleScrollToElement('servicios')}>Servicios</Link>
-          <Link to="/" onClick={() => handleScrollToElement('contacto')}>Contacto</Link>
+          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>{footerLinks[language].inicio}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{footerLinks[language].sobreMi}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('habilidades')}>{footerLinks[language].habilidades}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('portafolio')}>{footerLinks[language].portafolio}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('servicios')}>{footerLinks[language].servicios}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('contacto')}>{footerLinks[language].contacto}</Link>
         </div>
         <div className="footer-social">
-          <p>Conéctate conmigo en:</p>
+          <p>{footerLinks[language].connect}</p>
           <div className="social-links">
             <a href="https://linkedin.com/in/elier/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i> LinkedIn</a>
             <a href="https://github.com/elelier" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> GitHub</a>
