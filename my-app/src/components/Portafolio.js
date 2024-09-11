@@ -77,7 +77,7 @@ function Portafolio() {
   return (
     <section id="portafolio" className="portafolio">
       <div className="portafolio-header">
-        <h2>Portafolio de Proyectos</h2>
+        <h1>Portafolio de Proyectos</h1>
       </div>
       <p className="introduccion shinyh">
         En mi trayectoria profesional, he liderado proyectos transformadores que han redefinido el éxito para diversas organizaciones.

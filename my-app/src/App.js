@@ -18,7 +18,7 @@ function App() {
     <Router>
       <div className="App">
         <SEO 
-          title="Elier Loya - Transformando negocios con tecnología e innovación" 
+          title="Elier Loya - Transformando Negocios con Tecnología e Innovación" 
           description="Portafolio de Elier Loya, especialista en transformación digital, e-commerce y optimización de operaciones."
         />
         <Navegacion />
@@ -29,6 +29,7 @@ function App() {
               <SobeMi/>
               <ArsenalHabilidades />
               <Portafolio />
+              <Servicios />
               <Contacto />
             </>
           } />

@@ -1,93 +1,191 @@
-/* Estilos generales para Servicios */
-.servicios {
-  margin-top: 60px;
-  padding: 40px 0;
-  background-color: #f9f9f9;
+/* Variables de color */
+:root {
+  --color-fondo-card: #020817;
+  --color-texto: #ffffff;
+  --color-texto-destacado: #7dd3fc;
+  --color-fondo-destacado: #19191a;
+  --color-fondo-ejemplos: #1c1c1c;
+  --color-enlace: #7dd3fc;
+  --color-boton: #00cc99;
+  --color-boton-hover: #009966;
+  --sombra-boton: rgba(0, 0, 0, 0.2);
+}
+
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
   
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .servicios-grid {
+    grid-template-columns: 1fr;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+/* Contenedor principal de la sección de servicios */
+.servicios {
+  position: relative;
+  padding: 60px 20px;
+  background-color: var(--color-fondo-card);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
-  padding: 0 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Espacio entre los contenedores */
+  margin: auto;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
+/* Título de la sección */
 .servicios h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-texto-destacado);
+  margin-bottom: 20px;
   text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-  margin-top: 60px;
-  width: 100%; /* Asegura que el título ocupe toda la línea */
+  text-transform: uppercase;
 }
 
-/* Estilos para cada servicio */
-.servicio {
-  background-color: white;
+/* Contenedor de cada tarjeta de servicio */
+.servicio-card {
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(to top, var(--color-fondo-card), var(--color-fondo-destacado));
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 25px;
-  margin: 0; /* Elimina márgenes para un mejor espaciado con flexbox */
+  margin-bottom: 30px;
   transition: all 0.3s ease;
-  flex: 1 1 calc(33.333% - 20px); /* 3 elementos por renglón, ajusta según el número de columnas */
-  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho */
+  min-height: 350px;
 }
 
-.servicio:hover {
+/* Efecto de brillo en las tarjetas del portafolio */
+.servicio-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.2) 100%);
+  transform: rotate(30deg);
+  transition: all 0.5s;
+  opacity: 0;
+  pointer-events: none; /* Evitar que el efecto interfiera con la interacción */
+}
+
+.servicio-card:hover::after {
+  opacity: 1;
+  left: -100%;
+  top: -100%;
+}
+
+/* Ajuste para escalar el ícono o imagen dentro de la tarjeta, si aplica */
+.servicio-card:hover .habilidad-icono {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Asegúrate de que la tarjeta de servicio tenga un overflow hidden para que el brillo no se salga */
+.servicio-card {
+  overflow: hidden;
+}
+
+.servicio-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.servicio h2 {
-  color: #2c3e50;
+/* Título del servicio */
+.servicio-card h3 {
+  color: var(--color-texto-destacado);
+  font-size: 1.8rem;
   margin-bottom: 15px;
 }
 
-.servicio p {
-  color: #555;
+/* Descripción del servicio */
+.servicio-descripcion {
+  color: var(--color-texto);
   margin-bottom: 20px;
   line-height: 1.6;
 }
 
-.servicio h3 {
-  color: #2c3e50;
+
+/* Listado de beneficios y tecnologías */
+.servicio-beneficios h4,
+.servicio-tecnologias h4 {
+  color: var(--color-texto-destacado);
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.servicio ul {
+.servicio-beneficios ul,
+.servicio-tecnologias ul {
   padding-left: 20px;
-  color: #555;
+  color: var(--color-texto);
 }
 
-.servicio li {
+.servicio-beneficios li {
+  margin-bottom: 5px;
+}
+
+.servicio-tecnologias li {
+  color: #555;
   margin-bottom: 5px;
 }
 
 /* Estilos adicionales para servicios destacados */
-.servicio.servicio-0 {
-  border: 2px solid #3498db;
+.servicio-card.destacado {
+  border: 2px solid var(--color-texto-destacado);
   position: relative;
   overflow: hidden;
 }
 
-.servicio.servicio-0::before {
-  content: '🌟 Destacado';
+.servicio-card.destacado::before {
+  content: '🌟 Popular';
   position: absolute;
   top: 10px;
   right: -30px;
-  background: #3498db;
+  background: var(--color-texto-destacado);
   color: white;
   padding: 5px 30px;
   transform: rotate(45deg);
   font-size: 0.8em;
 }
 
-/* Estilos personalizados para el servicio de IA */
-.servicio.servicio-2 {
-  background: linear-gradient(145deg, #ffffff, #e6f7ff);
+/* Contenedor de tecnologías */
+.contenedor-tecnologias {
+  margin-bottom: 20px; /* Empuja el contenido de abajo */
+  min-height: 200px; /* Aumenta la altura mínima del contenedor */
 }
 
-.servicio.servicio-2 h2 {
-  color: #0056b3;
+/* Animación para tecnologías */
+.servicio-tecnologias li {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.servicio-tecnologias li:hover {
+  background: #3498db;
+  color: white;
+  transform: translateY(-3px);
+  cursor: pointer;
+}
+
+
+/* Contenedor del botón de llamada a la acción */
+.servicio-cta {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 /* Animación para fade in */
@@ -102,13 +200,37 @@
   }
 }
 
-.servicio {
+.servicio-card {
   animation: fadeInUp 0.5s ease-out;
 }
 
-/* Consultas de medios para diseño móvil */
-@media (max-width: 768px) {
-  .servicio {
-    flex: 1 1 100%; /* Hacer que cada contenedor ocupe toda la línea en pantallas pequeñas */
-  }
+/* Estilos para los botones CTA */
+.cta-button-3 {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%;
+  animation: gradientBG 10s ease infinite;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-button-3:hover {
+  background-color: var(--hero-button-hover-bg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  animation: gradientBG 18s ease infinite;
+}
+
+.cta-button-3:active {
+  transform: scale(0.95) !important;
+  background-color: #007d66;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  animation: none;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import './css/Servicios.css'; // Asegúrate de que este archivo CSS esté en la misma carpeta
-import { Link } from 'react-router-dom';
 
 function Servicios() {
   const servicios = [
@@ -11,7 +10,8 @@ function Servicios() {
         "Identificación de oportunidades de digitalización",
         "Desarrollo de estrategias de transformación a medida",
         "Implementación y seguimiento de proyectos digitales"
-      ]
+      ],
+      tecnologias: ["Análisis de procesos", "Planificación estratégica", "Automatización digital"]
     },
     {
       nombre: "Optimización de Operaciones y Logística",
@@ -20,7 +20,8 @@ function Servicios() {
         "Análisis y rediseño de procesos",
         "Implementación de sistemas de gestión de inventario",
         "Optimización de rutas y tiempos de entrega"
-      ]
+      ],
+      tecnologias: ["Gestión de inventarios", "Optimización logística", "Lean Management"]
     },
     {
       nombre: "Implementación de Soluciones IA",
@@ -29,7 +30,8 @@ function Servicios() {
         "Chatbots y asistentes virtuales personalizados",
         "Sistemas de predicción y análisis avanzado",
         "Automatización de procesos mediante IA"
-      ]
+      ],
+      tecnologias: ["Chatbots", "Aprendizaje automático", "Procesamiento de Lenguaje Natural"]
     },
     {
       nombre: "Desarrollo de Aplicaciones Personalizadas",
@@ -38,7 +40,8 @@ function Servicios() {
         "Soluciones adaptadas a requerimientos únicos",
         "Integración con sistemas existentes",
         "Mejora de la eficiencia y productividad"
-      ]
+      ],
+      tecnologias: ["React", "Node.js", "Desarrollo de APIs", "Integración de sistemas"]
     },
     {
       nombre: "Estrategias de E-commerce y Marketplaces",
@@ -47,27 +50,63 @@ function Servicios() {
         "Optimización de listings y contenido",
         "Estrategias de pricing y promociones",
         "Gestión de reputación y servicio al cliente"
-      ]
+      ],
+      tecnologias: ["Shopify", "Amazon", "Mercado Libre", "SEO y SEM"]
     }
   ];
 
+  // Función para desplazarse a la sección de contacto
+  const handleScrollToElement = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="servicios">
-      <h1>Servicios</h1>
-      {servicios.map((servicio, index) => (
-        <div key={index} className={`servicio servicio-${index}`}>
-          <h2>{servicio.nombre}</h2>
-          <p>{servicio.descripcion}</p>
-          <h3>Beneficios:</h3>
-          <ul>
-            {servicio.beneficios.map((beneficio, i) => (
-              <li key={i}>{beneficio}</li>
-            ))}
-          </ul>
-          <Link to="/contacto" className="cta-button">Contáctame</Link>
-        </div>
-      ))}
-    </div>
+    <section id="servicios" className="servicios">
+      <div className="servicios-header">
+        <h1>Servicios</h1>
+      </div>
+      <p className="introduccion shinyh">
+        Ofrezco una amplia gama de servicios para ayudar a empresas y emprendedores a digitalizar y optimizar sus operaciones.
+      </p>
+      <div className="servicios-grid">
+        {servicios.map((servicio, index) => (
+          <div 
+            key={index} 
+            className={`servicio-card ${servicio.nombre === 'Implementación de Soluciones IA' || servicio.nombre === 'Asistentes Virtuales' ? 'destacado ia' : ''}`}
+          >
+            <h3>{servicio.nombre}</h3>
+            <p className="servicio-descripcion">{servicio.descripcion}</p>
+            <div className="servicio-beneficios">
+              <h4>Beneficios:</h4>
+              <ul>
+                {servicio.beneficios.map((beneficio, i) => (
+                  <li key={i}>{beneficio}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="contenedor-tecnologias">
+              <div className="servicio-tecnologias">
+                <h4>Tecnologías:</h4>
+                <ul>
+                  {servicio.tecnologias.map((tech, i) => (
+                    <li key={i}>{tech}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>  
+            <div className="servicio-cta">
+              {/* Desplazar hacia la sección de contacto */}
+              <button className="cta-button-3" onClick={() => handleScrollToElement('contacto')}>
+                Contáctame
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 

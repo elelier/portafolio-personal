@@ -41,7 +41,7 @@
 }
 
 /* Título del portafolio */
-.portafolio h2 {
+.portafolio h1 {
   font-size: 2.5rem;
   font-weight: bold;
   color: var(--color-texto-destacado);
