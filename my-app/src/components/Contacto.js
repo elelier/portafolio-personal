@@ -5,7 +5,6 @@ import CV from './assets/files/2409_CV_EL.pdf';
 import { motion } from 'framer-motion';
 import './css/Contacto.css';
 import perfilImg from './assets/files/profile-picture-elier2.png';
-import banner from './assets/files/mail-banner-1.png';
 
 function Contacto() {
   const [name, setName] = useState('');
@@ -129,7 +128,6 @@ function Contacto() {
                   <i className="fas fa-file-download"></i>
                   Descargar CV
                 </a>
-                <img src={banner} alt="banner" className="banner-imagen" />
               </div>
             </div>
           </div>

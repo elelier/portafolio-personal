@@ -9,7 +9,7 @@
 
   /* Variables del widget de chat */
   /* Variable de color de fondo del widget */
-  --buildship-chat-widget-bg-color: linear-gradient(to top, #020817, #020817);
+  --buildship-chat-widget-bg-color: linear-gradient(to top, #19191a, #020817);
   --buildship-chat-widget-border-color: #7dd3fc;
   --buildship-chat-widget-shadow: rgba(7, 0, 20, 0.06) 0px 0px 0px 1px,
     rgba(7, 0, 20, 0.1) 0px 10px 15px -3px, rgba(7, 0, 20, 0.05) 0px 4px 6px,
@@ -184,3 +184,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+/* Estilos para el contenedor de opciones de chat */
+#chat-options {
+  position: absolute;
+  top: 60px; /* Ajusta según sea necesario */
+  left: 10px; /* Ajusta según sea necesario */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+}
+
+/* Estilo para los botones de opciones */
+.chat-option-button {
+  display: block;
+  background-color: #7dd3fc;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Hover effect para los botones */
+.chat-option-button:hover {
+  background-color: #4a90e2;
+}

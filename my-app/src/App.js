@@ -32,7 +32,9 @@ function App() {
               <Contacto />
             </>
           } />
+          <Route path="/hero-banner" element={<HeroBanner />} />
           <Route path="/portafolio" element={<Portafolio />} />
+          <Route path="/sobre-mi" element={<SobeMi />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contacto" element={<Contacto />} />
