@@ -1,12 +1,57 @@
 // Contacto.js
 
 import React, { useState } from 'react';
+import { useLanguage } from '../LanguageContext';
 import CV from './assets/files/2409_CV_EL.pdf';
 import { motion } from 'framer-motion';
 import './css/Contacto.css';
 import perfilImg from './assets/files/profile-picture-elier2.png';
 
+const texts = {
+  es: {
+    contactTitle: 'Contáctame',
+    contactPhrase: '¡Estoy aquí para ayudarte! No dudes en ponerte en contacto.',
+    successMessage: 'Tu mensaje ha sido enviado correctamente, gracias por tu interés.',
+    errorMessage: 'Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente.',
+    networkError: 'Error en la red. Por favor, intenta nuevamente.',
+    contactInfo: 'Información de contacto',
+    email: 'loya.elier@gmail.com',
+    whatsapp: '(+52) 811 780 1157',
+    location: 'Monterrey, México',
+    professionalLinks: 'Enlaces Profesionales',
+    agenda: 'Agenda 30 minutos',
+    downloadCV: 'Descargar CV',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    namePlaceholder: 'Nombre',
+    emailPlaceholder: 'Correo electrónico',
+    messagePlaceholder: 'Mensaje'
+  },
+  en: {
+    contactTitle: 'Contact Me',
+    contactPhrase: 'I’m here to help! Feel free to get in touch.',
+    successMessage: 'Your message has been sent successfully, thank you for your interest.',
+    errorMessage: 'There was a problem sending your message. Please try again.',
+    networkError: 'Network error. Please try again.',
+    contactInfo: 'Contact Information',
+    email: 'loya.elier@gmail.com',
+    whatsapp: '(+52) 811 780 1157',
+    location: 'Monterrey, Mexico',
+    professionalLinks: 'Professional Links',
+    agenda: 'Schedule 30 minutes',
+    downloadCV: 'Download CV',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    namePlaceholder: 'Name',
+    emailPlaceholder: 'Email',
+    messagePlaceholder: 'Message'
+  }
+};
+
 function Contacto() {
+  const { language } = useLanguage();
+  const t = texts[language] || texts.en; // Default to English if language is not found
+
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
   const [message, setMessage] = useState('');
@@ -26,15 +71,15 @@ function Contacto() {
       });
 
       if (response.ok) {
-        setSuccessMessage('Tu mensaje ha sido enviado correctamente, gracias por tu interés.');
+        setSuccessMessage(t.successMessage);
         setName('');
         setMail('');
         setMessage('');
       } else {
-        setErrorMessage('Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente.');
+        setErrorMessage(t.errorMessage);
       }
     } catch (error) {
-      setErrorMessage('Error en la red. Por favor, intenta nuevamente.');
+      setErrorMessage(t.networkError);
     }
   };
 
@@ -50,28 +95,28 @@ function Contacto() {
         <div className="contacto-header">
           <img src={perfilImg} alt="Perfil" className="contacto-imagen" />
           <div className="contacto-titulo">
-            <h2>Contáctame</h2>
-            <p className="contacto-frase">¡Estoy aquí para ayudarte! No dudes en ponerte en contacto.</p>
+            <h2>{t.contactTitle}</h2>
+            <p className="contacto-frase">{t.contactPhrase}</p>
           </div>
         </div>
         <div className="contacto-contenido">
           <form className="formulario-contacto" onSubmit={handleSubmit}>
             <AnimatedInput
-              placeholder="Nombre"
+              placeholder={t.namePlaceholder}
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={255}
             />
             <AnimatedInput
-              placeholder="Correo electrónico"
+              placeholder={t.emailPlaceholder}
               type="email"
               value={mail}
               onChange={(e) => setMail(e.target.value)}
               maxLength={255}
             />
             <AnimatedInput
-              placeholder="Mensaje"
+              placeholder={t.messagePlaceholder}
               type="textarea"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -83,50 +128,50 @@ function Contacto() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              Enviar mensaje
+              {language === 'es' ? 'Enviar mensaje' : 'Send Message'}
             </motion.button>
             <div className='buttonmessage'>
-            {successMessage && <p className="success-message">{successMessage}</p>}
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
+              {successMessage && <p className="success-message">{successMessage}</p>}
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
             </div>
           </form>
           <div className="info-contacto">
-            <h3>Información de contacto</h3>
+            <h3>{t.contactInfo}</h3>
             <div className="info-contacto-links">
-              <a href="mailto:loya.elier@gmail.com" className="info-contacto-link">
+              <a href={`mailto:${t.email}`} className="info-contacto-link">
                 <i className="fas fa-envelope"></i>
-                loya.elier@gmail.com
+                {t.email}
               </a>
               <a href="https://wa.me/528117801157" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
                 <i className="fab fa-whatsapp"></i>
-                (+52) 811 780 1157
+                {t.whatsapp}
               </a>
               <a href="https://www.google.com/maps/search/?api=1&query=Monterrey,+México" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
                 <i className="fas fa-map-marker-alt"></i>
-                Monterrey, México
+                {t.location}
               </a>
             </div>
             <div className="redes-sociales">
-              <h3>Enlaces Profesionales</h3>
+              <h3>{t.professionalLinks}</h3>
               <div className="redes-sociales-links">
                 <a href="https://linkedin.com/in/elier/" target="_blank" rel="noopener noreferrer" className="redes-sociales-link">
                   <i className="fab fa-linkedin"></i>
-                  LinkedIn
+                  {t.linkedin}
                 </a>
                 <a href="https://github.com/elelier" target="_blank" rel="noopener noreferrer" className="redes-sociales-link">
                   <i className="fab fa-github"></i>
-                  GitHub
+                  {t.github}
                 </a>
               </div>
               <h3>Agenda y Documentos</h3>
               <div className="agenda-documentos-links">
                 <a href="https://calendly.com/loya-elier/30min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
                   <i className="fas fa-calendar-check"></i>
-                  Agenda 30 minutos
+                  {t.agenda}
                 </a>
                 <a href={CV} download className="agenda-documentos-link">
                   <i className="fas fa-file-download"></i>
-                  Descargar CV
+                  {t.downloadCV}
                 </a>
               </div>
             </div>

@@ -1,60 +1,109 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../LanguageContext';
 import './css/HeroBanner.css';
 
 const DynamicHeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-
-  const heroContent = [
-    {
-      title: "Especialista en Optimización de Operaciones",
-      subtitle: "Transformando operaciones para un crecimiento exponencial",
-      description: "Con una experiencia sólida en la creación e implementación de estrategias para maximizar la eficiencia y rentabilidad, ofrezco soluciones innovadoras que potencian el éxito empresarial.",
-      icon: "📊",
-      cta: "Potencia tu Empresa",
-      target: "CEO's, COO's"
-    },
-    {
-      title: "Líder en Transformación Digital & E-Commerce",
-      subtitle: "Revolucionando negocios para la era digital",
-      description: "Experto en digitalización y gestión de plataformas como Mercado Libre, Amazon y Shopify.",
-      icon: "💻",
-      cta: "Digitaliza tu Negocio",
-      target: "CTO's, Emprendedores"
-    },
-    {
-      title: "Estratega de Soluciones AI Avanzadas",
-      subtitle: "Resolviendo desafíos complejos con inteligencia artificial",
-      description: "Implementación de IA y chatbots personalizados para potenciar la eficiencia operativa.",
-      icon: "🧠",
-      cta: "Innova con IA",
-      target: "CTO's, Innovadores"
-    },
-    {
-      title: "Consultor en Logística y Almacenes",
-      subtitle: "Optimizando operaciones para una mejora continua",
-      description: "Soluciones integrales para la gestión eficiente de almacenes y cadenas de suministro.",
-      icon: "🚚",
-      cta: "Mejora tu Logística",
-      target: "COO's, Gerentes de Operaciones"
-    },
-    {
-      title: "Experto en Estrategias Basadas en Datos",
-      subtitle: "Tomando decisiones informadas para el éxito empresarial",
-      description: "Análisis avanzado de datos para impulsar estrategias de negocio efectivas y medibles.",
-      icon: "🗃️",
-      cta: "Potencia tus Datos",
-      target: "CEO's, Analistas de Datos"
-    }
-  ];
+  const { language } = useLanguage();
+  const moreAboutMeText = {
+    es: "Más sobre mí",
+    en: "More about me"
+  };
+  const heroContent = {
+    es: [
+      {
+        title: "Especialista en Optimización de Operaciones",
+        subtitle: "Transformando operaciones para un crecimiento exponencial",
+        description: "Con una experiencia sólida en la creación e implementación de estrategias para maximizar la eficiencia y rentabilidad, ofrezco soluciones innovadoras que potencian el éxito empresarial.",
+        icon: "📊",
+        cta: "Potencia tu Empresa",
+        target: "CEO's, COO's"
+      },
+      {
+        title: "Líder en Transformación Digital & E-Commerce",
+        subtitle: "Revolucionando negocios para la era digital",
+        description: "Experto en digitalización y gestión de plataformas como Mercado Libre, Amazon y Shopify.",
+        icon: "💻",
+        cta: "Digitaliza tu Negocio",
+        target: "CTO's, Emprendedores"
+      },
+      {
+        title: "Estratega de Soluciones AI Avanzadas",
+        subtitle: "Resolviendo desafíos complejos con inteligencia artificial",
+        description: "Implementación de IA y chatbots personalizados para potenciar la eficiencia operativa.",
+        icon: "🧠",
+        cta: "Innova con IA",
+        target: "CTO's, Innovadores"
+      },
+      {
+        title: "Consultor en Logística y Almacenes",
+        subtitle: "Optimizando operaciones para una mejora continua",
+        description: "Soluciones integrales para la gestión eficiente de almacenes y cadenas de suministro.",
+        icon: "🚚",
+        cta: "Mejora tu Logística",
+        target: "COO's, Gerentes de Operaciones"
+      },
+      {
+        title: "Experto en Estrategias Basadas en Datos",
+        subtitle: "Tomando decisiones informadas para el éxito empresarial",
+        description: "Análisis avanzado de datos para impulsar estrategias de negocio efectivas y medibles.",
+        icon: "🗃️",
+        cta: "Potencia tus Datos",
+        target: "CEO's, Analistas de Datos"
+      }
+    ],
+    en: [
+      {
+        title: "Operations Optimization Specialist",
+        subtitle: "Transforming operations for exponential growth",
+        description: "With solid experience in creating and implementing strategies to maximize efficiency and profitability, I offer innovative solutions that drive business success.",
+        icon: "📊",
+        cta: "Boost Your Business",
+        target: "CEO's, COO's"
+      },
+      {
+        title: "Digital Transformation & E-Commerce Leader",
+        subtitle: "Revolutionizing businesses for the digital age",
+        description: "Expert in digitalization and management of platforms like Mercado Libre, Amazon, and Shopify.",
+        icon: "💻",
+        cta: "Digitize Your Business",
+        target: "CTO's, Entrepreneurs"
+      },
+      {
+        title: "Advanced AI Solutions Strategist",
+        subtitle: "Solving complex challenges with artificial intelligence",
+        description: "Implementation of AI and customized chatbots to enhance operational efficiency.",
+        icon: "🧠",
+        cta: "Innovate with AI",
+        target: "CTO's, Innovators"
+      },
+      {
+        title: "Logistics and Warehouse Consultant",
+        subtitle: "Optimizing operations for continuous improvement",
+        description: "Comprehensive solutions for efficient warehouse and supply chain management.",
+        icon: "🚚",
+        cta: "Improve Your Logistics",
+        target: "COO's, Operations Managers"
+      },
+      {
+        title: "Data-Driven Strategy Expert",
+        subtitle: "Making informed decisions for business success",
+        description: "Advanced data analysis to drive effective and measurable business strategies.",
+        icon: "🗃️",
+        cta: "Leverage Your Data",
+        target: "CEO's, Data Analysts"
+      }
+    ]
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % heroContent.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % heroContent[language].length);
         setIsTransitioning(false);
       }, 500);
     }, 8000);
@@ -117,9 +166,9 @@ const DynamicHeroBanner = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [heroContent.length]);
+  }, [language, heroContent.length]);
 
-  const currentContent = heroContent[currentIndex];
+  const currentContent = heroContent[language][currentIndex];
 
   const getFadeClass = (position) => {
     return position > 100 ? 'fade-out' : 'fade-in';
@@ -148,7 +197,7 @@ const DynamicHeroBanner = () => {
       </div>
 
       <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`} onClick={scrollToSobreMi}>
-        Más sobre mi
+        {moreAboutMeText[language]}
         <div className="scroll-arrow">▼</div>
       </div>
     </header>

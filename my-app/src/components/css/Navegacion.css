@@ -229,3 +229,40 @@
     display: none; /* Oculta el botón de contacto en pantallas pequeñas */
   }
 }
+
+/* CSS */
+.language-toggle {
+  background: none;
+  border: none;
+  color: white; /* Color inicial del texto y triángulo */
+  font-size: 10px;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra EN/ES y el triángulo */
+  transition: transform 0.3s ease, color 0.3s ease; /* Transición en escala y color */
+}
+
+/* Estilo del triángulo debajo del texto */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid currentColor; /* El triángulo usa el color del botón */
+  margin-top: 5px; /* Espacio entre las siglas y el triángulo */
+  transition: transform 0.3s ease, border-color 0.3s ease; /* Transición para la escala y color */
+}
+
+/* Efecto hover para cambiar color y escalar un poco */
+.language-toggle:hover {
+  transform: scale(1.1);
+  color: #3498db; /* Cambia color a azul */
+}
+
+/* Efecto clic para reducir el tamaño temporalmente */
+.language-toggle:active {
+  transform: scale(0.95);
+}
+

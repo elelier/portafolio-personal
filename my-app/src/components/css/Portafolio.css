@@ -42,6 +42,16 @@
 
 /* Título del portafolio */
 .portafolio h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--color-texto-destacado);
+  margin-bottom: 20px; /* Ajusta según sea necesario */
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Título del portafolio */
+.portafolio h2 {
   font-size: 2.5rem;
   font-weight: bold;
   color: var(--color-texto-destacado);
@@ -138,7 +148,10 @@
   margin-bottom: 30px;
   transition: all 0.3s ease;
   min-height: 350px;
+  /* Añade espacio inferior si se necesita más separación entre tarjetas */
+  margin-bottom: 30px; 
 }
+
 
 /* Efecto de brillo en las tarjetas del portafolio */
 .proyecto-card::after {
@@ -214,6 +227,7 @@
 .proyecto-tecnologias li {
   color: #555;
   margin-bottom: 5px;
+  font-size: 12px;
 }
 
 /* Estilos adicionales para proyectos destacados */
@@ -262,7 +276,7 @@
 
 /* Contenedor del botón de llamada a la acción */
 .proyecto-cta {
-  position: absolute;
+  margin-top: 20px; /* Espacio superior del botón CTA */
   bottom: 20px;
   right: 20px;
 }
@@ -285,6 +299,7 @@
 
 /* Estilos para los botones CTA */
 .cta-button-3 {
+  display: inline-block;
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
   background-size: 300% 300%;
   animation: gradientBG 10s ease infinite;

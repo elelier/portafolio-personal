@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useLanguage } from '../LanguageContext';
 import './css/Navegacion.css';
 
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolling] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -37,6 +38,25 @@ function Navegacion() {
     };
   }, [menuOpen]);
 
+  const navItems = {
+    es: {
+      sobreMi: 'Sobre Mí',
+      habilidades: 'Habilidades',
+      portafolio: 'Portafolio',
+      servicios: 'Servicios',
+      contactame: 'Contáctame'
+    },
+    en: {
+      sobreMi: 'About Me',
+      habilidades: 'Skills',
+      portafolio: 'Portfolio',
+      servicios: 'Services',
+      contactame: 'Contact Me'
+    }
+  };
+
+  const flagEmoji = language === 'es' ? 'ES' : 'EN';
+
   return (
     <nav className={`navegacion ${isScrolling ? 'fade-out' : 'fade-in'}`} role="navigation" aria-label="Navegación principal">
       <div className="nav-content">
@@ -50,11 +70,19 @@ function Navegacion() {
         </button>
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>Sobre Mi</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>Habilidades</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>Portafolio</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('servicios')}>Servicios</Link></li>
-          <li><Link to="/" className="contact-button" onClick={() => handleScrollToElement('contacto')}><i className="fas fa-comment-dots"></i>Contáctame</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{navItems[language].sobreMi}</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>{navItems[language].habilidades}</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('servicios')}>{navItems[language].servicios}</Link></li>
+          <li><Link to="/" className="contact-button" onClick={() => handleScrollToElement('contacto')}><i className="fas fa-comment-dots"></i>{navItems[language].contactame}</Link></li>
+          <li>
+            <button onClick={toggleLanguage} className="language-toggle" aria-label="Cambiar idioma">
+              <span className="flag-emoji" role="img" aria-label={language === 'es' ? 'Bandera de México' : 'USA Flag'}>
+                {flagEmoji}
+              </span>
+              <span class="triangle"></span>
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
