@@ -1,6 +1,5 @@
-/* Estilos para el Footer */
 .footer {
-    background-color: #2c3e50;
+    background-color: #1a1a1a;
     color: white;
     padding: 20px;
     text-align: center;
@@ -33,6 +32,52 @@
     color: #3498db;
 }
 
+.footer-social {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.footer-social p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #ecf0f1;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.social-links a[href*="linkedin"] {
+    color: #0077B5;
+}
+
+.social-links a[href*="github"] {
+    color: #fafafa;
+}
+
+.social-links a[href*="wa.me"] {
+    color: #25D366;
+}
+
+.social-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #bdc3c7;
+}
+
 /* Estilos responsivos para dispositivos móviles */
 @media (max-width: 768px) {
     .footer-content {
@@ -48,5 +93,11 @@
 
     .footer-links a {
         margin: 10px 0;
+    }
+
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
 }

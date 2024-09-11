@@ -54,9 +54,7 @@ function Navegacion() {
           <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>Habilidades</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>Portafolio</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('servicios')}>Servicios</Link></li>
-          <li><Link to="/blog" onClick={() => { closeMenu(); }}>Blog</Link></li>
           <li><Link to="/" className="contact-button" onClick={() => handleScrollToElement('contacto')}><i className="fas fa-comment-dots"></i>Contáctame</Link></li>
-
         </ul>
       </div>
     </nav>
