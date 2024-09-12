@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Entrada from './components/entradas/entrada1';
 import SobeMi from './components/SobreMi';
 
+
 function App() {
   return (
     <LanguageProvider> {/* Envuelve toda la aplicación con LanguageProvider */}

@@ -6,23 +6,6 @@
   --color-primary: #7dd3fc;
   --color-secondary: #6c757d;
   --color-accent: #28a745;
-
-  /* Variables del widget de chat */
-  /* Variable de color de fondo del widget */
-  --buildship-chat-widget-bg-color: linear-gradient(to top, #19191a, #020817);
-  --buildship-chat-widget-border-color: #7dd3fc;
-  --buildship-chat-widget-shadow: rgba(7, 0, 20, 0.06) 0px 0px 0px 1px,
-    rgba(7, 0, 20, 0.1) 0px 10px 15px -3px, rgba(7, 0, 20, 0.05) 0px 4px 6px,
-    rgba(7, 0, 20, 0.05) 0px 30px 40px;
-  --buildship-chat-widget-primary-color: var(--color-primary);
-  --buildship-chat-widget-primary-color-text: var(--color-text);
-  --buildship-chat-widget-secondary-color-text: var(--color-secondary);
-  --buildship-chat-widget-user-message-text-color: #fff;
-  --buildship-chat-widget-user-message-bg-color: #19191a;
-  --buildship-chat-widget-system-message-text-color: var(--color-text);
-  --buildship-chat-widget-system-message-bg-color: #19191a;
-  --buildship-chat-widget-header-height: 4rem;
-  --buildship-chat-widget-border-radius: 1rem;
 }
 
 
