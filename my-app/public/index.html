@@ -3,19 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elier Loya Mata - Digital Transformation Consultant</title>
-    <meta name="description" content="Digital transformation consulting services by Elier Loya Mata">
-    <meta name="keywords" content="digital transformation, consulting, web development">
+    <title>Personal Portfolio</title>
+    <script defer src="/static/js/bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Add the chat widget script here -->
+    <script src="https://unpkg.com/@buildshipapp/chat-widget@^1" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Function to set chat widget configuration based on language
+        function configureChatWidget(language) {
+            console.log('Configuring chat widget for language:', language); // Debug log
+            const messages = {  
+                es: `
+Hola! Soy un <b>Chatbot desarrollado por <a href="https://elelier.com" target="_blank" style="color: #7dd3fc;">Elier Loya Mata</a></b> para <b><a href="#hero-banner" style="color: #7dd3fc;">este portafolio</a></b>.
+<br><br>
+<b>¿Cómo puedo asistirte hoy?</b>
+<ul style="color: #f6f9fc; padding-left: 20px;">
+  <li><a href="#portafolio" onclick="scrollToSection('portafolio'); return false;" style="color: #7dd3fc;">Ver Proyectos</a></li>
+  <li><a href="#servicios" onclick="scrollToSection('servicios'); return false;" style="color: #7dd3fc;">Conocer Servicios</a></li>
+  <li><a href="#contacto" onclick="scrollToSection('contacto'); return false;" style="color: #7dd3fc;">Contáctame</a></li>
+  <li><a href="#sobre-mi" onclick="scrollToSection('sobre-mi'); return false;" style="color: #7dd3fc;">Más Sobre Mi</a></li>
+</ul>
+<br>
+Explora <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return false;" style="color: #7dd3fc;">mi sitio web</a> para más información.
+<br><br>
+¡Estoy aquí para ayudarte a encontrar lo que necesitas!
+<br><br>
+<b><a href="#" onclick="changeLanguage('en'); return false;" style="color: #7dd3fc;">Change to English</a></b>
+                `,
+                en: `
+Hello! I'm a <b>Chatbot developed by <a href="https://elelier.com" target="_blank" style="color: #7dd3fc;">Elier Loya Mata</a></b> for <b><a href="#hero-banner" style="color: #7dd3fc;">this portfolio</a></b>.
+<br><br>
+<b>How can I assist you today?</b>
+<ul style="color: #f6f9fc; padding-left: 20px;">
+  <li><a href="#portafolio" onclick="scrollToSection('portafolio'); return false;" style="color: #7dd3fc;">See Projects</a></li>
+  <li><a href="#servicios" onclick="scrollToSection('servicios'); return false;" style="color: #7dd3fc;">Know Services</a></li>
+  <li><a href="#contacto" onclick="scrollToSection('contacto'); return false;" style="color: #7dd3fc;">Contact Me</a></li>
+  <li><a href="#sobre-mi" onclick="scrollToSection('sobre-mi'); return false;" style="color: #7dd3fc;">More About Me</a></li>
+</ul>
+<br>
+Explore <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return false;" style="color: #7dd3fc;">my website</a> for more information.
+<br><br>
+I'm here to help you find what you need!
+<br><br>
+<b><a href="#" onclick="changeLanguage('es'); return false;" style="color: #7dd3fc;">Cambiar a Español</a></b>
+                `
+            };
+
+            const buttonTexts = {
+                es: "¡HOLA!",
+                en: "Hello!"
+            };
+
+            if (window.buildShipChatWidget && window.buildShipChatWidget.config) {
+                window.buildShipChatWidget.config.url = "https://81ocg9.buildship.run/el_bot";
+                window.buildShipChatWidget.config.widgetTitle = language === 'es' ? "¿Quieres un Chatbot?" : "Want a Chatbot?";
+                window.buildShipChatWidget.config.widgetBranding = language === 'es' ? "¿Quieres un chatbot para ti?" : "Want a chatbot for you?";
+                window.buildShipChatWidget.config.greetingMessage = messages[language] || messages['en'];
+                window.buildShipChatWidget.config.width = 300; 
+                window.buildShipChatWidget.config.height = 500; 
+
+                console.log('Chat widget config:', window.buildShipChatWidget.config); // Debug log
+            } else {
+                console.error('Chat widget configuration not available');
+            }
+
+            // Change button text based on language
+            const chatButtonText = document.getElementById("chat-widget-button-text");
+            if (chatButtonText) {
+                chatButtonText.textContent = buttonTexts[language] || buttonTexts['en'];
+            }
+
+            setTimeout(() => {
+                const titleElement = document.querySelector('.buildship-chat-widget__branding');
+                if (titleElement) {
+                    titleElement.style.display = 'none';
+                }
+            }, 1000); 
+        }
+
+        function changeLanguage(newLanguage) {
+            localStorage.setItem('language', newLanguage);
+            window.location.reload(); // Refresh the page with the new language
+        }
+
+        window.addEventListener("load", () => {
+            const chatButton = document.querySelector("[data-buildship-chat-widget-button]");
+            const chatContainer = document.getElementById("buildship-chat-widget__container");
+
+            chatButton.addEventListener("click", () => {
+                if (chatContainer) {
+                    chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+                }
+            });
+
+            const language = localStorage.getItem('language') || 'en';
+            console.log('Language from localStorage:', language); // Debug log
+            configureChatWidget(language);
+        });
+    </script>
+
+    <style>
+        /* Hide the chat widget branding link */
+        #buildship-chat-widget__branding {
+            display: none !important; /* Use !important to override any other styles */
+        }
+    </style>
+    <script>
+        const toggleTheme = () => {
+            document.body.classList.toggle('light-mode');
+            };
+            document.querySelector('#theme-toggle-button').addEventListener('click', toggleTheme);
+    </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5KBGG57T');</script>
-    <!-- End Google Tag Manager -->
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5KBGG57T');</script>
+        <!-- End Google Tag Manager -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J0EFBPH9P1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -24,23 +139,15 @@
     </script>
 </head>
 <body>
+    <button id="theme-toggle-button" class="btn btn-primary">Switch Theme</button>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KBGG57T"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Elier Loya Mata",
-      "url": "https://elelier.com",
-      "jobTitle": "Digital Transformation Consultant",
-      "sameAs": [
-        "https://www.linkedin.com/in/elierloyamata/",
-        "https://twitter.com/elierloyamata"
-      ]
-    }
-    </script>
+    <!-- Button to open the widget -->
+    <button data-buildship-chat-widget-button>
+        <i class="fas fa-robot"></i> <span id="chat-widget-button-text">Hello!</span>
+    </button>
 </body>
 </html>
