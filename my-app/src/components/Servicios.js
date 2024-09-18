@@ -16,6 +16,7 @@ function Servicios() {
     es: {
       servicios: [
         {
+          id: "consultoria-transformacion-digital",  // ID en español
           nombre: "Consultoría en Transformación Digital",
           descripcion: "Asesoramiento estratégico para la implementación de tecnologías digitales que optimicen procesos y mejoren la eficiencia operativa.",
           beneficios: [
@@ -27,6 +28,7 @@ function Servicios() {
           link_u: "Digitaliza tu Negocio"
         },
         {
+          id: "optimizacion-operaciones-logistica",  // ID en español
           nombre: "Optimización de Operaciones y Logística",
           descripcion: "Mejora de procesos operativos y logísticos para aumentar la eficiencia y reducir costos.",
           beneficios: [
@@ -38,6 +40,7 @@ function Servicios() {
           link_u: "Mejora tus Procesos"
         },
         {
+          id: "implementacion-soluciones-ia",  // ID en español
           nombre: "Implementación de Soluciones IA",
           descripcion: "Desarrollo e integración de soluciones de Inteligencia Artificial para automatizar tareas y mejorar la toma de decisiones.",
           beneficios: [
@@ -49,6 +52,7 @@ function Servicios() {
           link_u: "Innova con IA"
         },
         {
+          id: "desarrollo-aplicaciones-personalizadas",  // ID en español
           nombre: "Desarrollo de Aplicaciones Personalizadas",
           descripcion: "Creación de aplicaciones a medida para satisfacer necesidades específicas de negocio.",
           beneficios: [
@@ -60,6 +64,7 @@ function Servicios() {
           link_u: "Desarrolla tu idea"
         },
         {
+          id: "estrategias-ecommerce-marketplaces",  // ID en español
           nombre: "Estrategias de E-commerce y Marketplaces",
           descripcion: "Diseño e implementación de estrategias para optimizar la presencia y ventas en plataformas de comercio electrónico.",
           beneficios: [
@@ -77,6 +82,7 @@ function Servicios() {
     en: {
       servicios: [
         {
+          id: "digital-transformation-consulting",  // ID en inglés
           nombre: "Digital Transformation Consulting",
           descripcion: "Strategic advice for implementing digital technologies that optimize processes and improve operational efficiency.",
           beneficios: [
@@ -88,6 +94,7 @@ function Servicios() {
           link_u: "Digitize Your Business"
         },
         {
+          id: "operations-logistics-optimization",  // ID en inglés
           nombre: "Operations and Logistics Optimization",
           descripcion: "Improving operational and logistical processes to increase efficiency and reduce costs.",
           beneficios: [
@@ -99,6 +106,7 @@ function Servicios() {
           link_u: "Improve Your Processes"
         },
         {
+          id: "ai-solutions-implementation",  // ID en inglés
           nombre: "AI Solutions Implementation",
           descripcion: "Development and integration of artificial intelligence solutions to automate tasks and enhance decision-making.",
           beneficios: [
@@ -110,6 +118,7 @@ function Servicios() {
           link_u: "Innovate with AI"
         },
         {
+          id: "custom-application-development",  // ID en inglés
           nombre: "Custom Application Development",
           descripcion: "Creation of tailored applications to meet specific business needs.",
           beneficios: [
@@ -121,6 +130,7 @@ function Servicios() {
           link_u: "Develop Your Idea"
         },
         {
+          id: "ecommerce-marketplace-strategies",  // ID en inglés
           nombre: "E-commerce and Marketplaces Strategies",
           descripcion: "Design and implementation of strategies to optimize presence and sales on e-commerce platforms.",
           beneficios: [
@@ -136,6 +146,7 @@ function Servicios() {
       encabezado: "Services"
     }
   };
+  
 
   const { servicios, introduccion, encabezado } = translations[language] || translations.es; // Obtén las traducciones según el idioma
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import './css/HeroBanner.css';
 
@@ -53,7 +52,26 @@ const DynamicHeroBanner = () => {
         icon: "🗃️",
         cta: "Potencia tus Datos",
         target: "CEO's, Analistas de Datos"
+      },
+      {
+        title: "Estrategias Avanzadas para E-Commerce",
+        subtitle: "Optimiza tus ventas online con soluciones innovadoras",
+        description: "Asesoramiento y estrategias para mejorar la presencia y efectividad en plataformas de comercio electrónico.",
+        icon: "🛒",
+        cta: "Potencia tu E-Commerce",
+        target: "CTO's, Emprendedores, Gerentes de E-Commerce",
+        link: "#ecommerce-strategies"  // Enlace al servicio relacionado
+      },
+      {
+        title: "Desarrollo de Aplicaciones a Medida",
+        subtitle: "Construye soluciones digitales personalizadas para tu negocio",
+        description: "Desarrollo de aplicaciones a medida para resolver necesidades específicas de tu empresa.",
+        icon: "📱",
+        cta: "Desarrolla tu Aplicación",
+        target: "CTO's, Gerentes de IT, Emprendedores",
+        link: "#custom-application-development"  // Enlace al servicio relacionado
       }
+      
     ],
     en: [
       {
@@ -95,15 +113,37 @@ const DynamicHeroBanner = () => {
         icon: "🗃️",
         cta: "Leverage Your Data",
         target: "CEO's, Data Analysts"
+      },
+      {
+        title: "Advanced E-Commerce Strategies",
+        subtitle: "Optimize your online sales with innovative solutions",
+        description: "Consulting and strategies to enhance your presence and effectiveness on e-commerce platforms.",
+        icon: "🛒",
+        cta: "Boost Your E-Commerce",
+        target: "CTO's, Entrepreneurs, E-Commerce Managers",
+        link: "#ecommerce-strategies"  // Enlace al servicio relacionado
+      },
+      {
+        title: "Custom Application Development",
+        subtitle: "Build tailored digital solutions for your business",
+        description: "Development of custom applications to address your company's specific needs.",
+        icon: "📱",
+        cta: "Develop Your App",
+        target: "CTO's, IT Managers, Entrepreneurs",
+        link: "#custom-application-development"  // Enlace al servicio relacionado
       }
+      
     ]
   };
+
+    const currentHeroContent = heroContent[language] || [];
+    const heroContentLength = currentHeroContent.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % heroContent[language].length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % heroContentLength);
         setIsTransitioning(false);
       }, 500);
     }, 8000);
@@ -166,9 +206,9 @@ const DynamicHeroBanner = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [language, heroContent.length]);
+  }, [language, heroContentLength]);
 
-  const currentContent = heroContent[language][currentIndex];
+  const currentContent = currentHeroContent[currentIndex] || {};
 
   const getFadeClass = (position) => {
     return position > 100 ? 'fade-out' : 'fade-in';
@@ -181,6 +221,13 @@ const DynamicHeroBanner = () => {
     }
   };
 
+  const scrollToServicios = () => {
+    const serviciosSection = document.getElementById('servicios');
+    if (serviciosSection) {
+      serviciosSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header id="hero-banner" className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''}`}>
       <canvas id="star-canvas"></canvas>
@@ -189,11 +236,9 @@ const DynamicHeroBanner = () => {
         <h2 className="hero-title shiny">{currentContent.title}</h2>
         <h3 className="hero-subtitle">{currentContent.subtitle}</h3>
         <p className="hero-description">{currentContent.description}</p>
-        <Link to="/servicios">
-          <button className="hero-button">
-            {currentContent.cta} →
-          </button>
-        </Link>
+        <button className="hero-button" onClick={scrollToServicios}>
+          {currentContent.cta} →
+        </button>
       </div>
 
       <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`} onClick={scrollToSobreMi}>
