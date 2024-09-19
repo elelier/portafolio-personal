@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './css/SobreMi.css';
 import personal_story from './assets/files/profile-picture-elier2.png';
 import professional from './assets/files/ecommerce_marketing.png';
 import tech_vision from './assets/files/technologic_vision.png';
-import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import { useLanguage } from '../LanguageContext'; 
 
 function SobreMi() {
   const [currentSection, setCurrentSection] = useState(0);
   const { language } = useLanguage(); // Obtén el idioma del contexto
+  const intervalRef = useRef(null); // Para mantener una referencia al intervalo
+
   const sections = {
     es: [
       {
@@ -134,11 +135,22 @@ function SobreMi() {
   }, [language]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Limpia el intervalo previo si existe
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    // Configura el intervalo nuevo
+    intervalRef.current = setInterval(() => {
       setCurrentSection((prevSection) => (prevSection + 1) % sections[language].length);
     }, 30000); // Cambia de sección cada 30 segundos
 
-    return () => clearInterval(interval);
+    // Limpia el intervalo al desmontar el componente
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [language, sections[language].length]);
 
   const handleSwipe = (eventData) => {
@@ -160,6 +172,32 @@ function SobreMi() {
     trackMouse: true,
   });
 
+  const scrollToServicios = () => {
+    const serviciosSection = document.getElementById('servicios');
+    if (serviciosSection) {
+      serviciosSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToContacto = () => {
+    const contactoSection = document.getElementById('contacto');
+    if (contactoSection) {
+      contactoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleManualChange = (index) => {
+    setCurrentSection(index);
+    // Reinicia el intervalo al cambiar manualmente
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      setCurrentSection((prevSection) => (prevSection + 1) % sections[language].length);
+    }, 30000);
+  };
+
+
   return (
     <section id="sobre-mi" className="sobre-mi" {...swipeHandlers}>
       <div className="contenido-sobre-mi">
@@ -167,13 +205,13 @@ function SobreMi() {
         <div className="navigation-arrows">
           <button
             className="nav-arrow left"
-            onClick={() => setCurrentSection((prevSection) => (prevSection - 1 + sections[language].length) % sections[language].length)}
+            onClick={() => handleManualChange((currentSection - 1 + sections[language].length) % sections[language].length)}
           >
             &lt;
           </button>
           <button
             className="nav-arrow right"
-            onClick={() => setCurrentSection((prevSection) => (prevSection + 1) % sections[language].length)}
+            onClick={() => handleManualChange((currentSection + 1) % sections[language].length)}
           >
             &gt;
           </button>
@@ -183,7 +221,7 @@ function SobreMi() {
             <button
               key={index}
               className={`tab-button ${currentSection === index ? 'active' : ''}`}
-              onClick={() => setCurrentSection(index)}
+              onClick={() => handleManualChange(index)}
             >
               {section.title}
             </button>
@@ -199,15 +237,15 @@ function SobreMi() {
           </div>
         </div>
         <div className="cta-seccion-sobre-mi">
-          <Link to="/servicios" className="cta-button-2">{language === 'es' ? 'Mis Servicios' : 'My Services'}</Link>
-          <Link to="/contacto" className="cta-button-2">{language === 'es' ? 'Contáctame' : 'Contact Me'}</Link>
+          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Mis Servicios' : 'My Services'}</button>
+          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Contáctame' : 'Contact Me'}</button>
         </div>
         <div className="horizontal-scroll-indicator">
           {sections[language].map((_, index) => (
             <div
               key={index}
               className={`indicator ${currentSection === index ? 'active-indicator' : ''}`}
-              onClick={() => setCurrentSection(index)}
+              onClick={() => handleManualChange(index)}
             />
           ))}
         </div>

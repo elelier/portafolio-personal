@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { initializeSettings } from './settings';
 
 // Obtén el contenedor del DOM donde se montará la aplicación
 const container = document.getElementById('root');
@@ -16,7 +17,7 @@ root.render(
   //</React.StrictMode>
 );
 
-// Agregar el script de manejo de la animación
+// Inicializa el manejo del chat y la configuración
 window.addEventListener("load", () => {
   const chatButton = document.querySelector('[data-buildship-chat-widget-button]');
   const chatContainer = document.querySelector('#buildship-chat-widget__container');
@@ -46,4 +47,7 @@ window.addEventListener("load", () => {
     // Inicializa el contenedor como oculto al cargar la página
     chatContainer.style.display = 'none';
   }
+
+  // Inicializa la configuración
+  initializeSettings();
 });

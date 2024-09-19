@@ -37,6 +37,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100%;
+  padding-bottom: 40px; /* Agrega espacio adicional al final del contenedor */
 }
 
 /* Ajustes para el subtítulo */
@@ -230,6 +231,7 @@
   .cta-seccion-sobre-mi {
     margin-left: -10px;
     margin-right: 20px;
+    margin-bottom: 20px;
   }
   
 }
@@ -348,6 +350,7 @@
 /* Indicadores de bolitas para la navegación */
 .horizontal-scroll-indicator {
   position: absolute;
+  margin-top: 20px; 
   bottom: 10px;
   display: flex;
   justify-content: center;

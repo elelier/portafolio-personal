@@ -1,12 +1,15 @@
+
+
 /* Estilos para la barra de navegación principal */
 .navegacion {
-  position: fixed;
+  position: relative;
+  width: 100%;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
   z-index: 1000;
-  background-color: transparent; /* Fondo transparente para la barra de navegación */
+  background-color: #020817;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -42,17 +45,14 @@
 /* Contenido de la barra de navegación */
 .nav-content {
   display: flex;
-  justify-content: space-between; /* Distribuye el espacio entre el logo y el botón de contacto */
+  justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 15px 20px;
-  background: #020817;
-  position: relative; /* Asegura que los elementos dentro de .nav-content se posicionen correctamente */
+  padding: 0 20px;
+  height: 60px; /* Ajusta la altura según lo que necesites */
 }
-
 /* Estilo de los enlaces de navegación en la barra principal */
 .nav-links {
+  position: absolute;
   display: flex;
   justify-content:center; /* Centra los enlaces y distribuye el espacio equitativamente */
   align-items: center; /* Alinea verticalmente los enlaces */
@@ -132,7 +132,6 @@
 .contact-button:active {
   transform: scale(0.95) !important;
   transform: translateY(4px) !important;
-  background-color: #007d66 !important; /* Un tono aún más oscuro al hacer clic */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2) !important; /* Sombra interior */
   animation: none !important; /* Detener la animación del gradiente */
 }
@@ -150,24 +149,40 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Estilo del botón de menú en móvil */
+/* Estilos generales para el botón de menú */
+/* Estilos generales para el botón de menú */
 .menu-toggle {
   display: none;
-  background: none;
-  border: none;
-  color: #FFFFFF;
   cursor: pointer;
   font-size: 24px;
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  z-index: 1100;
+  background: none;
+  border: none;
+  color: white;
+  margin-left: -5px;
+  z-index: 1001;
+  position: relative;
 }
 
+.menu-toggle:hover {
+  /* Elimina el efecto de escala para evitar problemas de deformación */
+  color: #3498db; /* Cambia el color al pasar el ratón */
+}
+
+
+/* Ajustes específicos para dispositivos móviles */
 @media (max-width: 925px) {
+
+  .logo-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25x; /* Ajusta según lo que necesites */
+    z-index: 1001; /* Para asegurarte de que esté por encima de otros elementos */
+  }
+  
   .menu-toggle {
     display: block;
-    transform: translateY(-4px);
+    position: fixed;
   }
 
   .contact-button {
@@ -176,30 +191,50 @@
 
   .nav-links {
     position: fixed;
-    top: 0;
-    right: -100%; /* Inicialmente fuera de la vista */
-    width: 70%;
-    height: 100vh;
-    background-color: #020817;
+    top: 40;
+    left: -100%; /* Colocar el menú fuera de la vista inicialmente */
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    transition: right 0.3s ease;
+    align-items: start;
+    transition: left 0.3s ease-in-out;
+    padding-top: 40px;
     z-index: 1000;
-    list-style: none; /* Elimina las bolitas de la lista en el menú lateral */
-    margin: 0;
-    padding: 0;
   }
 
   .nav-links.open {
-    right: 0; /* Menú desliza hacia adentro */
+    left: 0; /* Mostrar el menú cuando se abre */
+    padding-top: 40px;
+    
   }
 
   .nav-links li {
-    margin: 20px 0;
-    font-size: 30px;
-    text-align: center; /* Centra los enlaces dentro del menú */
+    margin-bottom: 20px; /* Espacio entre enlaces */
+    list-style: none;
   }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    padding-left: 20px;
+    display: block;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    transform: scale(1.1);
+    color: #3498db; /* Cambia color a azul */
+    }
+
+  .nav-links a:active {
+    transform: scale(0.95);
+    }
+  
 
   .nav-links .contact-button {
     display: block; /* Mostrar el botón dentro del menú desplegable */
@@ -213,14 +248,13 @@
 
 @media (max-width: 400px) {
   .logo {
-    font-size: 15px;
     font-weight: bold;
     color: white;
-    transform: translateY(8px);
+    transform: translateY(0px);
   }
 
   .nav-links li {
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 15px;
     text-align: left;
   }
@@ -234,14 +268,14 @@
 .language-toggle {
   background: none;
   border: none;
-  color: white; /* Color inicial del texto y triángulo */
-  font-size: 10px;
+  color: white;
+  font-size: 12px;
   cursor: pointer;
   padding: 5px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra EN/ES y el triángulo */
-  transition: transform 0.3s ease, color 0.3s ease; /* Transición en escala y color */
+  align-items: center;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 /* Estilo del triángulo debajo del texto */
@@ -264,5 +298,6 @@
 /* Efecto clic para reducir el tamaño temporalmente */
 .language-toggle:active {
   transform: scale(0.95);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2) !important; /* Sombra interior */
 }
 

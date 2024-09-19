@@ -76,8 +76,10 @@ function Servicios() {
           link_u: "Mejora tu Estrategia"
         }
       ],
-      introduccion: "Ofrezco una amplia gama de servicios para ayudar a empresas y emprendedores a digitalizar y optimizar sus operaciones.",
-      encabezado: "Servicios"
+      introduccion: "Ofrezco una amplia gama de servicios para ayudar a empresas y emprendedores a digitalizar y optimizar sus procesos.",
+      encabezado: "Servicios",
+      beneficios: "Beneficios",
+      tecnologias: "Soluciones, Herramientas y Metodologías"
     },
     en: {
       servicios: [
@@ -142,13 +144,15 @@ function Servicios() {
           link_u: "Improve Your Strategy"
         }
       ],
-      introduccion: "I offer a wide range of services to help businesses and entrepreneurs digitalize and optimize their operations.",
-      encabezado: "Services"
+      introduccion: "I offer a wide range of services to help businesses and entrepreneurs digitalize and optimize their processes.",
+      encabezado: "Services",
+      beneficios: "Benefits",
+      tecnologias: "Solutions, Tools, and Methodologies"
     }
   };
   
 
-  const { servicios, introduccion, encabezado } = translations[language] || translations.es; // Obtén las traducciones según el idioma
+  const { servicios, introduccion, encabezado, beneficios, tecnologias } = translations[language] || translations.es; // Obtén las traducciones según el idioma
 
   return (
     <section id="servicios" className="servicios">
@@ -167,7 +171,7 @@ function Servicios() {
             <h3>{servicio.nombre}</h3>
             <p className="servicio-descripcion">{servicio.descripcion}</p>
             <div className="servicio-beneficios">
-              <h4>Beneficios:</h4>
+              <h4>{beneficios}:</h4>
               <ul>
                 {servicio.beneficios.map((beneficio, i) => (
                   <li key={i}>{beneficio}</li>
@@ -176,7 +180,7 @@ function Servicios() {
             </div>
             <div className="contenedor-tecnologias">
               <div className="servicio-tecnologias">
-                <h4>Tecnologías:</h4>
+                <h4>{tecnologias}:</h4>
                 <ul>
                   {servicio.tecnologias.map((tech, i) => (
                     <li key={i}>{tech}</li>

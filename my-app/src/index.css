@@ -198,3 +198,164 @@ h1, h2, h3, h4, h5, h6 {
 .chat-option-button:hover {
   background-color: #4a90e2;
 }
+
+
+/* Estilo para el botón de configuración */
+.settings-toggle {
+  position: fixed; /* Usa fixed para que esté siempre en la misma posición */
+  right: 20px; /* Ajusta el margen derecho */
+  top: 20px; /* Ajusta la posición vertical desde la parte superior */
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1100;
+  /* Elimina el efecto de escala para evitar problemas de deformación */
+  transform: none; /* Elimina cualquier transformación para mantener la posición correcta */
+}
+
+.settings-toggle:hover {
+  color: #3498db; /* Cambia el color al pasar el ratón */
+  transform: scale(1.1);
+}
+
+.settings-toggle:active {
+  color: #2980b9; /* Cambia el color cuando se hace clic */
+  transform: scale(0.95);
+}
+
+/* Ajustes específicos para dispositivos móviles */
+@media (max-width: 925px) {
+  .settings-toggle {
+    right: 20px; /* Alineado a la derecha con un margen de 20px */
+    top: 20px; /* Ajusta la posición vertical para móviles si es necesario */
+    transform: none; /* Asegura que la posición no se vea afectada por transformaciones */
+  }
+}
+
+/* Estilos para el ícono SVG */
+.settings-icon {
+  width: 24px; /* Tamaño del ícono */
+  height: 24px;
+  fill: white; /* Color del ícono */
+}
+
+.settings-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #020817;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px; /* Añadido padding alrededor de los íconos */
+  position: fixed;
+  top: 60px; /* Ajusta según sea necesario */
+  right: 10px; /* Ajusta según sea necesario */
+  z-index: 1000;
+}
+
+.settings-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30px; /* Tamaño del contenedor cuadrado reducido */
+  height: 30px; /* Tamaño del contenedor cuadrado reducido */
+  cursor: pointer;
+  padding: 5px; /* Reducido el padding */
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+}
+
+.settings-option:hover {
+  background-color: #252f47;
+  transform: scale(1.1);
+  color: #3498db; 
+}
+
+.settings-option.active {
+  background-color: #252f47;
+  transform: scale(0.95);}
+
+.settings-option i {
+  font-size: 20px; /* Tamaño del ícono reducido */
+  margin-bottom: 3px; /* Reducido el margen inferior */
+}
+
+
+.settings-option span {
+  font-size: 10px; /* Tamaño del texto debajo del ícono reducido */
+}
+
+.language-toggle {
+  width: 30px; /* Tamaño del contenedor cuadrado reducido */
+  height: 30px; /* Tamaño del contenedor cuadrado reducido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.language-toggle-button {
+  background-color: transparent;
+  border: none;
+  font-size: 12px; /* Tamaño del texto reducido */
+  cursor: pointer;
+  display: block;
+}
+
+.language-toggle-button span {
+  margin-right: 4px; /* Reducido el margen derecho */
+}
+
+.language-toggle .flag-emoji {
+  font-size: 20px; /* Tamaño del emoji reducido */
+}
+
+
+/* Ajustes de tamaño en pantallas pequeñas */
+@media (max-width: 925px) {
+
+  .settings-menu {
+     /* Asegúrate de que no se superponga con el menú */
+    right: 20px;
+    width: auto; /* Asegúrate de que el menú se ajuste al contenido */
+  }
+}
+
+
+.language-toggle-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -150%; /* Ajusta la posición */
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+}
+
+.language-toggle-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.flag-image {
+  width: 20px; /* Ajusta el tamaño según sea necesario */
+  height: 20px; /* Ajusta el tamaño según sea necesario */
+}

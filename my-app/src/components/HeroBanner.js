@@ -156,7 +156,7 @@ const DynamicHeroBanner = () => {
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
     const stars = [];
-    const numStars = 300;
+    const numStars = 500;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -169,35 +169,36 @@ const DynamicHeroBanner = () => {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: Math.random() * 1.5,
-          speed: Math.random() * 0.001 + 0.01,
+          speed: Math.random() * 0.05 + 0.05, // Mayor velocidad
         });
       }
     };
-
+    
     const drawStars = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
       stars.forEach(star => {
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 0.8);
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); // Estrellas más redondas
         ctx.fillStyle = 'white';
         ctx.fill();
-
-        star.x -= star.speed;
-
+    
+        star.x -= star.speed; // Mueve la estrella hacia la izquierda
+    
+        // Asegúrate de que las estrellas aparezcan aleatoriamente en la parte superior
         if (star.x < 0) {
           star.x = canvas.width;
           star.y = Math.random() * canvas.height;
         }
       });
-
+    
       requestAnimationFrame(drawStars);
     };
-
+    
     resizeCanvas();
     createStars();
     drawStars();
-
+    
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', resizeCanvas);
 
