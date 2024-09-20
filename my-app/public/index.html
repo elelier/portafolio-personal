@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" id="html-lang">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Scripts externos -->
+    <title data-en="Personal Portfolio" data-es="Portafolio Personal">Personal Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
     <script src="https://unpkg.com/@buildshipapp/chat-widget@^1" defer></script>
-    <!-- Script principal -->
     <script defer src="/static/js/bundle.js"></script>
-    <script type="module" src="src/settings.js"></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -19,34 +15,34 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
-    <!-- Button to open the widget -->
     <button data-buildship-chat-widget-button>
-        <i class="fas fa-robot"></i> <span id="chat-widget-button-text">Hello!</span>
+        <i class="fas fa-robot"></i> <span id="chat-widget-button-text" data-en="Hello!" data-es="¡Hola!">Hello!</span>
     </button>
-    <!-- Añadir botón de configuración -->
-    <button class="settings-toggle" onclick="toggleSettings()" aria-label="Toggle settings">
-        <img src="assets/files/gear.svg" alt="Settings" class="settings-icon" />
+    <button class="settings-toggle" aria-label="Toggle settings">
+        <i class="fas fa-cog settings-icon" alt="Settings" class="settings-icon" />
     </button>
-    <div class="settings-menu" id="settings-menu" style="display: none;">
-        <div class="settings-option" id="light-mode" onclick="setActiveSetting('light')">
-            <div class="tooltip">Light Mode</div>
-            <i class="fas fa-sun"></i>
-        </div>
-        <div class="settings-option" id="dark-mode" onclick="setActiveSetting('dark')">
-            <div class="tooltip">Dark Mode</div>
-            <i class="fas fa-moon"></i>
-        </div>
-        <div class="settings-option" id="system-mode" onclick="setActiveSetting(getSystemTheme())">
-            <div class="tooltip">System Theme</div>
-            <i class="fas fa-desktop"></i>
-        </div>
-        <div class="settings-option language-toggle" id="language-toggle">
-            <img id="language-flag" src="assets/files/flag-us.png" alt="Flag" class="flag-image"/>
-            <span id="language-text" class="language-toggle-button">EN</span>
+    <div class="bar-main">
+        <div class="settings-menu" id="settings-menu" style="display: none;">
+            <div class="settings-option" id="light" onclick="setActiveSetting('light')">
+                <div class="tooltip" data-en="Light Mode" data-es="Modo Claro">Light Mode</div>
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="settings-option" id="dark" onclick="setActiveSetting('dark')">
+                <div class="tooltip" data-en="Dark Mode" data-es="Modo Oscuro">Dark Mode</div>
+                <i class="fas fa-moon"></i>
+            </div>
+            <div class="settings-option" id="system" onclick="setActiveSetting(getSystemTheme())">
+                <div class="tooltip" data-en="System Theme" data-es="Tema del Sistema">System Theme</div>
+                <i class="fas fa-desktop"></i>
+            </div>
+            
+            <div class="settings-option language-toggle" id="language-toggle" onclick="toggleLanguage()">
+                <img id="language-flag" src="assets/files/flag-us.png" alt="Flag" class="flag-image"/>
+                <span id="language-text" class="language-toggle-button" data-en="EN" data-es="ES">EN</span>
+            </div>
         </div>
     </div>
-
-    <!-- Scripts internos -->
+        
     <script>
         function scrollToSection(id) {
             const element = document.getElementById(id);
@@ -55,178 +51,336 @@
             }
         }
 
-        function configureChatWidget(language) {
-            const messages = {  
-                es: `
-Hola! Soy un <b>Chatbot desarrollado por <a href="https://elelier.com" target="_blank" style="color: #7dd3fc;">Elier Loya Mata</a></b> para <b><a href="#hero-banner" style="color: #7dd3fc;">este portafolio</a></b>.
-<br><br>
-<b>¿Cómo puedo asistirte hoy?</b>
-<ul style="color: #f6f9fc; padding-left: 20px;">
-  <li><a href="#portafolio" onclick="scrollToSection('portafolio'); return false;" style="color: #7dd3fc;">Ver Proyectos</a></li>
-  <li><a href="#servicios" onclick="scrollToSection('servicios'); return false;" style="color: #7dd3fc;">Conocer Servicios</a></li>
-  <li><a href="#contacto" onclick="scrollToSection('contacto'); return false;" style="color: #7dd3fc;">Contáctame</a></li>
-  <li><a href="#sobre-mi" onclick="scrollToSection('sobre-mi'); return false;" style="color: #7dd3fc;">Más Sobre Mi</a></li>
-</ul>
-<br>
-Explora <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return false;" style="color: #7dd3fc;">mi sitio web</a> para más información.
-<br><br>
-¡Estoy aquí para ayudarte a encontrar lo que necesitas!
-<br><br>
-<b><a href="#" onclick="changeLanguage('en'); return false;" style="color: #7dd3fc;">Change to English</a></b>
-                `,
-                en: `
-Hello! I'm a <b>Chatbot developed by <a href="https://elelier.com" target="_blank" style="color: #7dd3fc;">Elier Loya Mata</a></b> for <b><a href="#hero-banner" style="color: #7dd3fc;">this portfolio</a></b>.
+
+        // Objeto de traducciones
+const translations = {
+    en: {
+        // Títulos y encabezados
+        pageTitle: "Personal Portfolio",
+        heroTitle: "Welcome to My Portfolio",
+        aboutMeTitle: "About Me",
+        skillsTitle: "My Skills",
+        projectsTitle: "My Projects",
+        servicesTitle: "My Services",
+        contactTitle: "Contact Me",
+
+        // Contenido de secciones
+        aboutMeContent: "I'm a digital transformation specialist with experience in...",
+        skillsList: ["Web Development", "Digital Strategy", "Project Management", "Data Analysis"],
+        servicesList: ["Digital Transformation Consulting", "Web Development", "Process Optimization", "Data-Driven Decision Making"],
+
+        // Formulario de contacto
+        nameplaceholder: "Your Name",
+        emailPlaceholder: "Your Email",
+        messagePlaceholder: "Your Message",
+        sendButton: "Send Message",
+
+        // Configuración
+        settingsTitle: "Settings",
+        lightMode: "Light Mode",
+        darkMode: "Dark Mode",
+        systemTheme: "System Theme",
+
+        // Chat widget
+        chatWidgetPlaceholder:"Ask me about Elier!",
+        chatWidgetTitle: "Want a Chatbot?",
+        chatWidgetBranding: "Want a chatbot for you?",
+        chatButtonText: "Hello!",
+        chatGreetingMessage: `
+Hello! I'm a <b>Chatbot developed by <a href="https://elelier.com" target="_blank">Elier Loya Mata</a></b> for <b><a href="#hero-banner">this portfolio</a></b>.
 <br><br>
 <b>How can I assist you today?</b>
 <ul style="color: #f6f9fc; padding-left: 20px;">
-  <li><a href="#portafolio" onclick="scrollToSection('portafolio'); return false;" style="color: #7dd3fc;">See Projects</a></li>
-  <li><a href="#servicios" onclick="scrollToSection('servicios'); return false;" style="color: #7dd3fc;">Know Services</a></li>
-  <li><a href="#contacto" onclick="scrollToSection('contacto'); return false;" style="color: #7dd3fc;">Contact Me</a></li>
-  <li><a href="#sobre-mi" onclick="scrollToSection('sobre-mi'); return false;" style="color: #7dd3fc;">More About Me</a></li>
+  <li><a href="#portafolio" onclick="scrollToSection('portafolio'); return false;">See Projects</a></li>
+  <li><a href="#servicios" onclick="scrollToSection('servicios'); return false;">Know Services</a></li>
+  <li><a href="#contacto" onclick="scrollToSection('contacto'); return false;">Contact Me</a></li>
+  <li><a href="#sobre-mi" onclick="scrollToSection('sobre-mi'); return false;">More About Me</a></li>
 </ul>
 <br>
-Explore <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return false;" style="color: #7dd3fc;">my website</a> for more information.
+Explore <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return false;">my website</a> for more information.
 <br><br>
 I'm here to help you find what you need!
 <br><br>
-<b><a href="#" onclick="changeLanguage('es'); return false;" style="color: #7dd3fc;">Cambiar a Español</a></b>
-                `
-            };
+<b><a href="#" onclick="changeLanguage('es'); return false;">Cambiar a Español</a></b>
+        `,
 
-            const buttonTexts = {
-                es: "¡HOLA!",
-                en: "Hello!"
-            };
+        // Footer
+        footerText: "© 2024 Your Name. All rights reserved.",
 
-            if (window.buildShipChatWidget && window.buildShipChatWidget.config) {
-                window.buildShipChatWidget.config.url = "https://81ocg9.buildship.run/el_bot";
-                window.buildShipChatWidget.config.widgetTitle = language === 'es' ? "¿Quieres un Chatbot?" : "Want a Chatbot?";
-                window.buildShipChatWidget.config.widgetBranding = language === 'es' ? "¿Quieres un chatbot para ti?" : "Want a chatbot for you?";
-                window.buildShipChatWidget.config.greetingMessage = messages[language] || messages['en'];
-                window.buildShipChatWidget.config.width = 300; 
-                window.buildShipChatWidget.config.height = 500; 
-            } else {
-                console.error('Chat widget configuration not available');
+        // Otros elementos
+        languageToggle: "EN"
+    },
+    es: {
+        // Títulos y encabezados
+        pageTitle: "Portafolio Personal",
+        heroTitle: "Bienvenido a Mi Portafolio",
+        aboutMeTitle: "Sobre Mí",
+        skillsTitle: "Mis Habilidades",
+        projectsTitle: "Mis Proyectos",
+        servicesTitle: "Mis Servicios",
+        contactTitle: "Contáctame",
+
+        // Contenido de secciones
+        aboutMeContent: "Soy un especialista en transformación digital con experiencia en...",
+        skillsList: ["Desarrollo Web", "Estrategia Digital", "Gestión de Proyectos", "Análisis de Datos"],
+        servicesList: ["Consultoría en Transformación Digital", "Desarrollo Web", "Optimización de Procesos", "Toma de Decisiones Basada en Datos"],
+
+        // Formulario de contacto
+        nameplaceholder: "Tu Nombre",
+        emailplaceholder: "Tu Email",
+        messageplaceholder: "Tu Mensaje",
+        sendButton: "Enviar Mensaje",
+
+        // Configuración
+        settingsTitle: "Configuración",
+        lightMode: "Modo Claro",
+        darkMode: "Modo Oscuro",
+        systemTheme: "Tema del Sistema",
+
+        // Chat widget
+        chatWidgetPlaceholder:"Pregúntame sobre Elier!",
+        chatWidgetTitle: "¿Quieres un Chatbot?",
+        chatWidgetBranding: "¿Quieres un chatbot para ti?",
+        chatButtonText: "¡HOLA!",
+        chatGreetingMessage: `
+Hola! Soy un <b>Chatbot desarrollado por <a href="https://elelier.com" target="_blank">Elier Loya Mata</a></b> para <b><a href="#hero-banner">este portafolio</a></b>.
+<br><br>
+<b>¿Cómo puedo asistirte hoy?</b>
+<ul style="color: #f6f9fc; padding-left: 20px;">
+  <li><a href="#portafolio" onclick="scrollToSection('portafolio'); return false;">Ver Proyectos</a></li>
+  <li><a href="#servicios" onclick="scrollToSection('servicios'); return false;">Conocer Servicios</a></li>
+  <li><a href="#contacto" onclick="scrollToSection('contacto'); return false;">Contáctame</a></li>
+  <li><a href="#sobre-mi" onclick="scrollToSection('sobre-mi'); return false;">Más Sobre Mi</a></li>
+</ul>
+<br>
+Explora <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return false;">mi sitio web</a> para más información.
+<br><br>
+¡Estoy aquí para ayudarte a encontrar lo que necesitas!
+<br><br>
+<b><a href="#" onclick="changeLanguage('en'); return false;">Change to English</a></b>
+        `,
+
+        // Footer
+        footerText: "© 2024 Tu Nombre. Todos los derechos reservados.",
+
+        // Otros elementos
+        languageToggle: "ES"
+    }
+};
+
+    function configureChatWidget(language) {
+        if (window.buildShipChatWidget && window.buildShipChatWidget.config) {
+            window.buildShipChatWidget.config.url = "https://81ocg9.buildship.run/el_bot";
+            window.buildShipChatWidget.config.widgetTitle = translations[language].chatWidgetTitle;
+            window.buildShipChatWidget.config.widgetMessage = translations[language].chatWidgetTitle;
+            window.buildShipChatWidget.config.widgetBranding = translations[language].chatWidgetBranding;
+            window.buildShipChatWidget.config.greetingMessage = translations[language].chatGreetingMessage;
+            window.buildShipChatWidget.config.width = 300; 
+            window.buildShipChatWidget.config.height = 500; 
+
+            // Reinitialize the chat widget
+            window.buildShipChatWidget.init();
+
+            // Establecer un observador de mutaciones para detectar cuando el widget se ha cargado
+            setupChatWidgetObserver(language);
+        } else {
+            console.error('Chat widget configuration not available');
+        }
+
+        const chatButtonText = document.getElementById("chat-widget-button-text");
+        if (chatButtonText) {
+            chatButtonText.textContent = translations[language].chatButtonText;
+        }
+
+        setTimeout(() => {
+            const titleElement = document.querySelector('.buildship-chat-widget__branding');
+            if (titleElement) {
+                titleElement.style.display = 'none';
             }
+        }, 1000); 
+    }
+    function setupChatWidgetObserver(language) {
+        const targetNode = document.body;
+        const config = { childList: true, subtree: true };
 
-            const chatButtonText = document.getElementById("chat-widget-button-text");
-            if (chatButtonText) {
-                chatButtonText.textContent = buttonTexts[language] || buttonTexts['en'];
-            }
-
-            setTimeout(() => {
-                const titleElement = document.querySelector('.buildship-chat-widget__branding');
-                if (titleElement) {
-                    titleElement.style.display = 'none';
+        const callback = function(mutationsList, observer) {
+            for(let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    const addedNodes = mutation.addedNodes;
+                    for(let node of addedNodes) {
+                        if(node.nodeType === Node.ELEMENT_NODE && node.classList.contains('buildship-chat-widget__message--system')) {
+                            updateChatWidgetMessage(node, language);
+                            observer.disconnect(); // Desconectar el observador una vez que se ha actualizado el mensaje
+                            return;
+                        }
+                    }
                 }
-            }, 1000); 
-        }
+            }
+        };
 
-        function changeLanguage(newLanguage) {
-            localStorage.setItem('language', newLanguage);
-            window.location.reload(); // Refresh the page with the new language
-        }
+        const observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+    }
+    // Función para actualizar el mensaje del widget de chat
+    function updateChatWidgetMessage(messageElement, language) {
+        messageElement.innerHTML = translations[language].chatGreetingMessage;
+    }
 
-        function toggleSettings() {
-            const menu = document.getElementById("settings-menu");
-            if (menu) {
-                menu.style.display = menu.style.display === "none" ? "block" : "none";
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const storedLanguage = localStorage.getItem('language') || getBrowserLanguage();
+        updateLanguageDisplay(storedLanguage);
+        configureChatWidget(storedLanguage);
+        updateDynamicContent(storedLanguage);
+        setActiveSetting(localStorage.getItem('theme') || getSystemTheme());
+
+        document.querySelector('.settings-toggle').addEventListener('click', toggleSettings);
+
+    });
+
+    // Función para manejar el cambio de idioma desde el widget de chat
+    function handleChatLanguageChange(newLanguage) {
+        changeLanguage(newLanguage);
+        updateDynamicContent(newLanguage); // Actualiza el contenido dinámico al cambiar de idioma
+    }
+
+    function changeLanguage(newLanguage) {
+        localStorage.setItem('language', newLanguage);
+        updateLanguageDisplay(newLanguage);
+        updateDynamicContent(newLanguage);
+        updateChatWidget(newLanguage);
+        configureChatWidget(newLanguage);
+        console.log(`Language changed to: ${newLanguage}`); // Log para verificar
+    }
+
+    // Nueva función para actualizar el widget de chat
+    function updateChatWidget(language) {
+        if (window.buildShipChatWidget && window.buildShipChatWidget.config) {
+            window.buildShipChatWidget.config.widgetTitle = translations[language].chatWidgetTitle;
+            window.buildShipChatWidget.config.widgetBranding = translations[language].chatWidgetBranding;
+            window.buildShipChatWidget.config.greetingMessage = translations[language].chatGreetingMessage;
+
+            // Reinicializar el widget de chat
+            window.buildShipChatWidget.init();
+
+            // Actualizar mensaje del sistema
+            const systemMessage = document.querySelector('.buildship-chat-widget__message--system');
+            if (systemMessage) {
+                systemMessage.innerHTML = translations[language].chatGreetingMessage;
             }
         }
 
-        function setActiveSetting(setting) {
-            const body = document.body;
-            const settings = document.querySelectorAll(".settings-option");
-            settings.forEach(setting => setting.classList.remove("active"));
-            document.getElementById(`${setting}-mode`).classList.add("active");
-            switch (setting) {
-                case 'light':
-                    body.classList.add("light-mode");
-                    body.classList.remove("dark-mode");
-                    break;
-                case 'dark':
-                    body.classList.add("dark-mode");
-                    body.classList.remove("light-mode");
-                    break;
-                default:
-                    body.classList.remove("light-mode", "dark-mode");
-                    break;
-            }
+        const chatButtonText = document.getElementById("chat-widget-button-text");
+        if (chatButtonText) {
+            chatButtonText.textContent = translations[language].chatButtonText;
         }
+    }
 
-        function getSystemTheme() {
-            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-
-        function getSystemLanguage() {
-            // Obtiene el idioma del navegador
-            const userLanguage = navigator.language || navigator.userLanguage;
-            // Extrae el código de idioma de dos letras
-            const languageCode = userLanguage.substring(0, 2);
-            // Retorna 'en' si el código no es 'en' o 'es'
-            return (languageCode === 'en' || languageCode === 'es') ? languageCode : 'en';
-        }
-
-        function updateLanguageDisplay(language) {
-            const flagImage = document.getElementById('language-flag');
-            const languageText = document.getElementById('language-text');
-
-            if (flagImage && languageText) {
-                if (language === 'es') {
-                    flagImage.src = 'assets/files/flag-mx.png';
-                    languageText.textContent = 'ES';
-                } else {
-                    flagImage.src = 'assets/files/flag-us.png';
-                    languageText.textContent = 'EN';
+        // Observador de mutaciones para detectar cuando se carga el widget de chat
+        const chatWidgetObserver = new MutationObserver((mutations) => {
+            for (let mutation of mutations) {
+                if (mutation.type === 'childList') {
+                    const addedNodes = mutation.addedNodes;
+                    for (let node of addedNodes) {
+                        if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('buildship-chat-widget__message--system')) {
+                            // El widget de chat se ha cargado, agregar event listeners a los enlaces de cambio de idioma
+                            const languageLinks = node.querySelectorAll('a[onclick^="changeLanguage"]');
+                            languageLinks.forEach(link => {
+                                link.onclick = (e) => {
+                                    e.preventDefault();
+                                    const newLang = link.getAttribute('onclick').includes("'es'") ? 'es' : 'en';
+                                    handleChatLanguageChange(newLang); // Llama a la función que actualiza el contenido
+                                };
+                            });
+                            chatWidgetObserver.disconnect();
+                            return;
+                        }
+                    }
                 }
             }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Obtiene el idioma almacenado o detecta el idioma del navegador
-            const storedLanguage = localStorage.getItem('language');
-            const currentLanguage = storedLanguage || getSystemLanguage();
-            
-            // Actualiza la interfaz con el idioma actual
-            updateLanguageDisplay(currentLanguage);
-            
-            // Configura el evento para cambiar el idioma al hacer clic
-            document.getElementById('language-toggle').addEventListener('click', () => {
-                const newLanguage = currentLanguage === 'en' ? 'es' : 'en';
-                localStorage.setItem('language', newLanguage);
-                updateLanguageDisplay(newLanguage);
-                // Opcionalmente recarga la página para aplicar el cambio
-                // window.location.reload();
-            });
         });
+        // Iniciar la observación del DOM
+        chatWidgetObserver.observe(document.body, { childList: true, subtree: true });
+
+        // Función para obtener el idioma actual
+        function getCurrentLanguage() {
+            return localStorage.getItem('language') || 'en'; // Cambia 'en' por tu idioma por defecto
+}
+        // Función para actualizar contenido dinámico
+        function updateDynamicContent(language) {
+            // Actualiza el contenido de los elementos con atributos data-en/data-es
+            document.querySelectorAll('[data-en], [data-es]').forEach((element) => {
+                element.textContent = element.getAttribute(`data-${language}`) || element.getAttribute('data-en');
+            });
+
+            // Actualiza los placeholders de los inputs
+            document.querySelectorAll('input[placeholder]').forEach((input) => {
+                const key = input.getAttribute('data-placeholder-key');
+                if (key) {
+                    input.placeholder = translations[language][key] || input.placeholder;
+                }
+            });
+
+            // Dispara un evento personalizado para notificar a otros componentes
+            const event = new CustomEvent('languageChanged', { detail: { language: language } });
+            document.dispatchEvent(event);
+        }
 
         function updateLanguageDisplay(language) {
             const htmlElement = document.documentElement;
+            htmlElement.lang = language;
 
-            if (language === 'es') {
-                htmlElement.lang = 'es'; // Cambia el atributo lang a 'es'
+            // Actualiza el contenido de los elementos con atributos data-en/data-es
+            document.querySelectorAll('[data-en], [data-es]').forEach((element) => {
+                element.textContent = element.getAttribute(`data-${language}`);
+            });
+
+            // Actualiza el ícono y texto del idioma
+            const languageFlag = document.getElementById('language-flag');
+            const languageText = document.getElementById('language-text');
+            if (language === 'en') {
+                languageFlag.src = 'assets/files/flag-us.png';
+                languageText.textContent = 'EN';
             } else {
-                htmlElement.lang = 'en'; // Cambia el atributo lang a 'en'
+                languageFlag.src = 'assets/files/flag-mx.png';
+                languageText.textContent = 'ES';
             }
         }
-
-        function handleClickOutside(event) {
-            const settingsMenu = document.getElementById("settings-menu");
-            const settingsButton = document.querySelector(".settings-toggle");
-            if (settingsMenu && settingsButton) {
-                if (!settingsMenu.contains(event.target) && !settingsButton.contains(event.target)) {
-                    settingsMenu.style.display = "none";
-                }
-            }
-        }
-
-        document.addEventListener('click', handleClickOutside);
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const language = localStorage.getItem('language') || 'en';
-            configureChatWidget(language);
-            document.body.style.fontFamily = 'Arial, sans-serif'; // Example of global styling
+        document.addEventListener('languageChanged', (event) => {
+            const language = event.detail.language;
+            // Actualiza cualquier otro contenido dinámico que no esté cubierto por updateDynamicContent
         });
+        function toggleSettings() {
+            event.preventDefault();
+            const menu = document.getElementById("settings-menu");
+            menu.style.display = menu.style.display === "none" ? "block" : "none";
+        }
+
+        function toggleLanguage() {
+            const currentLanguage = getCurrentLanguage();
+            const newLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            changeLanguage(newLanguage);
+        }      
+
+        function getBrowserLanguage() {
+            return navigator.language.startsWith('es') ? 'es' : 'en';
+        }
+
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function setActiveSetting(theme) {
+            document.body.classList.toggle('dark-theme', theme === 'dark');
+            document.body.classList.toggle('light-theme', theme === 'light');
+            localStorage.setItem('theme', theme);
+        }
     </script>
+    <style>
+        /* Hide the chat widget branding link */
+        #buildship-chat-widget__branding {
+            display: none !important; /* Use !important to override any other styles */
+        }
+    </style>
 </body>
 </html>

@@ -42,7 +42,6 @@ export function initializeSettings() {
         const currentLanguage = localStorage.getItem('language') || 'en';
         const newLanguage = currentLanguage === 'es' ? 'en' : 'es';
         localStorage.setItem('language', newLanguage);
-        window.location.reload(); // Recargar la página para aplicar el nuevo idioma
     }
 
     // Configurar el idioma

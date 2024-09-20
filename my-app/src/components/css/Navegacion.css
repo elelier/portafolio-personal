@@ -2,20 +2,19 @@
 
 /* Estilos para la barra de navegación principal */
 .navegacion {
-  position: relative;
+  position: fixed; /* Asegura que la barra esté siempre visible */
   width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 60px;
   z-index: 1000;
-  background-color: #020817;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  background-color: #020817 !important; /* Color sólido */
+  opacity: 1; /* Asegura que no sea transparente */
+  transition: background-color 0.3s ease-in-out, opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Estilo para el logo */
 .logo-container {
   flex-shrink: 0; /* Evita que el logo se reduzca en tamaño */
+  z-index: 100; /* Para asegurarte de que esté por encima de otros elementos */
 }
 
 
@@ -173,11 +172,11 @@
 @media (max-width: 925px) {
 
   .logo-container {
-    position: fixed;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
     top: 25x; /* Ajusta según lo que necesites */
-    z-index: 1001; /* Para asegurarte de que esté por encima de otros elementos */
+    z-index: 100; /* Para asegurarte de que esté por encima de otros elementos */
   }
   
   .menu-toggle {
@@ -208,6 +207,8 @@
   .nav-links.open {
     left: 0; /* Mostrar el menú cuando se abre */
     padding-top: 40px;
+    background-color: #020817;
+    
     
   }
 

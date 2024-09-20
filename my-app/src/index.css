@@ -1,24 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
 :root {
-  --color-bg: #272829;
-  --color-text: #f6f9fc;
-  --color-primary: #7dd3fc;
-  --color-secondary: #6c757d;
-  --color-accent: #28a745;
+  --color-bg-light: #f6f9fc;
+  --color-text-light: #020817;
+  --color-primary-light: #020817;
+  --color-secondary-light: #6c757d;
+  --color-accent-light: #00cc99;
+  --color-bg-anti-light: #020817;
+  --color-bg-2-light: #6c757d;
+  --buildship-chat-widget-bg-color-light:#f6f9fc;
+  --buildship-chat-widget-user-message-bg-color-ligh:#00cc99;
+  --buildship-chat-widget-system-message-bg-color-light: #ddf1ec; 
+  --buildship-chat-widget-user-message-text-color-light:#f6f9fc;
+
+  --color-bg-dark: #020817;
+  --color-text-dark: #f6f9fc;
+  --color-primary-dark: #7dd3fc;
+  --color-secondary-dark: #6c757d;
+  --color-accent-dark: #7dd3fc;
+  --color-bg-anti-dark: #f6f9fc;
+  --color-bg-2-dark: #19191a;
+  --buildship-chat-widget-bg-color-dark:#020817;
+  --buildship-chat-widget-user-message-bg-color-dark:#7dd3fc;
+  --buildship-chat-widget-system-message-bg-color-dark: #143142; 
+  --buildship-chat-widget-user-message-text-color-dark:#020817;
+
+}
+
+
+
+/* Estilos generales para modo oscuro */
+[data-theme="dark"] {
+  --color-bg: var(--color-bg-dark);
+  --color-text: var(--color-text-dark);
+  --color-primary: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary-dark);
+  --color-accent: var(--color-accent-dark);
+  --color-bg-anti: var(--color-bg-anti-dark);
+  --color-bg-2: var(--color-bg-2-dark);
+  --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-dark);
+  --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-dark); 
+  --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-dark);
+  --buildship-chat-widget-user-message-text-color: var(--buildship-chat-widget-user-message-text-color-dark);
+
+}
+
+/* Estilos generales para modo claro */
+[data-theme="light"] {
+  --color-bg: var(--color-bg-light);
+  --color-text: var(--color-text-light);
+  --color-primary: var(--color-primary-light);
+  --color-secondary: var(--color-secondary-light);
+  --color-accent: var(--color-accent-light);
+  --color-bg-anti: var(--color-bg-anti-light);
+  --color-bg-2: var(--color-bg-2-light);
+  --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-ligh);
+  --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-light); 
+  --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-light);
+  --buildship-chat-widget-user-message-text-color: var(--buildship-chat-widget-user-message-text-color-light);
 }
 
 
 /* General styles */
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  padding-top: 60px;
+  font-family: 'Poppins', 'sans-serif';
   background-color: var(--color-bg);
   color: var(--color-text);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-accent);
 }
 
 @keyframes gradientBG {
@@ -35,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 9998;
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
   background-size: 300% 300%; /* Expande el gradiente para el efecto de movimiento */
-  color: white;
+  color: var(--color-text);
   border: none;
   border-radius: 50px;
   padding: 12px 25px;
@@ -53,60 +110,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 [data-buildship-chat-widget-button] i {
-  margin-right: 8px; /* Espacio entre el ícono y el texto */
-  font-size: 22px; /* Ajusta el tamaño del ícono si es necesario */
-  animation: blink 2s infinite; /* Aplicar animación de parpadeo */
+  margin-right: 8px;
+  font-size: 22px;
+  animation: blink 2s infinite;
 }
 
-/* Cambiar estilo del botón en pantallas pequeñas */
 @media (max-width: 600px) {
   [data-buildship-chat-widget-button] {
-    padding: 10px; /* Hacer el botón más pequeño y redondo */
+    padding: 10px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    font-size: 0; /* Ocultar texto */
+    font-size: 0;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  
   [data-buildship-chat-widget-button] i {
-    margin-right: 8px; /* Espacio entre el ícono y el texto */
-    font-size: 0px; /* Ajusta el tamaño del ícono si es necesario */
-    animation: blink 2s infinite; /* Aplicar animación de parpadeo */
+    margin-right: 8px;
+    font-size: 0;
   }
 
-  /* Utiliza el ícono de robot con un signo de exclamación */
-  /* Utiliza el ícono de robot con un signo de exclamación */
   [data-buildship-chat-widget-button]::before {
-    content: '\f544 !'; /* Ícono de robot de Font Awesome seguido por un signo de exclamación */
-    font-family: "Font Awesome 5 Free"; /* Especifica la fuente */
-    font-weight: 900; /* Asegura que sea el ícono sólido */
-    font-size: 22px; /* Ajustar tamaño del ícono */
+    content: '\f544 !'; 
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    font-size: 22px; 
     display: flex;
     justify-content: center;
     align-items: center;
     transform: translate(8px, -1.5px);
-    animation: blink 2s infinite
+    animation: blink 2s infinite;
   }
+}
 
 /* Definición de la animación parpadeante */
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; } /* Cambia el nivel de opacidad a 20% */
+  50% { opacity: 0.5; }
 }
 
-  /* Alternativamente, puedes usar el ícono de comentarios */
-  /* [data-buildship-chat-widget-button]::before {
-    content: '\f086'; /* Ícono de comentarios de Font Awesome */
-  /*   font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-}
 
 /* Detener el zumbido al pasar el ratón sobre el botón */
 [data-buildship-chat-widget-button]:hover {
@@ -120,11 +164,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Efecto de clic */
 [data-buildship-chat-widget-button]:active {
   transform: scale(0.95);
-  background-color: #007d66; /* Un tono aún más oscuro al hacer clic */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
   animation: none;
 }
-
 
 /* Media queries para dispositivos móviles */
 @media (max-width: 600px) {
@@ -136,13 +178,12 @@ h1, h2, h3, h4, h5, h6 {
 /* Estilos para el contenedor del widget de chat con degradado */
 #buildship-chat-widget__container {
   position: fixed;
-  top: calc(20px + 60px); /* Ajusta el valor aquí para dar espacio suficiente por encima del botón */
+  top: calc(20px + 60px); /* Espacio suficiente por encima del botón */
   right: 20px;
   z-index: 9999; /* Asegúrate de que el contenedor del chat esté por encima del botón */
   max-width: 90vw;
   max-height: 90vh;
   box-sizing: border-box;
-  background: linear-gradient(to top, #020817, #19191a); /* Degradado de fondo, usando el mismo color para mantenerlo sólido */
   box-shadow: var(--buildship-chat-widget-shadow);
   border-radius: var(--buildship-chat-widget-border-radius);
   color: var(--buildship-chat-widget-primary-color-text);
@@ -150,21 +191,36 @@ h1, h2, h3, h4, h5, h6 {
   display: none; /* Oculta el contenedor por defecto */
 }
 
+#buildship-chat-widget__message a {
+  color:var(--color-accent)
+}
+
+#buildship-chat-widget__message {
+  color:var(--color-text)
+}
 
 /* Cambia el color de los enlaces dentro del widget */
 #buildship-chat-widget__container a {
-  color: #7dd3fc; /* Color de los enlaces */
-  text-decoration: none; /* Opcional: quita el subrayado de los enlaces */
+  text-decoration: none; /* Quita el subrayado de los enlaces */
 }
+
 
 #buildship-chat-widget__container a:hover {
   text-decoration: underline; /* Opcional: añade subrayado en el hover */
 }
 
+#buildship-chat-widget__submit {
+  background-color: var(--color-accent);
+}
+
+#buildship-chat-widget__input:focus {
+  border-color: var(--color-accent);
+}
 
 .buildship-chat-widget__title {
   visibility: hidden;
 }
+
 
 
 /* Estilos para el contenedor de opciones de chat */
@@ -172,20 +228,21 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 60px; /* Ajusta según sea necesario */
   left: 10px; /* Ajusta según sea necesario */
-  background-color: #fff;
+  background-color: var(--color-bg-anti);
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   display: none;
 }
 
+
 /* Estilo para los botones de opciones */
 .chat-option-button {
   display: block;
-  background-color: #7dd3fc;
-  color: #fff;
+  background-color: var(--color-accent);
+  color: var(--color-bg-anti);
   border: none;
   padding: 10px;
   margin: 5px 0;
@@ -194,58 +251,49 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-/* Hover effect para los botones */
-.chat-option-button:hover {
-  background-color: #4a90e2;
-}
-
 
 /* Estilo para el botón de configuración */
 .settings-toggle {
+
+  right: 35px; /* Alineado a la derecha con un margen de 20px */
+  top: 12.5px; /* Ajusta la posición vertical para móviles si es necesario */
+  transform: none; /* Asegura que la posición no se vea afectada por transformaciones */
   position: fixed; /* Usa fixed para que esté siempre en la misma posición */
-  right: 20px; /* Ajusta el margen derecho */
-  top: 20px; /* Ajusta la posición vertical desde la parte superior */
   background: none;
+  color: var(--color-text);
   border: none;
-  color: #FFFFFF;
   font-size: 24px;
   cursor: pointer;
   z-index: 1100;
   /* Elimina el efecto de escala para evitar problemas de deformación */
-  transform: none; /* Elimina cualquier transformación para mantener la posición correcta */
 }
 
 .settings-toggle:hover {
-  color: #3498db; /* Cambia el color al pasar el ratón */
+  color: var(--color-accent); /* Cambia el color al pasar el ratón */
   transform: scale(1.1);
 }
 
 .settings-toggle:active {
-  color: #2980b9; /* Cambia el color cuando se hace clic */
+  color: var(--color-accent); /* Cambia el color cuando se hace clic */
   transform: scale(0.95);
 }
 
 /* Ajustes específicos para dispositivos móviles */
-@media (max-width: 925px) {
-  .settings-toggle {
-    right: 20px; /* Alineado a la derecha con un margen de 20px */
-    top: 20px; /* Ajusta la posición vertical para móviles si es necesario */
-    transform: none; /* Asegura que la posición no se vea afectada por transformaciones */
-  }
-}
-
 /* Estilos para el ícono SVG */
 .settings-icon {
   width: 24px; /* Tamaño del ícono */
   height: 24px;
-  fill: white; /* Color del ícono */
+  stroke: var(--color-text) !important;
+  fill: var(--color-text) !important; /* Color del ícono */
+  color: var(--color-text) !important;
 }
+
 
 .settings-menu {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #020817;
+  background-color: var(--color-bg);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 15px; /* Añadido padding alrededor de los íconos */
@@ -260,6 +308,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--color-bg);
   width: 30px; /* Tamaño del contenedor cuadrado reducido */
   height: 30px; /* Tamaño del contenedor cuadrado reducido */
   cursor: pointer;
@@ -269,14 +318,18 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+.setting-icon {
+  fill: var(--color-text);
+  color: var(--color-text);
+}
+
 .settings-option:hover {
-  background-color: #252f47;
+  background-color: var(--color-secondary);
   transform: scale(1.1);
   color: #3498db; 
 }
 
 .settings-option.active {
-  background-color: #252f47;
   transform: scale(0.95);}
 
 .settings-option i {
@@ -301,8 +354,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .language-toggle-button {
   background-color: transparent;
+  color: var(--color-text);
   border: none;
   font-size: 12px; /* Tamaño del texto reducido */
+  font-family: 'poppins';
   cursor: pointer;
   display: block;
 }
@@ -318,6 +373,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Ajustes de tamaño en pantallas pequeñas */
 @media (max-width: 925px) {
+
+  .bar-main {
+    background-color: var(--color-bg); /* Color de fondo deseado */
+    height: 50px; /* Altura de la franja */
+    position: fixed; /* Mantenerlo fijo en la parte superior */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Alinear a la izquierda */
+    right: 0; /* Alinear a la derecha */
+    z-index: 888; /* Asegura que esté sobre otros elementos */
+  }
 
   .settings-menu {
      /* Asegúrate de que no se superponga con el menú */
@@ -335,8 +400,8 @@ h1, h2, h3, h4, h5, h6 {
 .tooltip {
   visibility: hidden;
   width: 120px;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
