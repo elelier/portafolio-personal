@@ -1,3 +1,5 @@
+
+
 /* Estilos generales */
 body {
   font-family: Arial, sans-serif;
@@ -5,7 +7,15 @@ body {
   margin: 0;
   padding: 0;
 }
+.dark-theme, .light-theme {
+  padding-top: 0px; /* O el valor que necesites */
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /* Estilos para el contenido principal */
 .main-content {
   padding-top: 0px; /* Altura de la barra de navegación */
@@ -28,8 +38,6 @@ body, html {
   background: linear-gradient(135deg, #003366, #0066cc, #00cc99);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  color: white;
-  padding-top: 60px;
   position: relative;
   overflow: hidden;
   box-sizing: border-box; /* Asegurar que padding no cause desbordamiento */

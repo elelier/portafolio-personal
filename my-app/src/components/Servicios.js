@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLanguage } from '../LanguageContext'; // Asegúrate de ajustar esta ruta si es necesario
-import './css/Servicios.css';
+import { useLanguage } from '../contexts/LanguageContext'; // Asegúrate de ajustar esta ruta si es necesario
+import '../styles/components/Servicios.css';
 
 function Servicios() {
   const { language } = useLanguage(); // Obtén el idioma actual del contexto

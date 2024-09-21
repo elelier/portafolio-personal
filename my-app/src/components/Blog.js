@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './css/Blog.css'; // Importa los estilos del blog desde la carpeta css dentro de components
+import '../styles/components/Blog.css'; // Importa los estilos del blog desde la carpeta css dentro de components
 
 function Blog() {
   const articulos = [

@@ -38,11 +38,6 @@ export function initializeSettings() {
     }
 
     // Función para alternar el idioma
-    function toggleLanguage() {
-        const currentLanguage = localStorage.getItem('language') || 'en';
-        const newLanguage = currentLanguage === 'es' ? 'en' : 'es';
-        localStorage.setItem('language', newLanguage);
-    }
 
     // Configurar el idioma
     const language = localStorage.getItem('language') || 'en';
@@ -54,5 +49,4 @@ export function initializeSettings() {
     document.querySelectorAll('.settings-option').forEach(option => {
         option.addEventListener('click', () => setActiveSetting(option.id));
     });
-    document.querySelector('.language-toggle').addEventListener('click', toggleLanguage);
 }

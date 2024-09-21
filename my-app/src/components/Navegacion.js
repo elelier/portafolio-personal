@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useLanguage } from '../LanguageContext';
-import './css/Navegacion.css';
+import { useLanguage } from '../contexts/LanguageContext';
+import '../styles/components/Navegacion.css';
 
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);

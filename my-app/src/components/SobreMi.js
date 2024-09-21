@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './css/SobreMi.css';
-import personal_story from './assets/files/profile-picture-elier2.png';
-import professional from './assets/files/ecommerce_marketing.png';
-import tech_vision from './assets/files/technologic_vision.png';
+import '../styles/components/SobreMi.css';
+import personal_story from '../assets/images/profile-picture-elier2.png';
+import professional from '../assets/images/ecommerce_marketing.png';
+import tech_vision from '../assets/images/technologic_vision.png';
 import { useSwipeable } from 'react-swipeable';
-import { useLanguage } from '../LanguageContext'; 
+import { useLanguage } from '../contexts/LanguageContext'; 
 
 function SobreMi() {
   const [currentSection, setCurrentSection] = useState(0);

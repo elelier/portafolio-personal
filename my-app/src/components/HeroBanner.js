@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '../LanguageContext';
-import './css/HeroBanner.css';
+import { useLanguage } from '../contexts/LanguageContext';
+import '../styles/components/HeroBanner.css';
 
 const DynamicHeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

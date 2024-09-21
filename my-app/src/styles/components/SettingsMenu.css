@@ -1,0 +1,109 @@
+@import '../index.css';
+
+.settings-menu-container {
+  position: fixed;
+  top: 12.5px;
+  right: 35px;
+  z-index: 1100;
+  border-radius: 8px;
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.settings-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text); /* Color del ícono según el tema */
+}
+
+/* Estilo para el botón de configuración */
+.settings-toggle {
+  right: 35px;
+  top: 12.5px;
+  transform: none;
+  position: fixed;
+  background: none;
+  color: var(--color-text);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.settings-toggle:hover {
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.settings-toggle:active {
+  color: var(--color-accent);
+  transform: scale(0.95);
+}
+
+.settings-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-bg-solid); /* Cambiado a un color sólido */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--color-shadow); /* Usando variable para sombra */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.settings-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.settings-option:hover {
+  background-color: var(--color-bg-anti); /* Usando un color de fondo anti para el hover */
+  transform: scale(1.1);
+}
+
+.language-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flag-image {
+  width: 24px;
+  height: 24px;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: fixed; /* Mantiene el tooltip en una posición fija */
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin-top: 5px; /* Espacio entre el elemento y el tooltip */
+}
+
+
+.settings-option:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 925px) {
+  .settings-menu-container {
+      top: 40px;
+      right: 20px;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../LanguageContext';
-import './css/Portafolio.css'; // Importa los estilos del portafolio desde la carpeta css
+import { useLanguage } from '../contexts/LanguageContext';
+import '../styles/components/Portafolio.css'; // Importa los estilos del portafolio desde la carpeta css
 
 const Portafolio = () => {
   const { language } = useLanguage();

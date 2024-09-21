@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLanguage } from '../LanguageContext';
-import './css/Footer.css';
+import { useLanguage } from '../contexts/LanguageContext';
+import '../styles/components/Footer.css';
 
 function Footer() {
   const { language } = useLanguage();

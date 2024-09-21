@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/Blog.css'; // Ruta correcta a los estilos desde la carpeta Entradas
+import '../../styles/components/Blog.css'; // Ruta correcta a los estilos desde la carpeta Entradas
 import { Link } from 'react-router-dom';
 
 function Entrada() {

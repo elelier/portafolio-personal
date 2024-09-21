@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './css/Habilidades.css';
-import { useLanguage } from '../LanguageContext'; // Ajusta la importación según tu estructura
+import '../styles/components/Habilidades.css';
+import { useLanguage } from '../contexts/LanguageContext'; // Ajusta la importación según tu estructura
 
 function ArsenalHabilidades() {
   const [activeIndex, setActiveIndex] = useState(null);

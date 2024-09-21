@@ -1,11 +1,11 @@
 // Contacto.js
 
 import React, { useState } from 'react';
-import { useLanguage } from '../LanguageContext';
-import CV from './assets/files/2409_CV_EL.pdf';
+import { useLanguage } from '../contexts/LanguageContext';
+import CV from '../assets/files/2409_CV_EL.pdf';
 import { motion } from 'framer-motion';
-import './css/Contacto.css';
-import perfilImg from './assets/files/profile-picture-elier2.png';
+import '../styles/components/Contacto.css';
+import perfilImg from '../assets/images/profile-picture-elier2.png';
 
 const texts = {
   es: {
