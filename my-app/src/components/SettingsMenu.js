@@ -1,11 +1,12 @@
+// SettingsMenu.js
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { useLanguage } from '../contexts/LanguageContext';  // Cambia esta línea
+import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/SettingsMenu.css';
 
 const SettingsMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { currentTheme, toggleTheme } = useContext(ThemeContext);
+  const { currentTheme, setTheme } = useContext(ThemeContext);
   const { language, toggleLanguage } = useLanguage();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -13,9 +14,9 @@ const SettingsMenu = () => {
   const handleMouseEnter = (event) => {
     const tooltip = event.currentTarget.querySelector('.tooltip');
     if (tooltip) {
-      const tooltipWidth = tooltip.offsetWidth; // Obtén el ancho del tooltip
-      tooltip.style.left = `${event.clientX - tooltipWidth - 10}px`; // Posiciona a la izquierda del mouse
-      tooltip.style.top = `${event.clientY}px`; // Alinea verticalmente con el mouse
+      const tooltipWidth = tooltip.offsetWidth;
+      tooltip.style.left = `${event.clientX - tooltipWidth - 10}px`;
+      tooltip.style.top = `${event.clientY}px`;
       tooltip.style.visibility = 'visible';
       tooltip.style.opacity = 1;
     }
@@ -27,6 +28,10 @@ const SettingsMenu = () => {
       tooltip.style.visibility = 'hidden';
       tooltip.style.opacity = 0;
     }
+  };
+
+  const handleThemeChange = (theme) => {
+    setTheme(theme);
   };
 
   return (
@@ -41,13 +46,31 @@ const SettingsMenu = () => {
       {isMenuOpen && (
         <div className="settings-menu">
           <div
-            className="settings-option"
+            className={`settings-option ${currentTheme === 'light' ? 'active' : ''}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={toggleTheme}
+            onClick={() => handleThemeChange('light')}
           >
-            <div className="tooltip">{currentTheme === 'light' ? 'Dark Mode' : 'Light Mode'}</div>
-            <i className={`fas fa-${currentTheme === 'light' ? 'sun' : 'moon'}`}></i>
+            <i className="fas fa-sun"></i>
+            <div className="tooltip">Light Mode</div>
+          </div>
+          <div
+            className={`settings-option ${currentTheme === 'dark' ? 'active' : ''}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleThemeChange('dark')}
+          >
+            <i className="fas fa-moon"></i>
+            <div className="tooltip">Dark Mode</div>
+          </div>
+          <div
+            className={`settings-option ${currentTheme === 'system' ? 'active' : ''}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleThemeChange('system')}
+          >
+            <i className="fas fa-desktop"></i>
+            <div className="tooltip">System Theme</div>
           </div>
           <div
             className="settings-option language-toggle"
@@ -60,7 +83,6 @@ const SettingsMenu = () => {
               alt="Flag"
               className="flag-image"
             />
-            <span className="language-toggle-button">{language.toUpperCase()}</span>
             <div className="tooltip">{language === 'en' ? 'English' : 'Español'}</div>
           </div>
         </div>

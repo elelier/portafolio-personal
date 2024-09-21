@@ -1,5 +1,6 @@
+// ThemeContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import { getCurrentTheme, setTheme, toggleTheme } from '../components/utils/themeUtils';
+import { getCurrentTheme, setTheme, getSystemTheme } from '../components/utils/themeUtils';
 
 export const ThemeContext = createContext();
 
@@ -7,17 +8,23 @@ export const ThemeProvider = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState(getCurrentTheme());
 
   useEffect(() => {
-    setTheme(currentTheme);
-    document.body.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'system') {
+      const systemTheme = getSystemTheme();
+      setTheme(systemTheme);
+      document.body.setAttribute('data-theme', systemTheme);
+    } else {
+      setTheme(currentTheme);
+      document.body.setAttribute('data-theme', currentTheme);
+    }
   }, [currentTheme]);
 
-  const handleToggleTheme = () => {
-    const newTheme = toggleTheme(); // Llama a la función toggleTheme
-    setCurrentTheme(newTheme); // Actualiza el estado con el nuevo tema
+  const handleSetTheme = (newTheme) => {
+    setCurrentTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, toggleTheme: handleToggleTheme }}>
+    <ThemeContext.Provider value={{ currentTheme, setTheme: handleSetTheme }}>
       {children}
     </ThemeContext.Provider>
   );
