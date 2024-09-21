@@ -1,5 +1,7 @@
+@import '../index.css'; 
+
 .footer {
-    background-color: #1a1a1a;
+    background: linear-gradient(to bottom, var(--color-bg-solid), var(--color-bg-solid));
     color: white;
     padding: 20px;
     text-align: center;

@@ -1,4 +1,7 @@
 /* Variables de color */
+@import '../index.css'; 
+
+
 :root {
   --color-fondo-card: #020817;
   --color-texto: #ffffff;
@@ -31,10 +34,7 @@
 .servicios {
   position: relative;
   padding: 60px 20px;
-  background-color: var(--color-fondo-card);
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
+  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-3));
   margin: auto;
   min-height: 100vh;
   overflow: hidden;

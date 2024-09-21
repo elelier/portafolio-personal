@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 :root {
-  --color-bg-light: #f6f9fc;
+  --color-bg-light: #c5e6f6;
   --color-text-light: #020817;
   --color-primary-light: #020817;
   --color-secondary-light: #6c757d;
   --color-accent-light: #00cc99;
   --color-bg-anti-light: #020817;
-  --color-bg-2-light: #6c757d;
-  --color-bg-3-light: #7dd3fc;
+  --color-bg-2-light: #bdcacb;
+  --color-bg-3-light: #ffffff;
   --color-bg-solid-light: #ffffff;
   --hero-title-color-light: #7dd3fc;
   --buildship-chat-widget-bg-color-light:#f6f9fc;
@@ -26,7 +26,8 @@
   --color-secondary-dark: #6c757d;
   --color-accent-dark: #7dd3fc;
   --color-bg-anti-dark: #f6f9fc;
-  --color-bg-2-dark: #19191a;
+  --color-bg-2-dark: #6c757d;
+  --color-bg-3-dark: #4b3e57;
   --color-bg-solid-dark: #121212;
   --hero-title-color-dark: #00cc99;
   --buildship-chat-widget-bg-color-dark:#020817;
@@ -68,6 +69,7 @@
   --color-accent: var(--color-accent-light);
   --color-bg-anti: var(--color-bg-anti-light);
   --color-bg-2: var(--color-bg-2-light);
+  --color-bg-3: var(--color-bg-3-light);
   --color-bg-solid: var(--color-bg-solid-light);
   --color-shadow: var(--color-shadow-light);
   --color-border: var(--color-border-light);

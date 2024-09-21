@@ -202,30 +202,31 @@ function SobreMi() {
     <section id="sobre-mi" className="sobre-mi" {...swipeHandlers}>
       <div className="contenido-sobre-mi">
         <h2>{language === 'es' ? 'Sobre Mí' : 'About Me'}</h2>
-        <div className="navigation-arrows">
+
+        <div className="tabs">
           <button
             className="nav-arrow left"
             onClick={() => handleManualChange((currentSection - 1 + sections[language].length) % sections[language].length)}
           >
             &lt;
           </button>
-          <button
-            className="nav-arrow right"
-            onClick={() => handleManualChange((currentSection + 1) % sections[language].length)}
-          >
-            &gt;
-          </button>
-        </div>
-        <div className="tabs">
-          {sections[language].map((section, index) => (
+            {sections[language].map((section, index) => (
+              <button
+                key={index}
+                className={`tab-button ${currentSection === index ? 'active' : ''}`}
+                onClick={() => handleManualChange(index)}
+              >
+                {section.title}
+              </button>
+              
+            ))}
             <button
-              key={index}
-              className={`tab-button ${currentSection === index ? 'active' : ''}`}
-              onClick={() => handleManualChange(index)}
+              className="nav-arrow right"
+              onClick={() => handleManualChange((currentSection + 1) % sections[language].length)}
             >
-              {section.title}
+              &gt;
             </button>
-          ))}
+      
         </div>
         <div className="section-content">
           <div className="sub-title-container shinyy">{sections[language][currentSection].subtitle}</div>

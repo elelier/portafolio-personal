@@ -1,4 +1,6 @@
 /* Variables de color */
+@import '../index.css'; 
+
 :root {
   --color-fondo-card: #020817;
   --color-texto: #ffffff;
@@ -10,13 +12,9 @@
 
 /* Contenedor de habilidades */
 .arsenal-habilidades {
-  margin-top: 10px;
   position: relative;
   padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
-  background-color: var(--color-fondo-card); /* Color del fondo del contenedor */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
-  max-width: 1200px; /* Ajusta el ancho máximo según el diseño */
+  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-2));
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -24,8 +22,8 @@
   justify-content: flex-start; /* Alinea desde la parte superior */
   min-height: 100vh; /* Altura mínima de la pantalla */
   overflow: hidden; /* Evita que el contenido se desborde */
-  margin-bottom: -50px;
 }
+
 .arsenal-habilidades h2 {
   margin-top: 30px; /* Aumenta este valor para separar más del margen superior */
   text-align: center;
