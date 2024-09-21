@@ -51,14 +51,14 @@ function Navegacion() {
       habilidades: 'Habilidades',
       portafolio: 'Portafolio',
       servicios: 'Servicios',
-      contactame: 'Contáctame'
+      contactame: ' Contáctame'
     },
     en: {
       sobreMi: 'About Me',
       habilidades: 'Skills',
       portafolio: 'Portfolio',
       servicios: 'Services',
-      contactame: 'Contact Me'
+      contactame: ' Contact Me'
     }
   };
 
@@ -79,7 +79,18 @@ function Navegacion() {
           <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>{navItems[language].habilidades}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('servicios')}>{navItems[language].servicios}</Link></li>
-          <li><Link to="/" className="contact-button" onClick={() => handleScrollToElement('contacto')}><i className="fas fa-comment-dots"></i>{navItems[language].contactame}</Link></li>
+          <li>
+            <Link
+              to="/"
+              className="contact-button"
+              onClick={() => handleScrollToElement('contacto')}
+            >
+              <div className="icon-container" style={{ display: 'inline-block' }}>
+                <i className="fas fa-comment-dots"></i>
+              </div>
+              {navItems[language].contactame}
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

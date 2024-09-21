@@ -1,57 +1,64 @@
-@import '../index.css';
+@import '../index.css'; 
 
 .settings-menu-container {
   position: fixed;
-  top: 12.5px;
+  top: 20px;
   right: 35px;
   z-index: 1100;
-  border-radius: 8px;
-  padding: 10px;
-  transition: background-color 0.3s ease-in-out;
 }
 
 .settings-icon {
   width: 24px;
   height: 24px;
-  color: var(--color-text); /* Color del ícono según el tema */
+  color: var(--color-text);
 }
 
-/* Estilo para el botón de configuración */
+.settings-icon:hover {
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent);
+}
+
+
 .settings-toggle {
-  right: 35px;
-  top: 12.5px;
-  transform: none;
-  position: fixed;
   background: none;
   color: var(--color-text);
   border: none;
   font-size: 24px;
   cursor: pointer;
-  z-index: 1100;
+  transition: transform 0.3s ease;
 }
 
 .settings-toggle:hover {
-  color: var(--color-accent);
+  fill: var(--color-accent);
   transform: scale(1.1);
 }
 
 .settings-toggle:active {
-  color: var(--color-accent);
   transform: scale(0.95);
 }
 
 .settings-menu {
   position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: var(--color-bg-solid); /* Cambiado a un color sólido */
+  top: 50px;
+  right: -12px;
+  background-color: var(--color-bg);
   border-radius: 8px;
-  box-shadow: 0 4px 8px var(--color-shadow); /* Usando variable para sombra */
-  padding: 15px;
+  box-shadow: 0 4px 8px var(--color-shadow);
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  gap: 5px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.settings-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .settings-option {
@@ -66,8 +73,15 @@
 }
 
 .settings-option:hover {
-  background-color: var(--color-bg-anti); /* Usando un color de fondo anti para el hover */
+  background-color: var(--color-bg-2);
+  color: var(--color-accent);
   transform: scale(1.1);
+}
+
+.settings-option.active {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  transform: scale(0.95);
 }
 
 .language-toggle {
@@ -83,7 +97,7 @@
 
 .tooltip {
   visibility: hidden;
-  position: fixed; /* Mantiene el tooltip en una posición fija */
+  position: absolute;
   background-color: var(--color-bg);
   color: var(--color-text);
   text-align: center;
@@ -92,9 +106,8 @@
   z-index: 1;
   opacity: 0;
   transition: opacity 0.3s;
-  margin-top: 5px; /* Espacio entre el elemento y el tooltip */
+  margin-top: 5px;
 }
-
 
 .settings-option:hover .tooltip {
   visibility: visible;
@@ -103,7 +116,7 @@
 
 @media (max-width: 925px) {
   .settings-menu-container {
-      top: 40px;
-      right: 20px;
+    top: 18px;
+    right: 20px;
   }
 }

@@ -1,13 +1,5 @@
 /* Variables de color para el banner */
-:root {
-  --hero-title-color: #ffffff;
-  --hero-subtitle-color: #7dd3fc;
-  --hero-description-color: #ffffff;
-  --hero-button-bg-color: #caba27;
-  --hero-button-color: #ffffff;
-  --hero-button-hover-bg-color: #7dd3fc;
-  --hero-button-active-bg-color: #558094;
-}
+@import '../index.css'; 
 
 html {
   scroll-behavior: smooth; /* Asegura que todos los desplazamientos sean suaves */
@@ -21,21 +13,17 @@ html {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #020817, #1a1a1a); /* Degradado oscuro */
+  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-3));
   overflow: hidden;
-  color: var(--hero-title-color);
+  color: var(--color-text);
   padding: 20px;
 }
 
-
-
-/* Contenedor de información posicionado debajo del título */
 .info-container {
-  position: absolute; /* Posiciona el contenedor de manera absoluta respecto al banner */
-    /* Ajusta la distancia desde el título (20px + altura del título + margen adicional) */
+  position: absolute; 
   width: 100%;
   max-width: 800px;
-  text-align: center; /* Alineación del texto en el centro */
+  text-align: center; 
   z-index: 1;
   box-sizing: border-box;
   padding: 1rem;
@@ -46,21 +34,21 @@ html {
 .hero-title {
   font-size: 3rem;
   font-weight: bold;
-  color: var(--hero-title-color);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
 /* Subtítulo del héroe */
 .hero-subtitle {
   font-size: 1.2rem;
-  color: var(--hero-subtitle-color);
+  color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
 /* Descripción del héroe */
 .hero-description {
   font-size: 1rem;
-  color: var(--hero-description-color);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -69,7 +57,7 @@ html {
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
   background-size: 300% 300%;
   animation: gradientBG 10s ease infinite; /* Animación del gradiente */
-  color: var(--hero-button-color);
+  color: #ffffff;
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
@@ -80,20 +68,16 @@ html {
 }
 
 .hero-button:hover {
-  background-color: var(--hero-button-hover-bg-color);
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0,0,0,0.3);
   text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  animation: gradientBG 18s ease infinite;
 }
 
 
 .hero-button:active {
   transform: scale(0.95);
-  background-color: #007d66; /* Un tono aún más oscuro al hacer clic */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
   animation: none;
-   
 }
 
 
@@ -104,7 +88,7 @@ html {
   position: absolute;
   bottom: 60px;
   font-size: 0.9rem;
-  color: var(--hero-description-color);
+  color: var(--color-text);
   z-index: 1;
   text-align: center;
   width: 100%; /* Asegura que el texto esté centrado */
@@ -121,15 +105,15 @@ html {
 
 /* Hover en el indicador de desplazamiento */
 .scroll-indicator:hover {
-  color: var(--hero-subtitle-color); /* Cambia el color al hacer hover */
+  color: var(--color-accent); /* Cambia el color al hacer hover */
   transform: scale(1.1); /* Aumenta ligeramente el tamaño */
   animation: none;
 }
 
 /* Hover en la flecha de desplazamiento */
 .scroll-arrow:hover {
-  color: var(--hero-subtitle-color); /* Cambia el color al hacer hover */
-  transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+  color: var(--color-accent); /* Cambia el color al hacer hover */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
   animation: none;
 }
 
@@ -153,7 +137,7 @@ html {
 }
 
 /* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 666px) {
   .hero-banner {
     padding: 10px; /* Menos padding en pantallas pequeñas */
   }
@@ -170,25 +154,43 @@ html {
   }
 
   .hero-title {
-    font-size: 2.5rem; /* Ajusta el tamaño del título */
-    margin-top: 0; /* Sin margen superior para mover el título más arriba */
-    position: relative; /* Mantén la posición relativa */
-    top: -20px; /* Ajuste adicional para mover el título hacia arriba */
+    font-size: 2.5rem; 
+    margin-top: 40px; 
+    position: relative; 
+    top: -20px; 
   }
 
   .hero-subtitle {
-    font-size: 1.5rem; /* Ajusta el tamaño del subtítulo */
+    font-size: 1.5rem; 
   }
 
   .hero-description {
-    font-size: 1.2rem; /* Ajusta el tamaño de la descripción */
-    text-align: center; /* Alinea el texto al centro */
+    font-size: 1.2rem; 
+    text-align: center;
   }
 }
 
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.3rem; /* Ajusta el tamaño del título */
+    margin-top: 10px; /* Sin margen superior para mover el título más arriba */
+    position: relative; /* Mantén la posición relativa */
+    top: -20px; /* Ajuste adicional para mover el título hacia arriba */
+  }
+  .hero-subtitle {
+    font-size: 1.3rem; 
+  }
+
+  .hero-description {
+    font-size: 1rem; 
+  }
+
+}
+
+
 /* Efecto de brillo en el texto */
 .shiny {
-  background: linear-gradient(to right, #ffffff 0%, #7dd3fc 50%, #ffffff 100%);
+  background: linear-gradient(to right, var(--color-accent) 0%, var(--hero-title-color) 50%, var(--color-accent) 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;

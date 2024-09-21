@@ -7,7 +7,9 @@
   --color-accent-light: #00cc99;
   --color-bg-anti-light: #020817;
   --color-bg-2-light: #6c757d;
+  --color-bg-3-light: #7dd3fc;
   --color-bg-solid-light: #ffffff;
+  --hero-title-color-light: #7dd3fc;
   --buildship-chat-widget-bg-color-light:#f6f9fc;
   --buildship-chat-widget-user-message-bg-color-light:#00cc99;
   --buildship-chat-widget-system-message-bg-color-light: #ddf1ec; 
@@ -26,6 +28,7 @@
   --color-bg-anti-dark: #f6f9fc;
   --color-bg-2-dark: #19191a;
   --color-bg-solid-dark: #121212;
+  --hero-title-color-dark: #00cc99;
   --buildship-chat-widget-bg-color-dark:#020817;
   --buildship-chat-widget-user-message-bg-color-dark:#7dd3fc;
   --buildship-chat-widget-system-message-bg-color-dark: #143142; 
@@ -44,9 +47,11 @@
   --color-accent: var(--color-accent-dark);
   --color-bg-anti: var(--color-bg-anti-dark);
   --color-bg-2: var(--color-bg-2-dark);
+  --color-bg-3: var(--color-bg-3-dark);
   --color-bg-solid: var(--color-bg-solid-dark);
   --color-shadow: var(--color-shadow-dark);
   --color-border: var(--color-border-dark);
+  --hero-title-color: var(--hero-title-color-dark);
   --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-dark);
   --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-dark); 
   --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-dark);
@@ -66,6 +71,7 @@
   --color-bg-solid: var(--color-bg-solid-light);
   --color-shadow: var(--color-shadow-light);
   --color-border: var(--color-border-light);
+  --hero-title-color: var(--hero-title-color-light);
   --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-ligh);
   --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-light); 
   --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-light);
@@ -77,7 +83,7 @@
 body {
   margin: 0;
   padding-top: 60px;
-  font-family: 'Poppins', 'sans-serif';
+  font-family: 'Work Sans', sans-serif !important;
   background-color: var(--color-bg);
   color: var(--color-text);
 }
@@ -265,51 +271,3 @@ a {
 }
 
 
-.settings-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-bg);
-  width: 30px; /* Tamaño del contenedor cuadrado reducido */
-  height: 30px; /* Tamaño del contenedor cuadrado reducido */
-  cursor: pointer;
-  padding: 5px; /* Reducido el padding */
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.3s;
-  text-align: center;
-}
-
-.setting-icon {
-  fill: var(--color-text);
-  color: var(--color-text);
-}
-
-.settings-option:hover {
-  background-color: var(--color-secondary);
-  transform: scale(1.1);
-  color: #3498db; 
-}
-
-.settings-option.active {
-  transform: scale(0.95);}
-
-.settings-option i {
-  font-size: 20px; /* Tamaño del ícono reducido */
-  margin-bottom: 3px; /* Reducido el margen inferior */
-}
-
-
-.settings-option span {
-  font-size: 10px; /* Tamaño del texto debajo del ícono reducido */
-}
-
-.language-toggle {
-  width: 30px; /* Tamaño del contenedor cuadrado reducido */
-  height: 30px; /* Tamaño del contenedor cuadrado reducido */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}

@@ -1,3 +1,4 @@
+@import '../index.css'; 
 
 
 /* Estilos para la barra de navegación principal */
@@ -6,10 +7,16 @@
   width: 100%;
   height: 60px;
   z-index: 1000;
-  background-color: #020817 !important; /* Color sólido */
+  background-color: var(--color-bg); /* Color sólido */
+  opacity: 0.7; /* Asegura que no sea transparente */
+  transition: background-color 0.3s ease-in-out, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.navegacion:hover{
   opacity: 1; /* Asegura que no sea transparente */
   transition: background-color 0.3s ease-in-out, opacity 0.5s ease, transform 0.5s ease;
 }
+
 
 /* Estilo para el logo */
 .logo-container {
@@ -17,28 +24,26 @@
   z-index: 100; /* Para asegurarte de que esté por encima de otros elementos */
 }
 
-
 /* Estilo para el logo dentro de un enlace */
 .logo {
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: var(--color-text);
   transition: color 0.3s ease;
-  text-decoration: none !important; /* Elimina el subrayado */
+  text-decoration: none; /* Elimina el subrayado */
 }
 
 .logo:hover {
-  font-size: 15px;
-  font-weight: bold;
-  color: #3498db;
-  text-decoration: none !important; /* Elimina el subrayado también en hover */
+  transform: scale(1.01) !important;
+  color: var(--color-accent);
+  text-decoration: none; /* Elimina el subrayado también en hover */
+  transition: transform 0.5s ease;
 }
 
 /* Asegura que el contenedor también no tenga subrayado si es necesario */
 .logo-container a {
-  text-decoration: none !important; /* Elimina el subrayado para enlaces dentro del contenedor */
+  text-decoration: none; /* Elimina el subrayado para enlaces dentro del contenedor */
 }
-
 
 
 /* Contenido de la barra de navegación */
@@ -46,7 +51,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 5%;
   height: 60px; /* Ajusta la altura según lo que necesites */
 }
 /* Estilo de los enlaces de navegación en la barra principal */
@@ -63,76 +68,99 @@
 
 
 .nav-links li {
-  margin-left: 30px; /* Espacio entre los elementos de la lista */
+  margin-left: 15px; /* Espacio entre los elementos de la lista */
 }
 
 .nav-links a {
-  color: white;
+  color: var(--color-text);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 510;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #3498db;
+  color: var(--color-accent);
+  transform: scale(1.05) !important;
+  transition: transform 0.5s ease;
+
 }
 
 .nav-links i:hover {
-  color: #3498db;
+  color: var(--color-accent);
+  transform: scale(1.05) !important;
+  transition: transform 0.5s ease;
+
 }
 /* Estilo para el enlace "Contacto" */
 .nav-contact {
   position: relative; /* Asegura que este elemento no se vea afectado por los estilos globales */
 }
 
-/* Estilo para el botón de contacto en la barra principal */
 .contact-button {
   position: relative;
-  z-index: 9999; /* Asegura que esté sobre otros elementos */
+  z-index: 9999;
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
-  background-size: 300% 300%; /* Expande el gradiente para el efecto de movimiento */
-  color: white;
+  background-size: 300% 300%;
+  color: white !important;
   border: none;
   border-radius: 50px;
   padding: 5px 15px;
   display: flex;
-  font-size: 15px;
+  font-size: 18px;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
-  text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold !important;
-  animation: gradientBG 10s ease infinite; /* Animación del gradiente */
+  animation: gradientBG 10s ease infinite !important;
 }
 
-.contact-button i {
-  margin-right: 8px; /* Espacio entre el ícono y el texto */
-  font-size: 22px; /* Ajusta el tamaño del ícono si es necesario */
-  animation: blink 2s infinite; /* Animación de parpadeo */
-}
 
-.contact-button i:hover {
-  color: white !important; /* Forzar color blanco */
-}
-
-/* Efecto hover manteniendo la animación del gradiente */
 .contact-button:hover {
-  transform: translateY(2px) !important;
-  color: white !important; /* Forzar color blanco */
-  box-shadow: 0 6px 8px rgba(0,0,0,0.3) !important;
-  animation: gradientBG 18s ease infinite !important;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2) !important;
+  transform: translateY(-2px) !important;
+  color: white !important;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  animation: gradientBG 18s ease infinite;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important; /* Para el botón */
 }
 
-/* Efecto de clic */
+/* Sombra para el ícono al hacer hover en el botón */
+.contact-button:hover .icon-container::before {
+  opacity: 1; /* Muestra la sombra al hacer hover */
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.icon-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Color de la sombra */
+  border-radius: 50%; /* Bordes redondeados */
+  z-index: -1; /* Detrás del ícono */
+  filter: blur(4px); /* Desenfoque de la sombra */
+  opacity: 0; /* Inicialmente invisible */
+  transition: opacity 0.3s ease; /* Transición suave */
+}
+
+.contact-button:hover i {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important; /* Asegúrate que se aplique aquí también */
+}
+
 .contact-button:active {
   transform: scale(0.95) !important;
   transform: translateY(4px) !important;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2) !important; /* Sombra interior */
-  animation: none !important; /* Detener la animación del gradiente */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  animation: none;
 }
 
 /* Animación de parpadeo */
@@ -156,21 +184,24 @@
   font-size: 24px;
   background: none;
   border: none;
-  color: white;
+  color: var(--color-text);
   margin-left: -5px;
   z-index: 1001;
   position: relative;
+  font-weight: bold;
 }
 
 .menu-toggle:hover {
   /* Elimina el efecto de escala para evitar problemas de deformación */
-  color: #3498db; /* Cambia el color al pasar el ratón */
+  color: var(--color-accent); /* Cambia el color al pasar el ratón */
 }
 
-
 /* Ajustes específicos para dispositivos móviles */
-@media (max-width: 925px) {
-
+@media (max-width: 830px) {
+  .navegacion {
+    opacity: 1; 
+  }
+  
   .logo-container {
     position: relative;
     left: 50%;
@@ -179,6 +210,9 @@
     z-index: 100; /* Para asegurarte de que esté por encima de otros elementos */
   }
   
+  .logo {
+    font-size: 30px;
+  }  
   .menu-toggle {
     display: block;
     position: fixed;
@@ -190,35 +224,31 @@
 
   .nav-links {
     position: fixed;
-    top: 40;
-    left: -100%; /* Colocar el menú fuera de la vista inicialmente */
-    width: 250px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
+    top: 0;
+    right: -100%;
+    width: 45%;
+    height: 100vh;
+    background-color: rgba(18, 30, 52, 0.95);
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: start;
-    transition: left 0.3s ease-in-out;
-    padding-top: 40px;
-    z-index: 1000;
+    transition: left 0.3s ease;
   }
 
   .nav-links.open {
     left: 0; /* Mostrar el menú cuando se abre */
     padding-top: 40px;
-    background-color: #020817;
-    
-    
-  }
+    background-color: var(--color-bg);
 
+  }
   .nav-links li {
-    margin-bottom: 20px; /* Espacio entre enlaces */
+    margin-bottom: 45px; /* Espacio entre enlaces */
+    margin-left: -20px;
     list-style: none;
   }
 
   .nav-links a {
-    color: white;
+    color: var(--color-text);
     text-decoration: none;
     font-size: 25px;
     padding-left: 20px;
@@ -229,7 +259,7 @@
   
   .nav-links a:hover {
     transform: scale(1.1);
-    color: #3498db; /* Cambia color a azul */
+    color: var(--color-accent); /* Cambia color a azul */
     }
 
   .nav-links a:active {
@@ -239,37 +269,53 @@
 
   .nav-links .contact-button {
     display: block; /* Mostrar el botón dentro del menú desplegable */
-    margin: 20px 0;
+    margin: 0px 0;
     font-size: 18px;
     position: static; /* Elimina el posicionamiento fijo para que fluya dentro del menú */
     width: auto;
     text-align: center;
   }
-}
 
-@media (max-width: 400px) {
+  .nav-links .contact-button {
+    margin-left: 20px;
+  }
+
+  .fa-comment-dot {
+    margin-right: 8px
+  }
+
+}
+@media (max-width: 666px) {
   .logo {
-    font-weight: bold;
-    color: white;
-    transform: translateY(0px);
-  }
+    font-size: 20px;
+    }
 
-  .nav-links li {
-    margin: 10px 0;
+  .nav-links .contact-button {
     font-size: 15px;
-    text-align: left;
   }
 
-  .contact-button {
-    display: none; /* Oculta el botón de contacto en pantallas pequeñas */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: rgba(18, 30, 52, 0.95);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s ease;
   }
+  
+  
 }
+
 
 /* CSS */
 .language-toggle {
   background: none;
   border: none;
-  color: white;
+  color: var(--color-text);
   font-size: 12px;
   cursor: pointer;
   padding: 5px;
@@ -293,12 +339,12 @@
 /* Efecto hover para cambiar color y escalar un poco */
 .language-toggle:hover {
   transform: scale(1.1);
-  color: #3498db; /* Cambia color a azul */
+  color: var(--color-accent); /* Cambia color a azul */
 }
 
 /* Efecto clic para reducir el tamaño temporalmente */
 .language-toggle:active {
   transform: scale(0.95);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2) !important; /* Sombra interior */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
 }
 
