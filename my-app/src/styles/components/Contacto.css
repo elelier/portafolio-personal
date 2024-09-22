@@ -1,24 +1,11 @@
 /* Variables de color */
 @import '../index.css'; 
-
-
-:root {
-    --color-fondo-card: #020817;
-    --color-texto: #ffffff;
-    --color-texto-destacado: #7dd3fc;
-    --color-fondo-destacado: #19191a;
-    --color-fondo-ejemplos: #1c1c1c;
-    --color-enlace: #7dd3fc;
-    --color-boton: #00cc99;
-    --color-boton-hover: #009966;
-    --sombra-boton: rgba(0, 0, 0, 0.2);
-}
   
 /* Estilos para la sección de Contacto en modo oscuro */
 .contacto {
     position: relative;
     padding: 40px 20px;
-    background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg-solid));
+    background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg));
     margin-left: auto;
     margin-right: auto;
     min-height: 100vh;
@@ -40,7 +27,15 @@
     height: 150px;
     border-radius: 50%; /* Crea el efecto de círculo */
     margin-right: 20px; /* Espacio entre imagen y título */
+    transition: transform 1s ease;
 }
+
+/* Estilo para la imagen del perfil */
+.contacto-imagen:hover {
+    transform: scale(1.1);
+    transition: transform 1s ease;
+  }
+
 
 /* Estilo para la imagen del perfil */
 .contacto-banner {
@@ -57,24 +52,37 @@
 /* Estilo para el título */
 .contacto-titulo h2 {
     margin: 0;
-    color: var(--color-texto);
+    color: var(--color-text);
     font-size: 2rem;
 }
 
 /* Estilo para la frase en cursiva */
 .contacto-frase {
     font-style: italic;
-    color: var(--color-texto-destacado);
+    color: var(--color-text);
     margin-top: 10px;
+    transition: transform 1s ease;
+
 }
+
+.contacto-frase:hover {
+    transform: scale(1.1);
+    transition: transform 1s ease;
+}
+
 
 /* Estilos del título de la sección */
 .contacto h2 {
-    text-align: left;
-    color: var(--color-texto);
-    margin-bottom: 30px;
-    font-size: 2rem; /* Tamaño de fuente ajustado */
-}
+    margin: 20px 0; /* Espaciado fijo alrededor del título */
+    text-align: center;
+    font-size: 3rem; /* Ajusta el tamaño del texto según necesites */
+    color: var(--hero-title-color-2);
+    position: sticky; /* Fija el título en la parte superior */
+    top: 0;
+    background-color: transparent; /* Fondo para mantener la legibilidad */
+    z-index: 100;
+    text-transform: uppercase;
+  }
 
 /* Contenido del contacto */
 .contacto-contenido {
@@ -82,7 +90,7 @@
     flex-direction: row;
     gap: 20px;
     align-items: flex-start;
-    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    justify-content: space-between; /* Ajuste de distribución */
     margin: 0 auto;
     max-width: 1000px; /* Ajusta el ancho máximo según sea necesario */
 }
@@ -91,7 +99,16 @@
 .formulario-contacto {
     flex: 2;
     max-width: 500px;
+    transition: transform 1s ease;
+    width: 100%; /* Ocupará todo el ancho disponible */
 }
+
+/* Estilos del formulario de contacto */
+.formulario-contacto:hover {
+    transform: scale(1.02);
+    transition: transform 1s ease;
+}
+
 
 /* Campos de entrada */
 .formulario-contacto input,
@@ -99,9 +116,9 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 10px; /* Reducido el margen inferior entre campos */
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    background-color: var(--color-fondo-destacado); /* Fondo oscuro para los campos */
+    background-color: var(--color-bg-3) !important; /* Fondo oscuro para los campos */
     color: var(--color-texto);
 }
 
@@ -122,21 +139,20 @@
     font-weight: bold;
   }
   
-  .formulario-contacto button:hover {
-    background-color: var(--hero-button-hover-bg-color);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-    animation: gradientBG 18s ease infinite;
-  }
-  
-  .formulario-contacto button:active {
-    transform: scale(0.95) !important;
-    background-color: #007d66;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
-    animation: none;
-  }
-  
+.formulario-contacto button:hover {
+background-color: var(--hero-button-hover-bg-color);
+transform: translateY(-2px);
+box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+animation: gradientBG 18s ease infinite;
+}
+
+.formulario-contacto button:active {
+transform: scale(0.95) !important;
+box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+animation: none;
+}
+
 
 
 /* Placeholder animación */
@@ -150,11 +166,17 @@
     position: absolute;
     left: 10px;
     top: 30%;
-    color: var(--color-texto);
-    background-color: var(--color-fondo-card);
+    color: var(--color-text);
+    background-color: var(--color-bg-3);
     pointer-events: none;
     transition: transform 0.2s ease, font-size 0.2s ease;
 }
+
+/* Animación especial para el campo Mensaje */
+.input-container.special .input-placeholder {
+    transform: translateY(-60px); /* Desplazamiento pronunciado para el campo Mensaje */
+}
+
 
 .input-field {
     width: 100%;
@@ -168,10 +190,10 @@
     width: 100%;
     height: 150px; /* Ajusta la altura según sea necesario */
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    background-color: var(--color-fondo-destacado);
-    color: var(--color-texto);
+    background-color: var(--color-accent);
+    color: var(--color-text);
     resize: vertical; /* Permite redimensionar verticalmente */
     overflow-y: auto; /* Habilita el scroll interno */
     white-space: pre-wrap; /* Mantiene los saltos de línea */
@@ -184,39 +206,36 @@
     overflow-y: auto !important; /* Habilita el scroll interno */
 }
 
-/* Animación especial para el campo Mensaje */
-.input-container.special .input-placeholder {
-    transform: translateY(-60px); /* Desplazamiento pronunciado para el campo Mensaje */
+
+/* Títulos para las categorías */
+.info-contacto h3,
+.redes-sociales h3,
+.agenda-documentos h3 {
+    font-size: 20px; 
+    font-weight: 700; 
+    color: var(--hero-title-color-2);
+    margin-top: 10px; /* Más espacio debajo del título */
+    border-bottom: 2px solid var(--color-primary); /* Línea fina y elegante debajo */
+    padding-bottom: 2px; /* Espaciado entre título y línea */
 }
 
 /* Información de contacto */
 .info-contacto {
     flex: 1;
-    max-width: 400px;
-    margin-left: 20px; /* Separación del formulario */
-}
-
-.info-contacto h3 {
-    color: var(--color-texto);
-    margin-bottom: 20px;
-}
+    margin-left: 10px;
+    width: 100%; /* Para móviles, se apilará debajo del formulario */}
 
 .info-contacto p {
-    margin-bottom: 10px;
-    color: var(--color-texto);
+    color: var(--color-text);
 }
 
-/* Estilos generales para la sección de contacto */
-.info-contacto {
-    margin-top: 0px;
-}
 
 .info-contacto-links,
 .redes-sociales-links,
 .agenda-documentos-links {
     display: flex;
-    flex-direction: column; /* Alinea los enlaces verticalmente */
-    gap: 10px;
+    flex-direction: column;
+    padding-top: 5px; 
 }
 
 .info-contacto-link,
@@ -224,53 +243,60 @@
 .agenda-documentos-link {
     display: flex;
     align-items: center;
-    color: var(--color-enlace);
+    color: var(--color-primary);
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
     transition: color 0.3s ease, transform 0.3s ease;
+    padding: 5px 0; 
+    margin-bottom: 5px;
+    margin-left: 10px; 
 }
-
-.info-contacto-link i,
-.redes-sociales-link i,
-.agenda-documentos-link i {
-    margin-right: 8px;
+.info-contacto-link svg ,
+.redes-sociales-link svg ,
+.agenda-documentos-link svg {
+    display: inline-block; /* Asegura que el ícono respete márgenes */
+    margin-right: 10px !important; /* Forzar el margen */
     font-size: 20px;
 }
-
 .info-contacto-link:hover,
 .redes-sociales-link:hover,
 .agenda-documentos-link:hover {
-    color: var(--color-texto-destacado);
-    transform: scale(1.1);
-    transform: translateX(10px)
+    color: var(--color-accent);
+    transform: translateX(10px); /* Desplazamiento más elegante a la derecha */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil al hover */
+    
 }
 
-/* Títulos para las categorías */
-.info-contacto h3,
-.redes-sociales h3,
-.agenda-documentos h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--color-titulo-seccion);
+.info-contacto-link:active,
+.redes-sociales-link:active,
+.agenda-documentos-link:active {
+    transform: scale(0.95); /* Desplazamiento más elegante a la derecha */
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .contacto-contenido {
-        flex-direction: column;
-    }
 
-    .info-contacto {
-        margin-left: 0;
-        margin-top: 30px;
-        max-width: 100%;
-    }
-}
 
 /* Estilo para el mensaje de éxito y error */
 .buttonmessage {
     margin-left: 20px;
 }
   
+
+/* Estilos responsivos para móviles */
+@media (max-width: 768px) {
+    /* Cambia la dirección a columna para pantallas más pequeñas */
+    .contacto-contenido {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .formulario-contacto, .info-contacto {
+        max-width: 100%; /* Ocuparán todo el ancho disponible */
+        margin: 0; /* Elimina márgenes */
+    }
+
+    /* Opcional: Aumentar padding para que se vea más limpio en móviles */
+    .contacto {
+        padding: 20px 10px;
+    }
+}

@@ -211,9 +211,11 @@
   transition: transform 1s ease;
 }
 
-
-
-
+.proyecto-card:hover li {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
 
 /* Título del proyecto */
 .proyecto-card h3 {

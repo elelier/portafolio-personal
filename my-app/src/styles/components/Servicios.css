@@ -120,41 +120,84 @@
   margin-bottom: 15px;
 }
 
+.servicio-card:hover h3 {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
+
+
 /* Descripción del servicio */
 .servicio-descripcion {
-  color: var(--color-text) !important;
+  color: var(--color-secondary) !important;
   margin-bottom: 20px;
   line-height: 1.6;
 }
+
+/* Descripción del servicio */
+.servicio-card:hover .servicio-descripcion {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
+
 
 
 /* Listado de beneficios y tecnologías */
 .servicio-beneficios h4,
 .servicio-tecnologias h4 {
-  color: var(--color-accent);
+  color: var(--color-secondary) !important;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
+/* Descripción del servicio */
+.servicio-card:hover h4 {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
+
+
 .servicio-beneficios ul,
 .servicio-tecnologias ul {
   padding-left: 20px;
-  color: var(--color-texto);
+  color: var(--color-secondary) !important;
 }
+
+.servicio-card:hover ul {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
+
+.servicio-card:hover li {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
+
 
 .servicio-beneficios li {
   margin-bottom: 5px;
 }
 
 .servicio-tecnologias li {
-  color: #555;
+  color: var(--color-bg-solid);
   margin-bottom: 5px;
   font-size: 12px;
 }
 
+.servicio-beneficios:hover li {
+  color: var(--color-text) !important;
+  transform: scale(1.02);
+  transition: transform 1s ease;
+}
+
+
 /* Estilos adicionales para servicios destacados */
 .servicio-card.destacado {
-  border: 2px solid var(--color-texto-destacado);
+  border: 2px solid var(--color-accent);
   position: relative;
   overflow: hidden;
 }
@@ -164,7 +207,7 @@
   position: absolute;
   top: 10px;
   right: -30px;
-  background: var(--color-texto-destacado);
+  background: var(--color-accent);
   color: white;
   padding: 5px 30px;
   transform: rotate(45deg);
@@ -180,7 +223,7 @@
 /* Animación para tecnologías */
 .servicio-tecnologias li {
   display: inline-block;
-  background: #f0f0f0;
+  background: var(--color-bg-2);
   padding: 5px 10px;
   border-radius: 15px;
   margin-right: 5px;
@@ -189,11 +232,17 @@
 }
 
 .servicio-tecnologias li:hover {
-  background: #3498db;
-  color: white;
+  background: var(--color-accent);
   transform: translateY(-3px);
   cursor: pointer;
 }
+
+.servicio-tecnologias li:active {
+  background: var(--color-accent);
+  transform: translateY(-3px) scale(0.95);
+  cursor: pointer;
+}
+
 
 
 /* Contenedor del botón de llamada a la acción */
