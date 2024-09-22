@@ -1,22 +1,11 @@
 /* Variables de color */
 @import '../index.css'; 
 
-:root {
-  --color-fondo-card: #020817;
-  --color-texto: #ffffff;
-  --color-texto-destacado: #7dd3fc;
-  --color-fondo-destacado: #19191a;
-  --color-fondo-ejemplos: #1c1c1c;
-  --color-enlace: #7dd3fc;
-}
-
 /* Contenedor de habilidades */
 .arsenal-habilidades {
   position: relative;
   padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
   background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-2));
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Alinea desde la parte superior */
@@ -24,29 +13,33 @@
   overflow: hidden; /* Evita que el contenido se desborde */
 }
 
+
 .arsenal-habilidades h2 {
-  margin-top: 30px; /* Aumenta este valor para separar más del margen superior */
+  margin: 20px 0; /* Espaciado fijo alrededor del título */
   text-align: center;
-  color: #7dd3fc;
-  margin-bottom: 30px;
+  font-size: 3rem; /* Ajusta el tamaño del texto según necesites */
+  color: var(--hero-title-color-2);
+  position: sticky; /* Fija el título en la parte superior */
+  top: 0;
+  background-color: transparent; /* Fondo para mantener la legibilidad */
+  z-index: 100;
 }
 
 .titulo-seccion {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--color-texto);
-  margin-bottom: 10px;
+  font-size: 3rem;
+  margin-top: 40px;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .introduccion {
   font-size: 1.8rem;
-  color: var(--color-texto);
+  text-align: justify;
+  color: var(--color-text);
   margin-bottom: 30px;
   margin-left: 60px;
   margin-right: 60px;
   line-height: 1.5;
-  font-weight: bold;
   margin-bottom: 50px;
 }
 
@@ -60,54 +53,67 @@
 }
 
 .habilidad-card {
-  background: linear-gradient(to top, var(--color-fondo-card), var(--color-fondo-destacado));
+  background: linear-gradient(to top, var(--color-bg-solid), var(--color-bg));
   border-radius: 12px;
   padding: 20px;
-  color: var(--color-texto); /* Color del texto inicial */
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
+  animation: floating 4s ease-in-out infinite;
 }
-
-
-.habilidad-card {
-  position: relative;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
 
 .habilidad-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to top, var(--color-fondo-destacado), var(--color-fondo-ejemplos));
-  color: var(--color-texto-destacado); /* Cambia el color del texto en hover */
+  background: linear-gradient(to top, var(--color-bg-3), var(--color-bg-solid));
+  color: var(--color-accent); 
   animation: none;
 }
 
 .habilidad-card:hover .habilidad-nombre {
-  color: var(--color-texto-destacado); /* Cambia el color del nombre en hover */
+  color: var(--color-text); 
+  transform: scale(1.1);
+  transition: transform 1s ease;
 }
 
 .habilidad-card:hover .habilidad-descripcion {
-  color: var(--color-texto-destacado); /* Cambia el color de la descripción en hover */
+  color: var(--color-text);
+  transform: scale(1.05);
+  transition: transform 1s ease;
 }
+
+.habilidad-card:hover .habilidad-ejemplos {
+  transform: scale(1.05);
+  transition: transform 1s ease;
+}
+.habilidad-card:hover .habilidad-ejemplos a {
+  color: var(--color-text);
+}
+
 
 .habilidad-card.active {
-  background: linear-gradient(to top, var(--color-fondo-destacado), var(--color-fondo-ejemplos));
-  color: var(--color-texto-destacado); /* Color de texto activo */
+  background: linear-gradient(to top, var(--color-bg), var(--color-bg-3));
+  color: var(--color-text);
 }
 
-.habilidad-card.active:hover {
-  color: var(--color-texto-destacado); /* Cambia el color de texto al hacer hover cuando esté activo */
+.habilidad-card.active .habilidad-nombre {
+  color: var(--color-text);
+}
+.habilidad-card.active .habilidad-descripcion {
+  color: var(--color-text);
+}
+
+.habilidad-card.active .habilidad-ejemplos a {
+  color: var(--color-text);
 }
 
 .habilidad-header {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  color: var(--color-secondary);
 }
 
 .habilidad-icono {
@@ -119,7 +125,7 @@
 .habilidad-nombre {
   font-size: 1.4rem;
   font-weight: bold;
-  color: var(--color-texto);
+  color: var(--color-secondary);
 }
 
 .habilidad-descripcion {
@@ -127,14 +133,14 @@
   margin-bottom: 10px;
   display: block;
   text-align: left;
-  color: var(--color-texto);
+  color: var(--color-secondary);
   transition: color 0.3s;
 }
 
 .habilidad-ejemplos {
   margin-top: 10px;
   padding: 15px;
-  color: white !important;
+  color: var(--color-secondary);
   font-size: 1rem;
   background-color: transparent; /* Elimina el fondo de la sección de ejemplos */
   border-radius: 8px;
@@ -148,30 +154,25 @@
 .habilidad-ejemplos li {
   margin-bottom: 10px;
   cursor: pointer;
-  color: white !important
 }
 
 .habilidad-ejemplos a {
-  color: white !important;
+  color: var(--color-secondary);
   text-decoration: none;
   font-weight: bold;
 }
 
 .habilidad-ejemplos a:hover {
   text-decoration: underline;
-  color: #7dd3fc !important
+  color: var(--color-accent) !important;
 }
 
-@keyframes shine {
-  to { background-position: 200% center; }
-}
 
-@media (max-width: 768px) {
+@media (max-width: 666px) {
   .introduccion {
     text-align: left;
     font-size: 1.3rem; /* Tamaño de la fuente del subtítulo */
     font-weight: bold;
-    color: #ffdd57; /* Color del subtítulo */
     padding-left: 5px;
     padding-right: 0px;
     position: relative;
@@ -187,15 +188,6 @@
   
 }
 
-.shinyh {
-  background: linear-gradient(to right, #ffffff 0%, #4cacd8 50%, #ffffff 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: shine 2s linear infinite;
-}
-
 
 @keyframes fadeIn {
   from { opacity: 1; }
@@ -209,16 +201,6 @@
   100% { transform: translateY(0); }
 }
 
-.habilidad-card {
-  animation: floating 4s ease-in-out infinite;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .habilidades-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
 
 .habilidad-card::after {
   content: '';
@@ -240,6 +222,6 @@
 }
 
 .habilidad-card:hover .habilidad-icono {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
+  transform: scale(1.3);
+  transition: transform 1s ease;
 }

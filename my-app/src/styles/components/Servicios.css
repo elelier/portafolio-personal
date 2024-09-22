@@ -1,24 +1,12 @@
 /* Variables de color */
 @import '../index.css'; 
 
-
-:root {
-  --color-fondo-card: #020817;
-  --color-texto: #ffffff;
-  --color-texto-destacado: #7dd3fc;
-  --color-fondo-destacado: #19191a;
-  --color-fondo-ejemplos: #1c1c1c;
-  --color-enlace: #7dd3fc;
-  --color-boton: #00cc99;
-  --color-boton-hover: #009966;
-  --sombra-boton: rgba(0, 0, 0, 0.2);
-}
-
 .servicios-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  
+  gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Responsive */
@@ -42,24 +30,31 @@
 
 /* Título de la sección */
 .servicios h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--color-texto-destacado);
-  margin-bottom: 20px;
+  margin: 20px 0; /* Espaciado fijo alrededor del título */
   text-align: center;
+  font-size: 3rem; /* Ajusta el tamaño del texto según necesites */
+  color: var(--hero-title-color-2);
+  position: sticky; /* Fija el título en la parte superior */
+  top: 0;
+  background-color: transparent; /* Fondo para mantener la legibilidad */
+  z-index: 100;
   text-transform: uppercase;
+
 }
 
 /* Contenedor de cada tarjeta de servicio */
 .servicio-card {
   position: relative;
   padding: 20px;
-  background: linear-gradient(to top, var(--color-fondo-card), var(--color-fondo-destacado));
+  background: linear-gradient(to top, var(--color-bg-solid), var(--color-bg));
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
   transition: all 0.3s ease;
   min-height: 350px;
+  cursor: pointer;
+  /* Añade espacio inferior si se necesita más separación entre tarjetas */
+  margin-bottom: 30px; 
 }
 
 /* Efecto de brillo en las tarjetas del portafolio */
@@ -94,6 +89,25 @@
   overflow: hidden;
 }
 
+.servicio-card.active h3 {
+  color: var(--color-text);
+}
+
+.servicio-card.active h4 {
+  color: var(--color-text);
+}
+
+
+.servicio-card.active .servicio-descripcion {
+  color: var(--color-text);
+}
+
+.servicio-card.active .royecto-descripcion {
+  color: var(--color-text);
+}
+
+
+
 .servicio-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -101,14 +115,14 @@
 
 /* Título del servicio */
 .servicio-card h3 {
-  color: var(--color-texto-destacado);
+  color: var(--color-secondary) !important;
   font-size: 1.8rem;
   margin-bottom: 15px;
 }
 
 /* Descripción del servicio */
 .servicio-descripcion {
-  color: var(--color-texto);
+  color: var(--color-text) !important;
   margin-bottom: 20px;
   line-height: 1.6;
 }
@@ -117,7 +131,7 @@
 /* Listado de beneficios y tecnologías */
 .servicio-beneficios h4,
 .servicio-tecnologias h4 {
-  color: var(--color-texto-destacado);
+  color: var(--color-accent);
   margin-top: 20px;
   margin-bottom: 10px;
 }

@@ -38,7 +38,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-links">
-          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>{footerLinks[language].inicio}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link>
           <Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{footerLinks[language].sobreMi}</Link>
           <Link to="/" onClick={() => handleScrollToElement('habilidades')}>{footerLinks[language].habilidades}</Link>
           <Link to="/" onClick={() => handleScrollToElement('portafolio')}>{footerLinks[language].portafolio}</Link>

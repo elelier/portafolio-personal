@@ -5,10 +5,8 @@
 /* Estilos generales para el contenedor */
 .sobre-mi {
   position: relative;
-  padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
+  padding: 40px 20px; /* Añadido padding para más espacio arriba y abajo */
   background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg)); /* Color del fondo del contenedor */
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Alinea desde la parte superior */
@@ -16,12 +14,11 @@
   overflow: hidden; /* Evita que el contenido se desborde */
 }
 
-/* Título y pestañas fijas */
 .sobre-mi h2 {
   margin: 20px 0; /* Espaciado fijo alrededor del título */
   text-align: center;
   font-size: 2rem; /* Ajusta el tamaño del texto según necesites */
-  color: var(--color-text);
+  color: var(--hero-title-color-2);
   position: sticky; /* Fija el título en la parte superior */
   top: 0;
   background-color: transparent; /* Fondo para mantener la legibilidad */
@@ -38,6 +35,14 @@
   min-height: 100%;
   padding-bottom: 40px; /* Agrega espacio adicional al final del contenedor */
 }
+
+.contenido-sobre-mi h2 {
+  font-size: 3rem;
+  margin-top: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 
 /* Ajustes para el subtítulo */
 .sub-title-container {
@@ -58,14 +63,6 @@
   color: var(--color-accent);
 }
 
-
-.contenido-sobre-mi h2 {
-  font-size: 3rem;
-  margin-top: 40px;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
 
 .historia-personal,
 .experiencia-destacada,
@@ -138,6 +135,19 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
+.image-container:hover img {
+  transform: scale(1.05);
+  transition: transform 1s ease;
+  cursor: pointer;
+
+}
+
+
+.image-container:active img {
+  transform: scale(0.95);
+}
+
+
 .text-content {
 
   max-width: 600px;
@@ -172,37 +182,21 @@
 
 
 /* Responsividad */
-@media (max-width: 1105px) {
-  .sobre-mi {
-    padding: 30px 10px; /* Ajusta el padding para móviles */
-    max-width: 100%;
-    min-height: 160vh;
-  }
+@media (max-width: 666px) {
 
-  .section-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px; /* Añade un espacio entre los elementos */
-    padding: 10px; /* Añade algo de padding para que el contenido no esté tan pegado a los bordes */
-  }
 
-  .image-container,
-  .text-content {
-    max-width: 100%; /* Asegura que los contenedores no excedan el ancho disponible */
-    flex: 1 1 auto;
-  }
 
   .tab-button {
     background: transparent;
     border: none;
     color: var(--color-text);
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 10px 20px;
     left: 5px;
   }
   
   .sub-title-container {
-    text-align: left;
+    text-align: center;
     font-size: 1.5rem; /* Tamaño de la fuente del subtítulo */
     font-weight: bold;
     color: var(--color-accent); /* Color del subtítulo */
@@ -237,7 +231,7 @@
 
 
 .shinyy {
-  background: linear-gradient(to right, var(--color-accent) 0%, var(--hero-title-color) 50%, var(--color-accent) 100%);
+  background: linear-gradient(to right, var(--hero-title-color-2) 0%, var(--hero-title-color) 50%, var(--hero-title-color-2) 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
@@ -306,7 +300,6 @@
 
 .nav-arrow:hover {
   color: var(--color-accent);
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada al pasar el ratón */
 }
 
 .nav-arrow:active {
@@ -329,7 +322,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 50px;
+  gap: 30px;
   flex-wrap: wrap;
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   min-height: 500px;
@@ -354,7 +347,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 20px;
+  height: 10px;
 }
 
 .indicator {

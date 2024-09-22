@@ -10,6 +10,8 @@
   --color-bg-3-light: #ffffff;
   --color-bg-solid-light: #ffffff;
   --hero-title-color-light: #7dd3fc;
+  --hero-title-color-2-light: #00cc99;
+  
   --buildship-chat-widget-bg-color-light:#f6f9fc;
   --buildship-chat-widget-user-message-bg-color-light:#00cc99;
   --buildship-chat-widget-system-message-bg-color-light: #ddf1ec; 
@@ -19,6 +21,7 @@
   --color-shadow-dark: rgba(0, 0, 0, 0.5); /* Sombra más fuerte para modo oscuro */
   --color-border-light: #e0e0e0; /* Bordes ligeros para modo claro */
   --color-border-dark: #444444; /* Bordes oscuros para modo oscuro */
+  --color-bg-footer: #121212;
 
   --color-bg-dark: #020817;
   --color-text-dark: #f6f9fc;
@@ -29,7 +32,9 @@
   --color-bg-2-dark: #6c757d;
   --color-bg-3-dark: #4b3e57;
   --color-bg-solid-dark: #121212;
-  --hero-title-color-dark: #00cc99;
+  --hero-title-color-dark: #7dd3fc;
+  --hero-title-color-2-dark: #f6f9fc;
+
   --buildship-chat-widget-bg-color-dark:#020817;
   --buildship-chat-widget-user-message-bg-color-dark:#7dd3fc;
   --buildship-chat-widget-system-message-bg-color-dark: #143142; 
@@ -53,6 +58,10 @@
   --color-shadow: var(--color-shadow-dark);
   --color-border: var(--color-border-dark);
   --hero-title-color: var(--hero-title-color-dark);
+  --color-bg-footer: var(--color-bg-footer);
+  --hero-title-color-2: var(--hero-title-color-2-dark);
+
+
   --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-dark);
   --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-dark); 
   --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-dark);
@@ -74,6 +83,10 @@
   --color-shadow: var(--color-shadow-light);
   --color-border: var(--color-border-light);
   --hero-title-color: var(--hero-title-color-light);
+  --color-bg-footer: var(--color-bg-footer);
+  --hero-title-color-2: var(--hero-title-color-2-light);
+
+
   --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-ligh);
   --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-light); 
   --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-light);

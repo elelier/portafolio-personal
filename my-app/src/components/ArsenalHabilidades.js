@@ -162,7 +162,7 @@ function ArsenalHabilidades() {
       <h2 className="titulo-seccion">
         {language === 'es' ? 'Arsenal de Habilidades' : 'Skill Arsenal'}
       </h2>
-      <p className="introduccion shinyh">
+      <p className="introduccion">
         {language === 'es'
           ? 'Estas son algunas herramientas que utilizo para transformar y potenciar negocios. Cada una es clave en mi navaja suiza digital, diseñada para enfrentar desafíos y ofrecer soluciones innovadoras.'
           : 'These are some of the tools I use to transform and empower businesses. Each one is key in my digital Swiss army knife, designed to tackle challenges and provide innovative solutions.'}
