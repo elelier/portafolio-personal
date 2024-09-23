@@ -30,6 +30,27 @@ html {
   
 }
 
+.image-container-0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  z-index: -1; /* Esto coloca la imagen detrás del contenido */
+  animation: brightnessEffect 5s infinite alternate; /* Animación del brillo */
+  box-shadow: none !important; /* Sobrescribe cualquier sombra que se aplique por otros estilos */
+  filter: drop-shadow(0 0 0 transparent) !important;
+}
+
+@keyframes brightnessEffect {
+  0% {
+    filter: brightness(-1); /* Sin cambio en brillo */
+  }
+  100% {
+    filter: brightness(1); /* Aumenta el brillo a 80% */
+  }
+}
 /* Título del héroe */
 .hero-title {
   font-size: 3rem;

@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { ThemeContext } from '../contexts/ThemeContext'; // Importamos ThemeContext directamente
 import '../styles/components/HeroBanner.css';
+import brilloImage from '../assets/images/brillo.webp';
 
 const DynamicHeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const { language } = useLanguage();
-  const moreAboutMeText = {
-    es: "Más sobre mí",
-    en: "More about me"
-  };
-  const heroContent = {
+  const { currentTheme } = useContext(ThemeContext);
+  const heroContent = useMemo(() => ({
     es: [
       {
         title: "Especialista en Optimización de Operaciones",
@@ -60,7 +59,6 @@ const DynamicHeroBanner = () => {
         icon: "🛒",
         cta: "Potencia tu E-Commerce",
         target: "CTO's, Emprendedores, Gerentes de E-Commerce",
-        link: "#ecommerce-strategies"  // Enlace al servicio relacionado
       },
       {
         title: "Desarrollo de Aplicaciones a Medida",
@@ -69,7 +67,6 @@ const DynamicHeroBanner = () => {
         icon: "📱",
         cta: "Desarrolla tu Aplicación",
         target: "CTO's, Gerentes de IT, Emprendedores",
-        link: "#custom-application-development"  // Enlace al servicio relacionado
       }
       
     ],
@@ -121,7 +118,6 @@ const DynamicHeroBanner = () => {
         icon: "🛒",
         cta: "Boost Your E-Commerce",
         target: "CTO's, Entrepreneurs, E-Commerce Managers",
-        link: "#ecommerce-strategies"  // Enlace al servicio relacionado
       },
       {
         title: "Custom Application Development",
@@ -130,14 +126,18 @@ const DynamicHeroBanner = () => {
         icon: "📱",
         cta: "Develop Your App",
         target: "CTO's, IT Managers, Entrepreneurs",
-        link: "#custom-application-development"  // Enlace al servicio relacionado
       }
       
     ]
-  };
+  }), []);
 
-    const currentHeroContent = heroContent[language] || [];
-    const heroContentLength = currentHeroContent.length;
+  const moreAboutMeText = useMemo(() => ({
+    es: "Más sobre mí",
+    en: "More about me"
+  }), []);
+
+  const currentHeroContent = useMemo(() => heroContent[language] || [], [heroContent, language]);
+  const heroContentLength = currentHeroContent.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -148,15 +148,22 @@ const DynamicHeroBanner = () => {
       }, 500);
     }, 8000);
 
+    return () => clearInterval(timer);
+  }, [heroContentLength]);
+
+  useEffect(() => {
     const handleScroll = () => {
-      const position = window.pageYOffset;
-      setScrollPosition(position);
+      setScrollPosition(window.pageYOffset);
     };
 
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
-    const stars = [];
-    const numStars = 500;
+    let animationFrameId;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -164,85 +171,82 @@ const DynamicHeroBanner = () => {
     };
 
     const createStars = () => {
+      const stars = [];
+      const numStars = 500;
       for (let i = 0; i < numStars; i++) {
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: Math.random() * 1.5,
-          speed: Math.random() * 0.05 + 0.05, // Mayor velocidad
+          speed: Math.random() * 0.05 + 0.05,
         });
       }
+      return stars;
     };
-    
-    const drawStars = () => {
+
+    const drawStars = (stars) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
       stars.forEach(star => {
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); // Estrellas más redondas
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = 'white';
         ctx.fill();
-    
-        star.x -= star.speed; // Mueve la estrella hacia la izquierda
-    
-        // Asegúrate de que las estrellas aparezcan aleatoriamente en la parte superior
+        star.x -= star.speed;
         if (star.x < 0) {
           star.x = canvas.width;
           star.y = Math.random() * canvas.height;
         }
       });
-    
-      requestAnimationFrame(drawStars);
+      animationFrameId = requestAnimationFrame(() => drawStars(stars));
     };
-    
-    resizeCanvas();
-    createStars();
-    drawStars();
-    
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', resizeCanvas);
+
+    const initStarEffect = () => {
+      resizeCanvas();
+      const stars = createStars();
+      drawStars(stars);
+    };
+
+    if (currentTheme === 'dark') {
+      initStarEffect();
+      window.addEventListener('resize', resizeCanvas);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      cancelAnimationFrame(animationFrameId);
+    }
 
     return () => {
-      clearInterval(timer);
-      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [language, heroContentLength]);
+  }, [currentTheme]);
+
+  const getFadeClass = useCallback((position) => {
+    return position > 100 ? 'fade-out' : 'fade-in';
+  }, []);
+
+  const scrollToSection = useCallback((sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   const currentContent = currentHeroContent[currentIndex] || {};
 
-  const getFadeClass = (position) => {
-    return position > 100 ? 'fade-out' : 'fade-in';
-  };
-
-  const scrollToSobreMi = () => {
-    const sobreMiSection = document.getElementById('sobre-mi');
-    if (sobreMiSection) {
-      sobreMiSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToServicios = () => {
-    const serviciosSection = document.getElementById('servicios');
-    if (serviciosSection) {
-      serviciosSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <header id="hero-banner" className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''}`}>
+    <header id="hero-banner" className={`hero-banner ${scrollPosition > 0 ? 'zoom' : ''} ${currentTheme}-theme`}>
       <canvas id="star-canvas"></canvas>
-
       <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass(scrollPosition)}`}>
         <h2 className="hero-title shiny">{currentContent.title}</h2>
+        
         <h3 className="hero-subtitle">{currentContent.subtitle}</h3>
         <p className="hero-description">{currentContent.description}</p>
-        <button className="hero-button" onClick={scrollToServicios}>
+        <button className="hero-button" onClick={() => scrollToSection('servicios')}>
           {currentContent.cta} →
         </button>
       </div>
 
-      <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`} onClick={scrollToSobreMi}>
+      <div className={`scroll-indicator ${getFadeClass(scrollPosition)}`} onClick={() => scrollToSection('sobre-mi')}>
         {moreAboutMeText[language]}
         <div className="scroll-arrow">▼</div>
       </div>

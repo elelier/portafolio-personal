@@ -9,7 +9,11 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     updateDynamicContent(language);
-  }, [language]);
+    const htmlElement = document.getElementById('html-lang');
+  if (htmlElement) {
+    htmlElement.lang = language; // Actualiza el atributo lang
+  }
+}, [language]);
 
   const toggleLanguage = () => {
     const newLanguage = language === 'es' ? 'en' : 'es';
