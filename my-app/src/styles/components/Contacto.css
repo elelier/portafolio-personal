@@ -4,7 +4,7 @@
 /* Estilos para la sección de Contacto en modo oscuro */
 .contacto {
     position: relative;
-    padding: 40px 20px;
+    padding: 10px 05px;
     background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg));
     margin-left: auto;
     margin-right: auto;
@@ -23,26 +23,17 @@
 
 /* Estilo para la imagen del perfil */
 .contacto-imagen {
-    width: 150px; /* Ajusta el tamaño según sea necesario */
+    width: 150px; 
     height: 150px;
-    border-radius: 50%; /* Crea el efecto de círculo */
-    margin-right: 20px; /* Espacio entre imagen y título */
+    border-radius: 50%; 
+    margin-right: 20px; 
     transition: transform 1s ease;
 }
 
 /* Estilo para la imagen del perfil */
 .contacto-imagen:hover {
     transform: scale(1.1);
-    transition: transform 1s ease;
   }
-
-
-/* Estilo para la imagen del perfil */
-.contacto-banner {
-    width: 1584px; /* Ajusta el tamaño según sea necesario */
-    height: 396px;
-    margin-right: 20px; /* Espacio entre imagen y título */
-}
 
 /* Estilo para el contenedor del título */
 .contacto-titulo {
@@ -67,7 +58,6 @@
 
 .contacto-frase:hover {
     transform: scale(1.1);
-    transition: transform 1s ease;
 }
 
 
@@ -90,7 +80,7 @@
     flex-direction: row;
     gap: 20px;
     align-items: flex-start;
-    justify-content: space-between; /* Ajuste de distribución */
+    justify-content: flex-start; /* Ajuste de distribución */
     margin: 0 auto;
     max-width: 1000px; /* Ajusta el ancho máximo según sea necesario */
 }
@@ -98,15 +88,7 @@
 /* Estilos del formulario de contacto */
 .formulario-contacto {
     flex: 2;
-    max-width: 500px;
-    transition: transform 1s ease;
     width: 100%; /* Ocupará todo el ancho disponible */
-}
-
-/* Estilos del formulario de contacto */
-.formulario-contacto:hover {
-    transform: scale(1.02);
-    transition: transform 1s ease;
 }
 
 
@@ -284,19 +266,40 @@ animation: none;
 
 /* Estilos responsivos para móviles */
 @media (max-width: 768px) {
-    /* Cambia la dirección a columna para pantallas más pequeñas */
+    /* En pantallas pequeñas, los elementos se colocan uno debajo del otro */
+    .contacto-header {
+        flex-direction: column; /* Apila los elementos verticalmente */
+        align-items: center; /* Alinea los elementos en el centro */
+    }
+    
     .contacto-contenido {
         flex-direction: column;
-        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        gap: 30px; /* Espaciado entre bloques */
     }
 
-    .formulario-contacto, .info-contacto {
-        max-width: 100%; /* Ocuparán todo el ancho disponible */
-        margin: 0; /* Elimina márgenes */
+    /* Asegura que el formulario y la info ocupen el ancho completo */
+    .formulario-contacto,
+    .info-contacto {
+        max-width: 100%;
     }
 
-    /* Opcional: Aumentar padding para que se vea más limpio en móviles */
-    .contacto {
-        padding: 20px 10px;
+   /* Opcional: ajusta el tamaño de la imagen en móvil */
+   .contacto-imagen {
+        order: 2; /* Coloca la imagen después del título */
+        width: 100px; /* Tamaño más pequeño para pantallas móviles */
+        height: 100px;
+        margin: 20px 0; /* Espaciado alrededor de la imagen */
+    }
+
+    .contacto-titulo h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+    }
+
+    .contacto-frase {
+        text-align: center;
     }
 }
