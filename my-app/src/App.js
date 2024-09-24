@@ -18,9 +18,6 @@ import React, { useEffect, lazy, Suspense } from 'react';
 const Blog = lazy(() => import('./components/Blog'));
 const Entrada = lazy(() => import('./components/entradas/entrada1'));
 
-
-
-
 function App({ initialLanguage }) {
   useEffect(() => {
     initializeTheme();
