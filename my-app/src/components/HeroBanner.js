@@ -79,7 +79,7 @@ const DynamicHeroBanner = () => {
         target: "CEO's, COO's"
       },
       {
-        title: "Digital Transformation & E-Commerce Leader",
+        title: "Digital Transformation & E-Commerce Consultant",
         subtitle: "Revolutionizing businesses for the digital age",
         description: "Expert in digitalization and management of platforms like Mercado Libre, Amazon, and Shopify.",
         icon: "💻",

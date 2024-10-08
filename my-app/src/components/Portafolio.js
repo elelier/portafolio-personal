@@ -9,16 +9,16 @@ const Portafolio = () => {
     es: [
       {
         nombre: "Wonderlabs",
-        rol: "Líder de Desarrollo y Marketing Digital",
-        descripcion: "Lideré el desarrollo de un plan integral de medios digitales y marketing para Wonderlabs, una app que genera cuentos personalizados con moralejas para niños.",
+        rol: "Desarrollador Backend Senior",
+        descripcion: "Desarrollé la infraestructura backend de una plataforma que genera cuentos personalizados para niños, integrando IA avanzada para la generación automática de historias, imágenes y narraciones.",
         logros: [
-          "Creación de una página web dinámica y API de backend robusta",
-          "Implementación de campañas para distintas redes sociales",
-          "Integración de IA para generar cuentos personalizados"
+          "Desarrollo de API's para gestionar los flujos esenciales, como bases de datos, generación de historias, imágenes y narraciones con IA",
+          "Configuración y optimización del sitio web dinámico utilizando WIX para una experiencia de usuario fluida",
+          "Implementación de un chatbot para atención al cliente utilizando inteligencia artificial avanzada"
         ],
-        tecnologias: ["React", "Node.js", "API development", "IA generativa", "Marketing digital"],
+        tecnologias: ["React", "Node.js", "Desarrollo de API", "IA Generativa", "WIX"],
         link: "https://wonderlabs.studio",
-        link_u: "wonderlabs.studio"
+        link_u: "Prueba la app"
       },
       {
         nombre: "Asistentes Virtuales",
@@ -73,16 +73,16 @@ const Portafolio = () => {
     en: [
       {
         nombre: "Wonderlabs",
-        rol: "Digital Development and Marketing Leader",
-        descripcion: "Led the development of a comprehensive digital media and marketing plan for Wonderlabs, an app that creates personalized stories with moral lessons for children.",
+        rol: "Senior Backend Developer",
+        descripcion: "I developed the backend infrastructure for a platform that generates personalized children's stories, integrating advanced AI for automatic story, image, and narration generation.",
         logros: [
-          "Creation of a dynamic website and robust backend API",
-          "Implementation of campaigns for various social media platforms",
-          "Integration of AI to generate personalized stories"
+          "Developed APIs to manage core workflows, including databases, story generation, images, and AI-driven storytelling",
+          "Configured and optimized a dynamic website using WIX for a seamless user experience",
+          "Implemented a customer service chatbot using advanced artificial intelligence"
         ],
-        tecnologias: ["React", "Node.js", "API development", "Generative AI", "Digital Marketing"],
+        tecnologias: ["React", "Node.js", "API Development", "Generative AI", "WIX"],
         link: "https://wonderlabs.studio",
-        link_u: "wonderlabs.studio"
+        link_u: "Try the app"
       },
       {
         nombre: "Virtual Assistants",
