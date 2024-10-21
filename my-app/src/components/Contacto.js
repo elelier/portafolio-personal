@@ -165,7 +165,7 @@ function Contacto() {
               </div>
               <h3>Agenda y Documentos</h3>
               <div className="agenda-documentos-links">
-                <a href="https://calendly.com/loya-elier/30min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
+                <a href="https://calendly.com/loya-elier/primer-contacto-30-min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
                   <i className="fas fa-calendar-check"></i>
                   {t.agenda}
                 </a>

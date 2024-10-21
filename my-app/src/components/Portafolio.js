@@ -18,7 +18,7 @@ const Portafolio = () => {
         ],
         tecnologias: ["React", "Node.js", "Desarrollo de API", "IA Generativa", "WIX"],
         link: "https://wonderlabs.studio",
-        link_u: "Prueba la app"
+        link_u: "wonderlabs.studio"
       },
       {
         nombre: "Asistentes Virtuales",
@@ -82,7 +82,7 @@ const Portafolio = () => {
         ],
         tecnologias: ["React", "Node.js", "API Development", "Generative AI", "WIX"],
         link: "https://wonderlabs.studio",
-        link_u: "Try the app"
+        link_u: "wonderlabs.studio"
       },
       {
         nombre: "Virtual Assistants",
