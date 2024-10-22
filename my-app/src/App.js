@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './styles/App.css';
@@ -15,14 +15,19 @@ import { initializeTheme } from './components/utils/themeUtils';
 import { loadExternalScripts } from './components/utils/generalUtils';
 import SettingsMenu from './components/SettingsMenu';
 import React, { useEffect, lazy, Suspense } from 'react';
+import Tarifario from './components/Tarifario';
+
+// Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
 const Entrada = lazy(() => import('./components/entradas/entrada1'));
+
+// Importa el componente de Tarifario para la redirección
+
 
 function App({ initialLanguage }) {
   useEffect(() => {
     initializeTheme();
-    loadExternalScripts().then(() => {
-    });
+    loadExternalScripts().then(() => {});
   }, [initialLanguage]);
 
   return (
@@ -30,7 +35,7 @@ function App({ initialLanguage }) {
       <ThemeProvider>
         <Router>
           <div className="App">
-          <SettingsMenu />
+            <SettingsMenu />
             <SEO 
               title="Elier Loya - Transformando Negocios con Tecnología e Innovación" 
               description="Portafolio de Elier Loya, especialista en transformación digital, e-commerce y optimización de operaciones."
@@ -48,6 +53,9 @@ function App({ initialLanguage }) {
                     <Contacto />
                   </>
                 } />
+                {/* Ruta para la redirección del tarifario */}
+                <Route path="/tarifario2024" element={<Tarifario />} />
+                
                 <Route path="/hero-banner" element={<HeroBanner />} />
                 <Route path="/portafolio" element={<Portafolio />} />
                 <Route path="/sobre-mi" element={<SobreMi />} />
@@ -56,7 +64,7 @@ function App({ initialLanguage }) {
                 <Route path="/entradas/2408_IA_Transforma_ecommerce" element={<Entrada />} />
                 <Route path="/contacto" element={<Contacto />} />
               </Routes>
-              </Suspense>
+            </Suspense>
             <Footer />
           </div>
         </Router>

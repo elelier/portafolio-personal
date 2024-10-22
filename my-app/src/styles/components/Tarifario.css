@@ -1,0 +1,26 @@
+.redirect-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    background-color: #f0f4f8; /* Un fondo suave y bonito */
+  }
+  
+  .redirect-text {
+    font-size: 3rem; /* Tamaño de letra grande */
+    font-family: 'Arial', sans-serif; /* Cambia por una fuente que te guste */
+    color: #333; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #e8f0fe; /* Fondo suave detrás del texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    animation: fadeIn 2s ease-in-out; /* Añade una animación */
+  }
+  
+  /* Animación de desvanecimiento */
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
