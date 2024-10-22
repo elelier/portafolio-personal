@@ -11,7 +11,7 @@ const Tarifario = () => {
 
   return (
     <div className="redirect-container">
-      <h2 className="redirect-text">Redirigiendo al tarifario...</h2>
+      <h2 className="redirect-text">...Redirigiendo a Tarifas Octubre 2024...</h2>
     </div>
   );
 };
