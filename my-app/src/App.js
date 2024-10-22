@@ -54,7 +54,7 @@ function App({ initialLanguage }) {
                   </>
                 } />
                 {/* Ruta para la redirección del tarifario */}
-                <Route path="/tarifas-servicios-digitales-2024" element={<Tarifario />} />
+                <Route path="/tarifas-2024" element={<Tarifario />} />
                 <Route path="/hero-banner" element={<HeroBanner />} />
                 <Route path="/portafolio" element={<Portafolio />} />
                 <Route path="/sobre-mi" element={<SobreMi />} />
