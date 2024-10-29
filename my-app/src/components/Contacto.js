@@ -19,7 +19,7 @@ const texts = {
     whatsapp: 'Envíame un mensaje',
     location: 'Monterrey, México',
     professionalLinks: 'Enlaces Profesionales',
-    agenda: 'Agenda 30 minutos',
+    agenda: 'Agenda 15 minutos',
     downloadCV: 'Descargar CV',
     linkedin: 'LinkedIn',
     github: 'GitHub',
@@ -38,7 +38,7 @@ const texts = {
     whatsapp: 'Message Me',
     location: 'Monterrey, Mexico',
     professionalLinks: 'Professional Links',
-    agenda: 'Schedule 30 minutes',
+    agenda: 'Schedule 15 minutes',
     downloadCV: 'Download Resume',
     linkedin: 'LinkedIn',
     github: 'GitHub',
@@ -165,7 +165,7 @@ function Contacto() {
               </div>
               <h3>Agenda y Documentos</h3>
               <div className="agenda-documentos-links">
-                <a href="https://calendly.com/loya-elier/primer-contacto-30-min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
+                <a href="https://calendly.com/loya-elier/primer-contacto-15-min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
                   <i className="fas fa-calendar-check"></i>
                   {t.agenda}
                 </a>
