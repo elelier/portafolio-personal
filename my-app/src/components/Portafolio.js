@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/Portafolio.css'; // Importa los estilos del portafolio desde la carpeta css
+import { useTechDetails } from '../components/TechDetails';
 
 const Portafolio = () => {
   const { language } = useLanguage();
+  const { getTechDetails } = useTechDetails();
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [modalTechId, setModalTechId] = useState(null);
+  
+  const selectedTechDetails = modalTechId ? getTechDetails(modalTechId) : null;
+  
 
   const proyectos = {
     es: [
@@ -136,11 +143,17 @@ const Portafolio = () => {
     ]
   };
 
-  const [isCollapsed, setIsCollapsed] = useState(true);
-
   const toggleCollapse = (e) => {
     e.preventDefault();
     setIsCollapsed(!isCollapsed);
+  };
+
+  const toggleTech = (techName) => {
+    setModalTechId(techName);
+  };
+
+  const closeModal = () => {
+    setModalTechId(null);
   };
 
   return (
@@ -185,7 +198,13 @@ const Portafolio = () => {
               <h4>{language === 'es' ? 'Tecnologías Utilizadas:' : 'Technologies Used:'}</h4>
               <ul>
                 {proyecto.tecnologias && proyecto.tecnologias.map((tec, i) => (
-                  <li key={i}>{tec}</li>
+                  <li 
+                    key={i} 
+                    onClick={() => toggleTech(tec)} 
+                    className="tecnologia-item"
+                  >
+                    {tec}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -200,6 +219,58 @@ const Portafolio = () => {
           </div>
         ))}
       </div>
+
+      {/* Modal mejorado */}
+      {modalTechId && (
+        <div className="tech-modal-overlay" onClick={closeModal}>
+          <div className="tech-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={closeModal}>×</button>
+            <div className="modal-header">
+              <div className="tech-icon">{selectedTechDetails?.icon}</div>
+              <h2>{selectedTechDetails?.name}</h2>
+            </div>
+            <div className="modal-body">
+              {selectedTechDetails ? (
+                <>
+                  <div className="tech-meta">
+                    <span className="tech-year">
+                      {language === 'es' ? 'Año: ' : 'Year: '}{selectedTechDetails.year}
+                    </span>
+                    <span className="tech-creator">
+                      {language === 'es' ? 'Creador: ' : 'Creator: '}{selectedTechDetails.creator}
+                    </span>
+                    <span className="tech-popularity">
+                      {language === 'es' ? 'Popularidad: ' : 'Popularity: '}{selectedTechDetails.popularity}
+                    </span>
+                  </div>
+                  <p className="tech-description">{selectedTechDetails.description}</p>
+                  <h4>{language === 'es' ? 'Características principales:' : 'Key features:'}</h4>
+                  <ul className="tech-features">
+                    {selectedTechDetails.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                  {selectedTechDetails.tools && (
+                    <div className="tech-tools">
+                      <h4>{language === 'es' ? 'Herramientas relacionadas:' : 'Related tools:'}</h4>
+                      <div className="tools-list">
+                        {selectedTechDetails.tools.map((tool, index) => (
+                          <span key={index} className="tool-tag">{tool}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <p>{language === 'es' 
+                  ? 'Información detallada próximamente...' 
+                  : 'Detailed information coming soon...'}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

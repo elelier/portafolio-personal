@@ -361,3 +361,218 @@
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
   animation: none;
 }
+
+.tecnologia-item {
+  cursor: pointer; /* Cambia el cursor al pasar sobre la tecnología */
+  position: relative; /* Para posicionar el detalle */
+}
+
+.tecnologia-detalle {
+  background: var(--color-bg-solid);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Puedes agregar más estilos para mejorar la apariencia */
+
+/* Estilos para el modal */
+.tech-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.tech-modal-content {
+  background: linear-gradient(to bottom, var(--color-bg-solid), var(--color-bg-2));
+  padding: 40px;
+  border-radius: 20px;
+  position: relative;
+  width: 95%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.4s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-icon {
+  font-size: 48px;
+  margin-right: 20px;
+}
+
+.modal-header h2 {
+  color: var(--color-text);
+  font-size: 36px;
+  margin: 0;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tech-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.tech-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: 30px;
+}
+
+.tech-features {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.tech-features li {
+  color: var(--color-text);
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.tech-features li:before {
+  content: "→";
+  margin-right: 10px;
+  color: var(--color-accent);
+}
+
+.tech-features li:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--color-text);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mejoras en la responsividad */
+@media (max-width: 768px) {
+  .tech-modal-content {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .modal-header h2 {
+    font-size: 24px;
+  }
+
+  .tech-icon {
+    font-size: 36px;
+  }
+
+  .tech-features {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Estilos para las herramientas relacionadas */
+.tech-tools {
+  margin-top: 30px;
+}
+
+.tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tool-tag {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tool-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+/* Ajuste responsive para las herramientas */
+@media (max-width: 768px) {
+  .tools-list {
+    justify-content: center;
+  }
+  
+  .tool-tag {
+    font-size: 0.8rem;
+    padding: 4px 12px;
+  }
+}
