@@ -1,0 +1,22 @@
+export const TECH_KEYS = {
+  REACT: "1",
+  NODEJS: "2",
+  API_DEV: "3",
+  GEN_AI: "4",
+  MACHINE_LEARNING: "5",
+  PYTHON: "6",
+  WIX: "7",
+  LEAN_SIX: "8",
+  HUGGING_FACE: "9",
+  NLP: "10",
+  ERP_OLIMPO: "11",
+  PROCESS_AUTO: "12",
+  INVENTORY: "13",
+  MERCADO_LIBRE: "14",
+  AMAZON: "15",
+  SHOPIFY: "16",
+  NETSUITE: "17",
+  AI_CUSTOMER: "18",
+  SAP: "19",
+  DMAIC: "20"
+};

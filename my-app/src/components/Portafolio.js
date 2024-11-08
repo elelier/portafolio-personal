@@ -2,15 +2,58 @@ import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/Portafolio.css'; // Importa los estilos del portafolio desde la carpeta css
 import { useTechDetails } from '../components/TechDetails';
+import { TECH_KEYS } from '../constants/techKeys';
 
 const Portafolio = () => {
   const { language } = useLanguage();
-  const { getTechDetails } = useTechDetails();
+  const { getAllTechDetails } = useTechDetails();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [modalTechId, setModalTechId] = useState(null);
   
-  const selectedTechDetails = modalTechId ? getTechDetails(modalTechId) : null;
-  
+  const allTechDetails = getAllTechDetails();
+  const selectedTechDetails = modalTechId ? allTechDetails[modalTechId] : null;
+
+  // eslint-disable-next-line no-unused-vars
+  const toggleTech = (techName) => {
+    console.log('Tech clicked:', techName);
+    console.log('Available techs:', Object.keys(allTechDetails));
+  };
+
+  const tecnologiasMap = {
+    "React": TECH_KEYS.REACT,
+    "Node.js": TECH_KEYS.NODEJS,
+    "Desarrollo de API": TECH_KEYS.API_DEV,
+    "API Development": TECH_KEYS.API_DEV,
+    "IA Generativa": TECH_KEYS.GEN_AI,
+    "Generative AI": TECH_KEYS.GEN_AI,
+    "Machine Learning": TECH_KEYS.MACHINE_LEARNING,
+    "Python": TECH_KEYS.PYTHON,
+    "WIX": TECH_KEYS.WIX,
+    "Lean Six Sigma": TECH_KEYS.LEAN_SIX,
+    "HuggingFace": TECH_KEYS.HUGGING_FACE,
+    "Procesamiento de Lenguaje Natural": TECH_KEYS.NLP,
+    "Natural Language Processing": TECH_KEYS.NLP,
+    "ERP Olimpo": TECH_KEYS.ERP_OLIMPO,
+    "Automatización de procesos": TECH_KEYS.PROCESS_AUTO,
+    "Process Automation": TECH_KEYS.PROCESS_AUTO,
+    "Gestión de inventarios": TECH_KEYS.INVENTORY,
+    "Inventory Management": TECH_KEYS.INVENTORY,
+    "Mercado Libre": TECH_KEYS.MERCADO_LIBRE,
+    "Amazon": TECH_KEYS.AMAZON,
+    "Shopify": TECH_KEYS.SHOPIFY,
+    "NetSuite ERP": TECH_KEYS.NETSUITE,
+    "IA para atención al cliente": TECH_KEYS.AI_CUSTOMER,
+    "AI for customer service": TECH_KEYS.AI_CUSTOMER,
+    "SAP": TECH_KEYS.SAP,
+    "Metodología DMAIC": TECH_KEYS.DMAIC,
+    "DMAIC Methodology": TECH_KEYS.DMAIC
+  };
+
+  const handleTechClick = (techName) => {
+    const mappedTechName = tecnologiasMap[techName] || techName;
+    console.log('Mapped tech name:', mappedTechName); // Para depuración
+    setModalTechId(mappedTechName);
+  };
 
   const proyectos = {
     es: [
@@ -34,7 +77,7 @@ const Portafolio = () => {
         logros: [
           "Creación de un asistente para generar ideas innovadoras de campañas publicitarias",
           "Desarrollo de un asistente para planificar, actualizar y evaluar proyectos",
-          "Implementación de funciones para mantener la motivación y el enfoque en los logros"
+          "Implementación de funciones para mantener la motivaci��n y el enfoque en los logros"
         ],
         tecnologias: ["HuggingFace", "Procesamiento de Lenguaje Natural", "Machine Learning", "Python"],
         link: "https://huggingface.co/chat/assistants?user=Elelier",
@@ -148,12 +191,31 @@ const Portafolio = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  const toggleTech = (techName) => {
-    setModalTechId(techName);
-  };
-
   const closeModal = () => {
     setModalTechId(null);
+  };
+
+  const techTitles = {
+    [TECH_KEYS.REACT]: "React",
+    [TECH_KEYS.NODEJS]: "Node.js",
+    [TECH_KEYS.API_DEV]: language === 'es' ? "Desarrollo de API's" : "API Development",
+    [TECH_KEYS.GEN_AI]: language === 'es' ? "IA Generativa" : "Generative AI",
+    [TECH_KEYS.MACHINE_LEARNING]: "Machine Learning",
+    [TECH_KEYS.PYTHON]: "Python",
+    [TECH_KEYS.WIX]: "WIX",
+    [TECH_KEYS.LEAN_SIX]: "Lean Six Sigma",
+    [TECH_KEYS.HUGGING_FACE]: "HuggingFace",
+    [TECH_KEYS.NLP]: language === 'es' ? "Procesamiento de Lenguaje Natural" : "Natural Language Processing",
+    [TECH_KEYS.ERP_OLIMPO]: "ERP Olimpo",
+    [TECH_KEYS.PROCESS_AUTO]: language === 'es' ? "Automatización de procesos" : "Process Automation",
+    [TECH_KEYS.INVENTORY]: language === 'es' ? "Gestión de inventarios" : "Inventory Management",
+    [TECH_KEYS.MERCADO_LIBRE]: "Mercado Libre",
+    [TECH_KEYS.AMAZON]: "Amazon",
+    [TECH_KEYS.SHOPIFY]: "Shopify",
+    [TECH_KEYS.NETSUITE]: "NetSuite ERP",
+    [TECH_KEYS.AI_CUSTOMER]: language === 'es' ? "IA para atención al cliente" : "AI for customer service",
+    [TECH_KEYS.SAP]: "SAP",
+    [TECH_KEYS.DMAIC]: language === 'es' ? "Metodología DMAIC" : "DMAIC Methodology"
   };
 
   return (
@@ -200,7 +262,7 @@ const Portafolio = () => {
                 {proyecto.tecnologias && proyecto.tecnologias.map((tec, i) => (
                   <li 
                     key={i} 
-                    onClick={() => toggleTech(tec)} 
+                    onClick={() => handleTechClick(tec)} 
                     className="tecnologia-item"
                   >
                     {tec}
@@ -221,36 +283,45 @@ const Portafolio = () => {
       </div>
 
       {/* Modal mejorado */}
-      {modalTechId && (
+      {modalTechId && selectedTechDetails && (
         <div className="tech-modal-overlay" onClick={closeModal}>
           <div className="tech-modal-content" onClick={e => e.stopPropagation()}>
             <button className="modal-close-btn" onClick={closeModal}>×</button>
             <div className="modal-header">
-              <div className="tech-icon">{selectedTechDetails?.icon}</div>
-              <h2>{selectedTechDetails?.name}</h2>
+              <span className="tech-icon">{selectedTechDetails.icon}</span>
+              <h2>
+                {language === 'es' 
+                  ? techTitles[modalTechId] 
+                  : modalTechId
+                }
+              </h2>
             </div>
             <div className="modal-body">
               {selectedTechDetails ? (
                 <>
                   <div className="tech-meta">
                     <span className="tech-year">
-                      {language === 'es' ? 'Año: ' : 'Year: '}{selectedTechDetails.year}
+                      {language === 'es' ? 'Año: ' : 'Year: '}{selectedTechDetails.year || 'N/A'}
                     </span>
                     <span className="tech-creator">
-                      {language === 'es' ? 'Creador: ' : 'Creator: '}{selectedTechDetails.creator}
+                      {language === 'es' ? 'Creador: ' : 'Creator: '}{selectedTechDetails.creator || 'N/A'}
                     </span>
                     <span className="tech-popularity">
-                      {language === 'es' ? 'Popularidad: ' : 'Popularity: '}{selectedTechDetails.popularity}
+                      {language === 'es' ? 'Popularidad: ' : 'Popularity: '}{selectedTechDetails.popularity || 'N/A'}
                     </span>
                   </div>
-                  <p className="tech-description">{selectedTechDetails.description}</p>
-                  <h4>{language === 'es' ? 'Características principales:' : 'Key features:'}</h4>
-                  <ul className="tech-features">
-                    {selectedTechDetails.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
-                  {selectedTechDetails.tools && (
+                  <p className="tech-description">{selectedTechDetails.description || ''}</p>
+                  {selectedTechDetails.features && selectedTechDetails.features.length > 0 && (
+                    <>
+                      <h4>{language === 'es' ? 'Características principales:' : 'Key features:'}</h4>
+                      <ul className="tech-features">
+                        {selectedTechDetails.features.map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {selectedTechDetails.tools && selectedTechDetails.tools.length > 0 && (
                     <div className="tech-tools">
                       <h4>{language === 'es' ? 'Herramientas relacionadas:' : 'Related tools:'}</h4>
                       <div className="tools-list">
@@ -263,8 +334,8 @@ const Portafolio = () => {
                 </>
               ) : (
                 <p>{language === 'es' 
-                  ? 'Información detallada próximamente...' 
-                  : 'Detailed information coming soon...'}
+                  ? `Información no disponible para ${modalTechId}` 
+                  : `Information not available for ${modalTechId}`}
                 </p>
               )}
             </div>
