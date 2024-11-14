@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/Portafolio.css'; // Importa los estilos del portafolio desde la carpeta css
 import { useTechDetails } from '../components/TechDetails';
@@ -77,7 +77,7 @@ const Portafolio = () => {
         logros: [
           "Creación de un asistente para generar ideas innovadoras de campañas publicitarias",
           "Desarrollo de un asistente para planificar, actualizar y evaluar proyectos",
-          "Implementación de funciones para mantener la motivaci��n y el enfoque en los logros"
+          "Implementación de funciones para mantener la motivación y el enfoque en los logros"
         ],
         tecnologias: ["HuggingFace", "Procesamiento de Lenguaje Natural", "Machine Learning", "Python"],
         link: "https://huggingface.co/chat/assistants?user=Elelier",
@@ -218,6 +218,20 @@ const Portafolio = () => {
     [TECH_KEYS.DMAIC]: language === 'es' ? "Metodología DMAIC" : "DMAIC Methodology"
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <section id="portafolio" className="portafolio">
       <div className="portafolio-header">
@@ -290,10 +304,7 @@ const Portafolio = () => {
             <div className="modal-header">
               <span className="tech-icon">{selectedTechDetails.icon}</span>
               <h2>
-                {language === 'es' 
-                  ? techTitles[modalTechId] 
-                  : modalTechId
-                }
+                {techTitles[modalTechId] || modalTechId}
               </h2>
             </div>
             <div className="modal-body">

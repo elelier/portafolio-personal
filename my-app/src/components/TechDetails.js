@@ -7,6 +7,10 @@ export const useTechDetails = () => {
   const techCategories = {
     "development": {
       [TECH_KEYS.REACT]: {
+        name: {
+          es: "React",
+          en: "React"
+        },
         description: language === 'es' 
           ? "Biblioteca de JavaScript para construir interfaces de usuario interactivas y reactivas."
           : "JavaScript library for building interactive and reactive user interfaces.",
@@ -34,6 +38,10 @@ export const useTechDetails = () => {
           : ["Redux", "React Router", "Material-UI", "Styled Components", "Next.js"]
       },
       [TECH_KEYS.NODEJS]: {
+        name: {
+          es: "Node.js",
+          en: "Node.js"
+        },
         description: language === 'es'
           ? "Entorno de ejecución de JavaScript del lado del servidor que permite construir aplicaciones web escalables y de alto rendimiento."
           : "Server-side JavaScript runtime environment that enables building scalable and high-performance web applications.",
@@ -58,7 +66,40 @@ export const useTechDetails = () => {
         popularity: "★★★★★",
         tools: ["Express", "NestJS", "Socket.IO", "Mongoose", "PM2"]
       },
-      "Python": {
+      [TECH_KEYS.HUGGING_FACE]: {
+        name: {
+          es: "Hugging Face",
+          en: "Hugging Face"
+        },
+        description: language === 'es'
+          ? "Plataforma de inteligencia artificial que ofrece modelos de lenguaje para generación de contenido."
+          : "Artificial intelligence platform offering language models for content generation.",
+        features: language === 'es'
+          ? [
+              "Generación de texto, imágenes y audio",
+              "Adaptación a diferentes contextos",
+              "Optimización de resultados",
+              "Integración con otras tecnologías",
+              "Security and compliance"
+            ]
+          : [
+              "Text, image, and audio generation",
+              "Adaptation to different contexts",
+              "Optimization of results",
+              "Integration with other technologies",
+              "Security and compliance"
+            ],  
+        icon: "🤗",
+        year: "2020",
+        creator: "Various",
+        popularity: "★★★★★",
+        tools: ["Hugging Face", "OpenAI", "Google", "Anthropic"]
+      },
+      [TECH_KEYS.PYTHON]: {
+        name: {
+          es: "Python",
+          en: "Python"
+        },
         description: language === 'es'
           ? "Lenguaje de programación versátil y fácil de aprender, ideal para desarrollo web, ciencia de datos e IA."
           : "Versatile and easy-to-learn programming language, ideal for web development, data science, and AI.",
@@ -85,7 +126,7 @@ export const useTechDetails = () => {
       }
     },
     "infrastructure": {
-      "API Development": {
+      [TECH_KEYS.API_DEV]: {
         description: language === 'es'
           ? "Diseño y desarrollo de API's para permitir la comunicación entre sistemas."
           : "Design and development of APIs to enable communication between systems.",
@@ -137,11 +178,33 @@ export const useTechDetails = () => {
       }
     },
     "ai_solutions": {
-      "Generative AI": {
-        // ... contenido existente de Generative AI
+      [TECH_KEYS.GEN_AI]: {
+        description: language === 'es'  
+          ? "Generación de contenido creativo y adaptativo utilizando modelos de lenguaje."
+          : "Creative and adaptive content generation using language models.",
+        features: language === 'es'
+          ? [
+              "Generación de texto, imágenes y audio",
+              "Adaptación a diferentes contextos",
+              "Optimización de resultados",
+              "Integración con otras tecnologías",
+              "Security and compliance"
+            ]
+          : [
+              "Text, image, and audio generation",
+              "Adaptation to different contexts",
+              "Optimization of results",
+              "Integration with other technologies",
+              "Security and compliance"
+            ],
+        icon: "🤖",
+        year: "2020",
+        creator: "Various",
+        popularity: "★★★★★",
+        tools: ["OpenAI", "Google", "Anthropic", "Microsoft"]
       },
-      "Machine Learning": {
-        description: language === 'es'
+      [TECH_KEYS.MACHINE_LEARNING]: {
+          description: language === 'es'
           ? "Rama de la inteligencia artificial que permite a los sistemas aprender y mejorar a partir de la experiencia."
           : "Branch of artificial intelligence that enables systems to learn and improve from experience.",
         features: language === 'es'
@@ -167,7 +230,7 @@ export const useTechDetails = () => {
       }
     },
     "platforms": {
-      "WIX": {
+      [TECH_KEYS.WIX]: {
         description: language === 'es'
           ? "Plataforma de desarrollo web que permite crear sitios web profesionales sin necesidad de código."
           : "Web development platform that allows creating professional websites without coding.",
@@ -192,7 +255,7 @@ export const useTechDetails = () => {
         popularity: "★★★★☆",
         tools: ["Wix ADI", "Wix Editor", "Wix Stores", "Wix Bookings", "Wix Analytics"]
       },
-      "Mercado Libre": {
+      [TECH_KEYS.MERCADO_LIBRE]: {
         description: language === 'es'
           ? "Principal plataforma de comercio electrónico en América Latina que conecta vendedores y compradores."
           : "Leading e-commerce platform in Latin America that connects sellers and buyers.",
@@ -217,7 +280,7 @@ export const useTechDetails = () => {
         popularity: "★★★★★",
         tools: ["Mercado Pago", "Mercado Envíos", "Mercado Shops", "Mercado Ads"]
       },
-      "Amazon": {
+      [TECH_KEYS.AMAZON]: {
         description: language === 'es'
           ? "Plataforma global de comercio electrónico y servicios en la nube líder mundial."
           : "Global e-commerce platform and world-leading cloud services provider.",
@@ -242,7 +305,7 @@ export const useTechDetails = () => {
         popularity: "★★★★★",
         tools: ["Seller Central", "FBA", "Amazon Advertising", "Brand Registry"]
       },
-      "Shopify": {
+      [TECH_KEYS.SHOPIFY]: {
         description: language === 'es'
           ? "Plataforma de comercio electrónico que permite crear y gestionar tiendas online."
           : "E-commerce platform that enables creating and managing online stores.",
@@ -267,7 +330,7 @@ export const useTechDetails = () => {
         popularity: "★★★★★",
         tools: ["Shopify POS", "Shopify Payments", "Shopify Apps", "Shopify Analytics"]
       },
-      "NetSuite ERP": {
+      [TECH_KEYS.NETSUITE]: {
         description: language === 'es'
           ? "Sistema ERP en la nube que integra gestión financiera, CRM, e-commerce y más."
           : "Cloud ERP system integrating financial management, CRM, e-commerce, and more.",
@@ -294,7 +357,7 @@ export const useTechDetails = () => {
       }
     },
     "methodologies": {
-      "Lean Six Sigma": {
+      [TECH_KEYS.LEAN_SIX]: {
         description: language === 'es'
           ? "Metodología de mejora de procesos que combina Lean Manufacturing y Six Sigma para reducir desperdicios y variabilidad."
           : "Process improvement methodology that combines Lean Manufacturing and Six Sigma to reduce waste and variability.",
@@ -321,7 +384,7 @@ export const useTechDetails = () => {
           ? ["DMAIC", "Value Stream Mapping", "5S", "Kaizen", "Control Charts"]
           : ["DMAIC", "Value Stream Mapping", "5S", "Kaizen", "Control Charts"]
       },
-      "DMAIC Methodology": {
+      [TECH_KEYS.DMAIC]: {
         description: language === 'es'
           ? "Metodología de mejora de procesos que forma parte de Six Sigma para optimizar y estabilizar procesos."
           : "Process improvement methodology part of Six Sigma to optimize and stabilize processes.",
@@ -346,7 +409,7 @@ export const useTechDetails = () => {
         popularity: "★★★★☆",
         tools: ["Minitab", "Quality Tools", "Statistical Analysis", "Process Mapping"]
       },
-      "Process Automation": {
+      [TECH_KEYS.PROCESS_AUTO]: {
         description: language === 'es'
           ? "Implementación de sistemas y tecnologías para automatizar procesos empresariales repetitivos."
           : "Implementation of systems and technologies to automate repetitive business processes.",
@@ -371,7 +434,7 @@ export const useTechDetails = () => {
         popularity: "★★★★★",
         tools: ["RPA", "BPM", "Workflow Engines", "Integration Platforms"]
       },
-      "SAP": {
+      [TECH_KEYS.SAP]: {
         description: language === 'es'
           ? "Sistema líder de planificación de recursos empresariales para gestionar operaciones de negocio."
           : "Leading enterprise resource planning system for managing business operations.",
@@ -396,7 +459,7 @@ export const useTechDetails = () => {
         popularity: "★★★★★",
         tools: ["SAP S/4HANA", "SAP ECC", "SAP Fiori", "SAP Analytics"]
       },
-      "Inventory Management": {
+      [TECH_KEYS.INVENTORY]: {
         description: language === 'es'
           ? "Sistema para controlar y gestionar eficientemente el inventario de una organización."
           : "System to efficiently control and manage an organization's inventory.",
