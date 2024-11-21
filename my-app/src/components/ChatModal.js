@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import '../styles/components/ChatModal.css';
 import { FaComment, FaTimes, FaRobot, FaInfoCircle, FaLightbulb, FaEnvelope, FaUser, FaCode, FaPlayCircle } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
+import benefitResponses from '../data/benefitResponses.json';
 
 const ChatModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,8 +11,8 @@ const ChatModal = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
-  const { language } = useLanguage();
   const messagesEndRef = useRef(null);
+  const { language } = useLanguage();
 
   const translations = {
     es: {
@@ -29,11 +30,11 @@ const ChatModal = () => {
       },
       steps: [
         {
-          content: "👋 ¡Hola! Soy un <b>Chatbot de IA</b> desarrollado por <a href='https://elelier.com' target='_blank'>Elier Loya Mata</a>.",
+          content: "¡Hola! Soy un <b>Chatbot de IA</b> desarrollado por <a href='https://elelier.com' target='_blank'>Elier Loya Mata</a>.",
           delay: 1000
         },
         {
-          content: "¿Te imaginas tener un asistente virtual como yo para tu negocio? 🤖✨ ¡Sería increíble! 🚀",
+          content: "¿Te imaginas tener un asistente virtual como yo para tu negocio?  ¡Sería increíble! ",
           delay: 1500
         },
         {
@@ -54,15 +55,36 @@ const ChatModal = () => {
         moreInfo: `<div class="message-content">
 ¡Por supuesto! Además de las funciones básicas, puedo:
 
-✨ Integrarme con tus sistemas existentes
-🔍 Aprender de las interacciones con usuarios
-📊 Proporcionar análisis detallados
-🎯 Personalizar respuestas según el perfil del cliente
-🤝 Transferir a agentes humanos cuando sea necesario</div>`,
+ Integrarme con tus sistemas existentes
+ Aprender de las interacciones con usuarios
+ Proporcionar análisis detallados
+ Personalizar respuestas según el perfil del cliente
+ Transferir a agentes humanos cuando sea necesario</div>`,
         seeProjects: "Te mostraré algunos proyectos interesantes...",
         requestDemo: "¡Genial! Prepararé una demo personalizada para ti...",
         contact: "Te conectaré con el desarrollador..."
-      }
+      },
+      aboutMe: 'Sobre mí',
+      skills: 'Habilidades',
+      contact: 'Contacto',
+      viewCode: 'Ver código',
+      viewDemo: 'Ver demo',
+      demoRequest: '¿Me puedes mostrar una demo?',
+      demoResponse: `
+        <div>
+          ¡Claro! Aquí tienes algunos ejemplos de lo que puedo hacer:
+          
+          <ul>
+            <li> Responder preguntas sobre mi experiencia y habilidades</li>
+            <li> Navegar a diferentes secciones del portafolio</li>
+            <li> Facilitar el contacto directo</li>
+            <li> Mostrar proyectos y código</li>
+            <li> Proporcionar información detallada sobre servicios</li>
+          </ul>
+
+          ¿Qué te gustaría explorar primero?
+        </div>
+      `,
     },
     en: {
       title: "AI Chatbots",
@@ -79,11 +101,11 @@ const ChatModal = () => {
       },
       steps: [
         {
-          content: "👋 Hi! I'm an <b>AI Chatbot</b> developed by <a href='https://elelier.com' target='_blank'>Elier Loya Mata</a>.",
+          content: "Hi! I'm an <b>AI Chatbot</b> developed by <a href='https://elelier.com' target='_blank'>Elier Loya Mata</a>.",
           delay: 1000
         },
         {
-          content: "Imagine having a virtual assistant like me for your business! 🤖✨ It would be amazing! 🚀",
+          content: "Imagine having a virtual assistant like me for your business!  It would be amazing! ",
           delay: 1500
         },
         {
@@ -104,15 +126,36 @@ const ChatModal = () => {
         moreInfo: `<div class="message-content">
 Of course! Besides the basic functions, I can:
 
-✨ Integrate with your existing systems
-🔍 Learn from user interactions
-📊 Provide detailed analytics
-🎯 Personalize responses based on customer profiles
-🤝 Transfer to human agents when needed</div>`,
+ Integrate with your existing systems
+ Learn from user interactions
+ Provide detailed analytics
+ Personalize responses based on customer profiles
+ Transfer to human agents when needed</div>`,
         seeProjects: "I'll show you some interesting projects...",
         requestDemo: "Great! I'll prepare a custom demo for you...",
         contact: "I'll connect you with the developer..."
-      }
+      },
+      aboutMe: 'About me',
+      skills: 'Skills',
+      contact: 'Contact',
+      viewCode: 'View code',
+      viewDemo: 'View demo',
+      demoRequest: 'Can you show me a demo?',
+      demoResponse: `
+        <div>
+          Sure! Here are some examples of what I can do:
+          
+          <ul>
+            <li> Answer questions about my experience and skills</li>
+            <li> Navigate to different portfolio sections</li>
+            <li> Facilitate direct contact</li>
+            <li> Show projects and code</li>
+            <li> Provide detailed information about services</li>
+          </ul>
+
+          What would you like to explore first?
+        </div>
+      `,
     }
   };
 
@@ -171,76 +214,24 @@ Of course! Besides the basic functions, I can:
   }, [language]);
 
   const getBenefitResponse = (benefitText, lang) => {
-    const responses = {
-      es: {
-        'Atención 24/7': `La atención 24/7 significa que tu negocio nunca duerme:
-• Respuestas instantáneas a cualquier hora
-• Soporte continuo para clientes globales
-• Sin tiempos muertos ni esperas
-• Mayor satisfacción del cliente
-• Ventaja competitiva significativa`,
-        'Respuestas al instante': `Con respuestas instantáneas mejoras la experiencia:
-• Sin tiempos de espera
-• Respuestas precisas y consistentes
-• Menor carga para tu equipo
-• Mayor retención de clientes
-• Eficiencia operativa mejorada`,
-        'Más conversiones': `Aumenta tus conversiones significativamente:
-• Captura leads 24/7
-• Califica prospectos automáticamente
-• Reduce el abandono
-• Optimiza el embudo de ventas
-• Seguimiento automático`,
-        'Equipo optimizado': `Optimiza el rendimiento de tu equipo:
-• Automatiza tareas repetitivas
-• Reduce la carga de trabajo
-• Mejora la productividad
-• Enfoque en tareas importantes
-• Escalabilidad sin límites`,
-        'Soporte multilingüe': `Alcance global con soporte multilingüe:
-• Comunícate en varios idiomas
-• Expande tu mercado
-• Personalización por región
-• Mejor experiencia local
-• Alcance internacional`
-      },
-      en: {
-        '24/7 Service': `24/7 service means your business never sleeps:
-• Instant responses anytime
-• Continuous support for global customers
-• No downtime or waiting
-• Increased customer satisfaction
-• Significant competitive advantage`,
-        'Instant Responses': `With instant responses you improve experience:
-• No waiting times
-• Accurate and consistent answers
-• Reduced team workload
-• Better customer retention
-• Improved operational efficiency`,
-        'More Conversions': `Significantly increase your conversions:
-• Capture leads 24/7
-• Automatically qualify prospects
-• Reduce abandonment
-• Optimize sales funnel
-• Automatic follow-up`,
-        'Optimized Team': `Optimize your team's performance:
-• Automate repetitive tasks
-• Reduce workload
-• Improve productivity
-• Focus on important tasks
-• Unlimited scalability`,
-        'Multilingual Support': `Global reach with multilingual support:
-• Communicate in multiple languages
-• Expand your market
-• Regional customization
-• Better local experience
-• International reach`
-      }
-    };
+    const response = benefitResponses[lang][benefitText];
+    if (!response) {
+      return lang === 'es'
+        ? 'Me encantaría contarte más sobre esto. ¿Qué te gustaría saber específicamente?'
+        : 'I would love to tell you more about this. What would you like to know specifically?';
+    }
 
-    return responses[lang][benefitText] || (lang === 'es' 
-      ? 'Me encantaría contarte más sobre esto. ¿Qué te gustaría saber específicamente?'
-      : 'I would love to tell you more about this. What would you like to know specifically?');
+    return `<div class="benefits-list">
+      <div class="benefit-header">
+        <h4 class="benefit-title">${response.title}</h4>
+        <p class="benefit-description">${response.description}</p>
+      </div>
+      <div class="benefits-grid">
+        ${response.points.map(point => 
+          `<div class="benefit-item">${point.icon} ${point.text}</div>`
+        ).join('')}
+      </div>
+    </div>`;
   };
 
   const scrollToBottom = useCallback(() => {
@@ -256,12 +247,44 @@ Of course! Besides the basic functions, I can:
     return () => clearTimeout(timer);
   }, [messages, isTyping, scrollToBottom]);
 
-  const handleOptionClick = (option) => {
-    setMessages(prev => [
-      ...prev,
-      { type: 'user', content: option.label },
-      { type: 'system', content: translations[language].responses[option.label] }
-    ]);
+  const handleOptionClick = (optionType) => {
+    switch (optionType) {
+      case 'info':
+        handleScrollToElement('sobre-mi');
+        setIsOpen(false);
+        break;
+      case 'skills':
+        handleScrollToElement('habilidades');
+        setIsOpen(false);
+        break;
+      case 'contact':
+        handleScrollToElement('contacto');
+        setIsOpen(false);
+        break;
+      case 'code':
+        window.open('https://github.com/tu-usuario', '_blank');
+        break;
+      case 'demo':
+        // Aquí puedes agregar la lógica para mostrar una demo o portafolio
+        addMessage({ type: 'user', content: translations[language].demoRequest });
+        addMessage({ 
+          type: 'system', 
+          content: translations[language].demoResponse,
+          html: true 
+        });
+        break;
+    }
+  };
+
+  const handleScrollToElement = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const addMessage = (message) => {
+    setMessages(prev => [...prev, message]);
   };
 
   const toggleChat = () => {
@@ -336,17 +359,46 @@ Of course! Besides the basic functions, I can:
           <div className="chat-footer">
             {showOptions && (
               <div className="chat-options-icons">
-                {options.map((option, index) => (
-                  <button
-                    key={index}
-                    className="chat-option-icon"
-                    onClick={() => handleOptionClick(option)}
-                    title={option.label}
-                  >
-                    {option.icon && <option.icon />}
-                    <span className="option-tooltip">{option.label}</span>
-                  </button>
-                ))}
+                <button 
+                  className="chat-option-icon"
+                  onClick={() => handleOptionClick('info')}
+                  aria-label={translations[language].aboutMe}
+                >
+                  <FaInfoCircle />
+                  <span className="option-tooltip">{translations[language].aboutMe}</span>
+                </button>
+                <button 
+                  className="chat-option-icon"
+                  onClick={() => handleOptionClick('skills')}
+                  aria-label={translations[language].skills}
+                >
+                  <FaLightbulb />
+                  <span className="option-tooltip">{translations[language].skills}</span>
+                </button>
+                <button 
+                  className="chat-option-icon"
+                  onClick={() => handleOptionClick('contact')}
+                  aria-label={translations[language].contact}
+                >
+                  <FaEnvelope />
+                  <span className="option-tooltip">{translations[language].contact}</span>
+                </button>
+                <button 
+                  className="chat-option-icon"
+                  onClick={() => handleOptionClick('code')}
+                  aria-label={translations[language].viewCode}
+                >
+                  <FaCode />
+                  <span className="option-tooltip">{translations[language].viewCode}</span>
+                </button>
+                <button 
+                  className="chat-option-icon"
+                  onClick={() => handleOptionClick('demo')}
+                  aria-label={translations[language].viewDemo}
+                >
+                  <FaPlayCircle />
+                  <span className="option-tooltip">{translations[language].viewDemo}</span>
+                </button>
               </div>
             )}
             <div className="chat-input-container">

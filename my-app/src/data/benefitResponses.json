@@ -1,0 +1,116 @@
+{
+  "es": {
+    "Atención 24/7": {
+      "title": "La atención 24/7 significa que tu negocio nunca duerme:",
+      "description": "Mantén tu negocio activo y accesible en todo momento, brindando una experiencia excepcional a tus clientes sin importar la hora o el día.",
+      "points": [
+        { "icon": "⚡", "text": "Asistencia inmediata disponible en cualquier momento del día" },
+        { "icon": "🌎", "text": "Atención continua para clientes en diferentes zonas horarias" },
+        { "icon": "⏰", "text": "Eliminación completa de tiempos de espera y períodos inactivos" },
+        { "icon": "😊", "text": "Experiencia del cliente mejorada con atención constante" },
+        { "icon": "🏆", "text": "Ventaja competitiva significativa en tu mercado" }
+      ]
+    },
+    "Respuestas al instante": {
+      "title": "Con respuestas instantáneas mejoras la experiencia:",
+      "description": "Optimiza la comunicación con tus clientes mediante respuestas inmediatas y precisas que generan confianza y satisfacción.",
+      "points": [
+        { "icon": "⚡", "text": "Eliminación total de tiempos de espera en la comunicación" },
+        { "icon": "✅", "text": "Respuestas detalladas y consistentes en cada interacción" },
+        { "icon": "👥", "text": "Reducción significativa en la carga de trabajo de tu equipo" },
+        { "icon": "🤝", "text": "Mayor fidelización de clientes gracias a la atención inmediata" },
+        { "icon": "📈", "text": "Optimización notable en la eficiencia operativa" }
+      ]
+    },
+    "Más conversiones": {
+      "title": "Aumenta tus conversiones significativamente:",
+      "description": "Maximiza tus oportunidades de venta con un sistema inteligente que nunca deja escapar un lead potencial.",
+      "points": [
+        { "icon": "🎯", "text": "Sistema automatizado de captura de leads las 24 horas" },
+        { "icon": "🤖", "text": "Proceso inteligente de calificación de prospectos" },
+        { "icon": "📉", "text": "Estrategias efectivas para reducir el abandono de clientes" },
+        { "icon": "🔄", "text": "Optimización continua del proceso de ventas" },
+        { "icon": "✨", "text": "Sistema de seguimiento automatizado y personalizado" }
+      ]
+    },
+    "Equipo optimizado": {
+      "title": "Optimiza el rendimiento de tu equipo:",
+      "description": "Potencia la eficiencia de tu equipo permitiéndoles enfocarse en tareas de alto valor mientras automatizas lo rutinario.",
+      "points": [
+        { "icon": "🤖", "text": "Automatización inteligente de tareas administrativas y repetitivas" },
+        { "icon": "📊", "text": "Distribución eficiente de la carga de trabajo" },
+        { "icon": "📈", "text": "Incremento sustancial en la productividad del equipo" },
+        { "icon": "🎯", "text": "Mayor concentración en tareas estratégicas y creativas" },
+        { "icon": "🚀", "text": "Capacidad ilimitada de crecimiento y adaptación" }
+      ]
+    },
+    "Soporte multilingüe": {
+      "title": "Alcance global con soporte multilingüe:",
+      "description": "Expande tus horizontes y conecta con clientes de todo el mundo mediante una comunicación fluida en múltiples idiomas.",
+      "points": [
+        { "icon": "🌎", "text": "Comunicación fluida y natural en diversos idiomas" },
+        { "icon": "🚀", "text": "Expansión estratégica hacia nuevos mercados internacionales" },
+        { "icon": "🎯", "text": "Adaptación cultural y lingüística por región" },
+        { "icon": "✨", "text": "Experiencia personalizada para cada mercado local" },
+        { "icon": "🌍", "text": "Presencia global con atención localizada" }
+      ]
+    }
+  },
+  "en": {
+    "24/7 Service": {
+      "title": "24/7 service means your business never sleeps:",
+      "description": "Keep your business active and accessible at all times, providing an exceptional experience to your customers regardless of time or day.",
+      "points": [
+        { "icon": "⚡", "text": "Immediate assistance available any time of day" },
+        { "icon": "🌎", "text": "Continuous support for customers across all time zones" },
+        { "icon": "⏰", "text": "Complete elimination of waiting times and downtimes" },
+        { "icon": "😊", "text": "Enhanced customer experience with constant attention" },
+        { "icon": "🏆", "text": "Significant competitive advantage in your market" }
+      ]
+    },
+    "Instant Responses": {
+      "title": "With instant responses you improve experience:",
+      "description": "Optimize communication with your customers through immediate and accurate responses that build trust and satisfaction.",
+      "points": [
+        { "icon": "⚡", "text": "Complete elimination of communication waiting times" },
+        { "icon": "✅", "text": "Detailed and consistent responses in every interaction" },
+        { "icon": "👥", "text": "Significant reduction in team workload" },
+        { "icon": "🤝", "text": "Increased customer loyalty through immediate attention" },
+        { "icon": "📈", "text": "Notable optimization in operational efficiency" }
+      ]
+    },
+    "More Conversions": {
+      "title": "Significantly increase your conversions:",
+      "description": "Maximize your sales opportunities with an intelligent system that never lets a potential lead slip away.",
+      "points": [
+        { "icon": "🎯", "text": "Automated 24/7 lead capture system" },
+        { "icon": "🤖", "text": "Intelligent prospect qualification process" },
+        { "icon": "📉", "text": "Effective strategies to reduce customer abandonment" },
+        { "icon": "🔄", "text": "Continuous optimization of the sales process" },
+        { "icon": "✨", "text": "Automated and personalized follow-up system" }
+      ]
+    },
+    "Optimized Team": {
+      "title": "Optimize your team's performance:",
+      "description": "Enhance your team's efficiency by allowing them to focus on high-value tasks while automating routine work.",
+      "points": [
+        { "icon": "🤖", "text": "Intelligent automation of administrative and repetitive tasks" },
+        { "icon": "📊", "text": "Efficient distribution of workload" },
+        { "icon": "📈", "text": "Substantial increase in team productivity" },
+        { "icon": "🎯", "text": "Greater focus on strategic and creative tasks" },
+        { "icon": "🚀", "text": "Unlimited capacity for growth and adaptation" }
+      ]
+    },
+    "Multilingual Support": {
+      "title": "Global reach with multilingual support:",
+      "description": "Expand your horizons and connect with customers worldwide through fluid communication in multiple languages.",
+      "points": [
+        { "icon": "🌎", "text": "Fluid and natural communication in various languages" },
+        { "icon": "🚀", "text": "Strategic expansion into new international markets" },
+        { "icon": "🎯", "text": "Cultural and linguistic adaptation by region" },
+        { "icon": "✨", "text": "Personalized experience for each local market" },
+        { "icon": "🌍", "text": "Global presence with localized attention" }
+      ]
+    }
+  }
+}
