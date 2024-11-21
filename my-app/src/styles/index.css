@@ -12,10 +12,10 @@
   --hero-title-color-light: #7dd3fc;
   --hero-title-color-2-light: #00cc99;
   
-  --buildship-chat-widget-bg-color-light:#f6f9fc;
-  --buildship-chat-widget-user-message-bg-color-light:#00cc99;
-  --buildship-chat-widget-system-message-bg-color-light: #ddf1ec; 
-  --buildship-chat-widget-user-message-text-color-light:#f6f9fc;
+  --chatbot-chat-widget-bg-color-light:#f6f9fc;
+  --chatbot-chat-widget-user-message-bg-color-light:#00cc99;
+  --chatbot-chat-widget-system-message-bg-color-light: #ddf1ec; 
+  --chatbot-chat-widget-user-message-text-color-light:#f6f9fc;
 
   --color-shadow-light: rgba(0, 0, 0, 0.1); /* Sombra ligera para modo claro */
   --color-shadow-dark: rgba(0, 0, 0, 0.5); /* Sombra más fuerte para modo oscuro */
@@ -35,10 +35,10 @@
   --hero-title-color-dark: #7dd3fc;
   --hero-title-color-2-dark: #f6f9fc;
 
-  --buildship-chat-widget-bg-color-dark:#020817;
-  --buildship-chat-widget-user-message-bg-color-dark:#7dd3fc;
-  --buildship-chat-widget-system-message-bg-color-dark: #143142; 
-  --buildship-chat-widget-user-message-text-color-dark:#020817;
+  --chatbot-chat-widget-bg-color-dark:#020817;
+  --chatbot-chat-widget-user-message-bg-color-dark:#7dd3fc;
+  --chatbot-chat-widget-system-message-bg-color-dark: #143142; 
+  --chatbot-chat-widget-user-message-text-color-dark:#020817;
 
 }
 
@@ -62,10 +62,10 @@
   --hero-title-color-2: var(--hero-title-color-2-dark);
 
 
-  --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-dark);
-  --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-dark); 
-  --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-dark);
-  --buildship-chat-widget-user-message-text-color: var(--buildship-chat-widget-user-message-text-color-dark);
+  --chatbot-chat-widget-user-message-bg-color: var(--chatbot-chat-widget-user-message-bg-color-dark);
+  --chatbot-chat-widget-system-message-bg-color:var(--chatbot-chat-widget-system-message-bg-color-dark); 
+  --chatbot-chat-widget-bg-color: var(--chatbot-chat-widget-bg-color-dark);
+  --chatbot-chat-widget-user-message-text-color: var(--chatbot-chat-widget-user-message-text-color-dark);
 
 }
 
@@ -87,10 +87,10 @@
   --hero-title-color-2: var(--hero-title-color-2-light);
 
 
-  --buildship-chat-widget-user-message-bg-color: var(--buildship-chat-widget-user-message-bg-color-ligh);
-  --buildship-chat-widget-system-message-bg-color:var(--buildship-chat-widget-system-message-bg-color-light); 
-  --buildship-chat-widget-bg-color: var(--buildship-chat-widget-bg-color-light);
-  --buildship-chat-widget-user-message-text-color: var(--buildship-chat-widget-user-message-text-color-light);
+  --chatbot-chat-widget-user-message-bg-color: var(--chatbot-chat-widget-user-message-bg-color-light);
+  --chatbot-chat-widget-system-message-bg-color:var(--chatbot-chat-widget-system-message-bg-color-light); 
+  --chatbot-chat-widget-bg-color: var(--chatbot-chat-widget-bg-color-light);
+  --chatbot-chat-widget-user-message-text-color: var(--chatbot-chat-widget-user-message-text-color-light);
 }
 
 
@@ -119,7 +119,7 @@ a {
 }
 
 /* Estilos para el botón del widget de chat */
-[data-buildship-chat-widget-button] {
+[data-chatbot-chat-widget-button] {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -143,14 +143,14 @@ a {
   animation: gradientBG 10s ease infinite; /* Aplicar el gradiente en movimiento fluido */
 }
 
-[data-buildship-chat-widget-button] i {
+[data-chatbot-chat-widget-button] i {
   margin-right: 8px;
   font-size: 22px;
   animation: blink 2s infinite;
 }
 
 @media (max-width: 600px) {
-  [data-buildship-chat-widget-button] {
+  [data-chatbot-chat-widget-button] {
     padding: 10px;
     width: 50px;
     height: 50px;
@@ -161,12 +161,12 @@ a {
     align-items: center;
   }
   
-  [data-buildship-chat-widget-button] i {
+  [data-chatbot-chat-widget-button] i {
     margin-right: 8px;
     font-size: 0;
   }
 
-  [data-buildship-chat-widget-button]::before {
+  [data-chatbot-chat-widget-button]::before {
     content: '\f544 !'; 
     font-family: "Font Awesome 5 Free"; 
     font-weight: 900; 
@@ -187,7 +187,7 @@ a {
 
 
 /* Detener el zumbido al pasar el ratón sobre el botón */
-[data-buildship-chat-widget-button]:hover {
+[data-chatbot-chat-widget-button]:hover {
   background: linear-gradient(1deg, #a80c9b, #7bcff8, #00cc99,);
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0,0,0,0.3);
@@ -196,7 +196,7 @@ a {
 }
 
 /* Efecto de clic */
-[data-buildship-chat-widget-button]:active {
+[data-chatbot-chat-widget-button]:active {
   transform: scale(0.95);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
   animation: none;
@@ -204,13 +204,13 @@ a {
 
 /* Media queries para dispositivos móviles */
 @media (max-width: 600px) {
-  #buildship-chat-widget__container {
+  #chatbot-chat-widget__container {
     max-width: 100vw; /* Ajusta para pantallas más pequeñas */
     max-height: 100vh; /* Ajusta para pantallas más pequeñas */
   }
 }
 /* Estilos para el contenedor del widget de chat con degradado */
-#buildship-chat-widget__container {
+#chatbot-chat-widget__container {
   position: fixed;
   top: calc(20px + 60px); /* Espacio suficiente por encima del botón */
   right: 20px;
@@ -218,40 +218,40 @@ a {
   max-width: 90vw;
   max-height: 90vh;
   box-sizing: border-box;
-  box-shadow: var(--buildship-chat-widget-shadow);
-  border-radius: var(--buildship-chat-widget-border-radius);
-  color: var(--buildship-chat-widget-primary-color-text);
+  box-shadow: var(--chatbot-chat-widget-shadow);
+  border-radius: var(--chatbot-chat-widget-border-radius);
+  color: var(--chatbot-chat-widget-primary-color-text);
   overflow: hidden;
   display: none; /* Oculta el contenedor por defecto */
 }
 
-#buildship-chat-widget__message a {
+#chatbot-chat-widget__message a {
   color:var(--color-accent)
 }
 
-#buildship-chat-widget__message {
+#chatbot-chat-widget__message {
   color:var(--color-text)
 }
 
 /* Cambia el color de los enlaces dentro del widget */
-#buildship-chat-widget__container a {
+#chatbot-chat-widget__container a {
   text-decoration: none; /* Quita el subrayado de los enlaces */
 }
 
 
-#buildship-chat-widget__container a:hover {
+#chatbot-chat-widget__container a:hover {
   text-decoration: underline; /* Opcional: añade subrayado en el hover */
 }
 
-#buildship-chat-widget__submit {
+#chatbot-chat-widget__submit {
   background-color: var(--color-accent);
 }
 
-#buildship-chat-widget__input:focus {
+#chatbot-chat-widget__input:focus {
   border-color: var(--color-accent);
 }
 
-.buildship-chat-widget__title {
+.chatbot-chat-widget__title {
   visibility: hidden;
 }
 
