@@ -1,0 +1,51 @@
+.floating-button {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background-color: var(--color-accent-light);
+  color: var(--color-bg-light);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px var(--color-shadow-light);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  z-index: 1000;
+}
+
+[data-theme="dark"] .floating-button {
+  background-color: var(--color-accent-dark);
+  color: var(--color-bg-dark);
+  box-shadow: 0 2px 10px var(--color-shadow-dark);
+}
+
+.floating-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--color-shadow-light);
+}
+
+[data-theme="dark"] .floating-button:hover {
+  box-shadow: 0 4px 15px var(--color-shadow-dark);
+}
+
+.floating-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px var(--color-shadow-light);
+}
+
+[data-theme="dark"] .floating-button:active {
+  box-shadow: 0 2px 10px var(--color-shadow-dark);
+}
+
+@media (max-width: 768px) {
+  .floating-button {
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}

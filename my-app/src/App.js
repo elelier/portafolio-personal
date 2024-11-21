@@ -16,6 +16,9 @@ import { loadExternalScripts } from './components/utils/generalUtils';
 import SettingsMenu from './components/SettingsMenu';
 import React, { useEffect, lazy, Suspense } from 'react';
 import Tarifario from './components/Tarifario';
+import FloatingButton from './components/FloatingButton';
+import ChatModal from './components/ChatModal';
+import { FaArrowUp } from 'react-icons/fa';
 
 // Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
@@ -23,12 +26,18 @@ const Entrada = lazy(() => import('./components/entradas/entrada1'));
 
 // Importa el componente de Tarifario para la redirección
 
-
 function App({ initialLanguage }) {
   useEffect(() => {
     initializeTheme();
     loadExternalScripts().then(() => {});
   }, [initialLanguage]);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <LanguageProvider initialLanguage={initialLanguage}>
@@ -65,6 +74,12 @@ function App({ initialLanguage }) {
               </Routes>
             </Suspense>
             <Footer />
+            <FloatingButton 
+              icon={<FaArrowUp />} 
+              onClick={scrollToTop}
+              ariaLabel="Volver arriba"
+            />
+            <ChatModal />
           </div>
         </Router>
       </ThemeProvider>
