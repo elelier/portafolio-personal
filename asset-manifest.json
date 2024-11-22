@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.26440d5e.css",
-    "main.js": "/static/js/main.a3e0efc0.js",
+    "main.css": "/static/css/main.909a00e5.css",
+    "main.js": "/static/js/main.e7d9a0f4.js",
     "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
     "static/js/889.fb90d5f7.chunk.js": "/static/js/889.fb90d5f7.chunk.js",
     "static/css/930.478c97b3.chunk.css": "/static/css/930.478c97b3.chunk.css",
@@ -11,15 +11,15 @@
     "static/media/profile-picture-elier2.png": "/static/media/profile-picture-elier2.bb22001998419d8c5a87.png",
     "static/media/2409_CV_EL.pdf": "/static/media/2409_CV_EL.8eaaefac1f39e389b143.pdf",
     "index.html": "/index.html",
-    "main.26440d5e.css.map": "/static/css/main.26440d5e.css.map",
-    "main.a3e0efc0.js.map": "/static/js/main.a3e0efc0.js.map",
+    "main.909a00e5.css.map": "/static/css/main.909a00e5.css.map",
+    "main.e7d9a0f4.js.map": "/static/js/main.e7d9a0f4.js.map",
     "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
     "889.fb90d5f7.chunk.js.map": "/static/js/889.fb90d5f7.chunk.js.map",
     "930.478c97b3.chunk.css.map": "/static/css/930.478c97b3.chunk.css.map",
     "930.0d885452.chunk.js.map": "/static/js/930.0d885452.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.26440d5e.css",
-    "static/js/main.a3e0efc0.js"
+    "static/css/main.909a00e5.css",
+    "static/js/main.e7d9a0f4.js"
   ]
 }
