@@ -29,8 +29,8 @@ class SystemMessage extends Message {
     }[section];
 
     const message = language === 'es'
-      ? `✨Ahora estás en la sección <b>${sectionName}</b><div class="section-spacing"></div><div class="message-list"><div class="message-item">❌Puedes cerrar esta ventana haciendo clic en X, aquí o en cualquier lugar fuera de la ventana</div></div>`
-      : `✨You are now on the <b>${sectionName}</b> section<div class="section-spacing"></div><div class="message-list"><div class="message-item">❌You can close this window by clicking X, here or anywhere outside</div></div>`;
+      ? `✨Ahora estás en la sección <b>${sectionName}</b><div style="margin: 8px 0"></div><div class="message-list"><div class="message-item">❌Puedes cerrar esta ventana haciendo clic en X, aquí o en cualquier lugar fuera de la ventana</div></div>`
+      : `✨You are now on the <b>${sectionName}</b> section<div style="margin: 8px 0"></div><div class="message-list"><div class="message-item">❌You can close this window by clicking X, here or anywhere outside</div></div>`;
 
     return new SystemMessage(message);
   }
