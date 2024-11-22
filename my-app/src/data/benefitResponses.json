@@ -112,5 +112,101 @@
         { "icon": "🌍", "text": "Global presence with localized attention" }
       ]
     }
+  },
+  "examples": {
+    "es": {
+      "Experiencia y habilidades": {
+        "title": "Experiencia y habilidades",
+        "description": "Información detallada sobre mi experiencia",
+        "points": [
+          "Tecnologías dominadas",
+          "Proyectos realizados",
+          "Logros destacados"
+        ]
+      },
+      "Navegación del portafolio": {
+        "title": "Navegación del portafolio",
+        "description": "Exploración guiada de secciones",
+        "points": [
+          "Acceso rápido",
+          "Información organizada",
+          "Navegación intuitiva"
+        ]
+      },
+      "Contacto directo": {
+        "title": "Contacto directo",
+        "description": "Facilitar la comunicación",
+        "points": [
+          "Múltiples canales",
+          "Respuesta rápida",
+          "Conexión personal"
+        ]
+      },
+      "Proyectos y código": {
+        "title": "Proyectos y código",
+        "description": "Muestra de trabajo realizado",
+        "points": [
+          "Repositorios GitHub",
+          "Demos en vivo",
+          "Documentación técnica"
+        ]
+      },
+      "Información de servicios": {
+        "title": "Información de servicios",
+        "description": "Detalles sobre servicios ofrecidos",
+        "points": [
+          "Descripción detallada",
+          "Proceso de trabajo",
+          "Resultados esperados"
+        ]
+      }
+    },
+    "en": {
+      "Experience and skills": {
+        "title": "Experience and skills",
+        "description": "Detailed information about my experience",
+        "points": [
+          "Mastered technologies",
+          "Completed projects",
+          "Notable achievements"
+        ]
+      },
+      "Portfolio navigation": {
+        "title": "Portfolio navigation",
+        "description": "Guided section exploration",
+        "points": [
+          "Quick access",
+          "Organized information",
+          "Intuitive navigation"
+        ]
+      },
+      "Direct contact": {
+        "title": "Direct contact",
+        "description": "Facilitate communication",
+        "points": [
+          "Multiple channels",
+          "Quick response",
+          "Personal connection"
+        ]
+      },
+      "Projects and code": {
+        "title": "Projects and code",
+        "description": "Showcase of work done",
+        "points": [
+          "GitHub repositories",
+          "Live demos",
+          "Technical documentation"
+        ]
+      },
+      "Service information": {
+        "title": "Service information",
+        "description": "Details about services offered",
+        "points": [
+          "Detailed description",
+          "Work process",
+          "Expected results"
+        ]
+      }
+    }
   }
 }
