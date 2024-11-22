@@ -264,6 +264,14 @@ const ChatModal = () => {
     };
   }, []);
 
+  const handleConstructionMessage = async (section) => {
+    const constructionMessage = language === 'es'
+      ? `🚧 ¡En construcción! 👷‍♂️\nLa sección de ${section} estará disponible próximamente.`
+      : `🚧 Under Construction! 👷‍♂️\nThe ${section} section will be available soon.`;
+    
+    setMessages(prev => [...prev, new SystemMessage(constructionMessage)]);
+  };
+
   return (
     <>
       <button 
@@ -317,31 +325,31 @@ const ChatModal = () => {
                 icon={FaUserAlt}
                 label={translations[language].sections.aboutMe}
                 color="blue"
-                onClick={() => handleScrollToElement('about', 'aboutMe')}
+                onClick={() => handleConstructionMessage(translations[language].sections.aboutMe)}
               />
               <ChatOptionButton
                 icon={FaRocket}
                 label={translations[language].sections.benefits}
                 color="cyan"
-                onClick={() => handleScrollToElement('benefits', 'benefits')}
+                onClick={() => handleConstructionMessage(translations[language].sections.benefits)}
               />
               <ChatOptionButton
                 icon={FaCogs}
                 label={translations[language].sections.skills}
                 color="yellow"
-                onClick={() => handleScrollToElement('skills', 'skills')}
+                onClick={() => handleConstructionMessage(translations[language].sections.skills)}
               />
               <ChatOptionButton
                 icon={FaCode}
                 label={translations[language].sections.projects}
                 color="orange"
-                onClick={() => handleScrollToElement('projects', 'projects')}
+                onClick={() => handleConstructionMessage(translations[language].sections.projects)}
               />
               <ChatOptionButton
                 icon={FaEnvelope}
                 label={translations[language].sections.contact}
                 color="purple"
-                onClick={() => handleScrollToElement('contact', 'contact')}
+                onClick={() => handleConstructionMessage(translations[language].sections.contact)}
               />
             </div>
 
