@@ -12,6 +12,7 @@
   --hero-title-color-light: #7dd3fc;
   --hero-title-color-2-light: #00cc99;
   --hero-title-color-light-rgb: 125, 211, 252;
+  --color-shadow-light: linear-gradient(rgba(167, 155, 155, 0.5), rgba(126, 219, 231, 0.7));
   
   --chatbot-chat-widget-bg-color-light:#f6f9fc;
   --chatbot-chat-widget-user-message-bg-color-light:#00cc99;
@@ -36,6 +37,7 @@
   --hero-title-color-dark: #7dd3fc;
   --hero-title-color-dark-rgb: 125, 211, 252;
   --hero-title-color-2-dark: #f6f9fc;
+  --color-shadow-dark: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
 
   --chatbot-chat-widget-bg-color-dark:#020817;
   --chatbot-chat-widget-user-message-bg-color-dark:#7dd3fc;

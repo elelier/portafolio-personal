@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import '../styles/components/SobreMi.css';
 import personal_story from '../assets/images/profile-picture-elier2.png';
 import professional from '../assets/images/ecommerce_marketing.png';
@@ -11,7 +11,7 @@ function SobreMi() {
   const { language } = useLanguage(); // Obtén el idioma del contexto
   const intervalRef = useRef(null); // Para mantener una referencia al intervalo
 
-  const sections = {
+  const sections = useMemo(() => ({
     es: [
       {
         title: 'Historia Personal',
@@ -170,30 +170,29 @@ function SobreMi() {
         ),
       },
     ],
-  };
+  }), []);
 
   useEffect(() => {
     setCurrentSection(0); // Reinicia la sección a 0 cuando cambie el idioma
   }, [language]);
 
+  const sectionLength = sections[language].length;
+
   useEffect(() => {
-    // Limpia el intervalo previo si existe
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
 
-    // Configura el intervalo nuevo
     intervalRef.current = setInterval(() => {
-      setCurrentSection((prevSection) => (prevSection + 1) % sections[language].length);
-    }, 30000); // Cambia de sección cada 30 segundos
+      setCurrentSection((prevSection) => (prevSection + 1) % sectionLength);
+    }, 30000);
 
-    // Limpia el intervalo al desmontar el componente
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [language, sections[language].length]);
+  }, [language, sections, sectionLength]);
 
   const handleSwipe = (eventData) => {
     if (eventData && eventData.dir) {
@@ -242,7 +241,7 @@ function SobreMi() {
   return (
     <section id="sobre-mi" className="sobre-mi" {...swipeHandlers}>
       <div className="contenido-sobre-mi">
-        <h2>{language === 'es' ? 'Sobre Mí' : 'About Me'}</h2>
+        <h2>{language === 'es' ? 'SOBRE MI' : 'ABOUT ME'}</h2>
 
         <div className="tabs">
           <button

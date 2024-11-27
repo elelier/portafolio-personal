@@ -1,0 +1,87 @@
+.tech-details-content {
+  padding: 20px;
+}
+
+.tech-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tech-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: var(--color-text);
+}
+
+.tech-metadata {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: var(--color-bg-2);
+  border-radius: 8px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.meta-label {
+  font-weight: bold;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+}
+
+.tech-features {
+  margin-bottom: 25px;
+}
+
+.tech-features h3,
+.tech-tools h3 {
+  color: var(--color-accent);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.tech-features ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tech-features li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.tech-features li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+.tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tool-tag {
+  background: var(--color-bg-2);
+  color: var(--color-text);
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.tool-tag:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+}

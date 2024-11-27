@@ -6,7 +6,10 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   padding-left: 20px;
-  padding-right: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding-right:  20px;
 }
 
 /* Responsive */
@@ -97,7 +100,6 @@
   color: var(--color-text);
 }
 
-
 .servicio-card.active .servicio-descripcion {
   color: var(--color-text);
 }
@@ -106,8 +108,7 @@
   color: var(--color-text);
 }
 
-
-
+/* Hover en la tarjeta */
 .servicio-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -115,17 +116,16 @@
 
 /* Título del servicio */
 .servicio-card h3 {
-  color: var(--color-secondary) !important;
+  color: var(--color-accent) !important;
   font-size: 1.8rem;
   margin-bottom: 15px;
 }
 
 .servicio-card:hover h3 {
-  color: var(--color-text) !important;
   transform: scale(1.02);
+  color: var(--color-accent) !important;
   transition: transform 1s ease;
 }
-
 
 /* Descripción del servicio */
 .servicio-descripcion {
@@ -141,83 +141,87 @@
   transition: transform 1s ease;
 }
 
-
-
 /* Listado de beneficios y tecnologías */
+.servicio-beneficios,
+.servicio-tecnologias {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .servicio-beneficios h4,
 .servicio-tecnologias h4 {
-  color: var(--color-secondary) !important;
-  margin-top: 20px;
+  color: var(--color-accent) !important;
+  margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 1.1rem;
 }
-
-/* Descripción del servicio */
-.servicio-card:hover h4 {
-  color: var(--color-text) !important;
-  transform: scale(1.02);
-  transition: transform 1s ease;
-}
-
 
 .servicio-beneficios ul,
 .servicio-tecnologias ul {
-  padding-left: 20px;
-  color: var(--color-secondary) !important;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 10px 0;
 }
-
-.servicio-card:hover ul {
-  color: var(--color-text) !important;
-  transform: scale(1.02);
-  transition: transform 1s ease;
-}
-
-.servicio-card:hover li {
-  color: var(--color-text) !important;
-  transform: scale(1.02);
-  transition: transform 1s ease;
-}
-
 
 .servicio-beneficios li {
-  margin-bottom: 5px;
+  color: var(--color-secondary);
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.servicio-beneficios li::before {
+  content: "•";
+  color: var(--color-accent);
+  position: absolute;
+  left: 0;
+}
+
+.servicio-tecnologias {
+  position: relative;
+  z-index: 5;
+}
+
+.servicio-tecnologias ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .servicio-tecnologias li {
-  color: var(--color-bg-solid);
-  margin-bottom: 5px;
-  font-size: 12px;
-}
-
-.servicio-beneficios:hover li {
-  color: var(--color-text) !important;
-  transform: scale(1.02);
-  transition: transform 1s ease;
-}
-
-
-/* Estilos adicionales para servicios destacados */
-.servicio-card.destacado {
-  border: 2px solid var(--color-accent);
+  display: inline-block;
+  background: var(--color-bg-2);
+  color: var(--color-text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
   position: relative;
-  overflow: hidden;
+  z-index: 10;
+  border: 1px solid transparent;
 }
 
-.servicio-card.destacado::before {
-  content: '🌟 Popular';
-  position: absolute;
-  top: 10px;
-  right: -30px;
+.servicio-tecnologias li:hover {
   background: var(--color-accent);
   color: white;
-  padding: 5px 30px;
-  transform: rotate(45deg);
-  font-size: 0.8em;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-accent);
+}
+
+.servicio-tecnologias li:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* Contenedor de tecnologías */
 .contenedor-tecnologias {
-  margin-bottom: 20px; /* Empuja el contenido de abajo */
-  min-height: 200px; /* Aumenta la altura mínima del contenedor */
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 5;
 }
 
 /* Animación para tecnologías */
@@ -242,8 +246,6 @@
   transform: translateY(-3px) scale(0.95);
   cursor: pointer;
 }
-
-
 
 /* Contenedor del botón de llamada a la acción */
 .servicio-cta {

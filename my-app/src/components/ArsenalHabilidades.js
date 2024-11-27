@@ -10,7 +10,7 @@ function ArsenalHabilidades() {
     es: [
       {
         nombre: 'Visión Estratégica',
-        icono: '🎯',
+        iconoClass: 'strategic-vision',
         descripcion: 'Diseño e implementación de estrategias para impulsar el crecimiento empresarial.',
         ejemplos: [
           { texto: 'Evaluación de Procesos', enlace: '#evaluacion-procesos' },
@@ -20,7 +20,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Liderazgo de Equipos',
-        icono: '👥',
+        iconoClass: 'team-leadership',
         descripcion: 'Gestión y desarrollo de equipos multidisciplinarios enfocados en alcanzar objetivos concretos.',
         ejemplos: [
           { texto: 'Metodologías Ágiles', enlace: '#metodologias-agiles' },
@@ -30,7 +30,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Integración Tecnológica',
-        icono: '🔗',
+        iconoClass: 'tech-integration',
         descripcion: 'Automatización y digitalización con BuildShip, Render y AWS para optimizar flujos de trabajo.',
         ejemplos: [
           { texto: 'Automatización con AWS', enlace: '#automatizacion-aws' },
@@ -40,7 +40,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Soluciones AI Avanzadas',
-        icono: '🤖',
+        iconoClass: 'ai-solutions',
         descripcion: 'Implementación de inteligencia artificial con OpenAI, TensorFlow, Ollama, y chatbots personalizados.',
         ejemplos: [
           { texto: 'Asistentes Virtuales', enlace: '#asistentes-virtuales' },
@@ -50,7 +50,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Análisis de Datos',
-        icono: '📊',
+        iconoClass: 'data-analysis',
         descripcion: 'Extracción, limpieza y análisis con JavaScript, Python, SQL, BI y Tableau para decisiones basadas en datos.',
         ejemplos: [
           { texto: 'Análisis Predictivo', enlace: '#analisis-predictivo' },
@@ -60,7 +60,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Logística y Operaciones',
-        icono: '📦',
+        iconoClass: 'logistics',
         descripcion: 'Optimización de operaciones y procesos para una mejora continua y sostenible.',
         ejemplos: [
           { texto: 'Optimización de Suministro', enlace: '#optimizacion-suministro' },
@@ -70,7 +70,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'E-Commerce & Marketplaces',
-        icono: '🛒',
+        iconoClass: 'ecommerce',
         descripcion: 'Experiencia en digitalización, integración y gestión en plataformas como Mercado Libre, Amazon y Shopify.',
         ejemplos: [
           { texto: 'SEO para Amazon', enlace: '#seo-amazon' },
@@ -82,7 +82,7 @@ function ArsenalHabilidades() {
     en: [
       {
         nombre: 'Strategic Vision',
-        icono: '🎯',
+        iconoClass: 'strategic-vision',
         descripcion: 'Design and implementation of strategies to drive business growth.',
         ejemplos: [
           { texto: 'Process Evaluation', enlace: '#process-evaluation' },
@@ -92,7 +92,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Team Leadership',
-        icono: '👥',
+        iconoClass: 'team-leadership',
         descripcion: 'Management and development of multidisciplinary teams focused on achieving concrete objectives.',
         ejemplos: [
           { texto: 'Agile Methodologies', enlace: '#agile-methodologies' },
@@ -102,7 +102,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Technological Integration',
-        icono: '🔗',
+        iconoClass: 'tech-integration',
         descripcion: 'Automation and digitalization with BuildShip, Render, and AWS to optimize workflows.',
         ejemplos: [
           { texto: 'Automation with AWS', enlace: '#automation-aws' },
@@ -112,7 +112,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Advanced AI Solutions',
-        icono: '🤖',
+        iconoClass: 'ai-solutions',
         descripcion: 'Implementation of artificial intelligence with OpenAI, TensorFlow, Ollama, and customized chatbots.',
         ejemplos: [
           { texto: 'Virtual Assistants', enlace: '#virtual-assistants' },
@@ -122,7 +122,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Data Analysis',
-        icono: '📊',
+        iconoClass: 'data-analysis',
         descripcion: 'Extraction, cleaning, and analysis with JavaScript, Python, SQL, BI, and Tableau for data-driven decisions.',
         ejemplos: [
           { texto: 'Predictive Analysis', enlace: '#predictive-analysis' },
@@ -132,7 +132,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Logistics and Operations',
-        icono: '📦',
+        iconoClass: 'logistics',
         descripcion: 'Optimization of operations and processes for continuous and sustainable improvement.',
         ejemplos: [
           { texto: 'Supply Optimization', enlace: '#supply-optimization' },
@@ -142,7 +142,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'E-Commerce & Marketplaces',
-        icono: '🛒',
+        iconoClass: 'ecommerce',
         descripcion: 'Experience in digitalization, integration, and management on platforms like Mercado Libre, Amazon, and Shopify.',
         ejemplos: [
           { texto: 'SEO for Amazon', enlace: '#seo-amazon' },
@@ -174,9 +174,8 @@ function ArsenalHabilidades() {
             className={`habilidad-card ${activeIndex === index ? 'active' : ''}`}
             onClick={() => handleCardClick(index)}
           >
-            <div className="habilidad-header">
-              <div className="habilidad-icono">{habilidad.icono}</div>
-              <div className="habilidad-nombre">{habilidad.nombre}</div>
+            <div className={`habilidad-header ${habilidad.iconoClass}`}>
+              <h3 className="habilidad-nombre">{habilidad.nombre}</h3>
             </div>
             <div className="habilidad-descripcion">
               {habilidad.descripcion}

@@ -1,141 +1,130 @@
 # Elier Portfolio
 
-**Elier Portfolio** is a personal portfolio website showcasing the work and skills of the developer. The project is built using modern web technologies and is hosted on GitHub Pages.
+**Elier Portfolio** es un sitio web profesional que muestra mi experiencia en transformación digital, e-commerce y optimización de operaciones. Construido con tecnologías modernas y enfocado en la experiencia del usuario.
 
-## Table of Contents
+## Tabla de Contenidos
 
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Deployment](#deployment)
-- [Getting Started](#getting-started)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Características](#características)
+- [Despliegue](#despliegue)
+- [Inicio Rápido](#inicio-rápido)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Project Structure
-
-The project is organized as follows:
+## Estructura del Proyecto
 
 ```bash
 /
-├── public/                 # Public assets and index.html
+├── public/                 # Activos públicos y configuración base
+│   └── index.html         # HTML base con meta tags SEO y analytics
 ├── src/
-│   ├── components/        # React components
-│   │   └── ChatModal/    # Interactive AI chatbot component
-│   ├── contexts/         # React contexts (Language, Theme)
-│   ├── data/            # Static data and configurations
-│   ├── hooks/           # Custom React hooks
-│   └── styles/          # CSS and styling files
+│   ├── components/        # Componentes React
+│   │   ├── ChatModal/    # Chatbot interactivo con IA
+│   │   ├── entradas/     # Componentes del blog
+│   │   ├── hooks/        # Hooks personalizados
+│   │   └── utils/        # Funciones de utilidad
+│   ├── contexts/         # Contextos (Idioma, Tema)
+│   ├── styles/           # Estilos CSS
+│   │   ├── components/   # Estilos específicos por componente
+│   │   └── shared/       # Estilos compartidos
+│   └── assets/           # Imágenes y recursos estáticos
 ├── .github/              # GitHub-specific files
 ├── README.md             # Project documentation
 ├── package.json          # Project dependencies and scripts
 └── .gitignore           # Git ignore configuration
 ```
 
-## Tech Stack
+## Stack Tecnológico
 
-- **HTML/CSS**: For the structure and responsive design of the site
-- **JavaScript (React)**: To add interactivity and dynamic content
-- **Git/GitHub**: For version control and project management
-- **GitHub Pages**: Used for hosting the portfolio website
-- **Custom Domain**: Configured for personalized URL
-- **React Icons**: For consistent and scalable iconography
-- **Context API**: For state management and internationalization
+### Frontend
+- **React 18+**: Framework principal
+- **React Router 6**: Enrutamiento del cliente
+- **Context API**: Gestión de estado global
+- **CSS Modules**: Estilos modulares
+- **Typed.js**: Animaciones de texto
+- **React Icons**: Iconografía
 
-## Features
+### Optimización y Rendimiento
+- **React Suspense & Lazy Loading**: Carga diferida de componentes
+- **Google Tag Manager**: Análisis y seguimiento
+- **Meta Tags Dinámicos**: SEO optimizado
+- **Responsive Design**: Diseño adaptativo
 
-### Interactive AI Chatbot
-- Bilingual support (Spanish/English)
-- Dynamic navigation through portfolio sections
-- Interactive benefits exploration
-- Real-time typing indicators
-- Message history preservation
-- Smooth animations and transitions
-- Quick access to key sections
-- Responsive design for all devices
+### Herramientas de Desarrollo
+- **Git & GitHub**: Control de versiones
+- **GitHub Pages**: Alojamiento
+- **NPM**: Gestión de paquetes
 
-### Technical Highlights
-- Optimized React components using Hooks
-- Efficient state management
-- Modular CSS with variables
-- Accessibility considerations
-- Mobile-first responsive design
-- Smooth scrolling and animations
-- Cross-browser compatibility
+## Características
 
-## Deployment
+### Componentes Principales
+- **HeroBanner**: Presentación dinámica con animaciones
+- **ArsenalHabilidades**: Showcase de habilidades técnicas
+- **Portafolio**: Galería de proyectos con ProjectCard
+- **Blog**: Sistema de blog con entradas dinámicas
+- **Servicios**: Servicios profesionales ofrecidos
+- **Tarifario**: Planes y precios
+- **ChatModal**: Asistente virtual inteligente
 
-The portfolio is deployed using GitHub Pages. You can view it live at [Elier Portfolio](https://elelier.github.io/elier-portfolio).
+### Características Técnicas
+- **Internacionalización**: Soporte multiidioma (ES/EN)
+- **Tema Dinámico**: Modo claro/oscuro
+- **SEO Optimizado**: Meta tags y Open Graph
+- **Analytics Integrado**: GTM y Google Analytics
+- **Diseño Responsivo**: Mobile-first
+- **Accesibilidad**: ARIA labels y semántica HTML5
 
-### GitHub Pages Configuration
+### Integración de IA
+- **Chatbot Inteligente**:
+  - Navegación asistida
+  - Respuestas contextuales
+  - Soporte bilingüe
+  - Historial de conversación
+  - Indicador de escritura
+  - Botones de acceso rápido
 
-The project is configured to deploy from the `main` branch. Ensure that:
+## Despliegue
 
-- The content is served from the `/src` folder
-- GitHub Pages is set to deploy from the root (`/`)
+El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https://www.elelier.com).
 
-## Getting Started
+### Configuración de Producción
+- Dominio personalizado configurado
+- HTTPS habilitado
+- Compresión de activos
+- Caché optimizado
+- Analytics configurado
 
-### Prerequisites
+## Inicio Rápido
 
-Make sure you have [Node.js](https://nodejs.org/) installed.
+### Prerrequisitos
+- Node.js 16+
+- NPM 7+
 
-### Installation
+### Instalación
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/elelier/elier-portfolio.git
-    cd elier-portfolio
-    ```
+```bash
+git clone https://github.com/elelier/portafolio-personal.git
+cd portafolio-personal
+npm install
+```
 
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
-
-### Running the App Locally
-
-To run the application in development mode:
+### Desarrollo Local
 
 ```bash
 npm start
 ```
 
-This will start the app and open it in your browser at [http://localhost:3000](http://localhost:3000). The page will automatically reload if you make changes to the code.
-
-### Building for Production
-
-To create an optimized production build:
+### Construcción para Producción
 
 ```bash
 npm run build
 ```
 
-This will output the production files to the `build` directory, ready for deployment.
-
 ## Contributing
 
-Contributions are welcome! Follow these steps:
-
-1. Fork the repository
-2. Create a new branch:
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-3. Make your changes and commit them:
-    ```bash
-    git commit -m "Add feature: your feature name"
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature/your-feature-name
-    ```
-5. Open a Pull Request
-
-Please ensure that your code follows the project's coding standards and is well-documented.
+No se aceptan contribuciones, pero siéntete libre de copiar el repositorio para hacer tu propia landing.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
----
+Este proyecto está licenciado bajo la licencia MIT. Consulte el archivo [LICENSE](LICENSE) para obtener más detalles.

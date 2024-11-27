@@ -1,111 +1,130 @@
 # Elier Portfolio
 
-**Elier Portfolio** es un sitio web de portafolio personal que muestra el trabajo y las habilidades del desarrollador. El proyecto está construido utilizando tecnologías web modernas y está alojado en GitHub Pages.
+**Elier Portfolio** es un sitio web profesional que muestra mi experiencia en transformación digital, e-commerce y optimización de operaciones. Construido con tecnologías modernas y enfocado en la experiencia del usuario.
 
 ## Tabla de Contenidos
 
 - [Estructura del Proyecto](#estructura-del-proyecto)
-- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Características](#características)
 - [Despliegue](#despliegue)
-- [Comenzando](#comenzando)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
+- [Inicio Rápido](#inicio-rápido)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Estructura del Proyecto
 
-El proyecto está organizado de la siguiente manera:
-
 ```bash
 /
-├── public/                 # Archivos públicos e index.html
-├── src/                    # Archivos fuente (componentes, recursos, estilos)
-├── .github/                # Archivos específicos de GitHub (Actions, configuración de Pages)
-├── README.md               # Documentación del proyecto
-├── package.json            # Dependencias y scripts del proyecto
-└── .gitignore              # Archivos y carpetas a ignorar en el control de versiones
+├── public/                 # Activos públicos y configuración base
+│   └── index.html         # HTML base con meta tags SEO y analytics
+├── src/
+│   ├── components/        # Componentes React
+│   │   ├── ChatModal/    # Chatbot interactivo con IA
+│   │   ├── entradas/     # Componentes del blog
+│   │   ├── hooks/        # Hooks personalizados
+│   │   └── utils/        # Funciones de utilidad
+│   ├── contexts/         # Contextos (Idioma, Tema)
+│   ├── styles/           # Estilos CSS
+│   │   ├── components/   # Estilos específicos por componente
+│   │   └── shared/       # Estilos compartidos
+│   └── assets/           # Imágenes y recursos estáticos
+├── .github/              # GitHub-specific files
+├── README.md             # Project documentation
+├── package.json          # Project dependencies and scripts
+└── .gitignore           # Git ignore configuration
 ```
 
-## Tecnologías Utilizadas
+## Stack Tecnológico
 
-- **HTML/CSS**: Para la estructura y el diseño responsivo del sitio.
-- **JavaScript (React)**: Para agregar interactividad y contenido dinámico.
-- **Git/GitHub**: Para el control de versiones y la gestión del proyecto.
-- **GitHub Pages**: Utilizado para alojar el sitio web del portafolio.
-- **Dominio Personalizado**: Configurado para una URL personalizada.
+### Frontend
+- **React 18+**: Framework principal
+- **React Router 6**: Enrutamiento del cliente
+- **Context API**: Gestión de estado global
+- **CSS Modules**: Estilos modulares
+- **Typed.js**: Animaciones de texto
+- **React Icons**: Iconografía
+
+### Optimización y Rendimiento
+- **React Suspense & Lazy Loading**: Carga diferida de componentes
+- **Google Tag Manager**: Análisis y seguimiento
+- **Meta Tags Dinámicos**: SEO optimizado
+- **Responsive Design**: Diseño adaptativo
+
+### Herramientas de Desarrollo
+- **Git & GitHub**: Control de versiones
+- **GitHub Pages**: Alojamiento
+- **NPM**: Gestión de paquetes
+
+## Características
+
+### Componentes Principales
+- **HeroBanner**: Presentación dinámica con animaciones
+- **ArsenalHabilidades**: Showcase de habilidades técnicas
+- **Portafolio**: Galería de proyectos con ProjectCard
+- **Blog**: Sistema de blog con entradas dinámicas
+- **Servicios**: Servicios profesionales ofrecidos
+- **Tarifario**: Planes y precios
+- **ChatModal**: Asistente virtual inteligente
+
+### Características Técnicas
+- **Internacionalización**: Soporte multiidioma (ES/EN)
+- **Tema Dinámico**: Modo claro/oscuro
+- **SEO Optimizado**: Meta tags y Open Graph
+- **Analytics Integrado**: GTM y Google Analytics
+- **Diseño Responsivo**: Mobile-first
+- **Accesibilidad**: ARIA labels y semántica HTML5
+
+### Integración de IA
+- **Chatbot Inteligente**:
+  - Navegación asistida
+  - Respuestas contextuales
+  - Soporte bilingüe
+  - Historial de conversación
+  - Indicador de escritura
+  - Botones de acceso rápido
 
 ## Despliegue
 
-🚀 El portafolio está desplegado utilizando GitHub Pages. Puedes verlo en vivo en [Elier Portfolio](https://elelier.github.io/elier-portfolio).
+El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https://www.elelier.com).
 
-### Configuración de GitHub Pages
+### Configuración de Producción
+- Dominio personalizado configurado
+- HTTPS habilitado
+- Compresión de activos
+- Caché optimizado
+- Analytics configurado
 
-El proyecto está configurado para desplegarse desde la rama `main`. Asegúrate de que:
-
-- El contenido se sirva desde la carpeta `/src`.
-- GitHub Pages esté configurado para desplegar desde la raíz (`/`).
-
-## Comenzando
+## Inicio Rápido
 
 ### Prerrequisitos
-
-💻 Asegúrate de tener [Node.js](https://nodejs.org/) instalado.
+- Node.js 16+
+- NPM 7+
 
 ### Instalación
 
-1. Clona el repositorio:
-    ```bash
-    git clone https://github.com/elelier/elier-portfolio.git
-    cd elier-portfolio
-    ```
+```bash
+git clone https://github.com/elelier/portafolio-personal.git
+cd portafolio-personal
+npm install
+```
 
-2. Instala las dependencias:
-    ```bash
-    npm install
-    ```
-
-### Ejecutando la Aplicación Localmente
-
-▶️ Para ejecutar la aplicación en modo de desarrollo:
+### Desarrollo Local
 
 ```bash
 npm start
 ```
 
-Esto iniciará la aplicación y la abrirá en tu navegador en [http://localhost:3000](http://localhost:3000). La página se recargará automáticamente si realizas cambios en el código.
-
 ### Construcción para Producción
-
-🏗️ Para crear una versión optimizada para producción:
 
 ```bash
 npm run build
 ```
 
-Esto generará los archivos de producción en el directorio `build`, listos para ser desplegados.
+## Contributing
 
-## Contribuciones
+No se aceptan contribuciones, pero siéntete libre de copiar el repositorio para hacer tu propia landing.
 
-🤝 ¡Las contribuciones son bienvenidas! Sigue estos pasos:
+## License
 
-1. Haz un fork del repositorio.
-2. Crea una nueva rama:
-    ```bash
-    git checkout -b feature/tu-nombre-de-característica
-    ```
-3. Realiza tus cambios y haz commit:
-    ```bash
-    git commit -m "Agregar característica: tu nombre de característica"
-    ```
-4. Empuja la rama:
-    ```bash
-    git push origin feature/tu-nombre-de-característica
-    ```
-5. Abre un Pull Request.
-
-Por favor, asegúrate de que tu código siga los estándares de codificación del proyecto y esté bien documentado.
-
-## Licencia
-
-📜 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
----
+Este proyecto está licenciado bajo la licencia MIT. Consulte el archivo [LICENSE](LICENSE) para obtener más detalles.

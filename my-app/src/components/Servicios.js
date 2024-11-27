@@ -1,15 +1,83 @@
-import React from 'react';
-import { useLanguage } from '../contexts/LanguageContext'; // Asegúrate de ajustar esta ruta si es necesario
+import React, { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import TechDetailsModal from './TechDetailsModal';
+import { TECH_KEYS } from '../constants/techKeys';
 import '../styles/components/Servicios.css';
 
 function Servicios() {
-  const { language } = useLanguage(); // Obtén el idioma actual del contexto
+  const { language } = useLanguage();
+  const [selectedTech, setSelectedTech] = useState(null);
 
   const handleScrollToElement = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleTechClick = (tech) => {
+    // Mapear el nombre de la tecnología a su clave correspondiente
+    const techKeyMap = {
+      // Desarrollo
+      'React': TECH_KEYS.REACT,
+      'Node.js': TECH_KEYS.NODEJS,
+      'Python': TECH_KEYS.PYTHON,
+      'Hugging Face': TECH_KEYS.HUGGING_FACE,
+      
+      // Análisis y Procesos
+      'Análisis de procesos': TECH_KEYS.PROCESS_AUTO,
+      'Process Analysis': TECH_KEYS.PROCESS_AUTO,
+      'Planificación estratégica': TECH_KEYS.LEAN_SIX,
+      'Strategic Planning': TECH_KEYS.LEAN_SIX,
+      'Automatización digital': TECH_KEYS.PROCESS_AUTO,
+      'Digital Automation': TECH_KEYS.PROCESS_AUTO,
+      'Optimización logística': TECH_KEYS.INVENTORY,
+      'Logistics Optimization': TECH_KEYS.INVENTORY,
+      'Lean Management': TECH_KEYS.LEAN_SIX,
+      'DMAIC': TECH_KEYS.DMAIC,
+      
+      // IA y Machine Learning
+      'Chatbots': TECH_KEYS.AI_CUSTOMER,
+      'Aprendizaje automático': TECH_KEYS.MACHINE_LEARNING,
+      'Machine Learning': TECH_KEYS.MACHINE_LEARNING,
+      'Procesamiento de Lenguaje Natural': TECH_KEYS.NLP,
+      'Natural Language Processing': TECH_KEYS.NLP,
+      'IA Generativa': TECH_KEYS.GEN_AI,
+      'Generative AI': TECH_KEYS.GEN_AI,
+      'IA para servicio al cliente': TECH_KEYS.AI_CUSTOMER,
+      'AI for Customer Service': TECH_KEYS.AI_CUSTOMER,
+      
+      // Desarrollo e Integración
+      'Desarrollo de APIs': TECH_KEYS.API_DEV,
+      'API Development': TECH_KEYS.API_DEV,
+      'Integración de sistemas': TECH_KEYS.API_DEV,
+      'System Integration': TECH_KEYS.API_DEV,
+      
+      // Plataformas y E-commerce
+      'Wix': TECH_KEYS.WIX,
+      'ERP Olimpo': TECH_KEYS.ERP_OLIMPO,
+      'Gestión de inventarios': TECH_KEYS.INVENTORY,
+      'Inventory Management': TECH_KEYS.INVENTORY,
+      'Mercado Libre': TECH_KEYS.MERCADO_LIBRE,
+      'Amazon': TECH_KEYS.AMAZON,
+      'Shopify': TECH_KEYS.SHOPIFY,
+      'NetSuite': TECH_KEYS.NETSUITE,
+      'SAP': TECH_KEYS.SAP,
+      'SEO y SEM': TECH_KEYS.WIX,
+      'SEO and SEM': TECH_KEYS.WIX
+    };
+
+    console.log('Tech clicked:', tech); // Para debugging
+    const techKey = techKeyMap[tech];
+    console.log('Tech key found:', techKey); // Para debugging
+    
+    if (techKey) {
+      setSelectedTech(techKey);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTech(null);
   };
 
   const translations = {
@@ -150,9 +218,8 @@ function Servicios() {
       tecnologias: "Solutions, Tools, and Methodologies"
     }
   };
-  
 
-  const { servicios, introduccion, encabezado, beneficios, tecnologias } = translations[language] || translations.es; // Obtén las traducciones según el idioma
+  const { servicios, introduccion, encabezado, beneficios, tecnologias } = translations[language] || translations.es;
 
   return (
     <section id="servicios" className="servicios">
@@ -183,7 +250,13 @@ function Servicios() {
                 <h4>{tecnologias}:</h4>
                 <ul>
                   {servicio.tecnologias.map((tech, i) => (
-                    <li key={i}>{tech}</li>
+                    <li 
+                      key={i} 
+                      onClick={() => handleTechClick(tech)}
+                      style={{ cursor: 'pointer', position: 'relative', zIndex: 10 }}
+                    >
+                      {tech}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -196,6 +269,11 @@ function Servicios() {
           </div>
         ))}
       </div>
+      <TechDetailsModal
+        isOpen={selectedTech !== null}
+        onClose={handleCloseModal}
+        techKey={selectedTech}
+      />
     </section>
   );
 }

@@ -127,6 +127,10 @@ export const useTechDetails = () => {
     },
     "infrastructure": {
       [TECH_KEYS.API_DEV]: {
+        name: {
+          es: "Desarrollo de APIs",
+          en: "API Development"
+        },
         description: language === 'es'
           ? "Diseño y desarrollo de API's para permitir la comunicación entre sistemas."
           : "Design and development of APIs to enable communication between systems.",
@@ -152,6 +156,10 @@ export const useTechDetails = () => {
         tools: ["Swagger", "Postman", "GraphQL", "OAuth", "JWT"]
       },
       "AWS": {
+        name: {
+          es: "Amazon Web Services",
+          en: "Amazon Web Services"
+        },
         description: language === 'es'
           ? "Plataforma líder de servicios en la nube que proporciona una amplia gama de servicios de infraestructura y computación."
           : "Leading cloud services platform providing a wide range of infrastructure and computing services.",
@@ -179,6 +187,10 @@ export const useTechDetails = () => {
     },
     "ai_solutions": {
       [TECH_KEYS.GEN_AI]: {
+        name: {
+          es: "IA Generativa",
+          en: "Generative AI"
+        },
         description: language === 'es'  
           ? "Generación de contenido creativo y adaptativo utilizando modelos de lenguaje."
           : "Creative and adaptive content generation using language models.",
@@ -204,6 +216,10 @@ export const useTechDetails = () => {
         tools: ["OpenAI", "Google", "Anthropic", "Microsoft"]
       },
       [TECH_KEYS.MACHINE_LEARNING]: {
+          name: {
+            es: "Machine Learning",
+            en: "Machine Learning"
+          },
           description: language === 'es'
           ? "Rama de la inteligencia artificial que permite a los sistemas aprender y mejorar a partir de la experiencia."
           : "Branch of artificial intelligence that enables systems to learn and improve from experience.",
@@ -231,6 +247,10 @@ export const useTechDetails = () => {
     },
     "platforms": {
       [TECH_KEYS.WIX]: {
+        name: {
+          es: "Wix",
+          en: "Wix"
+        },
         description: language === 'es'
           ? "Plataforma de desarrollo web que permite crear sitios web profesionales sin necesidad de código."
           : "Web development platform that allows creating professional websites without coding.",
@@ -256,6 +276,10 @@ export const useTechDetails = () => {
         tools: ["Wix ADI", "Wix Editor", "Wix Stores", "Wix Bookings", "Wix Analytics"]
       },
       [TECH_KEYS.MERCADO_LIBRE]: {
+        name: {
+          es: "Mercado Libre",
+          en: "Mercado Libre"
+        },
         description: language === 'es'
           ? "Principal plataforma de comercio electrónico en América Latina que conecta vendedores y compradores."
           : "Leading e-commerce platform in Latin America that connects sellers and buyers.",
@@ -281,6 +305,10 @@ export const useTechDetails = () => {
         tools: ["Mercado Pago", "Mercado Envíos", "Mercado Shops", "Mercado Ads"]
       },
       [TECH_KEYS.AMAZON]: {
+        name: {
+          es: "Amazon",
+          en: "Amazon"
+        },
         description: language === 'es'
           ? "Plataforma global de comercio electrónico y servicios en la nube líder mundial."
           : "Global e-commerce platform and world-leading cloud services provider.",
@@ -306,6 +334,10 @@ export const useTechDetails = () => {
         tools: ["Seller Central", "FBA", "Amazon Advertising", "Brand Registry"]
       },
       [TECH_KEYS.SHOPIFY]: {
+        name: {
+          es: "Shopify",
+          en: "Shopify"
+        },
         description: language === 'es'
           ? "Plataforma de comercio electrónico que permite crear y gestionar tiendas online."
           : "E-commerce platform that enables creating and managing online stores.",
@@ -331,6 +363,10 @@ export const useTechDetails = () => {
         tools: ["Shopify POS", "Shopify Payments", "Shopify Apps", "Shopify Analytics"]
       },
       [TECH_KEYS.NETSUITE]: {
+        name: {
+          es: "NetSuite",
+          en: "NetSuite"
+        },
         description: language === 'es'
           ? "Sistema ERP en la nube que integra gestión financiera, CRM, e-commerce y más."
           : "Cloud ERP system integrating financial management, CRM, e-commerce, and more.",
@@ -358,6 +394,10 @@ export const useTechDetails = () => {
     },
     "methodologies": {
       [TECH_KEYS.LEAN_SIX]: {
+        name: {
+          es: "Lean Six Sigma",
+          en: "Lean Six Sigma"
+        },
         description: language === 'es'
           ? "Metodología de mejora de procesos que combina Lean Manufacturing y Six Sigma para reducir desperdicios y variabilidad."
           : "Process improvement methodology that combines Lean Manufacturing and Six Sigma to reduce waste and variability.",
@@ -385,6 +425,10 @@ export const useTechDetails = () => {
           : ["DMAIC", "Value Stream Mapping", "5S", "Kaizen", "Control Charts"]
       },
       [TECH_KEYS.DMAIC]: {
+        name: {
+          es: "DMAIC",
+          en: "DMAIC"
+        },
         description: language === 'es'
           ? "Metodología de mejora de procesos que forma parte de Six Sigma para optimizar y estabilizar procesos."
           : "Process improvement methodology part of Six Sigma to optimize and stabilize processes.",
@@ -410,6 +454,10 @@ export const useTechDetails = () => {
         tools: ["Minitab", "Quality Tools", "Statistical Analysis", "Process Mapping"]
       },
       [TECH_KEYS.PROCESS_AUTO]: {
+        name: {
+          es: "Automatización de Procesos",
+          en: "Process Automation"
+        },
         description: language === 'es'
           ? "Implementación de sistemas y tecnologías para automatizar procesos empresariales repetitivos."
           : "Implementation of systems and technologies to automate repetitive business processes.",
@@ -435,6 +483,10 @@ export const useTechDetails = () => {
         tools: ["RPA", "BPM", "Workflow Engines", "Integration Platforms"]
       },
       [TECH_KEYS.SAP]: {
+        name: {
+          es: "SAP",
+          en: "SAP"
+        },
         description: language === 'es'
           ? "Sistema líder de planificación de recursos empresariales para gestionar operaciones de negocio."
           : "Leading enterprise resource planning system for managing business operations.",
@@ -460,6 +512,10 @@ export const useTechDetails = () => {
         tools: ["SAP S/4HANA", "SAP ECC", "SAP Fiori", "SAP Analytics"]
       },
       [TECH_KEYS.INVENTORY]: {
+        name: {
+          es: "Inventario",
+          en: "Inventory"
+        },
         description: language === 'es'
           ? "Sistema para controlar y gestionar eficientemente el inventario de una organización."
           : "System to efficiently control and manage an organization's inventory.",
@@ -487,31 +543,5 @@ export const useTechDetails = () => {
     }
   };
 
-  const getTechDetails = (category, techName) => {
-    return techCategories[category]?.[techName];
-  };
-
-  const getAllTechDetails = () => {
-    const allTechs = {};
-    
-    Object.values(techCategories).forEach(category => {
-      Object.entries(category).forEach(([techName, techDetails]) => {
-        allTechs[techName] = techDetails;
-      });
-    });
-    
-    console.log('All available techs:', allTechs);
-    return allTechs;
-  };
-
-  const getCategoryTechs = (category) => {
-    return techCategories[category] || {};
-  };
-
-  return {
-    getTechDetails,
-    getAllTechDetails,
-    getCategoryTechs,
-    techCategories
-  };
-}; 
+  return { techCategories };
+};

@@ -4,7 +4,7 @@
 /* Estilos generales para el contenedor */
 .sobre-mi {
   position: relative;
-  padding: 40px 20px; /* Añadido padding para más espacio arriba y abajo */
+  padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
   background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg)); /* Color del fondo del contenedor */
   display: flex;
   flex-direction: column;
@@ -14,15 +14,17 @@
 }
 
 .sobre-mi h2 {
-  margin: 20px 0; /* Espaciado fijo alrededor del título */
+  margin: 20px 0;
   text-align: center;
-  font-size: 2rem; /* Ajusta el tamaño del texto según necesites */
+  font-size: 3rem;
   color: var(--hero-title-color-2);
-  position: sticky; /* Fija el título en la parte superior */
+  position: sticky;
   top: 0;
-  background-color: transparent; /* Fondo para mantener la legibilidad */
-  z-index: 100; /* Asegura que esté encima del contenido */
+  background-color: transparent;
+  z-index: 100;
 }
+
+
 
 .contenido-sobre-mi {
   position: relative;
@@ -33,13 +35,6 @@
   justify-content: space-between;
   min-height: 100%;
   padding-bottom: 40px; /* Agrega espacio adicional al final del contenedor */
-}
-
-.contenido-sobre-mi h2 {
-  font-size: 3rem;
-  margin-top: 40px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
 }
 
 /* Ajustes para el subtítulo */
@@ -72,61 +67,79 @@
   color: var(--color-accent);
 }
 
-.historia-personal,
-.experiencia-destacada,
-.vision-tecnologica {
-  flex-shrink: 0; /* Evita que se reduzcan */
-  min-height: 100%; /* Asegura que cada uno tome al menos la altura del contenedor */
-}
 
 /* Estilos de las pestañas */
 .tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
-  position: sticky; /* Fija las pestañas en la parte superior */
-  top: 60px; /* Ajusta este valor para que esté debajo del título */
-  z-index: 100; /* Asegura que esté encima del contenido */
-  background: transparent;
+  align-items: center;
+  margin: 1rem auto 1rem; /* Reducido de 4rem a 2rem en el margen inferior */
+  position: sticky;
+  top: 60px;
+  z-index: 100;
+  background: rgba(var(--color-bg-rgb), 0.1);
+  backdrop-filter: blur(8px);
+  padding: 0.8rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 95%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tab-button {
   background: transparent;
   border: none;
   color: var(--color-text);
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  margin: 0 10px;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+  margin: 0 0.5rem;
   cursor: pointer;
   position: relative;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  border-radius: 25px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
 }
 
-.tab-button::after {
+.tab-button::before {
   content: '';
-  display: block;
-  width: 0%;
-  height: 2px;
-  background: var(--color-accent);
-  transition: width 0.3s;
   position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--color-accent), transparent);
+  border-radius: 25px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .tab-button:hover {
-  color: var(--color-accent);
+  color: var(--color-text);
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
-.tab-button:hover::after,
-.tab-button.active::after {
-  width: 100%;
+.tab-button:hover::before {
+  opacity: 0.15;
 }
 
 .tab-button.active {
-  color: var(--color-accent);
+  color: var(--color-text);
+  background: rgba(var(--color-accent-rgb), 0.15);
+  opacity: 1;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(var(--color-accent-rgb), 0.2);
 }
+
+.tab-button.active::before {
+  opacity: 0.2;
+}
+
+
 
 .section-content {
   display: flex;
@@ -134,7 +147,7 @@
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 2rem; /* Reducido el padding superior de 2rem a 1rem */
   gap: 2rem;
 }
 
@@ -147,14 +160,7 @@
   gap: 2rem;
 }
 
-@media (min-width: 768px) {
-  .content-container {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 3rem;
-  }
-}
+
 
 .image-container {
   flex: 0 1 400px;
@@ -193,24 +199,6 @@
   position: relative;
 }
 
-.sub-title-container::before {
-  content: '"';
-  font-size: 3rem;
-  position: absolute;
-  left: 0;
-  top: -0.5rem;
-  color: var(--color-accent);
-}
-
-.sub-title-container::after {
-  content: '"';
-  font-size: 3rem;
-  position: absolute;
-  right: 0;
-  bottom: -1.5rem;
-  color: var(--color-accent);
-}
-
 /* Contenedor para los botones CTA */
 .cta-seccion-sobre-mi {
   display: flex;
@@ -223,54 +211,9 @@
 }
 
 /* Responsividad */
-@media (max-width: 666px) {
-  .tab-button {
-    background: transparent;
-    border: none;
-    color: var(--color-text);
-    font-size: 1rem;
-    padding: 10px 20px;
-    left: 5px;
-  }
-  
-  .sub-title-container {
-    text-align: center;
-    font-size: 1.5rem; /* Tamaño de la fuente del subtítulo */
-    font-weight: bold;
-    color: var(--color-accent); /* Color del subtítulo */
-    padding-left:5px;
-    padding-right:0px;
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
 
-  .text-content {
-    text-align: center;
-    font-size: 1rem;
-  }
 
-  .gancho-emocional {
-    padding-left: 0;
-  }
 
-  .gancho-emocional::before {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .cta-seccion-sobre-mi {
-    margin-left: -10px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }
-}
-
-@media (min-width: 768px) {
-  .image-container {
-    grid-template-columns: minmax(300px, 1fr) 2fr;
-    align-items: start;
-  }
-}
 
 .shinyy {
   background: linear-gradient(to right, var(--hero-title-color-2) 0%, var(--hero-title-color) 50%, var(--hero-title-color-2) 100%);
@@ -315,18 +258,6 @@
   animation: none;
 }
 
-/* Estilos para las flechitas de navegación */
-.navigation-arrows {
-  position: absolute;
-  top: 15%;
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  transform: translateX(10%);
-  pointer-events: all;
-  z-index: 100; /* Asegura que las flechas estén por encima de otros elementos */
-}
 
 .nav-arrow {
   background: none;
@@ -406,4 +337,64 @@
 }
 .indicator:hover {
   background-color: var(--color-accent);
+}
+
+
+@media (min-width: 768px) {
+  .image-container {
+    grid-template-columns: minmax(300px, 1fr) 2fr;
+    align-items: start;
+  }
+  .content-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3rem;
+  }
+}
+
+
+@media (max-width: 666px) {
+  .sub-title-container {
+    text-align: center;
+    font-size: 1.5rem; /* Tamaño de la fuente del subtítulo */
+    font-weight: bold;
+    color: var(--color-accent); /* Color del subtítulo */
+    padding-left:5px;
+    padding-right:0px;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .text-content {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .gancho-emocional {
+    padding-left: 0;
+  }
+
+  .gancho-emocional::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cta-seccion-sobre-mi {
+    margin-left: -10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs {
+    border-radius: 20px;
+    padding: 0.5rem;
+  }
+
+  .tab-button {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+  }
 }
