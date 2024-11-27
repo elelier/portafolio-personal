@@ -1,7 +1,6 @@
 /* SobreMi.css */
 @import '../index.css'; 
 
-
 /* Estilos generales para el contenedor */
 .sobre-mi {
   position: relative;
@@ -43,26 +42,35 @@
   letter-spacing: 2px;
 }
 
-
 /* Ajustes para el subtítulo */
 .sub-title-container {
   font-size: 1.8rem; /* Tamaño de la fuente del subtítulo */
   font-weight: bold;
   color: var(--color-accent); /* Color del subtítulo */
-  padding-left:60px;
-  padding-right:20px;
+  padding: 0;
+  margin: 2rem 0;
+  text-align: center;
+  width: 100%;
   position: relative;
-  margin-bottom: 1rem;
 }
 
 .sub-title-container::before {
   content: '“';
   font-size: 3rem;
-  left: 0;
-  top: -10px;
+  position: absolute;
+  left: -1.5rem;
+  top: -0.5rem;
   color: var(--color-accent);
 }
 
+.sub-title-container::after {
+  content: '“';
+  font-size: 3rem;
+  position: absolute;
+  right: -1.5rem;
+  bottom: -1.5rem;
+  color: var(--color-accent);
+}
 
 .historia-personal,
 .experiencia-destacada,
@@ -120,54 +128,87 @@
   color: var(--color-accent);
 }
 
-.image-container {
+.section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 2rem;
+}
 
-  max-width: 500px;
-  text-align: center;
-  min-height: 100%; /* Asegura que la imagen contenedor tenga al menos la altura del contenedor */
-  flex: 1 1 auto;
+.content-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .content-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3rem;
+  }
+}
+
+.image-container {
+  flex: 0 1 400px;
+  margin: 0 auto;
 }
 
 .image-container img {
   width: 100%;
-  max-width: 400px;
+  height: auto;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .image-container:hover img {
-  transform: scale(1.05);
-  transition: transform 1s ease;
-  cursor: pointer;
-
+  transform: scale(1.02);
 }
-
-
-.image-container:active img {
-  transform: scale(0.95);
-}
-
 
 .text-content {
-
+  flex: 1;
   max-width: 600px;
-  text-align: justify;
-  min-height: 100%; /* Asegura que el texto contenedor tenga al menos la altura del contenedor */
-  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.text-content h3 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.sub-title-container {
+  font-size: 1.8rem;
+  font-weight: bold;
   color: var(--color-accent);
-  text-align: justify
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  position: relative;
 }
 
-.text-content p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-  text-align: justify
+.sub-title-container::before {
+  content: '"';
+  font-size: 3rem;
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  color: var(--color-accent);
+}
+
+.sub-title-container::after {
+  content: '"';
+  font-size: 3rem;
+  position: absolute;
+  right: 0;
+  bottom: -1.5rem;
+  color: var(--color-accent);
 }
 
 /* Contenedor para los botones CTA */
@@ -180,12 +221,8 @@
   margin-bottom: 20px; /* Asegúrate de dejar espacio debajo de los botones CTA */
 }
 
-
 /* Responsividad */
 @media (max-width: 666px) {
-
-
-
   .tab-button {
     background: transparent;
     border: none;
@@ -207,7 +244,6 @@
   }
   
 
-
   .text-content {
     text-align: center;
     font-size: 1rem;
@@ -226,9 +262,14 @@
     margin-right: 20px;
     margin-bottom: 20px;
   }
-  
 }
 
+@media (min-width: 768px) {
+  .image-container {
+    grid-template-columns: minmax(300px, 1fr) 2fr;
+    align-items: start;
+  }
+}
 
 .shinyy {
   background: linear-gradient(to right, var(--hero-title-color-2) 0%, var(--hero-title-color) 50%, var(--hero-title-color-2) 100%);
@@ -242,8 +283,6 @@
 @keyframes shine {
   to { background-position: 200% center; }
 }
-
-
 
 /* Estilos para los botones CTA */
 .cta-button-2 {

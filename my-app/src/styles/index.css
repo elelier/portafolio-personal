@@ -11,6 +11,7 @@
   --color-bg-solid-light: #ffffff;
   --hero-title-color-light: #7dd3fc;
   --hero-title-color-2-light: #00cc99;
+  --hero-title-color-light-rgb: 125, 211, 252;
   
   --chatbot-chat-widget-bg-color-light:#f6f9fc;
   --chatbot-chat-widget-user-message-bg-color-light:#00cc99;
@@ -33,6 +34,7 @@
   --color-bg-3-dark: #4b3e57;
   --color-bg-solid-dark: #121212;
   --hero-title-color-dark: #7dd3fc;
+  --hero-title-color-dark-rgb: 125, 211, 252;
   --hero-title-color-2-dark: #f6f9fc;
 
   --chatbot-chat-widget-bg-color-dark:#020817;
@@ -58,6 +60,7 @@
   --color-shadow: var(--color-shadow-dark);
   --color-border: var(--color-border-dark);
   --hero-title-color: var(--hero-title-color-dark);
+  --hero-title-color-rgb: var(--hero-title-color-dark-rgb);
   --color-bg-footer: var(--color-bg-footer);
   --hero-title-color-2: var(--hero-title-color-2-dark);
 
@@ -83,6 +86,7 @@
   --color-shadow: var(--color-shadow-light);
   --color-border: var(--color-border-light);
   --hero-title-color: var(--hero-title-color-light);
+  --hero-title-color-rgb: var(--hero-title-color-light-rgb);
   --color-bg-footer: var(--color-bg-footer);
   --hero-title-color-2: var(--hero-title-color-2-light);
 
@@ -284,5 +288,3 @@ a {
   border-radius: 5px;
   text-align: center;
 }
-
-
