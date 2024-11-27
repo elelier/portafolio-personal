@@ -132,7 +132,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
   gap: 2rem;
@@ -142,7 +142,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 0 auto;
   gap: 2rem;
 }
@@ -215,10 +215,11 @@
 .cta-seccion-sobre-mi {
   display: flex;
   gap: 10px;
-  justify-content: flex-end;
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-bottom: 20px; /* Asegúrate de dejar espacio debajo de los botones CTA */
+  justify-content: center;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto 20px auto;
+  padding: 0 20px;
 }
 
 /* Responsividad */
@@ -363,6 +364,7 @@
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
+  max-width: 1400px;
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   min-height: 500px;
   overflow: hidden;

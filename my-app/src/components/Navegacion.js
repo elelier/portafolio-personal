@@ -49,14 +49,14 @@ function Navegacion() {
     es: {
       sobreMi: 'Sobre Mí',
       habilidades: 'Habilidades',
-      portafolio: 'Portafolio',
+      portafolio: 'Carrera',
       servicios: 'Servicios',
       contactame: ' Contáctame'
     },
     en: {
       sobreMi: 'About Me',
       habilidades: 'Skills',
-      portafolio: 'Portfolio',
+      portafolio: 'Carrer',
       servicios: 'Services',
       contactame: ' Contact Me'
     }

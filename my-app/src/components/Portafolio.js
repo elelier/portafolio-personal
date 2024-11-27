@@ -185,8 +185,8 @@ const Portafolio = () => {
   };
 
   return (
-    <section className="portafolio">
-      <h2>{currentLang === 'es' ? 'Carrera Profesional' : 'Professional Career'}</h2>
+    <section id="portafolio" className="portafolio">
+      <h2>{currentLang === 'es' ? 'CARRERA PROFESIONAL' : 'PROFESSIONAL CAREER'}</h2>
       <p className="introduccion">
         {currentLang === 'es' 
           ? 'Mi portafolio refleja una trayectoria diversa en tecnología y gestión empresarial. Cada proyecto representa un desafío único donde he aplicado mis conocimientos en desarrollo de software, inteligencia artificial y optimización de procesos.' 
