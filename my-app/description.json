@@ -1,0 +1,24 @@
+{
+  "nombre": "Portfolio Personal de Elier",
+  "version": "1.0.0",
+  "descripcion": "Un sitio web profesional y moderno que muestra mi experiencia en transformación digital, e-commerce y optimización de operaciones. Construido con las últimas tecnologías web y centrado en ofrecer una experiencia de usuario excepcional.",
+  "tecnologias": [
+    "React",
+    "JavaScript",
+    "HTML",
+    "CSS"
+  ],
+  "caracteristicas": [
+    "Diseño responsivo y adaptativo",
+    "Internacionalización con soporte multiidioma (ES/EN)",
+    "Tema dinámico (modo claro/oscuro)",
+    "Chatbot inteligente con IA",
+    "SEO optimizado con meta tags dinámicos",
+    "Sistema de blog integrado",
+    "Animaciones y transiciones fluidas",
+    "Integración con Google Analytics"
+  ],
+  "link": "https://www.elelier.com",
+  "link_u": "Ver Sitio Web",
+  "banner": "portfolioBanner"
+}

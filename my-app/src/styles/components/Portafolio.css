@@ -21,7 +21,7 @@
   color: var(--hero-title-color-2);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .portafolio h2 {
@@ -40,9 +40,9 @@
   text-align: center;
   color: var(--color-text);
   max-width: 1000px;
-  margin: 0 auto 50px;
   line-height: 1.5;
   padding: 0 20px;
+  margin: 0 auto !important;
 }
 
 /* Grid de proyectos */
@@ -193,7 +193,7 @@
   .introduccion {
     font-size: 1.4rem;
     padding: 0 15px;
-    margin-bottom: 20%;
+    margin: 0 !important;
   }
 
   .proyectos-personales {

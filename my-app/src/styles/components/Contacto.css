@@ -4,7 +4,7 @@
 /* Estilos para la sección de Contacto en modo oscuro */
 .contacto {
     position: relative;
-    padding: 10px 05px;
+    padding: 60px 20px;
     background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg));
     margin-left: auto;
     margin-right: auto;

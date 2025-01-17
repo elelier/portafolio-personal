@@ -104,29 +104,6 @@ const ChatModal = () => {
     });
   };
 
-  const showRedirectMessage = async (sectionKey) => {
-    await showTypingIndicator(translations[language].typing.redirecting);
-    const sectionName = translations[language].sections[sectionKey];
-    const redirectMessage = `
-      <div class="redirect-message">
-        <p>${translations[language].redirectMessages.nowOn(sectionName)}</p>
-        <p class="close-instructions">${translations[language].redirectMessages.close}</p>
-      </div>
-    `;
-    setMessages(prev => [...prev, new SystemMessage(redirectMessage)]);
-  };
-
-  const handleScrollToElement = async (id, sectionKey) => {
-    const element = document.getElementById(id);
-    if (element) {
-      await showRedirectMessage(sectionKey);
-      element.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        setIsOpen(false);
-      }, 2000); // Dar tiempo para leer el mensaje antes de cerrar
-    }
-  };
-
   const handleUserMessage = async (content) => {
     setMessages(prev => [...prev, new UserMessage(content)]);
     await showTypingIndicator(translations[language].typing.thinking);
