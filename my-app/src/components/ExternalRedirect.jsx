@@ -1,22 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/HeroBanner.css';
 
-// Mapeo de IDs a URLs externas (fuera del componente)
 const EXTERNAL_URL_MAP = {
   '00132': 'https://www.canva.com/design/DAGcZPIh0jE/MXeJcVMjya5LRX9sp7cocw/view?utm_content=DAGcZPIh0jE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb4992d367b'
-  // Puedes agregar más mapeos aquí
+};
+
+const translations = {
+  es: {
+    loading: {
+      title: 'Preparando su documento',
+      description: 'Optimizando la experiencia de visualización...'
+    },
+    notFound: {
+      title: 'Documento no disponible',
+      description: 'El recurso solicitado no se encuentra en este momento. Verifique el enlace o contacte soporte.'
+    },
+    success: {
+      title: 'Documento de Cotización',
+      description: 'Haga clic para acceder al documento detallado de su cotización.',
+      buttonText: 'Abrir Documento'
+    }
+  },
+  en: {
+    loading: {
+      title: 'Preparing Your Document',
+      description: 'Optimizing viewing experience...'
+    },
+    notFound: {
+      title: 'Document Unavailable',
+      description: 'The requested resource is not available at this time. Please verify the link or contact support.'
+    },
+    success: {
+      title: 'Quotation Document',
+      description: 'Click to access the detailed quotation document.',
+      buttonText: 'Open Document'
+    }
+  }
 };
 
 const ExternalRedirect = () => {
   const { id } = useParams();
-  const [targetUrl, setTargetUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { language } = useLanguage();
+
+  const t = (key) => translations[language][key];
 
   useEffect(() => {
     const url = EXTERNAL_URL_MAP[id];
     if (url) {
-      setTargetUrl(url);
       setIsLoading(false);
     } else {
       console.error('URL no encontrada');
@@ -28,19 +61,25 @@ const ExternalRedirect = () => {
     return (
       <div className="hero-banner">
         <div className="info-container">
-          <h1 className="hero-title">Cargando...</h1>
-          <p>Por favor, espere un momento.</p>
+          <h1 className="hero-title">{t('loading').title}</h1>
+          <p>{t('loading').description}</p>
+          <div className="spinner" style={{ 
+            margin: '2rem auto', 
+            borderTop: '4px solid var(--color-primary)' 
+          }}></div>
         </div>
       </div>
     );
   }
 
+  const targetUrl = EXTERNAL_URL_MAP[id];
+
   if (!targetUrl) {
     return (
       <div className="hero-banner">
         <div className="info-container">
-          <h1 className="hero-title">Documento no encontrado</h1>
-          <p>Lo sentimos, el documento solicitado no está disponible.</p>
+          <h1 className="hero-title">{t('notFound').title}</h1>
+          <p>{t('notFound').description}</p>
         </div>
       </div>
     );
@@ -49,25 +88,19 @@ const ExternalRedirect = () => {
   return (
     <div className="hero-banner">
       <div className="info-container">
-        <h1 className="hero-title">Documento de Cotización</h1>
-        <p>Haz clic en el botón para abrir el documento.</p>
+        <h1 className="hero-title">{t('success').title}</h1>
+        <p style={{ marginBottom: '2rem' }}>{t('success').description}</p>
         <a 
           href={targetUrl} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="btn btn-primary"
-          style={{
-            marginTop: '20px',
-            display: 'inline-block',
-            padding: '10px 20px',
-            backgroundColor: 'var(--color-primary)',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '5px',
-            transition: 'background-color 0.3s ease'
+          className="hero-button"
+          style={{ 
+            marginTop: '2rem', 
+            textDecoration: 'none' 
           }}
         >
-          Abrir Documento
+          {t('success').buttonText} →
         </a>
       </div>
     </div>
