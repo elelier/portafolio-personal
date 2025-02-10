@@ -139,105 +139,107 @@ const ProjectProgress = () => {
 
   return (
     <div className="project-progress">
-      <div className="project-header">
-        <h2 className="project-title">
-          {language === 'es' ? 'Desarrollo del Proyecto' : 'Project Development'}
-        </h2>
-        <p className="project-subtitle">
-          {language === 'es' 
-            ? 'Seguimiento detallado del progreso y requerimientos del proyecto' 
-            : 'Detailed tracking of project progress and requirements'}
-        </p>
-      </div>
-
-      <div className="requirements-section">
-        <h3 className="group-title">
-          {language === 'es' ? 'Requerimientos del Proyecto' : 'Project Requirements'}
-        </h3>
-        <div className="requirements-grid">
-          {Object.entries(requirements).map(([key, section]) => (
-            <div key={key} className="requirement-card">
-              <h4 className="requirement-title">{section.title[language]}</h4>
-              <ul className="requirement-list">
-                {section.items.map((item, index) => (
-                  <li key={index}>{item[language]}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      <div className="project-content">
+        <div className="project-header">
+          <h2 className="project-title">
+            {language === 'es' ? 'Desarrollo del Proyecto' : 'Project Development'}
+          </h2>
+          <p className="project-subtitle">
+            {language === 'es' 
+              ? 'Seguimiento detallado del progreso y requerimientos del proyecto' 
+              : 'Detailed tracking of project progress and requirements'}
+          </p>
         </div>
-      </div>
 
-      {projectData.sprints.map(sprint => (
-        <div key={sprint.id} className="sprint-card">
-          <div className="sprint-header">
-            <h3 className="text-xl font-semibold">
-              Sprint {sprint.id}: {sprint.name}
-            </h3>
-            <span className="text-lg font-medium">{sprint.progress}%</span>
+        <div className="requirements-section">
+          <h3 className="group-title">
+            {language === 'es' ? 'Requerimientos del Proyecto' : 'Project Requirements'}
+          </h3>
+          <div className="requirements-grid">
+            {Object.entries(requirements).map(([key, section]) => (
+              <div key={key} className="requirement-card">
+                <h4 className="requirement-title">{section.title[language]}</h4>
+                <ul className="requirement-list">
+                  {section.items.map((item, index) => (
+                    <li key={index}>{item[language]}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div className="progress-bar">
-            <div 
-              className="progress-fill" 
-              style={{ width: `${sprint.progress}%` }}
-            />
-          </div>
+        {projectData.sprints.map(sprint => (
+          <div key={sprint.id} className="sprint-card">
+            <div className="sprint-header">
+              <h3 className="text-xl font-semibold">
+                Sprint {sprint.id}: {sprint.name}
+              </h3>
+              <span className="text-lg font-medium">{sprint.progress}%</span>
+            </div>
 
-          {sprint.tasks && (
-            <table className="task-table">
-              <thead>
-                <tr>
-                  <th>Tarea</th>
-                  <th>Estado</th>
-                  <th>Notas</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sprint.tasks.map((task, index) => (
-                  <tr key={index}>
-                    <td>{task.name}</td>
-                    <td className={getStatusClass(task.status)}>
-                      <StatusIcon status={task.status} />
-                    </td>
-                    <td>{task.notes}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+            <div className="progress-bar">
+              <div 
+                className="progress-fill" 
+                style={{ width: `${sprint.progress}%` }}
+              />
+            </div>
 
-          {sprint.groups && sprint.groups.map((group, index) => (
-            <div key={index}>
-              <h4 className="group-title">{group.name}</h4>
+            {sprint.tasks && (
               <table className="task-table">
                 <thead>
                   <tr>
                     <th>Tarea</th>
-                    <th>Prioridad</th>
                     <th>Estado</th>
-                    <th>Dependencias</th>
+                    <th>Notas</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {group.tasks.map((task, taskIndex) => (
-                    <tr key={taskIndex}>
+                  {sprint.tasks.map((task, index) => (
+                    <tr key={index}>
                       <td>{task.name}</td>
-                      <td className={getPriorityClass(task.priority)}>
-                        <PriorityIcon priority={task.priority} />
-                      </td>
                       <td className={getStatusClass(task.status)}>
                         <StatusIcon status={task.status} />
                       </td>
-                      <td>{task.dependencies}</td>
+                      <td>{task.notes}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-          ))}
-        </div>
-      ))}
+            )}
+
+            {sprint.groups && sprint.groups.map((group, index) => (
+              <div key={index}>
+                <h4 className="group-title">{group.name}</h4>
+                <table className="task-table">
+                  <thead>
+                    <tr>
+                      <th>Tarea</th>
+                      <th>Prioridad</th>
+                      <th>Estado</th>
+                      <th>Dependencias</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {group.tasks.map((task, taskIndex) => (
+                      <tr key={taskIndex}>
+                        <td>{task.name}</td>
+                        <td className={getPriorityClass(task.priority)}>
+                          <PriorityIcon priority={task.priority} />
+                        </td>
+                        <td className={getStatusClass(task.status)}>
+                          <StatusIcon status={task.status} />
+                        </td>
+                        <td>{task.dependencies}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
