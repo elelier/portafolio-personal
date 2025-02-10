@@ -4,7 +4,8 @@ import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/HeroBanner.css';
 
 const EXTERNAL_URL_MAP = {
-  '00132': 'https://www.canva.com/design/DAGcZPIh0jE/MXeJcVMjya5LRX9sp7cocw/view?utm_content=DAGcZPIh0jE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb4992d367b'
+  '00132': 'https://www.canva.com/design/DAGcZPIh0jE/MXeJcVMjya5LRX9sp7cocw/view?utm_content=DAGcZPIh0jE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb4992d367b',
+  'mockup': 'https://d1shbod9k202nu.cloudfront.net/'
 };
 
 const translations = {

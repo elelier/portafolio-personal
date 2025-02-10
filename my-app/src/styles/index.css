@@ -119,6 +119,7 @@ body {
   font-family: 'Work Sans', sans-serif !important;
   background-color: var(--color-bg);
   color: var(--color-text);
+  transition: background-color 1s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -301,4 +302,17 @@ a {
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+}
+
+/* Transición suave para el cambio de tema */
+html {
+  background-color: var(--color-bg);
+  transition: background-color 1s ease;
+}
+
+/* Asegurar que el fondo se extienda a toda la página */
+#root {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  transition: background-color 1s ease;
 }

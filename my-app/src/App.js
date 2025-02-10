@@ -22,7 +22,7 @@ import FloatingButton from './components/FloatingButton';
 import ChatModal from './components/ChatModal';
 import { FaArrowUp } from 'react-icons/fa';
 import ExternalRedirect from './components/ExternalRedirect';
-
+import MockupRedirect from './components/MockupRedirect';
 
 // Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
@@ -78,6 +78,7 @@ function App({ initialLanguage }) {
                   <Route path="/entradas/2408_IA_Transforma_ecommerce" element={<Entrada />} />
                   <Route path="/contacto" element={<Contacto />} />
                   <Route path="/cotizacion/:id" element={<ExternalRedirect />} />
+                  <Route path="/mockup/:id" element={<MockupRedirect />} />
                 </Routes>
               </Suspense>
               <Footer />
