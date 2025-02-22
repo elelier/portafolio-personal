@@ -7,6 +7,7 @@ import { getCurrentLanguage } from './utils/languageUtils';
 // Import images
 import wonderlabsImg from '../assets/images/wonderlabs.jpg';
 import elelierImg from '../assets/images/elelier.jpg';
+import chubbImg from '../assets/images/CHUBB.jpg';
 import gofarmaImg from '../assets/images/gofarma.jpg';
 import farmalistoImg from '../assets/images/farmalisto.jpg';
 import pepsicoImg from '../assets/images/pepsico.jpg';
@@ -34,9 +35,24 @@ const Portafolio = () => {
   const proyectos = {
     es: [
       {
-        nombre: "Asistentes Virtuales",
-        timeline: "2024",
-        rol: "Desarrollador de IA",
+        nombre: "CHUBB",
+        timeline: "2024 - Actualidad",
+        rol: "Digital Product Owner",
+        image: chubbImg,
+        descripcion: "Impulso la transformación digital en CHUBB, liderando la digitalización y optimización en el área de renovaciones de pólizas para mejorar la experiencia del cliente y la eficiencia operativa.",
+        logros: [
+          "Implementación de automatización y personalización en procesos de renovación para flotas e individuales",
+          "Desarrollo de una nueva interfaz de renovación y optimización de cotización y emisión",
+          "Integración de análisis de datos y estudios de usabilidad para decisiones estratégicas y mejora continua"
+        ],
+        tecnologias: ["Agile", "Automatización", "Digital Transformation", "Data Analytics", "UX/UI"],
+        link: "https://www.chubb.com",
+        link_u: "chubb.com"
+      },
+      {
+        nombre: "Freelancer",
+        timeline: "2024 - Actualidad",
+        rol: "Ingeniero en transformación digital",
         image: elelierImg,
         descripcion: "Desarrollé asistentes de IA enfocados en marketing y gestión de proyectos, mejorando la eficacia de estrategias de marca y la planificación de proyectos.",
         logros: [
@@ -108,6 +124,22 @@ const Portafolio = () => {
       }
     ],
     en: [
+      {
+        // English version
+        nombre: "CHUBB",
+        timeline: "2024 - Present",
+        rol: "Digital Product Owner",
+        image: chubbImg,
+        descripcion: "I drive digital transformation at CHUBB by optimizing policy renewal processes to enhance customer experience and operational efficiency.",
+        logros: [
+          "Implemented automation and customization for fleet and individual policy renewals",
+          "Developed a new renewal interface and optimized quoting and issuance processes",
+          "Integrated data analytics and usability studies for strategic decision-making and continuous improvement"
+        ],
+        tecnologias: ["Agile", "Automation", "Digital Transformation", "Data Analytics", "UX/UI"],
+        link: "https://www.chubb.com",
+        link_u: "chubb.com"
+      },
       {
         nombre: "Virtual Assistants",
         timeline: "2024",

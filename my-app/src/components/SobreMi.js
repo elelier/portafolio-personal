@@ -26,13 +26,13 @@ function SobreMi() {
               </div>
               <div className="text-content">
                 <p>
-                  Esa curiosidad me llevó a desarmar juguetes, estudiar ingeniería, y finalmente, transformar empresas a través de la tecnología.
+                  Esa misma curiosidad me impulsó a desmontar juguetes, adentrarme en la ingeniería y, con el tiempo, liderar transformaciones tecnológicas en diversas empresas.
                 </p>
                 <p>
-                  Soy Elier Loya, un Ingeniero Industrial y de Sistemas con más de 10 años de experiencia en la dirección y optimización de operaciones. Mi pasión por la tecnología y la innovación me ha llevado a especializarme en transformación digital y gestión logística.
+                  Soy Elier Loya, Ingeniero Industrial y de Sistemas con más de una década de experiencia en dirección y optimización de operaciones. Mi pasión por la tecnología y la innovación me impulsó a especializarme en transformación digital y gestión logística.
                 </p>
                 <p>
-                  A lo largo de mi carrera, he tenido el privilegio de liderar transformaciones clave en empresas como GoFarma, Farmalisto y PepsiCo, enfocándome en la digitalización, automatización y escalabilidad de procesos complejos.
+                  A lo largo de mi carrera, he liderado transformaciones clave en empresas como GoFarma, Farmalisto y PepsiCo. Actualmente, en CHUBB, aplico mi experiencia para impulsar la transformación digital en el área de renovaciones, potenciando la automatización y personalización de procesos críticos.
                 </p>
               </div>
             </div>
@@ -51,13 +51,17 @@ function SobreMi() {
                 <img src={professional} alt="Experiencia Destacada" />
               </div>
               <div className="text-content">
+                <h3>CHUBB</h3>
+                <p>
+                  Actualmente, como Digital Product Owner en CHUBB, lidero la transformación digital del área de renovaciones de pólizas, impulsando la automatización y personalización de procesos críticos para mejorar la experiencia del cliente y la eficiencia operativa.
+                </p>
                 <h3>GoFarma</h3>
                 <p>
-                  Como co-fundador y Director de Operaciones, diseñé e implementé un modelo operativo innovador que logró una precisión de inventario del 99.8% y tiempos de entrega altamente competitivos.
+                  Como co-fundador y Director de Operaciones, diseñé e implementé un modelo operativo innovador que logró una precisión de inventario del 99.8% y redujo significativamente los tiempos de entrega.
                 </p>
                 <h3>Farmalisto</h3>
                 <p>
-                  En mi rol como Director de Ventas en Marketplaces, lideré la expansión de la presencia en línea de la compañía, logrando un incremento del 144% en ventas y una reducción significativa en reclamos y cancelaciones.
+                  En mi rol como Director de Ventas en Marketplaces, lideré la expansión digital de la compañía, impulsando un incremento del 144% en ventas y reduciendo considerablemente reclamos y cancelaciones.
                 </p>
               </div>
             </div>
@@ -77,13 +81,13 @@ function SobreMi() {
               </div>
               <div className="text-content">
                 <p>
-                  Hace algunos años, tuve un momento de epifanía mientras implementaba un sistema de automatización en una cadena logística. Me di cuenta de que no solo estaba optimizando procesos, estaba cambiando la vida de las personas que trabajaban allí, haciéndoles la vida más fácil y sus trabajos más satisfactorios.
+                  Hace algunos años, durante la implementación de un sistema de automatización en una cadena logística, tuve una revelación: no solo optimizábamos procesos, sino que también transformábamos la vida de las personas, facilitándoles las tareas y mejorando su bienestar.
                 </p>
                 <p>
-                  Creo firmemente en el poder transformador de la tecnología en los negocios. Mi enfoque se centra en aprovechar soluciones innovadoras como la IA, la automatización y el análisis de datos para impulsar la eficiencia operativa y el crecimiento empresarial.
+                  Estoy convencido del poder transformador de la tecnología en los negocios. Mi enfoque se centra en aprovechar soluciones innovadoras, como la inteligencia artificial, la automatización y el análisis de datos, para impulsar la eficiencia operativa y el crecimiento empresarial.
                 </p>
                 <p>
-                  Si compartes mi visión de un futuro más eficiente y tecnológicamente avanzado, me encantaría que trabajáramos juntos. Vamos a transformar tu negocio en una historia de éxito.
+                  Si compartes mi visión de un futuro más eficiente y tecnológicamente avanzado, me encantaría colaborar contigo para convertir tu negocio en una verdadera historia de éxito.
                 </p>
               </div>
             </div>
@@ -111,7 +115,7 @@ function SobreMi() {
                   I’m Elier Loya, an Industrial and Systems Engineer with over 10 years of experience in directing and optimizing operations. My passion for technology and innovation has led me to specialize in digital transformation and logistics management.
                 </p>
                 <p>
-                  Throughout my career, I’ve had the privilege of leading key transformations at companies like GoFarma, Farmalisto, and PepsiCo, focusing on digitization, automation, and scalability of complex processes.
+                  Throughout my career, I have led key transformations at companies such as GoFarma, Farmalisto, and PepsiCo. Currently, at CHUBB, I leverage my expertise to drive digital transformation in the renewals area, enhancing the automation and customization of critical processes.
                 </p>
               </div>
             </div>
@@ -130,9 +134,13 @@ function SobreMi() {
                 <img src={professional} alt="Highlighted Experience" />
               </div>
               <div className="text-content">
+                <h3>CHUBB</h3>
+                <p>
+                  Currently, as a Digital Product Owner at CHUBB, I lead the digital transformation of the policy renewals area by driving automation and customization of critical processes to improve customer experience and operational efficiency.
+                </p>
                 <h3>GoFarma</h3>
                 <p>
-                  As co-founder and Chief Operating Officer, I designed and implemented an innovative operational model that achieved a 99.8% inventory accuracy and highly competitive delivery times.
+                  As co-founder and Chief Operating Officer, I designed and implemented an innovative operational model that achieved 99.8% inventory accuracy and significantly reduced delivery times.
                 </p>
                 <h3>Farmalisto</h3>
                 <p>
@@ -156,13 +164,13 @@ function SobreMi() {
               </div>
               <div className="text-content">
                 <p>
-                  A few years ago, I had an epiphany while implementing an automation system in a logistics chain. I realized that I was not only optimizing processes; I was changing the lives of the people working there, making their lives easier and their jobs more fulfilling.
+                  A few years ago, while implementing an automation system in a logistics chain, I had an epiphany: I realized that we were not only optimizing processes, but also changing the lives of the people working there, making their tasks easier and their jobs more fulfilling.
                 </p>
                 <p>
                   I firmly believe in the transformative power of technology in business. My focus is on leveraging innovative solutions such as AI, automation, and data analysis to drive operational efficiency and business growth.
                 </p>
                 <p>
-                  If you share my vision of a more efficient and technologically advanced future, I’d love to work together. Let’s turn your business into a success story.
+                  If you share my vision of a more efficient and technologically advanced future, I’d love to collaborate with you to turn your business into a success story.
                 </p>
               </div>
             </div>

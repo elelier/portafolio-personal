@@ -2,11 +2,12 @@ import React from 'react';
 
 const ProjectStatus = () => {
   const stages = [
-    { id: 1, name: 'Propuesta', nameEn: 'Proposal', status: 'completed' },
-    { id: 2, name: 'Prototipo', nameEn: 'Prototype', status: 'current' },
-    { id: 3, name: 'Avance 1', nameEn: 'Progress 1', status: 'pending' },
-    { id: 4, name: 'Avance 2', nameEn: 'Progress 2', status: 'pending' },
-    { id: 5, name: 'Entrega', nameEn: 'Delivery', status: 'pending' }
+    { id: 1, name: 'Sprint 1', nameEn: 'Sprint 1', status: 'completed' },
+    { id: 2, name: 'Sprint 2', nameEn: 'Sprint 2', status: 'completed' },
+    { id: 3, name: 'Sprint 3', nameEn: 'Sprint 3', status: 'completed' },
+    { id: 4, name: 'Sprint 4', nameEn: 'Sprint 4', status: 'current' },
+    { id: 5, name: 'Sprint 5', nameEn: 'Sprint 5', status: 'completed' },
+    { id: 6, name: 'Sprint 6', nameEn: 'Sprint 6', status: 'pending' }
   ];
 
   return (

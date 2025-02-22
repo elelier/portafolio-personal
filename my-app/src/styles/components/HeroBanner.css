@@ -237,3 +237,13 @@ html {
   opacity: 1;
   transition: opacity 0.5s ease-in;
 }
+
+.fade-in-content {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-out-content {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
