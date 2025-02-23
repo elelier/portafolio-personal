@@ -11,6 +11,7 @@ import chubbImg from '../assets/images/CHUBB.jpg';
 import gofarmaImg from '../assets/images/gofarma.jpg';
 import farmalistoImg from '../assets/images/farmalisto.jpg';
 import pepsicoImg from '../assets/images/pepsico.jpg';
+import eleliercomImg from '../assets/images/eleliercom.png';
 
 const Portafolio = () => {
   const [activeIndex, setActiveIndex] = useState(null);
