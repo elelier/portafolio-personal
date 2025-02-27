@@ -2,6 +2,13 @@ import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/ProjectProgress.css';
 
+// Fecha de última actualización
+const lastUpdated = {
+  date: "27/02/2025",
+  es: "Última actualización",
+  en: "Last updated"
+};
+
 const requirements = {
   structure: {
     title: {
@@ -68,7 +75,8 @@ const projectData = {
           name: "Sistema de Diseño",
           tasks: [
             { name: "Configurar Tailwind y PostCSS", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Implementar tokens de diseño", priority: "high", status: "complete", dependencies: "Tailwind config" }
+            { name: "Implementar tokens de diseño", priority: "high", status: "complete", dependencies: "Tailwind config" },
+            { name: "Documentar guía de estilos", priority: "medium", status: "complete", dependencies: "Sistema de diseño" }
           ]
         },
         {
@@ -82,96 +90,154 @@ const projectData = {
         {
           name: "Desarrollo Frontend",
           tasks: [
-            { name: "Implementar menú móvil", priority: "high", status: "complete", dependencies: "Sistema de diseño" },
-            { name: "Sistema de traducciones base", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Lazy loading de imágenes", priority: "medium", status: "complete", dependencies: "Optimización de assets" }
+            { name: "Implementar menú móvil (menu.js)", priority: "high", status: "complete", dependencies: "Sistema de diseño" },
+            { name: "Sistema de traducciones (i18n/index.js)", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Lazy loading de imágenes (lazyload.js)", priority: "medium", status: "complete", dependencies: "Optimización de assets" },
+            { name: "Estilos del menú (menu.css)", priority: "high", status: "complete", dependencies: "menu.js" },
+            { name: "Lazy loading CSS (lazyload.css)", priority: "medium", status: "complete", dependencies: "lazyload.js" },
+            { name: "Sistema de grid (grid.css)", priority: "high", status: "complete", dependencies: "Sistema de diseño" }
+          ]
+        },
+        {
+          name: "Internacionalización y SEO",
+          tasks: [
+            { name: "Traducciones ES (i18n/es.json)", priority: "medium", status: "complete", dependencies: "Sistema de traducciones" },
+            { name: "Traducciones EN (i18n/en.json)", priority: "medium", status: "complete", dependencies: "Sistema de traducciones" },
+            { name: "Meta tags SEO", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Markup semántico base", priority: "high", status: "complete", dependencies: "Estructura HTML" }
+          ]
+        },
+        {
+          name: "Configuración y Build",
+          tasks: [
+            { name: "Configuración de Vite", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Optimización de imágenes", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Compresión de assets", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Configuración de CloudFront", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Script de despliegue", priority: "high", status: "complete", dependencies: "Configuración AWS" }
+          ]
+        },
+        {
+          name: "Despliegue y Monitoreo",
+          tasks: [
+            { name: "Despliegue inicial", priority: "high", status: "complete", dependencies: "Build completo" },
+            { name: "Configuración de caché", priority: "high", status: "complete", dependencies: "CloudFront" }
+          ]
+        },
+        {
+          name: "SEO",
+          tasks: [
+            { name: "Implementar meta tags", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Configurar Open Graph", priority: "high", status: "complete", dependencies: "Meta tags" },
+            { name: "Implementar Twitter Cards", priority: "high", status: "complete", dependencies: "Meta tags" },
+            { name: "Configurar Schema.org", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Implementar sitemap.xml", priority: "high", status: "complete", dependencies: "Rutas definidas" },
+            { name: "Verificación de motores de búsqueda", priority: "high", status: "complete", dependencies: "Meta tags" },
+            { name: "Optimizar rendimiento", priority: "medium", status: "complete", dependencies: "Lighthouse > 90" },
+            { name: "Implementar canonical URLs", priority: "medium", status: "complete", dependencies: "-" },
+            { name: "Configurar hreflang", priority: "medium", status: "complete", dependencies: "i18n" }
           ]
         }
       ]
     },
     {
       id: 3,
-      name: "Portfolio y Contenido",
-      progress: 40,
+      name: "Portfolio y Navegación",
+      progress: 70,
       groups: [
         {
           name: "Portfolio",
           tasks: [
-            { name: "Grid responsivo de portfolio", priority: "high", status: "pending", dependencies: "Imágenes de proyectos" },
-            { name: "Sistema de filtros por categoría", priority: "high", status: "pending", dependencies: "Taxonomía de proyectos" },
-            { name: "Galería de imágenes con lazy loading", priority: "medium", status: "in-progress", dependencies: "Optimización de imágenes" }
+            { name: "Grid responsivo de portfolio", priority: "high", status: "complete", dependencies: "Imágenes de proyectos" },
+            { name: "Sistema de filtros por categoría", priority: "high", status: "complete", dependencies: "Taxonomía de proyectos" },
+            { name: "Galería de imágenes con lazy loading", priority: "high", status: "in-progress", dependencies: "Optimización de imágenes" }
           ]
         },
         {
           name: "Páginas de Proyecto",
           tasks: [
             { name: "Páginas individuales de proyecto", priority: "high", status: "pending", dependencies: "Contenido de proyectos" },
-            { name: "Animaciones y transiciones", priority: "medium", status: "pending", dependencies: "Grid implementado" }
+            { name: "Animaciones y transiciones", priority: "medium", status: "pending", dependencies: "Grid implementado" },
+            { name: "SEO básico y meta tags", priority: "medium", status: "in-progress", dependencies: "Contenido base" }
           ]
         }
       ]
     },
     {
       id: 4,
-      name: "Internacionalización y SEO",
+      name: "Contenido y Funcionalidad",
       progress: 100,
       groups: [
         {
           name: "Sistema de Traducción (i18n)",
           tasks: [
-            { name: "Archivos de traducción (es/en)", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Integración de atributos data-i18n", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Selector de idioma", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Implementación del sistema base de traducciones", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Creación de archivos de traducción (es.json, en.json)", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Integración de atributos data-i18n en el HTML", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Selector de idioma en navegación desktop y móvil", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Traducción de todos los textos de la página principal", priority: "high", status: "complete", dependencies: "-" },
             { name: "Testing de cambio de idiomas", priority: "medium", status: "complete", dependencies: "-" }
-          ]
-        },
-        {
-          name: "SEO Base",
-          tasks: [
-            { name: "Meta tags básicos", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Open Graph y Twitter Cards", priority: "high", status: "complete", dependencies: "Meta tags básicos" },
-            { name: "Schema.org", priority: "high", status: "complete", dependencies: "-" },
-            { name: "URLs canónicas", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Soporte multi-idioma (hreflang)", priority: "high", status: "complete", dependencies: "URLs canónicas" }
           ]
         }
       ]
     },
     {
       id: 5,
-      name: "Optimización y Testing",
+      name: "SEO y Optimización",
       progress: 60,
       groups: [
         {
           name: "Optimización de Rendimiento",
           tasks: [
-            { name: "Compresión gzip/brotli", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Optimización avanzada de imágenes", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Configurar caché y headers", priority: "high", status: "complete", dependencies: "-" }
+            { name: "Implementar compresión gzip/brotli", priority: "high", status: "complete", dependencies: "Configuración de servidor" },
+            { name: "Optimizar imágenes (AVIF/WebP)", priority: "high", status: "complete", dependencies: "Sharp implementado" },
+            { name: "Configurar caché y headers", priority: "high", status: "complete", dependencies: "Servidor Express" },
+            { name: "Implementar lazy loading", priority: "high", status: "complete", dependencies: "OptimizedImage componente" }
           ]
         },
         {
           name: "Bundle Optimization",
           tasks: [
-            { name: "Code splitting", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Tree shaking", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Minificación con Terser", priority: "high", status: "complete", dependencies: "-" },
-            { name: "Gestión de chunks", priority: "high", status: "complete", dependencies: "-" }
+            { name: "Configurar code splitting", priority: "high", status: "complete", dependencies: "Vite config" },
+            { name: "Implementar tree shaking", priority: "high", status: "complete", dependencies: "Build config" },
+            { name: "Minificar con Terser", priority: "high", status: "complete", dependencies: "Build config" },
+            { name: "Gestionar chunks", priority: "high", status: "complete", dependencies: "Rollup options" }
+          ]
+        },
+        {
+          name: "SEO",
+          tasks: [
+            { name: "Meta tags básicos", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Open Graph y Twitter Cards", priority: "high", status: "complete", dependencies: "Meta tags básicos" },
+            { name: "Schema.org para Arquitectura", priority: "high", status: "complete", dependencies: "-" },
+            { name: "URLs canónicas", priority: "high", status: "complete", dependencies: "-" },
+            { name: "Soporte multi-idioma (hreflang)", priority: "high", status: "complete", dependencies: "URLs canónicas" },
+            { name: "Meta tags de verificación", priority: "medium", status: "complete", dependencies: "-" }
           ]
         },
         {
           name: "Testing y Monitoreo",
           tasks: [
-            { name: "Web Vitals tracking", priority: "high", status: "in-progress", dependencies: "Analytics" },
+            { name: "Implementar Web Vitals tracking", priority: "high", status: "in-progress", dependencies: "Analytics configurado" },
             { name: "Testing cross-browser", priority: "high", status: "pending", dependencies: "UI completa" },
-            { name: "Auditoría de accesibilidad", priority: "medium", status: "pending", dependencies: "UI completa" }
+            { name: "Auditoría de accesibilidad", priority: "medium", status: "in-progress", dependencies: "UI completa" },
+            { name: "Monitoreo de rendimiento", priority: "medium", status: "pending", dependencies: "Despliegue" },
+            { name: "Pruebas de carga", priority: "medium", status: "pending", dependencies: "Despliegue" }
+          ]
+        },
+        {
+          name: "Próximas Optimizaciones",
+          tasks: [
+            { name: "Implementar Service Workers", priority: "medium", status: "pending", dependencies: "Optimizaciones base" },
+            { name: "Configurar HTTP/2 Push", priority: "medium", status: "pending", dependencies: "Servidor configurado" },
+            { name: "Optimizar Critical Path", priority: "high", status: "pending", dependencies: "Análisis de rendimiento" }
           ]
         }
       ]
     },
     {
       id: 6,
-      name: "Lanzamiento y Documentación",
+      name: "Lanzamiento",
       progress: 0,
       groups: [
         {
@@ -236,13 +302,16 @@ const ProjectProgress = () => {
     <div className="project-progress">
       <div className="project-content">
         <div className="project-header">
-          <h2 className="project-title">
-            {language === 'es' ? 'Desarrollo del Proyecto' : 'Project Development'}
-          </h2>
+          <h1 className="project-title">
+            {language === 'es' ? 'Arquitecta DM' : 'Architect DM'}
+          </h1>
           <p className="project-subtitle">
             {language === 'es' 
               ? 'Seguimiento detallado del progreso y requerimientos del proyecto' 
               : 'Detailed tracking of project progress and requirements'}
+          </p>
+          <p className="last-updated">
+            {lastUpdated[language]}: {lastUpdated.date}
           </p>
         </div>
 

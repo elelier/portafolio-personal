@@ -2,6 +2,52 @@
 
 ## Historial de Actualizaciones
 
+### 27 de Febrero, 2025 - Actualización del Seguimiento de Sprints
+
+#### Cambios Realizados
+
+1. **Actualización del Estado de los Sprints**
+   - Sprint 2: Actualizado a 100% completado
+   - Sprint 3: Actualizado a 70% completado (anteriormente 40%)
+   - Sprint 4: Marcado como completado
+   - Sprint 5: En progreso con 60% completado
+
+2. **Actualización de Tareas Completadas**
+   - Grid responsivo de portfolio: Marcado como completado
+   - Sistema de filtros por categoría: Marcado como completado
+   - Añadidas nuevas tareas en varios sprints
+
+3. **Reorganización de Tareas**
+   - Movidas "Monitoreo de rendimiento" y "Pruebas de carga" del Sprint 2 al Sprint 5
+   - Agrupadas tareas relacionadas con testing y monitoreo en el Sprint 5
+   - Eliminados stoppers para la finalización del Sprint 2
+
+4. **Mejoras en la Visualización**
+   - Añadido indicador de porcentaje para sprints en progreso
+   - Mejorada la leyenda con estado "Parcial"
+   - Reorganización de grupos de tareas para mejor claridad
+
+5. **Detalles Técnicos Actualizados**
+   - Actualización de dependencias en tareas
+   - Especificación de archivos implementados (menu.js, i18n/index.js, etc.)
+   - Detalle de tecnologías utilizadas (AVIF/WebP, Sharp, etc.)
+
+#### Estado Actual
+- ✅ Sprint 1: 100% completado
+- ✅ Sprint 2: 100% completado
+- 🟡 Sprint 3: 70% completado
+- ✅ Sprint 4: 100% completado
+- 🟡 Sprint 5: 60% completado
+- ⏳ Sprint 6: Pendiente
+
+#### Próximos Pasos
+1. Completar la implementación de la galería de imágenes con lazy loading
+2. Finalizar las páginas individuales de proyecto
+3. Implementar Web Vitals tracking
+4. Avanzar con la auditoría de accesibilidad
+
+---
+
 ### 10 de Febrero, 2025 - Mejoras en la Visualización del Progreso del Proyecto
 
 #### Cambios Realizados

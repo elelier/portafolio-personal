@@ -38,6 +38,14 @@
   font-size: 1.2rem;
 }
 
+.last-updated {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
 .requirements-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
