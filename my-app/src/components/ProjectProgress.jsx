@@ -106,13 +106,13 @@ const projectData = {
         es: "Construcción de las secciones clave del portafolio y navegación",
         en: "Construction of the key sections of the portfolio and navigation"
       },
-      progress: 85,
+      progress: 100,
       tasks: [
         { name: { es: "Implementación de header y navegación", en: "Header and navigation implementation" }, status: "completed" },
         { name: { es: "Desarrollo de sección Hero", en: "Hero section development" }, status: "completed" },
         { name: { es: "Implementación de sección Sobre Mí", en: "About Me section implementation" }, status: "completed" },
         { name: { es: "Desarrollo de sección Portafolio", en: "Portfolio section development" }, status: "completed" },
-        { name: { es: "Optimización de experiencia móvil", en: "Mobile experience optimization" }, status: "in-progress" }
+        { name: { es: "Optimización de experiencia móvil", en: "Mobile experience optimization" }, status: "completed" }
       ]
     },
     {
@@ -318,10 +318,7 @@ const ProjectProgress = ({ overallProgress }) => {
       progressContainer: {
         width: '100%',
         marginTop: '15px',
-        marginBottom: '15px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start'
+        marginBottom: '15px'
       },
       progressBar: {
         height: '10px',
@@ -333,7 +330,8 @@ const ProjectProgress = ({ overallProgress }) => {
       progressFill: {
         height: '100%',
         backgroundColor: 'var(--color-primary)',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        width: '100%' // Asegurar que el fill tome todo el ancho disponible
       },
       progressIndicator: {
         display: 'flex',
@@ -427,8 +425,6 @@ const ProjectProgress = ({ overallProgress }) => {
     }
   }, []);
 
-  const progressValue = 95;
-
   return (
     <div style={styles.container}>
       <div style={styles.content}>
@@ -517,14 +513,14 @@ const ProjectProgress = ({ overallProgress }) => {
                 </div>
 
                 {/* Barra de progreso */}
-                <div className="progress-container">
-                  <div className="progress-indicator">
-                    <span className="progress-percentage">{sprint.progress}%</span>
+                <div className="progress-container" style={styles.progressContainer}>
+                  <div className="progress-indicator" style={styles.progressIndicator}>
+                    <span className="progress-percentage" style={styles.progressPercentage}>{sprint.progress}%</span>
                   </div>
-                  <div className="progress-bar">
+                  <div className="progress-bar" style={styles.progressBar}>
                     <div
                       className="progress-fill"
-                      style={{ width: `${sprint.progress}%` }}
+                      style={{ ...styles.progressFill, width: `${sprint.progress}%` }}
                     ></div>
                   </div>
                 </div>
