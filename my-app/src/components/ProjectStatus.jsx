@@ -2,7 +2,7 @@ import React from 'react';
 
 // Fecha de última actualización
 const lastUpdated = {
-  date: "27/02/2025",
+  date: "08/03/2025",
   es: "Última actualización",
   en: "Last updated"
 };
@@ -10,11 +10,13 @@ const lastUpdated = {
 const ProjectStatus = () => {
   const stages = [
     { id: 1, name: 'Sprint 1', nameEn: 'Sprint 1', status: 'completed', progress: 100 },
-    { id: 2, name: 'Sprint 2', nameEn: 'Sprint 2', status: 'completed', progress: 100 },
-    { id: 3, name: 'Sprint 3', nameEn: 'Sprint 3', status: 'in-progress', progress: 70 },
+    { id: 2, name: 'Sprint 2', nameEn: 'Sprint 2', status: 'completed', progress: 95 },
+    { id: 3, name: 'Sprint 3', nameEn: 'Sprint 3', status: 'in-progress', progress: 40 },
     { id: 4, name: 'Sprint 4', nameEn: 'Sprint 4', status: 'completed', progress: 100 },
-    { id: 5, name: 'Sprint 5', nameEn: 'Sprint 5', status: 'in-progress', progress: 60 },
-    { id: 6, name: 'Sprint 6', nameEn: 'Sprint 6', status: 'pending' }
+    { id: 5, name: 'Sprint 5', nameEn: 'Sprint 5', status: 'in-progress', progress: 70 },
+    { id: 6, name: 'Sprint 6', nameEn: 'Sprint 6', status: 'pending', progress: 0 },
+    { id: 7, name: 'Sprint 7', nameEn: 'Sprint 7', status: 'completed', progress: 100 },
+    { id: 8, name: 'Sprint 8', nameEn: 'Sprint 8', status: 'completed', progress: 100 }
   ];
 
   return (
@@ -41,7 +43,7 @@ const ProjectStatus = () => {
               <div className="text-center">
                 <p className="font-medium text-sm">{stage.name}</p>
                 <p className="text-xs text-gray-500">{stage.nameEn}</p>
-                {stage.progress && (
+                {stage.progress !== undefined && (
                   <p className={`text-xs font-semibold ${
                     stage.status === 'completed' ? 'text-green-600' : 
                     stage.status === 'in-progress' ? 'text-yellow-600' : 

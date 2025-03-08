@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import ProjectProgress from './ProjectProgress';
-import '../styles/components/HeroBanner.css';
 
 const PROJECT_URL_MAP = {
   '00132': 'https://d1shbod9k202nu.cloudfront.net/'
@@ -105,6 +104,13 @@ const MockupRedirect = () => {
         <div className="info-container">
           <h1 className="hero-title">{content.title}</h1>
           <p style={{ marginBottom: '2rem' }}>{content.description}</p>
+          {/* Progreso general extra en el hero-banner */}
+          <div className="overall-progress" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+            <span style={{ fontWeight: 'bold' }}>95%</span>
+            <div style={{ flex: 1, height: '10px', backgroundColor: 'var(--color-bg-2)', borderRadius: '5px', overflow: 'hidden' }}>
+              <div style={{ width: '95%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
+            </div>
+          </div>
           {!isLoading && PROJECT_URL_MAP[id] && (
             <a 
               href={PROJECT_URL_MAP[id]} 
@@ -128,7 +134,10 @@ const MockupRedirect = () => {
         </div>
       </div>
 
-      <div id="project-progress">
+      <div id="project-progress" style={{ 
+        width: '100%',
+        background: 'linear-gradient(to bottom, var(--color-bg-3), var(--color-bg))'
+      }}>
         <ProjectProgress />
         {!isLoading && PROJECT_URL_MAP[id] && (
           <div className="cta-section" style={{
