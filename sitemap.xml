@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    
+    <!-- Página Principal -->
+    <url>
+        <loc>https://www.elelier.com/</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Secciones Principales -->
+    <url>
+        <loc>https://www.elelier.com/#sobre-mi</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/#habilidades</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/#portafolio</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/#servicios</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/#contacto</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Rutas Específicas -->
+    <url>
+        <loc>https://www.elelier.com/portafolio</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/sobre-mi</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/servicios</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/contacto</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Recursos Externos -->
+    <url>
+        <loc>https://www.elelier.com/mockup/00132</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elelier.com/cotizacion/00132</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
+</urlset>
