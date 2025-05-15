@@ -10,11 +10,11 @@ const lastUpdated = {
 const ProjectStatus = () => {
   const stages = [
     { id: 1, name: 'Sprint 1', nameEn: 'Sprint 1', status: 'completed', progress: 100 },
-    { id: 2, name: 'Sprint 2', nameEn: 'Sprint 2', status: 'completed', progress: 95 },
-    { id: 3, name: 'Sprint 3', nameEn: 'Sprint 3', status: 'in-progress', progress: 40 },
+    { id: 2, name: 'Sprint 2', nameEn: 'Sprint 2', status: 'completed', progress: 100 },
+    { id: 3, name: 'Sprint 3', nameEn: 'Sprint 3', status: 'completed', progress: 100 },
     { id: 4, name: 'Sprint 4', nameEn: 'Sprint 4', status: 'completed', progress: 100 },
-    { id: 5, name: 'Sprint 5', nameEn: 'Sprint 5', status: 'in-progress', progress: 70 },
-    { id: 6, name: 'Sprint 6', nameEn: 'Sprint 6', status: 'pending', progress: 0 },
+    { id: 5, name: 'Sprint 5', nameEn: 'Sprint 5', status: 'completed', progress: 100 },
+    { id: 6, name: 'Sprint 6', nameEn: 'Sprint 6', status: 'completed', progress: 100 },
     { id: 7, name: 'Sprint 7', nameEn: 'Sprint 7', status: 'completed', progress: 100 },
     { id: 8, name: 'Sprint 8', nameEn: 'Sprint 8', status: 'completed', progress: 100 }
   ];

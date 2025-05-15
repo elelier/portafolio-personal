@@ -62,176 +62,186 @@ const projectData = {
     {
       id: 1,
       name: {
-        es: "Planificación y Diseño Base",
-        en: "Planning and Base Design"
+        es: 'Planificación y Diseño Base',
+        en: 'Planning and Base Design'
       },
       description: {
-        es: "Definición de objetivos, alcance y diseño conceptual del proyecto",
-        en: "Definition of objectives, scope and conceptual design of the project"
+        es: 'Definición de objetivos, alcance y diseño conceptual del proyecto',
+        en: 'Definition of objectives, scope and conceptual design of the project'
       },
       progress: 100,
       tasks: [
-        { name: { es: "Análisis de requerimientos", en: "Requirements analysis" }, status: "completed" },
-        { name: { es: "Definición de arquitectura", en: "Architecture definition" }, status: "completed" },
-        { name: { es: "Diseño de wireframes", en: "Wireframes design" }, status: "completed" },
-        { name: { es: "Selección de tecnologías", en: "Technology selection" }, status: "completed" }
+        { name: { es: 'Análisis de requerimientos', en: 'Requirements analysis' }, status: 'completed' },
+        { name: { es: 'Definición de arquitectura', en: 'Architecture definition' }, status: 'completed' },
+        { name: { es: 'Diseño de wireframes', en: 'Wireframes design' }, status: 'completed' },
+        { name: { es: 'Selección de tecnologías', en: 'Technology selection' }, status: 'completed' }
       ]
     },
     {
       id: 2,
       name: {
-        es: "Sistema de Diseño y Estructura Base",
-        en: "Design System and Base Structure"
+        es: 'Sistema de Diseño y Estructura Base',
+        en: 'Design System and Base Structure'
       },
       description: {
-        es: "Implementación del sistema de diseño y componentes fundamentales",
-        en: "Implementation of the design system and fundamental components"
+        es: 'Implementación del sistema de diseño y componentes fundamentales',
+        en: 'Implementation of the design system and fundamental components'
       },
       progress: 100,
       tasks: [
-        { name: { es: "Configuración de Vite + React", en: "Vite + React configuration" }, status: "completed" },
-        { name: { es: "Implementación de Tailwind CSS", en: "Tailwind CSS implementation" }, status: "completed" },
-        { name: { es: "Creación de componentes base", en: "Creation of base components" }, status: "completed" },
-        { name: { es: "Tipografía arquitectónica", en: "Architectural typography" }, status: "completed" },
-        { name: { es: "Documentación del sistema de diseño", en: "Design system documentation" }, status: "completed" }
+        { name: { es: 'Configuración de Next.js + Tailwind', en: 'Next.js + Tailwind configuration' }, status: 'completed' },
+        { name: { es: 'Implementación de Framer Motion', en: 'Framer Motion implementation' }, status: 'completed' },
+        { name: { es: 'Creación de componentes base', en: 'Creation of base components' }, status: 'completed' },
+        { name: { es: 'Tipografía arquitectónica', en: 'Architectural typography' }, status: 'completed' },
+        { name: { es: 'Documentación del sistema de diseño', en: 'Design system documentation' }, status: 'completed' }
       ]
     },
     {
       id: 3,
       name: {
-        es: "Desarrollo de Secciones Principales",
-        en: "Development of Main Sections"
+        es: 'Desarrollo de Secciones Principales',
+        en: 'Development of Main Sections'
       },
       description: {
-        es: "Construcción de las secciones clave del portafolio y navegación",
-        en: "Construction of the key sections of the portfolio and navigation"
+        es: 'Construcción de las secciones clave del portafolio y navegación',
+        en: 'Construction of the key sections of the portfolio and navigation'
       },
       progress: 100,
       tasks: [
-        { name: { es: "Implementación de header y navegación", en: "Header and navigation implementation" }, status: "completed" },
-        { name: { es: "Desarrollo de sección Hero", en: "Hero section development" }, status: "completed" },
-        { name: { es: "Implementación de sección Sobre Mí", en: "About Me section implementation" }, status: "completed" },
-        { name: { es: "Desarrollo de sección Portafolio", en: "Portfolio section development" }, status: "completed" },
-        { name: { es: "Optimización de experiencia móvil", en: "Mobile experience optimization" }, status: "completed" }
+        { name: { es: 'Implementación de header y navegación', en: 'Header and navigation implementation' }, status: 'completed' },
+        { name: { es: 'Desarrollo de sección Hero', en: 'Hero section development' }, status: 'completed' },
+        { name: { es: 'Implementación de sección Sobre Mí', en: 'About Me section implementation' }, status: 'completed' },
+        { name: { es: 'Desarrollo de sección Portafolio', en: 'Portfolio section development' }, status: 'completed' },
+        { name: { es: 'Optimización de experiencia móvil', en: 'Mobile experience optimization' }, status: 'completed' }
       ]
     },
     {
       id: 4,
       name: {
-        es: "Proyectos y Trayectoria Profesional",
-        en: "Projects and Professional Career"
+        es: 'Proyectos y Trayectoria Profesional',
+        en: 'Projects and Professional Career'
       },
       description: {
-        es: "Integración de proyectos destacados y experiencia profesional",
-        en: "Integration of featured projects and professional experience"
+        es: 'Integración de proyectos destacados y experiencia profesional',
+        en: 'Integration of featured projects and professional experience'
       },
       progress: 100,
       tasks: [
-        { name: { es: "Diseño de tarjetas de proyectos", en: "Project card design" }, status: "completed" },
-        { name: { es: "Implementación de filtros de categorías", en: "Category filter implementation" }, status: "completed" },
-        { name: { es: "Integración de timeline profesional", en: "Professional timeline integration" }, status: "completed" },
-        { name: { es: "Documentación de logros profesionales", en: "Documentation of professional achievements" }, status: "completed" }
+        { name: { es: 'Diseño de tarjetas de proyectos', en: 'Project card design' }, status: 'completed' },
+        { name: { es: 'Implementación de filtros de categorías', en: 'Category filter implementation' }, status: 'completed' },
+        { name: { es: 'Integración de timeline profesional', en: 'Professional timeline integration' }, status: 'completed' },
+        { name: { es: 'Documentación de logros profesionales', en: 'Documentation of professional achievements' }, status: 'completed' }
       ]
     },
     {
       id: 5,
       name: {
-        es: "Optimización y Despliegue",
-        en: "Optimization and Deployment"
+        es: 'Optimización y Despliegue',
+        en: 'Optimization and Deployment'
       },
       description: {
-        es: "Mejoras de rendimiento, SEO y despliegue en producción",
-        en: "Performance improvements, SEO and deployment in production"
+        es: 'Mejoras de rendimiento, SEO y despliegue en producción',
+        en: 'Performance improvements, SEO and deployment in production'
       },
-      progress: 70,
+      progress: 100,
       tasks: [
-        { name: { es: "Optimización de imágenes", en: "Image optimization" }, status: "completed" },
-        { name: { es: "Implementación de lazy loading", en: "Lazy loading implementation" }, status: "completed" },
-        { name: { es: "Configuración de SEO básico", en: "Basic SEO configuration" }, status: "completed" },
-        { name: { es: "Despliegue en AWS", en: "Deployment on AWS" }, status: "completed" },
-        { name: { es: "Optimización de Lighthouse score", en: "Lighthouse score optimization" }, status: "in-progress" },
-        { name: { es: "Implementación de analytics", en: "Analytics implementation" }, status: "pending" }
+        { name: { es: 'Optimización de imágenes con Sharp', en: 'Image optimization with Sharp' }, status: 'completed' },
+        { name: { es: 'Implementación de lazy loading', en: 'Lazy loading implementation' }, status: 'completed' },
+        { name: { es: 'Configuración de SEO avanzado', en: 'Advanced SEO configuration' }, status: 'completed' },
+        { name: { es: 'Despliegue en AWS', en: 'Deployment on AWS' }, status: 'completed' },
+        { name: { es: 'Optimización de Lighthouse score', en: 'Lighthouse score optimization' }, status: 'completed' },
+        { name: { es: 'Implementación de analytics', en: 'Analytics implementation' }, status: 'completed' }
       ]
     },
     {
       id: 6,
       name: {
-        es: "Refinamiento y Funcionalidades Avanzadas",
-        en: "Refinamiento y Funcionalidades Avanzadas"
+        es: 'Refinamiento y Funcionalidades Avanzadas',
+        en: 'Refinement and Advanced Features'
       },
       description: {
-        es: "Implementación de características avanzadas y pulido final",
-        en: "Implementation of advanced features and final polishing"
+        es: 'Implementación de características avanzadas y pulido final',
+        en: 'Implementation of advanced features and final polishing'
       },
-      progress: 30,
+      progress: 100,
       tasks: [
-        { name: { es: "Sistema de contacto con validación", en: "Contact system with validation" }, status: "in-progress" },
-        { name: { es: "Animaciones y transiciones", en: "Animations and transitions" }, status: "in-progress" },
-        { name: { es: "Modo oscuro/claro", en: "Dark/light mode" }, status: "pending" },
-        { name: { es: "Integración con CMS para blog", en: "CMS integration for blog" }, status: "pending" },
-        { name: { es: "Pruebas de usabilidad", en: "Usability tests" }, status: "pending" },
-        { name: { es: "Implementación de feedback", en: "Feedback implementation" }, status: "pending" }
+        { name: { es: 'Sistema de contacto con validación', en: 'Contact system with validation' }, status: 'completed' },
+        { name: { es: 'Animaciones y transiciones', en: 'Animations and transitions' }, status: 'completed' },
+        { name: { es: 'Modo oscuro/claro', en: 'Dark/light mode' }, status: 'completed' },
+        { name: { es: 'Integración con CMS para blog', en: 'CMS integration for blog' }, status: 'completed' },
+        { name: { es: 'Pruebas de usabilidad', en: 'Usability tests' }, status: 'completed' },
+        { name: { es: 'Implementación de feedback', en: 'Feedback implementation' }, status: 'completed' }
       ]
     }
   ],
   achievements: {
     es: [
-      "Implementación exitosa de Vite + Tailwind",
+      "Implementación exitosa de Next.js + Tailwind",
       "Despliegue automatizado en AWS",
       "Menú responsive funcionando",
       "Sistema de estilos documentado",
       "Optimización automática de imágenes",
       "Estructura base del sitio completa",
       "Secciones principales implementadas (Hero, Sobre Mí, Portafolio)",
-      "Integración de proyectos y timeline profesional"
+      "Integración de proyectos y timeline profesional",
+      "Implementación de proyectos reales",
+      "Integración completa de la página de trayectoria",
+      "Pruebas de usabilidad finalizadas"
     ],
     en: [
-      "Successful implementation of Vite + Tailwind",
+      "Successful implementation of Next.js + Tailwind",
       "Automated deployment on AWS",
       "Responsive menu working",
       "Documented style system",
       "Automatic image optimization",
       "Complete base structure of the site",
       "Main sections implemented (Hero, About Me, Portfolio)",
-      "Integration of projects and professional timeline"
+      "Integration of projects and professional timeline",
+      "Implementation of real projects",
+      "Complete integration of career page",
+      "Usability tests completed"
     ]
   },
   nextSteps: {
     es: [
-      "Implementar proyectos reales",
-      "Integrar página de trayectoria",
-      "Realizar pruebas de usabilidad",
-      "Optimizar para SEO avanzado"
+      "Mantenimiento y actualizaciones continuas",
+      "Monitoreo de analytics",
+      "Implementación de nuevas funcionalidades según feedback"
     ],
     en: [
-      "Implement real projects",
-      "Integrate career page",
-      "Perform usability tests",
-      "Optimize for advanced SEO"
+      "Ongoing maintenance and updates",
+      "Analytics monitoring",
+      "Implementation of new features based on feedback"
     ]
   }
 };
 
 const achievementIcons = {
   es: {
-    "Implementación exitosa de Vite + Tailwind": "🚀",
+    "Implementación exitosa de Next.js + Tailwind": "🚀",
     "Despliegue automatizado en AWS": "☁️",
     "Menú responsive funcionando": "📱",
     "Sistema de estilos documentado": "📚",
     "Optimización automática de imágenes": "🖼️",
     "Estructura base del sitio completa": "🏗️",
     "Secciones principales implementadas (Hero, Sobre Mí, Portafolio)": "🧩",
-    "Integración de proyectos y timeline profesional": "💼"
+    "Integración de proyectos y timeline profesional": "💼",
+    "Implementación de proyectos reales": "🚀",
+    "Integración completa de la página de trayectoria": "📈",
+    "Pruebas de usabilidad finalizadas": "📊"
   },
   en: {
-    "Successful implementation of Vite + Tailwind": "🚀",
+    "Successful implementation of Next.js + Tailwind": "🚀",
     "Automated deployment on AWS": "☁️",
     "Responsive menu working": "📱",
     "Documented style system": "📚",
     "Automatic image optimization": "🖼️",
     "Complete base structure of the site": "🏗️",
     "Main sections implemented (Hero, About Me, Portfolio)": "🧩",
-    "Integration of projects and professional timeline": "💼"
+    "Integration of projects and professional timeline": "💼",
+    "Implementation of real projects": "🚀",
+    "Complete integration of career page": "📈",
+    "Usability tests completed": "📊"
   }
 };
 
@@ -441,9 +451,9 @@ const ProjectProgress = ({ overallProgress }) => {
 
           {/* Barra de progreso general (Hero) */}
           <div className="overall-progress" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-            <span style={{ fontWeight: 'bold' }}>95%</span>
+            <span style={{ fontWeight: 'bold' }}>100%</span>
             <div style={{ flex: '1 1 0%', height: '10px', backgroundColor: 'var(--color-bg-2)', borderRadius: '5px', overflow: 'hidden' }}>
-              <div style={{ width: '95%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
+              <div style={{ width: '100%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
             </div>
           </div>
 

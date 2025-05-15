@@ -106,7 +106,7 @@ const MockupRedirect = () => {
           <p style={{ marginBottom: '2rem' }}>{content.description}</p>
           {/* Progreso general extra en el hero-banner */}
           <div className="overall-progress" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-            <span style={{ fontWeight: 'bold' }}>95%</span>
+            <span style={{ fontWeight: 'bold' }}>100%</span>
             <div style={{ flex: 1, height: '10px', backgroundColor: 'var(--color-bg-2)', borderRadius: '5px', overflow: 'hidden' }}>
               <div style={{ width: '95%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
             </div>
