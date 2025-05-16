@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import '../styles/components/SobreMi.css';
 import personal_story from '../assets/images/profile-picture-elier2.png';
 import professional from '../assets/images/ecommerce_marketing.png';
 import tech_vision from '../assets/images/technologic_vision.png';
 import { useSwipeable } from 'react-swipeable';
-import { useLanguage } from '../contexts/LanguageContext'; 
+import { useLanguage } from '../contexts/LanguageContext';
 
 function SobreMi() {
   const [currentSection, setCurrentSection] = useState(0);
-  const { language } = useLanguage(); // Obtén el idioma del contexto
-  const intervalRef = useRef(null); // Para mantener una referencia al intervalo
+  const { language } = useLanguage();
+  const intervalRef = useRef(null);
 
   const sections = useMemo(() => ({
     es: [
@@ -22,7 +23,15 @@ function SobreMi() {
           <>
             <div className="content-container">
               <div className="image-container">
-                <img src={personal_story} alt="Historia Personal" />
+                <LazyLoadImage
+                  src={personal_story}
+                  alt="Historia Personal"
+                  width={500}
+                  height={500}
+                  effect="blur"
+                  placeholderSrc={personal_story}
+                  className="optimized-image"
+                />
               </div>
               <div className="text-content">
                 <p>
@@ -48,7 +57,15 @@ function SobreMi() {
           <>
             <div className="content-container">
               <div className="image-container">
-                <img src={professional} alt="Experiencia Destacada" />
+                <LazyLoadImage
+                  src={professional}
+                  alt="Experiencia Destacada"
+                  width={500}
+                  height={500}
+                  effect="blur"
+                  placeholderSrc={professional}
+                  className="optimized-image"
+                />
               </div>
               <div className="text-content">
                 <h3>CHUBB</h3>
@@ -77,7 +94,15 @@ function SobreMi() {
           <>
             <div className="content-container">
               <div className="image-container">
-                <img src={tech_vision} alt="Visión Tecnológica" />
+                <LazyLoadImage
+                  src={tech_vision}
+                  alt="Visión Tecnológica"
+                  width={500}
+                  height={500}
+                  effect="blur"
+                  placeholderSrc={tech_vision}
+                  className="optimized-image"
+                />
               </div>
               <div className="text-content">
                 <p>
@@ -105,7 +130,15 @@ function SobreMi() {
           <>
             <div className="content-container">
               <div className="image-container">
-                <img src={personal_story} alt="Personal Story" />
+                <LazyLoadImage
+                  src={personal_story}
+                  alt="Personal Story"
+                  width={500}
+                  height={500}
+                  effect="blur"
+                  placeholderSrc={personal_story}
+                  className="optimized-image"
+                />
               </div>
               <div className="text-content">
                 <p>
@@ -131,7 +164,15 @@ function SobreMi() {
           <>
             <div className="content-container">
               <div className="image-container">
-                <img src={professional} alt="Highlighted Experience" />
+                <LazyLoadImage
+                  src={professional}
+                  alt="Highlighted Experience"
+                  width={500}
+                  height={500}
+                  effect="blur"
+                  placeholderSrc={professional}
+                  className="optimized-image"
+                />
               </div>
               <div className="text-content">
                 <h3>CHUBB</h3>
@@ -160,7 +201,15 @@ function SobreMi() {
           <>
             <div className="content-container">
               <div className="image-container">
-                <img src={tech_vision} alt="Technological Vision" />
+                <LazyLoadImage
+                  src={tech_vision}
+                  alt="Technological Vision"
+                  width={500}
+                  height={500}
+                  effect="blur"
+                  placeholderSrc={tech_vision}
+                  className="optimized-image"
+                />
               </div>
               <div className="text-content">
                 <p>
@@ -178,10 +227,10 @@ function SobreMi() {
         ),
       },
     ],
-  }), []);
+  }), [language]);
 
   useEffect(() => {
-    setCurrentSection(0); // Reinicia la sección a 0 cuando cambie el idioma
+    setCurrentSection(0);
   }, [language]);
 
   const sectionLength = sections[language].length;
@@ -237,7 +286,6 @@ function SobreMi() {
 
   const handleManualChange = (index) => {
     setCurrentSection(index);
-    // Reinicia el intervalo al cambiar manualmente
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }

@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import '../styles/components/Habilidades.css';
-import { useLanguage } from '../contexts/LanguageContext'; // Ajusta la importación según tu estructura
+import strategic_vision from '../assets/images/skills/strategic_vision.png';
+import team_leadership from '../assets/images/skills/team_leadership.png';
+import tech_integration from '../assets/images/skills/tech_integration.png';
+import ai_solutions from '../assets/images/skills/ai_solutions.png';
+import data_analysis from '../assets/images/skills/data_analysis.png';
+import logistics from '../assets/images/skills/logistics.png';
+import ecommerce from '../assets/images/skills/ecommerce.png';
+import { useLanguage } from '../contexts/LanguageContext';
 
 function ArsenalHabilidades() {
   const [activeIndex, setActiveIndex] = useState(null);
-  const { language } = useLanguage(); // Obtén el idioma del contexto
+  const { language } = useLanguage();
 
   const habilidades = {
     es: [
       {
         nombre: 'Visión Estratégica',
-        iconoClass: 'strategic-vision',
+        imagen: strategic_vision,
         descripcion: 'Diseño e implementación de estrategias para impulsar el crecimiento empresarial.',
         ejemplos: [
           { texto: 'Evaluación de Procesos', enlace: '#evaluacion-procesos' },
@@ -20,7 +28,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Liderazgo de Equipos',
-        iconoClass: 'team-leadership',
+        imagen: team_leadership,
         descripcion: 'Gestión y desarrollo de equipos multidisciplinarios enfocados en alcanzar objetivos concretos.',
         ejemplos: [
           { texto: 'Metodologías Ágiles', enlace: '#metodologias-agiles' },
@@ -30,7 +38,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Integración Tecnológica',
-        iconoClass: 'tech-integration',
+        imagen: tech_integration,
         descripcion: 'Automatización y digitalización con BuildShip, Render y AWS para optimizar flujos de trabajo.',
         ejemplos: [
           { texto: 'Automatización con AWS', enlace: '#automatizacion-aws' },
@@ -40,7 +48,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Soluciones AI Avanzadas',
-        iconoClass: 'ai-solutions',
+        imagen: ai_solutions,
         descripcion: 'Implementación de inteligencia artificial con OpenAI, TensorFlow, Ollama, y chatbots personalizados.',
         ejemplos: [
           { texto: 'Asistentes Virtuales', enlace: '#asistentes-virtuales' },
@@ -50,39 +58,39 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Análisis de Datos',
-        iconoClass: 'data-analysis',
-        descripcion: 'Extracción, limpieza y análisis con JavaScript, Python, SQL, BI y Tableau para decisiones basadas en datos.',
+        imagen: data_analysis,
+        descripcion: 'Análisis avanzado de datos para toma de decisiones estratégicas.',
         ejemplos: [
           { texto: 'Análisis Predictivo', enlace: '#analisis-predictivo' },
           { texto: 'Visualización de Datos', enlace: '#visualizacion-datos' },
-          { texto: 'Dashboards BI', enlace: '#dashboards-bi' },
+          { texto: 'Machine Learning', enlace: '#machine-learning' },
         ],
       },
       {
         nombre: 'Logística y Operaciones',
-        iconoClass: 'logistics',
-        descripcion: 'Optimización de operaciones y procesos para una mejora continua y sostenible.',
+        imagen: logistics,
+        descripcion: 'Optimización de cadenas de suministro y operaciones logísticas.',
         ejemplos: [
-          { texto: 'Optimización de Suministro', enlace: '#optimizacion-suministro' },
-          { texto: 'Mejora en Almacenes', enlace: '#mejora-almacenes' },
-          { texto: 'Gestión de Inventarios', enlace: '#gestion-inventarios' },
+          { texto: 'Gestión de Almacenes', enlace: '#gestion-almacenes' },
+          { texto: 'Rutas Óptimas', enlace: '#rutas-optimas' },
+          { texto: 'Inventario Inteligente', enlace: '#inventario-inteligente' },
         ],
       },
       {
-        nombre: 'E-Commerce & Marketplaces',
-        iconoClass: 'ecommerce',
-        descripcion: 'Experiencia en digitalización, integración y gestión en plataformas como Mercado Libre, Amazon y Shopify.',
+        nombre: 'E-commerce',
+        imagen: ecommerce,
+        descripcion: 'Desarrollo y optimización de tiendas en línea y marketplaces.',
         ejemplos: [
-          { texto: 'SEO para Amazon', enlace: '#seo-amazon' },
-          { texto: 'Integración en Shopify', enlace: '#integracion-shopify' },
-          { texto: 'SEO en Mercado Libre', enlace: '#seo-mercado-libre' },
+          { texto: 'SEO Avanzado', enlace: '#seo-avanzado' },
+          { texto: 'Marketing Digital', enlace: '#marketing-digital' },
+          { texto: 'UX/UI', enlace: '#ux-ui' },
         ],
       },
     ],
     en: [
       {
         nombre: 'Strategic Vision',
-        iconoClass: 'strategic-vision',
+        imagen: strategic_vision,
         descripcion: 'Design and implementation of strategies to drive business growth.',
         ejemplos: [
           { texto: 'Process Evaluation', enlace: '#process-evaluation' },
@@ -92,7 +100,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Team Leadership',
-        iconoClass: 'team-leadership',
+        imagen: team_leadership,
         descripcion: 'Management and development of multidisciplinary teams focused on achieving concrete objectives.',
         ejemplos: [
           { texto: 'Agile Methodologies', enlace: '#agile-methodologies' },
@@ -102,7 +110,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Technological Integration',
-        iconoClass: 'tech-integration',
+        imagen: tech_integration,
         descripcion: 'Automation and digitalization with BuildShip, Render, and AWS to optimize workflows.',
         ejemplos: [
           { texto: 'Automation with AWS', enlace: '#automation-aws' },
@@ -112,7 +120,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Advanced AI Solutions',
-        iconoClass: 'ai-solutions',
+        imagen: ai_solutions,
         descripcion: 'Implementation of artificial intelligence with OpenAI, TensorFlow, Ollama, and customized chatbots.',
         ejemplos: [
           { texto: 'Virtual Assistants', enlace: '#virtual-assistants' },
@@ -122,17 +130,17 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'Data Analysis',
-        iconoClass: 'data-analysis',
+        imagen: data_analysis,
         descripcion: 'Extraction, cleaning, and analysis with JavaScript, Python, SQL, BI, and Tableau for data-driven decisions.',
         ejemplos: [
           { texto: 'Predictive Analysis', enlace: '#predictive-analysis' },
           { texto: 'Data Visualization', enlace: '#data-visualization' },
-          { texto: 'BI Dashboards', enlace: '#bi-dashboards' },
+          { texto: 'Machine Learning', enlace: '#machine-learning' },
         ],
       },
       {
         nombre: 'Logistics and Operations',
-        iconoClass: 'logistics',
+        imagen: logistics,
         descripcion: 'Optimization of operations and processes for continuous and sustainable improvement.',
         ejemplos: [
           { texto: 'Supply Optimization', enlace: '#supply-optimization' },
@@ -142,7 +150,7 @@ function ArsenalHabilidades() {
       },
       {
         nombre: 'E-Commerce & Marketplaces',
-        iconoClass: 'ecommerce',
+        imagen: ecommerce,
         descripcion: 'Experience in digitalization, integration, and management on platforms like Mercado Libre, Amazon, and Shopify.',
         ejemplos: [
           { texto: 'SEO for Amazon', enlace: '#seo-amazon' },
@@ -174,7 +182,15 @@ function ArsenalHabilidades() {
             className={`habilidad-card ${activeIndex === index ? 'active' : ''}`}
             onClick={() => handleCardClick(index)}
           >
-            <div className={`habilidad-header ${habilidad.iconoClass}`}>
+            <div className="habilidad-header">
+              <LazyLoadImage
+                src={habilidad.imagen}
+                alt={habilidad.nombre}
+                width="100%"
+                height="100%"
+                effect="blur"
+                className="habilidad-imagen"
+              />
               <h3 className="habilidad-nombre">{habilidad.nombre}</h3>
             </div>
             <div className="habilidad-descripcion">

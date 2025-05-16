@@ -53,10 +53,10 @@
 }
 
 .habilidad-card {
-  background: linear-gradient(145deg, var(--color-bg-solid), var(--color-bg));
-  border-radius: 15px;
   position: relative;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to top, var(--color-bg-solid), var(--color-bg));
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -65,6 +65,64 @@
   height: 100%;
   min-height: 250px;
   padding: 0;
+}
+
+/* Efecto de brillo que se mueve al pasar el mouse */
+.habilidad-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.2) 100%);
+  transform: rotate(30deg);
+  transition: all 0.5s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.habilidad-card:hover::after {
+  opacity: 1;
+  left: -100%;
+  top: -100%;
+}
+
+/* Efectos de hover en la tarjeta */
+.habilidad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Efectos de hover en el título */
+.habilidad-nombre {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ffffff;
+  position: relative;
+  z-index: 3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.habilidad-card:hover .habilidad-nombre {
+  transform: scale(1.02);
+}
+
+/* Efectos de hover en la descripción */
+.habilidad-descripcion {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-top: 8%;
+  margin-bottom: 3%;
+  flex-grow: 1;
+  padding: 0 25px;
+  transition: transform 0.3s ease;
+}
+
+.habilidad-card:hover .habilidad-descripcion {
+  transform: scale(1.02);
 }
 
 .habilidad-header {
@@ -83,6 +141,16 @@
   margin: 0;
 }
 
+.habilidad-imagen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
 .habilidad-header::before {
   content: '';
   position: absolute;
@@ -91,38 +159,7 @@
   right: 0;
   bottom: 0;
   background: var(--color-shadow);
-  z-index: 1;
-}
-
-.habilidad-nombre {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #ffffff;
-  position: relative;
   z-index: 2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.habilidad-header.strategic-vision { background-image: url('../../assets/images/skills/strategic_vision.png'); }
-.habilidad-header.team-leadership { background-image: url('../../assets/images/skills/team_leadership.png'); }
-.habilidad-header.tech-integration { background-image: url('../../assets/images/skills/tech_integration.png'); }
-.habilidad-header.ai-solutions { background-image: url('../../assets/images/skills/ai_solutions.png'); }
-.habilidad-header.data-analysis { background-image: url('../../assets/images/skills/data_analysis.png'); }
-.habilidad-header.logistics { background-image: url('../../assets/images/skills/logistics.png'); }
-.habilidad-header.ecommerce { background-image: url('../../assets/images/skills/ecommerce.png'); }
-
-.habilidad-icono {
-  display: none;
-}
-
-.habilidad-descripcion {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--color-text);
-  margin-top: 8%;
-  margin-bottom: 3%;
-  flex-grow: 1;
-  padding: 0 25px;
 }
 
 .habilidad-ejemplos {
@@ -150,24 +187,19 @@
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 
-.habilidad-ejemplos a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
+.habilidad-header.strategic-vision { background-image: url('../../assets/images/skills/strategic_vision.png'); }
+.habilidad-header.team-leadership { background-image: url('../../assets/images/skills/team_leadership.png'); }
+.habilidad-header.tech-integration { background-image: url('../../assets/images/skills/tech_integration.png'); }
+.habilidad-header.ai-solutions { background-image: url('../../assets/images/skills/ai_solutions.png'); }
+.habilidad-header.data-analysis { background-image: url('../../assets/images/skills/data_analysis.png'); }
+.habilidad-header.logistics { background-image: url('../../assets/images/skills/logistics.png'); }
+.habilidad-header.ecommerce { background-image: url('../../assets/images/skills/ecommerce.png'); }
 
-.habilidad-ejemplos a:hover {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-
-.habilidad-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(145deg, var(--color-bg-3), var(--color-bg-solid));
+.habilidad-icono {
+  display: none;
 }
 
 @media (max-width: 768px) {
