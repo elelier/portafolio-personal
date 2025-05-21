@@ -91,4 +91,18 @@
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
+
+        <url>
+        <loc>https://www.elelier.com/cotizacion/00133</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+        <url>
+        <loc>https://www.elelier.com/cotizacion/00134</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
 </urlset>

@@ -77,9 +77,8 @@ function App({ initialLanguage }) {
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/entradas/2408_IA_Transforma_ecommerce" element={<Entrada />} />
                   <Route path="/contacto" element={<Contacto />} />
-                  <Route path="/cotizacion/:id" element={<ExternalRedirect type="cotizacion" />} />
-                  <Route path="/mockup/:id" element={<ExternalRedirect type="mockup" />} />
-                  <Route path="/proyecto/:id" element={<ExternalRedirect type="proyecto" />} />
+                  <Route path="/cotizacion/:id" element={<ExternalRedirect />} />
+                  <Route path="/mockup/:id" element={<MockupRedirect />} />
                 </Routes>
               </Suspense>
               <Footer />
