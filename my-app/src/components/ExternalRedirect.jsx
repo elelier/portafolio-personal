@@ -3,13 +3,38 @@ import { useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/HeroBanner.css';
 
-const EXTERNAL_URL_MAP = {
-  '00132': 'https://www.canva.com/design/DAGcZPIh0jE/MXeJcVMjya5LRX9sp7cocw/view?utm_content=DAGcZPIh0jE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb4992d367b',
-  'mockup': 'https://d1shbod9k202nu.cloudfront.net/'
+const URL_MAPS = {
+  cotizacion: {
+    '00132': 'https://www.canva.com/design/DAGcZPIh0jE/MXeJcVMjya5LRX9sp7cocw/view',
+    '00133': 'https://www.canva.com/design/DAGn0jLRM2k/62nYjyNV7C8q6g2h_ekZ2Q/view',
+    '00134': 'https://www.canva.com/design/DAGn8_3MaeA/jDuD68zakM740t7Rhv7gFQ/view'
+  },
+  mockup: {
+    '00132': 'https://d1shbod9k202nu.cloudfront.net/mockup-1',
+    '00133': 'https://d1shbod9k202nu.cloudfront.net/mockup-2'
+  },
+  proyecto: {
+    'ecommerce': 'https://ejemplo.com/proyecto-ecommerce',
+    'ai': 'https://ejemplo.com/proyecto-ai'
+  }
 };
 
 const translations = {
   es: {
+    types: {
+      cotizacion: {
+        title: 'Documento de Cotización',
+        description: 'Acceda al documento detallado de su cotización.'
+      },
+      mockup: {
+        title: 'Vista Previa del Diseño',
+        description: 'Visualice el mockup de su proyecto.'
+      },
+      proyecto: {
+        title: 'Detalles del Proyecto',
+        description: 'Información detallada del proyecto.'
+      }
+    },
     loading: {
       title: 'Preparando su documento',
       description: 'Optimizando la experiencia de visualización...'
@@ -41,22 +66,25 @@ const translations = {
   }
 };
 
-const ExternalRedirect = () => {
+const ExternalRedirect = ({ type = 'cotizacion' }) => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const { language } = useLanguage();
 
   const t = (key) => translations[language][key];
+  const typeInfo = t('types')[type];
 
   useEffect(() => {
-    const url = EXTERNAL_URL_MAP[id];
+    const url = URL_MAPS[type]?.[id];
     if (url) {
       setIsLoading(false);
     } else {
-      console.error('URL no encontrada');
+      console.error(`URL no encontrada para tipo: ${type}, id: ${id}`);
       setIsLoading(false);
     }
-  }, [id]);
+  }, [id, type]);
+
+  const getTargetUrl = () => URL_MAPS[type]?.[id];
 
   if (isLoading) {
     return (
@@ -73,7 +101,7 @@ const ExternalRedirect = () => {
     );
   }
 
-  const targetUrl = EXTERNAL_URL_MAP[id];
+  const targetUrl = getTargetUrl();
 
   if (!targetUrl) {
     return (
