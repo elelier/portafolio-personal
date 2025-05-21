@@ -27,6 +27,7 @@ import MockupRedirect from './components/MockupRedirect';
 // Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
 const Entrada = lazy(() => import('./components/entradas/entrada1'));
+const ProyectosPage = lazy(() => import('./pages/ProyectosPage'));
 
 // Importa el componente de Tarifario para la redirección
 

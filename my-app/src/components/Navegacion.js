@@ -49,6 +49,7 @@ function Navegacion() {
     es: {
       sobreMi: 'Sobre Mí',
       habilidades: 'Habilidades',
+      proyectos: 'Proyectos', // New item
       portafolio: 'Carrera',
       servicios: 'Servicios',
       contactame: ' Contáctame'
@@ -56,7 +57,8 @@ function Navegacion() {
     en: {
       sobreMi: 'About Me',
       habilidades: 'Skills',
-      portafolio: 'Carrer',
+      proyectos: 'Projects', // New item
+      portafolio: 'Career', // Corrected 'Carrer' to 'Career'
       servicios: 'Services',
       contactame: ' Contact Me'
     }
@@ -77,6 +79,7 @@ function Navegacion() {
           <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{navItems[language].sobreMi}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>{navItems[language].habilidades}</Link></li>
+          <li><Link to="/proyectos" onClick={closeMenu}>{navItems[language].proyectos}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('servicios')}>{navItems[language].servicios}</Link></li>
           <li>

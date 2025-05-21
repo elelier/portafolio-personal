@@ -1,0 +1,72 @@
+{
+  "es": [
+    {
+      "name": "Compresor de Imágenes",
+      "shortDescription": "Herramienta para comprimir imágenes manteniendo calidad óptima, perfecta para correo o web.",
+      "longDescription": "Una herramienta simple pero poderosa para comprimir imágenes manteniendo una calidad óptima, perfecta para preparar imágenes para correo electrónico o web.\nCaracterísticas principales:\n- Compresión inteligente de imágenes a menos de 1MB\n- Soporte para múltiples formatos (JPG, JPEG, PNG, BMP, WEBP)\n- Proceso por lotes automatizado\n- Preservación de calidad con algoritmo adaptativo\n- Conversión automática a RGB para formatos compatibles\n- Interfaz de línea de comandos simple y directa",
+      "thumbnail": "../assets/images/projects/image-compressor-banner.png",
+      "tech": ["Python 3.6+", "Pillow (PIL)", "CLI"],
+      "website": "",
+      "repository": "https://github.com/elelier/image-compressor",
+      "status": "published",
+      "featured": true
+    },
+    {
+      "name": "Mi portafolio personal",
+      "shortDescription": "Sitio web profesional que muestra mi experiencia en transformación digital y e-commerce.",
+      "longDescription": "Un sitio web profesional y moderno que muestra mi experiencia en transformación digital, e-commerce y optimización de operaciones. Construido con las últimas tecnologías web y centrado en ofrecer una experiencia de usuario excepcional.\nCaracterísticas principales:\n- Diseño responsivo y adaptativo\n- Internacionalización con soporte multiidioma (ES/EN)\n- Tema dinámico (modo claro/oscuro)\n- Chatbot inteligente con IA\n- SEO optimizado con meta tags dinámicos\n- Sistema de blog integrado\n- Animaciones y transiciones fluidas\n- Integración con Google Analytics",
+      "thumbnail": "../assets/images/projects/image-compressor-banner.png",
+      "tech": ["React", "JavaScript", "HTML", "CSS"],
+      "website": "https://www.elelier.com",
+      "repository": "",
+      "status": "published",
+      "featured": true
+    },
+    {
+      "name": "EL Bot - AI Assistant",
+      "shortDescription": "Chatbot moderno impulsado por IA con Flask y OpenAI API.",
+      "longDescription": "Un chatbot moderno y responsivo impulsado por inteligencia artificial, diseñado con Flask y la API GPT-3.5 de OpenAI. Proporciona una interfaz interactiva para responder preguntas y ofrecer información en tiempo real.\nCaracterísticas principales:\n- Interfaz de chat en tiempo real\n- Diseño responsivo y moderno\n- Preservación del contexto de la conversación\n- Historial de conversación local\n- Indicadores de escritura en tiempo real",
+      "thumbnail": "../assets/images/projects/image-compressor-banner.png",
+      "tech": ["Python", "Flask", "OpenAI API", "JavaScript"],
+      "website": "",
+      "repository": "https://github.com/elelier/el-bot",
+      "status": "published",
+      "featured": false
+    }
+  ],
+  "en": [
+    {
+      "name": "Image Compressor",
+      "shortDescription": "Tool for compressing images while maintaining optimal quality, perfect for email or web.",
+      "longDescription": "A simple yet powerful tool for compressing images while maintaining optimal quality, perfect for preparing images for email or web use.\nKey features:\n- Smart image compression under 1MB\n- Multiple format support (JPG, JPEG, PNG, BMP, WEBP)\n- Automated batch processing\n- Adaptive quality preservation algorithm\n- Automatic RGB conversion for compatible formats\n- Simple and straightforward command-line interface",
+      "thumbnail": "../assets/images/projects/image-compressor-banner.png",
+      "tech": ["Python 3.6+", "Pillow (PIL)", "CLI"],
+      "website": "",
+      "repository": "https://github.com/elelier/image-compressor",
+      "status": "published",
+      "featured": true
+    },
+    {
+      "name": "My personal portfolio",
+      "shortDescription": "Professional website showcasing my experience in digital transformation and e-commerce.",
+      "longDescription": "A professional and modern website showcasing my experience in digital transformation, e-commerce, and operations optimization. Built with the latest web technologies and focused on providing an exceptional user experience.\nKey features:\n- Responsive and adaptive design\n- Internationalization with multi-language support (ES/EN)\n- Dynamic theme (light/dark mode)\n- Intelligent AI chatbot\n- SEO optimized with dynamic meta tags\n- Integrated blog system\n- Fluid animations and transitions\n- Integration with Google Analytics",
+      "thumbnail": "../assets/images/projects/image-compressor-banner.png",
+      "tech": ["React", "JavaScript", "HTML", "CSS"],
+      "website": "https://www.elelier.com",
+      "repository": "",
+      "status": "published",
+      "featured": true
+    },
+    {
+      "name": "EL Bot - AI Assistant",
+      "shortDescription": "Modern AI-powered chatbot with Flask and OpenAI API.",
+      "longDescription": "A modern and responsive chatbot powered by artificial intelligence, built with Flask and the GPT-3.5 OpenAI API. It provides an interactive interface to answer questions and deliver real-time information.\nKey features:\n- Real-time chat interface\n- Responsive and modern design\n- Conversation context preservation\n- Local conversation history\n- Typing indicators",
+      "thumbnail": "../assets/images/projects/image-compressor-banner.png",
+      "tech": ["Python", "Flask", "OpenAI API", "JavaScript"],
+      "website": "",
+      "repository": "https://github.com/elelier/el-bot",
+      "status": "published",
+      "featured": false
+    }
+  ]
+}
