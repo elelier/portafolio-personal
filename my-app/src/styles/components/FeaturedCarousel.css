@@ -1,0 +1,169 @@
+/* my-app/src/styles/components/FeaturedCarousel.css */
+.featured-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2rem 0;
+  margin: 2rem auto; /* Added some margin for spacing */
+  max-width: 900px; /* Or percentage of parent */
+  background-color: var(--color-bg-2, #2c2c2c); /* Using --color-bg-2 as per index.css, fallback provided */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px var(--color-shadow, rgba(0,0,0,0.2)); /* Using theme shadow */
+  /* overflow: hidden; Ensure the parent of the viewport also clips if necessary,
+                     or that viewport itself is well-contained. */
+}
+
+/* New viewport container for Framer Motion slides */
+.carousel-viewport {
+  position: relative; /* Crucial for absolute positioning of arrows if they were inside */
+  width: 100%; /* Take full width of parent */
+  /* max-width: 80%; /* Example: Match .carousel-slide's max-width if slides shouldn't touch arrows */
+  display: flex; /* Helps in centering the slide if it's narrower than viewport */
+  justify-content: center; /* Center the slide content */
+  align-items: center; /* Align items vertically */
+  overflow: hidden; /* This is key for the sliding animation */
+  min-height: 350px; /* Adjust to fit your content, including caption and CTAs */
+}
+
+.carousel-slide {
+  display: flex; /* For layout of image and caption */
+  flex-direction: column; /* Stack image and caption */
+  align-items: center;
+  text-align: center;
+  width: 100%; /* Ensure the motion.div takes full width of viewport */
+  max-width: 80%; /* Original max-width from before viewport was added, adjust as needed */
+  /* min-height is now on carousel-viewport, or can be here if viewport is taller */
+  /* justify-content: center; /* Viewport handles centering now */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 300px; /* Control max height, was 400px, adjusted for balance */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: cover; /* Ensures image covers the area well */
+  background-color: var(--color-bg-3, #333); /* Placeholder bg for image area */
+}
+
+.carousel-caption {
+  color: var(--color-text);
+  padding: 1rem;
+}
+
+.carousel-caption h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary); /* Use primary color for title */
+}
+
+.carousel-caption p {
+  font-size: 1rem;
+  color: var(--color-secondary); /* Use secondary text color */
+  line-height: 1.4; /* Improved readability */
+  margin-bottom: 1rem; /* Add margin to separate from actions */
+}
+
+/* CTA Actions in Carousel */
+.carousel-actions {
+  display: flex;
+  gap: 1rem; /* Spacing between CTA links */
+  justify-content: center; /* Center links if they don't fill space */
+  margin-top: 0.5rem; /* Space above action links */
+}
+
+.cta-link-carousel {
+  color: var(--color-accent, #7dd3fc);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem; /* Slightly more padding for better clickability */
+  border-radius: 4px; /* Rounded corners for a softer look */
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: 1px solid transparent; /* For consistent sizing, can be var(--color-border) */
+}
+
+.cta-link-carousel:hover,
+.cta-link-carousel:focus {
+  color: var(--hero-title-color-2, #ffffff);
+  background-color: var(--color-bg-3, #333); /* Subtle background on hover */
+  text-decoration: none; /* Remove underline, background change is enough */
+  border-color: var(--color-accent, #7dd3fc); /* Highlight border on hover */
+}
+
+.cta-link-carousel:focus {
+  outline: 1px dotted var(--color-accent, #7dd3fc);
+  outline-offset: 2px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px var(--color-accent, #007bff); /* Focus indicator */
+}
+
+.carousel-arrow.left-arrow {
+  left: 15px;
+}
+
+.carousel-arrow.right-arrow {
+  right: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .featured-carousel {
+    max-width: 95%; /* Use more screen width */
+    padding: 1rem 0;
+  }
+
+  .carousel-slide {
+    max-width: 90%;
+  }
+
+  .carousel-image {
+    max-height: 250px; /* Adjust image height for smaller screens */
+  }
+
+  .carousel-caption h3 {
+    font-size: 1.25rem;
+  }
+
+  .carousel-caption p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-arrow {
+    padding: 0.5rem; /* Smaller arrows */
+  }
+
+  .carousel-arrow.left-arrow {
+    left: 10px;
+  }
+
+  .carousel-arrow.right-arrow {
+    right: 10px;
+  }
+}

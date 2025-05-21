@@ -1,0 +1,142 @@
+/* my-app/src/styles/components/ProjectDetailModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Darker overlay for better focus */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.modal-content {
+  background-color: var(--color-bg-solid, #1a1a1a);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  max-width: 800px;
+  width: 90%; /* Ensure it's responsive on smaller screens */
+  max-height: 85vh; /* Limit height to prevent overflow on short screens */
+  overflow-y: auto; /* Allow scrolling for content that exceeds max-height */
+  position: relative; /* For positioning the close button */
+  color: var(--color-text, #f0f0f0);
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--color-text, #f0f0f0);
+  font-size: 1.5rem; /* Make icon larger and easier to click */
+  cursor: pointer;
+  padding: 0.25rem; /* Increase clickable area */
+  line-height: 1; /* Ensure icon is centered if it has descenders/ascenders */
+  transition: color 0.2s ease;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+  color: var(--color-accent, #7dd3fc); /* Highlight on hover/focus */
+  outline: none; /* Remove default outline, custom focus can be added if needed */
+}
+
+.modal-content h2 { /* Corresponds to #modal-project-title */
+  margin-top: 0; /* Remove default margin if any */
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--color-primary, #ffffff);
+  border-bottom: 1px solid var(--color-border, #444); /* Separator for title */
+  padding-bottom: 0.75rem;
+}
+
+.modal-body {
+  padding-top: 0.5rem;
+}
+
+.modal-body .long-description {
+  font-size: 1rem;
+  line-height: 1.7; /* Improved readability for longer text */
+  color: var(--color-text-secondary, #cccccc); /* Slightly softer color for description */
+  margin-bottom: 1.5rem;
+}
+
+.modal-body .long-description p { /* If you end up using <p> tags instead of <br> */
+  margin-bottom: 1em;
+}
+
+.modal-body h4 {
+  font-size: 1.1rem;
+  color: var(--color-primary, #ffffff);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal-body .tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-body .tech-tag { 
+  /* Using fallback values as CSS variable definition in index.css failed.
+     Light theme: bg #e9ecef, text #495057
+     Dark theme: bg #343a40, text #adb5bd 
+     Using a single set of fallbacks that work okay on dark theme for now.
+     Ideally, these would be theme-aware via --color-neutral-chip-bg and --color-neutral-chip-text */
+  background-color: var(--color-neutral-chip-bg, #343a40); /* Fallback to dark chip bg */
+  color: var(--color-neutral-chip-text, #adb5bd);          /* Fallback to dark chip text */
+  padding: 5px 12px; /* Adjusted padding for chip look */
+  border-radius: 15px; /* Rounded for chip look */
+  font-size: 0.8rem; /* Consistent font size with NewProjectCard */
+  border: none; /* Removed border for a flatter chip look */
+}
+
+.modal-body .project-links-modal {
+  display: flex;
+  flex-direction: column; /* Stack links vertically */
+  gap: 0.75rem;
+}
+
+.modal-body .cta-link-modal { /* Similar to cta-link in NewProjectCard.css */
+  color: var(--color-accent, #7dd3fc);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.25rem 0; /* Minimal padding, focus on text */
+  transition: color 0.2s ease;
+  display: inline-block; /* To ensure padding is respected */
+}
+
+.modal-body .cta-link-modal:hover,
+.modal-body .cta-link-modal:focus {
+  color: var(--hero-title-color-2, #ffffff); /* Brighter on hover/focus */
+  text-decoration: underline;
+  outline: 1px dotted var(--color-accent, #7dd3fc); /* Consistent focus style */
+  outline-offset: 2px; /* Consistent focus style */
+}
+
+/* For scrollbar styling (optional, browser-specific) */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: var(--color-bg-solid, #1a1a1a);
+  border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-bg-3, #444);
+  border-radius: 8px;
+  border: 2px solid var(--color-bg-solid, #1a1a1a); /* Creates padding around thumb */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-secondary, #6c757d);
+}
