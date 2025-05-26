@@ -91,16 +91,26 @@
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
-    <url>
+
+        <url>
         <loc>https://www.elelier.com/cotizacion/00133</loc>
-        <lastmod>2024-05-18</lastmod>
+        <lastmod>2024-05-14</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.1</priority>
+        <priority>0.4</priority>
     </url>
-    <url>
+
+        <url>
         <loc>https://www.elelier.com/cotizacion/00134</loc>
-        <lastmod>2024-05-19</lastmod>
+        <lastmod>2024-05-14</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.1</priority>
+        <priority>0.4</priority>
+    </url>
+       </url>
+
+        <url>
+        <loc>https://www.elelier.com/mockup/00132-drive</loc>
+        <lastmod>2024-05-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
     </url>
 </urlset>
