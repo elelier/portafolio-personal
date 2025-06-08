@@ -64,8 +64,8 @@ function App({ initialLanguage }) {
                       <SobreMi />
                       <ArsenalHabilidades />
                       <Portafolio />
-                      <Sites simplified={true} />
-                      {/*<Proyectos />/* Comentado para evitar duplicación de contenido */}
+                      {/* Temporalmente oculto mientras se cargan las imágenes
+                      <Sites simplified={true} /> */}
                       <Servicios />
                       <Contacto />
                     </>
