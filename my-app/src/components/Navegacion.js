@@ -51,14 +51,16 @@ function Navegacion() {
       habilidades: 'Habilidades',
       portafolio: 'Carrera',
       servicios: 'Servicios',
-      contactame: ' Contáctame'
+      contactame: ' Contáctame',
+      sites: 'Sitios'
     },
     en: {
       sobreMi: 'About Me',
       habilidades: 'Skills',
       portafolio: 'Carrer',
       servicios: 'Services',
-      contactame: ' Contact Me'
+      contactame: ' Contact Me',
+      sites: 'Sites'
     }
   };
 
@@ -79,6 +81,7 @@ function Navegacion() {
           <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>{navItems[language].habilidades}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('servicios')}>{navItems[language].servicios}</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('sites')}>{navItems[language].sites}</Link></li>
           <li>
             <Link
               to="/"

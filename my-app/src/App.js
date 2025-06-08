@@ -23,6 +23,7 @@ import ChatModal from './components/ChatModal';
 import { FaArrowUp } from 'react-icons/fa';
 import ExternalRedirect from './components/ExternalRedirect';
 import MockupRedirect from './components/MockupRedirect';
+import Sites from './components/Sites';
 
 // Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
@@ -63,7 +64,8 @@ function App({ initialLanguage }) {
                       <SobreMi />
                       <ArsenalHabilidades />
                       <Portafolio />
-                      <Proyectos />
+                      <Sites simplified={true} />
+                      {/*<Proyectos />/* Comentado para evitar duplicación de contenido */}
                       <Servicios />
                       <Contacto />
                     </>
@@ -79,6 +81,8 @@ function App({ initialLanguage }) {
                   <Route path="/contacto" element={<Contacto />} />
                   <Route path="/cotizacion/:id" element={<ExternalRedirect />} />
                   <Route path="/mockup/:id" element={<MockupRedirect />} />
+                  {/* Agregamos ruta independiente */}
+                  <Route path="/sites" element={<Sites simplified={false} />} />
                 </Routes>
               </Suspense>
               <Footer />
