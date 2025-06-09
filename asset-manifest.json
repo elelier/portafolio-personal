@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a7ed6541.css",
-    "main.js": "/static/js/main.27f59682.js",
+    "main.js": "/static/js/main.240f4e53.js",
     "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
     "static/js/889.fb90d5f7.chunk.js": "/static/js/889.fb90d5f7.chunk.js",
     "static/css/930.478c97b3.chunk.css": "/static/css/930.478c97b3.chunk.css",
@@ -26,7 +26,7 @@
     "static/media/farmalisto.jpg": "/static/media/farmalisto.3f0bee5b23c66aa31b0d.jpg",
     "index.html": "/index.html",
     "main.a7ed6541.css.map": "/static/css/main.a7ed6541.css.map",
-    "main.27f59682.js.map": "/static/js/main.27f59682.js.map",
+    "main.240f4e53.js.map": "/static/js/main.240f4e53.js.map",
     "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
     "889.fb90d5f7.chunk.js.map": "/static/js/889.fb90d5f7.chunk.js.map",
     "930.478c97b3.chunk.css.map": "/static/css/930.478c97b3.chunk.css.map",
@@ -34,6 +34,6 @@
   },
   "entrypoints": [
     "static/css/main.a7ed6541.css",
-    "static/js/main.27f59682.js"
+    "static/js/main.240f4e53.js"
   ]
 }
