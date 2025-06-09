@@ -5,6 +5,8 @@ import { SystemMessage, UserMessage } from '../utils/MessageSystem';
 import { getBenefitResponse } from '../utils/benefitResponses';
 import TypingIndicator from './TypingIndicator';
 import ChatOptionButton from './ChatOptionButton';
+import geminiService from '../services/geminiService';
+import securityService from '../services/securityService';
 import '../styles/components/ChatModal.css';
 
 const translations = {
@@ -105,9 +107,47 @@ const ChatModal = () => {
   };
 
   const handleUserMessage = async (content) => {
-    setMessages(prev => [...prev, new UserMessage(content)]);
+    // Validaciones de seguridad
+    const securityCheck = securityService.canSendMessage();
+    if (!securityCheck.allowed) {
+      const errorMessage = new SystemMessage(`⚠️ ${securityCheck.reason}`);
+      setMessages(prev => [...prev, new UserMessage(content), errorMessage]);
+      return;
+    }
+
+    const messageValidation = securityService.validateMessage(content);
+    if (!messageValidation.valid) {
+      const errorMessage = new SystemMessage(`⚠️ ${messageValidation.reason}`);
+      setMessages(prev => [...prev, new UserMessage(content), errorMessage]);
+      return;
+    }
+
+    // Sanitizar el contenido
+    const sanitizedContent = securityService.sanitizeMessage(content);
+    securityService.recordMessage();
+
+    setMessages(prev => [...prev, new UserMessage(sanitizedContent)]);
+    
+    // Mostrar indicador de typing
     await showTypingIndicator(translations[language].typing.thinking);
-    setMessages(prev => [...prev, new SystemMessage(`Echo: ${content}`)]);
+    
+    try {
+      // Intentar obtener respuesta de Gemini AI
+      const response = await geminiService.sendMessage(sanitizedContent, language, messages);
+      const systemMessage = new SystemMessage(response);
+      // Marcar el mensaje como powered by Gemini si está disponible
+      if (geminiService.isGeminiAvailable()) {
+        systemMessage.isGeminiPowered = true;
+      }
+      setMessages(prev => [...prev, systemMessage]);
+    } catch (error) {
+      console.error('Error with Gemini AI:', error);
+      // Fallback a respuesta simple si falla Gemini
+      const fallbackResponse = language === 'es' 
+        ? `Gracias por tu mensaje: "${content}". Te ayudaré a explorar el portafolio de Elier.`
+        : `Thank you for your message: "${content}". I'll help you explore Elier's portfolio.`;
+      setMessages(prev => [...prev, new SystemMessage(fallbackResponse)]);
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -150,28 +190,25 @@ const ChatModal = () => {
       if (isOpen && messages.length === 0) {
         // Primer mensaje
         await showTypingIndicator(translations[language].typing.writing, 1000);
+        const geminiStatus = await geminiService.initialize();
         const welcomeMessage = language === 'es'
-          ? `¡Hola! Soy un <b>🤖 Chatbot de IA</b> desarrollado por <a href='https://elelier.com' target='_blank'>Elier Loya Mata</a>.`
-          : `Hi! I'm an <b>🤖 AI Chatbot</b> developed by <a href='https://elelier.com' target='_blank'>Elier Loya Mata</a>.`;
+          ? `¡Hola! Soy el asistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`
+          : `Hi! I'm <b>Elier Loya's</b> virtual assistant ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`;
         setMessages([new SystemMessage(welcomeMessage)]);
         
         // Segundo mensaje
         await showTypingIndicator(translations[language].typing.writing, 1500);
-        const imagineMessage = language === 'es'
-          ? `🌟¿Te imaginas tener un asistente virtual como yo para tu empresa? 💻 ¡Sería increíble!`
-          : `🌟Can you imagine having a virtual assistant like me for your business? 💻 It would be amazing!`;
-        setMessages(prev => [...prev, new SystemMessage(imagineMessage)]);
+        const helpMessage = language === 'es'
+          ? `Estoy aquí para ayudarte a conocer más sobre sus servicios de transformación digital, desarrollo web y análisis de datos. ¿En qué puedo ayudarte? 💻`
+          : `I'm here to help you learn more about his digital transformation, web development, and data analysis services. How can I help you? 💻`;
+        setMessages(prev => [...prev, new SystemMessage(helpMessage)]);
 
-        // Tercer mensaje con beneficios
+        // Tercer mensaje con opciones de navegación
         await showTypingIndicator(translations[language].typing.writing, 1000);
-        const benefits = [
-          { icon: '✨', text: language === 'es' ? 'Atención 24/7' : '24/7 Service' },
-          { icon: '💡', text: language === 'es' ? 'Respuestas al instante' : 'Instant Responses' },
-          { icon: '📈', text: language === 'es' ? 'Más conversiones' : 'More Conversions' },
-          { icon: '⚡', text: language === 'es' ? 'Equipo optimizado' : 'Optimized Team' },
-          { icon: '🌐', text: language === 'es' ? 'Soporte multilingüe' : 'Multilingual Support' }
-        ];
-        setMessages(prev => [...prev, SystemMessage.createBenefitsMessage(language, benefits)]);
+        const quickOptions = language === 'es'
+          ? `Puedes usar los botones de abajo para navegación rápida o simplemente escríbeme lo que necesitas saber:`
+          : `You can use the buttons below for quick navigation or just write me what you need to know:`;
+        setMessages(prev => [...prev, new SystemMessage(quickOptions)]);
       }
     };
 
@@ -241,12 +278,28 @@ const ChatModal = () => {
     };
   }, []);
 
-  const handleConstructionMessage = async (section) => {
-    const constructionMessage = language === 'es'
-      ? `🚧 ¡En construcción! 👷‍♂️\nLa sección de ${section} estará disponible próximamente.`
-      : `🚧 Under Construction! 👷‍♂️\nThe ${section} section will be available soon.`;
+  const handleSectionRequest = async (sectionName) => {
+    const message = language === 'es' 
+      ? `Cuéntame sobre ${sectionName}`
+      : `Tell me about ${sectionName}`;
     
-    setMessages(prev => [...prev, new SystemMessage(constructionMessage)]);
+    setMessages(prev => [...prev, new UserMessage(message)]);
+    await showTypingIndicator(translations[language].typing.thinking);
+    
+    try {
+      const response = await geminiService.sendMessage(message, language, messages);
+      const systemMessage = new SystemMessage(response);
+      if (geminiService.isGeminiAvailable()) {
+        systemMessage.isGeminiPowered = true;
+      }
+      setMessages(prev => [...prev, systemMessage]);
+    } catch (error) {
+      console.error('Error with section request:', error);
+      const fallbackResponse = language === 'es'
+        ? `Te cuento sobre ${sectionName}: Esta sección contiene información relevante sobre la experiencia profesional de Elier. Te recomiendo explorar el portafolio para más detalles.`
+        : `About ${sectionName}: This section contains relevant information about Elier's professional experience. I recommend exploring the portfolio for more details.`;
+      setMessages(prev => [...prev, new SystemMessage(fallbackResponse)]);
+    }
   };
 
   return (
@@ -283,7 +336,7 @@ const ChatModal = () => {
           <div className="chat-content">
             <div className="messages-container">
               {messages.map((message, index) => (
-                <div key={index} className={`message ${message.type}`}>
+                <div key={index} className={`message ${message.type} ${message.isGeminiPowered ? 'gemini-powered' : ''}`}>
                   <div className="message-content" dangerouslySetInnerHTML={{ __html: message.content }} />
                 </div>
               ))}
@@ -302,31 +355,31 @@ const ChatModal = () => {
                 icon={FaUserAlt}
                 label={translations[language].sections.aboutMe}
                 color="blue"
-                onClick={() => handleConstructionMessage(translations[language].sections.aboutMe)}
+                onClick={() => handleSectionRequest(translations[language].aboutMe)}
               />
               <ChatOptionButton
                 icon={FaRocket}
                 label={translations[language].sections.benefits}
                 color="cyan"
-                onClick={() => handleConstructionMessage(translations[language].sections.benefits)}
+                onClick={() => handleSectionRequest(translations[language].benefits)}
               />
               <ChatOptionButton
                 icon={FaCogs}
                 label={translations[language].sections.skills}
                 color="yellow"
-                onClick={() => handleConstructionMessage(translations[language].sections.skills)}
+                onClick={() => handleSectionRequest(translations[language].skills)}
               />
               <ChatOptionButton
                 icon={FaCode}
                 label={translations[language].sections.projects}
                 color="orange"
-                onClick={() => handleConstructionMessage(translations[language].sections.projects)}
+                onClick={() => handleSectionRequest(translations[language].projects)}
               />
               <ChatOptionButton
                 icon={FaEnvelope}
                 label={translations[language].sections.contact}
                 color="purple"
-                onClick={() => handleConstructionMessage(translations[language].sections.contact)}
+                onClick={() => handleSectionRequest(translations[language].contact)}
               />
             </div>
 

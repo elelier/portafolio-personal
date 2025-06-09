@@ -2,28 +2,37 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { HelmetProvider } from 'react-helmet-async';
+import React, { useEffect, lazy, Suspense } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
+
+// Componentes principales
 import './styles/App.css';
 import SEO from './components/SEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
 import ArsenalHabilidades from './components/ArsenalHabilidades';
 import Portafolio from './components/Portafolio';
-import Proyectos from './components/Proyectos';
 import Servicios from './components/Servicios';
 import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import SobreMi from './components/SobreMi';
-import { initializeTheme } from './components/utils/themeUtils';
-import { loadExternalScripts } from './components/utils/generalUtils';
-import SettingsMenu from './components/SettingsMenu';
-import React, { useEffect, lazy, Suspense } from 'react';
 import Tarifario from './components/Tarifario';
 import FloatingButton from './components/FloatingButton';
 import ChatModal from './components/ChatModal';
-import { FaArrowUp } from 'react-icons/fa';
 import ExternalRedirect from './components/ExternalRedirect';
 import MockupRedirect from './components/MockupRedirect';
 import Sites from './components/Sites';
+import SettingsMenu from './components/SettingsMenu';
+
+// Utilidades
+import { initializeTheme } from './components/utils/themeUtils';
+import { loadExternalScripts } from './components/utils/generalUtils';
+
+// Debug tools (solo en desarrollo)
+import './utils/testGemini';
+if (process.env.NODE_ENV === 'development') {
+  import('./debug-gemini');
+}
 
 // Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
