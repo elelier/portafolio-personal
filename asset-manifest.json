@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.9a95f884.css",
-    "main.js": "/static/js/main.31324064.js",
+    "main.css": "/static/css/main.a7ed6541.css",
+    "main.js": "/static/js/main.27f59682.js",
     "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
     "static/js/889.fb90d5f7.chunk.js": "/static/js/889.fb90d5f7.chunk.js",
     "static/css/930.478c97b3.chunk.css": "/static/css/930.478c97b3.chunk.css",
@@ -20,21 +20,20 @@
     "static/media/strategic_vision.png": "/static/media/strategic_vision.ea32510587979dd9cf8e.png",
     "static/media/ai_solutions.png": "/static/media/ai_solutions.172c0e320bc403405dee.png",
     "static/media/ecommerce.png": "/static/media/ecommerce.99301c46a32e7e4c5a09.png",
-    "static/media/image-compressor-banner.png": "/static/media/image-compressor-banner.99301c46a32e7e4c5a09.png",
     "static/media/CHUBB.jpg": "/static/media/CHUBB.7d8a22b45218bb91d9e6.jpg",
     "static/media/elelier.jpg": "/static/media/elelier.568f9f81a4baa6a0e2d0.jpg",
     "static/media/gofarma.jpg": "/static/media/gofarma.5a440aec29a4d405ea0b.jpg",
     "static/media/farmalisto.jpg": "/static/media/farmalisto.3f0bee5b23c66aa31b0d.jpg",
     "index.html": "/index.html",
-    "main.9a95f884.css.map": "/static/css/main.9a95f884.css.map",
-    "main.31324064.js.map": "/static/js/main.31324064.js.map",
+    "main.a7ed6541.css.map": "/static/css/main.a7ed6541.css.map",
+    "main.27f59682.js.map": "/static/js/main.27f59682.js.map",
     "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
     "889.fb90d5f7.chunk.js.map": "/static/js/889.fb90d5f7.chunk.js.map",
     "930.478c97b3.chunk.css.map": "/static/css/930.478c97b3.chunk.css.map",
     "930.0d885452.chunk.js.map": "/static/js/930.0d885452.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9a95f884.css",
-    "static/js/main.31324064.js"
+    "static/css/main.a7ed6541.css",
+    "static/js/main.27f59682.js"
   ]
 }
