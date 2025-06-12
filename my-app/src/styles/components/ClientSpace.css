@@ -9,35 +9,419 @@
 }
 
 .client-header {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   margin-bottom: 2rem;
-  padding: 2.5rem;
+  padding: 2rem;
   background: var(--color-bg-solid);
-  border: 2px solid var(--color-border);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px var(--color-shadow);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .client-header {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .client-header {
+  background: var(--color-bg-solid);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+
+.welcome-section {
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .client-header h1 {
   color: var(--hero-title-color);
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 800;
+  font-size: 2.25rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
   line-height: 1.2;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-
-.client-header p {
+.welcome-message {
   font-size: 1.1rem;
-  margin-bottom: 0.75rem;
+  color: var(--color-text-muted);
   line-height: 1.6;
-  color: var(--color-text);
+  margin: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  font-style: italic;
 }
 
-.client-header p:last-child {
+.project-info-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .info-item {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+[data-theme="dark"] .info-item {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+}
+
+.info-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary);
+}
+
+[data-theme="light"] .info-item:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="dark"] .info-item:hover {
+  background: rgba(51, 65, 85, 0.6);
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+}
+
+.contact-item {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-item::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, 
+    rgba(59, 130, 246, 0.05) 0%, 
+    rgba(59, 130, 246, 0.05) 40%, 
+    rgba(59, 130, 246, 0.15) 50%, 
+    rgba(59, 130, 246, 0.05) 60%, 
+    rgba(59, 130, 246, 0.05) 100%);
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-item:hover::after {
+  opacity: 1;
+  left: -100%;
+  top: -100%;
+}
+
+.contact-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+}
+
+[data-theme="light"] .contact-item:hover {
+  background: rgba(239, 246, 255, 0.9);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .contact-item:hover {
+  background: rgba(30, 58, 138, 0.2);
+  border-color: var(--color-primary);
+}
+
+.info-label {
+  font-weight: 600;
   color: var(--color-text-muted);
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 2;
+}
+
+.info-value {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-link {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-item:hover .contact-link {
+  color: var(--hero-title-color-2);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.project-status-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.status-updates-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* Estilos base unificados para ambos botones */
+.status-badge,
+.updates-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 2rem; /* Más padding horizontal */
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  min-height: 48px; /* Altura unificada para acomodar emoji */
+  box-sizing: border-box;
+  white-space: nowrap;
+  flex: 1;
+  max-width: 260px; /* Aumentado para evitar desbordamiento */
+  min-width: 180px;
+  text-align: center;
+  overflow: hidden; /* Prevenir desbordamiento */
+}
+
+.status-badge {
+  cursor: default;
+  text-transform: none; /* Cambiar a none para unificar */
+}
+
+/* Estado clickeable para el status badge cuando hay cotizaciones activas */
+.status-badge.clickable {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  outline: none;
+}
+
+.status-badge.clickable:hover {
+  background: var(--color-primary-bg, #dbeafe);
+  border-color: var(--color-primary);
+  color: var(--color-primary-text, #1e40af);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.status-badge.clickable:focus {
+  background: var(--color-primary-bg, #dbeafe);
+  border-color: var(--color-primary);
+  color: var(--color-primary-text, #1e40af);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Indicador de flecha removido - solo mantener funcionalidad de hover/focus */
+
+.updates-button {
+  cursor: pointer;
+  text-transform: none;
+  border-color: var(--color-primary);
+  background: var(--color-primary-bg, #dbeafe);
+  color: var(--color-primary-text, #1e40af);
+  padding: 0.9rem 2.8rem; /* Aumentado el padding para mejor espaciado */
+  max-width: 320px; /* Más ancho para contenido completo */
+  min-width: 220px; /* Ancho mínimo más generoso */
+  gap: 0.75rem; /* Gap específico más amplio para mejor separación de elementos */
+}
+
+.status-badge:hover,
+.updates-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.updates-button:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Contadores con estilo unificado */
+.status-count,
+.updates-count {
+  border-radius: 12px;
+  padding: 0.3rem 0.8rem; /* Más padding interno para mejor lectura */
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 1rem; /* Aumentado el margen para mejor separación */
+  min-width: 24px; /* Ancho mínimo ligeramente mayor */
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Evitar que se compriman */
+}
+
+.status-count {
+  background: rgba(255, 255, 255, 0.9);
+  color: inherit;
+}
+
+.updates-count {
+  background: var(--color-primary);
+  color: white;
+}
+
+.updates-button:hover .updates-count {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+}
+
+/* Textos responsivos - Por defecto mostrar completo */
+.status-text-mobile,
+.updates-text-mobile {
+  display: none;
+}
+
+.status-text-full,
+.updates-text-full {
+  display: inline;
+}
+
+.updates-icon,
+.status-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0; /* Evitar que se compriman */
+}
+
+.updates-icon {
+  animation: ring 3s infinite;
+}
+
+.status-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes ring {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  5%, 15% { transform: rotate(15deg); }
+  10% { transform: rotate(-15deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  display: none; /* Ocultar ya que tenemos el icono verde */
+}
+
+.status-badge.activo {
+  background: var(--color-success-bg, #dcfce7);
+  color: var(--color-success-text, #166534);
+  border-color: var(--color-success, #10b981);
+}
+
+.status-badge.activo .status-dot {
+  background-color: var(--color-success, #10b981);
+}
+
+.status-badge.terminado {
+  background: var(--color-primary-bg, #dbeafe);
+  color: var(--color-primary-text, #1e40af);
+  border-color: var(--color-primary, #3b82f6);
+}
+
+.status-badge.terminado .status-dot {
+  background-color: var(--color-primary, #3b82f6);
+}
+
+.status-badge.pausado {
+  background: var(--color-warning-bg, #fef3c7);
+  color: var(--color-warning-text, #92400e);
+  border-color: var(--color-warning, #f59e0b);
+}
+
+.status-badge.pausado .status-dot {
+  background-color: var(--color-warning, #f59e0b);
+}
+
+/* Estilo especial para el botón "Cotiza ahora" */
+.status-badge.clickable:not(.activo):not(.terminado):not(.pausado) {
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6), var(--color-primary-dark, #1e40af));
+  color: white;
+  border-color: var(--color-primary, #3b82f6);
+  animation: pulse-glow 2s infinite;
+}
+
+.status-badge.clickable:not(.activo):not(.terminado):not(.pausado):hover {
+  background: linear-gradient(135deg, var(--color-primary-dark, #1e40af), var(--color-primary, #3b82f6));
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.status-badge.clickable:not(.activo):not(.terminado):not(.pausado) .status-count {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary, #3b82f6);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  50% { 
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .quote-list {
@@ -49,6 +433,93 @@
 
 /* Optimización móvil para quote-list */
 @media (max-width: 768px) {
+  .client-header {
+    padding: 1.5rem;
+    gap: 1.25rem;
+    border-radius: 16px;
+  }
+  
+  .welcome-section {
+    padding-bottom: 1.25rem;
+  }
+  
+  .client-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .welcome-message {
+    font-size: 1rem;
+  }
+  
+  .project-info-compact {
+    gap: 0;
+  }
+  
+  .info-row {
+    gap: 1rem;
+  }
+  
+  .info-item {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  
+  .info-label {
+    font-size: 0.75rem;
+  }
+  
+  .info-value, .contact-link {
+    font-size: 0.9rem;
+  }
+  
+  .status-updates-row {
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  
+  .status-badge,
+  .updates-button {
+    padding: 0.7rem 1.8rem; /* Más padding para mejor espaciado en tablet */
+    font-size: 0.8rem;
+    gap: 0.6rem; /* Gap más generoso */
+    flex: 1;
+    max-width: 185px; /* Más ancho para acomodar contenido */
+    min-width: 155px;
+    min-height: 44px;
+  }
+  
+  /* Ajuste específico para updates-button en tablet */
+  .updates-button {
+    gap: 0.65rem; /* Gap específico más amplio */
+  }
+  
+  /* Mostrar texto corto en tablet */
+  .status-text-full,
+  .updates-text-full {
+    display: none;
+  }
+  
+  .status-text-mobile,
+  .updates-text-mobile {
+    display: inline;
+  }
+  
+  .status-count,
+  .updates-count {
+    padding: 0.2rem 0.6rem; /* Mejor padding para tablet */
+    font-size: 0.7rem;
+    margin-left: 0.7rem; /* Mejor margen para separación */
+    min-width: 20px;
+  }
+  
+  .status-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
   .quote-list {
     grid-template-columns: 1fr;
     gap: 0.5rem;
@@ -57,6 +528,94 @@
 }
 
 @media (max-width: 480px) {
+  .client-header {
+    padding: 1.25rem;
+    gap: 1rem;
+    border-radius: 12px;
+  }
+  
+  .client-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-message {
+    font-size: 0.9rem;
+  }
+  
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .info-item {
+    padding: 0.75rem;
+    border-radius: 8px;
+  }
+  
+  .info-label {
+    font-size: 0.7rem;
+  }
+  
+  .info-value, .contact-link {
+    font-size: 0.85rem;
+  }
+  
+  .status-updates-row {
+    flex-direction: row;
+    gap: 0.6rem; /* Ligeramente más gap para mejor separación */
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .status-badge,
+  .updates-button {
+    padding: 0.6rem 1.6rem !important; /* Más padding para mejor espaciado */
+    font-size: 0.75rem;
+    border-radius: 20px;
+    gap: 0.4rem; /* Gap más amplio para mejor separación */
+    flex: 1;
+    max-width: 155px; /* Más ancho para contenido + iconos */
+    min-width: 135px; /* Mínimo más generoso */
+    min-height: 42px !important; /* Altura ligeramente mayor */
+    height: 42px; /* Altura fija para igualar */
+  }
+  
+  .updates-button {
+    padding: 0.6rem 1.4rem !important; /* Padding específico optimizado */
+    gap: 0.45rem; /* Gap específico más amplio */
+  }
+  
+  /* Mantener texto corto en móvil */
+  .status-text-full,
+  .updates-text-full {
+    display: none;
+  }
+  
+  .status-text-mobile,
+  .updates-text-mobile {
+    display: inline;
+  }
+  
+  .status-count,
+  .updates-count {
+    padding: 0.15rem 0.5rem; /* Padding optimizado */
+    font-size: 0.65rem;
+    margin-left: 0.6rem; /* Mejor margen para separación */
+    min-width: 18px;
+  }
+  
+  .status-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Ajustar tamaño de iconos en móvil */
+  .updates-icon,
+  .status-icon {
+    font-size: 1rem; /* Ligeramente más pequeños en móvil */
+  }
+  
   .quote-list {
     gap: 0.25rem;
   }
@@ -115,15 +674,6 @@
     gap: 1rem;
   }
   
-  .client-header {
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  
-  .client-header h1 {
-    font-size: 1.8rem;
-  }
-  
   .quote-section {
     margin-bottom: 1rem;
   }
@@ -133,19 +683,6 @@
   .client-space {
     padding: 5rem 0.5rem 1rem;
     gap: 0.75rem;
-  }
-  
-  .client-header {
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .client-header h1 {
-    font-size: 1.5rem;
-  }
-  
-  .client-header p {
-    font-size: 1rem;
   }
   
   .quote-section {

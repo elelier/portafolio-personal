@@ -3,15 +3,53 @@
     "passcode": "demo123",
     "project": {
       "nombre": "Andamios Modulares",
-      "descripcion": "Redise\u00f1o Web B2B para empresa de construcci\u00f3n",
+      "descripcion": "Rediseño Web B2B para empresa de construcción",
       "cliente": "Empresa Constructora S.A.",
       "fecha": "04/2024",
-      "estudio": "IL&EL \u2013 Brand & Product Studio",
-      "industria": "Construcci\u00f3n",
+      "estudio": "IL&EL – Brand & Product Studio",
+      "industria": "Construcción",
       "ubicacion": "Monterrey, MX",
       "numCotizaciones": 2,
       "estadoProyecto": "activo"
     },
+    "actualizaciones": [
+      {
+        "id": "upd001",
+        "titulo": "Propuesta de desarrollo aprobada",
+        "descripcion": "El cliente ha aprobado la cotización #001 para el desarrollo web. Comenzamos la fase de diseño.",
+        "fecha": "2025-06-10T10:30:00Z",
+        "tipo": "aprobacion",
+        "leida": false,
+        "relacionadoCon": "#001"
+      },
+      {
+        "id": "upd002", 
+        "titulo": "Nuevo documento disponible",
+        "descripcion": "Se ha generado la propuesta técnica detallada. Documento 00137 disponible para descarga.",
+        "fecha": "2025-06-08T16:20:00Z",
+        "tipo": "documento",
+        "leida": true,
+        "relacionadoCon": null
+      },
+      {
+        "id": "upd003",
+        "titulo": "Recordatorio: Cotización próxima a expirar",
+        "descripcion": "La cotización #001 expirará en 7 días. Te recomendamos revisarla antes de la fecha límite.",
+        "fecha": "2025-06-05T09:00:00Z",
+        "tipo": "recordatorio",
+        "leida": false,
+        "relacionadoCon": "#001"
+      },
+      {
+        "id": "upd004",
+        "titulo": "Actualización antigua (no se mostrará)",
+        "descripcion": "Esta actualización es de hace más de 10 días y no debería aparecer en las notificaciones.",
+        "fecha": "2025-05-20T14:30:00Z",
+        "tipo": "documento",
+        "leida": false,
+        "relacionadoCon": null
+      }
+    ],
     "cotizaciones": [
       {
         "id": "#001",
@@ -22,7 +60,7 @@
         "tiempoEntrega": "4 semanas",
         "fechaExpiracion": "2025-07-15",
         "fechaCreacion": "2024-06-11",
-        "incluidos": ["\ud83d\udcf1 Dise\u00f1o responsivo", "\ud83d\udee0\ufe0f SEO b\u00e1sico"],
+        "incluidos": ["📱 Diseño responsivo", "🛠️ SEO básico"],
         "documento": "00132"
       },
       {
@@ -34,7 +72,7 @@
         "tiempoEntrega": "1 semana",
         "fechaExpiracion": "2024-12-31",
         "fechaCreacion": "2024-05-20",
-        "incluidos": ["\ud83d\udd27 Actualizaciones", "\ud83d\udcca Reportes"],
+        "incluidos": ["🔧 Actualizaciones", "📊 Reportes"],
         "documento": "00133"
       }
     ]
@@ -52,6 +90,26 @@
       "numCotizaciones": 3,
       "estadoProyecto": "terminado"
     },
+    "actualizaciones": [
+      {
+        "id": "upd005",
+        "titulo": "Proyecto finalizado exitosamente",
+        "descripcion": "El e-commerce TechStore ha sido completado y entregado. Todos los objetivos fueron cumplidos satisfactoriamente.",
+        "fecha": "2025-06-01T14:00:00Z",
+        "tipo": "completado",
+        "leida": true,
+        "relacionadoCon": null
+      },
+      {
+        "id": "upd006",
+        "titulo": "Cotización backend aprobada",
+        "descripcion": "La cotización #004 para desarrollo backend y API ha sido aprobada por el cliente.",
+        "fecha": "2025-05-15T11:15:00Z",
+        "tipo": "aprobacion",
+        "leida": true,
+        "relacionadoCon": "#004"
+      }
+    ],
     "cotizaciones": [
       {
         "id": "#003",
@@ -90,5 +148,31 @@
         "documento": "00136"
       }
     ]
+  },
+  "token789": {
+    "passcode": "test789",
+    "project": {
+      "nombre": "Restaurante Luna",
+      "descripcion": "Sitio web para restaurante local",
+      "cliente": "Restaurante Luna S.A.",
+      "fecha": "06/2024",
+      "estudio": "IL&EL – Brand & Product Studio",
+      "industria": "Restaurantes",
+      "ubicacion": "Guadalajara, MX",
+      "numCotizaciones": 0,
+      "estadoProyecto": "activo"
+    },
+    "actualizaciones": [
+      {
+        "id": "upd007",
+        "titulo": "Bienvenido a nuestro sistema",
+        "descripcion": "Hemos iniciado el análisis de tu proyecto. Pronto recibirás una cotización personalizada.",
+        "fecha": "2025-06-11T09:00:00Z",
+        "tipo": "bienvenida",
+        "leida": false,
+        "relacionadoCon": null
+      }
+    ],
+    "cotizaciones": []
   }
 }

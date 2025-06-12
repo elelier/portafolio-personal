@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import data from '../data/clientProjects.json';
 import QuoteCard from './QuoteCard';
+import UpdatesModal from './UpdatesModal';
 import '../styles/components/ClientSpace.css';
 
 const ClientSpace = () => {
   const { token } = useParams();
   const client = data[token];
   const [authorized, setAuthorized] = useState(false);
+  const [showUpdatesModal, setShowUpdatesModal] = useState(false);
 
   useEffect(() => {
     if (!client) return;
@@ -56,27 +58,89 @@ const ClientSpace = () => {
     );
   }
 
-  const { project, cotizaciones } = client;
-
-  const projectCategory =
-    project.estadoProyecto === 'terminado'
-      ? 'Proyectos terminados'
-      : 'Proyectos Activos';
+  const { project, cotizaciones, actualizaciones = [] } = client || {};
 
   const today = new Date();
   const activeQuotes = [];
   const expiredQuotes = [];
 
-  cotizaciones.forEach((q) => {
-    const exp = q.fechaExpiracion ? new Date(q.fechaExpiracion) : null;
-    const isExpired = exp && exp < today;
-    const closed = q.estado === 'aprobada' || q.estado === 'cerrada';
-    if (isExpired) {
-      expiredQuotes.push(q);
-    } else if (!closed) {
-      activeQuotes.push(q);
+  if (cotizaciones) {
+    cotizaciones.forEach((q) => {
+      const exp = q.fechaExpiracion ? new Date(q.fechaExpiracion) : null;
+      const isExpired = exp && exp < today;
+      const closed = q.estado === 'aprobada' || q.estado === 'cerrada';
+      if (isExpired) {
+        expiredQuotes.push(q);
+      } else if (!closed) {
+        activeQuotes.push(q);
+      }
+    });
+  }
+
+  const projectCategory =
+    project?.estadoProyecto === 'terminado'
+      ? 'Proyectos terminados'
+      : activeQuotes.length > 0 
+        ? 'Proyectos Activos'
+        : 'Cotiza ahora';
+
+  // Filtrar actualizaciones de los últimos 10 días
+  const getRecentUpdates = () => {
+    const tenDaysAgo = new Date();
+    tenDaysAgo.setDate(today.getDate() - 10);
+    
+    return actualizaciones.filter(update => {
+      const updateDate = new Date(update.fecha);
+      return updateDate >= tenDaysAgo;
+    });
+  };
+
+  const recentUpdates = getRecentUpdates();
+
+  // Función para abrir el modal de actualizaciones
+  const handleOpenUpdatesModal = () => {
+    setShowUpdatesModal(true);
+  };
+
+  // Función para cerrar el modal de actualizaciones
+  const handleCloseUpdatesModal = () => {
+    setShowUpdatesModal(false);
+  };
+
+  // Función para hacer scroll suave a la sección de cotizaciones activas
+  // Considera la altura de la barra de navegación para un posicionamiento óptimo
+  const scrollToActiveQuotes = () => {
+    const activeQuotesSection = document.getElementById('active-quotes-section');
+    if (activeQuotesSection) {
+      const navHeight = 90; // Altura de la barra de navegación + padding extra
+      const elementPosition = activeQuotesSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
-  });
+  };
+
+  // Función para manejar el click en el botón de estado/cotizar
+  const handleStatusButtonClick = () => {
+    if (activeQuotes.length > 0) {
+      // Si hay cotizaciones activas, hacer scroll a la sección
+      scrollToActiveQuotes();
+    } else {
+      // Si no hay cotizaciones activas, redirigir a contacto
+      window.open('/contacto', '_blank');
+    }
+  };
+
+  // Función para manejar el teclado en el botón de estado/cotizar
+  const handleStatusButtonKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleStatusButtonClick();
+    }
+  };
 
   return (
     <div className="client-space">
@@ -86,25 +150,80 @@ const ClientSpace = () => {
         <link rel="canonical" href="https://www.elelier.com/" />
       </Helmet>
       <header className="client-header">
-        <h1>{project.nombre}</h1>
-        <p>{project.descripcion}</p>
-        <p>
-          <strong>{project.cliente}</strong> - {project.fecha}
-        </p>
-        {project.estudio && (
-          <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>
-            {project.estudio} | {project.industria} | {project.ubicacion}
+        <div className="welcome-section">
+          <h1>{project.nombre}</h1>
+          <p className="welcome-message">
+            Gracias por confiar en nosotros para hacer realidad este proyecto. 
+            Aquí puedes revisar el progreso, detalles y cotizaciones de tu colaboración con nosotros.
           </p>
-        )}
-        <p className="project-category">{projectCategory}</p>
+        </div>
+        
+        <div className="project-info-compact">
+          <div className="info-row">
+            <div className="info-item">
+              <span className="info-label">Cliente</span>
+              <span className="info-value">{project.cliente}</span>
+            </div>
+            
+            <div 
+              className="info-item contact-item"
+              onClick={() => {
+                window.open('/contacto', '_blank');
+              }}
+            >
+              <span className="info-label">Contacto</span>
+              <span className="contact-link">Elier Loya</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="project-status-section">
+          <div className="status-updates-row">
+            <div 
+              className={`status-badge ${project.estadoProyecto} clickable`}
+              onClick={handleStatusButtonClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={handleStatusButtonKeyDown}
+              title={activeQuotes.length > 0 ? 'Click para ir a las cotizaciones activas' : 'Click para cotizar ahora'}
+            >
+              <span className="status-icon">{activeQuotes.length > 0 ? '🟢' : '💬'}</span>
+              <span className="status-dot"></span>
+              <span className="status-text-full">{projectCategory}</span>
+              <span className="status-text-mobile">{activeQuotes.length > 0 ? 'Proyectos' : 'Cotizar'}</span>
+              {activeQuotes.length > 0 && (
+                <span className="status-count">{activeQuotes.length}</span>
+              )}
+            </div>
+            
+            {recentUpdates.length > 0 && (
+              <button 
+                className="updates-button"
+                onClick={handleOpenUpdatesModal}
+              >
+                <span className="updates-icon">🔔</span>
+                <span className="updates-text-full">Actualizaciones nuevas</span>
+                <span className="updates-text-mobile">Nuevas</span>
+                <span className="updates-count">{recentUpdates.length}</span>
+              </button>
+            )}
+          </div>
+        </div>
       </header>
 
       {activeQuotes.length > 0 && (
-        <section className="quote-section">
+        <section id="active-quotes-section" className="quote-section">
           <h3>Cotizaciones Activas</h3>
           <div className="quote-list">
             {activeQuotes.map((q) => (
-              <QuoteCard key={q.id} quote={q} />
+              <QuoteCard 
+                key={q.id} 
+                quote={q} 
+                recentUpdates={recentUpdates.filter(update => 
+                  update.relacionadoCon === q.id
+                )}
+                onNotificationClick={handleOpenUpdatesModal}
+              />
             ))}
           </div>
         </section>
@@ -115,11 +234,25 @@ const ClientSpace = () => {
           <h3>Cotizaciones Expiradas</h3>
           <div className="quote-list">
             {expiredQuotes.map((q) => (
-              <QuoteCard key={q.id} quote={q} />
+              <QuoteCard 
+                key={q.id} 
+                quote={q} 
+                recentUpdates={recentUpdates.filter(update => 
+                  update.relacionadoCon === q.id
+                )}
+                onNotificationClick={handleOpenUpdatesModal}
+              />
             ))}
           </div>
         </section>
       )}
+      
+      {/* Modal de Actualizaciones */}
+      <UpdatesModal
+        isOpen={showUpdatesModal}
+        onClose={handleCloseUpdatesModal}
+        updates={recentUpdates}
+      />
     </div>
   );
 };

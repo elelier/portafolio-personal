@@ -133,6 +133,10 @@
   letter-spacing: 0.025em;
   text-transform: uppercase;
   transition: all 0.3s ease;
+  height: 25px; /* Altura fija para empatar con notificador */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .quote-card:hover .quote-status-badge {
@@ -212,12 +216,16 @@
 
 .quote-amount {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
+  font-size: 16px; /* Aumentado de 14px */
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--color-primary, #3b82f6); /* Color destacado */
   white-space: nowrap;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6), var(--color-primary-dark, #1e40af));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .quote-card:hover .quote-amount {
@@ -259,7 +267,72 @@
 .quote-actions {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 4px;
+}
+
+/* Notificador de campanita para cotizaciones */
+.quote-notification-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  background: var(--color-primary-bg, #dbeafe);
+  border: 1px solid var(--color-primary, #3b82f6);
+  transition: all 0.3s ease;
+  font-size: 0.7rem;
+  height: 25px; /* Altura fija para empatar con status badge */
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.quote-notification-icon {
+  font-size: 0.8rem;
+  animation: ring-small 2s infinite;
+  color: var(--color-primary, #3b82f6);
+}
+
+.quote-notification-count {
+  background: var(--color-primary, #3b82f6);
+  color: white;
+  border-radius: 8px;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 16px;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Animación para la campanita en cotizaciones */
+@keyframes ring-small {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  5%, 15% { transform: rotate(10deg); }
+  10% { transform: rotate(-10deg); }
+}
+
+/* Estado cuando no hay notificaciones */
+.quote-notification-indicator.empty {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+}
+
+.quote-notification-indicator.empty .quote-notification-icon {
+  color: var(--color-text-muted);
+  animation: none;
+}
+
+.quote-notification-indicator:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.quote-notification-indicator.empty:hover {
+  transform: scale(1.05);
+  background: var(--color-bg-2);
+  border-color: var(--color-text-muted);
 }
 
 /* Botón base - estilo simple para cotizaciones expiradas */
@@ -386,11 +459,31 @@
   .quote-meta-item {
     font-size: 10px;
   }
-  
-  .quote-status-badge {
+    .quote-status-badge {
     font-size: 10px;
     padding: 2px 8px;
-  }  .quote-link {
+  }
+    /* Ajustes para notificador en tablet */
+  .quote-notification-indicator {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.65rem;
+    gap: 0.2rem;
+    height: 18px; /* Ajustado para tablet */
+  }
+  
+  .quote-notification-icon {
+    font-size: 0.7rem;
+  }
+  
+  .quote-notification-count {
+    font-size: 0.6rem;
+    padding: 0.05rem 0.25rem;
+    min-width: 14px;
+  }
+  
+  .quote-status-badge {
+    height: 18px; /* Empatar con notificador en tablet */
+  }.quote-link {
     font-size: 11px;
     padding: 4px 8px;
     border-radius: 6px;
@@ -434,17 +527,40 @@
   .quote-id {
     font-size: 10px;
   }
+    .quote-title {
+    font-size: 12px;
+  }
   
-  .quote-title {
-    font-size: 12px;
+  .quote-amount {
+    font-size: 14px; /* Mantener más grande incluso en móvil */
   }
-    .quote-amount {
-    font-size: 12px;
-  }
-    .quote-link {
+  .quote-link {
     font-size: 10px;
     padding: 3px 6px;
     border-radius: 5px;
+  }
+    /* Ajustes para notificador en móvil */
+  .quote-notification-indicator {
+    padding: 0.15rem 0.3rem;
+    font-size: 0.6rem;
+    gap: 0.15rem;
+    border-radius: 8px;
+    height: 16px; /* Ajustado para móvil */
+  }
+  
+  .quote-notification-icon {
+    font-size: 0.65rem;
+  }
+  
+  .quote-notification-count {
+    font-size: 0.55rem;
+    padding: 0.05rem 0.2rem;
+    min-width: 12px;
+    border-radius: 6px;
+  }
+  
+  .quote-status-badge {
+    height: 16px; /* Empatar con notificador en móvil */
   }
   
   /* Botones activos en móvil */

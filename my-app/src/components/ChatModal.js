@@ -278,6 +278,23 @@ const ChatModal = () => {
     };
   }, []);
 
+  // Manejar tecla Esc para cerrar modal
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isOpen]);
+
   const handleSectionRequest = async (sectionName) => {
     const message = language === 'es' 
       ? `Cuéntame sobre ${sectionName}`

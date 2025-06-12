@@ -51,7 +51,7 @@ const content = {
   }
 };
 
-const QuoteCard = ({ quote }) => {
+const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
   const { language } = useLanguage();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -150,6 +150,18 @@ const QuoteCard = ({ quote }) => {
           <div className={`quote-status-indicator ${quote.estado}`} data-status={quote.estado}></div>
         </div>
         <div className="quote-actions">
+          <div 
+            className={`quote-notification-indicator ${recentUpdates.length === 0 ? 'empty' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onNotificationClick) onNotificationClick();
+            }}
+          >
+            <span className="quote-notification-icon">🔔</span>
+            {recentUpdates.length > 0 && (
+              <span className="quote-notification-count">{recentUpdates.length}</span>
+            )}
+          </div>
           <span className={`quote-status-badge ${quote.estado}`} data-status={quote.estado}>
             {getStatusText(quote.estado)}
           </span>
