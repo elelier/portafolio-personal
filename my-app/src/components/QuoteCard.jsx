@@ -68,6 +68,9 @@ const QuoteCard = ({ quote }) => {
       </div>
       
       <h4 className="quote-title">{quote.titulo}</h4>
+      {quote.resumen && (
+        <p className="quote-summary">{quote.resumen}</p>
+      )}
       <div className="quote-amount">{quote.monto}</div>
       
       <div className="quote-info-grid">
