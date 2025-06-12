@@ -21,3 +21,14 @@ Para agregar un nuevo cliente:
 3. Comparte la URL `https://www.elelier.com/proyecto/<token>` y el c\u00f3digo de acceso con el cliente.
 
 Las p\u00e1ginas de cliente incluyen etiquetas `noindex` para evitar que aparezcan en buscadores.
+
+## Categorías de proyectos y cotizaciones
+
+Los espacios de cliente muestran la información agrupada según el estado del proyecto y de sus cotizaciones:
+
+- **Proyectos Activos**: proyectos cuyo campo `estadoProyecto` es `"activo"`.
+- **Proyectos terminados**: proyectos con `estadoProyecto` igual a `"terminado"`.
+- **Cotizaciones Activas**: cotizaciones vigentes (no expiradas) y sin estado `aprobada` o `cerrada`.
+- **Cotizaciones expiradas**: cotizaciones cuya `fechaExpiracion` ya pasó.
+
+Estas categorías facilitan consultar rápidamente el avance del proyecto y el estado de cada cotización.

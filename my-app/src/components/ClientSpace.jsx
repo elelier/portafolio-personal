@@ -58,6 +58,26 @@ const ClientSpace = () => {
 
   const { project, cotizaciones } = client;
 
+  const projectCategory =
+    project.estadoProyecto === 'terminado'
+      ? 'Proyectos terminados'
+      : 'Proyectos Activos';
+
+  const today = new Date();
+  const activeQuotes = [];
+  const expiredQuotes = [];
+
+  cotizaciones.forEach((q) => {
+    const exp = q.fechaExpiracion ? new Date(q.fechaExpiracion) : null;
+    const isExpired = exp && exp < today;
+    const closed = q.estado === 'aprobada' || q.estado === 'cerrada';
+    if (isExpired) {
+      expiredQuotes.push(q);
+    } else if (!closed) {
+      activeQuotes.push(q);
+    }
+  });
+
   return (
     <div className="client-space">
       <Helmet>
@@ -76,12 +96,30 @@ const ClientSpace = () => {
             {project.estudio} | {project.industria} | {project.ubicacion}
           </p>
         )}
+        <p className="project-category">{projectCategory}</p>
       </header>
-      <div className="quote-list">
-        {cotizaciones.map((q) => (
-          <QuoteCard key={q.id} quote={q} />
-        ))}
-      </div>
+
+      {activeQuotes.length > 0 && (
+        <section className="quote-section">
+          <h3>Cotizaciones Activas</h3>
+          <div className="quote-list">
+            {activeQuotes.map((q) => (
+              <QuoteCard key={q.id} quote={q} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {expiredQuotes.length > 0 && (
+        <section className="quote-section">
+          <h3>Cotizaciones Expiradas</h3>
+          <div className="quote-list">
+            {expiredQuotes.map((q) => (
+              <QuoteCard key={q.id} quote={q} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };
