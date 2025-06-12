@@ -10,10 +10,13 @@ export function getSystemTheme() {
   
   export function getCurrentTheme() {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'system' || !savedTheme) {
-      return getSystemTheme();
+    if (savedTheme && savedTheme !== 'system') {
+      return savedTheme; // Usa el tema guardado si existe y no es 'system'
     }
-    return savedTheme;
+    // Si es 'system', no hay nada guardado, o el valor guardado es inválido,
+    // el default es 'dark'. El usuario aún puede seleccionar 'system' explícitamente
+    // para que siga las preferencias del navegador.
+    return 'dark'; // Default general a 'dark'
   }
   
   export function initializeTheme() {

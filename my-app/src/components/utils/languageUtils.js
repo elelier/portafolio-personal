@@ -11,7 +11,16 @@ export function getTranslation(key, language) {
 }
 
 export function getCurrentLanguage() {
-  return localStorage.getItem('language') || 'en'; // Default to 'en' if no language is set
+  const storedLang = localStorage.getItem('language');
+  if (storedLang) {
+    return storedLang;
+  }
+  // Verifica el idioma del navegador, si es 'es-XX' o 'es', usa español.
+  const browserLang = navigator.language || navigator.userLanguage; 
+  if (browserLang.startsWith('es')) {
+    return 'es';
+  }
+  return 'es'; // Default general a español
 }
 
 export function changeLanguage(newLanguage) {
