@@ -10,7 +10,19 @@
   position: relative;
   box-shadow: 0 2px 8px var(--color-shadow);
   min-height: 280px;
+
+}
+
+.quote-card.expired {
+  opacity: 0.6;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .quote-card {
+  background: #1f2937;
+  border-color: #374151;
   color: var(--color-text);
+
 }
 
 .quote-card:hover {

@@ -1,6 +1,22 @@
 import React from 'react';
 import '../styles/components/QuoteCard.css';
 
+export const isQuoteExpired = (quote) => {
+  if (!quote.fechaExpiracion) return false;
+  return new Date(quote.fechaExpiracion) < new Date();
+};
+
+export const getQuoteCategory = (quote) => {
+  if (isQuoteExpired(quote)) {
+    return 'Cotizaciones expiradas';
+  }
+  const closed = quote.estado === 'aprobada' || quote.estado === 'cerrada';
+  if (!closed) {
+    return 'Cotizaciones Activas';
+  }
+  return null;
+};
+
 const statusIcons = {
   'abierta': '🟢',
   'cerrada': '🔴',
@@ -59,7 +75,7 @@ const QuoteCard = ({ quote }) => {
   };
 
   return (
-    <div className="quote-card" data-status={quote.estado}>
+    <div className={`quote-card ${isExpired ? 'expired' : ''}`} data-status={quote.estado}>
       <div className="quote-header">
         <span className="quote-id">{quote.id}</span>
         <span className={`quote-status-badge ${quote.estado}`} data-status={quote.estado}>

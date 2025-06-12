@@ -47,6 +47,20 @@
   margin-top: 1rem;
 }
 
+.project-category {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+[data-theme="dark"] .project-category {
+  color: #93c5fd;
+}
+
+.quote-section {
+  margin-bottom: 2rem;
+}
+
 /* Estados de error/loading con mejor contraste */
 .client-space .error-message,
 .client-space .access-denied {

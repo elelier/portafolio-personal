@@ -9,7 +9,8 @@
       "estudio": "IL&EL \u2013 Brand & Product Studio",
       "industria": "Construcci\u00f3n",
       "ubicacion": "Monterrey, MX",
-      "numCotizaciones": 2
+      "numCotizaciones": 2,
+      "estadoProyecto": "activo"
     },
     "cotizaciones": [
       {
@@ -48,7 +49,8 @@
       "estudio": "IL&EL – Brand & Product Studio",
       "industria": "Tecnología",
       "ubicacion": "Ciudad de México, MX",
-      "numCotizaciones": 3
+      "numCotizaciones": 3,
+      "estadoProyecto": "terminado"
     },
     "cotizaciones": [
       {
