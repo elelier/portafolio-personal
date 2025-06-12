@@ -25,11 +25,35 @@ const ClientSpace = () => {
   }, [token, client]);
 
   if (!client) {
-    return <div className="client-space">Cliente no encontrado</div>;
+    return (
+      <div className="client-space">
+        <Helmet>
+          <title>Cliente no encontrado - Elelier</title>
+          <meta name="robots" content="noindex,nofollow" />
+        </Helmet>
+        <div className="error-message">
+          <h2>🔍 Cliente no encontrado</h2>
+          <p>El token proporcionado no corresponde a ningún proyecto activo.</p>
+          <p>Verifica la URL o contacta con el equipo de soporte.</p>
+        </div>
+      </div>
+    );
   }
 
   if (!authorized) {
-    return <div className="client-space">Acceso denegado</div>;
+    return (
+      <div className="client-space">
+        <Helmet>
+          <title>Acceso restringido - {client?.project?.nombre || 'Proyecto'}</title>
+          <meta name="robots" content="noindex,nofollow" />
+        </Helmet>
+        <div className="access-denied">
+          <h2>🔒 Acceso restringido</h2>
+          <p>Este es un espacio privado para clientes.</p>
+          <p>Se requiere un código de acceso válido para continuar.</p>
+        </div>
+      </div>
+    );
   }
 
   const { project, cotizaciones } = client;
@@ -37,6 +61,7 @@ const ClientSpace = () => {
   return (
     <div className="client-space">
       <Helmet>
+        <title>{project.nombre} - Espacio Cliente</title>
         <meta name="robots" content="noindex,nofollow" />
         <link rel="canonical" href="https://www.elelier.com/" />
       </Helmet>
@@ -46,6 +71,11 @@ const ClientSpace = () => {
         <p>
           <strong>{project.cliente}</strong> - {project.fecha}
         </p>
+        {project.estudio && (
+          <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>
+            {project.estudio} | {project.industria} | {project.ubicacion}
+          </p>
+        )}
       </header>
       <div className="quote-list">
         {cotizaciones.map((q) => (

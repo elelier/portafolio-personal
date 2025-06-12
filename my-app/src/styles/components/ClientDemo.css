@@ -1,0 +1,224 @@
+.client-demo {
+  min-height: 100vh;
+  padding: 8rem 2rem 2rem;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.demo-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.demo-header h1 {
+  color: var(--color-accent);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.demo-header p {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.demo-card {
+  background: var(--color-surface);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.demo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.demo-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.demo-card-header h3 {
+  color: var(--color-text);
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.demo-badge {
+  background: var(--color-accent);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.demo-details p {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.demo-credentials {
+  background: var(--color-background);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--color-accent);
+}
+
+.demo-credentials h4 {
+  margin: 0 0 1rem 0;
+  color: var(--color-accent);
+  font-size: 1rem;
+}
+
+.credential-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.credential-item:last-child {
+  margin-bottom: 0;
+}
+
+.credential-item .label {
+  font-weight: 600;
+  min-width: 60px;
+  color: var(--color-text-secondary);
+}
+
+.credential-item code {
+  background: var(--color-surface);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  font-family: 'Courier New', monospace;
+  color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  user-select: all;
+  cursor: pointer;
+}
+
+.credential-item code:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+.demo-actions {
+  margin-top: 2rem;
+}
+
+.demo-link {
+  display: inline-block;
+  background: var(--color-accent);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.demo-link:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  color: white;
+}
+
+.demo-url {
+  text-align: center;
+}
+
+.demo-url small {
+  color: var(--color-text-secondary);
+  font-family: 'Courier New', monospace;
+  background: var(--color-background);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--color-border);
+}
+
+.demo-info, .demo-documentation {
+  background: var(--color-surface);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-border);
+}
+
+.demo-info h3, .demo-documentation h3 {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.demo-info ol {
+  line-height: 1.6;
+  padding-left: 1.5rem;
+}
+
+.demo-info li {
+  margin-bottom: 0.5rem;
+}
+
+.demo-documentation code {
+  background: var(--color-background);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+  font-family: 'Courier New', monospace;
+  color: var(--color-accent);
+  border: 1px solid var(--color-border);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .client-demo {
+    padding: 6rem 1rem 1rem;
+  }
+  
+  .demo-header h1 {
+    font-size: 2rem;
+  }
+  
+  .demo-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .demo-card {
+    padding: 1.5rem;
+  }
+  
+  .credential-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .credential-item .label {
+    min-width: auto;
+  }
+}

@@ -22,6 +22,7 @@ import ChatModal from './components/ChatModal';
 import ExternalRedirect from './components/ExternalRedirect';
 import MockupRedirect from './components/MockupRedirect';
 import ClientSpace from './components/ClientSpace';
+import ClientDemo from './components/ClientDemo';
 import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
 
@@ -93,6 +94,7 @@ function App({ initialLanguage }) {
                   <Route path="/mockup/:id" element={<MockupRedirect />} />
 
                   <Route path="/proyecto/:token" element={<ClientSpace />} />
+                  <Route path="/client-demo" element={<ClientDemo />} />
 
                   {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />

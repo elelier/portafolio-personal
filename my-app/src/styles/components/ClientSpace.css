@@ -1,16 +1,146 @@
 .client-space {
-  padding: 2rem;
+  min-height: 100vh;
+  padding: 8rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background: #f8fafc;
+  color: #111827;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .client-space {
+  background: #0f172a;
+  color: #f1f5f9;
 }
 
 .client-header {
   text-align: center;
+  margin-bottom: 2rem;
+  padding: 2.5rem;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .client-header {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.client-header h1 {
+  color: #1e40af;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .client-header h1 {
+  color: #60a5fa;
+}
+
+.client-header p {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+[data-theme="dark"] .client-header p {
+  color: #d1d5db;
+}
+
+.client-header p:last-child {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+[data-theme="dark"] .client-header p:last-child {
+  color: #9ca3af;
 }
 
 .quote-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* Estados de error/loading con mejor contraste */
+.client-space .error-message,
+.client-space .access-denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .client-space .error-message,
+[data-theme="dark"] .client-space .access-denied {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.client-space .error-message h2,
+.client-space .access-denied h2 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .client-space .error-message h2,
+[data-theme="dark"] .client-space .access-denied h2 {
+  color: #f87171;
+}
+
+.client-space .error-message p,
+.client-space .access-denied p {
+  color: #374151;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+[data-theme="dark"] .client-space .error-message p,
+[data-theme="dark"] .client-space .access-denied p {
+  color: #d1d5db;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .client-space {
+    padding: 6rem 1rem 1rem;
+  }
+  
+  .client-header {
+    padding: 2rem;
+  }
+  
+  .client-header h1 {
+    font-size: 2rem;
+  }
+  
+  .quote-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .client-space .error-message,
+  .client-space .access-denied {
+    padding: 2rem;
+    min-height: 50vh;
+  }
 }

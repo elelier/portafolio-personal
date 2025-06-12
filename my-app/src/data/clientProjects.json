@@ -18,6 +18,8 @@
         "estado": "abierta",
         "monto": "$10,000",
         "tiempoEntrega": "4 semanas",
+        "fechaExpiracion": "2025-07-15",
+        "fechaCreacion": "2024-06-11",
         "incluidos": ["\ud83d\udcf1 Dise\u00f1o responsivo", "\ud83d\udee0\ufe0f SEO b\u00e1sico"],
         "documento": "00132"
       },
@@ -27,8 +29,58 @@
         "estado": "cerrada",
         "monto": "$2,000",
         "tiempoEntrega": "1 semana",
+        "fechaExpiracion": "2024-12-31",
+        "fechaCreacion": "2024-05-20",
         "incluidos": ["\ud83d\udd27 Actualizaciones", "\ud83d\udcca Reportes"],
         "documento": "00133"
+      }
+    ]
+  },
+  "tech456": {
+    "passcode": "tech2024",
+    "project": {
+      "nombre": "E-commerce TechStore",
+      "descripcion": "Plataforma completa de comercio electrónico con integración a sistemas de pago",
+      "cliente": "TechStore Solutions",
+      "fecha": "06/2024",
+      "estudio": "IL&EL – Brand & Product Studio",
+      "industria": "Tecnología",
+      "ubicacion": "Ciudad de México, MX",
+      "numCotizaciones": 3
+    },
+    "cotizaciones": [
+      {
+        "id": "#003",
+        "titulo": "Desarrollo Frontend",
+        "estado": "aprobada",
+        "monto": "$15,000",
+        "tiempoEntrega": "6 semanas",
+        "fechaExpiracion": "2025-08-20",
+        "fechaCreacion": "2024-06-01",
+        "incluidos": ["⚛️ React.js", "💳 Integración PayPal", "📱 App móvil", "🎨 Diseño UX/UI"],
+        "documento": "00134"
+      },
+      {
+        "id": "#004",
+        "titulo": "Backend y API",
+        "estado": "en revision",
+        "monto": "$12,000",
+        "tiempoEntrega": "5 semanas",
+        "fechaExpiracion": "2025-07-30",
+        "fechaCreacion": "2024-06-05",
+        "incluidos": ["🔧 Node.js", "🗄️ Base de datos", "🔐 Autenticación", "📊 Analytics"],
+        "documento": "00135"
+      },
+      {
+        "id": "#005",
+        "titulo": "Hosting y Dominio",
+        "estado": "abierta",
+        "monto": "$3,000",
+        "tiempoEntrega": "1 semana",
+        "fechaExpiracion": "2025-06-25",
+        "fechaCreacion": "2024-06-10",
+        "incluidos": ["☁️ AWS Hosting", "🌐 Dominio .com", "📧 Correos corporativos"],
+        "documento": "00136"
       }
     ]
   }
