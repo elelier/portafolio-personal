@@ -24,7 +24,7 @@ const SiteCarousel = ({ sites, onSelect }) => {
   useEffect(() => {
     const timer = setInterval(() => navigate('next'), 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [navigate]);
 
   // Gestos touch
   const swipeHandlers = useSwipeable({
