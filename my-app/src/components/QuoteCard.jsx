@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/QuoteCard.css';
 
 export const isQuoteExpired = (quote) => {
@@ -24,7 +25,41 @@ const statusIcons = {
   'en revision': '🟡'
 };
 
+const content = {
+  es: {
+    delivery: 'Tiempo de entrega',
+    created: 'Creada',
+    expires: 'Expira',
+    expiresSoon: 'Expira pronto',
+    expiredLabel: 'Expirada',
+    expiredAgo: (d) => `Expiró hace ${d} días`,
+    expiresToday: 'Expira hoy',
+    expiresTomorrow: 'Expira mañana',
+    expiresIn: (d) => `Expira en ${d} días`,
+    viewProgress: 'Ver avance',
+    viewFullQuote: 'Ver cotización completa',
+    viewProject: 'Ver proyecto',
+    documentAlt: 'Ver documento completo de'
+  },
+  en: {
+    delivery: 'Delivery time',
+    created: 'Created',
+    expires: 'Expires',
+    expiresSoon: 'Expires soon',
+    expiredLabel: 'Expired',
+    expiredAgo: (d) => `Expired ${d} days ago`,
+    expiresToday: 'Expires today',
+    expiresTomorrow: 'Expires tomorrow',
+    expiresIn: (d) => `Expires in ${d} days`,
+    viewProgress: 'View progress',
+    viewFullQuote: 'View full quote',
+    viewProject: 'View project',
+    documentAlt: 'View full document of'
+  }
+};
+
 const QuoteCard = ({ quote }) => {
+  const { language } = useLanguage();
   // Helper para formatear fechas
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -44,34 +79,57 @@ const QuoteCard = ({ quote }) => {
     return diffDays;
   };
 
-  const daysUntilExpiration = quote.fechaExpiracion ? getDaysUntilExpiration(quote.fechaExpiracion) : null;
-  const isUrgent = daysUntilExpiration !== null && daysUntilExpiration <= 7 && daysUntilExpiration > 0;
+  const daysUntilExpiration = quote.fechaExpiracion
+    ? getDaysUntilExpiration(quote.fechaExpiracion)
+    : null;
+  const isUrgent =
+    daysUntilExpiration !== null && daysUntilExpiration <= 7 && daysUntilExpiration > 0;
   const isExpired = daysUntilExpiration !== null && daysUntilExpiration < 0;
 
   const getStatusText = (status) => {
     const statusMap = {
-      'abierta': 'Abierta',
-      'cerrada': 'Cerrada',
-      'aprobada': 'Aprobada',
-      'en revision': 'En Revisión'
+      es: {
+        abierta: 'Abierta',
+        cerrada: 'Cerrada',
+        aprobada: 'Aprobada',
+        'en revision': 'En Revisión'
+      },
+      en: {
+        abierta: 'Open',
+        cerrada: 'Closed',
+        aprobada: 'Approved',
+        'en revision': 'In Review'
+      }
     };
-    return statusMap[status] || status;
+    return statusMap[language][status] || status;
   };
 
   const getExpirationText = () => {
     if (!quote.fechaExpiracion) return null;
-    
     if (isExpired) {
-      return `Expiró hace ${Math.abs(daysUntilExpiration)} días`;
+      return content[language].expiredAgo(Math.abs(daysUntilExpiration));
     } else if (daysUntilExpiration === 0) {
-      return 'Expira hoy';
+      return content[language].expiresToday;
     } else if (daysUntilExpiration === 1) {
-      return 'Expira mañana';
+      return content[language].expiresTomorrow;
     } else if (daysUntilExpiration <= 7) {
-      return `Expira en ${daysUntilExpiration} días`;
+      return content[language].expiresIn(daysUntilExpiration);
     } else {
       return formatDate(quote.fechaExpiracion);
     }
+  };
+
+  const getCtaText = () => {
+    if (['aprobada', 'en revision'].includes(quote.estado)) {
+      return content[language].viewProgress;
+    }
+    if (quote.estado === 'abierta') {
+      return content[language].viewFullQuote;
+    }
+    if (quote.estado === 'cerrada') {
+      return content[language].viewProject;
+    }
+    return content[language].viewFullQuote;
   };
 
   return (
@@ -90,23 +148,29 @@ const QuoteCard = ({ quote }) => {
       <div className="quote-amount">{quote.monto}</div>
       
       <div className="quote-info-grid">
-        <div className="quote-info-item delivery">
-          <span className="quote-info-label">Tiempo de entrega</span>
-          <span className="quote-info-value">{quote.tiempoEntrega}</span>
-        </div>
-        
+        {quote.tiempoEntrega && (
+          <div className="quote-info-item delivery">
+            <span className="quote-info-label">{content[language].delivery}</span>
+            <span className="quote-info-value">{quote.tiempoEntrega}</span>
+          </div>
+        )}
+
         {quote.fechaExpiracion && (
           <div className={`quote-info-item expiration ${isUrgent || isExpired ? 'urgent' : ''}`}>
             <span className="quote-info-label">
-              {isExpired ? 'Expirada' : isUrgent ? 'Expira pronto' : 'Expira'}
+              {isExpired
+                ? content[language].expiredLabel
+                : isUrgent
+                ? content[language].expiresSoon
+                : content[language].expires}
             </span>
             <span className="quote-info-value">{getExpirationText()}</span>
           </div>
         )}
-        
-        {quote.fechaCreacion && (
+
+        {!quote.tiempoEntrega && quote.fechaCreacion && (
           <div className="quote-info-item creation">
-            <span className="quote-info-label">Creada</span>
+            <span className="quote-info-label">{content[language].created}</span>
             <span className="quote-info-value">{formatDate(quote.fechaCreacion)}</span>
           </div>
         )}
@@ -121,14 +185,14 @@ const QuoteCard = ({ quote }) => {
       )}
       
       {quote.documento && (
-        <a 
-          href={`/cotizacion/${quote.documento}`} 
-          className="quote-link" 
-          target="_blank" 
+        <a
+          href={`/cotizacion/${quote.documento}`}
+          className="quote-link"
+          target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Ver documento completo de ${quote.titulo}`}
+          aria-label={`${content[language].documentAlt} ${quote.titulo}`}
         >
-          📄 Ver Documento Completo
+          📄 {getCtaText()}
         </a>
       )}
     </div>
