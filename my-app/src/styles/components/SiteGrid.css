@@ -1,0 +1,70 @@
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.site-card {
+  background: var(--color-bg-solid);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  aspect-ratio: 4/3; /* Para mantener 800x600 */
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.site-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.site-card img {
+  width: 100%;
+  height: 300px; /* Aumentado de 200px a 250px para mejor proporción */
+  object-fit: cover;
+  object-position: top; /* Asegura que se muestre la parte superior de la imagen */
+  aspect-ratio: 4/3;
+  object-position: center top;
+  transition: transform 0.3s ease;
+}
+
+.site-card img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.site-info {
+  padding: 1.5rem;
+}
+
+.site-info h3 {
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tag {
+  background: var(--color-bg-2);
+  color: var(--color-accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .site-card {
+    max-width: 400px; /* Mitad del ancho en desktop */
+    margin: 0 auto;
+  }
+}

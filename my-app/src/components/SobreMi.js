@@ -227,7 +227,7 @@ function SobreMi() {
         ),
       },
     ],
-  }), [language]);
+  }), []);
 
   useEffect(() => {
     setCurrentSection(0);

@@ -4,7 +4,8 @@ import { useLanguage } from '../contexts/LanguageContext';
 import ProjectProgress from './ProjectProgress';
 
 const PROJECT_URL_MAP = {
-  '00132': 'https://d1shbod9k202nu.cloudfront.net/'
+  '00132': 'https://d1shbod9k202nu.cloudfront.net/',
+  '00132-drive': 'https://drive.google.com/drive/folders/11N3nQ7-H2YRDgTaKSM19lLVb42mtWsaO?usp=drive_link'
 };
 
 const translations = {

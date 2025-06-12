@@ -172,12 +172,92 @@ const projectData = {
         { name: { es: 'Pruebas de usabilidad', en: 'Usability tests' }, status: 'completed' },
         { name: { es: 'Implementación de feedback', en: 'Feedback implementation' }, status: 'completed' }
       ]
+    },
+    {
+      id: 7,
+      name: {
+        es: 'Mudanza Ligera y Staging',
+        en: 'Light Migration and Staging'
+      },
+      description: {
+        es: 'Migración del sitio a un hosting gratuito y configuración de entorno de pruebas',
+        en: 'Site migration to free hosting and testing environment setup'
+      },
+      progress: 100,
+      tasks: [
+        { name: { es: 'Migración exitosa de AWS a Netlify', en: 'Successful migration from AWS to Netlify' }, status: 'completed' },
+        { name: { es: 'Configuración de staging.arqidia.mx', en: 'Configuration of staging.arqidia.mx' }, status: 'completed' },
+        { name: { es: 'Configuración DNS desde GoDaddy a Netlify', en: 'DNS configuration from GoDaddy to Netlify' }, status: 'completed' },
+        { name: { es: 'Pipeline CI/CD con GitHub Actions', en: 'CI/CD Pipeline with GitHub Actions' }, status: 'completed' },
+        { name: { es: 'Documentación del flujo de despliegue', en: 'Deployment flow documentation' }, status: 'completed' },
+        { name: { es: 'Arquitectura de datos centralizada', en: 'Centralized data architecture' }, status: 'completed' }
+      ]
+    },
+    {
+      id: 8,
+      name: {
+        es: 'Guía de Contenido & Branding Final',
+        en: 'Content Guide & Final Branding'
+      },
+      description: {
+        es: 'Finalización de branding y creación de guías para el cliente',
+        en: 'Branding finalization and creation of client guides'
+      },
+      progress: 0,
+      tasks: [
+        { name: { es: 'Guía de cambios de textos para cliente', en: 'Text change guide for client' }, status: 'pending' },
+        { name: { es: 'Actualización de tokens de color y tipografías', en: 'Update of color tokens and typography' }, status: 'pending' },
+        { name: { es: 'Implementación de logo definitivo', en: 'Implementation of final logo' }, status: 'pending' },
+        { name: { es: 'Organización de carpeta Drive de assets', en: 'Organization of Drive assets folder' }, status: 'pending' },
+        { name: { es: 'Plantilla editable en Google Sheets', en: 'Editable template in Google Sheets' }, status: 'pending' }
+      ]
+    },
+    {
+      id: 9,
+      name: {
+        es: 'Piloto Editable y Performance',
+        en: 'Editable Pilot and Performance'
+      },
+      description: {
+        es: 'Sistema de edición de contenido y optimización de rendimiento',
+        en: 'Content editing system and performance optimization'
+      },
+      progress: 0,
+      tasks: [
+        { name: { es: 'Sistema de edición de contenido', en: 'Content editing system' }, status: 'pending' },
+        { name: { es: 'Optimización de imágenes WebP/AVIF', en: 'WebP/AVIF image optimization' }, status: 'pending' },
+        { name: { es: 'Mejoras de accesibilidad', en: 'Accessibility improvements' }, status: 'pending' },
+        { name: { es: 'Metadatos SEO y OpenGraph', en: 'SEO and OpenGraph metadata' }, status: 'pending' },
+        { name: { es: 'Documentación de presupuesto de rendimiento', en: 'Performance budget documentation' }, status: 'pending' }
+      ]
+    },
+    {
+      id: 10,
+      name: {
+        es: 'Go-Live & Hand-off',
+        en: 'Go-Live & Hand-off'
+      },
+      description: {
+        es: 'Lanzamiento final y entrega completa del proyecto',
+        en: 'Final launch and complete project handover'
+      },
+      progress: 0,
+      tasks: [
+        { name: { es: 'Pruebas QA multi-navegador', en: 'Multi-browser QA testing' }, status: 'pending' },
+        { name: { es: 'Apuntar arqidia.mx a producción', en: 'Point arqidia.mx to production' }, status: 'pending' },
+        { name: { es: 'Video tutorial y manual de auto-edición', en: 'Video tutorial and self-editing manual' }, status: 'pending' },
+        { name: { es: 'Corrección de bugs encontrados en QA', en: 'Correction of bugs found in QA' }, status: 'pending' },
+        { name: { es: 'Monitoreo post-lanzamiento', en: 'Post-launch monitoring' }, status: 'pending' },
+        { name: { es: 'Retro final y cierre de proyecto', en: 'Final retrospective and project closure' }, status: 'pending' }
+      ]
     }
   ],
   achievements: {
     es: [
       "Implementación exitosa de Next.js + Tailwind",
-      "Despliegue automatizado en AWS",
+      "Migración exitosa de AWS a Netlify (ahorro $600/año)",
+      "arqidia.mx funcionando en producción",
+      "staging.arqidia.mx operativo para pruebas",
       "Menú responsive funcionando",
       "Sistema de estilos documentado",
       "Optimización automática de imágenes",
@@ -186,11 +266,14 @@ const projectData = {
       "Integración de proyectos y timeline profesional",
       "Implementación de proyectos reales",
       "Integración completa de la página de trayectoria",
-      "Pruebas de usabilidad finalizadas"
+      "Pruebas de usabilidad finalizadas",
+      "Arquitectura de datos 100% centralizada y documentada"
     ],
     en: [
       "Successful implementation of Next.js + Tailwind",
-      "Automated deployment on AWS",
+      "Successful migration from AWS to Netlify (saving $600/year)",
+      "arqidia.mx working in production",
+      "staging.arqidia.mx operational for testing",
       "Responsive menu working",
       "Documented style system",
       "Automatic image optimization",
@@ -199,19 +282,20 @@ const projectData = {
       "Integration of projects and professional timeline",
       "Implementation of real projects",
       "Complete integration of career page",
-      "Usability tests completed"
+      "Usability tests completed",
+      "100% centralized and documented data architecture"
     ]
   },
   nextSteps: {
     es: [
-      "Mantenimiento y actualizaciones continuas",
-      "Monitoreo de analytics",
-      "Implementación de nuevas funcionalidades según feedback"
+      "Sprint 8: Finalización de branding y guías para la cliente",
+      "Sprint 9: Implementación de sistema de edición y optimización final",
+      "Sprint 10: Lanzamiento final y hand-off completo"
     ],
     en: [
-      "Ongoing maintenance and updates",
-      "Analytics monitoring",
-      "Implementation of new features based on feedback"
+      "Sprint 8: Finalization of branding and client guides",
+      "Sprint 9: Implementation of editing system and final optimization",
+      "Sprint 10: Final launch and complete hand-off"
     ]
   }
 };
@@ -219,7 +303,9 @@ const projectData = {
 const achievementIcons = {
   es: {
     "Implementación exitosa de Next.js + Tailwind": "🚀",
-    "Despliegue automatizado en AWS": "☁️",
+    "Migración exitosa de AWS a Netlify (ahorro $600/año)": "☁️",
+    "arqidia.mx funcionando en producción": "🌐",
+    "staging.arqidia.mx operativo para pruebas": "🔧",
     "Menú responsive funcionando": "📱",
     "Sistema de estilos documentado": "📚",
     "Optimización automática de imágenes": "🖼️",
@@ -228,11 +314,14 @@ const achievementIcons = {
     "Integración de proyectos y timeline profesional": "💼",
     "Implementación de proyectos reales": "🚀",
     "Integración completa de la página de trayectoria": "📈",
-    "Pruebas de usabilidad finalizadas": "📊"
+    "Pruebas de usabilidad finalizadas": "📊",
+    "Arquitectura de datos 100% centralizada y documentada": "🗂️"
   },
   en: {
     "Successful implementation of Next.js + Tailwind": "🚀",
-    "Automated deployment on AWS": "☁️",
+    "Successful migration from AWS to Netlify (saving $600/year)": "☁️",
+    "arqidia.mx working in production": "🌐",
+    "staging.arqidia.mx operational for testing": "🔧",
     "Responsive menu working": "📱",
     "Documented style system": "📚",
     "Automatic image optimization": "🖼️",
@@ -241,10 +330,12 @@ const achievementIcons = {
     "Integration of projects and professional timeline": "💼",
     "Implementation of real projects": "🚀",
     "Complete integration of career page": "📈",
-    "Usability tests completed": "📊"
+    "Usability tests completed": "📊",
+    "100% centralized and documented data architecture": "🗂️"
   }
 };
 
+// Agregar esta definición que falta
 const nextStepIcons = {
   es: "👉",
   en: "👉"
