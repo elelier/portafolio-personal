@@ -22,6 +22,7 @@ Para agregar un nuevo cliente:
 
 Las p\u00e1ginas de cliente incluyen etiquetas `noindex` para evitar que aparezcan en buscadores.
 
+
 ## Categorías de proyectos y cotizaciones
 
 Los espacios de cliente muestran la información agrupada según el estado del proyecto y de sus cotizaciones:
@@ -32,3 +33,10 @@ Los espacios de cliente muestran la información agrupada según el estado del p
 - **Cotizaciones expiradas**: cotizaciones cuya `fechaExpiracion` ya pasó.
 
 Estas categorías facilitan consultar rápidamente el avance del proyecto y el estado de cada cotización.
+
+## Estilos compartidos
+Los componentes de Client Space usan las mismas variables CSS definidas en `src/styles/index.css`.
+Al crear nuevas vistas para un cliente procura reutilizar `var(--color-bg-solid)`,
+`var(--color-border)` y `var(--color-shadow)` para que coincidan con módulos como
+`MockupRedirect` y `ProjectProgress`.
+
