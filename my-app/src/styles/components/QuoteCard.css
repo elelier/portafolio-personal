@@ -1,0 +1,38 @@
+.quote-card {
+  background: var(--color-bg-solid);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quote-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.quote-title {
+  margin: 0.5rem 0;
+  color: var(--hero-title-color-2);
+}
+
+.quote-amount {
+  text-decoration: line-through;
+  color: var(--color-text);
+}
+
+.quote-link {
+  margin-top: auto;
+  align-self: flex-start;
+  text-decoration: none;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.quote-link:hover {
+  text-decoration: underline;
+}

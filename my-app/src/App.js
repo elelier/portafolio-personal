@@ -23,6 +23,7 @@ import ChatModal from './components/ChatModal';
 import { FaArrowUp } from 'react-icons/fa';
 import ExternalRedirect from './components/ExternalRedirect';
 import MockupRedirect from './components/MockupRedirect';
+import ClientSpace from './components/ClientSpace';
 
 // Lazy load components
 const Blog = lazy(() => import('./components/Blog'));
@@ -79,6 +80,7 @@ function App({ initialLanguage }) {
                   <Route path="/contacto" element={<Contacto />} />
                   <Route path="/cotizacion/:id" element={<ExternalRedirect />} />
                   <Route path="/mockup/:id" element={<MockupRedirect />} />
+                  <Route path="/proyecto/:token" element={<ClientSpace />} />
                 </Routes>
               </Suspense>
               <Footer />

@@ -1,0 +1,35 @@
+{
+  "token123": {
+    "passcode": "demo123",
+    "project": {
+      "nombre": "Andamios Modulares",
+      "descripcion": "Redise\u00f1o Web B2B para empresa de construcci\u00f3n",
+      "cliente": "Empresa Constructora S.A.",
+      "fecha": "04/2024",
+      "estudio": "IL&EL \u2013 Brand & Product Studio",
+      "industria": "Construcci\u00f3n",
+      "ubicacion": "Monterrey, MX",
+      "numCotizaciones": 2
+    },
+    "cotizaciones": [
+      {
+        "id": "#001",
+        "titulo": "Desarrollo Web",
+        "estado": "abierta",
+        "monto": "$10,000",
+        "tiempoEntrega": "4 semanas",
+        "incluidos": ["\ud83d\udcf1 Dise\u00f1o responsivo", "\ud83d\udee0\ufe0f SEO b\u00e1sico"],
+        "documento": "00132"
+      },
+      {
+        "id": "#002",
+        "titulo": "Mantenimiento",
+        "estado": "cerrada",
+        "monto": "$2,000",
+        "tiempoEntrega": "1 semana",
+        "incluidos": ["\ud83d\udd27 Actualizaciones", "\ud83d\udcca Reportes"],
+        "documento": "00133"
+      }
+    ]
+  }
+}
