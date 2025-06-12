@@ -21,6 +21,7 @@ import FloatingButton from './components/FloatingButton';
 import ChatModal from './components/ChatModal';
 import ExternalRedirect from './components/ExternalRedirect';
 import MockupRedirect from './components/MockupRedirect';
+import ClientSpace from './components/ClientSpace';
 import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
 
@@ -90,8 +91,12 @@ function App({ initialLanguage }) {
                   <Route path="/contacto" element={<Contacto />} />
                   <Route path="/cotizacion/:id" element={<ExternalRedirect />} />
                   <Route path="/mockup/:id" element={<MockupRedirect />} />
+
+                  <Route path="/proyecto/:token" element={<ClientSpace />} />
+
                   {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />
+
                 </Routes>
               </Suspense>
               <Footer />
