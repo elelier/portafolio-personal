@@ -97,6 +97,55 @@ const ClientSpace = () => {
 
   const recentUpdates = getRecentUpdates();
 
+  // Función para calcular la última modificación del proyecto
+  const getLastModification = () => {
+    const dates = [];
+    
+    // Agregar fechas de actualizaciones
+    if (actualizaciones && actualizaciones.length > 0) {
+      actualizaciones.forEach(update => {
+        if (update.fecha) {
+          dates.push(new Date(update.fecha));
+        }
+      });
+    }
+    
+    // Agregar fechas de cotizaciones (creación y expiración)
+    if (cotizaciones && cotizaciones.length > 0) {
+      cotizaciones.forEach(quote => {
+        if (quote.fechaCreacion) {
+          dates.push(new Date(quote.fechaCreacion));
+        }
+        if (quote.fechaExpiracion) {
+          dates.push(new Date(quote.fechaExpiracion));
+        }
+      });
+    }
+    
+    // Agregar fecha del proyecto si existe
+    if (project?.fecha) {
+      // Convertir formato "MM/YYYY" a fecha
+      const [month, year] = project.fecha.split('/');
+      if (month && year) {
+        dates.push(new Date(`${year}-${month.padStart(2, '0')}-01`));
+      }
+    }
+    
+    // Encontrar la fecha más reciente
+    if (dates.length > 0) {
+      const latestDate = new Date(Math.max(...dates));
+      return latestDate.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+    
+    return null;
+  };
+
+  const lastModification = getLastModification();
+
   // Función para abrir el modal de actualizaciones
   const handleOpenUpdatesModal = () => {
     setShowUpdatesModal(true);
@@ -149,6 +198,7 @@ const ClientSpace = () => {
         <meta name="robots" content="noindex,nofollow" />
         <link rel="canonical" href="https://www.elelier.com/" />
       </Helmet>
+      <div className="client-space-container">
       <header className="client-header">
         <div className="welcome-section">
           <h1>{project.nombre}</h1>
@@ -209,6 +259,13 @@ const ClientSpace = () => {
             )}
           </div>
         </div>
+        
+        {lastModification && (
+          <div className="last-modification">
+            <span className="last-modification-label">Última modificación:</span>
+            <span className="last-modification-date">{lastModification}</span>
+          </div>
+        )}
       </header>
 
       {activeQuotes.length > 0 && (
@@ -241,7 +298,7 @@ const ClientSpace = () => {
                   update.relacionadoCon === q.id
                 )}
                 onNotificationClick={handleOpenUpdatesModal}
-              />
+                    />
             ))}
           </div>
         </section>
@@ -253,6 +310,7 @@ const ClientSpace = () => {
         onClose={handleCloseUpdatesModal}
         updates={recentUpdates}
       />
+      </div>
     </div>
   );
 };
