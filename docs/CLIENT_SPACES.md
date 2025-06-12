@@ -8,7 +8,9 @@ Cada cliente se define en `src/data/clientProjects.json` con la siguiente estruc
   "token_unico": {
     "passcode": "codigo",
     "project": { "nombre": "...", "descripcion": "..." },
-    "cotizaciones": [ { "id": "#001", "titulo": "..." } ]
+    "cotizaciones": [
+      { "id": "#001", "titulo": "...", "resumen": "Objetivo de la cotización" }
+    ]
   }
 }
 ```
