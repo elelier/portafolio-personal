@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import '../styles/components/SiteCarousel.css';
 
@@ -7,7 +7,7 @@ const SiteCarousel = ({ sites, onSelect }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Navegación manual y automática
-  const navigate = (direction) => {
+  const navigate = useCallback((direction) => {
     if (isTransitioning) return;
     
     setIsTransitioning(true);
@@ -18,7 +18,7 @@ const SiteCarousel = ({ sites, onSelect }) => {
     });
     
     setTimeout(() => setIsTransitioning(false), 300);
-  };
+  }, [isTransitioning, sites.length]);
 
   // Auto-rotación
   useEffect(() => {

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/components/AccessForm.css';
 import { Helmet } from 'react-helmet-async';
