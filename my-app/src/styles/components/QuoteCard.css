@@ -1,28 +1,73 @@
-/* QuoteCard.css - Diseño moderno inspirado en Linear/Jira/Asana */
+/* QuoteCard.css - Diseño moderno con estilos consistentes */
+@import '../index.css';
 
 .quote-card {
-  background: #ffffff;
-  border: 1px solid #e1e5e9;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  transition: all 0.2s ease-in-out;
   position: relative;
+  background: var(--color-bg-solid);
+  border: 1px solid var(--color-border);
+  border-radius: 15px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  /* Asegurar contraste en tema claro */
+  backdrop-filter: blur(1px);
+}
+
+[data-theme="light"] .quote-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .quote-card {
+  background: var(--color-bg-solid);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Efecto de brillo más tenue que no opaque el contenido */
+.quote-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, 
+    rgba(255,255,255,0.05) 0%, 
+    rgba(255,255,255,0.05) 40%, 
+    rgba(255,255,255,0.15) 50%, 
+    rgba(255,255,255,0.05) 60%, 
+    rgba(255,255,255,0.05) 100%);
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.quote-card:hover::after {
+  opacity: 1;
+  left: -100%;
+  top: -100%;
 }
 
 .quote-card:hover {
-  border-color: #d0d7de;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary);
 }
 
 .quote-card.expired {
-  background: #fef7f0;
-  border-color: #fd7e14;
+  /* Mantener el mismo fondo base, solo cambiar el borde */
+  border-color: var(--color-warning, #fd7e14);
+  border-left-width: 3px;
 }
 
 /* Header con ID y status indicator */
@@ -43,8 +88,13 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 12px;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--color-text-muted);
   letter-spacing: 0.025em;
+  transition: color 0.3s ease;
+}
+
+.quote-card:hover .quote-id {
+  color: var(--color-primary);
 }
 
 .quote-status-indicator {
@@ -52,51 +102,61 @@
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.quote-card:hover .quote-status-indicator {
+  transform: scale(1.2);
 }
 
 .quote-status-indicator.abierta {
-  background-color: #10b981;
+  background-color: var(--color-success, #10b981);
 }
 
 .quote-status-indicator.cerrada {
-  background-color: #6b7280;
+  background-color: var(--color-text-muted, #6b7280);
 }
 
 .quote-status-indicator.aprobada {
-  background-color: #3b82f6;
+  background-color: var(--color-primary, #3b82f6);
 }
 
 .quote-status-indicator[data-status="en revision"] {
-  background-color: #f59e0b;
+  background-color: var(--color-warning, #f59e0b);
 }
 
 .quote-status-badge {
   font-size: 11px;
   font-weight: 500;
-  padding: 2px 8px;
+  padding: 4px 12px;
   border-radius: 12px;
   letter-spacing: 0.025em;
   text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.quote-card:hover .quote-status-badge {
+  transform: scale(1.05);
 }
 
 .quote-status-badge.abierta {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: var(--color-success-bg, #dcfce7);
+  color: var(--color-success-text, #166534);
 }
 
 .quote-status-badge.cerrada {
-  background-color: #f3f4f6;
-  color: #374151;
+  background-color: var(--color-neutral-bg, #f3f4f6);
+  color: var(--color-neutral-text, #374151);
 }
 
 .quote-status-badge.aprobada {
-  background-color: #dbeafe;
-  color: #1e40af;
+  background-color: var(--color-primary-bg, #dbeafe);
+  color: var(--color-primary-text, #1e40af);
 }
 
 .quote-status-badge[data-status="en revision"] {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: var(--color-warning-bg, #fef3c7);
+  color: var(--color-warning-text, #92400e);
 }
 
 /* Contenido principal */
@@ -116,32 +176,53 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #111827;
+  color: var(--color-text);
   margin: 0;
   line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  position: relative;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.quote-card:hover .quote-title {
+  transform: scale(1.02);
+  color: var(--hero-title-color-2);
 }
 
 .quote-summary {
   font-size: 12px;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin: 2px 0 0 0;
-  line-height: 1.4;  overflow: hidden;
+  line-height: 1.4;
+  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+}
+
+.quote-card:hover .quote-summary {
+  transform: scale(1.02);
+  color: var(--color-text);
 }
 
 .quote-amount {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text);
   white-space: nowrap;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.quote-card:hover .quote-amount {
+  transform: scale(1.05);
+  color: var(--color-primary);
 }
 
 /* Meta información */
@@ -149,6 +230,11 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.quote-card:hover .quote-meta {
+  transform: scale(1.01);
 }
 
 .quote-meta-item {
@@ -156,15 +242,16 @@
   align-items: center;
   gap: 4px;
   font-size: 11px;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .quote-meta-item span:first-child {
   font-weight: 500;
+  color: var(--color-text-muted);
 }
 
 .quote-meta-item span:last-child {
-  color: #374151;
+  color: var(--color-text);
   font-weight: 400;
 }
 
@@ -175,51 +262,109 @@
   margin-top: 4px;
 }
 
+/* Botón base - estilo simple para cotizaciones expiradas */
 .quote-link {
   font-size: 12px;
   font-weight: 500;
-  color: #3b82f6;
+  color: var(--color-text-muted);
   text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
 }
 
 .quote-link:hover {
-  background-color: #eff6ff;
-  border-color: #bfdbfe;
-  color: #1e40af;
+  background-color: var(--color-bg-solid);
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estados especiales */
+/* Estilo especial con gradiente para cotizaciones activas */
+.quote-card:not(.expired):not([data-expired="true"]) .quote-link {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%;
+  animation: gradientBG 10s ease infinite;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+}
+
+.quote-card:not(.expired):not([data-expired="true"]) .quote-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  color: #ffffff;
+  background-color: unset;
+  border-color: unset;
+}
+
+.quote-card:not(.expired):not([data-expired="true"]) .quote-link:active {
+  transform: scale(0.95);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  animation: none;
+}
+
+/* Animación del gradiente (igual que el hero button) */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Estados especiales - solo borde, no fondo */
 .quote-card[data-urgent="true"] {
-  border-left: 3px solid #f59e0b;
+  border-left: 3px solid var(--color-warning, #f59e0b);
 }
 
 .quote-card[data-expired="true"] {
-  border-left: 3px solid #ef4444;
+  border-left: 3px solid var(--color-danger, #ef4444);
 }
 
 .quote-card[data-expired="true"] .quote-meta-item span:last-child {
-  color: #ef4444;
+  color: var(--color-danger, #ef4444);
   font-weight: 500;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+.quote-card {
+  animation: fadeIn 0.5s ease forwards;
 }
 
 /* Responsive para móviles */
 @media (max-width: 768px) {
   .quote-card {
-    padding: 10px 12px;
-    margin-bottom: 6px;
-    gap: 6px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    gap: 8px;
+    border-radius: 12px;
   }
   
   .quote-header {
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
   
   .quote-main-content {
-    gap: 8px;
+    gap: 10px;
   }
   
   .quote-title {
@@ -244,28 +389,89 @@
   
   .quote-status-badge {
     font-size: 10px;
-    padding: 1px 6px;
+    padding: 2px 8px;
+  }  .quote-link {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 6px;
   }
   
-  .quote-link {
+  /* Botones activos en tablet */
+  .quote-card:not(.expired):not([data-expired="true"]) .quote-link {
     font-size: 11px;
-    padding: 3px 6px;
+    padding: 6px 12px;
+    border-radius: 16px;
+  }
+    /* Reducir efectos en móvil para mejor rendimiento */
+  .quote-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .quote-card:hover::after {
+    opacity: 0.3;
   }
 }
 
 @media (max-width: 480px) {
   .quote-card {
-    padding: 8px 10px;
-    margin-bottom: 4px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    gap: 6px;
+    border-radius: 10px;
   }
   
   .quote-meta {
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
   
   .quote-meta-item {
     justify-content: space-between;
     width: 100%;
+    font-size: 9px;
   }
+  
+  .quote-id {
+    font-size: 10px;
+  }
+  
+  .quote-title {
+    font-size: 12px;
+  }
+    .quote-amount {
+    font-size: 12px;
+  }
+    .quote-link {
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 5px;
+  }
+  
+  /* Botones activos en móvil */
+  .quote-card:not(.expired):not([data-expired="true"]) .quote-link {
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 14px;
+  }
+}
+
+/* Media queries para temas - ajustar el efecto de brillo */
+@media (prefers-color-scheme: dark) {
+  .quote-card::after {
+    background: linear-gradient(to bottom right, 
+      rgba(255,255,255,0.03) 0%, 
+      rgba(255,255,255,0.03) 40%, 
+      rgba(255,255,255,0.08) 50%, 
+      rgba(255,255,255,0.03) 60%, 
+      rgba(255,255,255,0.03) 100%);
+  }
+}
+
+/* Asegurar z-index correcto para el contenido */
+.quote-header,
+.quote-main-content,
+.quote-meta,
+.quote-actions {
+  position: relative;
+  z-index: 2;
 }
