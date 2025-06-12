@@ -31,8 +31,9 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run security-check && npm run build",
     "deploy": "gh-pages -d build",
-    "generate-client-data": "node scripts/generate-client-data.js",
-    "security-check": "npm audit && prettier-package-json --list-different"
+    "generate-client-data": "node scripts/security/generate-client-data.js",
+    "security-check": "npm audit && prettier-package-json --list-different",
+    "pre-prod": "npm run build && serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +55,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
     "gh-pages": "^6.1.1"
   }
 }

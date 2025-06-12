@@ -1,50 +1,40 @@
 {
-  "token123": {
-    "passcode": "demo123",
+  "arqidia": {
     "project": {
-      "nombre": "Andamios Modulares",
-      "descripcion": "Rediseño Web B2B para empresa de construcción",
-      "cliente": "Empresa Constructora S.A.",
-      "fecha": "04/2024",
+      "nombre": "ARQIDIA - Portafolio Digital",
+      "descripcion": "Desarrollo de portafolio web para estudio de arquitectura y construcción holística con enfoque en neuroarquitectura y domótica",
+      "cliente": "Marcela Morales",
+      "fecha": "03/2025",
       "estudio": "IL&EL – Brand & Product Studio",
-      "industria": "Construcción",
+      "industria": "Arquitectura y Construcción",
       "ubicacion": "Monterrey, MX",
-      "numCotizaciones": 2,
+      "numCotizaciones": 1,
       "estadoProyecto": "activo"
     },
     "actualizaciones": [
       {
         "id": "upd001",
-        "titulo": "Propuesta de desarrollo aprobada",
-        "descripcion": "El cliente ha aprobado la cotización #001 para el desarrollo web. Comenzamos la fase de diseño.",
-        "fecha": "2025-06-10T10:30:00Z",
-        "tipo": "aprobacion",
+        "titulo": "Configuración de dominio completada",
+        "descripcion": "Se completó la configuración del dominio principal arqidia.mx y el entorno de pruebas staging.arqidia.mx. Certificados de seguridad y DNS verificados correctamente.",
+        "fecha": "2025-06-08T14:30:00Z",
+        "tipo": "completado",
         "leida": false,
-        "relacionadoCon": "#001"
+        "relacionadoCon": null
       },
       {
-        "id": "upd002", 
-        "titulo": "Nuevo documento disponible",
-        "descripcion": "Se ha generado la propuesta técnica detallada. Documento 00137 disponible para descarga.",
-        "fecha": "2025-06-08T16:20:00Z",
+        "id": "upd002",
+        "titulo": "Ajustes de diseño e identidad visual",
+        "descripcion": "Integración de logotipos definitivos y ajustes de contraste, proporciones y visibilidad. Optimización inicial de velocidad de carga en staging.",
+        "fecha": "2025-06-10T16:20:00Z",
         "tipo": "documento",
-        "leida": true,
+        "leida": false,
         "relacionadoCon": null
       },
       {
         "id": "upd003",
-        "titulo": "Recordatorio: Cotización próxima a expirar",
-        "descripcion": "La cotización #001 expirará en 7 días. Te recomendamos revisarla antes de la fecha límite.",
-        "fecha": "2025-06-05T09:00:00Z",
-        "tipo": "recordatorio",
-        "leida": false,
-        "relacionadoCon": "#001"
-      },
-      {
-        "id": "upd004",
-        "titulo": "Actualización antigua (no se mostrará)",
-        "descripcion": "Esta actualización es de hace más de 10 días y no debería aparecer en las notificaciones.",
-        "fecha": "2025-05-20T14:30:00Z",
+        "titulo": "Recepción de materiales de contenido",
+        "descripcion": "Confirmación recibida: todas las imágenes de proyectos están listas. Se inicia la carga progresiva de carpetas organizadas por categorías.",
+        "fecha": "2025-06-11T09:00:00Z",
         "tipo": "documento",
         "leida": false,
         "relacionadoCon": null
@@ -52,127 +42,166 @@
     ],
     "cotizaciones": [
       {
-        "id": "#001",
-        "titulo": "Desarrollo Web",
-        "resumen": "Objetivo de la cotización",
-        "estado": "abierta",
-        "monto": "$10,000",
-        "tiempoEntrega": "4 semanas",
-        "fechaExpiracion": "2025-07-15",
-        "fechaCreacion": "2024-06-11",
-        "incluidos": ["📱 Diseño responsivo", "🛠️ SEO básico"],
-        "documento": "00132"
-      },
-      {
-        "id": "#002",
-        "titulo": "Mantenimiento",
-        "resumen": "Objetivo de la cotización",
-        "estado": "cerrada",
-        "monto": "$2,000",
-        "tiempoEntrega": "1 semana",
-        "fechaExpiracion": "2024-12-31",
-        "fechaCreacion": "2024-05-20",
-        "incluidos": ["🔧 Actualizaciones", "📊 Reportes"],
-        "documento": "00133"
+        "id": "#00132",
+        "titulo": "Desarrollo Portafolio Web",
+        "resumen": "Portafolio digital con enfoque en neuroarquitectura y domótica",
+        "estado": "aprobada",
+        "monto": "$16,900 MXN",
+        "tiempoEntrega": "8 semanas",
+        "fechaExpiracion": "2025-08-15",
+        "fechaCreacion": "2025-03-15",
+        "incluidos": [
+          "🏗️ Diseño arquitectónico",
+          "📱 Sitio responsivo",
+          "🔧 Staging.arqidia.mx",
+          "🌐 Dominio arqidia.mx"
+        ],
+        "documento": "00132",
+        "url": "https://www.canva.com/design/DAGcZPIh0jE/MXeJcVMjya5LRX9sp7cocw/view?utm_content=DAGcZPIh0jE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb4992d367b",
+        "proyectoUrl": "/mockup/00132"
       }
     ]
   },
-  "tech456": {
-    "passcode": "tech2024",
+  "hqcontrol": {
     "project": {
-      "nombre": "E-commerce TechStore",
-      "descripcion": "Plataforma completa de comercio electrónico con integración a sistemas de pago",
-      "cliente": "TechStore Solutions",
-      "fecha": "06/2024",
+      "nombre": "HQControl - Servicios Ambientales",
+      "descripcion": "Mejoras web y migración para empresa de consultoría ambiental y análisis de laboratorio",
+      "cliente": "Juan Alcántara",
+      "fecha": "05/2025",
       "estudio": "IL&EL – Brand & Product Studio",
-      "industria": "Tecnología",
-      "ubicacion": "Ciudad de México, MX",
-      "numCotizaciones": 3,
-      "estadoProyecto": "terminado"
+      "industria": "Servicios Ambientales",
+      "ubicacion": "Monterrey, MX",
+      "numCotizaciones": 2,
+      "estadoProyecto": "inactivo"
     },
     "actualizaciones": [
       {
-        "id": "upd005",
-        "titulo": "Proyecto finalizado exitosamente",
-        "descripcion": "El e-commerce TechStore ha sido completado y entregado. Todos los objetivos fueron cumplidos satisfactoriamente.",
-        "fecha": "2025-06-01T14:00:00Z",
-        "tipo": "completado",
-        "leida": true,
+        "id": "upd004",
+        "titulo": "Cotizaciones enviadas - En espera de respuesta",
+        "descripcion": "Se enviaron las cotizaciones 00133 y 00134 para mejoras web y migración. Proyecto en espera de confirmación de arranque.",
+        "fecha": "2025-05-25T14:00:00Z",
+        "tipo": "recordatorio",
+        "leida": false,
         "relacionadoCon": null
       },
       {
-        "id": "upd006",
-        "titulo": "Cotización backend aprobada",
-        "descripcion": "La cotización #004 para desarrollo backend y API ha sido aprobada por el cliente.",
-        "fecha": "2025-05-15T11:15:00Z",
-        "tipo": "aprobacion",
-        "leida": true,
-        "relacionadoCon": "#004"
-      }
-    ],
-    "cotizaciones": [
-      {
-        "id": "#003",
-        "titulo": "Desarrollo Frontend",
-        "resumen": "Objetivo de la cotización",
-        "estado": "aprobada",
-        "monto": "$15,000",
-        "tiempoEntrega": "6 semanas",
-        "fechaExpiracion": "2025-08-20",
-        "fechaCreacion": "2024-06-01",
-        "incluidos": ["⚛️ React.js", "💳 Integración PayPal", "📱 App móvil", "🎨 Diseño UX/UI"],
-        "documento": "00134"
-      },
-      {
-        "id": "#004",
-        "titulo": "Backend y API",
-        "resumen": "Objetivo de la cotización",
-        "estado": "en revision",
-        "monto": "$12,000",
-        "tiempoEntrega": "5 semanas",
-        "fechaExpiracion": "2025-07-30",
-        "fechaCreacion": "2024-06-05",
-        "incluidos": ["🔧 Node.js", "🗄️ Base de datos", "🔐 Autenticación", "📊 Analytics"],
-        "documento": "00135"
-      },
-      {
-        "id": "#005",
-        "titulo": "Hosting y Dominio",
-        "resumen": "Objetivo de la cotización",
-        "estado": "abierta",
-        "monto": "$3,000",
-        "tiempoEntrega": "1 semana",
-        "fechaExpiracion": "2025-06-25",
-        "fechaCreacion": "2024-06-10",
-        "incluidos": ["☁️ AWS Hosting", "🌐 Dominio .com", "📧 Correos corporativos"],
-        "documento": "00136"
-      }
-    ]
-  },
-  "token789": {
-    "passcode": "test789",
-    "project": {
-      "nombre": "Restaurante Luna",
-      "descripcion": "Sitio web para restaurante local",
-      "cliente": "Restaurante Luna S.A.",
-      "fecha": "06/2024",
-      "estudio": "IL&EL – Brand & Product Studio",
-      "industria": "Restaurantes",
-      "ubicacion": "Guadalajara, MX",
-      "numCotizaciones": 0,
-      "estadoProyecto": "activo"
-    },
-    "actualizaciones": [
-      {
-        "id": "upd007",
-        "titulo": "Bienvenido a nuestro sistema",
-        "descripcion": "Hemos iniciado el análisis de tu proyecto. Pronto recibirás una cotización personalizada.",
-        "fecha": "2025-06-11T09:00:00Z",
-        "tipo": "bienvenida",
+        "id": "upd005",
+        "titulo": "Cotizaciones expiradas - Recotización disponible",
+        "descripcion": "Las cotizaciones expiraron el 31 de mayo. Contacta para generar nuevas propuestas actualizadas.",
+        "fecha": "2025-06-01T11:15:00Z",
+        "tipo": "recordatorio",
         "leida": false,
         "relacionadoCon": null
       }
     ],
-    "cotizaciones": []
+    "cotizaciones": [
+      {
+        "id": "#00133",
+        "titulo": "Mejora Sección Servicios",
+        "resumen": "Ajuste puntual de sitio web - sección Servicios Ambientales",
+        "estado": "cerrada",
+        "monto": "$1,300 MXN",
+        "tiempoEntrega": "1 semana",
+        "fechaExpiracion": "2025-05-31",
+        "fechaCreacion": "2025-05-10",
+        "incluidos": [
+          "🔧 Ajustes de contenido",
+          "📊 Optimización SEO"
+        ],
+        "documento": "00133",
+        "url": "https://www.canva.com/design/DAGn0jLRM2k/62nYjyNV7C8q6g2h_ekZ2Q/view"
+      },
+      {
+        "id": "#00134",
+        "titulo": "Migración HTML a WordPress",
+        "resumen": "Migración completa de sitio HTML a WordPress",
+        "estado": "cerrada",
+        "monto": "$4,200 MXN",
+        "tiempoEntrega": "3 semanas",
+        "fechaExpiracion": "2025-05-31",
+        "fechaCreacion": "2025-05-10",
+        "incluidos": [
+          "🔄 Migración completa",
+          "📱 Diseño responsivo",
+          "🛠️ Panel administración",
+          "📊 SEO optimizado"
+        ],
+        "documento": "00134",
+        "url": "https://www.canva.com/design/DAGn8_3MaeA/jDuD68zakM740t7Rhv7gFQ/view"
+      }
+    ]
+  },
+  "andamios": {
+    "project": {
+      "nombre": "Andamios Modulables",
+      "descripcion": "Rediseño integral del sitio web y desarrollo de cotizador online para empresa de andamios",
+      "cliente": "Paulina Jiménez",
+      "fecha": "06/2025",
+      "estudio": "IL&EL – Brand & Product Studio",
+      "industria": "Construcción",
+      "ubicacion": "Ciudad de México, MX",
+      "numCotizaciones": 2,
+      "estadoProyecto": "activo"
+    },
+    "actualizaciones": [
+      {
+        "id": "upd006",
+        "titulo": "Cotizaciones enviadas - En revisión",
+        "descripcion": "Envío de cotizaciones 00135 (Rediseño Web) y 00136 (Cotizador Online) a Paulina Jiménez. Pendientes de aprobación.",
+        "fecha": "2025-06-12T09:00:00Z",
+        "tipo": "documento",
+        "leida": false,
+        "relacionadoCon": null
+      },
+      {
+        "id": "upd007",
+        "titulo": "Documentos disponibles para descarga",
+        "descripcion": "Las cotizaciones 00135 y 00136 están disponibles en Canva. ",
+        "fecha": "2025-06-11T14:30:00Z",
+        "tipo": "documento",
+        "leida": false,
+        "relacionadoCon": "#00135"
+      }
+    ],
+    "cotizaciones": [
+      {
+        "id": "#00135",
+        "titulo": "Rediseño Integral Web",
+        "resumen": "Rediseño completo en WordPress con galería, promociones, blog, facturación y SEO",
+        "estado": "en revision",
+        "monto": "$21,000 MXN",
+        "tiempoEntrega": "6 semanas",
+        "fechaExpiracion": "2025-07-15",
+        "fechaCreacion": "2025-06-11",
+        "incluidos": [
+          "🎨 Diseño WordPress",
+          "📱 Galería proyectos",
+          "📝 Blog integrado",
+          "💳 Sistema facturación",
+          "🛠️ SEO avanzado",
+          "📲 WhatsApp Business"
+        ],
+        "documento": "00135",
+        "url": "https://www.canva.com/design/DAGqGAAI5CQ/lp0sySUcjsmtTGCFj3nONw/view"
+      },
+      {
+        "id": "#00136",
+        "titulo": "Cotizador Online",
+        "resumen": "Sistema de cotización automatizada - Opción A: Formulario / Opción B: Chatbot IA",
+        "estado": "en revision",
+        "monto": "A: $5,500 | B: $10,500",
+        "tiempoEntrega": "3-4 semanas",
+        "fechaExpiracion": "2025-07-15",
+        "fechaCreacion": "2025-06-11",
+        "incluidos": [
+          "🤖 A: Formulario inteligente",
+          "🧠 B: Chatbot con IA",
+          "💰 Cálculo automático",
+          "📊 Dashboard administrativo"
+        ],
+        "documento": "00136",
+        "url": "https://www.canva.com/design/DAGqGOA03WM/CWdwCVFYf-5QteVx-ENysw/view"
+      }
+    ]
   }
 }

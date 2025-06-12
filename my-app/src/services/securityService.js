@@ -84,7 +84,6 @@ class SecurityManager {
 
     return { valid: true };
   }
-
   // Sanitizar mensaje para prevenir inyecciones
   sanitizeMessage(message) {
     return message

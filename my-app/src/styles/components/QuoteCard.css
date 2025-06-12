@@ -572,34 +572,36 @@
   
   .quote-summary {
     display: none; /* Ocultar resumen en móvil para ahorrar espacio */
-  }    .quote-bottom-section {
+  }  .quote-bottom-section {
     align-items: flex-start;
     gap: 8px;
     margin-top: 6px;
-    flex-direction: column; /* Cambiar a columna en móvil para mejor espacio */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   
   .quote-bottom-section .quote-amount {
-    font-size: 12px; /* Más pequeño en móvil para textos largos */
-    max-width: 100%; /* Usar todo el ancho disponible */
-    white-space: nowrap; /* Mantener en una línea */
-    text-align: left; /* Alineación a la izquierda */
-    overflow: hidden; /* Evita desbordamiento */
-    text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
+    font-size: 12px;
+    max-width: 100%;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
   }
   
   .quote-actions-buttons {
-    width: 100%;
+    display: inline-flex;
     justify-content: flex-start;
     gap: 6px;
+    width: auto;
   }
   
   .quote-link,
   .quote-link-secondary {
     font-size: 10px !important;
     padding: 4px 8px !important;
-    flex: 1;
-    min-width: 0;
     text-align: center;
   }
   

@@ -403,16 +403,35 @@
 
 .updates-icon,
 .status-icon {
-  font-size: 1.1rem;
-  flex-shrink: 0; /* Evitar que se compriman */
+  font-size: 1.2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .updates-icon {
-  animation: ring 3s infinite;
+  animation: bellShake 2s ease-in-out infinite;
+  transform-origin: top center;
 }
 
-.status-icon {
-  animation: pulse 2s infinite;
+@keyframes bellShake {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  5%, 15% {
+    transform: rotate(15deg);
+  }
+  10%, 20% {
+    transform: rotate(-15deg);
+  }
+  25% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  50%, 100% {
+    transform: rotate(0);
+  }
 }
 
 @keyframes ring {
