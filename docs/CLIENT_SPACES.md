@@ -21,3 +21,9 @@ Para agregar un nuevo cliente:
 3. Comparte la URL `https://www.elelier.com/proyecto/<token>` y el c\u00f3digo de acceso con el cliente.
 
 Las p\u00e1ginas de cliente incluyen etiquetas `noindex` para evitar que aparezcan en buscadores.
+
+## Estilos compartidos
+Los componentes de Client Space usan las mismas variables CSS definidas en `src/styles/index.css`.
+Al crear nuevas vistas para un cliente procura reutilizar `var(--color-bg-solid)`,
+`var(--color-border)` y `var(--color-shadow)` para que coincidan con módulos como
+`MockupRedirect` y `ProjectProgress`.
