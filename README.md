@@ -95,6 +95,100 @@ El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https
 - Caché optimizado
 - Analytics configurado
 
+## Seguridad y Protección de Datos
+
+### Variables de Entorno
+```bash
+# .env.example
+REACT_APP_API_URL=your_api_url
+REACT_APP_ANALYTICS_ID=your_analytics_id
+REACT_APP_GEMINI_API_KEY=your_gemini_key
+```
+
+### Datos Sensibles y Configuración
+- **Variables de Entorno**: Usar `.env` para almacenar todas las claves de API y configuraciones sensibles
+- **Git Ignore**:
+  ```gitignore
+  # Archivos de ambiente
+  .env
+  .env.local
+  .env.*.local
+  
+  # Datos de clientes
+  /src/data/private/*
+  /src/data/clientProjects.json
+  
+  # Logs y cachés
+  npm-debug.log*
+  yarn-debug.log*
+  yarn-error.log*
+  .pnpm-debug.log*
+  ```
+
+### Mejores Prácticas de Seguridad
+
+#### Protección de Datos de Cliente
+1. **Sanitización de Datos**:
+   - Eliminar información personal identificable (PII) antes de subir al repositorio
+   - Usar nombres genéricos o códigos para clientes en ejemplos
+   - Encriptar o hashear contraseñas y tokens de acceso
+
+2. **Estructura de Datos Segura**:
+   ```javascript
+   // Ejemplo de estructura segura para datos públicos
+   {
+     "projectId": "PRJ001",
+     "displayName": "Project Alpha",
+     "status": "active",
+     "publicDetails": {
+       "industry": "Technology",
+       "location": "Region"
+     }
+   }
+   ```
+
+3. **Control de Acceso**:
+   - Implementar autenticación para áreas sensibles
+   - Usar tokens JWT con expiración corta
+   - Validar permisos en cada solicitud
+
+#### Despliegue Seguro
+1. **Preparación**:
+   ```bash
+   # Script de sanitización pre-deploy
+   npm run sanitize-data    # Elimina datos sensibles
+   npm run security-check   # Verifica exposición de datos
+   npm run build           # Construye con variables de prod
+   ```
+
+2. **Verificación**:
+   - Revisar archivos estáticos por datos sensibles
+   - Validar headers de seguridad
+   - Comprobar configuración CORS
+
+3. **Monitoreo**:
+   - Implementar logging seguro
+   - Configurar alertas de seguridad
+   - Realizar auditorías periódicas
+
+### Herramientas Recomendadas
+- **Seguridad**: 
+  - [Helmet](https://helmetjs.github.io/) para headers HTTP
+  - [node-rate-limiter](https://github.com/animir/node-rate-limiter) para protección DoS
+  - [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) para vulnerabilidades
+
+### Proceso de Desarrollo Seguro
+1. Nunca commitear archivos `.env`
+2. Usar variables de entorno para configuración
+3. Implementar sanitización de datos automática
+4. Revisar código por datos sensibles antes de push
+5. Mantener dependencias actualizadas
+
+### Documentación Adicional
+- [Guía completa de seguridad](./docs/SECURITY.md)
+- [Política de privacidad](./docs/PRIVACY.md)
+- [Proceso de sanitización](./docs/DATA_SANITIZATION.md)
+
 ## Inicio Rápido
 
 ### Prerrequisitos

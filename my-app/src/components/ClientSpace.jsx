@@ -63,15 +63,18 @@ const ClientSpace = () => {
   const today = new Date();
   const activeQuotes = [];
   const expiredQuotes = [];
+  const approvedQuotes = [];
 
   if (cotizaciones) {
     cotizaciones.forEach((q) => {
       const exp = q.fechaExpiracion ? new Date(q.fechaExpiracion) : null;
       const isExpired = exp && exp < today;
-      const closed = q.estado === 'aprobada' || q.estado === 'cerrada';
-      if (isExpired) {
+      
+      if (q.estado === 'aprobada') {
+        approvedQuotes.push(q);
+      } else if (isExpired) {
         expiredQuotes.push(q);
-      } else if (!closed) {
+      } else if (q.estado !== 'cerrada') {
         activeQuotes.push(q);
       }
     });
@@ -100,24 +103,30 @@ const ClientSpace = () => {
   // Función para calcular la última modificación del proyecto
   const getLastModification = () => {
     const dates = [];
+    const today = new Date();
     
     // Agregar fechas de actualizaciones
     if (actualizaciones && actualizaciones.length > 0) {
       actualizaciones.forEach(update => {
         if (update.fecha) {
-          dates.push(new Date(update.fecha));
+          const updateDate = new Date(update.fecha);
+          // Solo agregar si la fecha no es futura
+          if (updateDate <= today) {
+            dates.push(updateDate);
+          }
         }
       });
     }
     
-    // Agregar fechas de cotizaciones (creación y expiración)
+    // Agregar solo fechas de creación de cotizaciones (no expiración)
     if (cotizaciones && cotizaciones.length > 0) {
       cotizaciones.forEach(quote => {
         if (quote.fechaCreacion) {
-          dates.push(new Date(quote.fechaCreacion));
-        }
-        if (quote.fechaExpiracion) {
-          dates.push(new Date(quote.fechaExpiracion));
+          const creationDate = new Date(quote.fechaCreacion);
+          // Solo agregar si la fecha no es futura
+          if (creationDate <= today) {
+            dates.push(creationDate);
+          }
         }
       });
     }
@@ -127,7 +136,11 @@ const ClientSpace = () => {
       // Convertir formato "MM/YYYY" a fecha
       const [month, year] = project.fecha.split('/');
       if (month && year) {
-        dates.push(new Date(`${year}-${month.padStart(2, '0')}-01`));
+        const projectDate = new Date(`${year}-${month.padStart(2, '0')}-01`);
+        // Solo agregar si la fecha no es futura
+        if (projectDate <= today) {
+          dates.push(projectDate);
+        }
       }
     }
     
@@ -267,6 +280,24 @@ const ClientSpace = () => {
           </div>
         )}
       </header>
+
+      {approvedQuotes.length > 0 && (
+        <section className="quote-section">
+          <h3>Proyectos Aprobados</h3>
+          <div className="quote-list">
+            {approvedQuotes.map((q) => (
+              <QuoteCard 
+                key={q.id} 
+                quote={q} 
+                recentUpdates={recentUpdates.filter(update => 
+                  update.relacionadoCon === q.id
+                )}
+                onNotificationClick={handleOpenUpdatesModal}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {activeQuotes.length > 0 && (
         <section id="active-quotes-section" className="quote-section">

@@ -32,7 +32,9 @@ const content = {
     viewProgress: 'Ver avance',
     viewFullQuote: 'Ver cotización',
     viewProject: 'Ver proyecto',
-    documentAlt: 'Ver documento de'
+    documentAlt: 'Ver documento de',
+    viewQuote: 'Ver Cotización',
+    viewProjectProgress: 'Ver Proyecto'
   },
   en: {
     delivery: 'Delivery',
@@ -47,7 +49,9 @@ const content = {
     viewProgress: 'View progress',
     viewFullQuote: 'View quote',
     viewProject: 'View project',
-    documentAlt: 'View document of'
+    documentAlt: 'View document of',
+    viewQuote: 'View Quote',
+    viewProjectProgress: 'View Project'
   }
 };
 
@@ -96,13 +100,13 @@ const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
         abierta: 'Abierta',
         cerrada: 'Cerrada',
         aprobada: 'Aprobada',
-        'en revision': 'En Revisión'
+        'en revision': 'Activa'
       },
       en: {
         abierta: 'Open',
         cerrada: 'Closed',
         aprobada: 'Approved',
-        'en revision': 'In Review'
+        'en revision': 'Active'
       }
     };
     return statusMap[language][status] || status;
@@ -124,8 +128,17 @@ const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
   };
 
   const getCtaText = () => {
-    if (['aprobada', 'en revision'].includes(quote.estado)) {
+    // Si hay proyectoUrl, significa que hay un proyecto en progreso
+    if (quote.proyectoUrl && ['aprobada', 'en revision'].includes(quote.estado)) {
       return content[language].viewProgress;
+    }
+    // Si no hay proyecto pero está aprobada, mostrar como proyecto cerrado
+    if (quote.estado === 'aprobada') {
+      return content[language].viewProject;
+    }
+    // Para cotizaciones en revisión sin proyecto, mostrar como cotización
+    if (quote.estado === 'en revision') {
+      return content[language].viewFullQuote;
     }
     if (quote.estado === 'abierta') {
       return content[language].viewFullQuote;
@@ -175,7 +188,6 @@ const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
             <p className="quote-summary">{quote.resumen}</p>
           )}
         </div>
-        <div className="quote-amount">{quote.monto}</div>
       </div>
 
       {(quote.fechaExpiracion || quote.tiempoEntrega) && (
@@ -195,19 +207,33 @@ const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
         </div>
       )}
       
-      {quote.documento && (
-        <div className="quote-actions">
-          <a
-            href={`/cotizacion/${quote.documento}`}
-            className="quote-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${content[language].documentAlt} ${quote.titulo}`}
-          >
-            {getCtaText()}
-          </a>
+      <div className="quote-bottom-section">
+        <div className="quote-amount">{quote.monto}</div>
+        <div className="quote-actions-buttons">
+          {quote.url && (
+            <a
+              href={quote.url}
+              className={`quote-link ${quote.proyectoUrl ? 'quote-link-secondary' : ''}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${content[language].documentAlt} ${quote.titulo}`}
+            >
+              {quote.proyectoUrl ? content[language].viewQuote : getCtaText()}
+            </a>
+          )}
+          {quote.proyectoUrl && (
+            <a
+              href={quote.proyectoUrl}
+              className="quote-link quote-link-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${content[language].viewProjectProgress} ${quote.titulo}`}
+            >
+              {content[language].viewProjectProgress}
+            </a>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

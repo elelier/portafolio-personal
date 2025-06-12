@@ -152,7 +152,7 @@
 }
 
 .quote-status-indicator[data-status="en revision"] {
-  background-color: var(--color-warning, #f59e0b);
+  background-color: var(--color-success, #10b981);
 }
 
 .quote-status-badge {
@@ -189,16 +189,15 @@
 }
 
 .quote-status-badge[data-status="en revision"] {
-  background-color: var(--color-warning-bg, #fef3c7);
-  color: var(--color-warning-text, #92400e);
+  background-color: var(--color-success-bg, #dcfce7);
+  color: var(--color-success-text, #166534);
 }
 
 /* Contenido principal */
 .quote-main-content {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .quote-title-section {
@@ -255,16 +254,20 @@
 
 .quote-amount {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 16px; /* Aumentado de 14px */
+  font-size: 15px; /* Reducido para acomodar textos múltiples */
   font-weight: 700;
   color: var(--color-primary, #3b82f6); /* Color destacado */
-  white-space: nowrap;
+  white-space: normal; /* Cambio de nowrap a normal para permitir wrapping */
+  word-break: break-word; /* Permite corte de palabras en textos largos */
   flex-shrink: 0;
   transition: all 0.3s ease;
   background: linear-gradient(135deg, var(--color-primary, #3b82f6), var(--color-primary-dark, #1e40af));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.3; /* Altura de línea mejorada para múltiples líneas */
+  text-align: right; /* Alineación a la derecha para mantener diseño */
+  max-width: 140px; /* Ancho máximo para controlar el espacio */
 }
 
 .quote-card:hover .quote-amount {
@@ -324,6 +327,76 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 4px;
+}
+
+/* Sección inferior con monto y botón(es) */
+.quote-bottom-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.quote-bottom-section .quote-amount {
+  margin: 0;
+  flex-shrink: 0;
+  white-space: nowrap; /* Evita salto de línea */
+  text-align: left; /* Alineación explícita a la izquierda */
+  overflow: hidden; /* Evita desbordamiento */
+  text-overflow: ellipsis; /* Añade puntos suspensivos si es muy largo */
+  max-width: 50%; /* Reducido para dar espacio a dos botones */
+}
+
+/* Contenedor para botones múltiples */
+.quote-actions-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Botón principal (proyecto) - siempre con estilo premium */
+.quote-link-primary {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99) !important;
+  background-size: 300% 300% !important;
+  animation: gradientBG 10s ease infinite !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  padding: 8px 16px !important;
+  border-radius: 20px !important;
+  border: none !important;
+  font-size: 12px !important;
+}
+
+.quote-link-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3) !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2) !important;
+  color: #ffffff !important;
+  background-color: unset !important;
+  border-color: unset !important;
+}
+
+.quote-link-primary:active {
+  transform: scale(0.95) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2) !important;
+  animation: none !important;
+}
+
+/* Botón secundario para cotización cuando hay proyecto */
+.quote-link-secondary {
+  background: var(--color-bg-2) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  font-size: 11px !important;
+  padding: 5px 10px !important;
+}
+
+.quote-link-secondary:hover {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border-color: var(--color-primary) !important;
 }
 
 /* Notificador de campanita para cotizaciones */
@@ -413,8 +486,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo especial con gradiente para cotizaciones activas */
-.quote-card:not(.expired):not([data-expired="true"]) .quote-link {
+/* Estilo especial con gradiente para cotizaciones activas SIN proyecto */
+.quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary) {
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
   background-size: 300% 300%;
   animation: gradientBG 10s ease infinite;
@@ -425,7 +498,7 @@
   border: none;
 }
 
-.quote-card:not(.expired):not([data-expired="true"]) .quote-link:hover {
+.quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary):hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0,0,0,0.3);
   text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
@@ -434,7 +507,7 @@
   border-color: unset;
 }
 
-.quote-card:not(.expired):not([data-expired="true"]) .quote-link:active {
+.quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary):active {
   transform: scale(0.95);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
   animation: none;
@@ -489,21 +562,45 @@
   .quote-header {
     margin-bottom: 4px;
   }
-  
-  .quote-main-content {
-    gap: 10px;
+    .quote-main-content {
+    gap: 6px;
   }
   
   .quote-title {
     font-size: 13px;
   }
   
-  .quote-amount {
-    font-size: 13px;
-  }
-  
   .quote-summary {
     display: none; /* Ocultar resumen en móvil para ahorrar espacio */
+  }    .quote-bottom-section {
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 6px;
+    flex-direction: column; /* Cambiar a columna en móvil para mejor espacio */
+  }
+  
+  .quote-bottom-section .quote-amount {
+    font-size: 12px; /* Más pequeño en móvil para textos largos */
+    max-width: 100%; /* Usar todo el ancho disponible */
+    white-space: nowrap; /* Mantener en una línea */
+    text-align: left; /* Alineación a la izquierda */
+    overflow: hidden; /* Evita desbordamiento */
+    text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
+  }
+  
+  .quote-actions-buttons {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  
+  .quote-link,
+  .quote-link-secondary {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
   }
   
   .quote-meta {
@@ -542,9 +639,8 @@
     padding: 4px 8px;
     border-radius: 6px;
   }
-  
-  /* Botones activos en tablet */
-  .quote-card:not(.expired):not([data-expired="true"]) .quote-link {
+    /* Botones activos en tablet */
+  .quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary) {
     font-size: 11px;
     padding: 6px 12px;
     border-radius: 16px;
@@ -581,12 +677,22 @@
   .quote-id {
     font-size: 10px;
   }
-    .quote-title {
+  .quote-title {
     font-size: 12px;
   }
+    .quote-bottom-section {
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 4px;
+  }
   
-  .quote-amount {
-    font-size: 14px; /* Mantener más grande incluso en móvil */
+  .quote-bottom-section .quote-amount {
+    font-size: 11px; /* Reducido para textos múltiples en móvil pequeño */
+    max-width: 100%; /* Usar todo el ancho disponible */
+    white-space: nowrap; /* Mantener en una línea */
+    text-align: left; /* Alineación a la izquierda */
+    overflow: hidden; /* Evita desbordamiento */
+    text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
   }
   .quote-link {
     font-size: 10px;
@@ -616,9 +722,8 @@
   .quote-status-badge {
     height: 16px; /* Empatar con notificador en móvil */
   }
-  
-  /* Botones activos en móvil */
-  .quote-card:not(.expired):not([data-expired="true"]) .quote-link {
+    /* Botones activos en móvil */
+  .quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary) {
     font-size: 10px;
     padding: 5px 10px;
     border-radius: 14px;
