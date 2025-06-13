@@ -198,7 +198,7 @@
 .info-label {
   font-weight: 600;
   color: var(--color-text-muted);
-  font-size: 0.8rem;
+  font-size: 1rem; /* Ajustado desde 0.875rem */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   position: relative;
@@ -329,7 +329,7 @@
 .updates-count {
   border-radius: 12px;
   padding: 0.3rem 0.8rem; /* Más padding interno para mejor lectura */
-  font-size: 0.75rem;
+  font-size: 0.85rem; /* Ajustado desde 0.8rem */
   font-weight: 700;
   margin-left: 1rem; /* Aumentado el margen para mejor separación */
   min-width: 24px; /* Ancho mínimo ligeramente mayor */
@@ -451,9 +451,9 @@
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.5rem 1rem; /* Reducido padding vertical de 0.75rem a 0.5rem */
-  margin-top: 0.75rem; /* Reducido de 1rem a 0.75rem */
-  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.9rem; /* Ajustado desde 0.875rem */
   color: var(--color-text-muted);
   opacity: 0.7;
   transition: opacity 0.3s ease;
@@ -467,7 +467,7 @@
 .last-modification-label {
   font-weight: 400;
   opacity: 0.8;
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* Ajustado desde 0.8rem */
 }
 
 .last-modification-date {
@@ -478,7 +478,7 @@
   border-radius: 6px;
   border: 1px solid rgba(59, 130, 246, 0.15);
   transition: all 0.3s ease;
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* Ajustado desde 0.8rem */
 }
 
 /* Mejoras específicas para la fecha de modificación por tema */
@@ -555,7 +555,7 @@
   }
   
   .info-label {
-    font-size: 0.75rem;
+    font-size: 0.85rem; /* Ajustado desde 0.8rem */
   }
   
   .info-value, .contact-link {
@@ -602,7 +602,7 @@
   .status-count,
   .updates-count {
     padding: 0.2rem 0.6rem; /* Mejor padding para tablet */
-    font-size: 0.7rem;
+    font-size: 0.8rem; /* Ajustado desde 0.75rem */
     margin-left: 0.7rem; /* Mejor margen para separación */
     min-width: 20px;
   }
@@ -645,7 +645,7 @@
   }
   
   .info-label {
-    font-size: 0.7rem;
+    font-size: 0.8rem; /* Ajustado desde 0.75rem */
   }
   
   .info-value, .contact-link {
@@ -692,8 +692,8 @@
   
   .status-count,
   .updates-count {
-    padding: 0.15rem 0.5rem; /* Padding optimizado */
-    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem; /* Ajustado desde 0.7rem */
     margin-left: 0.6rem; /* Mejor margen para separación */
     min-width: 18px;
   }
@@ -711,6 +711,22 @@
   
   .quote-list {
     gap: 0.25rem;
+  }
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .status-updates-row {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons */
+    gap: 1rem; /* Adjust gap for vertical layout */
+  }
+
+  .status-badge,
+  .updates-button {
+    width: 100%; /* Make buttons take full width available in the column */
+    max-width: 320px; /* Optional: constrain max width on mobile if desired */
+    justify-content: center; /* Ensure text/icon inside button is centered */
   }
 }
 

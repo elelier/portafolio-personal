@@ -279,7 +279,7 @@ const ClientSpace = () => {
                 <span className="status-icon">📋</span>
                 <span className="status-dot"></span>
                 <span className="status-text-full">{projectCategory}</span>
-                <span className="status-text-mobile">{activeQuotes.length > 0 ? 'Proyectos' : 'Cotizar'}</span>
+                <span className="status-text-mobile">{activeQuotes.length > 0 ? 'Proyectos Activos' : 'Cotizar'}</span>
                 {activeQuotes.length > 0 && (
                   <span className="status-count">{activeQuotes.length}</span>
                 )}
@@ -292,7 +292,7 @@ const ClientSpace = () => {
                 >
                   <span className="updates-icon">🔔</span>
                   <span className="updates-text-full">Actualizaciones nuevas</span>
-                  <span className="updates-text-mobile">Nuevas</span>
+                  <span className="updates-text-mobile">Actualizaciones nuevas</span>
                   <span className="updates-count">{recentUpdates.length}</span>
                 </button>
               )}

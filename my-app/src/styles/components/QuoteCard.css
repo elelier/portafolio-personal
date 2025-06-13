@@ -99,7 +99,7 @@
 
 .quote-id {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 12px;
+  font-size: 1rem; /* Mantener este tamaño de fuente */
   font-weight: 500;
   color: var(--color-text-muted);
   letter-spacing: 0.025em;
@@ -156,14 +156,14 @@
 }
 
 .quote-status-badge {
-  font-size: 11px;
+  font-size: 0.9rem; /* Mantener este tamaño de fuente */
   font-weight: 500;
-  padding: 4px 12px;
+  padding: 3px 10px; /* Revertido a un padding menor */
   border-radius: 12px;
   letter-spacing: 0.025em;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  height: 25px; /* Altura fija para empatar con notificador */
+  height: 24px; /* Revertido a una altura menor */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,7 +207,7 @@
 
 .quote-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
+  font-size: 1.1rem; /* Mantener este tamaño de fuente */
   font-weight: 600;
   color: var(--color-text);
   margin: 0;
@@ -235,7 +235,7 @@
 }
 
 .quote-summary {
-  font-size: 12px;
+  font-size: 1rem; /* Mantener este tamaño de fuente */
   color: var(--color-text-muted);
   margin: 2px 0 0 0;
   line-height: 1.4;
@@ -254,7 +254,7 @@
 
 .quote-amount {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 15px; /* Reducido para acomodar textos múltiples */
+  font-size: 1.2rem; /* Mantener este tamaño de fuente */
   font-weight: 700;
   color: var(--color-primary, #3b82f6); /* Color destacado */
   white-space: normal; /* Cambio de nowrap a normal para permitir wrapping */
@@ -306,7 +306,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 0.95rem; /* Mantener este tamaño de fuente */
   color: var(--color-text-muted);
 }
 
@@ -363,10 +363,10 @@
   animation: gradientBG 10s ease infinite !important;
   color: #ffffff !important;
   font-weight: bold !important;
-  padding: 8px 16px !important;
+  padding: 8px 16px !important; /* Mantener padding original desktop */
   border-radius: 20px !important;
   border: none !important;
-  font-size: 12px !important;
+  font-size: 0.9rem !important; /* Mantener este tamaño de fuente */
 }
 
 .quote-link-primary:hover {
@@ -389,7 +389,7 @@
   background: var(--color-bg-2) !important;
   color: var(--color-text) !important;
   border: 1px solid var(--color-border) !important;
-  font-size: 11px !important;
+  font-size: 0.85rem !important; /* Ajustado desde 0.75rem */
   padding: 5px 10px !important;
 }
 
@@ -409,14 +409,14 @@
   background: var(--color-primary-bg, #dbeafe);
   border: 1px solid var(--color-primary, #3b82f6);
   transition: all 0.3s ease;
-  font-size: 0.7rem;
-  height: 25px; /* Altura fija para empatar con status badge */
+  font-size: 0.9rem; /* Ajustado desde 0.8rem */
+  height: 28px; /* Ajustado para nuevo tamaño de fuente */
   box-sizing: border-box;
   cursor: pointer;
 }
 
 .quote-notification-icon {
-  font-size: 0.8rem;
+  font-size: 0.9rem; /* Ajustado desde 0.8rem */
   animation: ring-small 2s infinite;
   color: var(--color-primary, #3b82f6);
 }
@@ -426,7 +426,7 @@
   color: white;
   border-radius: 8px;
   padding: 0.1rem 0.3rem;
-  font-size: 0.65rem;
+  font-size: 0.75rem; /* Ajustado desde 0.65rem */
   font-weight: 700;
   min-width: 16px;
   text-align: center;
@@ -453,7 +453,7 @@
 
 .quote-notification-indicator:hover {
   transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .quote-notification-indicator.empty:hover {
@@ -464,7 +464,7 @@
 
 /* Botón base - estilo simple para cotizaciones expiradas */
 .quote-link {
-  font-size: 12px;
+  font-size: 0.85rem; /* Ajustado desde 0.75rem */
   font-weight: 500;
   color: var(--color-text-muted);
   text-decoration: none;
@@ -554,181 +554,92 @@
 @media (max-width: 768px) {
   .quote-card {
     padding: 12px 16px;
-    margin-bottom: 8px;
     gap: 8px;
-    border-radius: 12px;
   }
-  
-  .quote-header {
-    margin-bottom: 4px;
+
+  .quote-id {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem */
   }
-    .quote-main-content {
-    gap: 6px;
+
+  .quote-status-badge {
+    font-size: 0.8rem; /* Ajustado desde 0.7rem */
+    padding: 3px 10px;
+    height: 22px;
   }
-  
+
   .quote-title {
-    font-size: 13px;
+    font-size: 0.95rem; /* Ajustado desde 0.85rem */
   }
-  
+
   .quote-summary {
-    display: none; /* Ocultar resumen en móvil para ahorrar espacio */
-  }  .quote-bottom-section {
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 6px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    font-size: 0.85rem; /* Ajustado desde 0.75rem */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
-  
-  .quote-bottom-section .quote-amount {
-    font-size: 12px;
-    max-width: 100%;
-    white-space: nowrap;
-    text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-right: auto;
+
+  .quote-amount {
+    font-size: 1rem; /* Ajustado desde 0.9rem */
   }
-  
-  .quote-actions-buttons {
-    display: inline-flex;
-    justify-content: flex-start;
-    gap: 6px;
-    width: auto;
-  }
-  
-  .quote-link,
-  .quote-link-secondary {
-    font-size: 10px !important;
-    padding: 4px 8px !important;
-    text-align: center;
-  }
-  
+
   .quote-meta {
     gap: 12px;
   }
-  
+
   .quote-meta-item {
-    font-size: 10px;
+    font-size: 0.85rem; /* Ajustado desde 0.75rem */
   }
-    .quote-status-badge {
-    font-size: 10px;
-    padding: 2px 8px;
+
+  .quote-actions .quote-link {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem */
+    padding: 5px 10px;
   }
-    /* Ajustes para notificador en tablet */
-  .quote-notification-indicator {
-    padding: 0.2rem 0.4rem;
-    font-size: 0.65rem;
-    gap: 0.2rem;
-    height: 18px; /* Ajustado para tablet */
-  }
-  
-  .quote-notification-icon {
-    font-size: 0.7rem;
-  }
-  
-  .quote-notification-count {
-    font-size: 0.6rem;
-    padding: 0.05rem 0.25rem;
-    min-width: 14px;
-  }
-  
-  .quote-status-badge {
-    height: 18px; /* Empatar con notificador en tablet */
-  }.quote-link {
-    font-size: 11px;
-    padding: 4px 8px;
-    border-radius: 6px;
-  }
-    /* Botones activos en tablet */
-  .quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary) {
-    font-size: 11px;
-    padding: 6px 12px;
-    border-radius: 16px;
-  }
-    /* Reducir efectos en móvil para mejor rendimiento */
-  .quote-card:hover {
-    transform: translateY(-2px);
-  }
-  
-  .quote-card:hover::after {
-    opacity: 0.3;
+
+  .quote-notification-badge {
+    font-size: 0.75rem; /* Ajustado desde 0.7rem */
+    padding: 2px 6px;
   }
 }
 
 @media (max-width: 480px) {
   .quote-card {
     padding: 10px 12px;
-    margin-bottom: 6px;
     gap: 6px;
-    border-radius: 10px;
+    border-radius: 12px;
   }
-  
-  .quote-meta {
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .quote-meta-item {
-    justify-content: space-between;
-    width: 100%;
-    font-size: 9px;
-  }
-  
+
   .quote-id {
-    font-size: 10px;
+    font-size: 0.75rem; /* Ajustado desde 0.7rem */
   }
-  .quote-title {
-    font-size: 12px;
-  }
-    .quote-bottom-section {
-    align-items: flex-start;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  
-  .quote-bottom-section .quote-amount {
-    font-size: 11px; /* Reducido para textos múltiples en móvil pequeño */
-    max-width: 100%; /* Usar todo el ancho disponible */
-    white-space: nowrap; /* Mantener en una línea */
-    text-align: left; /* Alineación a la izquierda */
-    overflow: hidden; /* Evita desbordamiento */
-    text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
-  }
-  .quote-link {
-    font-size: 10px;
-    padding: 3px 6px;
-    border-radius: 5px;
-  }
-    /* Ajustes para notificador en móvil */
-  .quote-notification-indicator {
-    padding: 0.15rem 0.3rem;
-    font-size: 0.6rem;
-    gap: 0.15rem;
-    border-radius: 8px;
-    height: 16px; /* Ajustado para móvil */
-  }
-  
-  .quote-notification-icon {
-    font-size: 0.65rem;
-  }
-  
-  .quote-notification-count {
-    font-size: 0.55rem;
-    padding: 0.05rem 0.2rem;
-    min-width: 12px;
-    border-radius: 6px;
-  }
-  
+
   .quote-status-badge {
-    height: 16px; /* Empatar con notificador en móvil */
+    font-size: 0.7rem; /* Ajustado desde 0.65rem */
+    padding: 2px 8px;
+    height: 20px;
   }
-    /* Botones activos en móvil */
-  .quote-card:not(.expired):not([data-expired="true"]) .quote-link:not(.quote-link-secondary) {
-    font-size: 10px;
-    padding: 5px 10px;
-    border-radius: 14px;
+
+  .quote-title {
+    font-size: 0.85rem; /* Ajustado desde 0.8rem */
+  }
+
+  .quote-summary {
+    font-size: 0.75rem; /* Ajustado desde 0.7rem */
+  }
+
+  .quote-amount {
+    font-size: 0.9rem; /* Ajustado desde 0.85rem */
+  }
+
+  .quote-meta-item {
+    font-size: 0.75rem; /* Ajustado desde 0.7rem */
+  }
+
+  .quote-actions .quote-link {
+    font-size: 0.75rem; /* Ajustado desde 0.7rem */
+    padding: 4px 8px;
+  }
+
+  .quote-notification-badge {
+    font-size: 0.7rem; /* Ajustado desde 0.65rem */
   }
 }
 
@@ -751,4 +662,178 @@
 .quote-actions {
   position: relative;
   z-index: 2;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .quote-card {
+    padding: 14px 18px; /* Ligeramente ajustado */
+    gap: 8px;
+  }
+
+  .quote-id {
+    font-size: 0.9rem; /* Ajustado desde 0.8rem (proporcional a 1rem) */
+  }
+
+  .quote-status-badge {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.9rem) */
+    padding: 3px 10px;
+    height: 24px;
+  }
+
+  .quote-title {
+    font-size: 1rem; /* Ajustado desde 0.9rem (proporcional a 1.1rem) */
+  }
+
+  .quote-summary {
+    font-size: 0.9rem; /* Ajustado desde 0.8rem (proporcional a 1rem) */
+    -webkit-line-clamp: 2; /* Mantenido */
+    line-clamp: 2; /* Mantenido */
+  }
+
+  .quote-amount {
+    font-size: 1.1rem; /* Ajustado desde 0.95rem (proporcional a 1.2rem) */
+    max-width: 120px;
+  }
+  
+  .quote-bottom-section .quote-amount {
+    max-width: 45%; /* Ajustado */
+  }
+
+  .quote-meta-item {
+    font-size: 0.9rem; /* Ajustado desde 0.8rem (proporcional a 0.95rem) */
+  }
+
+  .quote-actions .quote-link {
+    font-size: 0.9rem; /* Ajustado desde 0.8rem (proporcional a 0.95rem) */
+    padding: 7px 14px;
+  }
+  
+  .quote-link-primary {
+    font-size: 0.85rem !important; /* Ajustado desde 0.75rem (proporcional a 0.9rem) */
+    padding: 7px 14px !important;
+  }
+
+  .quote-link-secondary {
+    font-size: 0.8rem !important; /* Ajustado desde 0.7rem (proporcional a 0.85rem) */
+    padding: 4px 8px !important;
+  }
+
+  .quote-notification-indicator {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.9rem) */
+    height: 26px; /* Ajustado */
+  }
+  .quote-notification-icon {
+    font-size: 0.85rem; /* Ajustado */
+  }
+  .quote-notification-count {
+    font-size: 0.7rem; /* Ajustado desde 0.6rem (proporcional a 0.75rem) */
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .quote-card {
+    padding: 12px 16px; /* Ligeramente ajustado */
+    border-radius: 12px;
+    gap: 6px;
+  }
+
+  .quote-header {
+    margin-bottom: 2px;
+  }
+  
+  .quote-id {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 1rem) */
+  }
+
+  .quote-status-badge {
+    font-size: 0.8rem; /* Ajustado desde 0.7rem (proporcional a 0.9rem) */
+    padding: 2px 8px;
+    height: 22px;
+  }
+
+  .quote-title {
+    font-size: 0.95rem; /* Ajustado desde 0.85rem (proporcional a 1.1rem) */
+  }
+
+  .quote-summary {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 1rem) */
+    -webkit-line-clamp: 2; /* Mantenido */
+    line-clamp: 2; /* Mantenido */
+  }
+  
+  .quote-main-content {
+    gap: 6px;
+  }
+
+  .quote-amount {
+    font-size: 1rem; /* Ajustado desde 0.9rem (proporcional a 1.2rem) */
+    text-align: right; /* Reafirmar alineación */
+    max-width: 100px; /* Ajuste para móviles */
+  }
+
+  .quote-bottom-section {
+    flex-direction: column; /* Apilar en móvil */
+    align-items: stretch; /* Estirar elementos */
+    gap: 8px; /* Espacio entre monto y acciones */
+  }
+
+  .quote-bottom-section .quote-amount {
+    text-align: left; /* Alinear a la izquierda cuando está apilado */
+    max-width: 100%; /* Ancho completo cuando está apilado */
+    margin-bottom: 4px; /* Pequeño margen inferior */
+  }
+  
+  .quote-actions-buttons {
+    width: 100%; /* Ocupar todo el ancho */
+    justify-content: space-between; /* Distribuir botones */
+  }
+  
+  .quote-actions-buttons .quote-link {
+    flex-grow: 1; /* Permitir que los botones crezcan */
+    text-align: center;
+  }
+
+  .quote-meta {
+    gap: 12px; /* Reducir gap en móvil */
+  }
+
+  .quote-meta-item {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.95rem) */
+    gap: 3px;
+  }
+
+  .quote-actions {
+    width: 100%; /* Asegurar que las acciones ocupen todo el ancho */
+    justify-content: space-between; /* Distribuir botones si hay varios */
+  }
+  
+  .quote-actions .quote-link {
+    font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.95rem) */
+    padding: 8px 12px; /* Padding más generoso para tap */
+    flex-grow: 1; /* Para que ocupe el espacio disponible si es el único botón */
+  }
+
+  .quote-link-primary {
+    font-size: 0.8rem !important; /* Ajustado desde 0.7rem (proporcional a 0.9rem) */
+    padding: 8px 12px !important;
+  }
+
+  .quote-link-secondary {
+    font-size: 0.75rem !important; /* Ajustado desde 0.65rem (proporcional a 0.85rem) */
+    padding: 6px 10px !important;
+  }
+
+  .quote-notification-indicator {
+    font-size: 0.8rem; /* Ajustado desde 0.7rem (proporcional a 0.9rem) */
+    height: 24px; /* Ajustado */
+    padding: 0.2rem 0.4rem;
+  }
+  .quote-notification-icon {
+    font-size: 0.8rem; /* Ajustado */
+  }
+  .quote-notification-count {
+    font-size: 0.65rem; /* Ajustado desde 0.55rem (proporcional a 0.75rem) */
+  }
 }
