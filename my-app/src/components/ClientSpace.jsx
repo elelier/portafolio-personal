@@ -383,15 +383,23 @@ const ClientSpace = () => {
         />
         <section className="clientspace-cta">
           {activeQuotes.length > 0 ? (
-            <p>
-              {ctaText[language].withQuotes}
-              <a href="/contacto?subject=quote">{ctaText[language].contact}</a>
-            </p>
+            <div className="cta-content">
+              <p className="cta-text">
+                {ctaText[language].withQuotes}
+              </p>
+              <a href="/contacto?subject=quote" className="cta-button">
+                {ctaText[language].contact}
+              </a>
+            </div>
           ) : (
-            <p>
-              {ctaText[language].requestQuote}
-              <a href="/contacto?subject=quote">{ctaText[language].contact}</a>
-            </p>
+            <div className="cta-content">
+              <p className="cta-text">
+                {ctaText[language].requestQuote}
+              </p>
+              <a href="/contacto?subject=quote" className="cta-button">
+                {ctaText[language].contact}
+              </a>
+            </div>
           )}
         </section>
       </div>
