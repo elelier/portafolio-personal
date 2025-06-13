@@ -37,6 +37,15 @@
         "fecha": "2025-06-11T09:00:00Z",
         "tipo": "documento",
         "leida": false,
+      "relacionadoCon": null
+      },
+      {
+        "id": "upd008",
+        "titulo": "Paso y mejoras integradas",
+        "descripcion": "Se añadió un paso al proceso, mejoras en servicios y clientes, efecto shimmer en filtro de domótica y documentación actualizada. Cambios fusionados a main.",
+        "fecha": "2025-06-13T10:00:00Z",
+        "tipo": "documento",
+        "leida": false,
         "relacionadoCon": null
       }
     ],

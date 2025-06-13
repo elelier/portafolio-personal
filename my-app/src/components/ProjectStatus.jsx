@@ -2,7 +2,7 @@ import React from 'react';
 
 // Fecha de última actualización
 const lastUpdated = {
-  date: "08/03/2025",
+  date: "13/06/2025",
   es: "Última actualización",
   en: "Last updated"
 };
@@ -16,7 +16,8 @@ const ProjectStatus = () => {
     { id: 5, name: 'Sprint 5', nameEn: 'Sprint 5', status: 'completed', progress: 100 },
     { id: 6, name: 'Sprint 6', nameEn: 'Sprint 6', status: 'completed', progress: 100 },
     { id: 7, name: 'Sprint 7', nameEn: 'Sprint 7', status: 'completed', progress: 100 },
-    { id: 8, name: 'Sprint 8', nameEn: 'Sprint 8', status: 'completed', progress: 100 }
+    { id: 8, name: 'Sprint 8', nameEn: 'Sprint 8', status: 'completed', progress: 100 },
+    { id: 9, name: 'Sprint 9', nameEn: 'Sprint 9', status: 'pending', progress: 0 }
   ];
 
   return (
