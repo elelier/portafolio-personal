@@ -2,6 +2,18 @@
 
 ## Historial de Actualizaciones
 
+### 13 de Junio, 2025 - Actualizaciones Integrales
+
+#### Cambios Realizados
+
+1. **Nuevo paso en el proceso del proyecto**
+2. **Mejoras en servicios y clientes** con logos y estilos renovados
+3. **Efecto shimmer** y filtro diferenciado para "domótica"
+4. **Documentación actualizada** e integración de `ServicesPreview`
+5. **Reorganización** de proyectos y servicios en la página principal
+6. **Diseño mejorado** del componente `about-cta`
+7. **Merge a `main`** desde `staging` con todas las mejoras
+
 ### 8 de Marzo, 2025 - Mejora Visual del Componente ProjectProgress
 
 #### Cambios Realizados
