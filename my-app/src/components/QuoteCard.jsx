@@ -162,7 +162,10 @@ const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
           <span className="quote-id">{quote.id}</span>
           <div className={`quote-status-indicator ${quote.estado}`} data-status={quote.estado}></div>
         </div>
-        <div className="quote-actions">
+        <div className="quote-header-right">
+          <span className={`quote-status-badge ${quote.estado}`} data-status={quote.estado}>
+            {getStatusText(quote.estado)}
+          </span>
           <div 
             className={`quote-notification-indicator ${recentUpdates.length === 0 ? 'empty' : ''}`}
             onClick={(e) => {
@@ -175,9 +178,6 @@ const QuoteCard = ({ quote, recentUpdates = [], onNotificationClick }) => {
               <span className="quote-notification-count">{recentUpdates.length}</span>
             )}
           </div>
-          <span className={`quote-status-badge ${quote.estado}`} data-status={quote.estado}>
-            {getStatusText(quote.estado)}
-          </span>
         </div>
       </div>
       

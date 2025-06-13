@@ -91,6 +91,12 @@
   margin-bottom: 4px;
 }
 
+.quote-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .quote-left {
   display: flex;
   align-items: center;
@@ -332,8 +338,7 @@
 /* Sección inferior con monto y botón(es) */
 .quote-bottom-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Cambiar a columna para separar precio de botones */
   gap: 12px;
   margin-top: 8px;
 }
@@ -341,11 +346,12 @@
 .quote-bottom-section .quote-amount {
   margin: 0;
   flex-shrink: 0;
-  white-space: nowrap; /* Evita salto de línea */
+  white-space: normal; /* Permitir salto de línea si es necesario */
   text-align: left; /* Alineación explícita a la izquierda */
-  overflow: hidden; /* Evita desbordamiento */
-  text-overflow: ellipsis; /* Añade puntos suspensivos si es muy largo */
-  max-width: 50%; /* Reducido para dar espacio a dos botones */
+  overflow: visible; /* Permitir que se muestre completo */
+  text-overflow: unset; /* Quitar los puntos suspensivos */
+  max-width: 100%; /* Ancho completo en su propio renglón */
+  width: 100%; /* Asegurar que ocupe todo el ancho disponible */
 }
 
 /* Contenedor para botones múltiples */
@@ -354,6 +360,7 @@
   gap: 8px;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: flex-start; /* Alinear botones al inicio en desktop */
 }
 
 /* Botón principal (proyecto) - siempre con estilo premium */
@@ -413,6 +420,7 @@
   height: 28px; /* Ajustado para nuevo tamaño de fuente */
   box-sizing: border-box;
   cursor: pointer;
+  z-index: 10;
 }
 
 .quote-notification-icon {
@@ -637,9 +645,18 @@
     font-size: 0.75rem; /* Ajustado desde 0.7rem */
     padding: 4px 8px;
   }
-
   .quote-notification-badge {
     font-size: 0.7rem; /* Ajustado desde 0.65rem */
+  }
+
+  .quote-header-right {
+    gap: 4px; /* Gap aún más pequeño en pantallas muy pequeñas */
+  }
+
+  .quote-notification-indicator {
+    padding: 0.15rem 0.3rem; /* Padding más pequeño */
+    gap: 0.15rem; /* Gap interno más pequeño */
+    height: 22px; /* Altura reducida */
   }
 }
 
@@ -690,14 +707,22 @@
     -webkit-line-clamp: 2; /* Mantenido */
     line-clamp: 2; /* Mantenido */
   }
-
   .quote-amount {
     font-size: 1.1rem; /* Ajustado desde 0.95rem (proporcional a 1.2rem) */
-    max-width: 120px;
+    max-width: 100%; /* Ancho completo en tablet */
   }
   
+  .quote-bottom-section {
+    flex-direction: column; /* Mantener separado en tablet también */
+    gap: 10px;
+  }
   .quote-bottom-section .quote-amount {
-    max-width: 45%; /* Ajustado */
+    max-width: 100%; /* Ancho completo en tablet */
+    width: 100%;
+  }
+
+  .quote-header-right {
+    gap: 6px; /* Reducir gap en tablet */
   }
 
   .quote-meta-item {
@@ -717,9 +742,7 @@
   .quote-link-secondary {
     font-size: 0.8rem !important; /* Ajustado desde 0.7rem (proporcional a 0.85rem) */
     padding: 4px 8px !important;
-  }
-
-  .quote-notification-indicator {
+  }  .quote-notification-indicator {
     font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.9rem) */
     height: 26px; /* Ajustado */
   }
@@ -738,9 +761,14 @@
     border-radius: 12px;
     gap: 6px;
   }
-
   .quote-header {
     margin-bottom: 2px;
+    flex-wrap: nowrap; /* Evitar que se envuelvan los elementos */
+  }
+  
+  .quote-header-right {
+    gap: 6px; /* Reducir gap en móvil */
+    flex-shrink: 0; /* Evitar que se reduzca */
   }
   
   .quote-id {
@@ -772,9 +800,8 @@
     text-align: right; /* Reafirmar alineación */
     max-width: 100px; /* Ajuste para móviles */
   }
-
   .quote-bottom-section {
-    flex-direction: column; /* Apilar en móvil */
+    flex-direction: column; /* Mantener apilado en móvil */
     align-items: stretch; /* Estirar elementos */
     gap: 8px; /* Espacio entre monto y acciones */
   }
@@ -782,16 +809,14 @@
   .quote-bottom-section .quote-amount {
     text-align: left; /* Alinear a la izquierda cuando está apilado */
     max-width: 100%; /* Ancho completo cuando está apilado */
+    width: 100%; /* Asegurar ancho completo */
     margin-bottom: 4px; /* Pequeño margen inferior */
   }
-  
-  .quote-actions-buttons {
+    .quote-actions-buttons {
     width: 100%; /* Ocupar todo el ancho */
-    justify-content: space-between; /* Distribuir botones */
+    justify-content: flex-start; /* Mantener alineación al inicio para preservar posición del badge */
   }
-  
-  .quote-actions-buttons .quote-link {
-    flex-grow: 1; /* Permitir que los botones crezcan */
+    .quote-actions-buttons .quote-link {
     text-align: center;
   }
 
@@ -803,16 +828,13 @@
     font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.95rem) */
     gap: 3px;
   }
-
   .quote-actions {
     width: 100%; /* Asegurar que las acciones ocupen todo el ancho */
-    justify-content: space-between; /* Distribuir botones si hay varios */
+    justify-content: flex-start; /* Mantener alineación al inicio para preservar posición del badge */
   }
-  
-  .quote-actions .quote-link {
+    .quote-actions .quote-link {
     font-size: 0.85rem; /* Ajustado desde 0.75rem (proporcional a 0.95rem) */
     padding: 8px 12px; /* Padding más generoso para tap */
-    flex-grow: 1; /* Para que ocupe el espacio disponible si es el único botón */
   }
 
   .quote-link-primary {
@@ -824,11 +846,11 @@
     font-size: 0.75rem !important; /* Ajustado desde 0.65rem (proporcional a 0.85rem) */
     padding: 6px 10px !important;
   }
-
   .quote-notification-indicator {
     font-size: 0.8rem; /* Ajustado desde 0.7rem (proporcional a 0.9rem) */
     height: 24px; /* Ajustado */
     padding: 0.2rem 0.4rem;
+    gap: 0.2rem; /* Reducir gap interno en móvil */
   }
   .quote-notification-icon {
     font-size: 0.8rem; /* Ajustado */

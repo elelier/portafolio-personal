@@ -1,10 +1,10 @@
 .chat-button {
   position: fixed !important;
-  right: 1.5rem !important;
-  bottom: 1.5rem !important;
-  width: 60px !important;
-  height: 60px !important;
-  border-radius: 30px !important;
+  right: clamp(0.5rem, 1.5rem, 3vw) !important;
+  bottom: clamp(0.5rem, 1.5rem, 3vh) !important;
+  width: clamp(50px, 60px, 15vw) !important;
+  height: clamp(50px, 60px, 15vw) !important;
+  border-radius: 50% !important;
   background-color: var(--color-accent) !important;
   color: white !important;
   border: none !important;
@@ -12,11 +12,14 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 2.3rem !important;
+  font-size: clamp(1.8rem, 2.3rem, 5vw) !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.2s ease !important;
-  z-index: 1000 !important;
-  position: relative;
+  z-index: 1001 !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
 }
 
 .chat-button:hover {
@@ -39,21 +42,23 @@
 }
 
 .chat-modal {
-  position: fixed;
-  bottom: 6rem;
-  right: 2rem;
-  width: 380px;
-  max-width: 90vw;
-  height: 70vh;
-  background: var(--chatbot-chat-widget-bg-color);
-  border-radius: 15px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  border: 3px solid var(--chatbot-chat-widget-user-message-bg-color);
+  position: fixed !important;
+  bottom: clamp(6rem, 7rem, 15vh) !important;
+  right: clamp(0.5rem, 2rem, 5vw) !important;
+  width: clamp(280px, 380px, 90vw) !important;
+  max-width: 90vw !important;
+  height: clamp(400px, 70vh, 80vh) !important;
+  max-height: 80vh !important;
+  background: var(--chatbot-chat-widget-bg-color) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+  z-index: 1001 !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border: 3px solid var(--chatbot-chat-widget-user-message-bg-color) !important;
+  contain: layout style paint !important;
 }
 
 .chat-header {
@@ -146,34 +151,43 @@
 }
 
 .chat-content {
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: var(--chatbot-chat-widget-user-message-bg-color) transparent;
-  background-color: var(--chatbot-chat-widget-bg-color);
+  flex: 1 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  scroll-behavior: smooth !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--chatbot-chat-widget-user-message-bg-color) transparent !important;
+  background-color: var(--chatbot-chat-widget-bg-color) !important;
+  contain: layout style paint !important;
+  max-height: calc(100% - 140px) !important;
 }
 
 .messages-container {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  margin: 0;
-  background-color: var(--chatbot-chat-widget-bg-color);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex: 1 !important;
+  padding: clamp(0.5rem, 0.75rem, 1rem) clamp(0.75rem, 1rem, 1.25rem) !important;
+  margin: 0 !important;
+  background-color: var(--chatbot-chat-widget-bg-color) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(0.5rem, 0.75rem, 1rem) !important;
+  overflow: hidden !important;
+  contain: layout style paint !important;
 }
 
 .message {
-  padding: 0.875rem 1rem;
-  border-radius: 1rem;
-  max-width: 85%;
-  word-wrap: break-word;
-  line-height: 1.4;
-  transition: transform 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: clamp(0.625rem, 0.875rem, 1rem) clamp(0.75rem, 1rem, 1.25rem) !important;
+  border-radius: 1rem !important;
+  max-width: 85% !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.4 !important;
+  transition: transform 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  font-size: clamp(0.875rem, 1rem, 1.125rem) !important;
+  contain: layout style paint !important;
 }
 
 .message:hover {
@@ -335,35 +349,51 @@
 
 
 @media (max-width: 768px) {
+  .chat-modal {
+    right: clamp(5px, 1rem, 2rem) !important;
+    bottom: clamp(5rem, 6rem, 8rem) !important;
+    width: clamp(250px, 85vw, 350px) !important;
+    height: clamp(350px, 65vh, 75vh) !important;
+  }
+
+  .chat-button {
+    right: clamp(0.75rem, 1rem, 1.5rem) !important;
+    bottom: clamp(0.75rem, 1rem, 1.5rem) !important;
+    width: clamp(45px, 55px, 60px) !important;
+    height: clamp(45px, 55px, 60px) !important;
+    font-size: clamp(1.5rem, 2rem, 2.3rem) !important;
+  }
+
   .chat-content {
-    flex: 1;
-    overflow-y: auto;
+    flex: 1 !important;
+    overflow-y: auto !important;
+    max-height: calc(100% - 120px) !important;
   }
 
   .chat-bottom-container {
-    flex-shrink: 0;
+    flex-shrink: 0 !important;
   }
 
   .chat-options-icons {
-    padding: 8px;
-    gap: 8px;
+    padding: 8px !important;
+    gap: 8px !important;
   }
 
   .chat-option-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.2rem !important;
   }
 
   .option-tooltip {
-    font-size: 0.7rem;
-    padding: 3px 6px;
+    font-size: 0.7rem !important;
+    padding: 3px 6px !important;
   }
 
   .message {
-    max-width: 90%;
-    font-size: 0.95rem;
-    padding: 10px 12px;
+    max-width: 90% !important;
+    font-size: clamp(0.825rem, 0.95rem, 1rem) !important;
+    padding: clamp(8px, 10px, 12px) clamp(10px, 12px, 14px) !important;
   }
 }
 
