@@ -1,11 +1,12 @@
 // Contacto.js
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import CV from '../assets/files/2409_CV_EL.pdf';
 import { motion } from 'framer-motion';
 import '../styles/components/Contacto.css';
 import perfilImg from '../assets/images/profile-picture-elier2.png';
+import { useLocation } from 'react-router-dom';
 
 const texts = {
   es: {
@@ -57,6 +58,19 @@ function Contacto() {
   const [message, setMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('subject') === 'quote' && message === '') {
+      const quoteText =
+        language === 'es'
+          ? 'Hola, me gustaría solicitar una cotización.'
+          : 'Hi, I would like to request a quote.';
+      setMessage(quoteText);
+    }
+  }, [location.search, language]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

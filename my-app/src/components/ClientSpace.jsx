@@ -8,14 +8,29 @@ import UpdatesModal from './UpdatesModal';
 import clientAuthService from '../services/clientAuthService';
 import { hashedPasscodes } from '../config/hashedPasscodes';
 import '../styles/components/ClientSpace.css';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ClientSpace = () => {
   const { token } = useParams();
+  const { language } = useLanguage();
   const client = data[token];
   const [authorized, setAuthorized] = useState(false);
   const [showUpdatesModal, setShowUpdatesModal] = useState(false);
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
+
+  const ctaText = {
+    es: {
+      withQuotes: '¿Alguna duda con tus cotizaciones? ',
+      requestQuote: '¿Listo para solicitar una cotización? ',
+      contact: 'Contáctanos'
+    },
+    en: {
+      withQuotes: 'Any questions about your quotes? ',
+      requestQuote: 'Ready to request a quote? ',
+      contact: 'Contact us'
+    }
+  };
 
   const handleSubmitPasscode = async (e) => {
     e.preventDefault();
@@ -366,6 +381,19 @@ const ClientSpace = () => {
           onClose={handleCloseUpdatesModal}
           updates={recentUpdates}
         />
+        <section className="clientspace-cta">
+          {activeQuotes.length > 0 ? (
+            <p>
+              {ctaText[language].withQuotes}
+              <a href="/contacto?subject=quote">{ctaText[language].contact}</a>
+            </p>
+          ) : (
+            <p>
+              {ctaText[language].requestQuote}
+              <a href="/contacto?subject=quote">{ctaText[language].contact}</a>
+            </p>
+          )}
+        </section>
       </div>
     </div>
   );
