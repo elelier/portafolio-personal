@@ -2,13 +2,13 @@ export const sitesData = {
   es: [
     {
       id: "diana-mtz",
-      name: "Diana Martínez Architecture",
+      name: "Arqidia.mx",
       shortDescription: "Sitio web profesional para arquitectura",
       longDescription: "Este proyecto es un sitio web profesional para arquitectura, desarrollado con Next.js y Tailwind CSS.",
       thumbnail: "/images/sites/diana-mtz-thumb.jpg",
       fullImage: "/images/sites/diana-mtz-full.jpg",
       tech: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Radix UI", "AWS S3", "CloudFront"],
-      website: "https://d1shbod9k202nu.cloudfront.net/",
+      website: "https://www.arqidia.mx/",
       repository: "https://github.com/elelier/diana-mtz-architecture",
       status: "published",
       featured: true,
@@ -105,13 +105,13 @@ export const sitesData = {
   en: [
     {
       id: "diana-mtz",
-      name: "Diana Martínez Architecture",
+      name: "Arqidia.mx",
       shortDescription: "Professional website for architecture",
       longDescription: "This project is a professional website for architecture, developed with Next.js and Tailwind CSS.",
       thumbnail: "/images/sites/diana-mtz-thumb.jpg",
       fullImage: "/images/sites/diana-mtz-full.jpg",
       tech: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Radix UI", "AWS S3", "CloudFront"],
-      website: "https://d1shbod9k202nu.cloudfront.net/",
+      website: "https:/www.arqidia.mx/",
       repository: "https://github.com/elelier/diana-mtz-architecture",
       status: "published",
       featured: true,

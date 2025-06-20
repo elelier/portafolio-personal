@@ -1,8 +1,8 @@
 // ARCHIVO GENERADO AUTOMÁTICAMENTE - NO EDITAR MANUALMENTE
-// Generado el: 2025-06-13T15:06:39.086Z
+// Generado el: 2025-06-14T00:13:52.508Z
 
 export const hashedPasscodes = {
-  "arqidia": "5401b422fcd0e45a9da11b1d5836419cf9280732aeb9e545d260d37b838fd077$salt$3.0$74aab28aa5664975fc1fe8fd8a9a42d8",
-  "hqcontrol": "0b5b597aabc347d3dcb41e41f4e8dfb8aaa6e24483aae49d09bcf9917ebec0a8$salt$3.0$0355c06dc1e4017401379b7340beaf3f",
-  "andamios": "62d2412c7866b63333f990315f96dd9c6890517f31acb62bd465eb8abb5fa0f4$salt$3.0$1330a65cfc0b289f62a552883a880d4b"
+  "arqidia": "7434fa5fa8e76a2ef805d04537332e9d5a20416902b963665ed4e97f55c01cd0$salt$3.0$86c0c2698a7a83a83654a1e03b2c05eb",
+  "hqcontrol": "197c2d35dcb03e6dd97f9d44247affc7a02edbdb6ff28c01ad8684e123bb25c0$salt$3.0$4b17d0650ee688336816c6b5b2cb3b4c",
+  "andamios": "6de08c0636fb129949ecb3ed43b16190b82863ec17e45cfcba2258a48d51572a$salt$3.0$9741a424eb454b9d948466446da1bcab"
 };

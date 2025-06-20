@@ -6,7 +6,7 @@ import { FaSitemap, FaCog, FaPalette } from 'react-icons/fa';
 
 // Fecha de última actualización
 const lastUpdated = {
-  date: "08/03/2025",
+  date: "17/06/2025",
   es: "Última actualización",
   en: "Last updated"
 };
@@ -56,9 +56,8 @@ const requirements = {
   }
 };
 
-// Datos del proyecto
-const projectData = {
-  sprints: [
+// Datos del proyecto - sprints
+const sprints = [
     {
       id: 1,
       name: {
@@ -203,13 +202,13 @@ const projectData = {
         es: 'Finalización de branding y creación de guías para el cliente',
         en: 'Branding finalization and creation of client guides'
       },
-      progress: 0,
+      progress: 60,
       tasks: [
-        { name: { es: 'Guía de cambios de textos para cliente', en: 'Text change guide for client' }, status: 'pending' },
-        { name: { es: 'Actualización de tokens de color y tipografías', en: 'Update of color tokens and typography' }, status: 'pending' },
+        { name: { es: 'Efectos hover y botones estandarizados', en: 'Hover effects and standardized buttons' }, status: 'completed' },
+        { name: { es: 'Experiencia móvil mejorada', en: 'Improved mobile experience' }, status: 'completed' },
+        { name: { es: 'Páginas legales y logos de clientes', en: 'Legal pages and client logos' }, status: 'completed' },
         { name: { es: 'Implementación de logo definitivo', en: 'Implementation of final logo' }, status: 'pending' },
-        { name: { es: 'Organización de carpeta Drive de assets', en: 'Organization of Drive assets folder' }, status: 'pending' },
-        { name: { es: 'Plantilla editable en Google Sheets', en: 'Editable template in Google Sheets' }, status: 'pending' }
+        { name: { es: 'Organización de carpeta Drive de assets', en: 'Organization of Drive assets folder' }, status: 'pending' }
       ]
     },
     {
@@ -251,49 +250,50 @@ const projectData = {
         { name: { es: 'Retro final y cierre de proyecto', en: 'Final retrospective and project closure' }, status: 'pending' }
       ]
     }
-  ],
+  ];
+
+// Datos completos del proyecto
+const projectData = {
+  title: {
+    es: 'ARQIDIA - Portafolio Digital',
+    en: 'ARQIDIA - Digital Portfolio'
+  },
+  subtitle: {
+    es: 'Desarrollo de portafolio web para estudio de arquitectura',
+    en: 'Web portfolio development for architecture studio'
+  },
+  lastUpdate: "17/06/2025",
+  status: {
+    es: 'En desarrollo - Sprint 8',
+    en: 'In development - Sprint 8'
+  },
+  sprints: sprints,
   achievements: {
     es: [
-      "Implementación exitosa de Next.js + Tailwind",
-      "Migración exitosa de AWS a Netlify (ahorro $600/año)",
-      "arqidia.mx funcionando en producción",
-      "staging.arqidia.mx operativo para pruebas",
-      "Menú responsive funcionando",
-      "Sistema de estilos documentado",
-      "Optimización automática de imágenes",
-      "Estructura base del sitio completa",
-      "Secciones principales implementadas (Hero, Sobre Mí, Portafolio)",
-      "Integración de proyectos y timeline profesional",
-      "Implementación de proyectos reales",
-      "Integración completa de la página de trayectoria",
-      "Pruebas de usabilidad finalizadas",
-      "Arquitectura de datos 100% centralizada y documentada"
+      "Infraestructura completa: Next.js, Tailwind, migración AWS→Netlify",
+      "Sitio en producción: arqidia.mx y staging funcionales",
+      "Sistema de diseño documentado con efectos hover estandarizados",
+      "Secciones principales: Hero, Nuestro Enfoque, Portafolio, Blog",
+      "Experiencia móvil optimizada y menú responsive",
+      "Páginas legales completas y arquitectura de datos centralizada"
     ],
     en: [
-      "Successful implementation of Next.js + Tailwind",
-      "Successful migration from AWS to Netlify (saving $600/year)",
-      "arqidia.mx working in production",
-      "staging.arqidia.mx operational for testing",
-      "Responsive menu working",
-      "Documented style system",
-      "Automatic image optimization",
-      "Complete base structure of the site",
-      "Main sections implemented (Hero, About Me, Portfolio)",
-      "Integration of projects and professional timeline",
-      "Implementation of real projects",
-      "Complete integration of career page",
-      "Usability tests completed",
-      "100% centralized and documented data architecture"
+      "Complete infrastructure: Next.js, Tailwind, AWS→Netlify migration",
+      "Production site: arqidia.mx and functional staging",
+      "Documented design system with standardized hover effects",
+      "Main sections: Hero, About Me, Portfolio with real content",
+      "Optimized mobile experience and responsive menu",
+      "Complete legal pages and centralized data architecture"
     ]
   },
   nextSteps: {
     es: [
-      "Sprint 8: Finalización de branding y guías para la cliente",
+      "Sprint 8: Finalización de logo definitivo y organización de assets (60% completado)",
       "Sprint 9: Implementación de sistema de edición y optimización final",
       "Sprint 10: Lanzamiento final y hand-off completo"
     ],
     en: [
-      "Sprint 8: Finalization of branding and client guides",
+      "Sprint 8: Final logo finalization and assets organization (60% completed)",
       "Sprint 9: Implementation of editing system and final optimization",
       "Sprint 10: Final launch and complete hand-off"
     ]
@@ -302,36 +302,16 @@ const projectData = {
 
 const achievementIcons = {
   es: {
-    "Implementación exitosa de Next.js + Tailwind": "🚀",
-    "Migración exitosa de AWS a Netlify (ahorro $600/año)": "☁️",
-    "arqidia.mx funcionando en producción": "🌐",
-    "staging.arqidia.mx operativo para pruebas": "🔧",
-    "Menú responsive funcionando": "📱",
-    "Sistema de estilos documentado": "📚",
-    "Optimización automática de imágenes": "🖼️",
-    "Estructura base del sitio completa": "🏗️",
-    "Secciones principales implementadas (Hero, Sobre Mí, Portafolio)": "🧩",
-    "Integración de proyectos y timeline profesional": "💼",
-    "Implementación de proyectos reales": "🚀",
-    "Integración completa de la página de trayectoria": "📈",
-    "Pruebas de usabilidad finalizadas": "📊",
-    "Arquitectura de datos 100% centralizada y documentada": "🗂️"
+    "🏗️ Infraestructura técnica completa": "🏗️",
+    "🎨 Sistema de diseño y UX optimizada": "🎨",
+    "📱 Sitio responsive con contenido integrado": "�",
+    "⚖️ Páginas legales y optimización final": "⚖️"
   },
   en: {
-    "Successful implementation of Next.js + Tailwind": "🚀",
-    "Successful migration from AWS to Netlify (saving $600/year)": "☁️",
-    "arqidia.mx working in production": "🌐",
-    "staging.arqidia.mx operational for testing": "🔧",
-    "Responsive menu working": "📱",
-    "Documented style system": "📚",
-    "Automatic image optimization": "🖼️",
-    "Complete base structure of the site": "🏗️",
-    "Main sections implemented (Hero, About Me, Portfolio)": "🧩",
-    "Integration of projects and professional timeline": "💼",
-    "Implementation of real projects": "🚀",
-    "Complete integration of career page": "📈",
-    "Usability tests completed": "📊",
-    "100% centralized and documented data architecture": "🗂️"
+    "🏗️ Complete technical infrastructure": "🏗️",
+    "🎨 Design system and optimized UX": "🎨",
+    "📱 Responsive site with integrated content": "�",
+    "⚖️ Legal pages and final optimization": "⚖️"
   }
 };
 
@@ -542,9 +522,9 @@ const ProjectProgress = ({ overallProgress }) => {
 
           {/* Barra de progreso general (Hero) */}
           <div className="overall-progress" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-            <span style={{ fontWeight: 'bold' }}>100%</span>
+            <span style={{ fontWeight: 'bold' }}>85%</span>
             <div style={{ flex: '1 1 0%', height: '10px', backgroundColor: 'var(--color-bg-2)', borderRadius: '5px', overflow: 'hidden' }}>
-              <div style={{ width: '100%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
+              <div style={{ width: '85%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
             </div>
           </div>
 

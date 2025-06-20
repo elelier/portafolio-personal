@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from './common/Modal';
 import '../styles/components/UpdatesModal.css';
 
 const UpdatesModal = ({ isOpen, onClose, updates }) => {
+  const [expandedCard, setExpandedCard] = useState(null);
+
   if (!updates || updates.length === 0) return null;
+
+  // Ordenar actualizaciones de más nueva a más antigua
+  const sortedUpdates = [...updates].sort((a, b) => {
+    return new Date(b.fecha) - new Date(a.fecha);
+  });
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -15,17 +22,24 @@ const UpdatesModal = ({ isOpen, onClose, updates }) => {
       minute: '2-digit'
     });
   };
-
   const getTypeIcon = (type) => {
     switch (type) {
-      case 'aprobacion':
+      case 'completado':
         return '✅';
       case 'documento':
         return '📄';
+      case 'cotizacion':
+        return '💰';
       case 'recordatorio':
-        return '⏰';
-      case 'completado':
-        return '🎉';
+        return '⚠️';
+      case 'tecnico':
+        return '⚙️';
+      case 'mejora':
+        return '📈';
+      case 'diseno':
+        return '�';
+      case 'aprobacion':
+        return '✅';
       default:
         return '📢';
     }
@@ -33,26 +47,52 @@ const UpdatesModal = ({ isOpen, onClose, updates }) => {
 
   const getTypeLabel = (type) => {
     switch (type) {
-      case 'aprobacion':
-        return 'Aprobación';
-      case 'documento':
-        return 'Documento';
-      case 'recordatorio':
-        return 'Recordatorio';
       case 'completado':
         return 'Completado';
+      case 'documento':
+        return 'Documento';
+      case 'cotizacion':
+        return 'Cotización';
+      case 'recordatorio':
+        return 'Recordatorio';
+      case 'tecnico':
+        return 'Técnico';
+      case 'mejora':
+        return 'Mejora';
+      case 'diseno':
+        return 'Diseño';
+      case 'aprobacion':
+        return 'Aprobación';
       default:
         return 'Actualización';
     }
   };
-
   // Obtener la fecha de la actualización más antigua (para mostrar el rango)
-  const oldestUpdate = updates.reduce((oldest, current) => {
+  const oldestUpdate = sortedUpdates.reduce((oldest, current) => {
     return new Date(current.fecha) < new Date(oldest.fecha) ? current : oldest;
-  }, updates[0]);
+  }, sortedUpdates[0]);
   const daysSinceOldest = Math.ceil((new Date() - new Date(oldestUpdate.fecha)) / (1000 * 60 * 60 * 24));
 
-  const unreadCount = updates.length;
+  const unreadCount = sortedUpdates.length;
+  // Manejar click en card para expandir/contraer
+  const handleCardClick = (updateId, event) => {
+    // Prevenir que se cierre el modal
+    event.stopPropagation();
+    
+    if (expandedCard === updateId) {
+      setExpandedCard(null); // Contraer si ya está expandida
+    } else {
+      setExpandedCard(updateId); // Expandir nueva card
+    }
+  };
+
+  // Manejar click fuera de las cards para contraer todas
+  const handleContainerClick = (event) => {
+    // Solo contraer si se hace click directamente en el contenedor de la lista
+    if (event.target.classList.contains('updates-list')) {
+      setExpandedCard(null);
+    }
+  };
 
   return (
     <Modal
@@ -68,13 +108,12 @@ const UpdatesModal = ({ isOpen, onClose, updates }) => {
               : 'No hay actualizaciones recientes'
             }
           </p>
-        </div>
-
-        <div className="updates-list">
-          {updates.map((update) => (
+        </div>        <div className="updates-list" onClick={handleContainerClick}>
+          {sortedUpdates.map((update) => (
             <div 
               key={update.id} 
-              className="update-item"
+              className={`update-item ${expandedCard === update.id ? 'expanded' : ''}`}
+              onClick={(e) => handleCardClick(update.id, e)}
             >
               <div className="update-icon">
                 {getTypeIcon(update.tipo)}
@@ -84,7 +123,7 @@ const UpdatesModal = ({ isOpen, onClose, updates }) => {
                 <div className="update-header-info">
                   <h4 className="update-title">{update.titulo}</h4>
                   <div className="update-meta">
-                    <span className="update-type">{getTypeLabel(update.tipo)}</span>
+                    <span className={`update-type ${update.tipo}`}>{getTypeLabel(update.tipo)}</span>
                     <span className="update-date">{formatDate(update.fecha)}</span>
                   </div>
                 </div>

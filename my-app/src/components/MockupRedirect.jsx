@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import ProjectProgress from './ProjectProgress';
 
 const PROJECT_URL_MAP = {
-  '00132': 'https://d1shbod9k202nu.cloudfront.net/',
+  '00132': 'https://staging.arqidia.mx/',
   '00132-drive': 'https://drive.google.com/drive/folders/11N3nQ7-H2YRDgTaKSM19lLVb42mtWsaO?usp=drive_link'
 };
 
@@ -107,9 +107,9 @@ const MockupRedirect = () => {
           <p style={{ marginBottom: '2rem' }}>{content.description}</p>
           {/* Progreso general extra en el hero-banner */}
           <div className="overall-progress" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-            <span style={{ fontWeight: 'bold' }}>100%</span>
+            <span style={{ fontWeight: 'bold' }}>85%</span>
             <div style={{ flex: 1, height: '10px', backgroundColor: 'var(--color-bg-2)', borderRadius: '5px', overflow: 'hidden' }}>
-              <div style={{ width: '95%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
+              <div style={{ width: '85%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
             </div>
           </div>
           {!isLoading && PROJECT_URL_MAP[id] && (

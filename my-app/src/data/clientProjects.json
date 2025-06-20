@@ -13,40 +13,67 @@
     },
     "actualizaciones": [
       {
-        "id": "upd001",
-        "titulo": "Configuración de dominio completada",
-        "descripcion": "Se completó la configuración del dominio principal arqidia.mx y el entorno de pruebas staging.arqidia.mx. Certificados de seguridad y DNS verificados correctamente.",
-        "fecha": "2025-06-08T14:30:00Z",
-        "tipo": "completado",
-        "leida": false,
-        "relacionadoCon": null
-      },
-      {
-        "id": "upd002",
-        "titulo": "Ajustes de diseño e identidad visual",
-        "descripcion": "Integración de logotipos definitivos y ajustes de contraste, proporciones y visibilidad. Optimización inicial de velocidad de carga en staging.",
-        "fecha": "2025-06-10T16:20:00Z",
-        "tipo": "documento",
-        "leida": false,
-        "relacionadoCon": null
-      },
-      {
-        "id": "upd003",
-        "titulo": "Recepción de materiales de contenido",
-        "descripcion": "Confirmación recibida: todas las imágenes de proyectos están listas. Se inicia la carga progresiva de carpetas organizadas por categorías.",
-        "fecha": "2025-06-11T09:00:00Z",
-        "tipo": "documento",
-        "leida": false,
+      "id": "upd001",
+      "titulo": "Configuración de dominio completada",
+      "descripcion": "Se completó la configuración del dominio principal arqidia.mx y el entorno de pruebas staging.arqidia.mx. Certificados de seguridad y DNS verificados correctamente.",
+      "fecha": "2025-06-08T14:30:00Z",
+      "tipo": "tecnico",
+      "leida": false,
       "relacionadoCon": null
       },
       {
-        "id": "upd008",
-        "titulo": "Paso y mejoras integradas",
-        "descripcion": "Se añadió un paso al proceso, mejoras en servicios y clientes, efecto shimmer en filtro de domótica y documentación actualizada. Cambios fusionados a main.",
-        "fecha": "2025-06-13T10:00:00Z",
-        "tipo": "documento",
-        "leida": false,
-        "relacionadoCon": null
+      "id": "upd002",
+      "titulo": "Ajustes de diseño e identidad visual",
+      "descripcion": "Integración de logotipos definitivos y ajustes de contraste, proporciones y visibilidad. Optimización inicial de velocidad de carga en staging.",
+      "fecha": "2025-06-10T16:20:00Z",
+      "tipo": "diseno",
+      "leida": false,
+      "relacionadoCon": null
+      },
+      {
+      "id": "upd003",
+      "titulo": "Recepción de materiales de contenido",
+      "descripcion": "Confirmación recibida: todas las imágenes de proyectos están listas. Se inicia la carga progresiva de carpetas organizadas por categorías.",
+      "fecha": "2025-06-11T09:00:00Z",
+      "tipo": "documento",
+      "leida": false,
+      "relacionadoCon": null
+      },
+      {
+      "id": "upd008",
+      "titulo": "Paso y mejoras integradas",
+      "descripcion": "Se añadió un paso al proceso, mejoras en servicios y clientes, efecto shimmer en filtro de domótica y documentación actualizada. Cambios fusionados a main.",
+      "fecha": "2025-06-13T10:00:00Z",
+      "tipo": "mejora",
+      "leida": false,
+      "relacionadoCon": null
+      },
+      {
+      "id": "upd009a",
+      "titulo": "🎨 Efectos hover y botones estandarizados",
+      "descripcion": "Se implementaron efectos hover consistentes en todos los elementos interactivos y se estandarizaron los estilos de los botones para mejorar la experiencia visual.",
+      "fecha": "2025-06-15T00:00:00Z",
+      "tipo": "diseno",
+      "leida": false,
+      "relacionadoCon": null
+      },
+      {
+      "id": "upd009b",
+      "titulo": "📱 Experiencia móvil mejorada",
+      "descripcion": "El menú móvil fue optimizado y se realizaron ajustes para mejorar la navegación y usabilidad en dispositivos móviles.",
+      "fecha": "2025-06-16T00:00:00Z",
+      "tipo": "mejora",
+      "leida": false,
+      "relacionadoCon": null
+      },
+      {
+      "id": "upd009c",
+      "titulo": "⚖️ Páginas legales y logos de clientes",
+      "descripcion": "Se completaron las páginas legales (privacidad, términos, cookies y aviso legal) y se integraron los logos reales de los clientes en el sitio.",
+      "fecha": "2025-06-17T00:00:00Z",
+      "tipo": "completado",
+      "leida": false,
+      "relacionadoCon": null
       }
     ],
     "cotizaciones": [
@@ -89,7 +116,7 @@
         "titulo": "Cotizaciones enviadas - En espera de respuesta",
         "descripcion": "Se enviaron las cotizaciones 00133 y 00134 para mejoras web y migración. Proyecto en espera de confirmación de arranque.",
         "fecha": "2025-05-25T14:00:00Z",
-        "tipo": "recordatorio",
+        "tipo": "cotizacion",
         "leida": false,
         "relacionadoCon": null
       },
@@ -158,7 +185,7 @@
         "titulo": "Cotizaciones enviadas - En revisión",
         "descripcion": "Envío de cotizaciones 00135 (Rediseño Web) y 00136 (Cotizador Online) a Paulina Jiménez. Pendientes de aprobación.",
         "fecha": "2025-06-12T09:00:00Z",
-        "tipo": "documento",
+        "tipo": "cotizacion",
         "leida": false,
         "relacionadoCon": null
       },
