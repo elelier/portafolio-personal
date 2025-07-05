@@ -6,7 +6,7 @@ import { FaSitemap, FaCog, FaPalette } from 'react-icons/fa';
 
 // Fecha de última actualización
 const lastUpdated = {
-  date: "17/06/2025",
+  date: "03/07/2025",
   es: "Última actualización",
   en: "Last updated"
 };
@@ -202,50 +202,88 @@ const sprints = [
         es: 'Finalización de branding y creación de guías para el cliente',
         en: 'Branding finalization and creation of client guides'
       },
-      progress: 60,
+      progress: 100,
       tasks: [
         { name: { es: 'Efectos hover y botones estandarizados', en: 'Hover effects and standardized buttons' }, status: 'completed' },
         { name: { es: 'Experiencia móvil mejorada', en: 'Improved mobile experience' }, status: 'completed' },
         { name: { es: 'Páginas legales y logos de clientes', en: 'Legal pages and client logos' }, status: 'completed' },
-        { name: { es: 'Implementación de logo definitivo', en: 'Implementation of final logo' }, status: 'pending' },
-        { name: { es: 'Organización de carpeta Drive de assets', en: 'Organization of Drive assets folder' }, status: 'pending' }
+        { name: { es: 'Implementación de logo definitivo', en: 'Implementation of final logo' }, status: 'completed' },
+        { name: { es: 'Organización de carpeta Drive de assets', en: 'Organization of Drive assets folder' }, status: 'completed' }
       ]
     },
     {
       id: 9,
       name: {
-        es: 'Piloto Editable y Performance',
-        en: 'Editable Pilot and Performance'
+        es: 'Expansión de Contenido y Testing',
+        en: 'Content Expansion and Testing'
       },
       description: {
-        es: 'Sistema de edición de contenido y optimización de rendimiento',
-        en: 'Content editing system and performance optimization'
+        es: 'Integración de proyectos reales y sistema de testing automatizado',
+        en: 'Integration of real projects and automated testing system'
       },
-      progress: 0,
+      progress: 100,
       tasks: [
-        { name: { es: 'Sistema de edición de contenido', en: 'Content editing system' }, status: 'pending' },
-        { name: { es: 'Optimización de imágenes WebP/AVIF', en: 'WebP/AVIF image optimization' }, status: 'pending' },
-        { name: { es: 'Mejoras de accesibilidad', en: 'Accessibility improvements' }, status: 'pending' },
-        { name: { es: 'Metadatos SEO y OpenGraph', en: 'SEO and OpenGraph metadata' }, status: 'pending' },
-        { name: { es: 'Documentación de presupuesto de rendimiento', en: 'Performance budget documentation' }, status: 'pending' }
+        { name: { es: 'Agregar 15+ proyectos reales al portafolio', en: 'Add 15+ real projects to portfolio' }, status: 'completed' },
+        { name: { es: 'Eliminación de contenido dummy', en: 'Removal of dummy content' }, status: 'completed' },
+        { name: { es: 'Sistema de categorización multi-proyecto', en: 'Multi-project categorization system' }, status: 'completed' },
+        { name: { es: 'Integración de testing automatizado con Lighthouse', en: 'Automated testing integration with Lighthouse' }, status: 'completed' },
+        { name: { es: 'Documentación QA completa', en: 'Complete QA documentation' }, status: 'completed' }
       ]
     },
     {
       id: 10,
       name: {
-        es: 'Go-Live & Hand-off',
-        en: 'Go-Live & Hand-off'
+        es: 'Migración SSR/ISR y SEO Optimization',
+        en: 'SSR/ISR Migration and SEO Optimization'
       },
       description: {
-        es: 'Lanzamiento final y entrega completa del proyecto',
-        en: 'Final launch and complete project handover'
+        es: 'Migración completa a SSR/ISR con optimización SEO avanzada',
+        en: 'Complete migration to SSR/ISR with advanced SEO optimization'
+      },
+      progress: 100,
+      tasks: [
+        { name: { es: 'Migración de SSG a SSR/ISR en Netlify', en: 'Migration from SSG to SSR/ISR on Netlify' }, status: 'completed' },
+        { name: { es: 'Configuración de metadatos dinámicos', en: 'Dynamic metadata configuration' }, status: 'completed' },
+        { name: { es: 'Sitemap.xml y robots.txt automáticos', en: 'Automatic sitemap.xml and robots.txt' }, status: 'completed' },
+        { name: { es: 'Optimización canonical URLs', en: 'Canonical URLs optimization' }, status: 'completed' },
+        { name: { es: 'Investigación OG images WhatsApp/Twitter', en: 'OG images WhatsApp/Twitter research' }, status: 'completed' }
+      ]
+    },
+    {
+      id: 11,
+      name: {
+        es: 'Refinamiento Visual y UX Avanzada',
+        en: 'Visual Refinement and Advanced UX'
+      },
+      description: {
+        es: 'Implementación de funcionalidades visuales avanzadas y design system',
+        en: 'Implementation of advanced visual features and design system'
+      },
+      progress: 100,
+      tasks: [
+        { name: { es: 'Slider Before/After para proyectos', en: 'Before/After slider for projects' }, status: 'completed' },
+        { name: { es: 'Esquinas redondeadas responsivas en imágenes', en: 'Responsive rounded corners on images' }, status: 'completed' },
+        { name: { es: 'Grilla de servicios optimizada (1-2-3-5-5)', en: 'Optimized services grid (1-2-3-5-5)' }, status: 'completed' },
+        { name: { es: 'Tipografía y efectos hover estandarizados', en: 'Standardized typography and hover effects' }, status: 'completed' },
+        { name: { es: 'Dropdown y formularios con tema consistente', en: 'Dropdowns and forms with consistent theming' }, status: 'completed' }
+      ]
+    },
+    {
+      id: 12,
+      name: {
+        es: 'Optimización Final y Go-Live',
+        en: 'Final Optimization and Go-Live'
+      },
+      description: {
+        es: 'Preparación final para lanzamiento y entrega completa',
+        en: 'Final preparation for launch and complete delivery'
       },
       progress: 0,
       tasks: [
-        { name: { es: 'Pruebas QA multi-navegador', en: 'Multi-browser QA testing' }, status: 'pending' },
+        { name: { es: 'Pruebas QA multi-navegador finales', en: 'Final multi-browser QA testing' }, status: 'pending' },
         { name: { es: 'Apuntar arqidia.mx a producción', en: 'Point arqidia.mx to production' }, status: 'pending' },
         { name: { es: 'Video tutorial y manual de auto-edición', en: 'Video tutorial and self-editing manual' }, status: 'pending' },
-        { name: { es: 'Corrección de bugs encontrados en QA', en: 'Correction of bugs found in QA' }, status: 'pending' },
+        { name: { es: 'Corrección de bugs finales', en: 'Final bug corrections' }, status: 'pending' },
         { name: { es: 'Monitoreo post-lanzamiento', en: 'Post-launch monitoring' }, status: 'pending' },
         { name: { es: 'Retro final y cierre de proyecto', en: 'Final retrospective and project closure' }, status: 'pending' }
       ]
@@ -262,40 +300,40 @@ const projectData = {
     es: 'Desarrollo de portafolio web para estudio de arquitectura',
     en: 'Web portfolio development for architecture studio'
   },
-  lastUpdate: "17/06/2025",
+  lastUpdate: "03/07/2025",
   status: {
-    es: 'En desarrollo - Sprint 8',
-    en: 'In development - Sprint 8'
+    es: 'Finalización - Sprint 11',
+    en: 'Finalization - Sprint 11'
   },
   sprints: sprints,
   achievements: {
     es: [
-      "Infraestructura completa: Next.js, Tailwind, migración AWS→Netlify",
-      "Sitio en producción: arqidia.mx y staging funcionales",
-      "Sistema de diseño documentado con efectos hover estandarizados",
-      "Secciones principales: Hero, Nuestro Enfoque, Portafolio, Blog",
-      "Experiencia móvil optimizada y menú responsive",
-      "Páginas legales completas y arquitectura de datos centralizada"
+      "🏗️ Infraestructura completa: Next.js, Tailwind, migración AWS→Netlify→SSR/ISR",
+      "🎨 Slider Before/After único y design system estandarizado con efectos hover",
+      "📱 Sitio responsive con 15+ proyectos reales y contenido auténtico",
+      "🚀 SEO optimization: sitemap automático, robots.txt y metadatos dinámicos",
+      "🧪 Sistema de testing automatizado con Lighthouse y documentación QA",
+      "⚖️ Páginas legales completas y grilla de servicios optimizada (1-2-3-5-5)"
     ],
     en: [
-      "Complete infrastructure: Next.js, Tailwind, AWS→Netlify migration",
-      "Production site: arqidia.mx and functional staging",
-      "Documented design system with standardized hover effects",
-      "Main sections: Hero, About Me, Portfolio with real content",
-      "Optimized mobile experience and responsive menu",
-      "Complete legal pages and centralized data architecture"
+      "🏗️ Complete infrastructure: Next.js, Tailwind, AWS→Netlify→SSR/ISR migration", 
+      "🎨 Unique Before/After slider and standardized design system with hover effects",
+      "📱 Responsive site with 15+ real projects and authentic content",
+      "🚀 SEO optimization: automatic sitemap, robots.txt and dynamic metadata",
+      "🧪 Automated testing system with Lighthouse and QA documentation",
+      "⚖️ Complete legal pages and optimized services grid (1-2-3-5-5)"
     ]
   },
   nextSteps: {
     es: [
-      "Sprint 8: Finalización de logo definitivo y organización de assets (60% completado)",
-      "Sprint 9: Implementación de sistema de edición y optimización final",
-      "Sprint 10: Lanzamiento final y hand-off completo"
+      "Sprint 12: Pruebas QA finales multi-navegador y corrección de bugs",
+      "Go-Live: Apuntar arqidia.mx a producción y monitoreo post-lanzamiento",
+      "Hand-off: Video tutorial, manual de auto-edición y cierre de proyecto"
     ],
     en: [
-      "Sprint 8: Final logo finalization and assets organization (60% completed)",
-      "Sprint 9: Implementation of editing system and final optimization",
-      "Sprint 10: Final launch and complete hand-off"
+      "Sprint 12: Final multi-browser QA testing and bug corrections",
+      "Go-Live: Point arqidia.mx to production and post-launch monitoring", 
+      "Hand-off: Video tutorial, self-editing manual and project closure"
     ]
   }
 };
@@ -522,9 +560,9 @@ const ProjectProgress = ({ overallProgress }) => {
 
           {/* Barra de progreso general (Hero) */}
           <div className="overall-progress" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-            <span style={{ fontWeight: 'bold' }}>85%</span>
+            <span style={{ fontWeight: 'bold' }}>95%</span>
             <div style={{ flex: '1 1 0%', height: '10px', backgroundColor: 'var(--color-bg-2)', borderRadius: '5px', overflow: 'hidden' }}>
-              <div style={{ width: '85%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
+              <div style={{ width: '95%', height: '100%', backgroundColor: 'var(--color-primary)', borderRadius: '5px' }}></div>
             </div>
           </div>
 
