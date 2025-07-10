@@ -6,7 +6,7 @@ import { FaSitemap, FaCog, FaPalette } from 'react-icons/fa';
 
 // Fecha de última actualización
 const lastUpdated = {
-  date: "03/07/2025",
+  date: "09/07/2025",
   es: "Última actualización",
   en: "Last updated"
 };
@@ -265,7 +265,8 @@ const sprints = [
         { name: { es: 'Esquinas redondeadas responsivas en imágenes', en: 'Responsive rounded corners on images' }, status: 'completed' },
         { name: { es: 'Grilla de servicios optimizada (1-2-3-5-5)', en: 'Optimized services grid (1-2-3-5-5)' }, status: 'completed' },
         { name: { es: 'Tipografía y efectos hover estandarizados', en: 'Standardized typography and hover effects' }, status: 'completed' },
-        { name: { es: 'Dropdown y formularios con tema consistente', en: 'Dropdowns and forms with consistent theming' }, status: 'completed' }
+        { name: { es: 'Dropdown y formularios con tema consistente', en: 'Dropdowns and forms with consistent theming' }, status: 'completed' },
+        { name: { es: 'Google Analytics 4 configuración completa', en: 'Google Analytics 4 complete configuration' }, status: 'completed' }
       ]
     },
     {
@@ -300,7 +301,7 @@ const projectData = {
     es: 'Desarrollo de portafolio web para estudio de arquitectura',
     en: 'Web portfolio development for architecture studio'
   },
-  lastUpdate: "03/07/2025",
+  lastUpdate: "09/07/2025",
   status: {
     es: 'Finalización - Sprint 11',
     en: 'Finalization - Sprint 11'
@@ -313,7 +314,8 @@ const projectData = {
       "📱 Sitio responsive con 15+ proyectos reales y contenido auténtico",
       "🚀 SEO optimization: sitemap automático, robots.txt y metadatos dinámicos",
       "🧪 Sistema de testing automatizado con Lighthouse y documentación QA",
-      "⚖️ Páginas legales completas y grilla de servicios optimizada (1-2-3-5-5)"
+      "⚖️ Páginas legales completas y grilla de servicios optimizada (1-2-3-5-5)",
+      "📊 Google Analytics 4 configurado completamente y listo para producción"
     ],
     en: [
       "🏗️ Complete infrastructure: Next.js, Tailwind, AWS→Netlify→SSR/ISR migration", 
@@ -321,7 +323,8 @@ const projectData = {
       "📱 Responsive site with 15+ real projects and authentic content",
       "🚀 SEO optimization: automatic sitemap, robots.txt and dynamic metadata",
       "🧪 Automated testing system with Lighthouse and QA documentation",
-      "⚖️ Complete legal pages and optimized services grid (1-2-3-5-5)"
+      "⚖️ Complete legal pages and optimized services grid (1-2-3-5-5)",
+      "📊 Google Analytics 4 fully configured and ready for production"
     ]
   },
   nextSteps: {

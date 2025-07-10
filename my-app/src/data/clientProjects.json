@@ -110,6 +110,15 @@
       "tipo": "diseno",
       "leida": false,
       "relacionadoCon": null
+      },
+      {
+      "id": "upd011",
+      "titulo": "📊 Google Analytics 4 completamente configurado",
+      "descripcion": "Configuración completa de Google Analytics 4 siguiendo snippet oficial de Google. Variables de ambiente configuradas en Netlify y Marce agregada como administradora.",
+      "fecha": "2025-07-09T00:00:00Z",
+      "tipo": "tecnico",
+      "leida": false,
+      "relacionadoCon": null
       }
     ],
     "cotizaciones": [

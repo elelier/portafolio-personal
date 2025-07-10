@@ -9,6 +9,8 @@
 - [Características](#características)
 - [Despliegue](#despliegue)
 - [Inicio Rápido](#inicio-rápido)
+- [Scripts Disponibles](#scripts-disponibles)
+- [Seguridad y Privacidad](#seguridad-y-privacidad)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -17,36 +19,77 @@
 ```bash
 /
 ├── public/                 # Activos públicos y configuración base
-│   └── index.html         # HTML base con meta tags SEO y analytics
+│   ├── index.html         # HTML base con meta tags SEO y analytics
+│   ├── manifest.json      # PWA manifest
+│   ├── robots.txt         # SEO robots
+│   ├── sitemap.xml        # Mapa del sitio
+│   └── assets/            # Recursos estáticos públicos
 ├── src/
 │   ├── components/        # Componentes React
-│   │   ├── ChatModal/    # Chatbot interactivo con IA
-│   │   ├── entradas/     # Componentes del blog
-│   │   ├── hooks/        # Hooks personalizados
-│   │   └── utils/        # Funciones de utilidad
-│   ├── contexts/         # Contextos (Idioma, Tema)
-│   ├── styles/           # Estilos CSS
-│   │   ├── components/   # Estilos específicos por componente
-│   │   └── shared/       # Estilos compartidos
-│   └── assets/           # Imágenes y recursos estáticos
-├── .github/              # GitHub-specific files
-├── README.md             # Project documentation
-├── package.json          # Project dependencies and scripts
-└── .gitignore           # Git ignore configuration
+│   │   ├── ChatModal.js   # Chatbot con IA (Gemini)
+│   │   ├── entradas/      # Componentes del blog
+│   │   ├── hooks/         # Hooks personalizados
+│   │   └── utils/         # Funciones de utilidad
+│   ├── contexts/          # Contextos React
+│   │   ├── LanguageContext.js  # Internacionalización
+│   │   └── ThemeContext.js     # Tema claro/oscuro
+│   ├── services/          # Servicios de backend
+│   │   ├── geminiService.js    # Integración Google Gemini AI
+│   │   ├── securityService.js  # Seguridad del chatbot
+│   │   └── clientAuthService.js # Autenticación de clientes
+│   ├── config/            # Configuraciones
+│   │   ├── buildConfig.js      # Configuración de build
+│   │   └── hashedPasscodes.js  # Códigos seguros
+│   ├── data/              # Datos de la aplicación
+│   │   ├── sites.js            # Información de proyectos
+│   │   ├── clientProjects.json # Proyectos de clientes
+│   │   └── benefitResponses.json # Respuestas del chatbot
+│   ├── styles/            # Estilos CSS
+│   │   ├── components/    # Estilos por componente
+│   │   └── shared/        # Estilos compartidos
+│   ├── utils/             # Utilidades JavaScript
+│   ├── debug-gemini.js    # Herramientas de debug IA (dev)
+│   └── assets/            # Recursos multimedia
+├── scripts/               # Scripts de automatización
+│   ├── process-images.js  # Optimización de imágenes
+│   ├── sanitize-data.js   # Limpieza de datos
+│   └── security/          # Scripts de seguridad
+│       └── generate-client-data.js # Generación segura de datos
+├── build/                 # Build de producción (generado)
+├── .github/               # Configuración GitHub
+├── next.config.js         # Configuración (legacy)
+├── package.json           # Dependencias y scripts
+├── README.md              # Documentación del proyecto
+└── .gitignore            # Archivos ignorados por Git
 ```
 
 ## Stack Tecnológico
 
 ### Frontend
-- **React 18+**: Framework principal
+- **React 18.0.0**: Framework principal (SPA)
 - **React Router 6**: Enrutamiento del cliente
 - **Context API**: Gestión de estado global
 - **CSS Modules**: Estilos modulares
+- **Tailwind CSS**: Framework de utilidades CSS
 - **Typed.js**: Animaciones de texto
 - **React Icons**: Iconografía
+- **FontAwesome**: Iconos adicionales
+
+### Animaciones y UX
+- **Framer Motion**: Animaciones avanzadas
+- **React Spring**: Animaciones fluidas
+- **React Swipeable**: Gestos táctiles
+- **React Use Gesture**: Interacciones gestuales
+
+### Inteligencia Artificial
+- **Google Gemini AI**: Chatbot conversacional inteligente
+- **Rate Limiting**: Control de spam y seguridad
+- **Memoria Conversacional**: Contexto persistente
+- **Sanitización de Mensajes**: Seguridad de entrada
 
 ### Optimización y Rendimiento
 - **React Suspense & Lazy Loading**: Carga diferida de componentes
+- **React Helmet Async**: SEO dinámico
 - **Google Tag Manager**: Análisis y seguimiento
 - **Meta Tags Dinámicos**: SEO optimizado
 - **Responsive Design**: Diseño adaptativo
@@ -55,6 +98,7 @@
 - **Git & GitHub**: Control de versiones
 - **GitHub Pages**: Alojamiento
 - **NPM**: Gestión de paquetes
+- **React Scripts 5.0.1**: Herramientas de desarrollo
 
 ## Características
 
@@ -76,24 +120,50 @@
 - **Accesibilidad**: ARIA labels y semántica HTML5
 
 ### Integración de IA
-- **Chatbot Inteligente**:
-  - Navegación asistida
-  - Respuestas contextuales
-  - Soporte bilingüe
-  - Historial de conversación
-  - Indicador de escritura
-  - Botones de acceso rápido
+- **Chatbot Inteligente con Google Gemini AI**:
+  - 🧠 **Motor de IA**: Google Gemini 1.5 Flash
+  - 🗣️ **Conversación Natural**: Respuestas contextuales inteligentes
+  - 🌐 **Soporte Bilingüe**: Español e inglés automático
+  - 💾 **Memoria Conversacional**: Mantiene contexto de la conversación
+  - ⚡ **Indicadores Visuales**: Estados de escritura y procesamiento
+  - 🎯 **Botones de Acceso Rápido**: Navegación asistida
+  - 🔒 **Sistema de Seguridad**:
+    - Rate limiting (máximo 5 mensajes/minuto)
+    - Sanitización de entrada
+    - Validación de contenido
+    - Prevención de spam
+  - 🛠️ **Herramientas de Debug**: Testing y monitoreo (desarrollo)
+  - 📱 **Responsive**: Adaptado para móviles y escritorio
+  - ♿ **Accesibilidad**: ARIA labels y navegación por teclado
 
 ## Despliegue
 
 El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https://www.elelier.com).
 
 ### Configuración de Producción
-- Dominio personalizado configurado
-- HTTPS habilitado
-- Compresión de activos
-- Caché optimizado
-- Analytics configurado
+- **Dominio Personalizado**: elelier.com configurado con CNAME
+- **HTTPS Habilitado**: SSL/TLS automático por GitHub Pages
+- **Compresión de Activos**: Minificación automática de CSS/JS
+- **Caché Optimizado**: Headers de caché para recursos estáticos
+- **Analytics Configurado**: Google Tag Manager y Google Analytics 4
+- **Sitemap XML**: Generado automáticamente para SEO
+- **PWA Ready**: Manifest.json configurado para instalación
+
+### Pipeline de Despliegue
+1. **Build Automático**: `npm run build` genera datos de cliente y construye
+2. **Optimización**: Minificación, tree-shaking y code-splitting
+3. **Deploy**: `npm run deploy` sube a GitHub Pages usando gh-pages
+4. **DNS**: Redirección automática de www.elelier.com a elelier.com
+
+### Variables de Entorno Requeridas
+```bash
+REACT_APP_GEMINI_API_KEY=your_gemini_api_key_here  # Para producción
+```
+
+### Monitoreo y Analytics
+- **Google Analytics 4**: Tracking de usuarios y conversiones
+- **Google Tag Manager**: Gestión avanzada de tags
+- **Core Web Vitals**: Métricas de rendimiento automáticas
 
 ## Inicio Rápido
 
@@ -120,6 +190,46 @@ npm start
 ```bash
 npm run build
 ```
+
+## Scripts Disponibles
+
+### Desarrollo
+```bash
+npm start          # Servidor de desarrollo
+npm run dev        # Alias para npm start
+npm test           # Ejecutar tests
+```
+
+### Producción
+```bash
+npm run build      # Construir para producción (incluye generación de datos)
+npm run deploy     # Desplegar a GitHub Pages
+npm run predeploy  # Pre-construcción automática
+npm run pre-prod   # Testing local de build de producción
+```
+
+### Utilidades y Seguridad
+```bash
+npm run generate-client-data  # Generar datos seguros de clientes
+npm run security-check        # Auditoría de seguridad y formato
+```
+
+### Scripts Internos
+- **generate-client-data**: Procesa y hashea datos sensibles de clientes
+- **security-check**: Ejecuta `npm audit` y verifica formato de package.json
+
+## Seguridad y Privacidad
+
+### Protección de Datos
+- **Hasheado de Contraseñas**: Códigos de acceso encriptados
+- **Datos de Cliente Seguros**: Información sensible procesada y protegida
+- **Variables de Entorno**: API keys y secretos en variables seguras
+
+### Chatbot Security
+- **Rate Limiting**: Máximo 5 mensajes por minuto por usuario
+- **Sanitización**: Filtrado automático de contenido malicioso
+- **Validación de Entrada**: Verificación de longitud y contenido
+- **Sesiones Temporales**: No se almacenan conversaciones permanentemente
 
 ## Contributing
 
