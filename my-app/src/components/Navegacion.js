@@ -52,7 +52,6 @@ function Navegacion() {
       portafolio: 'Carrera',
       servicios: 'Servicios',
       contactame: ' Contáctame',
-      sites: 'Sitios'
     },
     en: {
       sobreMi: 'About Me',
@@ -60,7 +59,6 @@ function Navegacion() {
       portafolio: 'Carrer',
       servicios: 'Services',
       contactame: ' Contact Me',
-      sites: 'Sites'
     }
   };
 
