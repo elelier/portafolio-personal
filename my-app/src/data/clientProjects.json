@@ -13,112 +13,130 @@
     },
     "actualizaciones": [
       {
-      "id": "upd001",
-      "titulo": "Configuración de dominio completada",
-      "descripcion": "Se completó la configuración del dominio principal arqidia.mx y el entorno de pruebas staging.arqidia.mx. Certificados de seguridad y DNS verificados correctamente.",
-      "fecha": "2025-06-08T14:30:00Z",
-      "tipo": "tecnico",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd001",
+        "titulo": "Configuración de dominio completada",
+        "descripcion": "Se completó la configuración del dominio principal arqidia.mx y el entorno de pruebas staging.arqidia.mx. Certificados de seguridad y DNS verificados correctamente.",
+        "fecha": "2025-06-08T14:30:00Z",
+        "tipo": "tecnico",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd002",
-      "titulo": "Ajustes de diseño e identidad visual",
-      "descripcion": "Integración de logotipos definitivos y ajustes de contraste, proporciones y visibilidad. Optimización inicial de velocidad de carga en staging.",
-      "fecha": "2025-06-10T16:20:00Z",
-      "tipo": "diseno",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd002",
+        "titulo": "Ajustes de diseño e identidad visual",
+        "descripcion": "Integración de logotipos definitivos y ajustes de contraste, proporciones y visibilidad. Optimización inicial de velocidad de carga en staging.",
+        "fecha": "2025-06-10T16:20:00Z",
+        "tipo": "diseno",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd003",
-      "titulo": "Recepción de materiales de contenido",
-      "descripcion": "Confirmación recibida: todas las imágenes de proyectos están listas. Se inicia la carga progresiva de carpetas organizadas por categorías.",
-      "fecha": "2025-06-11T09:00:00Z",
-      "tipo": "documento",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd003",
+        "titulo": "Recepción de materiales de contenido",
+        "descripcion": "Confirmación recibida: todas las imágenes de proyectos están listas. Se inicia la carga progresiva de carpetas organizadas por categorías.",
+        "fecha": "2025-06-11T09:00:00Z",
+        "tipo": "documento",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd008",
-      "titulo": "Paso y mejoras integradas",
-      "descripcion": "Se añadió un paso al proceso, mejoras en servicios y clientes, efecto shimmer en filtro de domótica y documentación actualizada. Cambios fusionados a main.",
-      "fecha": "2025-06-13T10:00:00Z",
-      "tipo": "mejora",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd008",
+        "titulo": "Paso y mejoras integradas",
+        "descripcion": "Se añadió un paso al proceso, mejoras en servicios y clientes, efecto shimmer en filtro de domótica y documentación actualizada. Cambios fusionados a main.",
+        "fecha": "2025-06-13T10:00:00Z",
+        "tipo": "mejora",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd009a",
-      "titulo": "🎨 Efectos hover y botones estandarizados",
-      "descripcion": "Se implementaron efectos hover consistentes en todos los elementos interactivos y se estandarizaron los estilos de los botones para mejorar la experiencia visual.",
-      "fecha": "2025-06-15T00:00:00Z",
-      "tipo": "diseno",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd009a",
+        "titulo": "🎨 Efectos hover y botones estandarizados",
+        "descripcion": "Se implementaron efectos hover consistentes en todos los elementos interactivos y se estandarizaron los estilos de los botones para mejorar la experiencia visual.",
+        "fecha": "2025-06-15T00:00:00Z",
+        "tipo": "diseno",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd009b",
-      "titulo": "📱 Experiencia móvil mejorada",
-      "descripcion": "El menú móvil fue optimizado y se realizaron ajustes para mejorar la navegación y usabilidad en dispositivos móviles.",
-      "fecha": "2025-06-16T00:00:00Z",
-      "tipo": "mejora",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd009b",
+        "titulo": "📱 Experiencia móvil mejorada",
+        "descripcion": "El menú móvil fue optimizado y se realizaron ajustes para mejorar la navegación y usabilidad en dispositivos móviles.",
+        "fecha": "2025-06-16T00:00:00Z",
+        "tipo": "mejora",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd009c",
-      "titulo": "⚖️ Páginas legales y logos de clientes",
-      "descripcion": "Se completaron las páginas legales (privacidad, términos, cookies y aviso legal) y se integraron los logos reales de los clientes en el sitio.",
-      "fecha": "2025-06-17T00:00:00Z",
-      "tipo": "completado",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd009c",
+        "titulo": "⚖️ Páginas legales y logos de clientes",
+        "descripcion": "Se completaron las páginas legales (privacidad, términos, cookies y aviso legal) y se integraron los logos reales de los clientes en el sitio.",
+        "fecha": "2025-06-17T00:00:00Z",
+        "tipo": "completado",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd010a",
-      "titulo": "🏗️ Expansión de contenido y proyectos reales",
-      "descripcion": "Se agregaron 15+ proyectos reales al portafolio (residenciales, comerciales e industriales), eliminando contenido dummy y categorizando con sistema multi-proyecto.",
-      "fecha": "2025-06-20T00:00:00Z",
-      "tipo": "contenido",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd010a",
+        "titulo": "🏗️ Expansión de contenido y proyectos reales",
+        "descripcion": "Se agregaron 15+ proyectos reales al portafolio (residenciales, comerciales e industriales), eliminando contenido dummy y categorizando con sistema multi-proyecto.",
+        "fecha": "2025-06-20T00:00:00Z",
+        "tipo": "contenido",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd010b", 
-      "titulo": "🧪 Sistema de testing automatizado integrado",
-      "descripcion": "Implementación completa de sistema de testing con Lighthouse, PerformanceChecker y documentación QA para asegurar calidad del código.",
-      "fecha": "2025-06-21T00:00:00Z",
-      "tipo": "tecnico",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd010b",
+        "titulo": "🧪 Sistema de testing automatizado integrado",
+        "descripcion": "Implementación completa de sistema de testing con Lighthouse, PerformanceChecker y documentación QA para asegurar calidad del código.",
+        "fecha": "2025-06-21T00:00:00Z",
+        "tipo": "tecnico",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd010c",
-      "titulo": "🚀 Migración completa a SSR/ISR en Netlify",
-      "descripcion": "Migración exitosa de SSG a SSR/ISR con Next.js, habilitando metadatos dinámicos, sitemap automático y robots.txt para SEO optimization.",
-      "fecha": "2025-06-29T00:00:00Z",
-      "tipo": "tecnico",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd010c",
+        "titulo": "🚀 Migración completa a SSR/ISR en Netlify",
+        "descripcion": "Migración exitosa de SSG a SSR/ISR con Next.js, habilitando metadatos dinámicos, sitemap automático y robots.txt para SEO optimization.",
+        "fecha": "2025-06-29T00:00:00Z",
+        "tipo": "tecnico",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd010d",
-      "titulo": "🎨 Refinamiento visual y UX avanzada",
-      "descripcion": "Implementación de slider Before/After para proyectos, esquinas redondeadas responsivas, grilla de servicios optimizada (1-2-3-5-5) y design system estandarizado.",
-      "fecha": "2025-07-03T00:00:00Z",
-      "tipo": "diseno",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd010d",
+        "titulo": "🎨 Refinamiento visual y UX avanzada",
+        "descripcion": "Implementación de slider Before/After para proyectos, esquinas redondeadas responsivas, grilla de servicios optimizada (1-2-3-5-5) y design system estandarizado.",
+        "fecha": "2025-07-03T00:00:00Z",
+        "tipo": "diseno",
+        "leida": false,
+        "relacionadoCon": null
       },
       {
-      "id": "upd011",
-      "titulo": "📊 Google Analytics 4 completamente configurado",
-      "descripcion": "Configuración completa de Google Analytics 4 siguiendo snippet oficial de Google. Variables de ambiente configuradas en Netlify y Marce agregada como administradora.",
-      "fecha": "2025-07-09T00:00:00Z",
-      "tipo": "tecnico",
-      "leida": false,
-      "relacionadoCon": null
+        "id": "upd012",
+        "titulo": "🔗 Integración inicial de Google Analytics 4 (GA4)",
+        "descripcion": "Se integró el snippet oficial de GA4 en el sitio web, configurando la variable NEXT_PUBLIC_GA_TRACKING_ID y probando el tracking básico en desarrollo. Consentimiento de cookies ajustado para cumplir normativas de privacidad.",
+        "fecha": "2025-07-10T00:00:00Z",
+        "tipo": "tecnico",
+        "leida": false,
+        "relacionadoCon": null
+      },
+      {
+        "id": "upd013",
+        "titulo": "🛠️ Depuración y despliegue de Analytics a producción",
+        "descripcion": "Se eliminaron eventos personalizados y logs de desarrollo, dejando solo el tracking esencial. Se verificó el banner de consentimiento y la vinculación con páginas de privacidad y cookies. Primer despliegue a producción en Netlify.",
+        "fecha": "2025-07-11T00:00:00Z",
+        "tipo": "tecnico",
+        "leida": false,
+        "relacionadoCon": null
+      },
+      {
+        "id": "upd015",
+        "titulo": "👩‍💼 Configuración administrativa y monitoreo final",
+        "descripcion": "Finalización de la configuración administrativa de Google Analytics y Search Console, agregando a Marce como administradora. Integración verificada y documentación de pasos finales para monitoreo y gestión de datos analíticos.",
+        "fecha": "2025-07-13T00:00:00Z",
+        "tipo": "tecnico",
+        "leida": false,
+        "relacionadoCon": null
       }
     ],
     "cotizaciones": [

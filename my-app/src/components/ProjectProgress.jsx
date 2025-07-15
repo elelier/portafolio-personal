@@ -266,6 +266,10 @@ const sprints = [
         { name: { es: 'Grilla de servicios optimizada (1-2-3-5-5)', en: 'Optimized services grid (1-2-3-5-5)' }, status: 'completed' },
         { name: { es: 'Tipografía y efectos hover estandarizados', en: 'Standardized typography and hover effects' }, status: 'completed' },
         { name: { es: 'Dropdown y formularios con tema consistente', en: 'Dropdowns and forms with consistent theming' }, status: 'completed' },
+        { name: { es: 'Integración inicial de Google Analytics 4 (GA4)', en: 'Initial integration of Google Analytics 4 (GA4)' }, status: 'completed' },
+        { name: { es: 'Depuración y despliegue de Analytics a producción', en: 'Analytics debugging and deployment to production' }, status: 'completed' },
+        { name: { es: 'Solución de hits aplazados y validación en GA4', en: 'Hits delay fix and GA4 validation' }, status: 'completed' },
+        { name: { es: 'Configuración administrativa y monitoreo final', en: 'Administrative setup and final monitoring' }, status: 'completed' },
         { name: { es: 'Google Analytics 4 configuración completa', en: 'Google Analytics 4 complete configuration' }, status: 'completed' }
       ]
     },

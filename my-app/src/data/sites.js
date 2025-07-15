@@ -77,14 +77,14 @@ export const sitesData = {
     },
     {
       id: "space-counter",
-      name: "Space People Counter",
+      name: "Space People",
       shortDescription: "Contador de personas en el espacio",
       longDescription: "Aplicación web que muestra en tiempo real la cantidad de personas en el espacio utilizando APIs públicas.",
       thumbnail: "/images/sites/space-counter-thumb.jpg",
       fullImage: "/images/sites/space-counter-full.jpg",
       tech: ["React", "APIs REST"],
-      website: "https://same-space-population-tracker-s9sojw9phqj-latest.netlify.app/",
-      repository: null,
+      website: "https://space-peaople.netlify.app/",
+      repository: "https://github.com/elelier/space-peaople",
       status: "development",
       featured: false
     },
