@@ -137,6 +137,15 @@
         "tipo": "tecnico",
         "leida": false,
         "relacionadoCon": null
+      },
+      {
+        "id": "upd016",
+        "titulo": "🖼️ Imágenes responsivas en todos los Hero completadas",
+        "descripcion": "Todos los componentes Hero (Home, Portfolio, Approach, Services, Blog, Contact) ahora cuentan con imágenes responsivas, aspect ratios reales y optimización global. Implementado hook useResponsiveImage, helper generateResponsiveImagePaths y Next.js Image con quality=90 y priority. Patrón unificado en toda la app.",
+        "fecha": "2025-07-22T00:00:00Z",
+        "tipo": "mejora",
+        "leida": false,
+        "relacionadoCon": null
       }
     ],
     "cotizaciones": [
