@@ -156,10 +156,6 @@ function Contacto() {
                 <i className="fas fa-envelope"></i>
                 {t.email}
               </a>
-              <a href="https://wa.me/528117801157" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
-                <i className="fab fa-whatsapp"></i>
-                {t.whatsapp}
-              </a>
               <a href="https://www.google.com/maps/search/?api=1&query=Monterrey,+México" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
                 <i className="fas fa-map-marker-alt"></i>
                 {t.location}
