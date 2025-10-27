@@ -198,6 +198,53 @@
 .habilidad-header.logistics { background-image: url('../../assets/images/skills/logistics.png'); }
 .habilidad-header.ecommerce { background-image: url('../../assets/images/skills/ecommerce.png'); }
 
+.cta-habilidades {
+  margin-top: 60px;
+  max-width: 960px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 24px;
+  padding: 40px 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cta-habilidades h3 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: var(--hero-title-color-2);
+}
+
+.cta-habilidades p {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.cta-habilidades-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .cta-habilidades {
+    margin-top: 40px;
+    padding: 32px 20px;
+  }
+
+  .cta-habilidades h3 {
+    font-size: 1.6rem;
+  }
+
+  .cta-habilidades p {
+    font-size: 1rem;
+  }
+}
+
 .habilidad-icono {
   display: none;
 }

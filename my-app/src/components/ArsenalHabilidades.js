@@ -14,6 +14,23 @@ function ArsenalHabilidades() {
   const [activeIndex, setActiveIndex] = useState(null);
   const { language } = useLanguage();
 
+  const ctaContent = {
+    es: {
+      title: '¿Listo para poner estas habilidades en acción?',
+      description:
+        'Agendemos una sesión para entender tus retos y definir cómo estas capacidades pueden impulsar tu proyecto.',
+      primary: 'Planear mi proyecto',
+      secondary: 'Ver servicios disponibles'
+    },
+    en: {
+      title: 'Ready to put these skills to work?',
+      description:
+        'Let’s schedule a session to understand your challenges and decide how these capabilities can move your project forward.',
+      primary: 'Plan my project',
+      secondary: 'Explore available services'
+    }
+  };
+
   const habilidades = {
     es: [
       {
@@ -165,6 +182,15 @@ function ArsenalHabilidades() {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const currentCta = ctaContent[language] || ctaContent.es;
+
   return (
     <section id="habilidades" className="arsenal-habilidades">
       <h2 className="titulo-seccion">
@@ -205,6 +231,24 @@ function ArsenalHabilidades() {
             </ul>
           </div>
         ))}
+      </div>
+      <div className="cta-habilidades">
+        <h3>{currentCta.title}</h3>
+        <p>{currentCta.description}</p>
+        <div className="cta-habilidades-buttons">
+          <button
+            className="cta-button-primary"
+            onClick={() => scrollToSection('contacto')}
+          >
+            {currentCta.primary}
+          </button>
+          <button
+            className="cta-button-secondary"
+            onClick={() => scrollToSection('servicios')}
+          >
+            {currentCta.secondary}
+          </button>
+        </div>
       </div>
     </section>
   );

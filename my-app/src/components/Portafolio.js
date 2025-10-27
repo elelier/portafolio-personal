@@ -216,6 +216,32 @@ const Portafolio = () => {
     ]
   };
 
+  const ctaContent = {
+    es: {
+      title: '¿Te imaginas tu proyecto en este portafolio?',
+      description:
+        'Trabajemos juntos para diseñar una solución a medida, desde la estrategia hasta la implementación.',
+      primary: 'Solicitar una reunión',
+      secondary: 'Revisar servicios disponibles'
+    },
+    en: {
+      title: 'Ready to see your project featured here?',
+      description:
+        'Let’s craft a tailored solution together—from strategic planning to hands-on implementation.',
+      primary: 'Request a meeting',
+      secondary: 'Review available services'
+    }
+  };
+
+  const currentCta = ctaContent[language] || ctaContent.es;
+
+  const handleScrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="portafolio" className="portafolio">
       <h2>{currentLang === 'es' ? 'CARRERA PROFESIONAL' : 'PROFESSIONAL CAREER'}</h2>
@@ -227,7 +253,7 @@ const Portafolio = () => {
       <div className="timeline">
         {(currentLang === 'es' ? proyectos.es : proyectos.en).map((proyecto, idx) => (
           <article key={proyecto.nombre} className={idx % 2 === 0 ? 'left' : 'right'}>
-            <div 
+            <div
               className={`content-wrapper ${activeIndex === idx ? 'expanded' : ''}`}
               onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
             >
@@ -278,6 +304,24 @@ const Portafolio = () => {
             </div>
           </article>
         ))}
+      </div>
+      <div className="portafolio-cta">
+        <h3>{currentCta.title}</h3>
+        <p>{currentCta.description}</p>
+        <div className="portafolio-cta-buttons">
+          <button
+            className="cta-button-primary"
+            onClick={() => handleScrollToSection('contacto')}
+          >
+            {currentCta.primary}
+          </button>
+          <button
+            className="cta-button-secondary"
+            onClick={() => handleScrollToSection('servicios')}
+          >
+            {currentCta.secondary}
+          </button>
+        </div>
       </div>
     </section>
   );
