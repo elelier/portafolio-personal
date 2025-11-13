@@ -14,62 +14,34 @@ const DynamicHeroBanner = () => {
   const heroContent = useMemo(() => ({
     es: [
       {
-        title: "Transformación Digital & E-Commerce Revolucionaria",
-        subtitle: "Moderniza y potencia tus ventas online",
-        description: "Consultorías y workshops para digitalizar procesos y optimizar la presencia online en plataformas líderes. Da el salto a la innovación y transforma tu negocio hoy.",
-        icon: "💻",
-        cta: "Digitaliza tu Negocio",
+        title: "Digital Product Owner & Creador de Side Projects",
+        subtitle: "Construyo productos web experimentales",
+        description: "Empleado tiempo completo en CHUBB. Disponible 10-20h/semana para proyectos pequeños: landing pages, prototipos y asesorías técnicas ligeras (sin presión de tiempo).",
+        icon: "🧪",
+        cta: "Ver Disponibilidad",
       },
       {
-        title: "Estrategias Basadas en Datos para Decisiones Inteligentes",
-        subtitle: "Convierte datos en crecimiento real",
-        description: "Sesiones de análisis y asesoría para interpretar métricas y tomar decisiones estratégicas que impulsen tu negocio.",
-        icon: "🗃️",
-        cta: "Potencia tus Datos",
-      },
-      {
-        title: "Desarrollo Web y Soluciones a Medida",
-        subtitle: "Construye la presencia digital perfecta",
-        description: "Creación de páginas web, aplicaciones personalizadas, APIs y web scraping para optimizar procesos.",
-        icon: "📱",
-        cta: "Desarrolla tu Solución",
-      },
-      {
-        title: "Soluciones de IA para Innovación",
-        subtitle: "Impulsa la eficiencia con inteligencia artificial",
-        description: "Integración de chatbots y automatización para transformar tus operaciones y ganar competitividad.",
-        icon: "🧠",
-        cta: "Innova con IA",
+        title: "Proyectos Pequeños. Sin Prisa. Alto Cuidado.",
+        subtitle: "Iteraciones simples que avanzan tu idea",
+        description: "No hago consultorías profundas ni proyectos urgentes. Si tu idea puede crecer poco a poco y quieres alguien que experimente con ella, hablemos.",
+        icon: "🌱",
+        cta: "Hablemos",
       }
     ],
     en: [
       {
-        title: "Revolutionary Digital Transformation & E-Commerce",
-        subtitle: "Modernize and boost your online sales",
-        description: "Consulting and workshops to digitize processes and optimize your online presence.",
-        icon: "💻",
-        cta: "Digitize Your Business",
+        title: "Digital Product Owner & Side Project Builder",
+        subtitle: "I craft experimental web products",
+        description: "Full-time employee at CHUBB. Available 10–20h/week for small scope work: landing pages, prototypes and light technical advisory (no hard deadlines).",
+        icon: "🧪",
+        cta: "View Availability",
       },
       {
-        title: "Data-Driven Strategies for Smart Decisions",
-        subtitle: "Turn data into real growth",
-        description: "Analytical sessions and advisory to interpret metrics and drive your business forward.",
-        icon: "🗃️",
-        cta: "Leverage Your Data",
-      },
-      {
-        title: "Custom Web & App Development Solutions",
-        subtitle: "Build the perfect digital presence",
-        description: "Creation of websites, APIs, and web scraping to improve user experience.",
-        icon: "📱",
-        cta: "Develop Your Solution",
-      },
-      {
-        title: "AI Solutions for Innovation",
-        subtitle: "Boost efficiency with artificial intelligence",
-        description: "Integration of chatbots, automation, and AI solutions to enhance your operations.",
-        icon: "🧠",
-        cta: "Innovate with AI",
+        title: "Small, Calm, Craft-Oriented Work",
+        subtitle: "Light iterations that move ideas forward",
+        description: "I don't take on deep consulting or urgent large builds. If your idea can evolve gradually and you value thoughtful execution, let's talk.",
+        icon: "🌱",
+        cta: "Let's Talk",
       }
     ]
   }), []);
