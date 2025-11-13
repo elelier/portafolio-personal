@@ -14,34 +14,34 @@ const DynamicHeroBanner = () => {
   const heroContent = useMemo(() => ({
     es: [
       {
-        title: "Digital Product Owner & Creador de Side Projects",
-        subtitle: "Construyo productos web experimentales",
-        description: "Empleado tiempo completo en CHUBB. Disponible 10-20h/semana para proyectos pequeños: landing pages, prototipos y asesorías técnicas ligeras (sin presión de tiempo).",
+        title: "Construyo cosas web por curiosidad",
+        subtitle: "Digital Product Owner @ CHUBB (tiempo completo)",
+        description: "En mi tiempo libre exploro ideas pequeñas: landing pages, micro herramientas, prototipos y ajustes a proyectos existentes. Ritmo calmado (10–20h/semana), foco en aprender y dejar algo útil.",
         icon: "🧪",
-        cta: "Ver Disponibilidad",
+        cta: "Ver disponibilidad",
       },
       {
-        title: "Proyectos Pequeños. Sin Prisa. Alto Cuidado.",
-        subtitle: "Iteraciones simples que avanzan tu idea",
-        description: "No hago consultorías profundas ni proyectos urgentes. Si tu idea puede crecer poco a poco y quieres alguien que experimente con ella, hablemos.",
+        title: "¿Tienes una idea pequeña?",
+        subtitle: "Podemos iterarla sin presión",
+        description: "No tomo proyectos urgentes ni consultorías largas. Si quieres validar algo simple, mejorar una página o experimentar con una función nueva, mándame un mensaje.",
         icon: "🌱",
-        cta: "Hablemos",
+        cta: "Iniciar conversación",
       }
     ],
     en: [
       {
-        title: "Digital Product Owner & Side Project Builder",
-        subtitle: "I craft experimental web products",
-        description: "Full-time employee at CHUBB. Available 10–20h/week for small scope work: landing pages, prototypes and light technical advisory (no hard deadlines).",
+        title: "I build web things out of curiosity",
+        subtitle: "Digital Product Owner @ CHUBB (full-time)",
+        description: "In my spare time I explore small ideas: landing pages, tiny tools, prototypes, incremental improvements. Calm pace (10–20h/week), learning‑driven, craft‑minded.",
         icon: "🧪",
-        cta: "View Availability",
+        cta: "View availability",
       },
       {
-        title: "Small, Calm, Craft-Oriented Work",
-        subtitle: "Light iterations that move ideas forward",
-        description: "I don't take on deep consulting or urgent large builds. If your idea can evolve gradually and you value thoughtful execution, let's talk.",
+        title: "Got a small idea?",
+        subtitle: "We can explore it gently",
+        description: "I don't take urgent or heavy consulting work. If you want to validate something simple, polish an existing page or try a small feature, just reach out.",
         icon: "🌱",
-        cta: "Let's Talk",
+        cta: "Start a chat",
       }
     ]
   }), []);
