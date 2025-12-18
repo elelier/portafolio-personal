@@ -8,12 +8,14 @@ const translations = {
     sections: {
       about: "About Me",
       skills: "Skills",
+      availability: "Availability",
       projects: "Projects",
       contact: "Contact"
     },
     options: {
       about: "About Me",
       skills: "Skills",
+      availability: "Availability",
       projects: "Projects",
       contact: "Contact",
       github: "GitHub",
@@ -33,12 +35,14 @@ const translations = {
     sections: {
       about: "Acerca de Mí",
       skills: "Habilidades",
+      availability: "Disponibilidad",
       projects: "Proyectos",
       contact: "Contacto"
     },
     options: {
       about: "Acerca de Mí",
       skills: "Habilidades",
+      availability: "Disponibilidad",
       projects: "Proyectos",
       contact: "Contacto",
       github: "GitHub",

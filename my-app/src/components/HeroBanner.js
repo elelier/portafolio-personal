@@ -14,34 +14,20 @@ const DynamicHeroBanner = () => {
   const heroContent = useMemo(() => ({
     es: [
       {
-        title: "Construyo cosas web por curiosidad",
-        subtitle: "Digital Product Owner @ CHUBB (tiempo completo)",
-        description: "En mi tiempo libre exploro ideas pequeñas: landing pages, micro herramientas, prototipos y ajustes a proyectos existentes. Ritmo calmado (10–20h/semana), foco en aprender y dejar algo útil.",
+        title: "Estrategia · Producto · Desarrollo",
+        subtitle: "Digital Product Owner @ CHUBB · Side projects seleccionados",
+        description: "Producto, optimización y experimentación aplicada. Llevo ideas pequeñas a algo tangible sin ruido innecesario.",
         icon: "🧪",
-        cta: "Ver disponibilidad",
-      },
-      {
-        title: "¿Tienes una idea pequeña?",
-        subtitle: "Podemos iterarla sin presión",
-        description: "No tomo proyectos urgentes ni consultorías largas. Si quieres validar algo simple, mejorar una página o experimentar con una función nueva, mándame un mensaje.",
-        icon: "🌱",
-        cta: "Iniciar conversación",
+        cta: "Contactar"
       }
     ],
     en: [
       {
-        title: "I build web things out of curiosity",
-        subtitle: "Digital Product Owner @ CHUBB (full-time)",
-        description: "In my spare time I explore small ideas: landing pages, tiny tools, prototypes, incremental improvements. Calm pace (10–20h/week), learning‑driven, craft‑minded.",
+        title: "Strategy · Product · Development",
+        subtitle: "Digital Product Owner @ CHUBB · Select side projects",
+        description: "Product, optimization and practical experimentation. I shape small ideas into tangible, low‑noise outputs.",
         icon: "🧪",
-        cta: "View availability",
-      },
-      {
-        title: "Got a small idea?",
-        subtitle: "We can explore it gently",
-        description: "I don't take urgent or heavy consulting work. If you want to validate something simple, polish an existing page or try a small feature, just reach out.",
-        icon: "🌱",
-        cta: "Start a chat",
+        cta: "Contact"
       }
     ]
   }), []);
@@ -51,15 +37,16 @@ const DynamicHeroBanner = () => {
   const currentContent = currentHeroContent[currentIndex];
 
   // Cambiar banner automáticamente cada 10 segundos
+  // Desactivar rotación cuando solo hay un bloque
   useEffect(() => {
+    if (currentHeroContent.length <= 1) return; // no rotation
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % currentHeroContent.length);
         setIsTransitioning(false);
       }, 500);
-    }, 10000);
-
+    }, 25000); // ritmo más lento si en el futuro se añaden variantes
     return () => clearInterval(timer);
   }, [currentHeroContent.length]);
 
@@ -132,7 +119,7 @@ const DynamicHeroBanner = () => {
         <h2 className="hero-title shiny">{currentContent?.title}</h2>
         <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
         <p className="hero-description">{currentContent?.description}</p>
-        <button className="hero-button" onClick={() => scrollToSection('servicios')}>
+        <button className="hero-button" onClick={() => scrollToSection('contacto')}>
           {currentContent?.cta} →
         </button>
       </div>
