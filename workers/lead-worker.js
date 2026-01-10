@@ -55,7 +55,7 @@ const midTierQuestions = [
 function withCorsHeaders(headers = {}, origin = "") {
   const nextHeaders = {
     ...headers,
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin",
@@ -199,6 +199,16 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get("Origin") || "";
+    const STATUS_VALUES = new Set(["NEW", "CONTACTED", "WON", "LOST", "IGNORE"]);
+
+    const isValidAdminToken = (t) => {
+      const token = (t || "").trim();
+      if (!token) return false;
+      const single = env.ADMIN_TOKEN ? [env.ADMIN_TOKEN] : [];
+      const many = env.ADMIN_TOKENS ? String(env.ADMIN_TOKENS).split(",").map((x) => x.trim()) : [];
+      const allowed = new Set([...single, ...many].filter(Boolean));
+      return allowed.size ? allowed.has(token) : false;
+    };
 
     if (request.method === "OPTIONS") {
       return new Response(null, {
@@ -212,6 +222,66 @@ export default {
         status: 200,
         headers: withCorsHeaders({ "Content-Type": "text/plain" }, origin),
       });
+    }
+
+    // Admin: GET statuses
+    if (url.pathname === "/api/admin/statuses") {
+      const token = url.searchParams.get("token") || "";
+      if (!isValidAdminToken(token)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401, origin);
+      }
+
+      try {
+        const raw = env.LEAD_STATUSES ? await env.LEAD_STATUSES.get("lead_statuses") : null;
+        const data = raw ? JSON.parse(raw) : {};
+        return jsonResponse({ ok: true, data }, 200, origin);
+      } catch (e) {
+        return jsonResponse({ ok: false, error: "Failed to read statuses" }, 500, origin);
+      }
+    }
+
+    // Admin: POST update status
+    if (url.pathname === "/api/admin/lead-status") {
+      if (request.method !== "POST") {
+        return new Response("Method Not Allowed", {
+          status: 405,
+          headers: withCorsHeaders({ "Content-Type": "text/plain" }, origin),
+        });
+      }
+
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return jsonResponse({ ok: false, error: "Invalid JSON" }, 400, origin);
+      }
+
+      const token = body?.token || "";
+      const clientLeadId = `${body?.clientLeadId || ""}`.trim();
+      const status = String(body?.status || "").toUpperCase();
+
+      if (!isValidAdminToken(token)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401, origin);
+      }
+      if (!clientLeadId) {
+        return jsonResponse({ ok: false, error: "Missing clientLeadId" }, 400, origin);
+      }
+      if (!STATUS_VALUES.has(status)) {
+        return jsonResponse({ ok: false, error: "Invalid status" }, 400, origin);
+      }
+
+      try {
+        const raw = env.LEAD_STATUSES ? await env.LEAD_STATUSES.get("lead_statuses") : null;
+        const data = raw ? JSON.parse(raw) : {};
+        data[clientLeadId] = status;
+        if (!env.LEAD_STATUSES) {
+          return jsonResponse({ ok: false, error: "KV not configured" }, 500, origin);
+        }
+        await env.LEAD_STATUSES.put("lead_statuses", JSON.stringify(data), { expirationTtl: 60 * 60 * 24 * 365 });
+        return jsonResponse({ ok: true }, 200, origin);
+      } catch (e) {
+        return jsonResponse({ ok: false, error: "Failed to persist status" }, 500, origin);
+      }
     }
 
     if (url.pathname !== "/api/lead") {

@@ -165,6 +165,32 @@
   border-color: #6f6f6f;
   color: #b5b5b5;
 }
+.admin-leads__status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid #444;
+  color: #d2d2d2;
+  background: #1c1c1c;
+}
+.admin-leads__status--new { background: #17202a; border-color: #34495e; color: #9ec1e4; }
+.admin-leads__status--contacted { background: #1a281a; border-color: #2e7d32; color: #7fd18a; }
+.admin-leads__status--won { background: #1f2d1f; border-color: #43a047; color: #a5e1a9; }
+.admin-leads__status--lost { background: #2b1616; border-color: #e53935; color: #ff8a80; }
+.admin-leads__status--ignore { background: #1f1f1f; border-color: #616161; color: #bdbdbd; }
+
+.admin-leads__status-select {
+  background: #141414;
+  border: 1px solid #2d2d2d;
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: #f5f5f5;
+}
 .admin-leads__meta {
   color: #9f9f9f;
   margin: 6px 0 0;

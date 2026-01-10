@@ -3,6 +3,8 @@ import '../styles/AdminLeads.css';
 
 const STORAGE_KEY = 'ADMIN_TOKEN';
 const DEFAULT_TIER = 'ALL';
+const DEFAULT_STATUS_FILTER = 'ALL';
+const STATUS_OPTIONS = ['NEW', 'CONTACTED', 'WON', 'LOST', 'IGNORE'];
 
 const formatDate = (value) => {
   if (!value) {
@@ -81,12 +83,14 @@ const AdminLeads = () => {
   const [isTokenVisible, setIsTokenVisible] = useState(false);
   const [tierFilter, setTierFilter] = useState(DEFAULT_TIER);
   const [companyTypeFilter, setCompanyTypeFilter] = useState('ALL');
+  const [statusFilter, setStatusFilter] = useState(DEFAULT_STATUS_FILTER);
   const [leads, setLeads] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [errorDetails, setErrorDetails] = useState('');
   const [copiedEmail, setCopiedEmail] = useState('');
   const [copiedJson, setCopiedJson] = useState('');
+  const [statusesMap, setStatusesMap] = useState({});
 
   const companyTypes = useMemo(() => {
     const types = new Set();
@@ -107,9 +111,13 @@ const AdminLeads = () => {
       const companyMatches =
         companyTypeFilter === 'ALL' || lead.company_type === companyTypeFilter;
 
-      return tierMatches && companyMatches;
+      const id = lead?.client_lead_id || lead?.id || lead?.email || '';
+      const leadStatus = String(statusesMap[id] || 'NEW').toUpperCase();
+      const statusMatches = statusFilter === DEFAULT_STATUS_FILTER || leadStatus === statusFilter;
+
+      return tierMatches && companyMatches && statusMatches;
     });
-  }, [companyTypeFilter, leads, tierFilter]);
+  }, [companyTypeFilter, leads, tierFilter, statusesMap, statusFilter]);
 
   const handleTokenChange = (event) => {
     const nextToken = event.target.value;
@@ -199,10 +207,75 @@ const AdminLeads = () => {
       const nextLeads = json?.data || [];
       setLeads(nextLeads);
       setStatusMessage(`Cargados ${nextLeads.length} leads`);
+
+      // También cargar statuses del Worker
+      try {
+        const statusUrl = `https://leads.elelier.com/api/admin/statuses?token=${encodeURIComponent(tokenClean)}`;
+        const statusRes = await fetch(statusUrl);
+        if (statusRes.ok) {
+          const statusJson = await statusRes.json();
+          // Acepta tanto array [{clientLeadId, status}] como mapa {id: status}
+          const data = statusJson?.data ?? {};
+          const map = Array.isArray(data)
+            ? data.reduce((acc, it) => {
+                const key = it?.clientLeadId ?? it?.id ?? it?.email;
+                if (key && it?.status) acc[key] = String(it.status).toUpperCase();
+                return acc;
+              }, {})
+            : Object.entries(data).reduce((acc, [k, v]) => {
+                acc[k] = String(v || 'NEW').toUpperCase();
+                return acc;
+              }, {});
+          setStatusesMap(map);
+        } else {
+          console.warn('Statuses fetch failed:', statusRes.status);
+        }
+      } catch (e) {
+        console.warn('Error fetching statuses', e);
+      }
     } catch (fetchError) {
       setErrorDetails('Error de red al cargar los leads.');
       setStatusMessage('');
       setLeads([]);
+    }
+  };
+
+  const handleStatusChange = async (clientLeadId, nextStatus) => {
+    const normalized = String(nextStatus || '').toUpperCase();
+    if (!STATUS_OPTIONS.includes(normalized)) {
+      setErrorDetails('Status inválido.');
+      return;
+    }
+
+    const tokenClean = (token || '').trim();
+    if (!tokenClean) {
+      setErrorDetails('Ingresa un token válido para actualizar el status.');
+      return;
+    }
+
+    // Optimista
+    const prev = statusesMap[clientLeadId];
+    setStatusesMap((m) => ({ ...m, [clientLeadId]: normalized }));
+    setStatusMessage('Actualizando status...');
+
+    try {
+      const res = await fetch('https://leads.elelier.com/api/admin/lead-status', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ clientLeadId, status: normalized, token: tokenClean })
+      });
+
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(`Error ${res.status}: ${t}`);
+      }
+
+      setStatusMessage('Status actualizado');
+    } catch (err) {
+      // Revertir
+      setStatusesMap((m) => ({ ...m, [clientLeadId]: prev }));
+      setErrorDetails('No se pudo actualizar el status.');
+      setStatusMessage('');
     }
   };
 
@@ -262,6 +335,18 @@ const AdminLeads = () => {
           </select>
         </label>
         <label>
+          Status
+          <select
+            value={statusFilter}
+            onChange={(event) => setStatusFilter(event.target.value)}
+          >
+            <option value="ALL">ALL</option>
+            {STATUS_OPTIONS.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </label>
+        <label>
           Company type
           <select
             value={companyTypeFilter}
@@ -290,6 +375,9 @@ const AdminLeads = () => {
             const tierClassName = getTierClassName(lead.tier);
             const utmLine = getUtmLine(lead);
             const copyKey = lead.email || String(index);
+            const clientLeadId = lead?.client_lead_id || lead?.id || lead?.email || String(index);
+            const currentStatus = String(statusesMap[clientLeadId] || 'NEW').toUpperCase();
+            const statusClass = `admin-leads__status-badge admin-leads__status--${currentStatus.toLowerCase()}`;
 
             return (
               <article className="admin-leads__card" key={lead.email || index}>
@@ -298,6 +386,7 @@ const AdminLeads = () => {
                     <div className="admin-leads__headline">
                       <h2>{lead.name || 'Sin nombre'}</h2>
                       <span className={tierClassName}>{tierLabel}</span>
+                      <span className={statusClass}>{currentStatus}</span>
                     </div>
                     <p className="admin-leads__meta">
                       {formatDate(lead.created_at)} | Score {lead.score ?? 'N/A'}
@@ -307,6 +396,18 @@ const AdminLeads = () => {
                     ) : null}
                   </div>
                   <div className="admin-leads__actions">
+                    <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      <span style={{ fontSize: '0.8rem', color: '#b5b5b5' }}>Status</span>
+                      <select
+                        className="admin-leads__status-select"
+                        value={currentStatus}
+                        onChange={(e) => handleStatusChange(clientLeadId, e.target.value)}
+                      >
+                        {STATUS_OPTIONS.map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </select>
+                    </label>
                     <button
                       type="button"
                       className="admin-leads__copy"
