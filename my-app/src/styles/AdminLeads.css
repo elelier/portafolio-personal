@@ -104,9 +104,67 @@
   margin-bottom: 12px;
 }
 
+.admin-leads__headline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-leads__tier {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid #444;
+  color: #d2d2d2;
+  background: #1c1c1c;
+}
+
+.admin-leads__tier--high {
+  background: #2b1212;
+  border-color: #ff5c5c;
+  color: #ff7b7b;
+}
+
+.admin-leads__tier--mid {
+  background: #2b2412;
+  border-color: #f5c542;
+  color: #f5d46f;
+}
+
+.admin-leads__tier--low {
+  background: #1a1a1a;
+  border-color: #6f6f6f;
+  color: #b5b5b5;
+}
+
 .admin-leads__meta {
   color: #9f9f9f;
   margin: 6px 0 0;
+}
+
+.admin-leads__utm {
+  color: #8ab3ff;
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+}
+
+.admin-leads__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.admin-leads__copy--secondary {
+  background: #1e1f23;
+  border: 1px solid #3a3a3a;
+  color: #d7d7d7;
 }
 
 .admin-leads__card dl {
@@ -144,5 +202,10 @@
   .admin-leads__card header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .admin-leads__actions {
+    align-items: flex-start;
+    width: 100%;
   }
 }

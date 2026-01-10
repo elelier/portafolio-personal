@@ -44,6 +44,38 @@ const copyText = async (text) => {
   document.body.removeChild(textarea);
 };
 
+const getTierLabel = (tier) => {
+  if (!tier) {
+    return 'N/A';
+  }
+
+  return String(tier).toUpperCase();
+};
+
+const getTierClassName = (tier) => {
+  const normalized = String(tier || '').toUpperCase();
+
+  if (normalized === 'HIGH') {
+    return 'admin-leads__tier admin-leads__tier--high';
+  }
+
+  if (normalized === 'MID') {
+    return 'admin-leads__tier admin-leads__tier--mid';
+  }
+
+  if (normalized === 'LOW') {
+    return 'admin-leads__tier admin-leads__tier--low';
+  }
+
+  return 'admin-leads__tier';
+};
+
+const getUtmLine = (lead) => {
+  const parts = [lead?.utm_source, lead?.utm_medium, lead?.utm_campaign].filter(Boolean);
+
+  return parts.length ? parts.join(' / ') : '';
+};
+
 const AdminLeads = () => {
   const [token, setToken] = useState(() => sessionStorage.getItem(STORAGE_KEY) || '');
   const [tierFilter, setTierFilter] = useState(DEFAULT_TIER);
@@ -53,6 +85,7 @@ const AdminLeads = () => {
   const [statusMessage, setStatusMessage] = useState('');
   const [errorDetails, setErrorDetails] = useState('');
   const [copiedEmail, setCopiedEmail] = useState('');
+  const [copiedJson, setCopiedJson] = useState('');
 
   const companyTypes = useMemo(() => {
     const types = new Set();
@@ -90,6 +123,16 @@ const AdminLeads = () => {
       setTimeout(() => setCopiedEmail(''), 2000);
     } catch (copyError) {
       setErrorDetails('No se pudo copiar el email.');
+    }
+  };
+
+  const handleCopyJson = async (lead, key) => {
+    try {
+      await copyText(JSON.stringify(lead, null, 2));
+      setCopiedJson(key);
+      setTimeout(() => setCopiedJson(''), 2000);
+    } catch (copyError) {
+      setErrorDetails('No se pudo copiar el JSON.');
     }
   };
 
@@ -215,52 +258,73 @@ const AdminLeads = () => {
         {filteredLeads.length === 0 && !isLoading && !errorDetails ? (
           <p className="admin-leads__empty">No hay leads para mostrar.</p>
         ) : (
-          filteredLeads.map((lead, index) => (
-            <article className="admin-leads__card" key={lead.email || index}>
-              <header>
-                <div>
-                  <h2>{lead.name || 'Sin nombre'}</h2>
-                  <p className="admin-leads__meta">
-                    {formatDate(lead.created_at)} · Tier {lead.tier || 'N/A'} ·
-                    Score {lead.score ?? 'N/A'}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="admin-leads__copy"
-                  onClick={() => handleCopyEmail(lead.email)}
-                >
-                  {copiedEmail === lead.email ? 'Copiado' : 'Copiar email'}
-                </button>
-              </header>
-              <dl>
-                <div>
-                  <dt>Email</dt>
-                  <dd>{lead.email || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Tipo de empresa</dt>
-                  <dd>{lead.company_type || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Problema</dt>
-                  <dd>{lead.problem || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Presupuesto</dt>
-                  <dd>{lead.budget || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Urgencia</dt>
-                  <dd>{lead.urgency || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>URL</dt>
-                  <dd className="admin-leads__url">{lead.page_url || 'N/A'}</dd>
-                </div>
-              </dl>
-            </article>
-          ))
+          filteredLeads.map((lead, index) => {
+            const tierLabel = getTierLabel(lead.tier);
+            const tierClassName = getTierClassName(lead.tier);
+            const utmLine = getUtmLine(lead);
+            const copyKey = lead.email || String(index);
+
+            return (
+              <article className="admin-leads__card" key={lead.email || index}>
+                <header>
+                  <div>
+                    <div className="admin-leads__headline">
+                      <h2>{lead.name || 'Sin nombre'}</h2>
+                      <span className={tierClassName}>{tierLabel}</span>
+                    </div>
+                    <p className="admin-leads__meta">
+                      {formatDate(lead.created_at)} | Score {lead.score ?? 'N/A'}
+                    </p>
+                    {utmLine ? (
+                      <p className="admin-leads__utm">UTM: {utmLine}</p>
+                    ) : null}
+                  </div>
+                  <div className="admin-leads__actions">
+                    <button
+                      type="button"
+                      className="admin-leads__copy"
+                      onClick={() => handleCopyEmail(lead.email)}
+                    >
+                      {copiedEmail === lead.email ? 'Copiado' : 'Copiar email'}
+                    </button>
+                    <button
+                      type="button"
+                      className="admin-leads__copy admin-leads__copy--secondary"
+                      onClick={() => handleCopyJson(lead, copyKey)}
+                    >
+                      {copiedJson === copyKey ? 'JSON copiado' : 'Copiar JSON raw'}
+                    </button>
+                  </div>
+                </header>
+                <dl>
+                  <div>
+                    <dt>Email</dt>
+                    <dd>{lead.email || 'N/A'}</dd>
+                  </div>
+                  <div>
+                    <dt>Tipo de empresa</dt>
+                    <dd>{lead.company_type || 'N/A'}</dd>
+                  </div>
+                  <div>
+                    <dt>Problema</dt>
+                    <dd>{lead.problem || 'N/A'}</dd>
+                  </div>
+                  <div>
+                    <dt>Presupuesto</dt>
+                    <dd>{lead.budget || 'N/A'}</dd>
+                  </div>
+                  <div>
+                    <dt>Urgencia</dt>
+                    <dd>{lead.urgency || 'N/A'}</dd>
+                  </div>
+                  <div>
+                    <dt>URL</dt>
+                    <dd className="admin-leads__url">{lead.page_url || 'N/A'}</dd>
+                  </div>
+                </dl>
+              </article>
+            );
+          })
         )}
       </section>
     </main>
