@@ -78,6 +78,7 @@ const getUtmLine = (lead) => {
 
 const AdminLeads = () => {
   const [token, setToken] = useState(() => sessionStorage.getItem(STORAGE_KEY) || '');
+  const [isTokenVisible, setIsTokenVisible] = useState(false);
   const [tierFilter, setTierFilter] = useState(DEFAULT_TIER);
   const [companyTypeFilter, setCompanyTypeFilter] = useState('ALL');
   const [leads, setLeads] = useState([]);
@@ -114,6 +115,20 @@ const AdminLeads = () => {
     const nextToken = event.target.value;
     setToken(nextToken);
     sessionStorage.setItem(STORAGE_KEY, nextToken);
+  };
+
+  const handlePasteToken = async () => {
+    try {
+      if (navigator.clipboard?.readText) {
+        const text = await navigator.clipboard.readText();
+        setToken(text);
+        sessionStorage.setItem(STORAGE_KEY, text);
+      } else {
+        setErrorDetails('La función de pegar no está disponible en este navegador.');
+      }
+    } catch (err) {
+      setErrorDetails('No se pudo pegar el token desde el portapapeles.');
+    }
   };
 
   const handleCopyEmail = async (email) => {
@@ -188,8 +203,6 @@ const AdminLeads = () => {
       setErrorDetails('Error de red al cargar los leads.');
       setStatusMessage('');
       setLeads([]);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -204,11 +217,25 @@ const AdminLeads = () => {
         <label className="admin-leads__field">
           <span>ADMIN_TOKEN</span>
           <input
-            type="password"
+            type={isTokenVisible ? 'text' : 'password'}
             value={token}
             onChange={handleTokenChange}
             placeholder="Pega tu token"
           />
+          <button
+            type="button"
+            className="admin-leads__token-toggle"
+            onClick={() => setIsTokenVisible((prev) => !prev)}
+          >
+            {isTokenVisible ? 'Ocultar' : 'Mostrar'}
+          </button>
+          <button
+            type="button"
+            className="admin-leads__token-paste"
+            onClick={handlePasteToken}
+          >
+            Pegar
+          </button>
         </label>
 
         <button

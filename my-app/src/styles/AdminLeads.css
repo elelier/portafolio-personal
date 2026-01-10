@@ -28,6 +28,32 @@
   flex-direction: column;
   gap: 6px;
   flex: 1 1 280px;
+  position: relative;
+}
+
+.admin-leads__field input {
+  padding-right: 150px;
+}
+
+.admin-leads__token-toggle,
+.admin-leads__token-paste {
+  position: absolute;
+  top: 30px;
+  bottom: 2px;
+  background: #2a2a2a;
+  border: 1px solid #3d3d3d;
+  color: #c5c5c5;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.admin-leads__token-toggle {
+  right: 68px;
+}
+
+.admin-leads__token-paste {
+  right: 8px;
 }
 
 .admin-leads__field input,
