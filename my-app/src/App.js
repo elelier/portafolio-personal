@@ -26,6 +26,7 @@ import ClientSpace from './components/ClientSpace';
 import ClientDemo from './components/ClientDemo';
 import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
+import AdminLeads from './pages/AdminLeads';
 
 // Utilidades
 import { initializeTheme } from './components/utils/themeUtils';
@@ -97,6 +98,8 @@ function App({ initialLanguage }) {
 
                   <Route path="/proyecto/:token" element={<ClientSpace />} />
                   <Route path="/client-demo" element={<ClientDemo />} />
+
+                  <Route path="/admin/leads" element={<AdminLeads />} />
 
                   {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />

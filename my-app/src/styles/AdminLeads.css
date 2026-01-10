@@ -78,12 +78,10 @@
   color: #ff7070;
   margin-bottom: 16px;
 }
-
 .admin-leads__status {
   color: #9dd4ff;
   margin-bottom: 16px;
 }
-
 .admin-leads__list {
   display: grid;
   gap: 16px;
@@ -103,7 +101,6 @@
   align-items: flex-start;
   margin-bottom: 12px;
 }
-
 .admin-leads__headline {
   display: flex;
   align-items: center;
@@ -142,12 +139,12 @@
   border-color: #6f6f6f;
   color: #b5b5b5;
 }
-
 .admin-leads__meta {
   color: #9f9f9f;
   margin: 6px 0 0;
 }
 
+<<<<<<< HEAD
 .admin-leads__utm {
   color: #8ab3ff;
   margin: 6px 0 0;
@@ -166,7 +163,6 @@
   border: 1px solid #3a3a3a;
   color: #d7d7d7;
 }
-
 .admin-leads__card dl {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -203,7 +199,6 @@
     flex-direction: column;
     align-items: flex-start;
   }
-
   .admin-leads__actions {
     align-items: flex-start;
     width: 100%;
