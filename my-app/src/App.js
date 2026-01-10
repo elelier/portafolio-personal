@@ -10,6 +10,7 @@ import './styles/App.css';
 import SEO from './components/SEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
+import LeadQualifier from './components/LeadQualifier';
 import ArsenalHabilidades from './components/ArsenalHabilidades';
 import Portafolio from './components/Portafolio';
 import Servicios from './components/Servicios';
@@ -72,6 +73,7 @@ function App({ initialLanguage }) {
                   <Route path="/" element={
                     <>
                       <HeroBanner />
+                      <LeadQualifier />
                       <SobreMi />
                       <ArsenalHabilidades />
                       <Portafolio />
