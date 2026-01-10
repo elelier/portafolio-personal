@@ -8,6 +8,7 @@ const initialFormState = {
   problem: '',
   budget: '',
   urgency: '',
+  website: '',
 };
 
 const defaultFollowupQuestions = [
@@ -36,6 +37,7 @@ function LeadQualifier() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [followupAnswers, setFollowupAnswers] = useState({});
   const resultRef = useRef(null);
@@ -85,8 +87,27 @@ function LeadQualifier() {
 
     setLoading(true);
     setError(false);
+    setErrorMessage('');
     setSuccess(false);
     setResult(null);
+
+    const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+    const utm = {
+      source: searchParams?.get('utm_source') || null,
+      medium: searchParams?.get('utm_medium') || null,
+      campaign: searchParams?.get('utm_campaign') || null,
+      term: searchParams?.get('utm_term') || null,
+      content: searchParams?.get('utm_content') || null,
+    };
+
+    const trackedPayload = {
+      ...payload,
+      pageUrl: typeof window !== 'undefined' ? window.location.href : null,
+      referrer: typeof document !== 'undefined' ? document.referrer || null : null,
+      utm,
+      clientLeadId: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      website: payload.website || '',
+    };
 
     try {
       const response = await fetch('https://leads.elelier.com/api/lead', {
@@ -94,10 +115,15 @@ function LeadQualifier() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(trackedPayload),
       });
 
       if (!response.ok) {
+        if (response.status === 429) {
+          setErrorMessage('Estás enviando muy rápido. Intenta en unos minutos.');
+        } else {
+          setErrorMessage('Ocurrio un error. Intenta mas tarde.');
+        }
         setError(true);
         return null;
       }
@@ -110,6 +136,7 @@ function LeadQualifier() {
       }
       return data;
     } catch (fetchError) {
+      setErrorMessage('Ocurrio un error. Intenta mas tarde.');
       setError(true);
       return null;
     } finally {
@@ -150,6 +177,18 @@ function LeadQualifier() {
         </div>
 
         <form className="lead-qualifier__form" onSubmit={handleSubmit} aria-busy={loading}>
+          <div className="lead-qualifier__field" style={{ display: 'none' }} aria-hidden="true">
+            <label htmlFor="lead-website">Website</label>
+            <input
+              id="lead-website"
+              name="website"
+              type="text"
+              value={formData.website}
+              onChange={handleChange}
+              autoComplete="off"
+              tabIndex={-1}
+            />
+          </div>
           <div className="lead-qualifier__field">
             <label htmlFor="lead-name">Nombre</label>
             <input
@@ -259,7 +298,7 @@ function LeadQualifier() {
         <div className="lead-qualifier__feedback" aria-live="polite" ref={resultRef}>
           {error && (
             <p className="lead-qualifier__error" role="alert">
-              Ocurrio un error. Intenta mas tarde.
+              {errorMessage || 'Ocurrio un error. Intenta mas tarde.'}
             </p>
           )}
           {result?.ok && result.tier === 'HIGH' && (
