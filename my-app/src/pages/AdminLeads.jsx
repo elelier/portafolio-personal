@@ -332,39 +332,3 @@ const AdminLeads = () => {
 };
 
 export default AdminLeads;
-              <dl>
-                <div>
-                  <dt>Email</dt>
-                  <dd>{lead.email || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Tipo de empresa</dt>
-                  <dd>{lead.company_type || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Problema</dt>
-                  <dd>{lead.problem || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Presupuesto</dt>
-                  <dd>{lead.budget || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>Urgencia</dt>
-                  <dd>{lead.urgency || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt>URL</dt>
-                  <dd className="admin-leads__url">{lead.page_url || 'N/A'}</dd>
-                </div>
-              </dl>
-            </article>
-          ))
-        )}
-      </section>
-    </main>
-  );
-};
-
-export default AdminLeads;
->>>>>>> 40a322d5a884c2845ce26643bf0bf3cd637d1f26
