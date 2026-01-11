@@ -43,8 +43,6 @@ const buildCalUrl = ({ name, email, clientLeadId, utm, baseUrl }) => {
   if (utm?.medium) params.set('utm_medium', utm.medium);
   if (utm?.campaign) params.set('utm_campaign', utm.campaign);
 
-  params.set('overlayCalendar', 'true');
-
   return url.toString();
 };
 
@@ -92,7 +90,7 @@ function LeadQualifier() {
     });
 
     console.debug('[Cal.com] Opening with params:', finalUrl);
-    window.location.assign(finalUrl);
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleChange = (event) => {
@@ -120,6 +118,8 @@ function LeadQualifier() {
     if (loading) return null;
 
     if (redirecting) return null;
+
+    calendarOpenedRef.current = false;
 
     setLoading(true);
     setError(false);
@@ -185,6 +185,7 @@ function LeadQualifier() {
         calendarOpenedRef.current = false;
         setRedirecting(true);
         openCalendar(trackedPayload, baseUrl);
+        setTimeout(() => setRedirecting(false), 4500);
       }
 
       return data;
@@ -344,7 +345,7 @@ function LeadQualifier() {
           </div>
 
           <button className="lead-qualifier__submit" type="submit" disabled={loading || redirecting}>
-            {loading || redirecting ? 'Procesando...' : 'Enviar diagnostico'}
+            {redirecting ? 'Calendario abierto ✅' : loading ? 'Analizando...' : 'Enviar diagnostico'}
           </button>
         </form>
 
@@ -357,7 +358,7 @@ function LeadQualifier() {
           {result?.ok && result.tier === 'HIGH' && (
             <div className="lead-qualifier__next-step">
               <h3>✅ Listo para llamada</h3>
-              <p>Listo ✅ Te estoy llevando a la agenda…</p>
+              <p>Abrimos el calendario en una pestaña nueva. Cuando termines, puedes volver aquí.</p>
               {result?.nextStep?.url && (
                 <a
                   className="lead-qualifier__action"

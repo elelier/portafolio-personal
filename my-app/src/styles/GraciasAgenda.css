@@ -1,0 +1,62 @@
+.gracias-agenda {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 16px 80px;
+  background: #0f0f0f;
+  color: #f5f5f5;
+}
+
+.gracias-agenda__card {
+  max-width: 600px;
+  width: 100%;
+  background: #121212;
+  border: 1px solid #262626;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.gracias-agenda__card h1 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+}
+
+.gracias-agenda__card p {
+  margin: 0 0 20px;
+  color: #cfcfcf;
+  line-height: 1.5;
+}
+
+.gracias-agenda__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2b63ff, #6a8dff);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid #3c6bff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gracias-agenda__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(43, 99, 255, 0.35);
+}
+
+@media (max-width: 600px) {
+  .gracias-agenda {
+    padding-top: 100px;
+  }
+  .gracias-agenda__card {
+    padding: 24px;
+  }
+  .gracias-agenda__card h1 {
+    font-size: 1.6rem;
+  }
+}

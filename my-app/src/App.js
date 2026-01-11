@@ -27,6 +27,7 @@ import ClientDemo from './components/ClientDemo';
 import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
 import AdminLeads from './pages/AdminLeads';
+import GraciasAgenda from './pages/GraciasAgenda';
 
 // Utilidades
 import { initializeTheme } from './components/utils/themeUtils';
@@ -100,6 +101,7 @@ function App({ initialLanguage }) {
                   <Route path="/client-demo" element={<ClientDemo />} />
 
                   <Route path="/admin/leads" element={<AdminLeads />} />
+                  <Route path="/gracias-agenda" element={<GraciasAgenda />} />
 
                   {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />
