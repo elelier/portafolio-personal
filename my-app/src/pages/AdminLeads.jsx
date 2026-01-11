@@ -259,10 +259,11 @@ const AdminLeads = () => {
     setStatusMessage('Actualizando status...');
 
     try {
-      const res = await fetch('https://leads.elelier.com/api/admin/lead-status', {
+      const url = `https://leads.elelier.com/api/admin/lead-status?token=${encodeURIComponent(tokenClean)}`;
+      const res = await fetch(url, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ clientLeadId, status: normalized, token: tokenClean })
+        body: JSON.stringify({ clientLeadId, status: normalized })
       });
 
       if (!res.ok) {
