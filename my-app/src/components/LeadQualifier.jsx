@@ -32,6 +32,22 @@ const defaultFollowupQuestions = [
   },
 ];
 
+const buildCalUrl = ({ name, email, clientLeadId, utm, baseUrl }) => {
+  const url = new URL(baseUrl || 'https://cal.com/elelier/diagnostico');
+  const params = url.searchParams;
+
+  if (name) params.set('name', name);
+  if (email) params.set('email', email);
+  if (clientLeadId) params.set('client_lead_id', clientLeadId);
+  if (utm?.source) params.set('utm_source', utm.source);
+  if (utm?.medium) params.set('utm_medium', utm.medium);
+  if (utm?.campaign) params.set('utm_campaign', utm.campaign);
+
+  params.set('overlayCalendar', 'true');
+
+  return url.toString();
+};
+
 function LeadQualifier() {
   const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
@@ -40,9 +56,9 @@ function LeadQualifier() {
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [followupAnswers, setFollowupAnswers] = useState({});
+  const [redirecting, setRedirecting] = useState(false);
   const resultRef = useRef(null);
   const calendarOpenedRef = useRef(false);
-  const [currentLeadData, setCurrentLeadData] = useState(null);
 
   const followupQuestions =
     result?.tier === 'MID' && Array.isArray(result?.nextStep?.questions) && result.nextStep.questions.length > 0
@@ -63,26 +79,20 @@ function LeadQualifier() {
     }
   }, [result]);
 
-  const openCalendar = (leadData) => {
-    // Evitar doble apertura
+  const openCalendar = (leadData, baseUrl) => {
     if (calendarOpenedRef.current) return;
     calendarOpenedRef.current = true;
 
-    const base = 'https://cal.com/elelier/diagnostico';
-    const params = new URLSearchParams();
+    const finalUrl = buildCalUrl({
+      name: leadData?.name,
+      email: leadData?.email,
+      clientLeadId: leadData?.clientLeadId,
+      utm: leadData?.utm,
+      baseUrl,
+    });
 
-    // Agregar parámetros solo si tienen valor
-    if (leadData?.name) params.append('name', leadData.name);
-    if (leadData?.email) params.append('email', leadData.email);
-    if (leadData?.clientLeadId) params.append('client_lead_id', leadData.clientLeadId);
-    if (leadData?.utm?.source) params.append('utm_source', leadData.utm.source);
-    if (leadData?.utm?.medium) params.append('utm_medium', leadData.utm.medium);
-    if (leadData?.utm?.campaign) params.append('utm_campaign', leadData.utm.campaign);
-
-    const finalUrl = params.toString() ? `${base}?${params}` : base;
-    
-    console.debug('[Cal.com] Opening with params:', Object.fromEntries(params));
-    window.open(finalUrl, '_blank', 'noopener,noreferrer');
+    console.debug('[Cal.com] Opening with params:', finalUrl);
+    window.location.assign(finalUrl);
   };
 
   const handleChange = (event) => {
@@ -108,6 +118,8 @@ function LeadQualifier() {
 
   const submitLead = async (payload) => {
     if (loading) return null;
+
+    if (redirecting) return null;
 
     setLoading(true);
     setError(false);
@@ -158,17 +170,23 @@ function LeadQualifier() {
       if (data?.tier && typeof data?.score === 'number') {
         trackLead(data);
       }
-      
-      // Auto-open calendar para HIGH tier
-      if (data?.tier === 'HIGH') {
-        // Guardar data para usar en openCalendar
-        setCurrentLeadData(trackedPayload);
-        // Resetear ref para permitir apertura
+
+      const isHigh = data?.ok && data?.tier === 'HIGH';
+      const hasHoneypot = Boolean(trackedPayload.website);
+
+      if (isHigh && !hasHoneypot) {
+        if (!trackedPayload.clientLeadId) {
+          setErrorMessage('No pudimos generar tu ID, intenta de nuevo.');
+          setError(true);
+          return data;
+        }
+
+        const baseUrl = data?.nextStep?.url || 'https://cal.com/elelier/diagnostico';
         calendarOpenedRef.current = false;
-        // Abrir calendario
-        openCalendar(trackedPayload);
+        setRedirecting(true);
+        openCalendar(trackedPayload, baseUrl);
       }
-      
+
       return data;
     } catch (fetchError) {
       setErrorMessage('Ocurrio un error. Intenta mas tarde.');
@@ -325,8 +343,8 @@ function LeadQualifier() {
             </select>
           </div>
 
-          <button className="lead-qualifier__submit" type="submit" disabled={loading}>
-            {loading ? 'Analizando...' : 'Enviar diagnostico'}
+          <button className="lead-qualifier__submit" type="submit" disabled={loading || redirecting}>
+            {loading || redirecting ? 'Procesando...' : 'Enviar diagnostico'}
           </button>
         </form>
 
@@ -339,7 +357,7 @@ function LeadQualifier() {
           {result?.ok && result.tier === 'HIGH' && (
             <div className="lead-qualifier__next-step">
               <h3>✅ Listo para llamada</h3>
-              <p>Abriendo calendario para agendar...</p>
+              <p>Listo ✅ Te estoy llevando a la agenda…</p>
               {result?.nextStep?.url && (
                 <a
                   className="lead-qualifier__action"
@@ -347,7 +365,7 @@ function LeadQualifier() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  O agendar aquí manualmente
+                  Abrir manualmente
                 </a>
               )}
             </div>
@@ -392,9 +410,9 @@ function LeadQualifier() {
                 <button
                   className="lead-qualifier__submit"
                   type="submit"
-                  disabled={loading || !isFollowupReady}
+                  disabled={loading || redirecting || !isFollowupReady}
                 >
-                  {loading ? 'Analizando...' : 'Enviar detalles'}
+                  {loading || redirecting ? 'Procesando...' : 'Enviar detalles'}
                 </button>
               </form>
             </div>
