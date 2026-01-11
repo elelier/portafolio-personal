@@ -208,27 +208,36 @@ const AdminLeads = () => {
       setLeads(nextLeads);
       setStatusMessage(`Cargados ${nextLeads.length} leads`);
 
-      // También cargar statuses del Worker
+      // Rehidratar statuses desde KV del Worker
       try {
-        const statusUrl = `https://leads.elelier.com/api/admin/statuses?token=${encodeURIComponent(tokenClean)}`;
-        const statusRes = await fetch(statusUrl);
-        if (statusRes.ok) {
-          const statusJson = await statusRes.json();
-          // Acepta tanto array [{clientLeadId, status}] como mapa {id: status}
-          const data = statusJson?.data ?? {};
-          const map = Array.isArray(data)
-            ? data.reduce((acc, it) => {
-                const key = it?.clientLeadId ?? it?.id ?? it?.email;
-                if (key && it?.status) acc[key] = String(it.status).toUpperCase();
-                return acc;
-              }, {})
-            : Object.entries(data).reduce((acc, [k, v]) => {
-                acc[k] = String(v || 'NEW').toUpperCase();
-                return acc;
-              }, {});
-          setStatusesMap(map);
+        const ids = nextLeads
+          .map((lead) => lead.client_lead_id)
+          .filter(Boolean);
+        
+        console.debug('statuses ids', ids.length, ids.slice(0, 3));
+        
+        if (ids.length > 0) {
+          const statusUrl = `https://leads.elelier.com/api/admin/statuses?ids=${encodeURIComponent(
+            ids.join(',')
+          )}&token=${encodeURIComponent(tokenClean)}`;
+          
+          const statusRes = await fetch(statusUrl);
+          if (statusRes.ok) {
+            const statusJson = await statusRes.json();
+            const statuses = statusJson?.statuses ?? {};
+            console.debug('statuses returned', Object.keys(statuses || {}).length);
+            setStatusesMap(statuses);
+          } else {
+            console.warn('Statuses fetch failed:', statusRes.status);
+            // Default a NEW para todos
+            const defaultMap = ids.reduce((acc, id) => {
+              acc[id] = 'NEW';
+              return acc;
+            }, {});
+            setStatusesMap(defaultMap);
+          }
         } else {
-          console.warn('Statuses fetch failed:', statusRes.status);
+          setStatusesMap({});
         }
       } catch (e) {
         console.warn('Error fetching statuses', e);
@@ -272,6 +281,22 @@ const AdminLeads = () => {
       }
 
       setStatusMessage('Status actualizado');
+      
+      // Refrescar desde servidor para asegurar consistencia
+      try {
+        const statusUrl = `https://leads.elelier.com/api/admin/statuses?ids=${encodeURIComponent(
+          clientLeadId
+        )}&token=${encodeURIComponent(tokenClean)}`;
+        
+        const statusRes = await fetch(statusUrl);
+        if (statusRes.ok) {
+          const statusJson = await statusRes.json();
+          const statuses = statusJson?.statuses ?? {};
+          setStatusesMap((prev) => ({ ...prev, ...statuses }));
+        }
+      } catch (e) {
+        console.warn('Error refetching status', e);
+      }
     } catch (err) {
       // Revertir
       setStatusesMap((m) => ({ ...m, [clientLeadId]: prev }));
