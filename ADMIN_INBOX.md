@@ -2,6 +2,24 @@
 
 Mini-CRM para gestionar leads generados por el formulario de contacto de elelier.com.
 
+## Cal.com Integration (HIGH Tier)
+
+Para leads **HIGH**, se abre automáticamente Cal.com con los parámetros pre-llenados:
+
+```
+https://cal.com/elelier/diagnostico?name=...&email=...&client_lead_id=...&utm_source=...&utm_medium=...&utm_campaign=...
+```
+
+**Parámetros enviados a Cal.com:**
+- `name`: Nombre del lead
+- `email`: Email del lead
+- `client_lead_id`: ID único generado en frontend
+- `utm_source`: Fuente UTM (si existe)
+- `utm_medium`: Medio UTM (si existe)
+- `utm_campaign`: Campaña UTM (si existe)
+
+Implementación: [my-app/src/components/LeadQualifier.jsx](my-app/src/components/LeadQualifier.jsx#L71)
+
 ## Endpoints
 
 ### GET /api/admin/leads

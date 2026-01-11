@@ -41,6 +41,8 @@ function LeadQualifier() {
   const [success, setSuccess] = useState(false);
   const [followupAnswers, setFollowupAnswers] = useState({});
   const resultRef = useRef(null);
+  const calendarOpenedRef = useRef(false);
+  const [currentLeadData, setCurrentLeadData] = useState(null);
 
   const followupQuestions =
     result?.tier === 'MID' && Array.isArray(result?.nextStep?.questions) && result.nextStep.questions.length > 0
@@ -60,6 +62,28 @@ function LeadQualifier() {
       setFollowupAnswers({});
     }
   }, [result]);
+
+  const openCalendar = (leadData) => {
+    // Evitar doble apertura
+    if (calendarOpenedRef.current) return;
+    calendarOpenedRef.current = true;
+
+    const base = 'https://cal.com/elelier/diagnostico';
+    const params = new URLSearchParams();
+
+    // Agregar parámetros solo si tienen valor
+    if (leadData?.name) params.append('name', leadData.name);
+    if (leadData?.email) params.append('email', leadData.email);
+    if (leadData?.clientLeadId) params.append('client_lead_id', leadData.clientLeadId);
+    if (leadData?.utm?.source) params.append('utm_source', leadData.utm.source);
+    if (leadData?.utm?.medium) params.append('utm_medium', leadData.utm.medium);
+    if (leadData?.utm?.campaign) params.append('utm_campaign', leadData.utm.campaign);
+
+    const finalUrl = params.toString() ? `${base}?${params}` : base;
+    
+    console.debug('[Cal.com] Opening with params:', Object.fromEntries(params));
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -134,6 +158,17 @@ function LeadQualifier() {
       if (data?.tier && typeof data?.score === 'number') {
         trackLead(data);
       }
+      
+      // Auto-open calendar para HIGH tier
+      if (data?.tier === 'HIGH') {
+        // Guardar data para usar en openCalendar
+        setCurrentLeadData(trackedPayload);
+        // Resetear ref para permitir apertura
+        calendarOpenedRef.current = false;
+        // Abrir calendario
+        openCalendar(trackedPayload);
+      }
+      
       return data;
     } catch (fetchError) {
       setErrorMessage('Ocurrio un error. Intenta mas tarde.');
@@ -303,8 +338,8 @@ function LeadQualifier() {
           )}
           {result?.ok && result.tier === 'HIGH' && (
             <div className="lead-qualifier__next-step">
-              <h3>Listo para llamada</h3>
-              <p>Agenda una llamada para revisar el siguiente paso.</p>
+              <h3>✅ Listo para llamada</h3>
+              <p>Abriendo calendario para agendar...</p>
               {result?.nextStep?.url && (
                 <a
                   className="lead-qualifier__action"
@@ -312,7 +347,7 @@ function LeadQualifier() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Agendar llamada
+                  O agendar aquí manualmente
                 </a>
               )}
             </div>
