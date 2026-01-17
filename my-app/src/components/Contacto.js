@@ -69,7 +69,7 @@ function Contacto() {
           : 'Hi, I would like to request a quote.';
       setMessage(quoteText);
     }
-  }, [location.search, language]);
+  }, [location.search, language, message]);
 
 
   const handleSubmit = async (e) => {
