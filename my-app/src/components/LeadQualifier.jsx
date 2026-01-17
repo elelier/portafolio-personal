@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/LeadQualifier.css';
 
 const initialFormState = {
@@ -14,21 +15,21 @@ const initialFormState = {
 const defaultFollowupQuestions = [
   {
     id: 'primaryMetric',
-    label: 'Cual es tu principal metrica a mover?',
+    labelKey: 'leadFollowupMetric',
     type: 'select',
-    options: ['conversion', 'costos', 'lead time', 'retencion', 'otro'],
+    optionKeys: ['leadFollowupConversion', 'leadFollowupCosts', 'leadFollowupLeadTime', 'leadFollowupRetention', 'leadFollowupOther'],
   },
   {
     id: 'dataAvailable',
-    label: 'Tienes datos disponibles?',
+    labelKey: 'leadFollowupData',
     type: 'select',
-    options: ['si', 'no'],
+    optionKeys: ['leadFollowupYes', 'leadFollowupNo'],
   },
   {
     id: 'decisionMaker',
-    label: 'Quien decide?',
+    labelKey: 'leadFollowupDecision',
     type: 'select',
-    options: ['yo', 'partner', 'board', 'otro'],
+    optionKeys: ['leadFollowupMe', 'leadFollowupPartner', 'leadFollowupBoard', 'leadFollowupOther'],
   },
 ];
 
@@ -47,6 +48,7 @@ const buildCalUrl = ({ name, email, clientLeadId, utm, baseUrl }) => {
 };
 
 function LeadQualifier() {
+  const { translate } = useLanguage();
   const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -156,9 +158,9 @@ function LeadQualifier() {
 
       if (!response.ok) {
         if (response.status === 429) {
-          setErrorMessage('Estás enviando muy rápido. Intenta en unos minutos.');
+          setErrorMessage(translate('leadTooFast'));
         } else {
-          setErrorMessage('Ocurrio un error. Intenta mas tarde.');
+          setErrorMessage(translate('leadError'));
         }
         setError(true);
         return null;
@@ -190,7 +192,7 @@ function LeadQualifier() {
 
       return data;
     } catch (fetchError) {
-      setErrorMessage('Ocurrio un error. Intenta mas tarde.');
+      setErrorMessage(translate('leadError'));
       setError(true);
       return null;
     } finally {
@@ -226,8 +228,8 @@ function LeadQualifier() {
     <section id="diagnostico" className="lead-qualifier">
       <div className="lead-qualifier__inner">
         <div className="lead-qualifier__header">
-          <h2>Diagnostico Express</h2>
-          <p>Cuentame tu reto y te digo el siguiente paso.</p>
+          <h2>{translate('leadQualifierTitle')}</h2>
+          <p>{translate('leadQualifierSubtitle')}</p>
         </div>
 
         <form className="lead-qualifier__form" onSubmit={handleSubmit} aria-busy={loading}>
@@ -244,7 +246,7 @@ function LeadQualifier() {
             />
           </div>
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-name">Nombre</label>
+            <label htmlFor="lead-name">{translate('leadName')}</label>
             <input
               id="lead-name"
               name="name"
@@ -257,7 +259,7 @@ function LeadQualifier() {
           </div>
 
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-email">Email</label>
+            <label htmlFor="lead-email">{translate('leadEmail')}</label>
             <input
               id="lead-email"
               name="email"
@@ -270,7 +272,7 @@ function LeadQualifier() {
           </div>
 
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-company-type">Tipo de empresa</label>
+            <label htmlFor="lead-company-type">{translate('leadCompanyType')}</label>
             <select
               id="lead-company-type"
               name="companyType"
@@ -279,17 +281,17 @@ function LeadQualifier() {
               required
             >
               <option value="" disabled>
-                Selecciona una opcion
+                {translate('leadSelectOption')}
               </option>
-              <option value="freelancer">Freelancer</option>
-              <option value="startup">Startup</option>
-              <option value="pyme">Pyme</option>
-              <option value="enterprise">Enterprise</option>
+              <option value="freelancer">{translate('leadFreelancer')}</option>
+              <option value="startup">{translate('leadStartup')}</option>
+              <option value="pyme">{translate('leadPyme')}</option>
+              <option value="enterprise">{translate('leadEnterprise')}</option>
             </select>
           </div>
 
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-problem">Tipo de reto</label>
+            <label htmlFor="lead-problem">{translate('leadProblem')}</label>
             <select
               id="lead-problem"
               name="problem"
@@ -298,8 +300,7 @@ function LeadQualifier() {
               required
             >
               <option value="" disabled>
-                Selecciona una opcion
-              </option>
+                {translate('leadSelectOption')}</option>
               <option value="operacion">Operacion</option>
               <option value="producto">Producto</option>
               <option value="ia">IA</option>
@@ -308,7 +309,7 @@ function LeadQualifier() {
           </div>
 
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-budget">Presupuesto</label>
+            <label htmlFor="lead-budget">{translate('leadBudget')}</label>
             <select
               id="lead-budget"
               name="budget"
@@ -317,7 +318,7 @@ function LeadQualifier() {
               required
             >
               <option value="" disabled>
-                Selecciona una opcion
+                {translate('leadSelectOption')}
               </option>
               <option value="<3k">{'<3k'}</option>
               <option value="3-5k">3-5k</option>
@@ -327,7 +328,7 @@ function LeadQualifier() {
           </div>
 
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-urgency">Urgencia</label>
+            <label htmlFor="lead-urgency">{translate('leadUrgency')}</label>
             <select
               id="lead-urgency"
               name="urgency"
@@ -336,7 +337,7 @@ function LeadQualifier() {
               required
             >
               <option value="" disabled>
-                Selecciona una opcion
+                {translate('leadSelectOption')}
               </option>
               <option value="2w">2w</option>
               <option value="1m">1m</option>
@@ -345,20 +346,20 @@ function LeadQualifier() {
           </div>
 
           <button className="lead-qualifier__submit" type="submit" disabled={loading || redirecting}>
-            {redirecting ? 'Calendario abierto ✅' : loading ? 'Analizando...' : 'Enviar diagnostico'}
+            {redirecting ? translate('leadCalendarOpened') : loading ? translate('leadAnalyzing') : translate('leadSubmitButton')}
           </button>
         </form>
 
         <div className="lead-qualifier__feedback" aria-live="polite" ref={resultRef}>
           {error && (
             <p className="lead-qualifier__error" role="alert">
-              {errorMessage || 'Ocurrio un error. Intenta mas tarde.'}
+              {errorMessage || translate('leadError')}
             </p>
           )}
           {result?.ok && result.tier === 'HIGH' && (
             <div className="lead-qualifier__next-step">
-              <h3>✅ Listo para llamada</h3>
-              <p>Abrimos el calendario en una pestaña nueva. Cuando termines, puedes volver aquí.</p>
+              <h3>{translate('leadHighTitle')}</h3>
+              <p>{translate('leadHighDescription')}</p>
               {result?.nextStep?.url && (
                 <a
                   className="lead-qualifier__action"
@@ -366,20 +367,22 @@ function LeadQualifier() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Abrir manualmente
+                  {translate('leadHighAction')}
                 </a>
               )}
             </div>
           )}
           {result?.ok && result.tier === 'MID' && (
             <div className="lead-qualifier__next-step">
-              <h3>Un par de detalles mas</h3>
-              <p>Responde estas preguntas para afinar el diagnostico.</p>
+              <h3>{translate('leadMidTitle')}</h3>
+              <p>{translate('leadMidDescription')}</p>
               <form className="lead-qualifier__followup-form" onSubmit={handleFollowupSubmit}>
                 {followupQuestions.map((question) => (
                   <div className="lead-qualifier__field" key={question.id}>
-                    <label htmlFor={`followup-${question.id}`}>{question.label}</label>
-                    {Array.isArray(question.options) ? (
+                    <label htmlFor={`followup-${question.id}`}>
+                      {question.labelKey ? translate(question.labelKey) : question.label}
+                    </label>
+                    {Array.isArray(question.optionKeys || question.options) ? (
                       <select
                         id={`followup-${question.id}`}
                         name={question.id}
@@ -388,11 +391,11 @@ function LeadQualifier() {
                         required
                       >
                         <option value="" disabled>
-                          Selecciona una opcion
+                          {translate('leadSelectOption')}
                         </option>
-                        {question.options.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
+                        {(question.optionKeys || question.options).map((option) => (
+                          <option key={option} value={translate(option) || option}>
+                            {translate(option) || option}
                           </option>
                         ))}
                       </select>
@@ -413,15 +416,15 @@ function LeadQualifier() {
                   type="submit"
                   disabled={loading || redirecting || !isFollowupReady}
                 >
-                  {loading || redirecting ? 'Procesando...' : 'Enviar detalles'}
+                  {loading || redirecting ? translate('leadMidProcessing') : translate('leadMidSubmitButton')}
                 </button>
               </form>
             </div>
           )}
           {result?.ok && result.tier === 'LOW' && (
             <div className="lead-qualifier__next-step">
-              <h3>Recurso recomendado</h3>
-              <p>Te dejamos un recurso para avanzar con claridad.</p>
+              <h3>{translate('leadLowTitle')}</h3>
+              <p>{translate('leadLowDescription')}</p>
               {result?.nextStep?.url && (
                 <a
                   className="lead-qualifier__action"
@@ -429,13 +432,13 @@ function LeadQualifier() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Ver recurso
+                  {translate('leadLowAction')}
                 </a>
               )}
             </div>
           )}
           {success && result?.ok && !result?.tier && (
-            <p className="lead-qualifier__success">Gracias. Te mostraremos el siguiente paso.</p>
+            <p className="lead-qualifier__success">{translate('leadSuccessGeneric')}</p>
           )}
         </div>
       </div>
