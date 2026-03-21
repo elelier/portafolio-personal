@@ -1,0 +1,273 @@
+@import '../index.css';
+
+.aion-labs-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(125, 211, 252, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(0, 204, 153, 0.16), transparent 28%),
+    linear-gradient(180deg, var(--color-bg) 0%, rgba(10, 18, 36, 0.98) 100%);
+}
+
+.aion-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 72px;
+}
+
+.aion-hero__content,
+.aion-section__inner,
+.aion-cta-card {
+  width: min(1120px, 100%);
+}
+
+.aion-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.aion-badge,
+.aion-section__eyebrow,
+.aion-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aion-badge {
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--hero-title-color);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.aion-kicker,
+.aion-section__eyebrow {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.aion-hero h1,
+.aion-section h2 {
+  color: var(--color-text);
+}
+
+.aion-hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  line-height: 1.04;
+  max-width: 1000px;
+  margin: 0 auto 24px;
+}
+
+.aion-lead,
+.aion-section__heading p,
+.aion-section__copy p,
+.aion-card p,
+.aion-story-card p,
+.aion-cta-card p {
+  color: rgba(246, 249, 252, 0.82);
+  line-height: 1.75;
+  font-size: 1.06rem;
+}
+
+.aion-lead {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.aion-hero__actions {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.aion-inline-icon {
+  margin-left: 8px;
+}
+
+.aion-hero__glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.65;
+}
+
+.aion-hero__glow--one {
+  width: 320px;
+  height: 320px;
+  background: rgba(125, 211, 252, 0.22);
+  top: 10%;
+  left: 8%;
+}
+
+.aion-hero__glow--two {
+  width: 360px;
+  height: 360px;
+  background: rgba(0, 204, 153, 0.16);
+  bottom: 8%;
+  right: 8%;
+}
+
+.aion-section {
+  padding: 32px 24px 88px;
+}
+
+.aion-section__inner {
+  margin: 0 auto;
+}
+
+.aion-section--intro .aion-section__inner,
+.aion-section--contrast .aion-section__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+}
+
+.aion-section__inner--stacked {
+  display: block;
+}
+
+.aion-principles-card,
+.aion-card,
+.aion-story-card,
+.aion-cta-card {
+  background: rgba(10, 19, 37, 0.72);
+  border: 1px solid rgba(125, 211, 252, 0.14);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+.aion-principles-card,
+.aion-story-card {
+  padding: 32px;
+}
+
+.aion-principles-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.aion-principles-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: rgba(246, 249, 252, 0.9);
+  line-height: 1.6;
+}
+
+.aion-principles-card svg,
+.aion-card__icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.aion-section__heading {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.aion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.aion-card {
+  padding: 28px;
+}
+
+.aion-card__icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background: rgba(125, 211, 252, 0.08);
+  margin-bottom: 18px;
+}
+
+.aion-card h3,
+.aion-story-card h2,
+.aion-principles-card h2,
+.aion-cta-card h2,
+.aion-section__copy h2,
+.aion-section__heading h2 {
+  margin-bottom: 14px;
+}
+
+.aion-section--contrast {
+  padding-top: 0;
+}
+
+.aion-section--cta {
+  padding-top: 0;
+  padding-bottom: 110px;
+}
+
+.aion-cta-card {
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .aion-grid,
+  .aion-section--intro .aion-section__inner,
+  .aion-section--contrast .aion-section__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .aion-hero {
+    min-height: auto;
+    padding-top: 110px;
+  }
+}
+
+@media (max-width: 640px) {
+  .aion-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .aion-section,
+  .aion-hero {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .aion-card,
+  .aion-principles-card,
+  .aion-story-card,
+  .aion-cta-card {
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .aion-lead,
+  .aion-section__heading p,
+  .aion-section__copy p,
+  .aion-card p,
+  .aion-story-card p,
+  .aion-cta-card p {
+    font-size: 1rem;
+  }
+}

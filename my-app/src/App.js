@@ -30,6 +30,7 @@ import AdminLeads from './pages/AdminLeads';
 import GraciasAgenda from './pages/GraciasAgenda';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import AionLabs from './components/AionLabs';
 
 // Utilidades
 import { initializeTheme } from './components/utils/themeUtils';
@@ -106,6 +107,7 @@ function App({ initialLanguage }) {
                   <Route path="/gracias-agenda" element={<GraciasAgenda />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<TermsOfService />} />
+                  <Route path="/aionlabs" element={<AionLabs />} />
 
                   {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />
