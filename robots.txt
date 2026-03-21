@@ -1,6 +1,6 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Allow: /
 Disallow: /proyecto/
 Disallow: /admin/
 
-# Sitemap: https://www.elelier.com/sitemap.xml
+Sitemap: https://www.elelier.com/sitemap.xml
