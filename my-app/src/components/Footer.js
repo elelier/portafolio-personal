@@ -14,6 +14,8 @@ function Footer() {
       portafolio: 'Portafolio',
       servicios: 'Servicios',
       contacto: 'Contacto',
+      privacy: 'Privacidad',
+      terms: 'Términos',
       connect: 'Conéctate conmigo en:'
     },
     en: {
@@ -23,6 +25,8 @@ function Footer() {
       portafolio: 'Portfolio',
       servicios: 'Services',
       contacto: 'Contact',
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
       connect: 'Connect with me on:'
     }
   };
@@ -44,6 +48,8 @@ function Footer() {
           <Link to="/" onClick={() => handleScrollToElement('portafolio')}>{footerLinks[language].portafolio}</Link>
           <Link to="/" onClick={() => handleScrollToElement('servicios')}>{footerLinks[language].servicios}</Link>
           <Link to="/" onClick={() => handleScrollToElement('contacto')}>{footerLinks[language].contacto}</Link>
+          <Link to="/privacy-policy">{footerLinks[language].privacy}</Link>
+          <Link to="/terms-of-service">{footerLinks[language].terms}</Link>
         </div>
         <div className="footer-social">
           <p>{footerLinks[language].connect}</p>

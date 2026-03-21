@@ -28,6 +28,8 @@ import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
 import AdminLeads from './pages/AdminLeads';
 import GraciasAgenda from './pages/GraciasAgenda';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Utilidades
 import { initializeTheme } from './components/utils/themeUtils';
@@ -102,6 +104,8 @@ function App({ initialLanguage }) {
 
                   <Route path="/admin/leads" element={<AdminLeads />} />
                   <Route path="/gracias-agenda" element={<GraciasAgenda />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-of-service" element={<TermsOfService />} />
 
                   {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />
