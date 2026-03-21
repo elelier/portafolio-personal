@@ -217,7 +217,7 @@ npm run build
 
 ## Contributing
 
-No se aceptan contribuciones, pero siéntete libre de copiar el repositorio para hacer tu propia landing.
+No se aceptan contribuciones externas por ahora, pero siéntete libre de clonar el repositorio como referencia para construir tu propia landing.
 
 ## License
 
