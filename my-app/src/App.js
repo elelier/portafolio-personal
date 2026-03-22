@@ -46,9 +46,29 @@ if (process.env.NODE_ENV === 'development') {
 const Blog = lazy(() => import('./components/Blog'));
 const Entrada = lazy(() => import('./components/entradas/entrada1'));
 
-// Importa el componente de Tarifario para la redirección
-
 function App({ initialLanguage }) {
+  const homeSectionPalette = [
+    'var(--color-bg)',
+    'var(--color-bg-3)',
+    'var(--color-bg)',
+    'var(--color-bg-2)',
+  ];
+
+  const homeSections = [
+    { key: 'hero', Component: HeroBanner },
+    { key: 'diagnostico', Component: LeadQualifier },
+    { key: 'sobre-mi', Component: SobreMi },
+    { key: 'habilidades', Component: ArsenalHabilidades },
+    { key: 'portafolio', Component: Portafolio },
+    { key: 'servicios', Component: Servicios },
+    { key: 'contacto', Component: Contacto },
+  ];
+
+  const getSectionTransitionStyle = (index) => ({
+    '--section-bg-start': homeSectionPalette[index % homeSectionPalette.length],
+    '--section-bg-end': homeSectionPalette[(index + 1) % homeSectionPalette.length],
+  });
+
   useEffect(() => {
     initializeTheme();
     loadExternalScripts().then(() => {});
@@ -77,18 +97,13 @@ function App({ initialLanguage }) {
                 <Routes>
                   <Route path="/" element={
                     <>
-                      <HeroBanner />
-                      <LeadQualifier />
-                      <SobreMi />
-                      <ArsenalHabilidades />
-                      <Portafolio />
+                      {homeSections.map(({ key, Component }, index) => (
+                        <Component key={key} style={getSectionTransitionStyle(index)} />
+                      ))}
                       {/* Temporalmente oculto mientras se cargan las imágenes
                       <Sites simplified={true} /> */}
-                      <Servicios />
-                      <Contacto />
                     </>
                   } />
-                  {/* Ruta para la redirección del tarifario */}
                   <Route path="/tarifas-2024" element={<Tarifario />} />
                   <Route path="/hero-banner" element={<HeroBanner />} />
                   <Route path="/portafolio" element={<Portafolio />} />
@@ -99,19 +114,14 @@ function App({ initialLanguage }) {
                   <Route path="/contacto" element={<Contacto />} />
                   <Route path="/cotizacion/:id" element={<ExternalRedirect />} />
                   <Route path="/mockup/:id" element={<MockupRedirect />} />
-
                   <Route path="/proyecto/:token" element={<ClientSpace />} />
                   <Route path="/client-demo" element={<ClientDemo />} />
-
                   <Route path="/admin/leads" element={<AdminLeads />} />
                   <Route path="/gracias-agenda" element={<GraciasAgenda />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<TermsOfService />} />
                   <Route path="/aionlabs" element={<AionLabs />} />
-
-                  {/* Agregamos ruta independiente */}
                   <Route path="/sites" element={<Sites simplified={false} />} />
-
                 </Routes>
               </Suspense>
               <Footer />

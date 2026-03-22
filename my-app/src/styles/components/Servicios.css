@@ -25,7 +25,7 @@
 .servicios {
   position: relative;
   padding: 60px 20px;
-  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-3));
+  background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
   margin: auto;
   min-height: 100vh;
   overflow: hidden;

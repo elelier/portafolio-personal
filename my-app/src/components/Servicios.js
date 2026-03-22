@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/Servicios.css';
 
-function Servicios() {
+function Servicios({ style }) {
   const { language } = useLanguage();
 
   const content = {
@@ -59,7 +59,7 @@ function Servicios() {
   const t = content[language] || content.es;
 
   return (
-    <section id="disponibilidad" className="servicios colaboraciones disponibilidad">
+    <section id="disponibilidad" className="servicios colaboraciones disponibilidad" style={style}>
       <div className="servicios-header">
         <h1>{/* title */}{t.heading}</h1>
       </div>

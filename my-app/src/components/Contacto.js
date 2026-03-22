@@ -49,7 +49,7 @@ const texts = {
   }
 };
 
-function Contacto() {
+function Contacto({ style }) {
   const { language } = useLanguage();
   const t = texts[language] || texts.en; // Default to English if language is not found
 
@@ -101,6 +101,7 @@ function Contacto() {
     <motion.section
       id="contacto"
       className="contacto"
+      style={style}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

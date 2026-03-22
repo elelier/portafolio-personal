@@ -7,7 +7,7 @@ import tech_vision from '../assets/images/technologic_vision.png';
 import { useSwipeable } from 'react-swipeable';
 import { useLanguage } from '../contexts/LanguageContext';
 
-function SobreMi() {
+function SobreMi({ style }) {
   const [currentSection, setCurrentSection] = useState(0);
   const { language } = useLanguage();
   const intervalRef = useRef(null);
@@ -295,7 +295,7 @@ function SobreMi() {
   };
 
   return (
-    <section id="sobre-mi" className="sobre-mi" {...swipeHandlers}>
+    <section id="sobre-mi" className="sobre-mi" style={style} {...swipeHandlers}>
       <div className="contenido-sobre-mi">
         <h2>{language === 'es' ? 'SOBRE MI' : 'ABOUT ME'}</h2>
 

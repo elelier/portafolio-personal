@@ -2,7 +2,7 @@
 
 .lead-qualifier {
   padding: 80px 20px;
-  background: linear-gradient(180deg, var(--color-bg), var(--color-bg-3));
+  background: linear-gradient(180deg, var(--section-bg-start, var(--color-bg-3)), var(--section-bg-end, var(--color-bg)));
 }
 
 .lead-qualifier__inner {

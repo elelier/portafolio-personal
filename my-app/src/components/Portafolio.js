@@ -12,7 +12,7 @@ import gofarmaImg from '../assets/images/gofarma.jpg';
 import farmalistoImg from '../assets/images/farmalisto.jpg';
 import pepsicoImg from '../assets/images/pepsico.jpg';
 
-const Portafolio = () => {
+const Portafolio = ({ style }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const { language } = useLanguage();
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
@@ -243,7 +243,7 @@ const Portafolio = () => {
   };
 
   return (
-    <section id="portafolio" className="portafolio">
+    <section id="portafolio" className="portafolio" style={style}>
       <h2>{currentLang === 'es' ? 'CARRERA PROFESIONAL' : 'PROFESSIONAL CAREER'}</h2>
       <p className="introduccion">
         {currentLang === 'es' 

@@ -5,7 +5,7 @@
 .sobre-mi {
   position: relative;
   padding: 60px 20px; /* Añadido padding para más espacio arriba y abajo */
-  background: linear-gradient(to bottom, var(--color-bg-3), var(--color-bg)); /* Color del fondo del contenedor */
+  background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg-3)), var(--section-bg-end, var(--color-bg))); /* Color del fondo del contenedor */
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Alinea desde la parte superior */

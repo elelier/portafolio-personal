@@ -3,7 +3,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 import '../styles/components/HeroBanner.css';
 
-const DynamicHeroBanner = () => {
+const DynamicHeroBanner = ({ style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -112,7 +112,7 @@ const DynamicHeroBanner = () => {
   }, []);
 
   return (
-    <header id="hero-banner" className={`hero-banner ${scrollPosition ? 'zoom' : ''} ${currentTheme}-theme`}>
+    <header id="hero-banner" className={`hero-banner ${scrollPosition ? 'zoom' : ''} ${currentTheme}-theme`} style={style}>
       <canvas id="star-canvas"></canvas>
 
       <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass()}`}>
