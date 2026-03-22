@@ -10,7 +10,7 @@ import logistics from '../assets/images/skills/logistics.png';
 import ecommerce from '../assets/images/skills/ecommerce.png';
 import { useLanguage } from '../contexts/LanguageContext';
 
-function ArsenalHabilidades() {
+function ArsenalHabilidades({ style }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const { language } = useLanguage();
 

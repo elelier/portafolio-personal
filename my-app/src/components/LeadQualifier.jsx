@@ -47,7 +47,7 @@ const buildCalUrl = ({ name, email, clientLeadId, utm, baseUrl }) => {
   return url.toString();
 };
 
-function LeadQualifier() {
+function LeadQualifier({ style }) {
   const { translate } = useLanguage();
   const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
@@ -225,7 +225,7 @@ function LeadQualifier() {
     followupQuestions.every((question) => Boolean(followupAnswers[question.id]));
 
   return (
-    <section id="diagnostico" className="lead-qualifier">
+    <section id="diagnostico" className="lead-qualifier" style={style}>
       <div className="lead-qualifier__inner">
         <div className="lead-qualifier__header">
           <h2>{translate('leadQualifierTitle')}</h2>

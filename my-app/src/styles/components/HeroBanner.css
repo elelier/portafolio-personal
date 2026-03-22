@@ -13,7 +13,7 @@ html {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-3));
+  background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
   overflow: hidden;
   color: var(--color-text);
   padding: 20px;
