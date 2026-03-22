@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.1ed96b5c.css",
+    "main.css": "/static/css/main.53611dcd.css",
     "main.js": "/static/js/main.9d45cec5.js",
     "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
     "static/js/889.30cf63f0.chunk.js": "/static/js/889.30cf63f0.chunk.js",
@@ -24,7 +24,7 @@
     "static/media/gofarma.jpg": "/static/media/gofarma.5a440aec29a4d405ea0b.jpg",
     "static/media/farmalisto.jpg": "/static/media/farmalisto.3f0bee5b23c66aa31b0d.jpg",
     "index.html": "/index.html",
-    "main.1ed96b5c.css.map": "/static/css/main.1ed96b5c.css.map",
+    "main.53611dcd.css.map": "/static/css/main.53611dcd.css.map",
     "main.9d45cec5.js.map": "/static/js/main.9d45cec5.js.map",
     "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
     "889.30cf63f0.chunk.js.map": "/static/js/889.30cf63f0.chunk.js.map",
@@ -32,7 +32,7 @@
     "930.0d885452.chunk.js.map": "/static/js/930.0d885452.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ed96b5c.css",
+    "static/css/main.53611dcd.css",
     "static/js/main.9d45cec5.js"
   ]
 }
