@@ -1,37 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/LeadQualifier.css';
 
 const initialFormState = {
   name: '',
   email: '',
-  companyType: '',
+  companyType: 'pyme',
   problem: '',
   budget: '',
   urgency: '',
+  expectedOutcome: '',
   website: '',
 };
-
-const defaultFollowupQuestions = [
-  {
-    id: 'primaryMetric',
-    labelKey: 'leadFollowupMetric',
-    type: 'select',
-    optionKeys: ['leadFollowupConversion', 'leadFollowupCosts', 'leadFollowupLeadTime', 'leadFollowupRetention', 'leadFollowupOther'],
-  },
-  {
-    id: 'dataAvailable',
-    labelKey: 'leadFollowupData',
-    type: 'select',
-    optionKeys: ['leadFollowupYes', 'leadFollowupNo'],
-  },
-  {
-    id: 'decisionMaker',
-    labelKey: 'leadFollowupDecision',
-    type: 'select',
-    optionKeys: ['leadFollowupMe', 'leadFollowupPartner', 'leadFollowupBoard', 'leadFollowupOther'],
-  },
-];
 
 const buildCalUrl = ({ name, email, clientLeadId, utm, baseUrl }) => {
   const url = new URL(baseUrl || 'https://cal.com/elelier/diagnostico');
@@ -49,35 +30,22 @@ const buildCalUrl = ({ name, email, clientLeadId, utm, baseUrl }) => {
 
 function LeadQualifier({ style }) {
   const { translate } = useLanguage();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
-  const [followupAnswers, setFollowupAnswers] = useState({});
   const [redirecting, setRedirecting] = useState(false);
   const resultRef = useRef(null);
   const calendarOpenedRef = useRef(false);
-
-  const followupQuestions =
-    result?.tier === 'MID' && Array.isArray(result?.nextStep?.questions) && result.nextStep.questions.length > 0
-      ? result.nextStep.questions
-      : result?.tier === 'MID'
-        ? defaultFollowupQuestions
-        : [];
 
   useEffect(() => {
     if ((result || error) && resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [result, error]);
-
-  useEffect(() => {
-    if (result?.tier !== 'MID') {
-      setFollowupAnswers({});
-    }
-  }, [result]);
 
   const openCalendar = (leadData, baseUrl) => {
     if (calendarOpenedRef.current) return;
@@ -91,18 +59,12 @@ function LeadQualifier({ style }) {
       baseUrl,
     });
 
-    console.debug('[Cal.com] Opening with params:', finalUrl);
     window.open(finalUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFollowupChange = (event) => {
-    const { name, value } = event.target;
-    setFollowupAnswers((prev) => ({ ...prev, [name]: value }));
   };
 
   const trackLead = (data) => {
@@ -117,12 +79,9 @@ function LeadQualifier({ style }) {
   };
 
   const submitLead = async (payload) => {
-    if (loading) return null;
-
-    if (redirecting) return null;
+    if (loading || redirecting) return null;
 
     calendarOpenedRef.current = false;
-
     setLoading(true);
     setError(false);
     setErrorMessage('');
@@ -157,11 +116,7 @@ function LeadQualifier({ style }) {
       });
 
       if (!response.ok) {
-        if (response.status === 429) {
-          setErrorMessage(translate('leadTooFast'));
-        } else {
-          setErrorMessage(translate('leadError'));
-        }
+        setErrorMessage(response.status === 429 ? translate('leadTooFast') : translate('leadError'));
         setError(true);
         return null;
       }
@@ -169,25 +124,30 @@ function LeadQualifier({ style }) {
       const data = await response.json();
       setResult(data);
       setSuccess(true);
+
       if (data?.tier && typeof data?.score === 'number') {
         trackLead(data);
       }
 
-      const isHigh = data?.ok && data?.tier === 'HIGH';
       const hasHoneypot = Boolean(trackedPayload.website);
+      if (!hasHoneypot) {
+        const baseUrl = data?.nextStep?.url || 'https://cal.com/elelier/diagnostico';
+        const calUrl = buildCalUrl({
+          name: trackedPayload.name,
+          email: trackedPayload.email,
+          clientLeadId: trackedPayload.clientLeadId,
+          utm: trackedPayload.utm,
+          baseUrl,
+        });
 
-      if (isHigh && !hasHoneypot) {
-        if (!trackedPayload.clientLeadId) {
-          setErrorMessage('No pudimos generar tu ID, intenta de nuevo.');
-          setError(true);
-          return data;
+        sessionStorage.setItem('elelierLastDiagnosisCalUrl', calUrl);
+        setRedirecting(true);
+
+        if (data?.tier === 'HIGH') {
+          openCalendar(trackedPayload, baseUrl);
         }
 
-        const baseUrl = data?.nextStep?.url || 'https://cal.com/elelier/diagnostico';
-        calendarOpenedRef.current = false;
-        setRedirecting(true);
-        openCalendar(trackedPayload, baseUrl);
-        setTimeout(() => setRedirecting(false), 4500);
+        navigate('/gracias-diagnostico');
       }
 
       return data;
@@ -204,25 +164,6 @@ function LeadQualifier({ style }) {
     event.preventDefault();
     await submitLead(formData);
   };
-
-  const handleFollowupSubmit = async (event) => {
-    event.preventDefault();
-
-    const answers = followupQuestions.map((question) => ({
-      id: question.id,
-      label: question.label,
-      value: followupAnswers[question.id] || '',
-    }));
-
-    await submitLead({
-      ...formData,
-      followupAnswers: answers,
-    });
-  };
-
-  const isFollowupReady =
-    followupQuestions.length > 0 &&
-    followupQuestions.every((question) => Boolean(followupAnswers[question.id]));
 
   return (
     <section id="diagnostico" className="lead-qualifier" style={style}>
@@ -245,15 +186,16 @@ function LeadQualifier({ style }) {
               tabIndex={-1}
             />
           </div>
+
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-name">{translate('leadName')}</label>
+            <label htmlFor="lead-name">{translate('leadNameCompany')}</label>
             <input
               id="lead-name"
               name="name"
               type="text"
               value={formData.name}
               onChange={handleChange}
-              autoComplete="name"
+              autoComplete="organization"
               required
             />
           </div>
@@ -271,42 +213,20 @@ function LeadQualifier({ style }) {
             />
           </div>
 
-          <div className="lead-qualifier__field">
-            <label htmlFor="lead-company-type">{translate('leadCompanyType')}</label>
-            <select
-              id="lead-company-type"
-              name="companyType"
-              value={formData.companyType}
-              onChange={handleChange}
-              required
-            >
-              <option value="" disabled>
-                {translate('leadSelectOption')}
-              </option>
-              <option value="freelancer">{translate('leadFreelancer')}</option>
-              <option value="startup">{translate('leadStartup')}</option>
-              <option value="pyme">{translate('leadPyme')}</option>
-              <option value="enterprise">{translate('leadEnterprise')}</option>
-            </select>
-          </div>
+          <fieldset className="lead-qualifier__fieldset">
+            <legend>{translate('leadProblem')}</legend>
+            <label><input type="radio" name="problem" value="validar-idea" checked={formData.problem === 'validar-idea'} onChange={handleChange} required /> {translate('leadValidateIdea')}</label>
+            <label><input type="radio" name="problem" value="optimizar-proceso" checked={formData.problem === 'optimizar-proceso'} onChange={handleChange} /> {translate('leadOptimizeProcess')}</label>
+            <label><input type="radio" name="problem" value="automatizar-ia" checked={formData.problem === 'automatizar-ia'} onChange={handleChange} /> {translate('leadAutomateAI')}</label>
+            <label><input type="radio" name="problem" value="otro" checked={formData.problem === 'otro'} onChange={handleChange} /> {translate('leadOther')}</label>
+          </fieldset>
 
-          <div className="lead-qualifier__field">
-            <label htmlFor="lead-problem">{translate('leadProblem')}</label>
-            <select
-              id="lead-problem"
-              name="problem"
-              value={formData.problem}
-              onChange={handleChange}
-              required
-            >
-              <option value="" disabled>
-                {translate('leadSelectOption')}</option>
-              <option value="operacion">Operacion</option>
-              <option value="producto">Producto</option>
-              <option value="ia">IA</option>
-              <option value="web">Web</option>
-            </select>
-          </div>
+          <fieldset className="lead-qualifier__fieldset">
+            <legend>{translate('leadUrgency')}</legend>
+            <label><input type="radio" name="urgency" value="30-dias" checked={formData.urgency === '30-dias'} onChange={handleChange} required /> {translate('leadNext30Days')}</label>
+            <label><input type="radio" name="urgency" value="trimestre" checked={formData.urgency === 'trimestre'} onChange={handleChange} /> {translate('leadThisQuarter')}</label>
+            <label><input type="radio" name="urgency" value="explorando" checked={formData.urgency === 'explorando'} onChange={handleChange} /> {translate('leadExploring')}</label>
+          </fieldset>
 
           <div className="lead-qualifier__field">
             <label htmlFor="lead-budget">{translate('leadBudget')}</label>
@@ -317,36 +237,33 @@ function LeadQualifier({ style }) {
               onChange={handleChange}
               required
             >
-              <option value="" disabled>
-                {translate('leadSelectOption')}
-              </option>
-              <option value="<3k">{'<3k'}</option>
-              <option value="3-5k">3-5k</option>
-              <option value="5-10k">5-10k</option>
-              <option value="10k+">10k+</option>
+              <option value="" disabled>{translate('leadSelectOption')}</option>
+              <option value="<1k">{translate('leadBudgetUnder1k')}</option>
+              <option value="1-3k">$1k-$3k</option>
+              <option value="3-10k">$3k-$10k</option>
+              <option value="unknown">{translate('leadBudgetUnknown')}</option>
             </select>
           </div>
 
           <div className="lead-qualifier__field">
-            <label htmlFor="lead-urgency">{translate('leadUrgency')}</label>
+            <label htmlFor="lead-expected-outcome">{translate('leadExpectedOutcome')}</label>
             <select
-              id="lead-urgency"
-              name="urgency"
-              value={formData.urgency}
+              id="lead-expected-outcome"
+              name="expectedOutcome"
+              value={formData.expectedOutcome}
               onChange={handleChange}
               required
             >
-              <option value="" disabled>
-                {translate('leadSelectOption')}
-              </option>
-              <option value="2w">2w</option>
-              <option value="1m">1m</option>
-              <option value="3m">3m</option>
+              <option value="" disabled>{translate('leadSelectOption')}</option>
+              <option value="prototipo">{translate('leadOutcomePrototype')}</option>
+              <option value="automatizacion">{translate('leadOutcomeAutomation')}</option>
+              <option value="metricas">{translate('leadOutcomeMetrics')}</option>
+              <option value="claridad">{translate('leadOutcomeClarity')}</option>
             </select>
           </div>
 
           <button className="lead-qualifier__submit" type="submit" disabled={loading || redirecting}>
-            {redirecting ? translate('leadCalendarOpened') : loading ? translate('leadAnalyzing') : translate('leadSubmitButton')}
+            {redirecting ? translate('leadRedirecting') : loading ? translate('leadAnalyzing') : translate('leadSubmitButton')}
           </button>
         </form>
 
@@ -356,88 +273,7 @@ function LeadQualifier({ style }) {
               {errorMessage || translate('leadError')}
             </p>
           )}
-          {result?.ok && result.tier === 'HIGH' && (
-            <div className="lead-qualifier__next-step">
-              <h3>{translate('leadHighTitle')}</h3>
-              <p>{translate('leadHighDescription')}</p>
-              {result?.nextStep?.url && (
-                <a
-                  className="lead-qualifier__action"
-                  href={result.nextStep.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {translate('leadHighAction')}
-                </a>
-              )}
-            </div>
-          )}
-          {result?.ok && result.tier === 'MID' && (
-            <div className="lead-qualifier__next-step">
-              <h3>{translate('leadMidTitle')}</h3>
-              <p>{translate('leadMidDescription')}</p>
-              <form className="lead-qualifier__followup-form" onSubmit={handleFollowupSubmit}>
-                {followupQuestions.map((question) => (
-                  <div className="lead-qualifier__field" key={question.id}>
-                    <label htmlFor={`followup-${question.id}`}>
-                      {question.labelKey ? translate(question.labelKey) : question.label}
-                    </label>
-                    {Array.isArray(question.optionKeys || question.options) ? (
-                      <select
-                        id={`followup-${question.id}`}
-                        name={question.id}
-                        value={followupAnswers[question.id] || ''}
-                        onChange={handleFollowupChange}
-                        required
-                      >
-                        <option value="" disabled>
-                          {translate('leadSelectOption')}
-                        </option>
-                        {(question.optionKeys || question.options).map((option) => (
-                          <option key={option} value={translate(option) || option}>
-                            {translate(option) || option}
-                          </option>
-                        ))}
-                      </select>
-                    ) : (
-                      <input
-                        id={`followup-${question.id}`}
-                        name={question.id}
-                        type="text"
-                        value={followupAnswers[question.id] || ''}
-                        onChange={handleFollowupChange}
-                        required
-                      />
-                    )}
-                  </div>
-                ))}
-                <button
-                  className="lead-qualifier__submit"
-                  type="submit"
-                  disabled={loading || redirecting || !isFollowupReady}
-                >
-                  {loading || redirecting ? translate('leadMidProcessing') : translate('leadMidSubmitButton')}
-                </button>
-              </form>
-            </div>
-          )}
-          {result?.ok && result.tier === 'LOW' && (
-            <div className="lead-qualifier__next-step">
-              <h3>{translate('leadLowTitle')}</h3>
-              <p>{translate('leadLowDescription')}</p>
-              {result?.nextStep?.url && (
-                <a
-                  className="lead-qualifier__action"
-                  href={result.nextStep.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {translate('leadLowAction')}
-                </a>
-              )}
-            </div>
-          )}
-          {success && result?.ok && !result?.tier && (
+          {success && result?.ok && (
             <p className="lead-qualifier__success">{translate('leadSuccessGeneric')}</p>
           )}
         </div>
