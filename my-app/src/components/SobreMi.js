@@ -15,215 +15,125 @@ function SobreMi({ style }) {
   const sections = useMemo(() => ({
     es: [
       {
-        title: 'Historia Personal',
+        title: 'Resultados',
         image: personal_story,
-        alt: 'Historia Personal',
-        subtitle: 'Desde que tengo memoria, siempre he sentido una gran curiosidad por cómo funcionan las cosas.',
+        alt: 'Elier Loya',
+        subtitle: 'He pasado de coordinar operaciones en PepsiCo a co-fundar una startup con 99.8% de precisión de inventario.',
         content: (
-          <>
-            <div className="content-container">
-              <div className="image-container">
-                <LazyLoadImage
-                  src={personal_story}
-                  alt="Historia Personal"
-                  width={500}
-                  height={500}
-                  effect="blur"
-                  placeholderSrc={personal_story}
-                  className="optimized-image"
-                />
-              </div>
-              <div className="text-content">
-                <p>
-                  Esa misma curiosidad me impulsó a desmontar juguetes, adentrarme en la ingeniería y, con el tiempo, liderar transformaciones tecnológicas en diversas empresas.
-                </p>
-                <p>
-                  Soy Elier Loya, Ingeniero Industrial y de Sistemas con más de una década de experiencia en dirección y optimización de operaciones. Mi pasión por la tecnología y la innovación me impulsó a especializarme en transformación digital y gestión logística.
-                </p>
-                <p>
-                  A lo largo de mi carrera, he liderado transformaciones clave en empresas como GoFarma, Farmalisto y PepsiCo. Actualmente, en CHUBB, aplico mi experiencia para impulsar la transformación digital en el área de renovaciones, potenciando la automatización y personalización de procesos críticos.
-                </p>
-              </div>
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={personal_story} alt="Elier Loya" width={500} height={500} effect="blur" placeholderSrc={personal_story} className="optimized-image" />
             </div>
-          </>
+            <div className="text-content">
+              <p>Combino criterio operativo, pensamiento de producto y ejecución técnica para sacar proyectos de la maraña estratégica o tecnológica.</p>
+              <p>Si tienes una idea validable, un proceso trabado o una automatización que podría mover ingresos, costos o velocidad, yo lo bajo a alcance, prototipo y métrica.</p>
+              <p><strong>Si tu proyecto está atascado, lo desatascamos con foco.</strong></p>
+            </div>
+          </div>
         ),
       },
       {
-        title: 'Experiencia Destacada',
+        title: 'Datos duros',
         image: professional,
-        alt: 'Experiencia Destacada',
-        subtitle: 'Mis logros reflejan mi compromiso con la excelencia operativa y mi pasión por transformar empresas.',
+        alt: 'Resultados profesionales',
+        subtitle: '+10 años transformando operaciones, productos digitales y canales comerciales.',
         content: (
-          <>
-            <div className="content-container">
-              <div className="image-container">
-                <LazyLoadImage
-                  src={professional}
-                  alt="Experiencia Destacada"
-                  width={500}
-                  height={500}
-                  effect="blur"
-                  placeholderSrc={professional}
-                  className="optimized-image"
-                />
-              </div>
-              <div className="text-content">
-                <h3>CHUBB</h3>
-                <p>
-                  Actualmente, como Digital Product Owner en CHUBB, lidero la transformación digital del área de renovaciones de pólizas, impulsando la automatización y personalización de procesos críticos para mejorar la experiencia del cliente y la eficiencia operativa.
-                </p>
-                <h3>GoFarma</h3>
-                <p>
-                  Como co-fundador y Director de Operaciones, diseñé e implementé un modelo operativo innovador que logró una precisión de inventario del 99.8% y redujo significativamente los tiempos de entrega.
-                </p>
-                <h3>Farmalisto</h3>
-                <p>
-                  En mi rol como Director de Ventas en Marketplaces, lideré la expansión digital de la compañía, impulsando un incremento del 144% en ventas y reduciendo considerablemente reclamos y cancelaciones.
-                </p>
-              </div>
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={professional} alt="Resultados profesionales" width={500} height={500} effect="blur" placeholderSrc={professional} className="optimized-image" />
             </div>
-          </>
+            <div className="text-content">
+              <h3>+10 años transformando operaciones</h3>
+              <p>Experiencia entre logística, e-commerce, marketplaces, producto digital y automatización de procesos.</p>
+              <h3>99.8% de precisión de inventario</h3>
+              <p>Modelo operativo en GoFarma con foco en control, velocidad y confiabilidad para operación tipo dark store.</p>
+              <h3>144% de crecimiento en marketplaces</h3>
+              <p>Expansión digital en Farmalisto con mejora comercial, visibilidad y reducción de fricción operativa.</p>
+            </div>
+          </div>
         ),
       },
       {
-        title: 'Visión Tecnológica',
+        title: 'Casos mínimos',
         image: tech_vision,
-        alt: 'Visión Tecnológica',
-        subtitle: 'Creo en el poder de la tecnología para transformar negocios y construir un futuro más eficiente.',
+        alt: 'Casos de estudio',
+        subtitle: 'Problema → solución → resultado. Sin buzzwords.',
         content: (
-          <>
-            <div className="content-container">
-              <div className="image-container">
-                <LazyLoadImage
-                  src={tech_vision}
-                  alt="Visión Tecnológica"
-                  width={500}
-                  height={500}
-                  effect="blur"
-                  placeholderSrc={tech_vision}
-                  className="optimized-image"
-                />
-              </div>
-              <div className="text-content">
-                <p>
-                  Hace algunos años, durante la implementación de un sistema de automatización en una cadena logística, tuve una revelación: no solo optimizábamos procesos, sino que también transformábamos la vida de las personas, facilitándoles las tareas y mejorando su bienestar.
-                </p>
-                <p>
-                  Estoy convencido del poder transformador de la tecnología en los negocios. Mi enfoque se centra en aprovechar soluciones innovadoras, como la inteligencia artificial, la automatización y el análisis de datos, para impulsar la eficiencia operativa y el crecimiento empresarial.
-                </p>
-                <p>
-                  Si compartes mi visión de un futuro más eficiente y tecnológicamente avanzado, me encantaría colaborar contigo para convertir tu negocio en una verdadera historia de éxito.
-                </p>
-              </div>
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={tech_vision} alt="Casos de estudio" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
             </div>
-          </>
+            <div className="text-content">
+              <h3>GoFarma</h3>
+              <p><strong>Problema:</strong> operación con inventario sensible y presión de entregas. <strong>Solución:</strong> modelo operativo estandarizado para dark store. <strong>Resultado:</strong> 99.8% de precisión de inventario.</p>
+              <h3>Farmalisto</h3>
+              <p><strong>Problema:</strong> canal marketplace con fricción comercial y operativa. <strong>Solución:</strong> gestión de presencia online y optimización de catálogo/canales. <strong>Resultado:</strong> 144% de incremento en ventas.</p>
+              <h3>CHUBB</h3>
+              <p><strong>Problema:</strong> procesos de renovación con alta complejidad operativa. <strong>Solución:</strong> liderazgo de producto para automatización, UX y priorización. <strong>Resultado:</strong> mejoras digitales en cotización, emisión y experiencia.</p>
+            </div>
+          </div>
         ),
       },
     ],
     en: [
       {
-        title: 'Personal Story',
+        title: 'Outcomes',
         image: personal_story,
-        alt: 'Personal Story',
-        subtitle: 'Since I can remember, I’ve always had a great curiosity about how things work.',
+        alt: 'Elier Loya',
+        subtitle: 'I went from coordinating operations at PepsiCo to co-founding a startup with 99.8% inventory accuracy.',
         content: (
-          <>
-            <div className="content-container">
-              <div className="image-container">
-                <LazyLoadImage
-                  src={personal_story}
-                  alt="Personal Story"
-                  width={500}
-                  height={500}
-                  effect="blur"
-                  placeholderSrc={personal_story}
-                  className="optimized-image"
-                />
-              </div>
-              <div className="text-content">
-                <p>
-                  This curiosity led me to disassemble toys, study engineering, and ultimately, transform companies through technology.
-                </p>
-                <p>
-                  I’m Elier Loya, an Industrial and Systems Engineer with over 10 years of experience in directing and optimizing operations. My passion for technology and innovation has led me to specialize in digital transformation and logistics management.
-                </p>
-                <p>
-                  Throughout my career, I have led key transformations at companies such as GoFarma, Farmalisto, and PepsiCo. Currently, at CHUBB, I leverage my expertise to drive digital transformation in the renewals area, enhancing the automation and customization of critical processes.
-                </p>
-              </div>
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={personal_story} alt="Elier Loya" width={500} height={500} effect="blur" placeholderSrc={personal_story} className="optimized-image" />
             </div>
-          </>
+            <div className="text-content">
+              <p>I combine operational judgment, product thinking and technical execution to move projects out of strategic or technical complexity.</p>
+              <p>If you have a validatable idea, a stuck process or an automation that could move revenue, costs or speed, I translate it into scope, prototype and metrics.</p>
+              <p><strong>If your project is stuck, we unblock it with focus.</strong></p>
+            </div>
+          </div>
         ),
       },
       {
-        title: 'Highlighted Experience',
+        title: 'Hard numbers',
         image: professional,
-        alt: 'Highlighted Experience',
-        subtitle: 'My achievements reflect my commitment to operational excellence and my passion for transforming businesses.',
+        alt: 'Professional outcomes',
+        subtitle: '+10 years transforming operations, digital products and commercial channels.',
         content: (
-          <>
-            <div className="content-container">
-              <div className="image-container">
-                <LazyLoadImage
-                  src={professional}
-                  alt="Highlighted Experience"
-                  width={500}
-                  height={500}
-                  effect="blur"
-                  placeholderSrc={professional}
-                  className="optimized-image"
-                />
-              </div>
-              <div className="text-content">
-                <h3>CHUBB</h3>
-                <p>
-                  Currently, as a Digital Product Owner at CHUBB, I lead the digital transformation of the policy renewals area by driving automation and customization of critical processes to improve customer experience and operational efficiency.
-                </p>
-                <h3>GoFarma</h3>
-                <p>
-                  As co-founder and Chief Operating Officer, I designed and implemented an innovative operational model that achieved 99.8% inventory accuracy and significantly reduced delivery times.
-                </p>
-                <h3>Farmalisto</h3>
-                <p>
-                  In my role as Director of Marketplaces Sales, I led the company's online presence expansion, achieving a 144% increase in sales and a significant reduction in claims and cancellations.
-                </p>
-              </div>
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={professional} alt="Professional outcomes" width={500} height={500} effect="blur" placeholderSrc={professional} className="optimized-image" />
             </div>
-          </>
+            <div className="text-content">
+              <h3>+10 years transforming operations</h3>
+              <p>Experience across logistics, e-commerce, marketplaces, digital product and process automation.</p>
+              <h3>99.8% inventory accuracy</h3>
+              <p>Operational model at GoFarma focused on control, speed and reliability for a dark-store operation.</p>
+              <h3>144% marketplace growth</h3>
+              <p>Digital expansion at Farmalisto through online presence, catalog and channel optimization.</p>
+            </div>
+          </div>
         ),
       },
       {
-        title: 'Technological Vision',
+        title: 'Mini cases',
         image: tech_vision,
-        alt: 'Technological Vision',
-        subtitle: 'I believe in the power of technology to transform businesses and build a more efficient future.',
+        alt: 'Case studies',
+        subtitle: 'Problem → solution → result. No buzzwords.',
         content: (
-          <>
-            <div className="content-container">
-              <div className="image-container">
-                <LazyLoadImage
-                  src={tech_vision}
-                  alt="Technological Vision"
-                  width={500}
-                  height={500}
-                  effect="blur"
-                  placeholderSrc={tech_vision}
-                  className="optimized-image"
-                />
-              </div>
-              <div className="text-content">
-                <p>
-                  A few years ago, while implementing an automation system in a logistics chain, I had an epiphany: I realized that we were not only optimizing processes, but also changing the lives of the people working there, making their tasks easier and their jobs more fulfilling.
-                </p>
-                <p>
-                  I firmly believe in the transformative power of technology in business. My focus is on leveraging innovative solutions such as AI, automation, and data analysis to drive operational efficiency and business growth.
-                </p>
-                <p>
-                  If you share my vision of a more efficient and technologically advanced future, I’d love to collaborate with you to turn your business into a success story.
-                </p>
-              </div>
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={tech_vision} alt="Case studies" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
             </div>
-          </>
+            <div className="text-content">
+              <h3>GoFarma</h3>
+              <p><strong>Problem:</strong> inventory-sensitive operation under delivery pressure. <strong>Solution:</strong> standardized dark-store operating model. <strong>Result:</strong> 99.8% inventory accuracy.</p>
+              <h3>Farmalisto</h3>
+              <p><strong>Problem:</strong> marketplace channel with commercial and operational friction. <strong>Solution:</strong> online presence and catalog/channel optimization. <strong>Result:</strong> 144% sales growth.</p>
+              <h3>CHUBB</h3>
+              <p><strong>Problem:</strong> renewal processes with high operational complexity. <strong>Solution:</strong> product leadership for automation, UX and prioritization. <strong>Result:</strong> digital improvements in quote, issuance and experience.</p>
+            </div>
+          </div>
         ),
       },
     ],
@@ -271,17 +181,11 @@ function SobreMi({ style }) {
   });
 
   const scrollToServicios = () => {
-    const serviciosSection = document.getElementById('servicios');
-    if (serviciosSection) {
-      serviciosSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('disponibilidad')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToContacto = () => {
-    const contactoSection = document.getElementById('contacto');
-    if (contactoSection) {
-      contactoSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('diagnostico')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleManualChange = (index) => {
@@ -297,46 +201,28 @@ function SobreMi({ style }) {
   return (
     <section id="sobre-mi" className="sobre-mi" style={style} {...swipeHandlers}>
       <div className="contenido-sobre-mi">
-        <h2>{language === 'es' ? 'SOBRE MI' : 'ABOUT ME'}</h2>
+        <h2>{language === 'es' ? 'SOBRE MÍ' : 'ABOUT ME'}</h2>
 
         <div className="tabs">
-          <button
-            className="nav-arrow left"
-            onClick={() => handleManualChange((currentSection - 1 + sections[language].length) % sections[language].length)}
-          >
-            &lt;
-          </button>
+          <button className="nav-arrow left" onClick={() => handleManualChange((currentSection - 1 + sections[language].length) % sections[language].length)}>&lt;</button>
           {sections[language].map((section, index) => (
-            <button
-              key={index}
-              className={`tab-button ${currentSection === index ? 'active' : ''}`}
-              onClick={() => handleManualChange(index)}
-            >
+            <button key={index} className={`tab-button ${currentSection === index ? 'active' : ''}`} onClick={() => handleManualChange(index)}>
               {section.title}
             </button>
           ))}
-          <button
-            className="nav-arrow right"
-            onClick={() => handleManualChange((currentSection + 1) % sections[language].length)}
-          >
-            &gt;
-          </button>
+          <button className="nav-arrow right" onClick={() => handleManualChange((currentSection + 1) % sections[language].length)}>&gt;</button>
         </div>
         <div className="section-content">
           <div className="sub-title-container shinyy">{sections[language][currentSection].subtitle}</div>
           {sections[language][currentSection].content}
         </div>
         <div className="cta-seccion-sobre-mi">
-          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Mis Servicios' : 'My Services'}</button>
-          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Contáctame' : 'Contact Me'}</button>
+          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Ver método' : 'See method'}</button>
+          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Recibe diagnóstico' : 'Get diagnosis'}</button>
         </div>
         <div className="horizontal-scroll-indicator">
           {sections[language].map((_, index) => (
-            <div
-              key={index}
-              className={`indicator ${currentSection === index ? 'active-indicator' : ''}`}
-              onClick={() => handleManualChange(index)}
-            />
+            <div key={index} className={`indicator ${currentSection === index ? 'active' : ''}`}></div>
           ))}
         </div>
       </div>
