@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   padding: 120px 16px 80px;
-  /* Gradiente de puente: conecta hero → contenido */
   background: linear-gradient(
     to bottom,
     var(--color-bg-3) 0%,
@@ -44,9 +43,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin: 6px 8px 0 0;
   padding: 12px 18px;
   border-radius: 20px;
-  /* Gradiente coherente con hero-button */
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
   background-size: 300% 300%;
   animation: gradientBG 10s ease infinite;
@@ -55,6 +54,13 @@
   font-weight: 600;
   border: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gracias-agenda__button--secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  animation: none;
 }
 
 .gracias-agenda__button:hover {
