@@ -7,52 +7,52 @@ function Servicios({ style }) {
 
   const content = {
     es: {
-      heading: 'Disponibilidad',
-      intro: 'Proyectos pequeños y colaboraciones (10–20 h/semana). Si encaja, escríbeme.',
+      heading: 'Mi método',
+      intro: 'Filtro sin rodeos: trabajo mejor con retos acotados, métricas claras y entregas visibles.',
       blocks: [
         {
-          title: 'Qué sí hago',
-          items: ['Landing page enfocada', 'Prototipo funcional temprano', 'Mejora incremental de un módulo', 'Refactor pequeño con objetivo claro', 'Asesoría técnica puntual (orientación / criterio)']
+          title: '1. Diagnóstico exprés',
+          items: ['Sesión inicial de hasta 1 hora', 'Entender reto, urgencia y restricciones', 'Separar idea vaga de oportunidad accionable']
         },
         {
-          title: 'Qué no tomo',
-          items: ['Proyectos urgentes o “para ayer”', 'Re-escrituras completas sin validación previa', 'Procesos largos de consultoría', 'Roadmaps indefinidos sin foco', 'Marketing vapor / buzzwords']
+          title: '2. Alcance fijo',
+          items: ['Propuesta con entregables concretos', 'Precio transparente antes de construir', 'Criterios de éxito desde el inicio']
         },
         {
-          title: 'Cómo trabajo',
-          items: ['Alcance reducido y explícito', 'Iteraciones visibles antes de seguir', 'Preferencia por simplicidad mantenible', 'Documentar decisiones clave', 'Solo compromisos que realmente cumplo']
+          title: '3. Iteraciones cada 2 semanas',
+          items: ['Avances visibles, no promesas eternas', 'Feedback rápido y ajuste de prioridad', 'Documentación ligera para mantener continuidad']
         },
         {
-          title: 'Ejemplos típicos',
-          items: ['MVP de formulario + listado', 'Página de producto validando propuesta', 'Pequeña API proxy / wrapper', 'Optimización de performance puntual', 'UI refactor: limpiar componentes']
+          title: 'Proyectos ideales',
+          items: ['Validaciones de idea', 'Automatizaciones pequeñas', 'Mejoras de performance', 'MVPs acotados', 'Procesos atascados por maraña técnica o estratégica']
         }
       ],
-      cta: 'Hablemos',
-      ctaHelper: 'Cuéntame el mínimo necesario para evaluar.'
+      cta: 'Recibe diagnóstico exprés',
+      ctaHelper: 'No tomo proyectos sin foco; sí tomo problemas que podemos mover rápido.'
     },
     en: {
-      heading: 'Availability',
-      intro: 'Small projects and collaborations (10–20 h/week). If it fits, get in touch.',
+      heading: 'My method',
+      intro: 'Clear filter: I work best with scoped challenges, clear metrics and visible delivery.',
       blocks: [
         {
-          title: 'What I do',
-          items: ['Focused landing page', 'Early functional prototype', 'Incremental module improvement', 'Small purposeful refactor', 'Targeted technical advisory']
+          title: '1. Express diagnosis',
+          items: ['Initial session up to 1 hour', 'Understand challenge, urgency and constraints', 'Separate vague idea from actionable opportunity']
         },
         {
-          title: 'What I decline',
-          items: ['“Urgent yesterday” projects', 'Full rewrites without prior validation', 'Lengthy consulting programs', 'Vague endless roadmaps', 'Buzzword-driven fluff']
+          title: '2. Fixed scope',
+          items: ['Proposal with concrete deliverables', 'Transparent price before building', 'Success criteria from day one']
         },
         {
-          title: 'How I operate',
-          items: ['Reduced, explicit scope', 'Visible iteration before expanding', 'Bias for maintainable simplicity', 'Document key decisions', 'Only commitments I can honor']
+          title: '3. 2-week iterations',
+          items: ['Visible progress, not endless promises', 'Fast feedback and priority adjustment', 'Light documentation for continuity']
         },
         {
-          title: 'Typical examples',
-          items: ['Form + list MVP', 'Product page validating proposition', 'Small API proxy / wrapper', 'Targeted performance tweak', 'UI cleanup / component pruning']
+          title: 'Ideal projects',
+          items: ['Idea validation', 'Small automations', 'Performance improvements', 'Scoped MVPs', 'Projects stuck in technical or strategic complexity']
         }
       ],
-      cta: 'Start conversation',
-      ctaHelper: 'Share just enough context to assess.'
+      cta: 'Get express diagnosis',
+      ctaHelper: 'I do not take unfocused projects; I do take problems we can move quickly.'
     }
   };
 
@@ -61,7 +61,7 @@ function Servicios({ style }) {
   return (
     <section id="disponibilidad" className="servicios colaboraciones disponibilidad" style={style}>
       <div className="servicios-header">
-        <h1>{/* title */}{t.heading}</h1>
+        <h1>{t.heading}</h1>
       </div>
       <p className="introduccion shinyh">{t.intro}</p>
       <div className="servicios-grid simple-grid">
@@ -69,13 +69,13 @@ function Servicios({ style }) {
           <div key={idx} className="servicio-card minimal">
             <h3>{block.title}</h3>
             <ul className="bullet-clean">
-              {block.items.map((it,i)=>(<li key={i}>{it}</li>))}
+              {block.items.map((it, i) => (<li key={i}>{it}</li>))}
             </ul>
           </div>
         ))}
       </div>
       <div className="servicio-cta global-cta">
-        <button className="cta-button-3" onClick={() => document.getElementById('contacto')?.scrollIntoView({behavior:'smooth'})}>{t.cta}</button>
+        <button className="cta-button-3" onClick={() => document.getElementById('diagnostico')?.scrollIntoView({ behavior: 'smooth' })}>{t.cta}</button>
         <div className="cta-helper-text">{t.ctaHelper}</div>
       </div>
     </section>

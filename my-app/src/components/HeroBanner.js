@@ -10,54 +10,49 @@ const DynamicHeroBanner = ({ style }) => {
   const { language } = useLanguage();
   const { currentTheme } = useContext(ThemeContext);
 
-  // Contenido del banner
   const heroContent = useMemo(() => ({
     es: [
       {
-        title: "Estrategia · Producto · Desarrollo",
-        subtitle: "Digital Product Owner @ CHUBB · Side projects seleccionados",
-        description: "Producto, optimización y experimentación aplicada. Llevo ideas pequeñas a algo tangible sin ruido innecesario.",
-        icon: "🧪",
-        cta: "Contactar"
+        title: 'Llevo tu idea de negocio a un producto digital funcional en semanas, no meses',
+        subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB. Solo tomo proyectos con foco.',
+        description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo sin humo.',
+        icon: '🧪',
+        cta: 'Recibe diagnóstico exprés'
       }
     ],
     en: [
       {
-        title: "Strategy · Product · Development",
-        subtitle: "Digital Product Owner @ CHUBB · Select side projects",
-        description: "Product, optimization and practical experimentation. I shape small ideas into tangible, low‑noise outputs.",
-        icon: "🧪",
-        cta: "Contact"
+        title: 'I turn your business idea into a working digital product in weeks, not months',
+        subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB. I only take focused projects.',
+        description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge without fluff.',
+        icon: '🧪',
+        cta: 'Get an express diagnosis'
       }
     ]
   }), []);
 
-  const moreAboutMeText = useMemo(() => ({ es: "Más sobre mí", en: "More about me" }), []);
+  const moreAboutMeText = useMemo(() => ({ es: 'Más sobre mí', en: 'More about me' }), []);
   const currentHeroContent = useMemo(() => heroContent[language], [heroContent, language]);
   const currentContent = currentHeroContent[currentIndex];
 
-  // Cambiar banner automáticamente cada 10 segundos
-  // Desactivar rotación cuando solo hay un bloque
   useEffect(() => {
-    if (currentHeroContent.length <= 1) return; // no rotation
+    if (currentHeroContent.length <= 1) return;
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % currentHeroContent.length);
         setIsTransitioning(false);
       }, 500);
-    }, 25000); // ritmo más lento si en el futuro se añaden variantes
+    }, 25000);
     return () => clearInterval(timer);
   }, [currentHeroContent.length]);
 
-  // Manejar scroll para animaciones
   useEffect(() => {
     const handleScroll = () => setScrollPosition(window.pageYOffset);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Efecto de estrellas en tema oscuro
   useEffect(() => {
     const canvas = document.getElementById('star-canvas');
     if (!canvas) return;
@@ -119,7 +114,7 @@ const DynamicHeroBanner = ({ style }) => {
         <h2 className="hero-title shiny">{currentContent?.title}</h2>
         <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
         <p className="hero-description">{currentContent?.description}</p>
-        <button className="hero-button" onClick={() => scrollToSection('contacto')}>
+        <button className="hero-button" onClick={() => scrollToSection('diagnostico')}>
           {currentContent?.cta} →
         </button>
       </div>
