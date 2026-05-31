@@ -58,19 +58,22 @@ I'm here to help you find what you need!
         languageToggle: "EN",
 
         // Página de agradecimiento
-        thanksTitle: "Session Confirmed",
-        thanksDescription: "Thank you for scheduling your Express Diagnosis. We sent you the confirmation by email. You can close this tab or return to elelier.com.",
+        thanksTitle: "Diagnosis received",
+        thanksDescription: "Thanks for sending your express diagnosis. The next useful step is a 20-minute call to review scope, fit and a practical first move.",
         thanksButton: "Back to elelier.com",
+        thanksCalendarButton: "Schedule 20-minute call",
 
         // Lead Qualifier
-        leadQualifierTitle: "Express Diagnosis",
-        leadQualifierSubtitle: "Tell me your challenge and I'll tell you the next step.",
+        leadQualifierTitle: "Express diagnosis",
+        leadQualifierSubtitle: "Answer 5 focused questions. I use them to separate vague ideas from a project we can actually move in weeks.",
         leadName: "Name",
+        leadNameCompany: "Your name / company",
         leadEmail: "Email",
         leadCompanyType: "Company Type",
-        leadProblem: "Challenge Type",
-        leadBudget: "Budget",
-        leadUrgency: "Urgency",
+        leadProblem: "What is your main challenge?",
+        leadBudget: "Estimated monthly budget",
+        leadUrgency: "What is your urgency?",
+        leadExpectedOutcome: "What do you expect to achieve in 30 days?",
         leadSelectOption: "Select an option",
         leadFreelancer: "Freelancer",
         leadStartup: "Startup",
@@ -80,8 +83,22 @@ I'm here to help you find what you need!
         leadProducto: "Product",
         leadIA: "AI",
         leadWeb: "Web",
-        leadSubmitButton: "Send diagnosis",
+        leadValidateIdea: "Validate an idea",
+        leadOptimizeProcess: "Optimize an existing process",
+        leadAutomateAI: "Automate with AI",
+        leadOther: "Other",
+        leadNext30Days: "Next 30 days",
+        leadThisQuarter: "This quarter",
+        leadExploring: "Exploring",
+        leadBudgetUnder1k: "Less than $1k",
+        leadBudgetUnknown: "I don't know yet",
+        leadOutcomePrototype: "Working prototype",
+        leadOutcomeAutomation: "Small automation running",
+        leadOutcomeMetrics: "Clear metrics / dashboard",
+        leadOutcomeClarity: "Scope and roadmap clarity",
+        leadSubmitButton: "Get express diagnosis",
         leadAnalyzing: "Analyzing...",
+        leadRedirecting: "Preparing next step...",
         leadCalendarOpened: "Calendar opened ✅",
         leadError: "An error occurred. Try again later.",
         leadTooFast: "You're sending too fast. Try in a few minutes.",
@@ -95,7 +112,7 @@ I'm here to help you find what you need!
         leadLowTitle: "Recommended resource",
         leadLowDescription: "We leave you a resource to move forward with clarity.",
         leadLowAction: "View resource",
-        leadSuccessGeneric: "Thank you. We will show you the next step.",
+        leadSuccessGeneric: "Diagnosis received. I’m preparing the next step.",
         leadFollowupMetric: "What is your main metric to move?",
         leadFollowupData: "Do you have data available?",
         leadFollowupDecision: "Who decides?",
@@ -167,19 +184,22 @@ Explora <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return f
         languageToggle: "ES",
 
         // Página de agradecimiento
-        thanksTitle: "Sesión confirmada",
-        thanksDescription: "Gracias por agendar tu Diagnóstico Express. Te enviamos la confirmación por email. Puedes cerrar esta pestaña o volver a elelier.com.",
+        thanksTitle: "Diagnóstico recibido",
+        thanksDescription: "Gracias por enviar tu diagnóstico exprés. El siguiente paso útil es una llamada de 20 minutos para revisar alcance, encaje y primera acción práctica.",
         thanksButton: "Volver a elelier.com",
+        thanksCalendarButton: "Agendar llamada de 20 min",
 
         // Lead Qualifier
-        leadQualifierTitle: "Diagnóstico Express",
-        leadQualifierSubtitle: "Cuéntame tu reto y te digo el siguiente paso.",
+        leadQualifierTitle: "Diagnóstico exprés",
+        leadQualifierSubtitle: "Responde 5 preguntas concretas. Las uso para separar ideas vagas de proyectos que sí podemos mover en semanas.",
         leadName: "Nombre",
+        leadNameCompany: "Tu nombre / empresa",
         leadEmail: "Email",
         leadCompanyType: "Tipo de empresa",
-        leadProblem: "Tipo de reto",
-        leadBudget: "Presupuesto",
-        leadUrgency: "Urgencia",
+        leadProblem: "¿Cuál es tu reto principal?",
+        leadBudget: "Presupuesto mensual estimado",
+        leadUrgency: "¿Cuál es tu urgencia?",
+        leadExpectedOutcome: "¿Qué esperas lograr en 30 días?",
         leadSelectOption: "Selecciona una opción",
         leadFreelancer: "Freelancer",
         leadStartup: "Startup",
@@ -189,8 +209,22 @@ Explora <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return f
         leadProducto: "Producto",
         leadIA: "IA",
         leadWeb: "Web",
-        leadSubmitButton: "Enviar diagnóstico",
+        leadValidateIdea: "Validar una idea",
+        leadOptimizeProcess: "Optimizar un proceso existente",
+        leadAutomateAI: "Automatizar con IA",
+        leadOther: "Otro",
+        leadNext30Days: "Próximos 30 días",
+        leadThisQuarter: "Este trimestre",
+        leadExploring: "Explorando",
+        leadBudgetUnder1k: "Menos de $1k",
+        leadBudgetUnknown: "No lo sé",
+        leadOutcomePrototype: "Prototipo funcional",
+        leadOutcomeAutomation: "Automatización pequeña corriendo",
+        leadOutcomeMetrics: "Métricas claras / dashboard",
+        leadOutcomeClarity: "Claridad de alcance y roadmap",
+        leadSubmitButton: "Recibe diagnóstico exprés",
         leadAnalyzing: "Analizando...",
+        leadRedirecting: "Preparando siguiente paso...",
         leadCalendarOpened: "Calendario abierto ✅",
         leadError: "Ocurrió un error. Intenta más tarde.",
         leadTooFast: "Estás enviando muy rápido. Intenta en unos minutos.",
@@ -204,7 +238,7 @@ Explora <a href="#hero-banner" onclick="scrollToSection('hero-banner'); return f
         leadLowTitle: "Recurso recomendado",
         leadLowDescription: "Te dejamos un recurso para avanzar con claridad.",
         leadLowAction: "Ver recurso",
-        leadSuccessGeneric: "Gracias. Te mostraremos el siguiente paso.",
+        leadSuccessGeneric: "Diagnóstico recibido. Estoy preparando el siguiente paso.",
         leadFollowupMetric: "¿Cuál es tu principal métrica a mover?",
         leadFollowupData: "¿Tienes datos disponibles?",
         leadFollowupDecision: "¿Quién decide?",
@@ -233,20 +267,10 @@ export function changeLanguage(newLanguage) {
     localStorage.setItem('language', newLanguage);
     document.documentElement.lang = newLanguage;
     updateDynamicContent(newLanguage);
-    // You might want to dispatch a custom event here to notify other parts of your app
     const event = new CustomEvent('languageChanged', { detail: { language: newLanguage } });
     document.dispatchEvent(event);
 }
 
-export function updateDynamicContent(language) {
-    document.querySelectorAll('[data-en], [data-es]').forEach((element) => {
-        element.textContent = element.getAttribute(`data-${language}`) || element.getAttribute('data-en');
-    });
-
-    document.querySelectorAll('input[placeholder]').forEach((input) => {
-        const key = input.getAttribute('data-placeholder-key');
-        if (key && translations[language][key]) {
-            input.placeholder = translations[language][key];
-        }
-    });
-};
+function updateDynamicContent() {
+    // Kept as a safe no-op for legacy inline chat links.
+}
