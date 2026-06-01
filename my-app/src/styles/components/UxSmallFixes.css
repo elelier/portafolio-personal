@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+  .App { overflow-x: hidden; }
+  .sobre-mi { min-height: auto; padding: 48px 14px 82px; }
+  .sobre-mi h2, .servicios h1, .contacto h2 { position: static; line-height: 1.05; overflow-wrap: anywhere; }
+  .sobre-mi .tabs { position: static; max-width: calc(100vw - 32px); overflow: hidden; }
+  .sobre-mi .sub-title-container { max-width: 100%; padding-left: 8px; padding-right: 8px; overflow-wrap: anywhere; }
+  .sobre-mi .sub-title-container::before, .sobre-mi .sub-title-container::after { display: none; }
+  .sobre-mi .section-content { min-height: auto; overflow: visible; padding: 0; }
+  .servicios { min-height: auto; padding-bottom: 92px; }
+  .servicio-card { min-height: auto; }
+  .servicio-cta.global-cta { position: static; margin: 28px auto 0; text-align: center; }
+}
