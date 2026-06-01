@@ -113,7 +113,15 @@ const DynamicHeroBanner = ({ style }) => {
     <header id="hero-banner" className={`hero-banner ${scrollPosition ? 'zoom' : ''} ${currentTheme}-theme`} style={style}>
       <canvas id="star-canvas"></canvas>
 
-      <div className={`hero-layout ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass()}`}>
+      <div className={`hero-layout ${isTransitioning ? 'fade-out-content' : 'fade-in-content'}`}>
+        <figure className="hero-portrait-card" aria-label="Elier Loya">
+          <img src={heroPortrait} alt="Elier Loya" className="hero-portrait" />
+          <figcaption>
+            <strong>Elier Loya</strong>
+            <span>Digital Product Owner · Ex-COO startup</span>
+          </figcaption>
+        </figure>
+
         <div className="info-container">
           <span className="hero-eyebrow">Producto digital · Operaciones · IA aplicada</span>
           <h2 className="hero-title shiny">{currentContent?.title}</h2>
@@ -128,14 +136,6 @@ const DynamicHeroBanner = ({ style }) => {
             </button>
           </div>
         </div>
-
-        <figure className="hero-portrait-card" aria-label="Elier Loya">
-          <img src={heroPortrait} alt="Elier Loya" className="hero-portrait" />
-          <figcaption>
-            <strong>Elier Loya</strong>
-            <span>Digital Product Owner · Ex-COO startup</span>
-          </figcaption>
-        </figure>
       </div>
 
       <div className={`scroll-indicator scroll-indicator--secondary ${getFadeClass()}`} onClick={() => scrollToSection('diagnostico')}>
