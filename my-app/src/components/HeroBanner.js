@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ThemeContext } from '../contexts/ThemeContext';
+import heroPortrait from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/HeroBanner.css';
 
 const DynamicHeroBanner = ({ style }) => {
@@ -17,7 +18,8 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB. Solo tomo proyectos con foco.',
         description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo sin humo.',
         icon: '🧪',
-        cta: 'Recibe diagnóstico exprés'
+        cta: 'Diagnóstico exprés',
+        secondaryCta: 'Ver casos reales'
       }
     ],
     en: [
@@ -26,12 +28,13 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB. I only take focused projects.',
         description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge without fluff.',
         icon: '🧪',
-        cta: 'Get an express diagnosis'
+        cta: 'Express diagnosis',
+        secondaryCta: 'See real cases'
       }
     ]
   }), []);
 
-  const moreAboutMeText = useMemo(() => ({ es: 'Más sobre mí', en: 'More about me' }), []);
+  const scrollHintText = useMemo(() => ({ es: 'Ver diagnóstico', en: 'See diagnosis' }), []);
   const currentHeroContent = useMemo(() => heroContent[language], [heroContent, language]);
   const currentContent = currentHeroContent[currentIndex];
 
@@ -110,17 +113,33 @@ const DynamicHeroBanner = ({ style }) => {
     <header id="hero-banner" className={`hero-banner ${scrollPosition ? 'zoom' : ''} ${currentTheme}-theme`} style={style}>
       <canvas id="star-canvas"></canvas>
 
-      <div className={`info-container ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass()}`}>
-        <h2 className="hero-title shiny">{currentContent?.title}</h2>
-        <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
-        <p className="hero-description">{currentContent?.description}</p>
-        <button className="hero-button" onClick={() => scrollToSection('diagnostico')}>
-          {currentContent?.cta} →
-        </button>
+      <div className={`hero-layout ${isTransitioning ? 'fade-out-content' : 'fade-in-content'} ${getFadeClass()}`}>
+        <div className="info-container">
+          <span className="hero-eyebrow">Producto digital · Operaciones · IA aplicada</span>
+          <h2 className="hero-title shiny">{currentContent?.title}</h2>
+          <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
+          <p className="hero-description">{currentContent?.description}</p>
+          <div className="hero-actions" aria-label="Acciones principales">
+            <button className="hero-button" onClick={() => scrollToSection('diagnostico')}>
+              {currentContent?.cta} →
+            </button>
+            <button className="hero-button-secondary" onClick={() => scrollToSection('casos-reales')}>
+              {currentContent?.secondaryCta}
+            </button>
+          </div>
+        </div>
+
+        <figure className="hero-portrait-card" aria-label="Elier Loya">
+          <img src={heroPortrait} alt="Elier Loya" className="hero-portrait" />
+          <figcaption>
+            <strong>Elier Loya</strong>
+            <span>Digital Product Owner · Ex-COO startup</span>
+          </figcaption>
+        </figure>
       </div>
 
-      <div className={`scroll-indicator ${getFadeClass()}`} onClick={() => scrollToSection('sobre-mi')}>
-        {moreAboutMeText[language]} <div className="scroll-arrow">▼</div>
+      <div className={`scroll-indicator scroll-indicator--secondary ${getFadeClass()}`} onClick={() => scrollToSection('diagnostico')}>
+        {scrollHintText[language]} <div className="scroll-arrow">▼</div>
       </div>
     </header>
   );

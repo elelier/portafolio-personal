@@ -9,7 +9,8 @@ import SEO from './components/SEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
 import LeadQualifier from './components/LeadQualifier';
-import ArsenalHabilidades from './components/ArsenalHabilidades';
+import CasosEstudio from './components/CasosEstudio';
+import PruebaSocial from './components/PruebaSocial';
 import Portafolio from './components/Portafolio';
 import Servicios from './components/Servicios';
 import Contacto from './components/Contacto';
@@ -51,8 +52,9 @@ function App({ initialLanguage }) {
   const homeSections = [
     { key: 'hero', Component: HeroBanner },
     { key: 'diagnostico', Component: LeadQualifier },
+    { key: 'casos', Component: CasosEstudio },
+    { key: 'prueba-social', Component: PruebaSocial },
     { key: 'sobre-mi', Component: SobreMi },
-    { key: 'habilidades', Component: ArsenalHabilidades },
     { key: 'portafolio', Component: Portafolio },
     { key: 'servicios', Component: Servicios },
     { key: 'contacto', Component: Contacto },

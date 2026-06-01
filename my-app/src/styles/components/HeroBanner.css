@@ -1,11 +1,7 @@
-/* Variables de color para el banner */
-@import '../index.css'; 
+@import '../index.css';
 
-html {
-  scroll-behavior: smooth; /* Asegura que todos los desplazamientos sean suaves */
-}
+html { scroll-behavior: smooth; }
 
-/* Contenedor principal del banner */
 .hero-banner {
   position: relative;
   display: flex;
@@ -16,90 +12,131 @@ html {
   background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
   overflow: hidden;
   color: var(--color-text);
-  padding: 20px;
+  padding: 90px 20px 70px;
 }
 
 #star-canvas {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   transition: opacity 2s ease-in-out;
 }
 
-[data-theme="dark"] #star-canvas {
-  opacity: 1;
+[data-theme="dark"] #star-canvas { opacity: 1; }
+
+.hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 36px;
+  width: min(1120px, 100%);
 }
 
 .info-container {
-  position: absolute; 
+  position: relative;
   width: 100%;
-  max-width: 800px;
-  text-align: center; 
+  max-width: 760px;
+  text-align: left;
   z-index: 1;
   box-sizing: border-box;
   padding: 1rem;
-  
-}
-/* Título del héroe */
-.hero-title {
-  font-size: 3rem;
-  font-weight: bold;
-  color: var(--color-text);
-  margin-bottom: 1rem;
 }
 
-/* Subtítulo del héroe */
+.hero-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: 1;
+  font-weight: bold;
+  color: var(--color-text);
+  margin: 0 0 1rem;
+}
+
 .hero-subtitle {
   font-size: 1.2rem;
   color: var(--color-primary);
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
 }
 
-/* Descripción del héroe */
 .hero-description {
   font-size: 1rem;
   color: var(--color-text);
-  margin-bottom: 1rem;
+  margin: 0 0 1.4rem;
+  line-height: 1.6;
 }
 
-/* Botón de llamada a la acción */
-.hero-button {
-  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
-  background-size: 300% 300%;
-  animation: gradientBG 10s ease infinite; /* Animación del gradiente */
-  color: #ffffff;
-  padding: 10px 20px;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-button,
+.hero-button-secondary {
+  padding: 12px 22px;
   font-size: 1rem;
-  border: none;
-  border-radius: 20px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
   font-weight: bold;
 }
 
-.hero-button:hover {
+.hero-button {
+  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
+  background-size: 300% 300%;
+  animation: gradientBG 10s ease infinite;
+  color: #ffffff;
+  border: none;
+}
+
+.hero-button-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.hero-button:hover,
+.hero-button-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
 }
 
-
-.hero-button:active {
-  transform: scale(0.95);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2); /* Sombra interior */
-  animation: none;
+.hero-portrait-card {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 26px;
+  background: var(--color-bg-solid);
 }
 
+.hero-portrait {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  object-fit: cover;
+  border-radius: 20px;
+}
 
+.hero-portrait-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
+}
 
-
-/* Indicador de desplazamiento */
-.mockup-redirect-container {
-  position: relative;
-  min-height: 100vh;
+.hero-portrait-card figcaption span {
+  color: var(--color-secondary);
+  font-size: 0.9rem;
 }
 
 .scroll-indicator {
@@ -107,21 +144,12 @@ html {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--color-text);
   z-index: 10;
   text-align: center;
   transition: opacity 0.3s ease;
   cursor: pointer;
-}
-
-.scroll-indicator.visible {
-  opacity: 1;
-}
-
-.scroll-indicator.hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .scroll-arrow {
@@ -132,87 +160,17 @@ html {
   margin-top: 0.5rem;
 }
 
-.scroll-arrow-icon {
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
 }
 
-/* Transiciones de opacidad */
-.fade-in-content {
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
-}
+.fade-in-content,
+.fade-in { opacity: 1; transition: opacity 0.5s ease-in; }
+.fade-out-content,
+.fade-out { opacity: 0; transition: opacity 0.5s ease-out; }
 
-.fade-out-content {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 666px) {
-  .hero-banner {
-    padding: 10px; /* Menos padding en pantallas pequeñas */
-  }
-
-  .info-container {
-    position: absolute;
-    top: 70px; /* Ajusta la distancia desde la parte superior en pantallas pequeñas */
-    width: 100%;
-    max-width: 800px;
-    text-align: center; /* Alineación del texto en el centro */
-    z-index: 1;
-    box-sizing: border-box;
-    padding: 1rem;
-  }
-
-  .hero-title {
-    font-size: 2.5rem; 
-    margin-top: 40px; 
-    position: relative; 
-    top: -20px; 
-  }
-
-  .hero-subtitle {
-    font-size: 1.5rem; 
-  }
-
-  .hero-description {
-    font-size: 1.2rem; 
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 2.3rem; /* Ajusta el tamaño del título */
-    margin-top: 10px; /* Sin margen superior para mover el título más arriba */
-    position: relative; /* Mantén la posición relativa */
-    top: -20px; /* Ajuste adicional para mover el título hacia arriba */
-  }
-  .hero-subtitle {
-    font-size: 1.3rem; 
-  }
-
-  .hero-description {
-    font-size: 1rem; 
-  }
-
-}
-
-
-/* Efecto de brillo en el texto */
 .shiny {
   background: linear-gradient(to right, var(--color-accent) 0%, var(--hero-title-color) 50%, var(--color-accent) 100%);
   background-size: 200% auto;
@@ -222,28 +180,19 @@ html {
   animation: shine 3s linear infinite;
 }
 
-@keyframes shine {
-  to { background-position: 200% center; }
+@keyframes shine { to { background-position: 200% center; } }
+
+@media (max-width: 800px) {
+  .hero-banner { min-height: auto; padding: 110px 14px 84px; }
+  .hero-layout { grid-template-columns: 1fr; gap: 24px; }
+  .info-container { text-align: center; padding: 0; }
+  .hero-actions { justify-content: center; }
+  .hero-portrait-card { width: min(320px, 92vw); margin: 0 auto; }
+  .hero-portrait { max-height: 320px; }
 }
 
-/* Transición de ocultación suave */
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-}
-
-/* Transición de aparición suave */
-.fade-in {
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
-}
-
-.fade-in-content {
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
-}
-
-.fade-out-content {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.35rem; }
+  .hero-button,
+  .hero-button-secondary { width: 100%; }
 }
