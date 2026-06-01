@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import React, { useEffect, lazy, Suspense } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 import './styles/App.css';
+import './styles/components/UxSmallFixes.css';
 import SEO from './components/SEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
