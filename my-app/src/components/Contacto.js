@@ -1,230 +1,253 @@
 // Contacto.js
 
-import React, { useState, useEffect } from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
-import CV from '../assets/files/2409_CV_EL.pdf';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import '../styles/components/Contacto.css';
-import perfilImg from '../assets/images/profile-picture-elier2.png';
 import { useLocation } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import perfilImg from '../assets/images/profile-picture-elier2.png';
+import '../styles/components/Contacto.css';
+
+const CONTACT_ENDPOINT = 'https://81ocg9.buildship.run/contact_me';
+const EMAIL = 'loya.elier@gmail.com';
+const WHATSAPP_URL = 'https://wa.me/528117801157';
+const LINKEDIN_URL = 'https://linkedin.com/in/elier/';
+const GITHUB_URL = 'https://github.com/elelier';
 
 const texts = {
   es: {
-    contactTitle: 'Contáctame',
-    contactPhrase: '¡Estoy aquí para ayudarte! No dudes en ponerte en contacto.',
-    successMessage: 'Tu mensaje ha sido enviado correctamente, gracias por tu interés.',
-    errorMessage: 'Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente.',
-    networkError: 'Error en la red. Por favor, intenta nuevamente.',
-    contactInfo: 'Información de contacto',
-    email: 'loya.elier@gmail.com',
-    whatsapp: 'Envíame un mensaje',
-    location: 'Monterrey, México',
-    professionalLinks: 'Enlaces Profesionales',
-    downloadCV: 'Ver CV (PDF)',
+    eyebrow: 'Hablemos',
+    title: 'Cuéntame qué quieres mejorar',
+    description:
+      'Comparte el reto, proceso o idea que quieres mover. Te responderé personalmente para entender el contexto y ver si hace sentido trabajar juntos.',
+    directLabel: 'Ruta directa',
+    whatsappButton: 'Escríbeme por WhatsApp',
+    whatsappHelper: 'Ideal para una primera conversación rápida.',
+    formTitle: 'O déjame un poco de contexto',
+    nameLabel: 'Tu nombre',
+    emailLabel: 'Tu correo',
+    messageLabel: '¿Qué quieres mejorar, automatizar, simplificar, digitalizar o crear?',
+    submitButton: 'Enviar mensaje',
+    submittingButton: 'Enviando mensaje…',
+    microcopy: 'Sin diagnóstico automático ni agenda obligatoria. Empezamos por el reto.',
+    successMessage: 'Gracias, ya recibí tu mensaje. Te responderé personalmente.',
+    errorMessage: 'No pude enviar tu mensaje en este momento. Puedes escribirme por WhatsApp o correo.',
+    findMeTitle: 'También puedes encontrarme en',
+    location: 'Monterrey, México · Trabajo remoto',
     linkedin: 'LinkedIn',
     github: 'GitHub',
-    namePlaceholder: 'Nombre',
-    emailPlaceholder: 'Correo electrónico',
-    messagePlaceholder: 'Mensaje'
+    quotePrefill: 'Hola, me gustaría solicitar una cotización.'
   },
   en: {
-    contactTitle: 'Contact Me',
-    contactPhrase: 'I’m here to help! Feel free to get in touch.',
-    successMessage: 'Your message has been sent successfully, thank you for your interest.',
-    errorMessage: 'There was a problem sending your message. Please try again.',
-    networkError: 'Network error. Please try again.',
-    contactInfo: 'Contact Information',
-    email: 'loya.elier@gmail.com',
-    whatsapp: 'Message Me',
-    location: 'Monterrey, Mexico',
-    professionalLinks: 'Professional Links',
-    downloadCV: 'View resume (PDF)',
+    eyebrow: 'Let’s talk',
+    title: 'Tell me what you want to improve',
+    description:
+      'Share the challenge, process or idea you want to move forward. I will reply personally to understand the context and see whether it makes sense to work together.',
+    directLabel: 'Direct route',
+    whatsappButton: 'Message me on WhatsApp',
+    whatsappHelper: 'Best for a quick first conversation.',
+    formTitle: 'Or send me some context',
+    nameLabel: 'Your name',
+    emailLabel: 'Your email',
+    messageLabel: 'What do you want to improve, automate, simplify, digitize or create?',
+    submitButton: 'Send message',
+    submittingButton: 'Sending message…',
+    microcopy: 'No automatic diagnosis or mandatory scheduling. We start with the challenge.',
+    successMessage: 'Thanks, I received your message. I will reply personally.',
+    errorMessage: 'I could not send your message right now. You can reach me through WhatsApp or email.',
+    findMeTitle: 'You can also find me on',
+    location: 'Monterrey, Mexico · Remote work',
     linkedin: 'LinkedIn',
     github: 'GitHub',
-    namePlaceholder: 'Name',
-    emailPlaceholder: 'Email',
-    messagePlaceholder: 'Message'
+    quotePrefill: 'Hi, I would like to request a quote.'
   }
 };
 
 function Contacto({ style }) {
   const { language } = useLanguage();
-  const t = texts[language] || texts.en; // Default to English if language is not found
+  const t = texts[language] || texts.en;
+  const location = useLocation();
 
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
   const [message, setMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const location = useLocation();
+  const [feedback, setFeedback] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('subject') === 'quote' && message === '') {
-      const quoteText =
-        language === 'es'
-          ? 'Hola, me gustaría solicitar una cotización.'
-          : 'Hi, I would like to request a quote.';
-      setMessage(quoteText);
+      setMessage(t.quotePrefill);
     }
-  }, [location.search, language, message]);
+  }, [location.search, message, t.quotePrefill]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (isSubmitting) {
+      return;
+    }
+
+    setFeedback({ type: '', message: '' });
+    setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://81ocg9.buildship.run/contact_me', {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, mail, message }),
+        body: JSON.stringify({ name, mail, message })
       });
 
-      if (response.ok) {
-        setSuccessMessage(t.successMessage);
-        setName('');
-        setMail('');
-        setMessage('');
-      } else {
-        setErrorMessage(t.errorMessage);
+      if (!response.ok) {
+        throw new Error('Contact request failed');
       }
+
+      setFeedback({ type: 'success', message: t.successMessage });
+      setName('');
+      setMail('');
+      setMessage('');
     } catch (error) {
-      setErrorMessage(t.networkError);
+      setFeedback({ type: 'error', message: t.errorMessage });
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  const feedbackClassName = feedback.type ? `contacto-feedback contacto-feedback--${feedback.type}` : 'contacto-feedback';
 
   return (
     <motion.section
       id="contacto"
       className="contacto"
       style={{ scrollMarginTop: '96px', ...style }}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 32 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <div className="contacto">
-        <div className="contacto-header">
-          <img src={perfilImg} alt="Perfil" className="contacto-imagen" />
-          <div className="contacto-titulo">
-            <h2>{t.contactTitle}</h2>
-            <p className="contacto-frase">{t.contactPhrase}</p>
+      <div className="contacto-shell">
+        <div className="contacto-heading">
+          <div>
+            <p className="contacto-eyebrow">{t.eyebrow}</p>
+            <h2>{t.title}</h2>
           </div>
+          <p>{t.description}</p>
         </div>
-        <div className="contacto-contenido">
+
+        <div className="contacto-layout">
+          <aside className="contacto-conversation" aria-label={t.directLabel}>
+            <div className="contacto-profile">
+              <img src={perfilImg} alt="Elier Loya" className="contacto-imagen" />
+              <div>
+                <p className="contacto-route-label">{t.directLabel}</p>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="contacto-whatsapp">
+                  <i className="fab fa-whatsapp" aria-hidden="true"></i>
+                  <span>{t.whatsappButton}</span>
+                </a>
+                <p className="contacto-helper">{t.whatsappHelper}</p>
+              </div>
+            </div>
+
+            <div className="contacto-secondary">
+              <h3>{t.findMeTitle}</h3>
+              <ul>
+                <li>
+                  <a href={`mailto:${EMAIL}`}>
+                    <i className="fas fa-envelope" aria-hidden="true"></i>
+                    <span>{EMAIL}</span>
+                  </a>
+                </li>
+                <li className="contacto-location">
+                  <i className="fas fa-location-dot" aria-hidden="true"></i>
+                  <span>{t.location}</span>
+                </li>
+                <li>
+                  <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-linkedin" aria-hidden="true"></i>
+                    <span>{t.linkedin}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-github" aria-hidden="true"></i>
+                    <span>{t.github}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
           <form className="formulario-contacto" onSubmit={handleSubmit}>
-            <AnimatedInput
-              placeholder={t.namePlaceholder}
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              maxLength={255}
-            />
-            <AnimatedInput
-              placeholder={t.emailPlaceholder}
-              type="email"
-              value={mail}
-              onChange={(e) => setMail(e.target.value)}
-              maxLength={255}
-            />
-            <AnimatedInput
-              placeholder={t.messagePlaceholder}
-              type="textarea"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              special
-              maxLength={500}
-            />
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {language === 'es' ? 'Enviar mensaje' : 'Send Message'}
-            </motion.button>
-            <div className='buttonmessage'>
-              {successMessage && <p className="success-message">{successMessage}</p>}
-              {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <div className="contacto-form-heading">
+              <h3>{t.formTitle}</h3>
+              <p>{t.microcopy}</p>
+            </div>
+
+            <div className="contacto-field">
+              <label htmlFor="contact-name">{t.nameLabel}</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                required
+                autoComplete="name"
+                maxLength={255}
+              />
+            </div>
+
+            <div className="contacto-field">
+              <label htmlFor="contact-mail">{t.emailLabel}</label>
+              <input
+                id="contact-mail"
+                name="mail"
+                type="email"
+                value={mail}
+                onChange={(event) => setMail(event.target.value)}
+                required
+                autoComplete="email"
+                maxLength={255}
+              />
+            </div>
+
+            <div className="contacto-field">
+              <label htmlFor="contact-message">{t.messageLabel}</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                required
+                autoComplete="off"
+                rows="5"
+                maxLength={500}
+              />
+            </div>
+
+            <button className="contacto-submit" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? t.submittingButton : t.submitButton}
+            </button>
+
+            <div className={feedbackClassName} aria-live="polite">
+              {feedback.message && (
+                <>
+                  <p>{feedback.message}</p>
+                  {feedback.type === 'error' && (
+                    <div className="contacto-feedback-links">
+                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                        WhatsApp
+                      </a>
+                      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </form>
-          <div className="info-contacto">
-            <h3>{t.contactInfo}</h3>
-            <div className="info-contacto-links">
-              <a href={`mailto:${t.email}`} className="info-contacto-link">
-                <i className="fas fa-envelope"></i>
-                {t.email}
-              </a>
-              <a href="https://www.google.com/maps/search/?api=1&query=Monterrey,+México" target="_blank" rel="noopener noreferrer" className="info-contacto-link">
-                <i className="fas fa-map-marker-alt"></i>
-                {t.location}
-              </a>
-            </div>
-            <div className="redes-sociales">
-              <h3>{t.professionalLinks}</h3>
-              <div className="redes-sociales-links">
-                <a href="https://linkedin.com/in/elier/" target="_blank" rel="noopener noreferrer" className="redes-sociales-link">
-                  <i className="fab fa-linkedin"></i>
-                  {t.linkedin}
-                </a>
-                <a href="https://github.com/elelier" target="_blank" rel="noopener noreferrer" className="redes-sociales-link">
-                  <i className="fab fa-github"></i>
-                  {t.github}
-                </a>
-              </div>
-              <div className="agenda-documentos-links">
-                <a href={CV} target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
-                  <i className="fas fa-file-pdf"></i>
-                  {t.downloadCV}
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </motion.section>
-  );
-}
-
-function AnimatedInput({ placeholder, type, special, value, onChange, maxLength }) {
-  const [isFocused, setIsFocused] = useState(false);
-
-  return (
-    <div className={`input-container ${special ? 'special' : ''}`}>
-      <motion.label
-        className="input-placeholder"
-        initial={false}
-        animate={{
-          scale: isFocused ? 0.8 : 1,
-          x: 10,
-          y: isFocused ? (special ? -60 : -20) : 0,
-        }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      >
-        {placeholder}
-      </motion.label>
-      {type === 'textarea' ? (
-        <motion.textarea
-          className="input-field textarea-field"
-          value={value}
-          onChange={onChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={(e) => !e.target.value && setIsFocused(false)}
-          rows="4" // Define el número de filas visibles
-          maxLength={maxLength} // Limita la cantidad de caracteres
-        />
-      ) : (
-        <motion.input
-          type={type}
-          className="input-field"
-          value={value}
-          onChange={onChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={(e) => !e.target.value && setIsFocused(false)}
-          maxLength={maxLength} // Limita la cantidad de caracteres
-        />
-      )}
-    </div>
   );
 }
 
