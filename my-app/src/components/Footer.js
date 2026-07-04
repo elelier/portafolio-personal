@@ -10,8 +10,8 @@ function Footer() {
     es: {
       inicio: 'Inicio',
       sobreMi: 'Sobre Mí',
-      habilidades: 'Habilidades',
-      portafolio: 'Portafolio',
+      casosReales: 'Casos reales',
+      portafolio: 'Carrera',
       soluciones: 'Soluciones',
       contacto: 'Contacto',
       privacy: 'Privacidad',
@@ -21,8 +21,8 @@ function Footer() {
     en: {
       inicio: 'Home',
       sobreMi: 'About Me',
-      habilidades: 'Skills',
-      portafolio: 'Portfolio',
+      casosReales: 'Case studies',
+      portafolio: 'Career',
       soluciones: 'Solutions',
       contacto: 'Contact',
       privacy: 'Privacy Policy',
@@ -44,7 +44,7 @@ function Footer() {
         <div className="footer-links">
           <Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link>
           <Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{footerLinks[language].sobreMi}</Link>
-          <Link to="/" onClick={() => handleScrollToElement('habilidades')}>{footerLinks[language].habilidades}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('casos-reales')}>{footerLinks[language].casosReales}</Link>
           <Link to="/" onClick={() => handleScrollToElement('portafolio')}>{footerLinks[language].portafolio}</Link>
           <Link to="/" onClick={() => handleScrollToElement('soluciones')}>{footerLinks[language].soluciones}</Link>
           <Link to="/" onClick={() => handleScrollToElement('contacto')}>{footerLinks[language].contacto}</Link>

@@ -48,14 +48,14 @@ function Navegacion() {
   const navItems = {
     es: {
       sobreMi: 'Sobre Mí',
-      habilidades: 'Habilidades',
+      casosReales: 'Casos reales',
       portafolio: 'Carrera',
       soluciones: 'Soluciones',
       contactame: ' Contáctame',
     },
     en: {
       sobreMi: 'About Me',
-      habilidades: 'Skills',
+      casosReales: 'Case studies',
       portafolio: 'Career',
       soluciones: 'Solutions',
       contactame: ' Contact Me',
@@ -76,7 +76,7 @@ function Navegacion() {
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{navItems[language].sobreMi}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('habilidades')}>{navItems[language].habilidades}</Link></li>
+          <li><Link to="/" onClick={() => handleScrollToElement('casos-reales')}>{navItems[language].casosReales}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
           <li><Link to="/" onClick={() => handleScrollToElement('soluciones')}>{navItems[language].soluciones}</Link></li>
           <li>

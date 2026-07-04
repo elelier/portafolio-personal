@@ -30,6 +30,8 @@ const renderFooter = (language = 'es') => {
   };
 };
 
+const findLinkByText = (container, text) => Array.from(container.querySelectorAll('a')).find((link) => link.textContent.includes(text));
+
 describe('Footer', () => {
   beforeEach(() => {
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
@@ -40,33 +42,71 @@ describe('Footer', () => {
     document.body.innerHTML = '';
   });
 
-  it('links Soluciones to the solutions section in Spanish', () => {
-    const target = document.createElement('section');
-    target.id = 'soluciones';
-    target.scrollIntoView = jest.fn();
-    document.body.appendChild(target);
+  it('links Casos reales / Case studies to the cases section', () => {
+    ['es', 'en'].forEach((language) => {
+      const target = document.createElement('section');
+      target.id = 'casos-reales';
+      target.scrollIntoView = jest.fn();
+      document.body.appendChild(target);
 
-    const { container, cleanup } = renderFooter('es');
-    const solutionsLink = Array.from(container.querySelectorAll('a')).find((link) => link.textContent.includes('Soluciones'));
+      const { container, cleanup } = renderFooter(language);
+      const label = language === 'es' ? 'Casos reales' : 'Case studies';
+      const casesLink = findLinkByText(container, label);
 
-    expect(solutionsLink).toBeTruthy();
-    expect(container.textContent).not.toContain('Cómo trabajo');
+      expect(casesLink).toBeTruthy();
 
-    act(() => {
-      solutionsLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      act(() => {
+        casesLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      });
+
+      expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+      cleanup();
+      target.remove();
     });
-
-    expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
-
-    cleanup();
   });
 
-  it('renders Solutions in English', () => {
-    const { container, cleanup } = renderFooter('en');
+  it('shows Carrera / Career and removes the old Habilidades / Skills and Portafolio / Portfolio labels', () => {
+    const { container: esContainer, cleanup: cleanupEs } = renderFooter('es');
+    expect(esContainer.textContent).toContain('Carrera');
+    expect(esContainer.textContent).not.toContain('Habilidades');
+    expect(esContainer.textContent).not.toContain('Portafolio');
+    cleanupEs();
 
-    expect(container.textContent).toContain('Solutions');
-    expect(container.textContent).not.toContain('How I work');
-    expect(container.textContent).not.toContain('Services');
+    const { container: enContainer, cleanup: cleanupEn } = renderFooter('en');
+    expect(enContainer.textContent).toContain('Career');
+    expect(enContainer.textContent).not.toContain('Skills');
+    expect(enContainer.textContent).not.toContain('Portfolio');
+    cleanupEn();
+  });
+
+  it('keeps Soluciones, Contacto and Sobre Mí working', () => {
+    const targets = ['sobre-mi', 'soluciones', 'contacto'].reduce((acc, id) => {
+      const target = document.createElement('section');
+      target.id = id;
+      target.scrollIntoView = jest.fn();
+      document.body.appendChild(target);
+      acc[id] = target;
+      return acc;
+    }, {});
+
+    const { container, cleanup } = renderFooter('es');
+    const aboutLink = findLinkByText(container, 'Sobre Mí');
+    const solutionsLink = findLinkByText(container, 'Soluciones');
+    const contactLink = findLinkByText(container, 'Contacto');
+
+    expect(aboutLink).toBeTruthy();
+    expect(solutionsLink).toBeTruthy();
+    expect(contactLink).toBeTruthy();
+    act(() => {
+      aboutLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      solutionsLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      contactLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(targets['sobre-mi'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    expect(targets['soluciones'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    expect(targets['contacto'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
 
     cleanup();
   });
