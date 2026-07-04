@@ -54,22 +54,22 @@ function SobreMi({ style }) {
         ),
       },
       {
-        title: 'Casos mínimos',
+        title: 'Cómo trabajo',
         image: tech_vision,
-        alt: 'Casos de estudio',
-        subtitle: 'Problema → solución → resultado. Sin buzzwords.',
+        alt: 'Cómo trabajo',
+        subtitle: 'Entender el sistema, elegir qué mover primero y acompañar la ejecución.',
         content: (
           <div className="content-container">
             <div className="image-container">
-              <LazyLoadImage src={tech_vision} alt="Casos de estudio" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
+              <LazyLoadImage src={tech_vision} alt="Cómo trabajo" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
             </div>
             <div className="text-content">
-              <h3>GoFarma</h3>
-              <p><strong>Problema:</strong> operación con inventario sensible y presión de entregas. <strong>Solución:</strong> modelo operativo estandarizado para dark store. <strong>Resultado:</strong> 99.8% de precisión de inventario.</p>
-              <h3>Farmalisto</h3>
-              <p><strong>Problema:</strong> canal marketplace con fricción comercial y operativa. <strong>Solución:</strong> gestión de presencia online y optimización de catálogo/canales. <strong>Resultado:</strong> 144% de incremento en ventas.</p>
-              <h3>CHUBB</h3>
-              <p><strong>Problema:</strong> procesos de renovación con alta complejidad operativa. <strong>Solución:</strong> liderazgo de producto para automatización, UX y priorización. <strong>Resultado:</strong> mejoras digitales en cotización, emisión y experiencia.</p>
+              <h3>1. Aterrizamos el reto</h3>
+              <p>Empiezo por entender qué ocurre en la operación, con las personas y frente al cliente. No parto de una herramienta.</p>
+              <h3>2. Diseñamos lo necesario</h3>
+              <p>Definimos proceso, alcance, experiencia y medición antes de construir más de la cuenta.</p>
+              <h3>3. Lo llevamos a uso real</h3>
+              <p>Conecto decisiones, tecnología y equipos para que la solución se adopte, se mida y mejore con evidencia.</p>
             </div>
           </div>
         ),
@@ -116,22 +116,22 @@ function SobreMi({ style }) {
         ),
       },
       {
-        title: 'Mini cases',
+        title: 'How I work',
         image: tech_vision,
-        alt: 'Case studies',
-        subtitle: 'Problem → solution → result. No buzzwords.',
+        alt: 'How I work',
+        subtitle: 'Understand the system, decide what to move first and stay close to execution.',
         content: (
           <div className="content-container">
             <div className="image-container">
-              <LazyLoadImage src={tech_vision} alt="Case studies" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
+              <LazyLoadImage src={tech_vision} alt="How I work" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
             </div>
             <div className="text-content">
-              <h3>GoFarma</h3>
-              <p><strong>Problem:</strong> inventory-sensitive operation under delivery pressure. <strong>Solution:</strong> standardized dark-store operating model. <strong>Result:</strong> 99.8% inventory accuracy.</p>
-              <h3>Farmalisto</h3>
-              <p><strong>Problem:</strong> marketplace channel with commercial and operational friction. <strong>Solution:</strong> online presence and catalog/channel optimization. <strong>Result:</strong> 144% sales growth.</p>
-              <h3>CHUBB</h3>
-              <p><strong>Problem:</strong> renewal processes with high operational complexity. <strong>Solution:</strong> product leadership for automation, UX and prioritization. <strong>Result:</strong> digital improvements in quote, issuance and experience.</p>
+              <h3>1. Ground the challenge</h3>
+              <p>I start by understanding what is happening in the operation, with the people involved and for the customer. I do not start with a tool.</p>
+              <h3>2. Design what is needed</h3>
+              <p>We define process, scope, experience and measurement before building more than necessary.</p>
+              <h3>3. Bring it into real use</h3>
+              <p>I connect decisions, technology and teams so the solution is adopted, measured and improved with evidence.</p>
             </div>
           </div>
         ),
