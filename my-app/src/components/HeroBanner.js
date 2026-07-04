@@ -4,6 +4,8 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import heroPortrait from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/HeroBanner.css';
 
+const CALENDLY_URL = 'https://calendly.com/loya-elier/primer-contacto-15-min';
+
 const DynamicHeroBanner = ({ style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -14,8 +16,8 @@ const DynamicHeroBanner = ({ style }) => {
   const heroContent = useMemo(() => ({
     es: [
       {
-        title: 'Llevo tu idea de negocio a un producto digital funcional en semanas, no meses',
-        subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB. Solo tomo proyectos con foco.',
+        title: 'Transformo procesos complicados en soluciones que realmente funcionan.',
+        subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB.',
         description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo sin humo.',
         icon: '🧪',
         cta: 'Diagnóstico exprés',
@@ -25,7 +27,7 @@ const DynamicHeroBanner = ({ style }) => {
     en: [
       {
         title: 'I turn your business idea into a working digital product in weeks, not months',
-        subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB. I only take focused projects.',
+        subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB.',
         description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge without fluff.',
         icon: '🧪',
         cta: 'Express diagnosis',
@@ -128,9 +130,9 @@ const DynamicHeroBanner = ({ style }) => {
           <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
           <p className="hero-description">{currentContent?.description}</p>
           <div className="hero-actions" aria-label="Acciones principales">
-            <button className="hero-button" onClick={() => scrollToSection('diagnostico')}>
+            <a className="hero-button" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
               {currentContent?.cta} →
-            </button>
+            </a>
             <button className="hero-button-secondary" onClick={() => scrollToSection('casos-reales')}>
               {currentContent?.secondaryCta}
             </button>
