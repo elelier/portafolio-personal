@@ -43,6 +43,10 @@ describe('CasosEstudio', () => {
     expect(container.textContent).toContain('Arqidia');
     expect(container.textContent).toContain('OneClicTrip');
     expect(container.textContent).toContain('De un reto concreto a algo que ya funciona');
+    expect(container.textContent).toContain('Estrategia, tecnología y operación alineadas para generar resultados medibles.');
+    expect(container.textContent).toContain('Ganar visibilidad y organizar su oferta digital.');
+    expect(container.textContent).toContain('Operación centralizada y ventas reales.');
+    expect(container.textContent).not.toContain('La decisión');
     expect(container.textContent).not.toContain('GoFarma');
     expect(container.textContent).not.toContain('Wonderlabs');
     expect(container.textContent).not.toContain('Farmalisto');
@@ -50,20 +54,14 @@ describe('CasosEstudio', () => {
     cleanup();
   });
 
-  it('shows the OneClicTrip transparency note', () => {
-    const { container, cleanup } = renderCasosEstudio('es');
-
-    expect(container.textContent).toContain('Transparencia: OneClicTrip es la agencia de viajes de Ilse Jasso, pareja de Elier.');
-
-    cleanup();
-  });
 
   it('uses the approved external project links safely', () => {
     const { container, cleanup } = renderCasosEstudio('es');
 
-    const arqidiaLink = Array.from(container.querySelectorAll('a')).find((link) => link.textContent === 'Ver Arqidia');
-    const oneClicTripLink = Array.from(container.querySelectorAll('a')).find((link) => link.textContent === 'Visitar OneClicTrip');
+    const links = Array.from(container.querySelectorAll('a')).filter((link) => link.textContent === 'Ver proyecto');
+    const [arqidiaLink, oneClicTripLink] = links;
 
+    expect(links).toHaveLength(2);
     expect(arqidiaLink.getAttribute('href')).toBe('https://arqidia.mx/');
     expect(arqidiaLink.getAttribute('rel')).toBe('noopener noreferrer');
     expect(oneClicTripLink.getAttribute('href')).toBe('https://www.oneclictrip.com/');
@@ -76,10 +74,26 @@ describe('CasosEstudio', () => {
     const { container, cleanup } = renderCasosEstudio('en');
 
     expect(container.textContent).toContain('From a concrete challenge to something that works');
+    expect(container.textContent).toContain('Strategy, technology and operations aligned to generate measurable results.');
     expect(container.textContent).toContain('Architecture · Presence and lead generation');
     expect(container.textContent).toContain('Custom travel · Lead generation and operations');
-    expect(container.textContent).toContain('The platform is operating with real clients and sales.');
+    expect(container.textContent).toContain('Gain visibility and organize its digital offer.');
+    expect(container.textContent).toContain('Centralized operations and real sales.');
     expect(container.textContent).toContain('Transparency: OneClicTrip is the travel agency of Ilse Jasso, Elier’s partner.');
+
+    cleanup();
+  });
+
+  it('renders descriptive static previews for both projects', () => {
+    const { container, cleanup } = renderCasosEstudio('es');
+
+    const previews = Array.from(container.querySelectorAll('.caso-card__preview img'));
+
+    expect(previews).toHaveLength(2);
+    expect(previews[0].getAttribute('alt')).toBe('Preview visual del sitio Arqidia');
+    expect(previews[1].getAttribute('alt')).toBe('Preview visual del sitio OneClicTrip');
+    expect(previews[0].getAttribute('src')).toContain('arqidia');
+    expect(previews[1].getAttribute('src')).toContain('oneclictrip');
 
     cleanup();
   });

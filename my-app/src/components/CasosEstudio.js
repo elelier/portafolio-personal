@@ -1,39 +1,41 @@
 import React from 'react';
 import '../styles/components/CasosEstudio.css';
 import { useLanguage } from '../contexts/LanguageContext';
+import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
+import oneClicTripPreview from '../assets/images/casos-oneclictrip-preview.jpg';
 
 const content = {
   es: {
     eyebrow: 'Casos reales',
     title: 'De un reto concreto a algo que ya funciona',
-    description: 'Dos proyectos donde la estrategia, la tecnología y la operación se alinearon para convertir trabajo disperso en una experiencia más clara.',
+    description: 'Estrategia, tecnología y operación alineadas para generar resultados medibles.',
     cta: 'Hablemos de tu reto →',
     labels: {
-      challenge: 'El reto',
-      decision: 'La decisión',
-      built: 'Lo que construí',
+      challenge: 'Reto',
+      built: 'Construcción',
       result: 'Resultado'
     },
     cases: [
       {
         category: 'Arquitectura · Presencia y captación',
         title: 'Arqidia',
-        challenge: 'Una firma de arquitectura necesitaba una presencia digital a la altura de su trayectoria, capaz de ordenar su oferta, mostrar su portafolio y abrir conversaciones con clientes potenciales.',
-        decision: 'En lugar de una plantilla genérica, construí una experiencia a medida que hace visible su forma de trabajar y facilita el siguiente paso para quien llega por primera vez.',
-        built: 'Sitio web a medida, portafolio de más de 15 proyectos, páginas de servicios, SEO técnico, Search Console y analítica; un sistema visual responsivo con modo claro y oscuro.',
-        result: 'Arqidia está publicado, el proyecto fue entregado y hoy cuenta con mantenimiento mensual activo.',
-        linkText: 'Ver Arqidia',
+        preview: arqidiaPreview,
+        previewAlt: 'Preview visual del sitio Arqidia',
+        challenge: 'Ganar visibilidad y organizar su oferta digital.',
+        built: 'Sitio web a medida, portafolio, SEO técnico y analítica.',
+        result: 'Presencia digital sólida y flujo de consultas.',
+        linkText: 'Ver proyecto',
         url: 'https://arqidia.mx/'
       },
       {
         category: 'Viajes a medida · Captación y operación',
         title: 'OneClicTrip',
-        challenge: 'Una agencia de viajes a la medida gestionaba cotizaciones, seguimiento y pagos entre conversaciones sueltas de WhatsApp, sin un punto común para ordenar la operación.',
-        decision: 'Construí una plataforma propia para dar estructura a la captación y acompañar el viaje, conservando a Ilse como la cara humana de cada decisión.',
-        built: 'Sitio web, catálogo de experiencias, destinos y servicios, CRM a medida, rutas de WhatsApp e integración con Mercado Pago para centralizar presencia, captación y cobro.',
-        result: 'La plataforma opera con clientes y ventas reales. Datos reportados el 4 de julio de 2026: 583 visitantes y 40 usuarios nuevos en los 30 días previos.',
-        transparency: 'Transparencia: OneClicTrip es la agencia de viajes de Ilse Jasso, pareja de Elier.',
-        linkText: 'Visitar OneClicTrip',
+        preview: oneClicTripPreview,
+        previewAlt: 'Preview visual del sitio OneClicTrip',
+        challenge: 'Cotizaciones y pagos dispersos sin control.',
+        built: 'Plataforma a medida, WhatsApp y Mercado Pago integrados.',
+        result: 'Operación centralizada y ventas reales.',
+        linkText: 'Ver proyecto',
         url: 'https://www.oneclictrip.com/'
       }
     ]
@@ -41,34 +43,35 @@ const content = {
   en: {
     eyebrow: 'Real work',
     title: 'From a concrete challenge to something that works',
-    description: 'Two projects where strategy, technology and operations came together to turn scattered work into a clearer experience.',
+    description: 'Strategy, technology and operations aligned to generate measurable results.',
     cta: 'Let’s talk about your challenge →',
     labels: {
       challenge: 'Challenge',
-      decision: 'Decision',
-      built: 'Built',
+      built: 'Build',
       result: 'Result'
     },
     cases: [
       {
         category: 'Architecture · Presence and lead generation',
         title: 'Arqidia',
-        challenge: 'An architecture firm needed a digital presence that reflected its track record, organized its offer, showcased its portfolio and opened better conversations with potential clients.',
-        decision: 'Instead of using a generic template, I built a tailored experience that makes its way of working visible and clarifies the next step for first-time visitors.',
-        built: 'A custom website, a portfolio of more than 15 projects, service pages, technical SEO, Search Console and analytics; a responsive visual system with light and dark modes.',
-        result: 'Arqidia is live, the project was delivered, and it now has an active monthly maintenance plan.',
-        linkText: 'View Arqidia',
+        preview: arqidiaPreview,
+        previewAlt: 'Preview visual del sitio Arqidia',
+        challenge: 'Gain visibility and organize its digital offer.',
+        built: 'Custom website, portfolio, technical SEO and analytics.',
+        result: 'A solid digital presence and clearer inquiry flow.',
+        linkText: 'View project',
         url: 'https://arqidia.mx/'
       },
       {
         category: 'Custom travel · Lead generation and operations',
         title: 'OneClicTrip',
-        challenge: 'A custom travel agency handled quotes, follow-ups and payments across separate WhatsApp conversations, without a shared operational system.',
-        decision: 'I built a proprietary platform to structure lead generation and support the travel-planning experience while keeping Ilse as the human face of every decision.',
-        built: 'A website, experience catalog, destinations and services, a custom CRM, WhatsApp pathways and Mercado Pago integration to centralize presence, lead generation and payment.',
-        result: 'The platform is operating with real clients and sales. Reported on July 4, 2026: 583 visitors and 40 new users in the preceding 30 days.',
+        preview: oneClicTripPreview,
+        previewAlt: 'Preview visual del sitio OneClicTrip',
+        challenge: 'Quotes and payments scattered without control.',
+        built: 'Custom platform with WhatsApp and Mercado Pago integration.',
+        result: 'Centralized operations and real sales.',
         transparency: 'Transparency: OneClicTrip is the travel agency of Ilse Jasso, Elier’s partner.',
-        linkText: 'Visit OneClicTrip',
+        linkText: 'View project',
         url: 'https://www.oneclictrip.com/'
       }
     ]
@@ -93,18 +96,23 @@ function CasosEstudio({ style }) {
       <div className="casos-estudio__grid">
         {t.cases.map((caseStudy) => (
           <article className="caso-card" key={caseStudy.title}>
+            <div className="caso-card__preview">
+              <img src={caseStudy.preview} alt={caseStudy.previewAlt} loading="lazy" />
+            </div>
             <p className="caso-card__category">{caseStudy.category}</p>
-            <h3>{caseStudy.title}</h3>
+            <div className="caso-card__title-row">
+              <h3>{caseStudy.title}</h3>
+              <span aria-hidden="true">→</span>
+            </div>
             <div className="caso-card__blocks">
               <p><strong>{t.labels.challenge}</strong>{caseStudy.challenge}</p>
-              <p><strong>{t.labels.decision}</strong>{caseStudy.decision}</p>
               <p><strong>{t.labels.built}</strong>{caseStudy.built}</p>
               <p className="caso-card__result"><strong>{t.labels.result}</strong>{caseStudy.result}</p>
             </div>
-            {caseStudy.transparency && <p className="caso-card__transparency">{caseStudy.transparency}</p>}
             <a href={caseStudy.url} target="_blank" rel="noopener noreferrer" className="caso-card__link">
               {caseStudy.linkText}
             </a>
+            {caseStudy.transparency && <p className="caso-card__transparency">{caseStudy.transparency}</p>}
           </article>
         ))}
       </div>
