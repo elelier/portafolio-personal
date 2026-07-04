@@ -111,11 +111,15 @@ html { scroll-behavior: smooth; }
 }
 
 .hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
   background-size: 300% 300%;
   animation: gradientBG 10s ease infinite;
   color: #ffffff;
   border: none;
+  text-decoration: none;
 }
 
 .hero-button-secondary {
