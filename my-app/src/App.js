@@ -11,7 +11,6 @@ import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
 import Soluciones from './components/Soluciones';
 import CasosEstudio from './components/CasosEstudio';
-import PruebaSocial from './components/PruebaSocial';
 import Portafolio from './components/Portafolio';
 import Servicios from './components/Servicios';
 import Contacto from './components/Contacto';
@@ -27,7 +26,6 @@ import ClientDemo from './components/ClientDemo';
 import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
 import AdminLeads from './pages/AdminLeads';
-import GraciasAgenda from './pages/GraciasAgenda';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import AionLabs from './components/AionLabs';
@@ -54,7 +52,6 @@ function App({ initialLanguage }) {
     { key: 'hero', Component: HeroBanner },
     { key: 'soluciones', Component: Soluciones },
     { key: 'casos', Component: CasosEstudio },
-    { key: 'prueba-social', Component: PruebaSocial },
     { key: 'sobre-mi', Component: SobreMi },
     { key: 'portafolio', Component: Portafolio },
     { key: 'servicios', Component: Servicios },
@@ -103,7 +100,6 @@ function App({ initialLanguage }) {
                   <Route path="/proyecto/:token" element={<ClientSpace />} />
                   <Route path="/client-demo" element={<ClientDemo />} />
                   <Route path="/admin/leads" element={<AdminLeads />} />
-                  <Route path="/gracias-agenda" element={<GraciasAgenda />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<TermsOfService />} />
                   <Route path="/aionlabs" element={<AionLabs />} />

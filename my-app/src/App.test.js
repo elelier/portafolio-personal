@@ -10,7 +10,12 @@ describe('App public diagnosis removal', () => {
     expect(appSource).not.toContain("key: 'diagnostico'");
   });
 
-  it('does not expose the public gracias-diagnostico route', () => {
-    expect(appSource).not.toContain('/gracias-diagnostico');
+  it('does not render PruebaSocial on the public home', () => {
+    expect(appSource).not.toContain("import PruebaSocial");
+    expect(appSource).not.toContain("key: 'prueba-social'");
+  });
+
+  it('does not expose the public gracias-agenda route', () => {
+    expect(appSource).not.toContain('/gracias-agenda');
   });
 });
