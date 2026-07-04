@@ -34,7 +34,7 @@ const DynamicHeroBanner = ({ style }) => {
     ]
   }), []);
 
-  const scrollHintText = useMemo(() => ({ es: 'Ver diagnóstico', en: 'See diagnosis' }), []);
+  const scrollHintText = useMemo(() => ({ es: 'Ver soluciones', en: 'See solutions' }), []);
   const currentHeroContent = useMemo(() => heroContent[language], [heroContent, language]);
   const currentContent = currentHeroContent[currentIndex];
 
@@ -138,7 +138,7 @@ const DynamicHeroBanner = ({ style }) => {
         </div>
       </div>
 
-      <div className={`scroll-indicator scroll-indicator--secondary ${getFadeClass()}`} onClick={() => scrollToSection('diagnostico')}>
+      <div className={`scroll-indicator scroll-indicator--secondary ${getFadeClass()}`} onClick={() => scrollToSection('soluciones')}>
         {scrollHintText[language]} <div className="scroll-arrow">▼</div>
       </div>
     </header>
