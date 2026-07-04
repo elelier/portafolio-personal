@@ -79,7 +79,6 @@ describe('CasosEstudio', () => {
     expect(container.textContent).toContain('Custom travel · Lead generation and operations');
     expect(container.textContent).toContain('Gain visibility and organize its digital offer.');
     expect(container.textContent).toContain('Centralized operations and real sales.');
-    expect(container.textContent).toContain('Transparency: OneClicTrip is the travel agency of Ilse Jasso, Elier’s partner.');
 
     cleanup();
   });

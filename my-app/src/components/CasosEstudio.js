@@ -70,7 +70,6 @@ const content = {
         challenge: 'Quotes and payments scattered without control.',
         built: 'Custom platform with WhatsApp and Mercado Pago integration.',
         result: 'Centralized operations and real sales.',
-        transparency: 'Transparency: OneClicTrip is the travel agency of Ilse Jasso, Elier’s partner.',
         linkText: 'View project',
         url: 'https://www.oneclictrip.com/'
       }
