@@ -52,7 +52,7 @@ describe('HeroBanner', () => {
     expect(container.textContent).not.toContain('producto digital funcional en semanas, no meses');
 
     const primaryCta = container.querySelector('.hero-button');
-    expect(primaryCta.textContent).toContain('Diagnóstico exprés');
+    expect(primaryCta.textContent).toContain('Agenda una llamada');
     expect(primaryCta.tagName).toBe('A');
     expect(primaryCta.getAttribute('href')).toBe(calendlyUrl);
 
@@ -62,10 +62,11 @@ describe('HeroBanner', () => {
     cleanup();
   });
 
-  it('keeps the existing English headline until a stakeholder translation is approved', () => {
+  it('keeps the existing English headline and shows the updated English CTA', () => {
     const { container, cleanup } = renderHero('en');
 
     expect(container.textContent).toContain('I turn your business idea into a working digital product in weeks, not months');
+    expect(container.querySelector('.hero-button').textContent).toContain('Schedule a call');
 
     cleanup();
   });

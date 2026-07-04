@@ -20,7 +20,7 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB.',
         description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo sin humo.',
         icon: '🧪',
-        cta: 'Diagnóstico exprés',
+        cta: 'Agenda una llamada',
         secondaryCta: 'Ver casos reales'
       }
     ],
@@ -30,7 +30,7 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB.',
         description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge without fluff.',
         icon: '🧪',
-        cta: 'Express diagnosis',
+        cta: 'Schedule a call',
         secondaryCta: 'See real cases'
       }
     ]
