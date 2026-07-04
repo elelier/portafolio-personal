@@ -12,7 +12,7 @@ function Footer() {
       sobreMi: 'Sobre Mí',
       habilidades: 'Habilidades',
       portafolio: 'Portafolio',
-      servicios: 'Cómo trabajo',
+      soluciones: 'Soluciones',
       contacto: 'Contacto',
       privacy: 'Privacidad',
       terms: 'Términos',
@@ -23,7 +23,7 @@ function Footer() {
       sobreMi: 'About Me',
       habilidades: 'Skills',
       portafolio: 'Portfolio',
-      servicios: 'How I work',
+      soluciones: 'Solutions',
       contacto: 'Contact',
       privacy: 'Privacy Policy',
       terms: 'Terms of Service',
@@ -46,7 +46,7 @@ function Footer() {
           <Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{footerLinks[language].sobreMi}</Link>
           <Link to="/" onClick={() => handleScrollToElement('habilidades')}>{footerLinks[language].habilidades}</Link>
           <Link to="/" onClick={() => handleScrollToElement('portafolio')}>{footerLinks[language].portafolio}</Link>
-          <Link to="/" onClick={() => handleScrollToElement('como-trabajo')}>{footerLinks[language].servicios}</Link>
+          <Link to="/" onClick={() => handleScrollToElement('soluciones')}>{footerLinks[language].soluciones}</Link>
           <Link to="/" onClick={() => handleScrollToElement('contacto')}>{footerLinks[language].contacto}</Link>
           <Link to="/privacy-policy">{footerLinks[language].privacy}</Link>
           <Link to="/terms-of-service">{footerLinks[language].terms}</Link>

@@ -181,11 +181,11 @@ function SobreMi({ style }) {
   });
 
   const scrollToServicios = () => {
-    document.getElementById('disponibilidad')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('como-trabajo')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToContacto = () => {
-    document.getElementById('diagnostico')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleManualChange = (index) => {
@@ -218,7 +218,7 @@ function SobreMi({ style }) {
         </div>
         <div className="cta-seccion-sobre-mi">
           <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Ver método' : 'See method'}</button>
-          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Recibe diagnóstico' : 'Get diagnosis'}</button>
+          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Hablemos de tu reto' : 'Let’s talk about your challenge'}</button>
         </div>
         <div className="horizontal-scroll-indicator">
           {sections[language].map((_, index) => (

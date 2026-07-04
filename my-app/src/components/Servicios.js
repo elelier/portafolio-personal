@@ -11,8 +11,8 @@ function Servicios({ style }) {
       intro: 'Filtro sin rodeos: trabajo mejor con retos acotados, métricas claras y entregas visibles.',
       blocks: [
         {
-          title: '1. Diagnóstico exprés',
-          items: ['Sesión inicial de hasta 1 hora', 'Entender reto, urgencia y restricciones', 'Separar idea vaga de oportunidad accionable']
+          title: '1. Aterrizamos el reto',
+          items: ['Conversación inicial para entender el contexto', 'Reto, urgencia y restricciones visibles', 'Separar idea vaga de oportunidad accionable']
         },
         {
           title: '2. Alcance fijo',
@@ -27,7 +27,7 @@ function Servicios({ style }) {
           items: ['Validaciones de idea', 'Automatizaciones pequeñas', 'Mejoras de performance', 'MVPs acotados', 'Procesos atascados por maraña técnica o estratégica']
         }
       ],
-      cta: 'Recibe diagnóstico exprés',
+      cta: 'Hablemos de tu reto',
       ctaHelper: 'No tomo proyectos sin foco; sí tomo problemas que podemos mover rápido.'
     },
     en: {
@@ -35,8 +35,8 @@ function Servicios({ style }) {
       intro: 'Clear filter: I work best with scoped challenges, clear metrics and visible delivery.',
       blocks: [
         {
-          title: '1. Express diagnosis',
-          items: ['Initial session up to 1 hour', 'Understand challenge, urgency and constraints', 'Separate vague idea from actionable opportunity']
+          title: '1. Ground the challenge',
+          items: ['Initial conversation to understand the context', 'Make the challenge, urgency and constraints visible', 'Separate a vague idea from an actionable opportunity']
         },
         {
           title: '2. Fixed scope',
@@ -51,7 +51,7 @@ function Servicios({ style }) {
           items: ['Idea validation', 'Small automations', 'Performance improvements', 'Scoped MVPs', 'Projects stuck in technical or strategic complexity']
         }
       ],
-      cta: 'Get express diagnosis',
+      cta: 'Let’s talk about your challenge',
       ctaHelper: 'I do not take unfocused projects; I do take problems we can move quickly.'
     }
   };
@@ -75,7 +75,7 @@ function Servicios({ style }) {
         ))}
       </div>
       <div className="servicio-cta global-cta">
-        <button className="cta-button-3" onClick={() => document.getElementById('diagnostico')?.scrollIntoView({ behavior: 'smooth' })}>{t.cta}</button>
+        <button className="cta-button-3" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>{t.cta}</button>
         <div className="cta-helper-text">{t.ctaHelper}</div>
       </div>
     </section>

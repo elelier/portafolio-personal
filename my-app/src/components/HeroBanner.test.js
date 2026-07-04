@@ -49,6 +49,11 @@ describe('HeroBanner', () => {
     contacto.scrollIntoView = jest.fn();
     document.body.appendChild(contacto);
 
+    const soluciones = document.createElement('section');
+    soluciones.id = 'soluciones';
+    soluciones.scrollIntoView = jest.fn();
+    document.body.appendChild(soluciones);
+
     const { container, cleanup } = renderHero('es');
 
     expect(container.textContent).toContain('Transformo procesos complicados en soluciones que realmente funcionan.');
@@ -69,14 +74,29 @@ describe('HeroBanner', () => {
     const secondaryCta = container.querySelector('.hero-button-secondary');
     expect(secondaryCta.textContent).toContain('Ver casos reales');
 
+    const scrollIndicator = container.querySelector('.scroll-indicator');
+    expect(scrollIndicator.textContent).toContain('Ver soluciones');
+
+    act(() => {
+      scrollIndicator.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(soluciones.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+
     cleanup();
   });
 
   it('keeps the existing English headline and shows the updated English CTA', () => {
+    const soluciones = document.createElement('section');
+    soluciones.id = 'soluciones';
+    soluciones.scrollIntoView = jest.fn();
+    document.body.appendChild(soluciones);
+
     const { container, cleanup } = renderHero('en');
 
     expect(container.textContent).toContain('I turn your business idea into a working digital product in weeks, not months');
     expect(container.querySelector('.hero-button').textContent).toContain('Let’s talk about your challenge');
+    expect(container.querySelector('.scroll-indicator').textContent).toContain('See solutions');
     expect(container.innerHTML).not.toContain('calendly.com');
 
     cleanup();

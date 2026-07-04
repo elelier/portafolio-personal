@@ -9,7 +9,7 @@ import './styles/components/UxSmallFixes.css';
 import SEO from './components/SEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
-import LeadQualifier from './components/LeadQualifier';
+import Soluciones from './components/Soluciones';
 import CasosEstudio from './components/CasosEstudio';
 import PruebaSocial from './components/PruebaSocial';
 import Portafolio from './components/Portafolio';
@@ -52,7 +52,7 @@ function App({ initialLanguage }) {
 
   const homeSections = [
     { key: 'hero', Component: HeroBanner },
-    { key: 'diagnostico', Component: LeadQualifier },
+    { key: 'soluciones', Component: Soluciones },
     { key: 'casos', Component: CasosEstudio },
     { key: 'prueba-social', Component: PruebaSocial },
     { key: 'sobre-mi', Component: SobreMi },
@@ -104,7 +104,6 @@ function App({ initialLanguage }) {
                   <Route path="/client-demo" element={<ClientDemo />} />
                   <Route path="/admin/leads" element={<AdminLeads />} />
                   <Route path="/gracias-agenda" element={<GraciasAgenda />} />
-                  <Route path="/gracias-diagnostico" element={<GraciasAgenda />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<TermsOfService />} />
                   <Route path="/aionlabs" element={<AionLabs />} />

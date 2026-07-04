@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/GraciasAgenda.css';
 
-const DEFAULT_CAL_URL = 'https://cal.com/elelier/diagnostico';
+const DEFAULT_CAL_URL = 'https://cal.com/elelier/reto';
 
 const GraciasAgenda = () => {
   const { translate } = useLanguage();
   const [calendarUrl, setCalendarUrl] = useState(DEFAULT_CAL_URL);
 
   useEffect(() => {
-    const storedUrl = sessionStorage.getItem('elelierLastDiagnosisCalUrl');
+    const storedUrl = sessionStorage.getItem('elelierLastContactCalUrl');
     if (storedUrl) {
       setCalendarUrl(storedUrl);
     }

@@ -40,20 +40,20 @@ describe('Footer', () => {
     document.body.innerHTML = '';
   });
 
-  it('links Como trabajo to the existing section in Spanish', () => {
+  it('links Soluciones to the solutions section in Spanish', () => {
     const target = document.createElement('section');
-    target.id = 'como-trabajo';
+    target.id = 'soluciones';
     target.scrollIntoView = jest.fn();
     document.body.appendChild(target);
 
     const { container, cleanup } = renderFooter('es');
-    const howIWorkLink = Array.from(container.querySelectorAll('a')).find((link) => link.textContent.includes('Cómo trabajo'));
+    const solutionsLink = Array.from(container.querySelectorAll('a')).find((link) => link.textContent.includes('Soluciones'));
 
-    expect(howIWorkLink).toBeTruthy();
-    expect(container.textContent).not.toContain('Servicios');
+    expect(solutionsLink).toBeTruthy();
+    expect(container.textContent).not.toContain('Cómo trabajo');
 
     act(() => {
-      howIWorkLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      solutionsLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
     expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
@@ -61,10 +61,11 @@ describe('Footer', () => {
     cleanup();
   });
 
-  it('renders How I work in English', () => {
+  it('renders Solutions in English', () => {
     const { container, cleanup } = renderFooter('en');
 
-    expect(container.textContent).toContain('How I work');
+    expect(container.textContent).toContain('Solutions');
+    expect(container.textContent).not.toContain('How I work');
     expect(container.textContent).not.toContain('Services');
 
     cleanup();
