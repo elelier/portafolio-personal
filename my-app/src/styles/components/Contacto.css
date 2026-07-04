@@ -1,305 +1,380 @@
-/* Variables de color */
-@import '../index.css'; 
-  
-/* Estilos para la sección de Contacto en modo oscuro */
+@import '../index.css';
+
 .contacto {
-    position: relative;
-    padding: 60px 20px;
-    background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg-3)), var(--section-bg-end, var(--color-bg)));
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 100vh;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 80px 20px;
+  background:
+    linear-gradient(180deg, rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.08), transparent 34%),
+    var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
 }
 
-
-/* Añadido para centrar la imagen y el título en una sola línea */
-.contacto-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+.contacto *,
+.contacto *::before,
+.contacto *::after {
+  box-sizing: border-box;
 }
 
-/* Estilo para la imagen del perfil */
-.contacto-imagen {
-    width: 150px; 
-    height: 150px;
-    border-radius: 50%; 
-    margin-right: 20px; 
-    transition: transform 1s ease;
+.contacto-shell {
+  width: min(1120px, 100%);
+  margin: 0 auto;
 }
 
-/* Estilo para la imagen del perfil */
-.contacto-imagen:hover {
-    transform: scale(1.1);
-  }
-
-/* Estilo para el contenedor del título */
-.contacto-titulo {
-    text-align: left;
+.contacto-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(280px, 1.05fr);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 28px;
 }
 
-/* Estilo para el título */
-.contacto-titulo h2 {
-    margin: 0;
-    color: var(--color-text);
-    font-size: 2rem;
+.contacto-eyebrow,
+.contacto-route-label {
+  margin: 0 0 10px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* Estilo para la frase en cursiva */
-.contacto-frase {
-    font-style: italic;
-    color: var(--color-text);
-    margin-top: 10px;
-    transition: transform 1s ease;
-
-}
-
-.contacto-frase:hover {
-    transform: scale(1.1);
-}
-
-
-/* Estilos del título de la sección */
 .contacto h2 {
-    margin: 20px 0; /* Espaciado fijo alrededor del título */
-    text-align: center;
-    font-size: 3rem; /* Ajusta el tamaño del texto según necesites */
-    color: var(--hero-title-color-2);
-    position: sticky; /* Fija el título en la parte superior */
-    top: 0;
-    background-color: transparent; /* Fondo para mantener la legibilidad */
-    z-index: 100;
-    text-transform: uppercase;
-  }
-
-/* Contenido del contacto */
-.contacto-contenido {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: flex-start;
-    justify-content: flex-start; /* Ajuste de distribución */
-    margin: 0 auto;
-    max-width: 1000px; /* Ajusta el ancho máximo según sea necesario */
+  margin: 0;
+  color: var(--hero-title-color-2);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  text-align: left;
+  text-transform: none;
 }
 
-/* Estilos del formulario de contacto */
+.contacto-heading > p {
+  max-width: 640px;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  opacity: 0.88;
+}
+
+.contacto-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(360px, 1.15fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.contacto-conversation,
 .formulario-contacto {
-    flex: 2;
-    width: 100%; /* Ocupará todo el ancho disponible */
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-solid);
+  box-shadow: 0 16px 36px rgba(2, 8, 23, 0.12);
 }
 
-
-/* Campos de entrada */
-.formulario-contacto input,
-.formulario-contacto textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px; /* Reducido el margen inferior entre campos */
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    background-color: var(--color-bg-3) !important; /* Fondo oscuro para los campos */
-    color: var(--color-texto);
+.contacto-conversation {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
 }
 
-/* Estilos para los botones CTA */
-.formulario-contacto button {
-    background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
-    background-size: 300% 300%;
-    animation: gradientBG 10s ease infinite;
-    margin-left: 10px;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
-    text-decoration: none;
-    font-weight: bold;
+.contacto-profile {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.contacto-imagen {
+  width: 86px;
+  height: 86px;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.16);
+}
+
+.contacto-whatsapp,
+.contacto-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.contacto-whatsapp {
+  width: 100%;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--color-accent);
+  color: var(--color-bg-solid);
+}
+
+.contacto-whatsapp:hover,
+.contacto-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 204, 153, 0.22);
+}
+
+.contacto-whatsapp:focus-visible,
+.contacto-submit:focus-visible,
+.contacto a:focus-visible,
+.contacto input:focus-visible,
+.contacto textarea:focus-visible {
+  outline: 3px solid rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.55);
+  outline-offset: 3px;
+}
+
+.contacto-helper {
+  margin: 10px 0 0;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.contacto-secondary {
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.contacto-secondary h3,
+.contacto-form-heading h3 {
+  margin: 0 0 14px;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.contacto-secondary ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contacto-secondary a,
+.contacto-location,
+.contacto-feedback-links a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.contacto-secondary a,
+.contacto-location {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 0;
+  overflow-wrap: anywhere;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.contacto-secondary a:hover {
+  color: var(--color-accent);
+  transform: translateX(4px);
+}
+
+.contacto-secondary i,
+.contacto-location i {
+  width: 20px;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+.formulario-contacto {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.contacto-form-heading p {
+  margin: 0;
+  color: var(--color-secondary);
+  line-height: 1.6;
+}
+
+.contacto-field {
+  display: grid;
+  gap: 8px;
+}
+
+.contacto-field label {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.contacto-field input,
+.contacto-field textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-solid);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.contacto-field input {
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+.contacto-field textarea {
+  min-height: 144px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.contacto-field input:focus,
+.contacto-field textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.18);
+}
+
+.contacto-submit {
+  width: fit-content;
+  min-width: 164px;
+  padding: 12px 20px;
+  background: var(--hero-title-color-2);
+  color: var(--color-bg-solid);
+  cursor: pointer;
+}
+
+.contacto-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.contacto-feedback {
+  min-height: 28px;
+  color: var(--color-text);
+  line-height: 1.55;
+}
+
+.contacto-feedback p {
+  margin: 0;
+}
+
+.contacto-feedback--success {
+  color: #16a34a;
+}
+
+.contacto-feedback--error {
+  color: #dc2626;
+}
+
+.contacto-feedback-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.contacto-feedback-links a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .contacto-conversation,
+[data-theme="dark"] .formulario-contacto {
+  background: var(--color-bg-solid);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.26);
+}
+
+[data-theme="dark"] .contacto-whatsapp,
+[data-theme="dark"] .contacto-submit {
+  color: #020817;
+}
+
+[data-theme="dark"] .contacto-feedback--success {
+  color: #86efac;
+}
+
+[data-theme="dark"] .contacto-feedback--error {
+  color: #fca5a5;
+}
+
+@media (max-width: 820px) {
+  .contacto {
+    padding: 64px 18px;
   }
-  
-.formulario-contacto button:hover {
-background-color: var(--hero-button-hover-bg-color);
-transform: translateY(-2px);
-box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-animation: gradientBG 18s ease infinite;
+
+  .contacto-heading,
+  .contacto-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto-heading {
+    gap: 14px;
+  }
 }
 
-.formulario-contacto button:active {
-transform: scale(0.95) !important;
-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
-animation: none;
-}
+@media (max-width: 480px) {
+  .contacto {
+    padding: 56px 14px;
+  }
 
+  .contacto-conversation,
+  .formulario-contacto {
+    padding: 18px;
+  }
 
+  .contacto-profile {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+  }
 
-/* Placeholder animación */
-.input-container {
-    position: relative;
-    border-radius: 5px;
-    padding: 10px 10px;
-}
+  .contacto-imagen {
+    width: 72px;
+    height: 72px;
+  }
 
-.input-placeholder {
-    position: absolute;
-    left: 10px;
-    top: 30%;
-    color: var(--color-text);
-    background-color: var(--color-bg-3);
-    pointer-events: none;
-    transition: transform 0.2s ease, font-size 0.2s ease;
-}
+  .contacto-helper {
+    margin-top: 6px;
+  }
 
-/* Animación especial para el campo Mensaje */
-.input-container.special .input-placeholder {
-    transform: translateY(-60px); /* Desplazamiento pronunciado para el campo Mensaje */
-}
+  .contacto-secondary {
+    padding-top: 14px;
+  }
 
+  .contacto-secondary ul {
+    gap: 2px;
+  }
 
-.input-field {
+  .contacto-secondary a,
+  .contacto-location {
+    min-height: 34px;
+    padding: 4px 0;
+  }
+
+  .contacto-whatsapp,
+  .contacto-submit {
     width: 100%;
-    font-size: 18px;
-    padding: 5px 0;
-    border: none;
-    outline: none;
-}
-
-.input-field.textarea-field {
-    width: 100%;
-    height: 150px; /* Ajusta la altura según sea necesario */
-    padding: 12px;
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    background-color: var(--color-accent);
-    color: var(--color-text);
-    resize: vertical; /* Permite redimensionar verticalmente */
-    overflow-y: auto; /* Habilita el scroll interno */
-    white-space: pre-wrap; /* Mantiene los saltos de línea */
-    word-wrap: break-word; /* Rompe las palabras largas para evitar el desbordamiento */
-}
-
-.textarea-field {
-    height: 150px !important; /* Ajusta la altura del textarea para ser más grande */
-    resize: vertical !important; /* Permite redimensionar verticalmente */
-    overflow-y: auto !important; /* Habilita el scroll interno */
-}
-
-
-/* Títulos para las categorías */
-.info-contacto h3,
-.redes-sociales h3,
-.agenda-documentos h3 {
-    font-size: 20px; 
-    font-weight: 700; 
-    color: var(--hero-title-color-2);
-    margin-top: 10px; /* Más espacio debajo del título */
-    border-bottom: 2px solid var(--color-primary); /* Línea fina y elegante debajo */
-    padding-bottom: 2px; /* Espaciado entre título y línea */
-}
-
-/* Información de contacto */
-.info-contacto {
-    flex: 1;
-    margin-left: 10px;
-    width: 100%; /* Para móviles, se apilará debajo del formulario */}
-
-.info-contacto p {
-    color: var(--color-text);
-}
-
-
-.info-contacto-links,
-.redes-sociales-links,
-.agenda-documentos-links {
-    display: flex;
-    flex-direction: column;
-    padding-top: 5px; 
-}
-
-.info-contacto-link,
-.redes-sociales-link,
-.agenda-documentos-link {
-    display: flex;
-    align-items: center;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease, transform 0.3s ease;
-    padding: 5px 0; 
-    margin-bottom: 5px;
-    margin-left: 10px; 
-}
-.info-contacto-link svg ,
-.redes-sociales-link svg ,
-.agenda-documentos-link svg {
-    display: inline-block; /* Asegura que el ícono respete márgenes */
-    margin-right: 10px !important; /* Forzar el margen */
-    font-size: 20px;
-}
-.info-contacto-link:hover,
-.redes-sociales-link:hover,
-.agenda-documentos-link:hover {
-    color: var(--color-accent);
-    transform: translateX(10px); /* Desplazamiento más elegante a la derecha */
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil al hover */
-    
-}
-
-.info-contacto-link:active,
-.redes-sociales-link:active,
-.agenda-documentos-link:active {
-    transform: scale(0.95); /* Desplazamiento más elegante a la derecha */
-}
-
-
-
-/* Estilo para el mensaje de éxito y error */
-.buttonmessage {
-    margin-left: 20px;
-}
-  
-
-/* Estilos responsivos para móviles */
-@media (max-width: 768px) {
-    /* En pantallas pequeñas, los elementos se colocan uno debajo del otro */
-    .contacto-header {
-        flex-direction: column; /* Apila los elementos verticalmente */
-        align-items: center; /* Alinea los elementos en el centro */
-    }
-    
-    .contacto-contenido {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px; /* Espaciado entre bloques */
-    }
-
-    /* Asegura que el formulario y la info ocupen el ancho completo */
-    .formulario-contacto,
-    .info-contacto {
-        max-width: 100%;
-    }
-
-   /* Opcional: ajusta el tamaño de la imagen en móvil */
-   .contacto-imagen {
-        order: 2; /* Coloca la imagen después del título */
-        width: 100px; /* Tamaño más pequeño para pantallas móviles */
-        height: 100px;
-        margin: 20px 0; /* Espaciado alrededor de la imagen */
-    }
-
-    .contacto-titulo h2 {
-        text-align: center;
-        margin-bottom: 10px;
-        font-size: 1.8rem;
-    }
-
-    .contacto-frase {
-        text-align: center;
-    }
+  }
 }
