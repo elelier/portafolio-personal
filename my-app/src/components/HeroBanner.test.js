@@ -4,7 +4,6 @@ import HeroBanner from './HeroBanner';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-const calendlyUrl = 'https://calendly.com/loya-elier/primer-contacto-15-min';
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const renderHero = (language = 'es') => {
@@ -44,7 +43,12 @@ describe('HeroBanner', () => {
     document.body.innerHTML = '';
   });
 
-  it('shows the approved Spanish hero message and Calendly CTA', () => {
+  it('shows the approved Spanish hero message and scroll CTA to contacto', () => {
+    const contacto = document.createElement('section');
+    contacto.id = 'contacto';
+    contacto.scrollIntoView = jest.fn();
+    document.body.appendChild(contacto);
+
     const { container, cleanup } = renderHero('es');
 
     expect(container.textContent).toContain('Transformo procesos complicados en soluciones que realmente funcionan.');
@@ -52,9 +56,15 @@ describe('HeroBanner', () => {
     expect(container.textContent).not.toContain('producto digital funcional en semanas, no meses');
 
     const primaryCta = container.querySelector('.hero-button');
-    expect(primaryCta.textContent).toContain('Agenda una llamada');
-    expect(primaryCta.tagName).toBe('A');
-    expect(primaryCta.getAttribute('href')).toBe(calendlyUrl);
+    expect(primaryCta.textContent).toContain('Hablemos de tu reto');
+    expect(primaryCta.tagName).toBe('BUTTON');
+    expect(container.innerHTML).not.toContain('calendly.com');
+
+    act(() => {
+      primaryCta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(contacto.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
 
     const secondaryCta = container.querySelector('.hero-button-secondary');
     expect(secondaryCta.textContent).toContain('Ver casos reales');
@@ -66,7 +76,8 @@ describe('HeroBanner', () => {
     const { container, cleanup } = renderHero('en');
 
     expect(container.textContent).toContain('I turn your business idea into a working digital product in weeks, not months');
-    expect(container.querySelector('.hero-button').textContent).toContain('Schedule a call');
+    expect(container.querySelector('.hero-button').textContent).toContain('Let’s talk about your challenge');
+    expect(container.innerHTML).not.toContain('calendly.com');
 
     cleanup();
   });

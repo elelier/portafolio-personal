@@ -101,7 +101,6 @@ function CasosEstudio({ style }) {
             <p className="caso-card__category">{caseStudy.category}</p>
             <div className="caso-card__title-row">
               <h3>{caseStudy.title}</h3>
-              <span aria-hidden="true">→</span>
             </div>
             <div className="caso-card__blocks">
               <p><strong>{t.labels.challenge}</strong>{caseStudy.challenge}</p>

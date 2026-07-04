@@ -4,8 +4,6 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import heroPortrait from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/HeroBanner.css';
 
-const CALENDLY_URL = 'https://calendly.com/loya-elier/primer-contacto-15-min';
-
 const DynamicHeroBanner = ({ style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -20,7 +18,7 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB.',
         description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo sin humo.',
         icon: '🧪',
-        cta: 'Agenda una llamada',
+        cta: 'Hablemos de tu reto',
         secondaryCta: 'Ver casos reales'
       }
     ],
@@ -30,7 +28,7 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB.',
         description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge without fluff.',
         icon: '🧪',
-        cta: 'Schedule a call',
+        cta: 'Let’s talk about your challenge',
         secondaryCta: 'See real cases'
       }
     ]
@@ -130,9 +128,9 @@ const DynamicHeroBanner = ({ style }) => {
           <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
           <p className="hero-description">{currentContent?.description}</p>
           <div className="hero-actions" aria-label="Acciones principales">
-            <a className="hero-button" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-              {currentContent?.cta} →
-            </a>
+            <button className="hero-button" onClick={() => scrollToSection('contacto')}>
+              {currentContent?.cta}
+            </button>
             <button className="hero-button-secondary" onClick={() => scrollToSection('casos-reales')}>
               {currentContent?.secondaryCta}
             </button>

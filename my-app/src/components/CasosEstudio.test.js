@@ -83,6 +83,14 @@ describe('CasosEstudio', () => {
     cleanup();
   });
 
+  it('does not render decorative arrows next to case titles', () => {
+    const { container, cleanup } = renderCasosEstudio('es');
+
+    expect(container.querySelector('.caso-card__title-row').textContent).not.toContain('→');
+
+    cleanup();
+  });
+
   it('renders descriptive static previews for both projects', () => {
     const { container, cleanup } = renderCasosEstudio('es');
 
