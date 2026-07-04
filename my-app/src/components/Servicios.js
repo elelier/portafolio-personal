@@ -7,7 +7,7 @@ function Servicios({ style }) {
 
   const content = {
     es: {
-      heading: 'Mi método',
+      heading: 'Cómo trabajo',
       intro: 'Filtro sin rodeos: trabajo mejor con retos acotados, métricas claras y entregas visibles.',
       blocks: [
         {
@@ -31,7 +31,7 @@ function Servicios({ style }) {
       ctaHelper: 'No tomo proyectos sin foco; sí tomo problemas que podemos mover rápido.'
     },
     en: {
-      heading: 'My method',
+      heading: 'How I work',
       intro: 'Clear filter: I work best with scoped challenges, clear metrics and visible delivery.',
       blocks: [
         {
@@ -59,7 +59,7 @@ function Servicios({ style }) {
   const t = content[language] || content.es;
 
   return (
-    <section id="disponibilidad" className="servicios colaboraciones disponibilidad" style={style}>
+    <section id="como-trabajo" className="servicios colaboraciones disponibilidad" style={{ scrollMarginTop: '96px', ...style }}>
       <div className="servicios-header">
         <h1>{t.heading}</h1>
       </div>

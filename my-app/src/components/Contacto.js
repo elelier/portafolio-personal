@@ -20,8 +20,7 @@ const texts = {
     whatsapp: 'Envíame un mensaje',
     location: 'Monterrey, México',
     professionalLinks: 'Enlaces Profesionales',
-    agenda: 'Agenda 15 minutos',
-    downloadCV: 'Descargar CV',
+    downloadCV: 'Ver CV (PDF)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     namePlaceholder: 'Nombre',
@@ -39,8 +38,7 @@ const texts = {
     whatsapp: 'Message Me',
     location: 'Monterrey, Mexico',
     professionalLinks: 'Professional Links',
-    agenda: 'Schedule 15 minutes',
-    downloadCV: 'Download Resume',
+    downloadCV: 'View resume (PDF)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     namePlaceholder: 'Name',
@@ -101,7 +99,7 @@ function Contacto({ style }) {
     <motion.section
       id="contacto"
       className="contacto"
-      style={style}
+      style={{ scrollMarginTop: '96px', ...style }}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -174,14 +172,9 @@ function Contacto({ style }) {
                   {t.github}
                 </a>
               </div>
-              <h3>Agenda y Documentos</h3>
               <div className="agenda-documentos-links">
-                <a href="https://calendly.com/loya-elier/primer-contacto-15-min" target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
-                  <i className="fas fa-calendar-check"></i>
-                  {t.agenda}
-                </a>
-                <a href={CV} download className="agenda-documentos-link">
-                  <i className="fas fa-file-download"></i>
+                <a href={CV} target="_blank" rel="noopener noreferrer" className="agenda-documentos-link">
+                  <i className="fas fa-file-pdf"></i>
                   {t.downloadCV}
                 </a>
               </div>

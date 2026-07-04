@@ -222,14 +222,14 @@ const Portafolio = ({ style }) => {
       description:
         'Trabajemos juntos para diseñar una solución a medida, desde la estrategia hasta la implementación.',
       primary: 'Solicitar una reunión',
-      secondary: 'Revisar servicios disponibles'
+      secondary: 'Conoce cómo trabajo'
     },
     en: {
       title: 'Ready to see your project featured here?',
       description:
         'Let’s craft a tailored solution together—from strategic planning to hands-on implementation.',
       primary: 'Request a meeting',
-      secondary: 'Review available services'
+      secondary: 'See how I work'
     }
   };
 
@@ -317,7 +317,7 @@ const Portafolio = ({ style }) => {
           </button>
           <button
             className="cta-button-secondary"
-            onClick={() => handleScrollToSection('servicios')}
+            onClick={() => handleScrollToSection('como-trabajo')}
           >
             {currentCta.secondary}
           </button>
