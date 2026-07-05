@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.219c502f.css",
-    "main.js": "/static/js/main.c72af3bc.js",
+    "main.css": "/static/css/main.1e8370ae.css",
+    "main.js": "/static/js/main.1f074efc.js",
     "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
     "static/js/889.30cf63f0.chunk.js": "/static/js/889.30cf63f0.chunk.js",
     "static/css/930.478c97b3.chunk.css": "/static/css/930.478c97b3.chunk.css",
@@ -9,7 +9,6 @@
     "static/media/technologic_vision.png": "/static/media/technologic_vision.ec953b376e729e08c8aa.png",
     "static/media/ecommerce_marketing.png": "/static/media/ecommerce_marketing.c1dad67f04e06be9c101.png",
     "static/media/profile-picture-elier2.png": "/static/media/profile-picture-elier2.bb22001998419d8c5a87.png",
-    "static/media/2409_CV_EL.pdf": "/static/media/2409_CV_EL.8eaaefac1f39e389b143.pdf",
     "static/media/casos-oneclictrip-preview.jpg": "/static/media/casos-oneclictrip-preview.bbff0ca187f13db44a50.jpg",
     "static/media/casos-arqidia-preview.jpg": "/static/media/casos-arqidia-preview.145f0173af7cc2029e6f.jpg",
     "static/media/wonderlabs.jpg": "/static/media/wonderlabs.0150cbf1ddef27a1a5c6.jpg",
@@ -19,15 +18,15 @@
     "static/media/gofarma.jpg": "/static/media/gofarma.5a440aec29a4d405ea0b.jpg",
     "static/media/farmalisto.jpg": "/static/media/farmalisto.3f0bee5b23c66aa31b0d.jpg",
     "index.html": "/index.html",
-    "main.219c502f.css.map": "/static/css/main.219c502f.css.map",
-    "main.c72af3bc.js.map": "/static/js/main.c72af3bc.js.map",
+    "main.1e8370ae.css.map": "/static/css/main.1e8370ae.css.map",
+    "main.1f074efc.js.map": "/static/js/main.1f074efc.js.map",
     "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
     "889.30cf63f0.chunk.js.map": "/static/js/889.30cf63f0.chunk.js.map",
     "930.478c97b3.chunk.css.map": "/static/css/930.478c97b3.chunk.css.map",
     "930.0d885452.chunk.js.map": "/static/js/930.0d885452.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.219c502f.css",
-    "static/js/main.c72af3bc.js"
+    "static/css/main.1e8370ae.css",
+    "static/js/main.1f074efc.js"
   ]
 }
