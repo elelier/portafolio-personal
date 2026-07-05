@@ -3,7 +3,7 @@
 .contacto {
   position: relative;
   width: 100%;
-  padding: 80px 20px;
+  padding: 86px 20px;
   background:
     linear-gradient(180deg, rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.08), transparent 34%),
     var(--color-bg);
@@ -68,10 +68,21 @@
 
 .contacto-conversation,
 .formulario-contacto {
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card);
   background: var(--color-bg-solid);
-  box-shadow: 0 16px 36px rgba(2, 8, 23, 0.12);
+  box-shadow: var(--ui-card-shadow);
+  transition:
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition);
+}
+
+.contacto-conversation:hover,
+.formulario-contacto:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: var(--ui-card-shadow-hover);
+  transform: translateY(-3px);
 }
 
 .contacto-conversation {
@@ -103,18 +114,18 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border-radius: 8px;
+  border-radius: var(--ui-radius-pill);
   border: 1px solid transparent;
   font: inherit;
   font-weight: 700;
   text-decoration: none;
   transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease,
-    opacity 180ms ease;
+    background-color var(--ui-transition),
+    border-color var(--ui-transition),
+    color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition),
+    opacity var(--ui-transition);
 }
 
 .contacto-whatsapp {
@@ -227,8 +238,8 @@
 .contacto-field input,
 .contacto-field textarea {
   width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card-sm);
   background: var(--color-bg-solid);
   color: var(--color-text);
   font: inherit;
@@ -304,7 +315,25 @@
 [data-theme="dark"] .contacto-conversation,
 [data-theme="dark"] .formulario-contacto {
   background: var(--color-bg-solid);
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--ui-card-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contacto-conversation,
+  .formulario-contacto,
+  .contacto-whatsapp,
+  .contacto-submit,
+  .contacto-secondary a {
+    transition: none;
+  }
+
+  .contacto-conversation:hover,
+  .formulario-contacto:focus-within,
+  .contacto-whatsapp:hover,
+  .contacto-submit:hover:not(:disabled),
+  .contacto-secondary a:hover {
+    transform: none;
+  }
 }
 
 [data-theme="dark"] .contacto-whatsapp,

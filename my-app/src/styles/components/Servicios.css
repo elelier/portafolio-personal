@@ -1,264 +1,206 @@
-/* Variables de color */
-@import '../index.css'; 
+@import '../index.css';
+
+.servicios {
+  position: relative;
+  padding: 86px 20px;
+  background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+.servicios-shell {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.servicios-header {
+  display: grid;
+  gap: 12px;
+  max-width: 760px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.servicios-header span {
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.servicios-header h2 {
+  margin: 0;
+  color: var(--hero-title-color-2);
+  font-size: clamp(2.1rem, 4vw, 3.45rem);
+  line-height: 1.06;
+}
+
+.servicios-header p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--color-secondary);
+  font-size: 1.02rem;
+  line-height: 1.62;
+}
 
 .servicios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding-left: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
   width: 100%;
-  padding-right:  20px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .servicios-grid {
-    grid-template-columns: 1fr;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-}
-
-/* Contenedor principal de la sección de servicios */
-.servicios {
-  position: relative;
-  padding: 60px 20px;
-  background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
-  margin: auto;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-/* Título de la sección */
-.servicios h1 {
-  margin: 20px 0; /* Espaciado fijo alrededor del título */
-  text-align: center;
-  font-size: 3rem; /* Ajusta el tamaño del texto según necesites */
-  color: var(--hero-title-color-2);
-  position: sticky; /* Fija el título en la parte superior */
-  top: 0;
-  background-color: transparent; /* Fondo para mantener la legibilidad */
-  z-index: 100;
-  text-transform: uppercase;
-
-}
-
-/* Contenedor de cada tarjeta de servicio */
 .servicio-card {
   position: relative;
-  padding: 20px;
-  background: linear-gradient(to top, var(--color-bg-solid), var(--color-bg));
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  transition: all 0.3s ease;
-  min-height: 350px;
-  cursor: pointer;
-  /* Añade espacio inferior si se necesita más separación entre tarjetas */
-  margin-bottom: 30px; 
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 18px;
+  padding: var(--ui-card-padding);
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card);
+  background:
+    linear-gradient(180deg, rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.08), transparent 42%),
+    var(--color-bg-solid);
+  box-shadow: var(--ui-card-shadow);
+  overflow: hidden;
+  animation: methodCardIn 520ms ease both;
+  transition:
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition);
 }
 
-/* Efecto de brillo en las tarjetas del portafolio */
-.servicio-card::after {
+.servicio-card:nth-child(2) { animation-delay: 80ms; }
+.servicio-card:nth-child(3) { animation-delay: 160ms; }
+.servicio-card:nth-child(4) { animation-delay: 240ms; }
+
+.servicio-card:hover,
+.servicio-card:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: var(--ui-card-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.servicio-card__index {
+  width: fit-content;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.servicio-card h3 {
+  margin: 0;
+  color: var(--hero-title-color);
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.18;
+}
+
+.bullet-clean {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullet-clean li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.bullet-clean li::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(to bottom right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.2) 100%);
-  transform: rotate(30deg);
-  transition: all 0.5s;
-  opacity: 0;
-  pointer-events: none; /* Evitar que el efecto interfiera con la interacción */
-}
-
-.servicio-card:hover::after {
-  opacity: 1;
-  left: -100%;
-  top: -100%;
-}
-
-/* Ajuste para escalar el ícono o imagen dentro de la tarjeta, si aplica */
-.servicio-card:hover .habilidad-icono {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
-
-/* Asegúrate de que la tarjeta de servicio tenga un overflow hidden para que el brillo no se salga */
-.servicio-card {
-  overflow: hidden;
-}
-
-.servicio-card.active h3 {
-  color: var(--color-text);
-}
-
-.servicio-card.active h4 {
-  color: var(--color-text);
-}
-
-.servicio-card.active .servicio-descripcion {
-  color: var(--color-text);
-}
-
-.servicio-card.active .royecto-descripcion {
-  color: var(--color-text);
-}
-
-/* Hover en la tarjeta */
-.servicio-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Título del servicio */
-.servicio-card h3 {
-  color: var(--color-accent) !important;
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-}
-
-.servicio-card:hover h3 {
-  transform: scale(1.02);
-  color: var(--color-accent) !important;
-  transition: transform 1s ease;
-}
-
-/* Descripción del servicio */
-.servicio-descripcion {
-  color: var(--color-secondary) !important;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-/* Descripción del servicio */
-.servicio-card:hover .servicio-descripcion {
-  color: var(--color-text) !important;
-  transform: scale(1.02);
-  transition: transform 1s ease;
-}
-
-/* Listado de beneficios y tecnologías */
-.servicio-beneficios,
-.servicio-tecnologias {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.servicio-beneficios h4,
-.servicio-tecnologias h4 {
-  color: var(--color-accent) !important;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-.servicio-beneficios ul,
-.servicio-tecnologias ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 10px 0;
-}
-
-.servicio-beneficios li {
-  color: var(--color-secondary);
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-}
-
-.servicio-beneficios li::before {
-  content: "•";
-  color: var(--color-accent);
-  position: absolute;
+  top: 0.72em;
   left: 0;
-}
-
-.servicio-tecnologias {
-  position: relative;
-  z-index: 5;
-}
-
-.servicio-tecnologias ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.servicio-tecnologias li {
-  display: inline-block;
-  background: var(--color-bg-2);
-  color: var(--color-text);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  z-index: 10;
-  border: 1px solid transparent;
-}
-
-.servicio-tecnologias li:hover {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   background: var(--color-accent);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-color: var(--color-accent);
 }
 
-.servicio-tecnologias li:active {
-  transform: translateY(0) scale(0.98);
-}
-
-/* Contenedor de tecnologías */
-.contenedor-tecnologias {
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 5;
-}
-
-/* Animación para tecnologías */
-.servicio-tecnologias li {
-  display: inline-block;
-  background: var(--color-bg-2);
-  padding: 5px 10px;
-  border-radius: 15px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  transition: all 0.3s ease;
-}
-
-.servicio-tecnologias li:hover {
-  background: var(--color-accent);
-  transform: translateY(-3px);
-  cursor: pointer;
-}
-
-.servicio-tecnologias li:active {
-  background: var(--color-accent);
-  transform: translateY(-3px) scale(0.95);
-  cursor: pointer;
-}
-
-/* Contenedor del botón de llamada a la acción */
 .servicio-cta {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  max-width: 760px;
+  margin: 34px auto 0;
+  padding: 26px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card);
+  background: var(--color-bg-solid);
+  box-shadow: var(--ui-card-shadow);
+  text-align: center;
 }
 
-/* Animación para fade in */
-@keyframes fadeInUp {
+.cta-button-3 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 24px;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-pill);
+  background: var(--hero-title-color-2);
+  color: var(--color-bg-solid);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background-color var(--ui-transition),
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    color var(--ui-transition),
+    opacity var(--ui-transition),
+    transform var(--ui-transition);
+}
+
+.cta-button-3:hover,
+.cta-button-3:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-bg-solid);
+  box-shadow: 0 12px 24px rgba(0, 204, 153, 0.2);
+  transform: translateY(-2px);
+}
+
+.cta-button-3:focus-visible {
+  outline: 3px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+
+.cta-button-3:active {
+  transform: translateY(0);
+}
+
+.cta-button-3:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.cta-helper-text {
+  max-width: 560px;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+@keyframes methodCardIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -266,37 +208,54 @@
   }
 }
 
-.servicio-card {
-  animation: fadeInUp 0.5s ease-out;
+@media (prefers-reduced-motion: reduce) {
+  .servicio-card {
+    animation: none;
+    transition: none;
+  }
+
+  .servicio-card:hover,
+  .servicio-card:focus-within,
+  .cta-button-3:hover,
+  .cta-button-3:focus-visible {
+    transform: none;
+  }
 }
 
-/* Estilos para los botones CTA */
-.cta-button-3 {
-  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
-  background-size: 300% 300%;
-  animation: gradientBG 10s ease infinite;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
-  text-decoration: none;
-  font-weight: bold;
+@media (max-width: 980px) {
+  .servicios-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.cta-button-3:hover {
-  background-color: var(--hero-button-hover-bg-color);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  animation: gradientBG 18s ease infinite;
-}
+@media (max-width: 620px) {
+  .servicios {
+    padding: 54px 14px;
+  }
 
-.cta-button-3:active {
-  transform: scale(0.95) !important;
-  background-color: #007d66;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
-  animation: none;
+  .servicios-header {
+    margin-bottom: 22px;
+    text-align: left;
+  }
+
+  .servicios-header h2 {
+    font-size: clamp(1.78rem, 8vw, 2.2rem);
+  }
+
+  .servicios-header p {
+    font-size: 0.94rem;
+  }
+
+  .servicios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicio-card,
+  .servicio-cta {
+    padding: 18px;
+  }
+
+  .cta-button-3 {
+    width: 100%;
+  }
 }

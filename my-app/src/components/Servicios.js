@@ -59,24 +59,28 @@ function Servicios({ style }) {
   const t = content[language] || content.es;
 
   return (
-    <section id="como-trabajo" className="servicios colaboraciones disponibilidad" style={{ scrollMarginTop: '96px', ...style }}>
-      <div className="servicios-header">
-        <h1>{t.heading}</h1>
-      </div>
-      <p className="introduccion shinyh">{t.intro}</p>
-      <div className="servicios-grid simple-grid">
+    <section id="como-trabajo" className="servicios" style={{ scrollMarginTop: '96px', ...style }}>
+      <div className="servicios-shell">
+        <div className="servicios-header">
+          <span>{language === 'es' ? 'Método de colaboración' : 'Collaboration method'}</span>
+          <h2>{t.heading}</h2>
+          <p>{t.intro}</p>
+        </div>
+      <div className="servicios-grid">
         {t.blocks.map((block, idx) => (
-          <div key={idx} className="servicio-card minimal">
+          <article key={idx} className="servicio-card">
+            <div className="servicio-card__index">{String(idx + 1).padStart(2, '0')}</div>
             <h3>{block.title}</h3>
             <ul className="bullet-clean">
               {block.items.map((it, i) => (<li key={i}>{it}</li>))}
             </ul>
-          </div>
+          </article>
         ))}
       </div>
       <div className="servicio-cta global-cta">
         <button className="cta-button-3" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>{t.cta}</button>
         <div className="cta-helper-text">{t.ctaHelper}</div>
+      </div>
       </div>
     </section>
   );

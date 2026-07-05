@@ -25,6 +25,19 @@
   --color-border-dark: #444444; /* Bordes oscuros para modo oscuro */
   --color-bg-footer: #121212;
 
+  --ui-radius-card: 12px;
+  --ui-radius-card-sm: 8px;
+  --ui-radius-pill: 999px;
+  --ui-card-padding: 24px;
+  --ui-card-border-light: rgba(2, 8, 23, 0.12);
+  --ui-card-border-dark: rgba(246, 249, 252, 0.16);
+  --ui-card-shadow-light: 0 18px 42px rgba(2, 8, 23, 0.12);
+  --ui-card-shadow-dark: 0 22px 50px rgba(0, 0, 0, 0.34);
+  --ui-card-shadow-hover-light: 0 24px 54px rgba(2, 8, 23, 0.16);
+  --ui-card-shadow-hover-dark: 0 28px 60px rgba(0, 0, 0, 0.42);
+  --ui-focus-ring: rgba(125, 211, 252, 0.55);
+  --ui-transition: 180ms ease;
+
   --color-bg-dark: #020817;
   --color-text-dark: #f6f9fc;
   --color-primary-dark: #7dd3fc;
@@ -61,6 +74,9 @@
   --color-bg-solid: var(--color-bg-solid-dark);
   --color-shadow: var(--color-shadow-dark);
   --color-border: var(--color-border-dark);
+  --ui-card-border: var(--ui-card-border-dark);
+  --ui-card-shadow: var(--ui-card-shadow-dark);
+  --ui-card-shadow-hover: var(--ui-card-shadow-hover-dark);
   --hero-title-color: var(--hero-title-color-dark);
   --hero-title-color-rgb: var(--hero-title-color-dark-rgb);
   --color-bg-footer: var(--color-bg-footer);
@@ -87,6 +103,9 @@
   --color-bg-solid: var(--color-bg-solid-light);
   --color-shadow: var(--color-shadow-light);
   --color-border: var(--color-border-light);
+  --ui-card-border: var(--ui-card-border-light);
+  --ui-card-shadow: var(--ui-card-shadow-light);
+  --ui-card-shadow-hover: var(--ui-card-shadow-hover-light);
   --hero-title-color: var(--hero-title-color-light);
   --hero-title-color-rgb: var(--hero-title-color-light-rgb);
   --color-bg-footer: var(--color-bg-footer);

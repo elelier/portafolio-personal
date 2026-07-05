@@ -57,6 +57,8 @@ describe('HeroBanner', () => {
     const { container, cleanup } = renderHero('es');
 
     expect(container.textContent).toContain('Transformo procesos complicados en soluciones que realmente funcionan.');
+    expect(container.textContent).toContain('con claridad y ejecución visible');
+    expect(container.textContent).not.toContain('sin humo');
     expect(container.textContent).not.toContain('Solo tomo proyectos con foco');
     expect(container.textContent).not.toContain('producto digital funcional en semanas, no meses');
 
@@ -95,6 +97,8 @@ describe('HeroBanner', () => {
     const { container, cleanup } = renderHero('en');
 
     expect(container.textContent).toContain('I turn your business idea into a working digital product in weeks, not months');
+    expect(container.textContent).toContain('with clarity and visible execution');
+    expect(container.textContent).not.toContain('without fluff');
     expect(container.querySelector('.hero-button').textContent).toContain('Let’s talk about your challenge');
     expect(container.querySelector('.scroll-indicator').textContent).toContain('See solutions');
     expect(container.innerHTML).not.toContain('calendly.com');
