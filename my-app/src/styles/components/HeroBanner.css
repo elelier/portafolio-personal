@@ -12,7 +12,7 @@ html { scroll-behavior: smooth; }
   background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
   overflow-x: hidden;
   color: var(--color-text);
-  padding: 90px 20px 70px;
+  padding: 92px 20px 72px;
   box-sizing: border-box;
 }
 
@@ -33,7 +33,7 @@ html { scroll-behavior: smooth; }
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   align-items: center;
-  gap: 32px;
+  gap: 38px;
   width: min(1120px, 100%);
   max-width: 100%;
 }
@@ -66,7 +66,7 @@ html { scroll-behavior: smooth; }
   max-width: 100%;
   font-size: clamp(2.1rem, 5.2vw, 4.55rem);
   line-height: 1.04;
-  font-weight: bold;
+  font-weight: 800;
   color: var(--color-text);
   margin: 0 0 1rem;
   overflow-wrap: anywhere;
@@ -104,36 +104,68 @@ html { scroll-behavior: smooth; }
   max-width: 100%;
   padding: 12px 22px;
   font-size: 1rem;
-  border-radius: 999px;
+  border-radius: var(--ui-radius-pill);
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 800;
   white-space: normal;
+  transition:
+    background-color var(--ui-transition),
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    color var(--ui-transition),
+    opacity var(--ui-transition),
+    transform var(--ui-transition);
 }
 
 .hero-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #a80c9b, #7bcff8, #00cc99);
-  background-size: 300% 300%;
-  animation: gradientBG 10s ease infinite;
-  color: #ffffff;
-  border: none;
+  background: var(--hero-title-color-2);
+  color: var(--color-bg-solid);
+  border: 1px solid transparent;
   text-decoration: none;
 }
 
 .hero-button-secondary {
-  background: transparent;
+  background: var(--color-bg-solid);
   color: var(--color-text);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--ui-card-border);
+}
+
+.hero-button:hover,
+.hero-button:focus-visible,
+.hero-button-secondary:hover,
+.hero-button-secondary:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 24px rgba(0, 204, 153, 0.2);
+  transform: translateY(-2px);
+}
+
+.hero-button:hover,
+.hero-button:focus-visible {
+  background: var(--color-accent);
+}
+
+.hero-button-secondary:hover,
+.hero-button-secondary:focus-visible {
+  color: var(--color-accent);
+}
+
+.hero-button:focus-visible,
+.hero-button-secondary:focus-visible,
+.scroll-indicator:focus-visible {
+  outline: 3px solid var(--ui-focus-ring);
+  outline-offset: 3px;
 }
 
 .hero-portrait-card {
   margin: 0;
   padding: 12px;
-  border: 1px solid var(--color-border);
-  border-radius: 24px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card);
   background: var(--color-bg-solid);
+  box-shadow: var(--ui-card-shadow);
   width: min(320px, 100%);
   justify-self: center;
   box-sizing: border-box;
@@ -195,15 +227,34 @@ html { scroll-behavior: smooth; }
 .fade-out { opacity: 0; transition: opacity 0.5s ease-out; pointer-events: none; }
 
 .shiny {
-  background: linear-gradient(to right, var(--color-accent) 0%, var(--hero-title-color) 50%, var(--color-accent) 100%);
-  background-size: 200% auto;
+  background: linear-gradient(to right, var(--hero-title-color-2) 0%, var(--hero-title-color) 58%, var(--color-accent) 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: shine 3s linear infinite;
 }
 
 @keyframes shine { to { background-position: 200% center; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button,
+  .hero-button-secondary,
+  .scroll-arrow,
+  .fade-in-content,
+  .fade-in,
+  .fade-out-content,
+  .fade-out,
+  #star-canvas {
+    animation: none;
+    transition: none;
+  }
+
+  .hero-button:hover,
+  .hero-button:focus-visible,
+  .hero-button-secondary:hover,
+  .hero-button-secondary:focus-visible {
+    transform: none;
+  }
+}
 
 @media (max-width: 900px) {
   .hero-banner { min-height: auto; padding: 92px 14px 56px; }

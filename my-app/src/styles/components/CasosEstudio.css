@@ -1,13 +1,13 @@
 .casos-estudio {
-  padding: 78px 20px;
+  padding: 86px 20px;
   scroll-margin-top: 78px;
   color: var(--color-text);
-  background: var(--color-bg);
+  background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
 }
 
 .casos-estudio__header {
   max-width: 760px;
-  margin: 0 auto 32px;
+  margin: 0 auto 38px;
   text-align: center;
 }
 
@@ -38,28 +38,44 @@
 .casos-estudio__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 22px;
   max-width: 1120px;
   margin: 0 auto;
 }
 
 .caso-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 18px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: linear-gradient(180deg, var(--color-bg-solid), var(--color-bg));
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card);
+  background: var(--color-bg-solid);
+  box-shadow: var(--ui-card-shadow);
   min-width: 0;
+  overflow: hidden;
+  animation: caseCardIn 520ms ease both;
+  transition:
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition);
+}
+
+.caso-card:nth-child(2) { animation-delay: 100ms; }
+
+.caso-card:hover,
+.caso-card:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: var(--ui-card-shadow-hover);
+  transform: translateY(-4px);
 }
 
 .caso-card__preview {
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card-sm);
   background: var(--color-bg);
 }
 
@@ -68,6 +84,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--ui-transition);
+}
+
+.caso-card:hover .caso-card__preview img {
+  transform: scale(1.025);
 }
 
 .caso-card__category {
@@ -111,8 +132,8 @@
 
 .caso-card__blocks p {
   padding: 12px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card-sm);
   background: rgba(255, 255, 255, 0.03);
   font-size: 0.95rem;
 }
@@ -126,7 +147,7 @@
 }
 
 .caso-card__result {
-  border-color: var(--color-border);
+  border-color: var(--ui-card-border);
   border-left: 4px solid var(--color-accent);
   background: var(--color-bg);
   font-weight: 700;
@@ -155,16 +176,74 @@
   text-decoration: underline;
 }
 
+.caso-card__link:focus-visible {
+  outline: 3px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+
 .casos-estudio__cta {
   display: block;
   margin: 32px auto 0;
   padding: 14px 32px;
-  border: none;
-  border-radius: 999px;
-  color: #ffffff;
-  background: #a80c9b;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-pill);
+  color: var(--color-bg-solid);
+  background: var(--hero-title-color-2);
+  font: inherit;
   font-weight: 800;
   cursor: pointer;
+  transition:
+    background-color var(--ui-transition),
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    color var(--ui-transition),
+    opacity var(--ui-transition),
+    transform var(--ui-transition);
+}
+
+.casos-estudio__cta:hover,
+.casos-estudio__cta:focus {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  box-shadow: 0 12px 24px rgba(0, 204, 153, 0.2);
+  transform: translateY(-2px);
+}
+
+.casos-estudio__cta:focus-visible {
+  outline: 3px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+
+.casos-estudio__cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+@keyframes caseCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caso-card,
+  .caso-card__preview img {
+    animation: none;
+    transition: none;
+  }
+
+  .caso-card:hover,
+  .caso-card:focus-within,
+  .caso-card:hover .caso-card__preview img,
+  .casos-estudio__cta:hover,
+  .casos-estudio__cta:focus {
+    transform: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -176,12 +255,13 @@
 
 @media (max-width: 520px) {
   .casos-estudio {
-    padding: 38px 14px 46px;
+    padding: 54px 14px;
     scroll-margin-top: 44px;
   }
 
   .casos-estudio__header {
     margin-bottom: 18px;
+    text-align: left;
   }
 
   .casos-estudio__header span {

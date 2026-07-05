@@ -16,7 +16,7 @@ const DynamicHeroBanner = ({ style }) => {
       {
         title: 'Transformo procesos complicados en soluciones que realmente funcionan.',
         subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB.',
-        description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo sin humo.',
+        description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo con claridad y ejecución visible.',
         icon: '🧪',
         cta: 'Hablemos de tu reto',
         secondaryCta: 'Ver casos reales'
@@ -26,7 +26,7 @@ const DynamicHeroBanner = ({ style }) => {
       {
         title: 'I turn your business idea into a working digital product in weeks, not months',
         subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB.',
-        description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge without fluff.',
+        description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge with clarity and visible execution.',
         icon: '🧪',
         cta: 'Let’s talk about your challenge',
         secondaryCta: 'See real cases'
@@ -123,7 +123,9 @@ const DynamicHeroBanner = ({ style }) => {
         </figure>
 
         <div className="info-container">
-          <span className="hero-eyebrow">Producto digital · Operaciones · IA aplicada</span>
+          <span className="hero-eyebrow">
+            {language === 'es' ? 'Producto digital · Operaciones · IA aplicada' : 'Digital product · Operations · Applied AI'}
+          </span>
           <h2 className="hero-title shiny">{currentContent?.title}</h2>
           <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
           <p className="hero-description">{currentContent?.description}</p>

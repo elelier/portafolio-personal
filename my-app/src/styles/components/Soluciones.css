@@ -1,5 +1,5 @@
 .soluciones {
-  padding: 78px 20px;
+  padding: 86px 20px;
   scroll-margin-top: 96px;
   color: var(--color-text);
   background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
@@ -7,7 +7,7 @@
 
 .soluciones-header {
   max-width: 780px;
-  margin: 0 auto 32px;
+  margin: 0 auto 38px;
   text-align: center;
 }
 
@@ -40,18 +40,38 @@
 .soluciones-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 22px;
   max-width: 1120px;
   margin: 0 auto;
 }
 
 .soluciones-card {
+  position: relative;
   min-width: 0;
-  padding: 22px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: linear-gradient(180deg, var(--color-bg-solid), var(--color-bg));
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.14);
+  padding: var(--ui-card-padding);
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-card);
+  background:
+    linear-gradient(180deg, rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.08), transparent 46%),
+    var(--color-bg-solid);
+  box-shadow: var(--ui-card-shadow);
+  overflow: hidden;
+  animation: solutionCardIn 520ms ease both;
+  transition:
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition);
+}
+
+.soluciones-card:nth-child(2) { animation-delay: 80ms; }
+.soluciones-card:nth-child(3) { animation-delay: 160ms; }
+.soluciones-card:nth-child(4) { animation-delay: 240ms; }
+
+.soluciones-card:hover,
+.soluciones-card:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: var(--ui-card-shadow-hover);
+  transform: translateY(-4px);
 }
 
 .soluciones-card__meta {
@@ -62,6 +82,8 @@
 }
 
 .soluciones-card__meta span {
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-accent);
   color: var(--color-accent);
   font-size: 0.9rem;
   font-weight: 800;
@@ -97,7 +119,7 @@
 .soluciones-card__support {
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--ui-card-border);
   color: var(--color-secondary);
   font-size: 0.92rem;
 }
@@ -107,23 +129,73 @@
   justify-items: center;
   gap: 20px;
   max-width: 760px;
-  margin: 32px auto 0;
+  margin: 36px auto 0;
   text-align: center;
 }
 
 .soluciones-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   padding: 14px 30px;
-  border: none;
-  border-radius: 999px;
-  color: #ffffff;
-  background: #a80c9b;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-pill);
+  color: var(--color-bg-solid);
+  background: var(--hero-title-color-2);
+  font: inherit;
   font-weight: 800;
   cursor: pointer;
+  transition:
+    background-color var(--ui-transition),
+    border-color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    color var(--ui-transition),
+    opacity var(--ui-transition),
+    transform var(--ui-transition);
 }
 
 .soluciones-cta:hover,
 .soluciones-cta:focus {
-  background: #7a0871;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  box-shadow: 0 12px 24px rgba(0, 204, 153, 0.2);
+  transform: translateY(-2px);
+}
+
+.soluciones-cta:focus-visible {
+  outline: 3px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+
+.soluciones-cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+@keyframes solutionCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soluciones-card {
+    animation: none;
+    transition: none;
+  }
+
+  .soluciones-card:hover,
+  .soluciones-card:focus-within,
+  .soluciones-cta:hover,
+  .soluciones-cta:focus {
+    transform: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -135,11 +207,12 @@
 
 @media (max-width: 520px) {
   .soluciones {
-    padding: 42px 14px 48px;
+    padding: 54px 14px;
   }
 
   .soluciones-header {
     margin-bottom: 20px;
+    text-align: left;
   }
 
   .soluciones-header h2 {
@@ -153,7 +226,7 @@
   }
 
   .soluciones-card {
-    padding: 16px;
+    padding: 18px;
   }
 
   .soluciones-card__meta {
