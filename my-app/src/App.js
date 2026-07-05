@@ -11,6 +11,7 @@ import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
 import Soluciones from './components/Soluciones';
 import CasosEstudio from './components/CasosEstudio';
+import Testimonios from './components/Testimonios';
 import Portafolio from './components/Portafolio';
 import Servicios from './components/Servicios';
 import Contacto from './components/Contacto';
@@ -52,6 +53,7 @@ function App({ initialLanguage }) {
     { key: 'hero', Component: HeroBanner },
     { key: 'soluciones', Component: Soluciones },
     { key: 'casos', Component: CasosEstudio },
+    { key: 'testimonios', Component: Testimonios },
     { key: 'sobre-mi', Component: SobreMi },
     { key: 'portafolio', Component: Portafolio },
     { key: 'servicios', Component: Servicios },
