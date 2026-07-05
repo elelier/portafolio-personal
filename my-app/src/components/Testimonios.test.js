@@ -75,8 +75,14 @@ describe('Testimonios', () => {
     expect(container.textContent).toContain('Edgar E. Tienda Delgado');
     expect(container.textContent).toContain('Gloria Higuera');
     expect(container.textContent).toContain('Ilse Jasso');
-    expect(Array.from(container.querySelectorAll('.testimonios__initials')).map((node) => node.textContent)).toEqual(['ET', 'GH', 'IJ']);
-    expect(container.querySelector('img')).toBeNull();
+    expect(container.textContent).toContain('Trabajó con Elier en Pepsico');
+    expect(container.textContent).toContain('Trabajó con Elier en Gofarma y Farmalisto');
+    expect(container.textContent).toContain('Marketing OneClicTrip');
+    const photos = Array.from(container.querySelectorAll('.testimonios__photo'));
+    expect(photos).toHaveLength(3);
+    expect(photos[0].getAttribute('alt')).toBe('Edgar E. Tienda Delgado');
+    expect(photos[1].getAttribute('alt')).toBe('Gloria Higuera');
+    expect(photos[2].getAttribute('alt')).toBe('Ilse Jasso');
 
     cleanup();
   });
@@ -87,8 +93,9 @@ describe('Testimonios', () => {
     expect(container.textContent).toContain('Testimonials');
     expect(container.textContent).toContain('What people say about working with me');
     expect(container.textContent).toContain('Three real recommendations from people who have worked closely with me.');
-    expect(container.textContent).toContain('Worked with Elier on the same team');
-    expect(container.textContent).toContain('Digital project and commercial operations');
+    expect(container.textContent).toContain('Worked with Elier on Pepsico');
+    expect(container.textContent).toContain('Worked with Elier on Gofarma-Farmalisto');
+    expect(container.textContent).toContain('Marketing OneClicTrip');
 
     cleanup();
   });

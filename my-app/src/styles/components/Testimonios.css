@@ -98,6 +98,24 @@
   gap: 12px;
 }
 
+.testimonios__avatar {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+}
+
+.testimonios__photo {
+  display: block;
+  width: 54px;
+  height: 54px;
+  border: 2px solid color-mix(in srgb, var(--color-accent) 45%, white);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  background: color-mix(in srgb, var(--color-bg-3) 72%, var(--color-bg-solid));
+}
+
 .testimonios__initials {
   display: inline-flex;
   align-items: center;
@@ -112,6 +130,10 @@
   font-weight: 800;
   letter-spacing: 0.06em;
   flex-shrink: 0;
+}
+
+.testimonios__initials--fallback {
+  display: none;
 }
 
 .testimonios__meta {
