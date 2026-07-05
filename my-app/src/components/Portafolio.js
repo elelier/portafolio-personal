@@ -221,14 +221,14 @@ const Portafolio = ({ style }) => {
       title: '¿Te imaginas tu proyecto en este portafolio?',
       description:
         'Trabajemos juntos para diseñar una solución a medida, desde la estrategia hasta la implementación.',
-      primary: 'Solicitar una reunión',
+      primary: 'Hablemos de tu proyecto',
       secondary: 'Conoce cómo trabajo'
     },
     en: {
       title: 'Ready to see your project featured here?',
       description:
         'Let’s craft a tailored solution together—from strategic planning to hands-on implementation.',
-      primary: 'Request a meeting',
+      primary: "Let's talk about your project",
       secondary: 'See how I work'
     }
   };

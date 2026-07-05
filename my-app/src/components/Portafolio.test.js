@@ -68,4 +68,14 @@ describe('Portafolio CTA', () => {
 
     cleanup();
   });
+
+  it('labels the primary CTA as a contact action in both languages', () => {
+    const { container: esContainer, cleanup: cleanupEs } = renderPortafolio('es');
+    expect(esContainer.querySelector('.cta-button-primary').textContent).toContain('Hablemos de tu proyecto');
+    cleanupEs();
+
+    const { container: enContainer, cleanup: cleanupEn } = renderPortafolio('en');
+    expect(enContainer.querySelector('.cta-button-primary').textContent).toContain("Let's talk about your project");
+    cleanupEn();
+  });
 });

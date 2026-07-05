@@ -9,7 +9,7 @@ const content = {
     eyebrow: 'Casos reales',
     title: 'De un reto concreto a algo que ya funciona',
     description: 'Estrategia, tecnología y operación alineadas para generar resultados medibles.',
-    cta: 'Hablemos de tu reto →',
+    cta: 'Ver cómo lo resolví →',
     labels: {
       challenge: 'Reto',
       built: 'Construcción',
@@ -44,7 +44,7 @@ const content = {
     eyebrow: 'Real work',
     title: 'From a concrete challenge to something that works',
     description: 'Strategy, technology and operations aligned to generate measurable results.',
-    cta: 'Let’s talk about your challenge →',
+    cta: 'See how I solved it →',
     labels: {
       challenge: 'Challenge',
       built: 'Build',

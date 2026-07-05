@@ -113,6 +113,8 @@ describe('CasosEstudio', () => {
     const { container, cleanup } = renderCasosEstudio('es');
     const cta = container.querySelector('.casos-estudio__cta');
 
+    expect(cta.textContent).toContain('Ver cómo lo resolví');
+
     act(() => {
       cta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
