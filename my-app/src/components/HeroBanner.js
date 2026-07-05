@@ -24,12 +24,12 @@ const DynamicHeroBanner = ({ style }) => {
     ],
     en: [
       {
-        title: 'I turn your business idea into a working digital product in weeks, not months',
+        title: 'I turn complex business processes into digital solutions that actually work',
         subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB.',
-        description: 'Strategy, prototype and real metrics to validate, automate or unblock an operational challenge with clarity and visible execution.',
+        description: 'I combine operations, product thinking and practical technology to help teams move faster, make better decisions and solve real business problems.',
         icon: '🧪',
         cta: 'Let’s talk about your challenge',
-        secondaryCta: 'See real cases'
+        secondaryCta: 'Explore real projects'
       }
     ]
   }), []);

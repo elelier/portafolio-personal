@@ -103,7 +103,7 @@ describe('Testimonios', () => {
   it('renders the three approved quote extracts without banned filler copy', () => {
     const { container, cleanup } = renderWithLanguage(<Testimonios />, 'es');
 
-    expect(container.textContent).toContain('Elier stood out for his objectivity, commitment, continuous improvement focus and excellent data analysis. He is a dedicated leader, always working with teams to optimize processes and deliver results.');
+    expect(container.textContent).toContain('Elier se destacó por su objetividad, compromiso, enfoque de mejora continua y excelente análisis de datos. Es un líder dedicado, siempre trabajando con los equipos para optimizar procesos y entregar resultados.');
     expect(container.textContent).toContain('Elier tiene una admirable capacidad de auto-aprendizaje y siempre está buscando cómo mejorar y automatizar procesos. Es una persona confiable, que se rige por principios y valores ante cualquier circunstancia.');
     expect(container.textContent).toContain('No sólo te enfocas en que algo se vea bonito, sino en entender el problema, pensar en las personas que lo van a usar y construir algo que realmente funcione. OneClicTrip hoy tiene mucho más dirección gracias a ti.');
     expect(container.textContent).not.toContain('referencias en proceso');
@@ -116,7 +116,7 @@ describe('Testimonios', () => {
     cleanup();
   });
 
-  it('uses the approved LinkedIn links and keeps Ilse without an external link', () => {
+  it('uses the approved LinkedIn links for all three testimonials', () => {
     const { container, cleanup } = renderWithLanguage(<Testimonios />, 'es');
 
     const links = Array.from(container.querySelectorAll('a'));
@@ -124,14 +124,9 @@ describe('Testimonios', () => {
 
     expect(hrefs).toContain('https://www.linkedin.com/in/edgar-tienda/?locale=en');
     expect(hrefs).toContain('https://www.linkedin.com/in/gloriahiguera/');
-    expect(links.filter((link) => link.textContent === 'Ver en LinkedIn')).toHaveLength(2);
+    expect(hrefs).toContain('https://www.linkedin.com/in/ilse-jasso/en/');
+    expect(links.filter((link) => link.textContent === 'Ver en LinkedIn')).toHaveLength(3);
     expect(container.textContent).not.toContain('Fuente');
-
-    const ilseCard = Array.from(container.querySelectorAll('.testimonios__card')).find((card) =>
-      card.textContent.includes('Ilse Jasso')
-    );
-
-    expect(ilseCard.querySelector('a')).toBeNull();
 
     cleanup();
   });

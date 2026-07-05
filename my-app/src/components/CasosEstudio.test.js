@@ -113,6 +113,27 @@ describe('CasosEstudio', () => {
     const { container, cleanup } = renderCasosEstudio('es');
     const cta = container.querySelector('.casos-estudio__cta');
 
+    expect(cta.textContent).toContain('Cuéntame qué quieres resolver');
+
+    act(() => {
+      cta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(contacto.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+    cleanup();
+  });
+
+  it('shows the approved English lower CTA copy while keeping the same contact scroll', () => {
+    const contacto = document.createElement('section');
+    contacto.id = 'contacto';
+    document.body.appendChild(contacto);
+
+    const { container, cleanup } = renderCasosEstudio('en');
+    const cta = container.querySelector('.casos-estudio__cta');
+
+    expect(cta.textContent).toContain('Tell me what you want to solve');
+
     act(() => {
       cta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });

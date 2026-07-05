@@ -68,4 +68,32 @@ describe('Portafolio CTA', () => {
 
     cleanup();
   });
+
+  it('labels the primary CTA as a contact action in both languages', () => {
+    const contacto = document.createElement('section');
+    contacto.id = 'contacto';
+    contacto.scrollIntoView = jest.fn();
+    document.body.appendChild(contacto);
+
+    const { container: esContainer, cleanup: cleanupEs } = renderPortafolio('es');
+    const esPrimaryCta = esContainer.querySelector('.cta-button-primary');
+    expect(esPrimaryCta.textContent).toContain('Hablemos de tu proyecto');
+    act(() => {
+      esPrimaryCta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+    expect(contacto.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    cleanupEs();
+
+    contacto.scrollIntoView.mockClear();
+    const { container: enContainer, cleanup: cleanupEn } = renderPortafolio('en');
+    const enPrimaryCta = enContainer.querySelector('.cta-button-primary');
+    expect(enPrimaryCta.textContent).toContain("Let's talk about your project");
+    act(() => {
+      enPrimaryCta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+    expect(contacto.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    cleanupEn();
+
+    contacto.remove();
+  });
 });

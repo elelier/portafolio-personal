@@ -88,7 +88,7 @@ describe('HeroBanner', () => {
     cleanup();
   });
 
-  it('keeps the existing English headline and shows the updated English CTA', () => {
+  it('uses the approved English hero positioning and CTA copy', () => {
     const soluciones = document.createElement('section');
     soluciones.id = 'soluciones';
     soluciones.scrollIntoView = jest.fn();
@@ -96,10 +96,13 @@ describe('HeroBanner', () => {
 
     const { container, cleanup } = renderHero('en');
 
-    expect(container.textContent).toContain('I turn your business idea into a working digital product in weeks, not months');
-    expect(container.textContent).toContain('with clarity and visible execution');
-    expect(container.textContent).not.toContain('without fluff');
+    expect(container.textContent).toContain('I turn complex business processes into digital solutions that actually work');
+    expect(container.textContent).toContain('I combine operations, product thinking and practical technology');
+    expect(container.textContent).toContain('help teams move faster, make better decisions and solve real business problems');
+    expect(container.textContent).not.toContain('working digital product in weeks, not months');
+    expect(container.textContent).not.toContain('turn your business idea into a working digital product');
     expect(container.querySelector('.hero-button').textContent).toContain('Let’s talk about your challenge');
+    expect(container.querySelector('.hero-button-secondary').textContent).toContain('Explore real projects');
     expect(container.querySelector('.scroll-indicator').textContent).toContain('See solutions');
     expect(container.innerHTML).not.toContain('calendly.com');
 

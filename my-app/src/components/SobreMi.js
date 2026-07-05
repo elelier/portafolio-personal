@@ -54,22 +54,18 @@ function SobreMi({ style }) {
         ),
       },
       {
-        title: 'Cómo trabajo',
+        title: 'Mi enfoque',
         image: tech_vision,
-        alt: 'Cómo trabajo',
-        subtitle: 'Entender el sistema, elegir qué mover primero y acompañar la ejecución.',
+        alt: 'Mi enfoque',
+        subtitle: 'La solución correcta empieza por entender qué está frenando al negocio.',
         content: (
           <div className="content-container">
             <div className="image-container">
-              <LazyLoadImage src={tech_vision} alt="Cómo trabajo" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
+              <LazyLoadImage src={tech_vision} alt="Mi enfoque" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
             </div>
             <div className="text-content">
-              <h3>1. Aterrizamos el reto</h3>
-              <p>Empiezo por entender qué ocurre en la operación, con las personas y frente al cliente. No parto de una herramienta.</p>
-              <h3>2. Diseñamos lo necesario</h3>
-              <p>Definimos proceso, alcance, experiencia y medición antes de construir más de la cuenta.</p>
-              <h3>3. Lo llevamos a uso real</h3>
-              <p>Conecto decisiones, tecnología y equipos para que la solución se adopte, se mida y mejore con evidencia.</p>
+              <p>Mi experiencia me enseñó que una buena solución no empieza con tecnología, sino con entender qué está frenando al negocio.</p>
+              <p>Por eso conecto operación, producto y ejecución antes de llevar el trabajo completo a la sección dedicada más abajo.</p>
             </div>
           </div>
         ),
@@ -116,22 +112,18 @@ function SobreMi({ style }) {
         ),
       },
       {
-        title: 'How I work',
+        title: 'My approach',
         image: tech_vision,
-        alt: 'How I work',
-        subtitle: 'Understand the system, decide what to move first and stay close to execution.',
+        alt: 'My approach',
+        subtitle: 'The right solution starts with understanding what is slowing the business down.',
         content: (
           <div className="content-container">
             <div className="image-container">
-              <LazyLoadImage src={tech_vision} alt="How I work" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
+              <LazyLoadImage src={tech_vision} alt="My approach" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
             </div>
             <div className="text-content">
-              <h3>1. Ground the challenge</h3>
-              <p>I start by understanding what is happening in the operation, with the people involved and for the customer. I do not start with a tool.</p>
-              <h3>2. Design what is needed</h3>
-              <p>We define process, scope, experience and measurement before building more than necessary.</p>
-              <h3>3. Bring it into real use</h3>
-              <p>I connect decisions, technology and teams so the solution is adopted, measured and improved with evidence.</p>
+              <p>I have learned that good solutions do not start with technology. They start by understanding what is slowing the business down.</p>
+              <p>That is why I connect operations, product and execution before moving the full work to the dedicated section below.</p>
             </div>
           </div>
         ),
@@ -217,7 +209,7 @@ function SobreMi({ style }) {
           {sections[language][currentSection].content}
         </div>
         <div className="cta-seccion-sobre-mi">
-          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Ver método' : 'See method'}</button>
+          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Conoce cómo trabajo' : 'See how I work'}</button>
           <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Hablemos de tu reto' : 'Let’s talk about your challenge'}</button>
         </div>
         <div className="horizontal-scroll-indicator">
