@@ -1,0 +1,201 @@
+.testimonios {
+  padding: 56px 14px;
+  scroll-margin-top: 44px;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at top center, rgba(var(--hero-title-color-rgb), 0.12), transparent 38%),
+    linear-gradient(to bottom, var(--section-bg-start, var(--color-bg)), var(--section-bg-end, var(--color-bg-3)));
+}
+
+.testimonios__inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.testimonios__header {
+  max-width: 680px;
+  margin: 0 auto 22px;
+  text-align: left;
+}
+
+.testimonios__header span {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.testimonios__header h2 {
+  margin: 0 0 10px;
+  color: var(--hero-title-color-2);
+  font-size: clamp(1.7rem, 7vw, 3.2rem);
+  line-height: 1.08;
+}
+
+.testimonios__header p {
+  margin: 0;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.testimonios__grid {
+  display: grid;
+  gap: 16px;
+}
+
+.testimonios__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px 16px 16px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--color-bg-solid) 88%, transparent);
+  box-shadow: var(--ui-card-shadow);
+  transition:
+    transform var(--ui-transition),
+    box-shadow var(--ui-transition),
+    border-color var(--ui-transition);
+}
+
+.testimonios__card:hover,
+.testimonios__card:focus-within {
+  border-color: color-mix(in srgb, var(--color-accent) 55%, var(--ui-card-border));
+  box-shadow: var(--ui-card-shadow-hover);
+  transform: translateY(-3px);
+}
+
+.testimonios__quote-mark {
+  margin: 0 0 8px;
+  color: color-mix(in srgb, var(--color-accent) 72%, white);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.testimonios__quote {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.75;
+  font-style: italic;
+}
+
+.testimonios__divider {
+  margin: 18px 0 16px;
+  height: 1px;
+  background: color-mix(in srgb, var(--ui-card-border) 75%, transparent);
+}
+
+.testimonios__person {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonios__initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border: 2px solid color-mix(in srgb, var(--color-accent) 45%, white);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-bg-3) 72%, var(--color-bg-solid));
+  color: var(--hero-title-color);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.testimonios__meta {
+  min-width: 0;
+}
+
+.testimonios__meta h3 {
+  margin: 0 0 4px;
+  color: var(--hero-title-color);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.testimonios__meta p {
+  margin: 0;
+  color: var(--color-secondary);
+  font-size: 0.87rem;
+  line-height: 1.45;
+}
+
+.testimonios__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--color-accent);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.testimonios__link:hover,
+.testimonios__link:focus {
+  text-decoration: underline;
+}
+
+.testimonios__link:focus-visible {
+  outline: 3px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+@media (min-width: 700px) {
+  .testimonios {
+    padding: 72px 20px;
+    scroll-margin-top: 78px;
+  }
+
+  .testimonios__header {
+    margin-bottom: 34px;
+    text-align: center;
+  }
+
+  .testimonios__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .testimonios__card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 540px;
+    justify-self: center;
+  }
+}
+
+@media (min-width: 1040px) {
+  .testimonios__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .testimonios__card:last-child:nth-child(odd) {
+    grid-column: auto;
+    max-width: none;
+    justify-self: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonios__card {
+    transition: none;
+  }
+
+  .testimonios__card:hover,
+  .testimonios__card:focus-within {
+    transform: none;
+  }
+}
