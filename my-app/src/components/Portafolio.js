@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Portafolio.css';
 import '../styles/components/Timeline.css';
 import { getCurrentLanguage } from './utils/languageUtils';
@@ -349,7 +350,7 @@ const Portafolio = ({ style }) => {
   const handleScrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      scrollIntoViewWithMotionPreference(section);
     }
   };
 

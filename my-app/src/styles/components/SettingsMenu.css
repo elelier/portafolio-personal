@@ -27,6 +27,7 @@
   font-size: 24px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  padding: 0;
 }
 
 .settings-toggle:hover {
@@ -61,24 +62,38 @@
   pointer-events: auto;
 }
 
-.settings-option {
+.settings-theme-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-option-button {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  cursor: pointer;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
   border-radius: 8px;
+  cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.settings-option:hover {
+.settings-option-button:hover,
+.settings-option-button:focus-visible {
   background-color: var(--color-bg-2);
   color: var(--color-accent);
   transform: scale(1.1);
 }
 
-.settings-option.active {
+.settings-option-button[aria-pressed="true"] {
   background-color: var(--color-accent);
   color: var(--color-bg);
   transform: scale(0.95);
@@ -88,6 +103,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .flag-image {
@@ -109,9 +127,21 @@
   margin-top: 5px;
 }
 
-.settings-option:hover .tooltip {
+.settings-option-button:hover .tooltip,
+.settings-option-button:focus-visible .tooltip,
+.language-toggle:hover .tooltip,
+.language-toggle:focus-visible .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-toggle,
+  .settings-option-button,
+  .language-toggle,
+  .settings-menu {
+    transition: none;
+  }
 }
 
 @media (max-width: 925px) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Soluciones.css';
 
 const content = {
@@ -76,7 +77,7 @@ function Soluciones({ style }) {
   const t = content[language] || content.es;
 
   const scrollToContacto = () => {
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    scrollIntoViewWithMotionPreference(document.getElementById('contacto'));
   };
 
   return (

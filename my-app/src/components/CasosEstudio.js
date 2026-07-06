@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/components/CasosEstudio.css';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
 import oneClicTripPreview from '../assets/images/casos-oneclictrip-preview.jpg';
 
@@ -82,7 +83,7 @@ function CasosEstudio({ style }) {
   const t = content[language] || content.es;
 
   const scrollToContacto = () => {
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    scrollIntoViewWithMotionPreference(document.getElementById('contacto'));
   };
 
   return (

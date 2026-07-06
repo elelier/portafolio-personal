@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Servicios.css';
 
 function Servicios({ style }) {
@@ -78,7 +79,7 @@ function Servicios({ style }) {
         ))}
       </div>
       <div className="servicio-cta global-cta">
-        <button className="cta-button-3" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>{t.cta}</button>
+        <button className="cta-button-3" onClick={() => scrollIntoViewWithMotionPreference(document.getElementById('contacto'))}>{t.cta}</button>
         <div className="cta-helper-text">{t.ctaHelper}</div>
       </div>
       </div>

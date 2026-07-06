@@ -2,11 +2,12 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
-const SITE_URL = 'https://www.elelier.com';
+const SITE_URL = 'https://elelier.com';
 const DEFAULT_OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
 
-function buildUrl(pathname = '/') {
-  const normalizedPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
+export function buildUrl(pathname = '/') {
+  const sanitizedPath = `${pathname || '/'}`.split('?')[0].split('#')[0];
+  const normalizedPath = sanitizedPath.startsWith('/') ? sanitizedPath : `/${sanitizedPath}`;
   return `${SITE_URL}${normalizedPath}`;
 }
 
@@ -22,7 +23,7 @@ function SEO({
   locale = 'es_MX'
 }) {
   const location = useLocation();
-  const currentPath = pathname || `${location.pathname || '/'}${location.search || ''}`;
+  const currentPath = pathname || location.pathname || '/';
   const canonicalUrl = buildUrl(currentPath);
 
   return (

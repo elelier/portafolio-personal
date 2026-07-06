@@ -9,6 +9,7 @@ import clientAuthService from '../services/clientAuthService';
 import { hashedPasscodes } from '../config/hashedPasscodes';
 import '../styles/components/ClientSpace.css';
 import { useLanguage } from '../contexts/LanguageContext';
+import { getMotionAwareScrollBehavior } from './utils/generalUtils';
 
 const ClientSpace = () => {
   const { token } = useParams();
@@ -227,7 +228,7 @@ const ClientSpace = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: getMotionAwareScrollBehavior()
       });
     }
   };

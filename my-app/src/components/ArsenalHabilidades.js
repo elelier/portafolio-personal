@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import '../styles/components/Habilidades.css';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import strategic_vision from '../assets/images/skills/strategic_vision.png';
 import team_leadership from '../assets/images/skills/team_leadership.png';
 import tech_integration from '../assets/images/skills/tech_integration.png';
@@ -185,7 +186,7 @@ function ArsenalHabilidades({ style }) {
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      scrollIntoViewWithMotionPreference(section);
     }
   };
 

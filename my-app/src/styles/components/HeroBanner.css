@@ -236,6 +236,8 @@ html { scroll-behavior: smooth; }
 @keyframes shine { to { background-position: 200% center; } }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
   .hero-button,
   .hero-button-secondary,
   .scroll-arrow,
@@ -253,6 +255,10 @@ html { scroll-behavior: smooth; }
   .hero-button-secondary:hover,
   .hero-button-secondary:focus-visible {
     transform: none;
+  }
+
+  #star-canvas {
+    opacity: 0 !important;
   }
 }
 

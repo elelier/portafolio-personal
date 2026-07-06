@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import { FaRocket, FaUserAlt, FaCogs, FaCode, FaEnvelope, FaTimes, FaPaperPlane, FaRobot } from 'react-icons/fa';
 import { SystemMessage, UserMessage } from '../utils/MessageSystem';
 import { getBenefitResponse } from '../utils/benefitResponses';
@@ -175,12 +176,12 @@ const ChatModal = () => {
 
   const toggleChat = () => {
     if (!isOpen) {
-      // Si hay histórico, hacemos scroll al final después de que se abra
-      if (messages.length > 0) {
-        setTimeout(() => {
-          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
+        // Si hay histórico, hacemos scroll al final después de que se abra
+        if (messages.length > 0) {
+          setTimeout(() => {
+            scrollIntoViewWithMotionPreference(messagesEndRef.current);
+          }, 100);
+        }
     }
     setIsOpen(!isOpen);
   };
@@ -246,8 +247,7 @@ const ChatModal = () => {
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ 
-        behavior: 'smooth',
+      scrollIntoViewWithMotionPreference(messagesEndRef.current, {
         block: 'end',
         inline: 'nearest'
       });
@@ -260,7 +260,7 @@ const ChatModal = () => {
 
   useEffect(() => {
     if (isOpen && messages.length > 0) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      scrollIntoViewWithMotionPreference(messagesEndRef.current);
     }
   }, [isOpen, messages]);
 

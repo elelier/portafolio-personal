@@ -31,7 +31,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import AionLabs from './components/AionLabs';
 import { initializeTheme } from './components/utils/themeUtils';
-import { loadExternalScripts } from './components/utils/generalUtils';
+import { getMotionAwareScrollBehavior, loadExternalScripts } from './components/utils/generalUtils';
 import './utils/testGemini';
 
 if (process.env.NODE_ENV === 'development') {
@@ -71,7 +71,7 @@ function App({ initialLanguage }) {
   }, [initialLanguage]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: getMotionAwareScrollBehavior() });
   };
 
   return (
@@ -82,8 +82,8 @@ function App({ initialLanguage }) {
             <div className="App">
               <SettingsMenu />
               <SEO
-                title="Elier Loya - Transformando Negocios con Tecnología e Innovación"
-                description="Portafolio de Elier Loya, especialista en transformación digital, e-commerce y optimización de operaciones."
+                title="Transformo procesos complicados en soluciones que realmente funcionan. | Elier Loya"
+                description="Transformo procesos complicados en soluciones que realmente funcionan. Especialista en operaciones, producto digital e IA aplicada."
               />
               <Navegacion />
               <Suspense fallback={<div>Loading...</div>}>

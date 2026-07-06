@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import ProjectProgress from './ProjectProgress';
 
 const PROJECT_URL_MAP = {
@@ -50,7 +51,7 @@ const MockupRedirect = () => {
   const handleScrollToProgress = () => {
     const progressSection = document.getElementById('project-progress');
     if (progressSection) {
-      progressSection.scrollIntoView({ behavior: 'smooth' });
+      scrollIntoViewWithMotionPreference(progressSection);
     }
   };
 
