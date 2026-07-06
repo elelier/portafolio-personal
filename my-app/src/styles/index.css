@@ -246,6 +246,21 @@ a {
   animation: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  [data-chatbot-chat-widget-button],
+  [data-chatbot-chat-widget-button]:hover,
+  [data-chatbot-chat-widget-button]:active,
+  [data-chatbot-chat-widget-button] i,
+  [data-chatbot-chat-widget-button]::before {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  [data-chatbot-chat-widget-button] {
+    background-position: 0 0 !important;
+  }
+}
+
 /* Media queries para dispositivos móviles */
 @media (max-width: 600px) {
   #chatbot-chat-widget__container {

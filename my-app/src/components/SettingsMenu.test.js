@@ -81,6 +81,27 @@ describe('SettingsMenu', () => {
     cleanup();
   });
 
+  it('keeps the closed menu hidden from assistive tech and exposes it when open', () => {
+    const { container, cleanup } = renderSettingsMenu({ language: 'es', currentTheme: 'dark' });
+
+    const toggle = container.querySelector('.settings-toggle');
+    const panel = container.querySelector('#settings-menu');
+
+    expect(panel.getAttribute('aria-hidden')).toBe('true');
+    expect(panel.getAttribute('inert')).toBe('');
+    expect(panel.classList.contains('open')).toBe(false);
+
+    act(() => {
+      toggle.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(panel.getAttribute('aria-hidden')).toBe('false');
+    expect(panel.hasAttribute('inert')).toBe(false);
+    expect(panel.classList.contains('open')).toBe(true);
+
+    cleanup();
+  });
+
   it('switches language with an accessible destination label in English', () => {
     const { container, cleanup, toggleLanguage } = renderSettingsMenu({ language: 'en', currentTheme: 'light' });
 

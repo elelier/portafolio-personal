@@ -8,6 +8,7 @@ const SettingsMenu = () => {
   const { currentTheme, setTheme } = useContext(ThemeContext);
   const { language, toggleLanguage } = useLanguage();
   const menuRef = useRef(null);
+  const menuPanelRef = useRef(null);
 
   const labels = {
     es: {
@@ -68,6 +69,18 @@ const SettingsMenu = () => {
     setTheme(theme);
   };
 
+  useEffect(() => {
+    if (!menuPanelRef.current) {
+      return;
+    }
+
+    if (isMenuOpen) {
+      menuPanelRef.current.removeAttribute('inert');
+    } else {
+      menuPanelRef.current.setAttribute('inert', '');
+    }
+  }, [isMenuOpen]);
+
   return (
     <div className="settings-menu-container" ref={menuRef}>
       <button
@@ -80,7 +93,12 @@ const SettingsMenu = () => {
       >
         <i className="fas fa-cog settings-icon" aria-hidden="true" />
       </button>
-      <div id="settings-menu" className={`settings-menu ${isMenuOpen ? 'open' : ''}`}>
+      <div
+        id="settings-menu"
+        ref={menuPanelRef}
+        className={`settings-menu ${isMenuOpen ? 'open' : ''}`}
+        aria-hidden={!isMenuOpen}
+      >
         <div className="settings-theme-group">
           <button
             type="button"
