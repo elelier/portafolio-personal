@@ -1,16 +1,275 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/Portafolio.css';
 import '../styles/components/Timeline.css';
 import { getCurrentLanguage } from './utils/languageUtils';
 
-// Import images
-import wonderlabsImg from '../assets/images/wonderlabs.jpg';
-import elelierImg from '../assets/images/elelier.jpg';
 import chubbImg from '../assets/images/CHUBB.jpg';
-import gofarmaImg from '../assets/images/gofarma.jpg';
+import elelierImg from '../assets/images/elelier.jpg';
 import farmalistoImg from '../assets/images/farmalisto.jpg';
-import pepsicoImg from '../assets/images/pepsico.jpg';
+
+const LINKEDIN_URL = 'https://linkedin.com/in/elier/';
+
+const careerContent = {
+  es: [
+    {
+      id: 'gofarma-farmalisto',
+      name: 'GoFarma + Farmalisto',
+      period: '2016–2024',
+      role: 'Operación, producto digital y crecimiento comercial',
+      description:
+        'Convertí procesos operativos complejos en una operación más precisa, rápida y medible.',
+      bannerAlt: 'Banner de Farmalisto con enfoque en operación y crecimiento comercial',
+      image: farmalistoImg,
+      chips: [
+        '99.8% precisión de inventario',
+        'Pedidos en ~2 min',
+        '−50% reclamaciones y cancelaciones',
+        '+144% ventas',
+        '+58% ticket promedio'
+      ],
+      links: [
+        {
+          label: 'Ver Farmalisto ↗',
+          href: 'https://www.farmalisto.com.mx/'
+        }
+      ],
+      bullets: [
+        'Diseñé procesos de inventario, operación y fulfillment.',
+        'Estandaricé flujos para reducir reclamos y cancelaciones.',
+        'Llevé operación y marketplaces a decisiones más medibles.'
+      ]
+    },
+    {
+      id: 'chubb',
+      name: 'CHUBB',
+      period: '2024–Actualidad',
+      role: 'Digital Product Owner',
+      description:
+        'Lidero iniciativas de producto y transformación digital para mejorar experiencia, operación y toma de decisiones.',
+      bannerAlt: 'Banner de CHUBB con enfoque en producto digital',
+      image: chubbImg,
+      chips: ['Producto digital', 'Operación', 'Transformación', 'Usabilidad', 'Datos'],
+      links: [
+        {
+          label: 'Ver LinkedIn ↗',
+          href: LINKEDIN_URL
+        }
+      ],
+      bullets: [
+        'Digitalización de renovaciones de pólizas.',
+        'Mejora de cotización, emisión y experiencia de usuario.',
+        'Uso de datos y usabilidad para priorizar decisiones.'
+      ]
+    },
+    {
+      id: 'elier',
+      name: 'Elier',
+      period: '2025–Actualidad',
+      role: 'Producto y transformación digital',
+      description:
+        'Ayudo a negocios y equipos a aterrizar retos en soluciones digitales útiles, claras y accionables.',
+      bannerAlt: 'Banner de Elier con enfoque en producto y transformación digital',
+      image: elelierImg,
+      chips: ['Automatización', 'IA aplicada', 'Producto', 'Integraciones', 'Consultoría'],
+      links: [
+        {
+          label: 'Ver elelier.com ↗',
+          href: 'https://elelier.com/'
+        },
+        {
+          label: 'LinkedIn ↗',
+          href: LINKEDIN_URL
+        }
+      ],
+      bullets: [
+        'Diseño y construcción de soluciones digitales.',
+        'Automatización e IA aplicada a retos concretos.',
+        'Integración entre operación, producto y ejecución.'
+      ]
+    }
+  ],
+  en: [
+    {
+      id: 'gofarma-farmalisto',
+      name: 'GoFarma + Farmalisto',
+      period: '2016–2024',
+      role: 'Operations, digital product and commercial growth',
+      description:
+        'I turned complex operational processes into a more accurate, faster and measurable operation.',
+      bannerAlt: 'Farmalisto banner focused on operations and commercial growth',
+      image: farmalistoImg,
+      chips: [
+        '99.8% inventory accuracy',
+        'Orders in ~2 min',
+        '−50% claims and cancellations',
+        '+144% sales',
+        '+58% average ticket'
+      ],
+      links: [
+        {
+          label: 'View Farmalisto ↗',
+          href: 'https://www.farmalisto.com.mx/'
+        }
+      ],
+      bullets: [
+        'Designed inventory, operations and fulfillment processes.',
+        'Standardized flows to reduce claims and cancellations.',
+        'Brought operations and marketplaces into more measurable decision-making.'
+      ]
+    },
+    {
+      id: 'chubb',
+      name: 'CHUBB',
+      period: '2024–Present',
+      role: 'Digital Product Owner',
+      description:
+        'I lead product and digital transformation initiatives to improve experience, operations and decision-making.',
+      bannerAlt: 'CHUBB banner focused on digital product work',
+      image: chubbImg,
+      chips: ['Digital product', 'Operations', 'Transformation', 'Usability', 'Data'],
+      links: [
+        {
+          label: 'View LinkedIn ↗',
+          href: LINKEDIN_URL
+        }
+      ],
+      bullets: [
+        'Digitalization of policy renewal processes.',
+        'Improvement of quoting, issuance and user experience.',
+        'Use of data and usability to prioritize decisions.'
+      ]
+    },
+    {
+      id: 'elier',
+      name: 'Elier',
+      period: '2025–Present',
+      role: 'Product and digital transformation',
+      description:
+        'I help businesses and teams turn challenges into useful, clear and actionable digital solutions.',
+      bannerAlt: 'Elier banner focused on product and digital transformation',
+      image: elelierImg,
+      chips: ['Automation', 'Applied AI', 'Product', 'Integrations', 'Consulting'],
+      links: [
+        {
+          label: 'View elelier.com ↗',
+          href: 'https://elelier.com/'
+        },
+        {
+          label: 'LinkedIn ↗',
+          href: LINKEDIN_URL
+        }
+      ],
+      bullets: [
+        'Design and delivery of digital solutions.',
+        'Automation and applied AI for concrete challenges.',
+        'Integration across operations, product and execution.'
+      ]
+    }
+  ]
+};
+
+const ctaContent = {
+  es: {
+    title: '¿Te imaginas tu proyecto en este portafolio?',
+    description:
+      'Trabajemos juntos para diseñar una solución a medida, desde la estrategia hasta la implementación.',
+    primary: 'Hablemos de tu proyecto',
+    secondary: 'Conoce cómo trabajo'
+  },
+  en: {
+    title: 'Ready to see your project featured here?',
+    description:
+      'Let’s craft a tailored solution together—from strategic planning to hands-on implementation.',
+    primary: "Let's talk about your project",
+    secondary: 'See how I work'
+  }
+};
+
+function CareerCard({ entry, index, language, isExpanded, onToggle }) {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onToggle(index);
+    }
+  };
+
+  const stopPropagation = (event) => {
+    event.stopPropagation();
+  };
+
+  return (
+    <article
+      className={`timeline-card${isExpanded ? ' timeline-card--expanded' : ''}`}
+      role="button"
+      tabIndex={0}
+      aria-expanded={isExpanded}
+      data-testid="career-card"
+      data-career-name={entry.name}
+      onClick={() => onToggle(index)}
+      onKeyDown={handleKeyDown}
+      aria-label={`${entry.name} ${entry.period}`}
+    >
+      <span className="timeline-card__period">{entry.period}</span>
+
+      <div className="timeline-card__banner">
+        <img src={entry.image} alt={entry.bannerAlt} className="timeline-card__image" />
+        <div className="timeline-card__overlay" aria-hidden="true" />
+      </div>
+
+      <div className="timeline-card__body">
+        <div className="timeline-card__identity">
+          <h3>{entry.name}</h3>
+          <h4>{entry.role}</h4>
+          <p>{entry.description}</p>
+        </div>
+
+        <div className="timeline-card__chips" aria-label={language === 'es' ? 'Logros destacados' : 'Highlighted achievements'}>
+          {entry.chips.map((chip) => (
+            <span key={chip} className="timeline-card__chip">
+              {chip}
+            </span>
+          ))}
+        </div>
+
+        <div className="timeline-card__links">
+          {entry.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={stopPropagation}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {isExpanded && (
+          <div className="timeline-card__details">
+            <h5>{language === 'es' ? 'Lo que moví' : 'What I moved'}</h5>
+            <ul>
+              {entry.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <span className="timeline-card__toggle">
+          {isExpanded
+            ? language === 'es'
+              ? 'Ocultar detalles ↑'
+              : 'Hide details ↑'
+            : language === 'es'
+              ? 'Ver detalles ↓'
+              : 'View details ↓'}
+        </span>
+      </div>
+    </article>
+  );
+}
 
 const Portafolio = ({ style }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -29,211 +288,63 @@ const Portafolio = ({ style }) => {
   }, []);
 
   useEffect(() => {
-    setCurrentLang(getCurrentLanguage());
+    setCurrentLang(language || getCurrentLanguage());
   }, [language]);
 
-  const proyectos = {
-    es: [
-      {
-        nombre: "CHUBB",
-        timeline: "2024 - Actualidad",
-        rol: "Digital Product Owner",
-        image: chubbImg,
-        descripcion: "Impulso la transformación digital en CHUBB, liderando la digitalización y optimización en el área de renovaciones de pólizas para mejorar la experiencia del cliente y la eficiencia operativa.",
-        logros: [
-          "Implementación de automatización y personalización en procesos de renovación para flotas e individuales",
-          "Desarrollo de una nueva interfaz de renovación y optimización de cotización y emisión",
-          "Integración de análisis de datos y estudios de usabilidad para decisiones estratégicas y mejora continua"
-        ],
-        tecnologias: ["Agile", "Automatización", "Digital Transformation", "Data Analytics", "UX/UI"],
-        link: "https://www.chubb.com",
-        link_u: "chubb.com"
-      },
-      {
-        nombre: "Freelancer",
-        timeline: "2024 - Actualidad",
-        rol: "Ingeniero en transformación digital",
-        image: elelierImg,
-        descripcion: "Desarrollé asistentes de IA enfocados en marketing y gestión de proyectos, mejorando la eficacia de estrategias de marca y la planificación de proyectos.",
-        logros: [
-          "Creación de un asistente para generar ideas innovadoras de campañas publicitarias",
-          "Desarrollo de un asistente para planificar, actualizar y evaluar proyectos",
-          "Implementación de funciones para mantener la motivación y el enfoque en los logros"
-        ],
-        tecnologias: ["HuggingFace", "Procesamiento de Lenguaje Natural", "Machine Learning", "Python"],
-        link: "https://huggingface.co/chat/assistants?user=Elelier",
-        link_u: "huggingface.co"
-      },
-      {
-        nombre: "Wonderlabs",
-        timeline: "2023-2024",
-        rol: "Desarrollador Backend Senior",
-        image: wonderlabsImg,
-        descripcion: "Desarrollé la infraestructura backend de una plataforma que genera cuentos personalizados para niños, integrando IA avanzada para la generación automática de historias, imágenes y narraciones.",
-        logros: [
-          "Desarrollo de API's para gestionar los flujos esenciales, como bases de datos, generación de historias, imágenes y narraciones con IA",
-          "Configuración y optimización del sitio web dinámico utilizando WIX para una experiencia de usuario fluida",
-          "Implementación de un chatbot para atención al cliente utilizando inteligencia artificial avanzada"
-        ],
-        tecnologias: ["React", "Node.js", "Desarrollo de API", "IA Generativa", "WIX"],
-        link: "https://wonderlabs.studio",
-        link_u: "wonderlabs.studio"
-      },
+  useEffect(() => {
+    const section = document.getElementById('portafolio');
 
-      {
-        nombre: "GoFarma",
-        timeline: "2016-2024",
-        rol: "Co-fundador y Director de Operaciones",
-        image: gofarmaImg,
-        descripcion: "Diseñé e implementé el modelo operativo de la compañía, logrando una precisión de inventario del 99.8% y tiempos de entrega competitivos.",
-        logros: [
-          "Precisión del inventario del 99.8%",
-          "Tiempo de procesamiento por pedido de 2 minutos",
-          "Optimización de envíos locales y nacionales"
-        ],
-        tecnologias: ["ERP Olimpo", "Automatización de procesos", "Gestión de inventarios"],
-        link: "http://www.gofarma.com",
-        link_u: "gofarma.com"
-      },
-      {
-        nombre: "Farmalisto",
-        timeline: "2022-2024",
-        rol: "Director de Ventas en Marketplaces",
-        image: farmalistoImg,
-        descripcion: "Gestioné la presencia en línea en diversos marketplaces, aumentando la visibilidad y conversión de clientes.",
-        logros: [
-          "Reducción del 50% en reclamos y cancelaciones",
-          "Incremento del 144% en ventas",
-          "Aumento del 58% en ticket promedio"
-        ],
-        tecnologias: ["Mercado Libre", "Amazon", "Shopify", "NetSuite ERP", "IA para atención al cliente"],
-        link: "https://www.farmalisto.com.mx/",
-        link_u: "farmalisto.com.mx"
-      },
-      {
-        nombre: "PepsiCo",
-        timeline: "2012-2016",
-        rol: "Coordinador de Proyectos de Productividad",
-        image: pepsicoImg,
-        descripcion: "Lideré proyectos de mejora en 8 plantas de Gamesa-Quaker, optimizando procesos y aumentando la eficiencia.",
-        logros: [
-          "Incremento del rendimiento de materia prima en un 0.4% a nivel nacional",
-          "Implementación de KPIs y gestión de proyectos de aumento de capacidad"
-        ],
-        tecnologias: ["SAP", "Metodología DMAIC", "Lean Six Sigma"]
-      }
-    ],
-    en: [
-      {
-        // English version
-        nombre: "CHUBB",
-        timeline: "2024 - Present",
-        rol: "Digital Product Owner",
-        image: chubbImg,
-        descripcion: "I drive digital transformation at CHUBB by optimizing policy renewal processes to enhance customer experience and operational efficiency.",
-        logros: [
-          "Implemented automation and customization for fleet and individual policy renewals",
-          "Developed a new renewal interface and optimized quoting and issuance processes",
-          "Integrated data analytics and usability studies for strategic decision-making and continuous improvement"
-        ],
-        tecnologias: ["Agile", "Automation", "Digital Transformation", "Data Analytics", "UX/UI"],
-        link: "https://www.chubb.com",
-        link_u: "chubb.com"
-      },
-      {
-        nombre: "Virtual Assistants",
-        timeline: "2024",
-        rol: "AI Developer",
-        image: elelierImg,
-        descripcion: "Developed AI assistants focused on marketing and project management, improving brand strategy effectiveness and project planning.",
-        logros: [
-          "Creation of an assistant for generating innovative advertising campaign ideas",
-          "Development of an assistant for planning, updating, and evaluating projects",
-          "Implementation of features to maintain motivation and focus on achievements"
-        ],
-        tecnologias: ["HuggingFace", "Natural Language Processing", "Machine Learning", "Python"],
-        link: "https://huggingface.co/chat/assistants?user=Elelier",
-        link_u: "huggingface.co"
-      },
-      {
-        nombre: "Wonderlabs",
-        timeline: "2023-2024",
-        rol: "Senior Backend Developer",
-        image: wonderlabsImg,
-        descripcion: "I developed the backend infrastructure for a platform that generates personalized children's stories, integrating advanced AI for automatic story, image, and narration generation.",
-        logros: [
-          "Developed APIs to manage core workflows, including databases, story generation, images, and AI-driven storytelling",
-          "Configured and optimized a dynamic website using WIX for a seamless user experience",
-          "Implemented a customer service chatbot using advanced artificial intelligence"
-        ],
-        tecnologias: ["React", "Node.js", "API Development", "Generative AI", "WIX"],
-        link: "https://wonderlabs.studio",
-        link_u: "wonderlabs.studio"
-      },
-
-      {
-        nombre: "GoFarma",
-        timeline: "2016-2024",
-        rol: "Co-founder and Operations Director",
-        image: gofarmaImg,
-        descripcion: "Designed and implemented the company's operating model, achieving 99.8% inventory accuracy and competitive delivery times.",
-        logros: [
-          "99.8% inventory accuracy",
-          "2-minute order processing time",
-          "Optimization of local and national shipping"
-        ],
-        tecnologias: ["ERP Olimpo", "Process Automation", "Inventory Management"],
-        link: "http://www.gofarma.com",
-        link_u: "gofarma.com"
-      },
-      {
-        nombre: "Farmalisto",
-        timeline: "2022-2024",
-        rol: "Marketplace Sales Director",
-        image: farmalistoImg,
-        descripcion: "Managed the online presence across various marketplaces, increasing customer visibility and conversion.",
-        logros: [
-          "50% reduction in claims and cancellations",
-          "144% increase in sales",
-          "58% increase in average ticket"
-        ],
-        tecnologias: ["Mercado Libre", "Amazon", "Shopify", "NetSuite ERP", "AI for Customer Service"],
-        link: "https://www.farmalisto.com.mx/",
-        link_u: "farmalisto.com.mx"
-      },
-      {
-        nombre: "PepsiCo",
-        timeline: "2012-2016",
-        rol: "Productivity Projects Coordinator",
-        image: pepsicoImg,
-        descripcion: "Led improvement projects in 8 Gamesa-Quaker plants, optimizing processes and increasing efficiency.",
-        logros: [
-          "0.4% increase in raw material performance nationwide",
-          "Implementation of KPIs and capacity increase projects"
-        ],
-        tecnologias: ["SAP", "DMAIC Methodology", "Lean Six Sigma"]
-      }
-    ]
-  };
-
-  const ctaContent = {
-    es: {
-      title: '¿Te imaginas tu proyecto en este portafolio?',
-      description:
-        'Trabajemos juntos para diseñar una solución a medida, desde la estrategia hasta la implementación.',
-      primary: 'Hablemos de tu proyecto',
-      secondary: 'Conoce cómo trabajo'
-    },
-    en: {
-      title: 'Ready to see your project featured here?',
-      description:
-        'Let’s craft a tailored solution together—from strategic planning to hands-on implementation.',
-      primary: "Let's talk about your project",
-      secondary: 'See how I work'
+    if (!section || typeof window.IntersectionObserver === 'undefined' || typeof window.matchMedia !== 'function') {
+      document.body.classList.remove('career-section-in-view');
+      return undefined;
     }
-  };
 
-  const currentCta = ctaContent[language] || ctaContent.es;
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+    const syncFloatingControls = (isInView) => {
+      document.body.classList.toggle('career-section-in-view', mobileQuery.matches && isInView);
+    };
+
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        syncFloatingControls(entry.isIntersecting);
+      },
+      { threshold: 0.18 }
+    );
+
+    observer.observe(section);
+
+    const handleMediaChange = () => {
+      const sectionRect = section.getBoundingClientRect();
+      const isInView = sectionRect.top < window.innerHeight && sectionRect.bottom > 0;
+      syncFloatingControls(isInView);
+    };
+
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener('change', handleMediaChange);
+    } else {
+      mobileQuery.addListener(handleMediaChange);
+    }
+
+    handleMediaChange();
+
+    return () => {
+      observer.disconnect();
+      if (mobileQuery.removeEventListener) {
+        mobileQuery.removeEventListener('change', handleMediaChange);
+      } else {
+        mobileQuery.removeListener(handleMediaChange);
+      }
+      document.body.classList.remove('career-section-in-view');
+    };
+  }, []);
+
+  const projects = useMemo(() => careerContent[currentLang] || careerContent.es, [currentLang]);
+  const currentCta = ctaContent[currentLang] || ctaContent.es;
+
+  const handleToggle = (index) => {
+    setActiveIndex((current) => (current === index ? null : index));
+  };
 
   const handleScrollToSection = (id) => {
     const section = document.getElementById(id);
@@ -244,81 +355,39 @@ const Portafolio = ({ style }) => {
 
   return (
     <section id="portafolio" className="portafolio" style={style}>
-      <h2>{currentLang === 'es' ? 'CARRERA PROFESIONAL' : 'PROFESSIONAL CAREER'}</h2>
-      <p className="introduccion">
-        {currentLang === 'es' 
-          ? 'Mi portafolio refleja una trayectoria diversa en tecnología y gestión empresarial. Cada proyecto representa un desafío único donde he aplicado mis conocimientos en desarrollo de software, inteligencia artificial y optimización de procesos.' 
-          : "My portfolio reflects a diverse background in technology and business management. Each project represents a unique challenge where I've applied my expertise in software development, artificial intelligence, and process optimization."}
-      </p>
-      <div className="timeline">
-        {(currentLang === 'es' ? proyectos.es : proyectos.en).map((proyecto, idx) => (
-          <article key={proyecto.nombre} className={idx % 2 === 0 ? 'left' : 'right'}>
-            <div
-              className={`content-wrapper ${activeIndex === idx ? 'expanded' : ''}`}
-              onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
-            >
-              <span className="year">{proyecto.timeline}</span>
-              <div className="banner-container">
-                <img 
-                  src={proyecto.image} 
-                  alt={proyecto.nombre || ''} 
-                  className="banner-image"
-                />
-                <div className="image-overlay"></div>
-              </div>
-              <div className="content">
-                <h3>{proyecto.nombre || ''}</h3>
-                <h4>{proyecto.rol || ''}</h4>
-                <p>{proyecto.descripcion || ''}</p>
-                {activeIndex === idx && (
-                  <div className="logros">
-                    <h5>{currentLang === 'es' ? 'Logros Destacados:' : 'Key Achievements:'}</h5>
-                    <ul>
-                      {proyecto.logros?.map((logro, logroIdx) => (
-                        <li key={logroIdx}>{logro}</li>
-                      ))}
-                    </ul>
-                    {proyecto.link && (
-                      <a 
-                        href={proyecto.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="proyecto-link"
-                      >
-                        {proyecto.link_u} →
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="examples">
-                {proyecto.tecnologias?.map((tech, techIndex) => (
-                  <a 
-                    key={techIndex} 
-                    href={`#${tech.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    {tech}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </article>
+      <div className="portafolio__heading">
+        <p className="portafolio__eyebrow">{currentLang === 'es' ? 'TRAYECTORIA' : 'CAREER'}</p>
+        <h2>{currentLang === 'es' ? 'Carrera profesional' : 'Professional career'}</h2>
+        <p className="introduccion">
+          {currentLang === 'es'
+            ? 'Una trayectoria construida entre operación, producto digital y soluciones que generan resultados reales.'
+            : 'A career built across operations, digital product and solutions that create measurable results.'}
+        </p>
+      </div>
+
+      <div className="timeline" role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : 'Professional career'}>
+        {projects.map((project, idx) => (
+          <div key={project.id} className="timeline__row" role="listitem">
+            <span className="timeline__node" aria-hidden="true" />
+            <CareerCard
+              entry={project}
+              index={idx}
+              language={currentLang}
+              isExpanded={activeIndex === idx}
+              onToggle={handleToggle}
+            />
+          </div>
         ))}
       </div>
+
       <div className="portafolio-cta">
         <h3>{currentCta.title}</h3>
         <p>{currentCta.description}</p>
         <div className="portafolio-cta-buttons">
-          <button
-            className="cta-button-primary"
-            onClick={() => handleScrollToSection('contacto')}
-          >
+          <button className="cta-button-primary" onClick={() => handleScrollToSection('contacto')}>
             {currentCta.primary}
           </button>
-          <button
-            className="cta-button-secondary"
-            onClick={() => handleScrollToSection('como-trabajo')}
-          >
+          <button className="cta-button-secondary" onClick={() => handleScrollToSection('como-trabajo')}>
             {currentCta.secondary}
           </button>
         </div>
