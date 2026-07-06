@@ -10,10 +10,10 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     updateDynamicContent(language);
     const htmlElement = document.getElementById('html-lang');
-  if (htmlElement) {
-    htmlElement.lang = language; // Actualiza el atributo lang
-  }
-}, [language]);
+    if (htmlElement) {
+      htmlElement.lang = language === 'es' ? 'es-MX' : 'en';
+    }
+  }, [language]);
 
   const toggleLanguage = () => {
     const newLanguage = language === 'es' ? 'en' : 'es';

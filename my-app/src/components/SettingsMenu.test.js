@@ -99,6 +99,21 @@ describe('SettingsMenu', () => {
     expect(panel.hasAttribute('inert')).toBe(false);
     expect(panel.classList.contains('open')).toBe(true);
 
+    const firstTheme = container.querySelector('[data-settings-theme="light"]');
+    firstTheme.focus();
+    expect(document.activeElement).toBe(firstTheme);
+
+    const escapeEvent = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+    act(() => {
+      document.dispatchEvent(escapeEvent);
+    });
+
+    expect(escapeEvent.defaultPrevented).toBe(true);
+    expect(panel.getAttribute('aria-hidden')).toBe('true');
+    expect(panel.getAttribute('inert')).toBe('');
+    expect(panel.classList.contains('open')).toBe(false);
+    expect(document.activeElement).toBe(toggle);
+
     cleanup();
   });
 

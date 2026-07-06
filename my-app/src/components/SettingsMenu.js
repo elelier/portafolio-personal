@@ -9,6 +9,7 @@ const SettingsMenu = () => {
   const { language, toggleLanguage } = useLanguage();
   const menuRef = useRef(null);
   const menuPanelRef = useRef(null);
+  const toggleRef = useRef(null);
 
   const labels = {
     es: {
@@ -81,9 +82,32 @@ const SettingsMenu = () => {
     }
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape') {
+        return;
+      }
+
+      event.preventDefault();
+      setIsMenuOpen(false);
+      toggleRef.current?.focus();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
   return (
     <div className="settings-menu-container" ref={menuRef}>
       <button
+        ref={toggleRef}
         className="settings-toggle"
         type="button"
         aria-expanded={isMenuOpen}
