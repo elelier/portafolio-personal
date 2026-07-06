@@ -4,12 +4,12 @@
 /* Contenedor principal del portafolio */
 .portafolio {
   position: relative;
-  padding: 60px 20px;
+  padding: 22px 20px;
+  scroll-margin-top: 60px;
   background: linear-gradient(to bottom, var(--section-bg-start, var(--color-bg-2)), var(--section-bg-end, var(--color-bg)));
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -33,6 +33,40 @@
   top: 0;
   background-color: transparent;
   z-index: 100;
+}
+
+.portafolio__heading {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto 12px;
+  text-align: center;
+}
+
+.portafolio__eyebrow {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.portafolio__heading h2 {
+  position: static;
+  margin: 0;
+  background: none;
+  font-size: 2.25rem;
+  line-height: 1.05;
+}
+
+.introduccion {
+  font-size: 0.96rem;
+  text-align: center;
+  color: var(--color-text);
+  max-width: 740px;
+  line-height: 1.38;
+  padding: 0 20px;
+  margin: 8px auto 0;
 }
 
 .introduccion p {
@@ -183,40 +217,50 @@
 }
 
 .portafolio-cta {
-  margin-top: 60px;
-  max-width: 980px;
+  margin-top: 10px;
+  max-width: 900px;
   width: 100%;
   text-align: center;
   background: rgba(0, 0, 0, 0.25);
-  border-radius: 24px;
-  padding: 48px 32px;
+  border-radius: 18px;
+  padding: 14px 20px;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
 }
 
 .portafolio-cta h3 {
-  font-size: 2.2rem;
+  font-size: 1.18rem;
   color: var(--hero-title-color-2);
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .portafolio-cta p {
   color: var(--color-text);
-  font-size: 1.15rem;
-  margin-bottom: 32px;
-  line-height: 1.7;
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+  line-height: 1.35;
 }
 
 .portafolio-cta-buttons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 12px;
+}
+
+.portafolio-cta-buttons .cta-button-primary,
+.portafolio-cta-buttons .cta-button-secondary {
+  padding: 9px 20px;
+  font-size: 0.9rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .portafolio {
+    padding: 42px 14px;
+  }
+
   .proyectos-grid {
     grid-template-columns: 1fr;
     padding: 10px;
@@ -260,6 +304,7 @@
   .portafolio-cta {
     margin-top: 40px;
     padding: 36px 20px;
+    border-radius: 20px;
   }
 
   .portafolio-cta h3 {
@@ -268,6 +313,15 @@
 
   .portafolio-cta p {
     font-size: 1.05rem;
+  }
+
+  .portafolio__heading h2 {
+    font-size: 2.2rem;
+  }
+
+  .introduccion {
+    font-size: 1.05rem;
+    padding: 0 15px;
   }
 }
 

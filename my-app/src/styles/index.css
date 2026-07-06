@@ -215,6 +215,12 @@ a {
     transform: translate(8px, -1.5px);
     animation: blink 2s infinite;
   }
+
+  body.career-section-in-view [data-chatbot-chat-widget-button] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px) scale(0.92);
+  }
 }
 
 /* Definición de la animación parpadeante */

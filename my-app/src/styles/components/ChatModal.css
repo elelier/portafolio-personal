@@ -364,6 +364,12 @@
     font-size: clamp(1.5rem, 2rem, 2.3rem) !important;
   }
 
+  body.career-section-in-view .chat-button {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(16px) scale(0.92) !important;
+  }
+
   .chat-content {
     flex: 1 !important;
     overflow-y: auto !important;
