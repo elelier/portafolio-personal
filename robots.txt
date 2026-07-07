@@ -3,4 +3,4 @@ Allow: /
 Disallow: /proyecto/
 Disallow: /admin/
 
-Sitemap: https://www.elelier.com/sitemap.xml
+Sitemap: https://elelier.com/sitemap.xml

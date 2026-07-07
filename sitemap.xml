@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.elelier.com/</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/portafolio</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/portafolio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/sobre-mi</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/sobre-mi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/servicios</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/servicios</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/contacto</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/contacto</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/blog</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/blog</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/aionlabs</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/aionlabs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/privacy-policy</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://www.elelier.com/terms-of-service</loc>
-    <lastmod>2026-03-21</lastmod>
+    <loc>https://elelier.com/terms-of-service</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
