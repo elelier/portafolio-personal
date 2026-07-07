@@ -1,11 +1,57 @@
 // src/utils/generalUtils.js
 
+import { useEffect, useState } from 'react';
+
 // import { scrollToSection, loadExternalScripts, isMobile } from '../utils/generalUtils';
+
+export function prefersReducedMotion() {
+    return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches || false;
+}
+
+export function usePrefersReducedMotion() {
+    const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion());
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+        if (!mediaQuery) {
+            return undefined;
+        }
+
+        const handleChange = (event) => {
+            setReducedMotion(event.matches);
+        };
+
+        setReducedMotion(mediaQuery.matches);
+
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener('change', handleChange);
+            return () => mediaQuery.removeEventListener('change', handleChange);
+        }
+
+        mediaQuery.addListener(handleChange);
+        return () => mediaQuery.removeListener(handleChange);
+    }, []);
+
+    return reducedMotion;
+}
+
+export function getMotionAwareScrollBehavior() {
+    return prefersReducedMotion() ? 'auto' : 'smooth';
+}
+
+export function scrollIntoViewWithMotionPreference(element, options = {}) {
+    if (!element) {
+        return;
+    }
+
+    const behavior = options.behavior || getMotionAwareScrollBehavior();
+    element.scrollIntoView({ ...options, behavior });
+}
 
 export function scrollToSection(id) {
     const element = document.getElementById(id);
     if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        scrollIntoViewWithMotionPreference(element);
     }
 }
 

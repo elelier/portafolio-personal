@@ -6,6 +6,7 @@ import professional from '../assets/images/ecommerce_marketing.png';
 import tech_vision from '../assets/images/technologic_vision.png';
 import { useSwipeable } from 'react-swipeable';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 
 function SobreMi({ style }) {
   const [currentSection, setCurrentSection] = useState(0);
@@ -173,11 +174,11 @@ function SobreMi({ style }) {
   });
 
   const scrollToServicios = () => {
-    document.getElementById('como-trabajo')?.scrollIntoView({ behavior: 'smooth' });
+    scrollIntoViewWithMotionPreference(document.getElementById('como-trabajo'));
   };
 
   const scrollToContacto = () => {
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    scrollIntoViewWithMotionPreference(document.getElementById('contacto'));
   };
 
   const handleManualChange = (index) => {

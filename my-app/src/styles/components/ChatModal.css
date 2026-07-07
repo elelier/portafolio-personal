@@ -164,6 +164,12 @@
   max-height: calc(100% - 140px) !important;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .chat-content {
+    scroll-behavior: auto !important;
+  }
+}
+
 .messages-container {
   flex: 1 !important;
   padding: clamp(0.5rem, 0.75rem, 1rem) clamp(0.75rem, 1rem, 1.25rem) !important;

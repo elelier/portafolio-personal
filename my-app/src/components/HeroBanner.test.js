@@ -35,6 +35,17 @@ describe('HeroBanner', () => {
     jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue({
       clearRect: jest.fn()
     });
+    window.matchMedia = jest.fn().mockImplementation((query) => ({
+      matches: query.includes('prefers-reduced-motion') ? false : false,
+      media: query,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      onchange: null,
+      dispatchEvent: jest.fn()
+    }));
+    window.requestAnimationFrame = jest.fn();
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
   });
 
@@ -88,6 +99,21 @@ describe('HeroBanner', () => {
     cleanup();
   });
 
+  it('renders a single H1 in the hero and keeps the credential as supporting text', () => {
+    const { container, cleanup } = renderHero('es');
+
+    expect(container.querySelectorAll('h1')).toHaveLength(1);
+    expect(container.querySelector('h1.hero-title.shiny')?.textContent).toBe(
+      'Transformo procesos complicados en soluciones que realmente funcionan.'
+    );
+    expect(container.querySelector('h2.hero-title')).toBeNull();
+    expect(container.querySelector('h3.hero-subtitle')).toBeNull();
+    expect(container.querySelectorAll('h3').length).toBe(0);
+    expect(container.textContent).toContain('Ex-COO de GoFarma y Digital Product Owner en CHUBB.');
+
+    cleanup();
+  });
+
   it('uses the approved English hero positioning and CTA copy', () => {
     const soluciones = document.createElement('section');
     soluciones.id = 'soluciones';
@@ -105,6 +131,37 @@ describe('HeroBanner', () => {
     expect(container.querySelector('.hero-button-secondary').textContent).toContain('Explore real projects');
     expect(container.querySelector('.scroll-indicator').textContent).toContain('See solutions');
     expect(container.innerHTML).not.toContain('calendly.com');
+
+    cleanup();
+  });
+
+  it('respects reduced motion by skipping the star canvas animation and smooth scrolling', () => {
+    window.matchMedia = jest.fn().mockImplementation((query) => ({
+      matches: query === '(prefers-reduced-motion: reduce)',
+      media: query,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      onchange: null,
+      dispatchEvent: jest.fn()
+    }));
+
+    const contacto = document.createElement('section');
+    contacto.id = 'contacto';
+    contacto.scrollIntoView = jest.fn();
+    document.body.appendChild(contacto);
+
+    const { container, cleanup } = renderHero('es');
+
+    expect(window.requestAnimationFrame).not.toHaveBeenCalled();
+
+    const primaryCta = container.querySelector('.hero-button');
+    act(() => {
+      primaryCta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(contacto.scrollIntoView).toHaveBeenCalledWith({ behavior: 'auto' });
 
     cleanup();
   });

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { usePrefersReducedMotion } from './utils/generalUtils';
 import perfilImg from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/Contacto.css';
 
@@ -66,6 +67,8 @@ function Contacto({ style }) {
   const { language } = useLanguage();
   const t = texts[language] || texts.en;
   const location = useLocation();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const AnimatedSection = prefersReducedMotion ? 'section' : motion.section;
 
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
@@ -117,13 +120,17 @@ function Contacto({ style }) {
   const feedbackClassName = feedback.type ? `contacto-feedback contacto-feedback--${feedback.type}` : 'contacto-feedback';
 
   return (
-    <motion.section
+    <AnimatedSection
       id="contacto"
       className="contacto"
       style={{ scrollMarginTop: '96px', ...style }}
-      initial={{ opacity: 0, y: 32 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      {...(prefersReducedMotion
+        ? {}
+        : {
+            initial: { opacity: 0, y: 32 },
+            animate: { opacity: 1, y: 0 },
+            transition: { duration: 0.5, ease: 'easeOut' }
+          })}
     >
       <div className="contacto-shell">
         <div className="contacto-heading">
@@ -247,7 +254,7 @@ function Contacto({ style }) {
           </form>
         </div>
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { usePrefersReducedMotion, scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import heroPortrait from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/HeroBanner.css';
 
@@ -10,6 +11,7 @@ const DynamicHeroBanner = ({ style }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const { language } = useLanguage();
   const { currentTheme } = useContext(ThemeContext);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const heroContent = useMemo(() => ({
     es: [
@@ -57,6 +59,10 @@ const DynamicHeroBanner = ({ style }) => {
   }, []);
 
   useEffect(() => {
+    if (prefersReducedMotion) {
+      return undefined;
+    }
+
     const canvas = document.getElementById('star-canvas');
     if (!canvas) return;
 
@@ -101,12 +107,12 @@ const DynamicHeroBanner = ({ style }) => {
       window.removeEventListener('resize', resizeCanvas);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
-  }, [currentTheme]);
+  }, [currentTheme, prefersReducedMotion]);
 
   const getFadeClass = useCallback(() => (scrollPosition > 100 ? 'fade-out' : 'fade-in'), [scrollPosition]);
 
   const scrollToSection = useCallback((id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    scrollIntoViewWithMotionPreference(document.getElementById(id));
   }, []);
 
   return (
@@ -126,8 +132,8 @@ const DynamicHeroBanner = ({ style }) => {
           <span className="hero-eyebrow">
             {language === 'es' ? 'Producto digital · Operaciones · IA aplicada' : 'Digital product · Operations · Applied AI'}
           </span>
-          <h2 className="hero-title shiny">{currentContent?.title}</h2>
-          <h3 className="hero-subtitle">{currentContent?.subtitle}</h3>
+          <h1 className="hero-title shiny">{currentContent?.title}</h1>
+          <p className="hero-subtitle">{currentContent?.subtitle}</p>
           <p className="hero-description">{currentContent?.description}</p>
           <div className="hero-actions" aria-label="Acciones principales">
             <button className="hero-button" onClick={() => scrollToSection('contacto')}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Footer.css';
 
 function Footer() {
@@ -34,7 +35,7 @@ function Footer() {
   const handleScrollToElement = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      scrollIntoViewWithMotionPreference(element);
     }
   };
 
