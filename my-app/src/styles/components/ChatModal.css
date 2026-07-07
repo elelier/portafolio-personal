@@ -165,6 +165,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .chat-button,
+  .chat-button:hover,
+  .chat-button:active,
+  .chat-button.gemini-active,
+  .chat-modal {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .chat-button:hover,
+  .chat-button:active,
+  .chat-button.gemini-active {
+    transform: none !important;
+  }
+
   .chat-content {
     scroll-behavior: auto !important;
   }
