@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0ab363f3.css",
-    "main.js": "/static/js/main.9e73251a.js",
+    "main.css": "/static/css/main.1535f67e.css",
+    "main.js": "/static/js/main.282f8255.js",
     "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
     "static/js/889.30cf63f0.chunk.js": "/static/js/889.30cf63f0.chunk.js",
     "static/css/930.478c97b3.chunk.css": "/static/css/930.478c97b3.chunk.css",
@@ -18,15 +18,15 @@
     "static/media/elelier.jpg": "/static/media/elelier.568f9f81a4baa6a0e2d0.jpg",
     "static/media/farmalisto.jpg": "/static/media/farmalisto.3f0bee5b23c66aa31b0d.jpg",
     "index.html": "/index.html",
-    "main.0ab363f3.css.map": "/static/css/main.0ab363f3.css.map",
-    "main.9e73251a.js.map": "/static/js/main.9e73251a.js.map",
+    "main.1535f67e.css.map": "/static/css/main.1535f67e.css.map",
+    "main.282f8255.js.map": "/static/js/main.282f8255.js.map",
     "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
     "889.30cf63f0.chunk.js.map": "/static/js/889.30cf63f0.chunk.js.map",
     "930.478c97b3.chunk.css.map": "/static/css/930.478c97b3.chunk.css.map",
     "930.0d885452.chunk.js.map": "/static/js/930.0d885452.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0ab363f3.css",
-    "static/js/main.9e73251a.js"
+    "static/css/main.1535f67e.css",
+    "static/js/main.282f8255.js"
   ]
 }
