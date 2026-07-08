@@ -181,10 +181,8 @@ const AdminLeads = () => {
       const url = `https://leads.elelier.com/api/admin/leads?token=${encodeURIComponent(
         tokenClean
       )}&limit=50`;
-      console.log('Fetching leads URL:', url);
 
       const response = await fetch(url);
-      console.log('Response status:', response.status);
 
       if (!response.ok) {
         const responseClone = response.clone();
@@ -213,9 +211,7 @@ const AdminLeads = () => {
         const ids = nextLeads
           .map((lead) => lead.client_lead_id)
           .filter(Boolean);
-        
-        console.debug('statuses ids', ids.length, ids.slice(0, 3));
-        
+
         if (ids.length > 0) {
           const statusUrl = `https://leads.elelier.com/api/admin/statuses?ids=${encodeURIComponent(
             ids.join(',')
@@ -225,10 +221,8 @@ const AdminLeads = () => {
           if (statusRes.ok) {
             const statusJson = await statusRes.json();
             const statuses = statusJson?.statuses ?? {};
-            console.debug('statuses returned', Object.keys(statuses || {}).length);
             setStatusesMap(statuses);
           } else {
-            console.warn('Statuses fetch failed:', statusRes.status);
             // Default a NEW para todos
             const defaultMap = ids.reduce((acc, id) => {
               acc[id] = 'NEW';
@@ -240,7 +234,7 @@ const AdminLeads = () => {
           setStatusesMap({});
         }
       } catch (e) {
-        console.warn('Error fetching statuses', e);
+        setStatusesMap({});
       }
     } catch (fetchError) {
       setErrorDetails('Error de red al cargar los leads.');
@@ -295,7 +289,7 @@ const AdminLeads = () => {
           setStatusesMap((prev) => ({ ...prev, ...statuses }));
         }
       } catch (e) {
-        console.warn('Error refetching status', e);
+        setStatusesMap((current) => ({ ...current }));
       }
     } catch (err) {
       // Revertir

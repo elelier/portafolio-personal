@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/components/AccessForm.css';
-import { Helmet } from 'react-helmet-async';
 import data from '../data/clientProjects.json';
 import QuoteCard from './QuoteCard';
 import UpdatesModal from './UpdatesModal';
@@ -43,8 +42,7 @@ const ClientSpace = () => {
     }
 
     if (!hashedPasscodes[token]) {
-      setError('Error de configuración del espacio cliente');
-      console.error('No hay código hash configurado para el token:', token);
+      setError('No se pudo validar el acceso.');
       return;
     }
 
@@ -57,7 +55,6 @@ const ClientSpace = () => {
         setError('Código de acceso incorrecto');
       }
     } catch (err) {
-      console.error('Error al verificar el código:', err);
       setError('Error al verificar el código de acceso');
     }
   };
@@ -77,20 +74,18 @@ const ClientSpace = () => {
       }
     };
 
-    verifyStoredAccess().catch(console.error);
+    verifyStoredAccess().catch(() => {
+      setAuthorized(false);
+    });
   }, [token, client]);
 
   if (!client) {
     return (
       <div className="client-space">
-        <Helmet>
-          <title>Cliente no encontrado - Elelier</title>
-          <meta name="robots" content="noindex,nofollow" />
-        </Helmet>
         <div className="error-message">
-          <h2> Cliente no encontrado</h2>
-          <p>El token proporcionado no corresponde a ningún proyecto activo.</p>
-          <p>Verifica la URL o contacta con el equipo de soporte.</p>
+          <h2>Espacio de cliente</h2>
+          <p>El enlace no está disponible o ya no es válido.</p>
+          <p>Contacta al equipo correspondiente si necesitas un acceso actualizado.</p>
         </div>
       </div>
     );
@@ -100,11 +95,11 @@ const ClientSpace = () => {
     return (
       <div className="access-form-container">
         <form onSubmit={handleSubmitPasscode} className="access-form">
-          <h2>Acceso Restringido</h2>
-          <p>Esta área es exclusiva para <strong>{client.project.nombre}</strong></p>
+          <h2>Espacio de cliente</h2>
+          <p>Ingresa tu código de acceso para continuar.</p>
           <div className="form-group">
             <label htmlFor="passcode" className="form-label">
-              Ingresa tu código de acceso
+              Código de acceso
             </label>
             <input
               type="password"
@@ -250,11 +245,6 @@ const ClientSpace = () => {
 
   return (
     <div className="client-space">
-      <Helmet>
-        <title>{project.nombre} - Espacio Cliente</title>
-        <meta name="robots" content="noindex,nofollow" />
-        <link rel="canonical" href="https://www.elelier.com/" />
-      </Helmet>
       <div className="client-space-container">
         <header className="client-header">
           <div className="welcome-section">

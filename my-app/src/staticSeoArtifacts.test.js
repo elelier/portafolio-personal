@@ -36,5 +36,14 @@ describe('static SEO artifacts', () => {
       '/privacy-policy',
       '/terms-of-service'
     ]);
+    expect(sitemap).not.toContain('/proyecto/');
+    expect(sitemap).not.toContain('/admin/leads');
+    expect(sitemap).not.toContain('/client-demo');
+    expect(sitemap).not.toContain('/cotizacion/');
+    expect(sitemap).not.toContain('/mockup/');
+    expect(sitemap).not.toContain('/sites');
+    expect(sitemap).not.toContain('/tarifas-2024');
+    expect(sitemap).not.toContain('/hero-banner');
+    expect(sitemap).not.toContain('/entradas/2408_IA_Transforma_ecommerce');
   });
 });
