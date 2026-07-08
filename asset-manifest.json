@@ -1,11 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.7eded868.css",
-    "main.js": "/static/js/main.02c643a6.js",
-    "static/css/889.478c97b3.chunk.css": "/static/css/889.478c97b3.chunk.css",
-    "static/js/889.30cf63f0.chunk.js": "/static/js/889.30cf63f0.chunk.js",
-    "static/css/930.478c97b3.chunk.css": "/static/css/930.478c97b3.chunk.css",
-    "static/js/930.0d885452.chunk.js": "/static/js/930.0d885452.chunk.js",
+    "main.css": "/static/css/main.301e8ba9.css",
+    "main.js": "/static/js/main.027eb00f.js",
+    "static/css/249.16dccead.chunk.css": "/static/css/249.16dccead.chunk.css",
+    "static/js/249.2b6c52db.chunk.js": "/static/js/249.2b6c52db.chunk.js",
     "static/media/technologic_vision.png": "/static/media/technologic_vision.ec953b376e729e08c8aa.png",
     "static/media/ecommerce_marketing.png": "/static/media/ecommerce_marketing.c1dad67f04e06be9c101.png",
     "static/media/profile-picture-elier2.png": "/static/media/profile-picture-elier2.bb22001998419d8c5a87.png",
@@ -18,15 +16,13 @@
     "static/media/elelier.jpg": "/static/media/elelier.568f9f81a4baa6a0e2d0.jpg",
     "static/media/farmalisto.jpg": "/static/media/farmalisto.3f0bee5b23c66aa31b0d.jpg",
     "index.html": "/index.html",
-    "main.7eded868.css.map": "/static/css/main.7eded868.css.map",
-    "main.02c643a6.js.map": "/static/js/main.02c643a6.js.map",
-    "889.478c97b3.chunk.css.map": "/static/css/889.478c97b3.chunk.css.map",
-    "889.30cf63f0.chunk.js.map": "/static/js/889.30cf63f0.chunk.js.map",
-    "930.478c97b3.chunk.css.map": "/static/css/930.478c97b3.chunk.css.map",
-    "930.0d885452.chunk.js.map": "/static/js/930.0d885452.chunk.js.map"
+    "main.301e8ba9.css.map": "/static/css/main.301e8ba9.css.map",
+    "main.027eb00f.js.map": "/static/js/main.027eb00f.js.map",
+    "249.16dccead.chunk.css.map": "/static/css/249.16dccead.chunk.css.map",
+    "249.2b6c52db.chunk.js.map": "/static/js/249.2b6c52db.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7eded868.css",
-    "static/js/main.02c643a6.js"
+    "static/css/main.301e8ba9.css",
+    "static/js/main.027eb00f.js"
   ]
 }
