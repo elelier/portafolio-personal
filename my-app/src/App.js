@@ -21,16 +21,14 @@ import Tarifario from './components/Tarifario';
 import FloatingButton from './components/FloatingButton';
 import ChatModal from './components/ChatModal';
 import ExternalRedirect from './components/ExternalRedirect';
-import MockupRedirect from './components/MockupRedirect';
 import ClientSpace from './components/ClientSpace';
-import ClientDemo from './components/ClientDemo';
-import Sites from './components/Sites';
 import SettingsMenu from './components/SettingsMenu';
 import AdminLeads from './pages/AdminLeads';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import AionLabs from './components/AionLabs';
 import PrivateRouteSEO from './components/PrivateRouteSEO';
+import InternalRoutePlaceholder from './components/InternalRoutePlaceholder';
 import { initializeTheme } from './components/utils/themeUtils';
 import { getMotionAwareScrollBehavior, loadExternalScripts } from './components/utils/generalUtils';
 import './utils/testGemini';
@@ -40,7 +38,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const Blog = lazy(() => import('./components/Blog'));
-const Entrada = lazy(() => import('./components/entradas/entrada1'));
 
 function App({ initialLanguage }) {
   const homeSectionPalette = [
@@ -117,7 +114,7 @@ function App({ initialLanguage }) {
                   <Route path="/blog" element={<Blog />} />
                   <Route
                     path="/entradas/2408_IA_Transforma_ecommerce"
-                    element={renderPrivateRoute(<Entrada />, {
+                    element={renderPrivateRoute(<InternalRoutePlaceholder />, {
                       title: 'Contenido privado | Elier Loya',
                       description: 'Contenido interno con acceso controlado y sin indexacion publica.'
                     })}
@@ -132,7 +129,7 @@ function App({ initialLanguage }) {
                   />
                   <Route
                     path="/mockup/:id"
-                    element={renderPrivateRoute(<MockupRedirect />, {
+                    element={renderPrivateRoute(<InternalRoutePlaceholder />, {
                       title: 'Ruta privada | Elier Loya',
                       description: 'Ruta privada con acceso controlado y sin indexacion publica.'
                     })}
@@ -146,7 +143,7 @@ function App({ initialLanguage }) {
                   />
                   <Route
                     path="/client-demo"
-                    element={renderPrivateRoute(<ClientDemo />, {
+                    element={renderPrivateRoute(<InternalRoutePlaceholder />, {
                       title: 'Ruta de demostracion | Elier Loya',
                       description: 'Demostracion interna con acceso controlado y sin indexacion publica.'
                     })}
@@ -163,7 +160,7 @@ function App({ initialLanguage }) {
                   <Route path="/aionlabs" element={<AionLabs />} />
                   <Route
                     path="/sites"
-                    element={renderPrivateRoute(<Sites simplified={false} />, {
+                    element={renderPrivateRoute(<InternalRoutePlaceholder />, {
                       title: 'Vista utilitaria | Elier Loya',
                       description: 'Vista interna con acceso controlado y sin indexacion publica.'
                     })}
