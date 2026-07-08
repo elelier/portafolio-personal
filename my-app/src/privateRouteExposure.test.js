@@ -114,6 +114,17 @@ describe('private route exposure hardening', () => {
     expect(source).not.toContain('www.elelier.com');
   });
 
+  it('declares a reusable placeholder for visually closed private and utilitarian routes', () => {
+    const placeholderPath = path.join(__dirname, 'components/InternalRoutePlaceholder.jsx');
+
+    expect(fs.existsSync(placeholderPath)).toBe(true);
+
+    const source = fs.readFileSync(placeholderPath, 'utf8');
+    expect(source).toContain('Espacio no disponible');
+    expect(source).toContain('Esta vista no está disponible públicamente.');
+    expect(source).toContain('Volver al inicio');
+  });
+
   it('wraps every approved private route from App.js without touching core public routes', () => {
     const source = fs.readFileSync(path.join(__dirname, 'App.js'), 'utf8');
 
@@ -127,6 +138,11 @@ describe('private route exposure hardening', () => {
     expect(source).toContain('path="/hero-banner"');
     expect(source).toContain('path="/entradas/2408_IA_Transforma_ecommerce"');
     expect(source).toContain('PrivateRouteSEO');
+    expect(source).toContain('InternalRoutePlaceholder');
+    expect(source).not.toContain('renderPrivateRoute(<ClientDemo />');
+    expect(source).not.toContain('renderPrivateRoute(<MockupRedirect />');
+    expect(source).not.toContain('renderPrivateRoute(<Sites simplified={false} />');
+    expect(source).not.toContain('renderPrivateRoute(<Entrada />');
     expect(source).not.toContain('<Route path="/" element={<><PrivateRouteSEO');
     expect(source).not.toContain('<Route path="/portafolio" element={<><PrivateRouteSEO');
     expect(source).not.toContain('<Route path="/sobre-mi" element={<><PrivateRouteSEO');
