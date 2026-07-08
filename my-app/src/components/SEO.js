@@ -15,6 +15,7 @@ function SEO({
   title,
   description,
   pathname,
+  canonicalPath,
   image = DEFAULT_OG_IMAGE,
   type = 'website',
   robots = 'index,follow',
@@ -24,7 +25,7 @@ function SEO({
 }) {
   const location = useLocation();
   const currentPath = pathname || location.pathname || '/';
-  const canonicalUrl = buildUrl(currentPath);
+  const canonicalUrl = buildUrl(canonicalPath || currentPath);
 
   return (
     <Helmet>

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { INDEXABLE_SITEMAP_PATHS } = require('./config/routeSeoPolicy');
 
 const publicDir = path.resolve(__dirname, '../public');
 const robotsPath = path.join(publicDir, 'robots.txt');
@@ -25,17 +26,7 @@ describe('static SEO artifacts', () => {
 
     expect(sitemap).not.toContain('https://www.elelier.com');
     expect(sitemap).not.toContain('<lastmod>');
-    expect(extractSitemapPaths(sitemap)).toEqual([
-      '/',
-      '/portafolio',
-      '/sobre-mi',
-      '/servicios',
-      '/contacto',
-      '/blog',
-      '/aionlabs',
-      '/privacy-policy',
-      '/terms-of-service'
-    ]);
+    expect(extractSitemapPaths(sitemap)).toEqual(INDEXABLE_SITEMAP_PATHS);
     expect(sitemap).not.toContain('/proyecto/');
     expect(sitemap).not.toContain('/admin/leads');
     expect(sitemap).not.toContain('/client-demo');

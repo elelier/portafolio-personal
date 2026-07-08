@@ -7,6 +7,7 @@ import { FaArrowUp } from 'react-icons/fa';
 import './styles/App.css';
 import './styles/components/UxSmallFixes.css';
 import SEO from './components/SEO';
+import RouteSEO from './components/RouteSEO';
 import Navegacion from './components/Navegacion';
 import HeroBanner from './components/HeroBanner';
 import Soluciones from './components/Soluciones';
@@ -31,6 +32,7 @@ import PrivateRouteSEO from './components/PrivateRouteSEO';
 import InternalRoutePlaceholder from './components/InternalRoutePlaceholder';
 import { initializeTheme } from './components/utils/themeUtils';
 import { getMotionAwareScrollBehavior, loadExternalScripts } from './components/utils/generalUtils';
+import { getRouteSeoPolicy } from './config/routeSeoPolicy';
 import './utils/testGemini';
 
 if (process.env.NODE_ENV === 'development') {
@@ -62,6 +64,7 @@ function App({ initialLanguage }) {
     '--section-bg-start': homeSectionPalette[index % homeSectionPalette.length],
     '--section-bg-end': homeSectionPalette[(index + 1) % homeSectionPalette.length],
   });
+  const homeSeoPolicy = getRouteSeoPolicy('/');
 
   useEffect(() => {
     initializeTheme();
@@ -79,6 +82,13 @@ function App({ initialLanguage }) {
     </>
   );
 
+  const renderPublicAliasRoute = (element, seoProps) => (
+    <>
+      <RouteSEO {...seoProps} />
+      {element}
+    </>
+  );
+
   return (
     <HelmetProvider>
       <LanguageProvider initialLanguage={initialLanguage}>
@@ -87,8 +97,8 @@ function App({ initialLanguage }) {
             <div className="App">
               <SettingsMenu />
               <SEO
-                title="Transformo procesos complicados en soluciones que realmente funcionan. | Elier Loya"
-                description="Transformo procesos complicados en soluciones que realmente funcionan. Especialista en operaciones, producto digital e IA aplicada."
+                title={homeSeoPolicy?.title}
+                description={homeSeoPolicy?.description}
               />
               <Navegacion />
               <Suspense fallback={<div>Loading...</div>}>
@@ -108,10 +118,38 @@ function App({ initialLanguage }) {
                       description: 'Vista interna con acceso controlado y sin indexacion publica.'
                     })}
                   />
-                  <Route path="/portafolio" element={<Portafolio />} />
-                  <Route path="/sobre-mi" element={<SobreMi />} />
-                  <Route path="/servicios" element={<Servicios />} />
-                  <Route path="/blog" element={<Blog />} />
+                  <Route
+                    path="/portafolio"
+                    element={renderPublicAliasRoute(<Portafolio />, {
+                      route: '/portafolio',
+                      title: getRouteSeoPolicy('/portafolio')?.title,
+                      description: getRouteSeoPolicy('/portafolio')?.description,
+                    })}
+                  />
+                  <Route
+                    path="/sobre-mi"
+                    element={renderPublicAliasRoute(<SobreMi />, {
+                      route: '/sobre-mi',
+                      title: getRouteSeoPolicy('/sobre-mi')?.title,
+                      description: getRouteSeoPolicy('/sobre-mi')?.description,
+                    })}
+                  />
+                  <Route
+                    path="/servicios"
+                    element={renderPublicAliasRoute(<Servicios />, {
+                      route: '/servicios',
+                      title: getRouteSeoPolicy('/servicios')?.title,
+                      description: getRouteSeoPolicy('/servicios')?.description,
+                    })}
+                  />
+                  <Route
+                    path="/blog"
+                    element={renderPublicAliasRoute(<Blog />, {
+                      route: '/blog',
+                      title: getRouteSeoPolicy('/blog')?.title,
+                      description: getRouteSeoPolicy('/blog')?.description,
+                    })}
+                  />
                   <Route
                     path="/entradas/2408_IA_Transforma_ecommerce"
                     element={renderPrivateRoute(<InternalRoutePlaceholder />, {
@@ -119,7 +157,14 @@ function App({ initialLanguage }) {
                       description: 'Contenido interno con acceso controlado y sin indexacion publica.'
                     })}
                   />
-                  <Route path="/contacto" element={<Contacto />} />
+                  <Route
+                    path="/contacto"
+                    element={renderPublicAliasRoute(<Contacto />, {
+                      route: '/contacto',
+                      title: getRouteSeoPolicy('/contacto')?.title,
+                      description: getRouteSeoPolicy('/contacto')?.description,
+                    })}
+                  />
                   <Route
                     path="/cotizacion/:id"
                     element={renderPrivateRoute(<ExternalRedirect />, {
@@ -157,7 +202,14 @@ function App({ initialLanguage }) {
                   />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<TermsOfService />} />
-                  <Route path="/aionlabs" element={<AionLabs />} />
+                  <Route
+                    path="/aionlabs"
+                    element={renderPublicAliasRoute(<AionLabs />, {
+                      route: '/aionlabs',
+                      title: getRouteSeoPolicy('/aionlabs')?.title,
+                      description: getRouteSeoPolicy('/aionlabs')?.description,
+                    })}
+                  />
                   <Route
                     path="/sites"
                     element={renderPrivateRoute(<InternalRoutePlaceholder />, {
