@@ -6,9 +6,46 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { LanguageContext } from './contexts/LanguageContext';
 
+jest.mock('./components/utils/generalUtils', () => ({
+  getMotionAwareScrollBehavior: jest.fn(() => 'auto'),
+  loadExternalScripts: jest.fn(() => Promise.resolve()),
+}));
+
 const ClientSpace = require('./components/ClientSpace').default;
+const generalUtils = require('./components/utils/generalUtils');
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+
+const mountedCleanups = new Set();
+
+const registerCleanup = (cleanup) => {
+  mountedCleanups.add(cleanup);
+
+  return async () => {
+    if (!mountedCleanups.has(cleanup)) {
+      return;
+    }
+
+    mountedCleanups.delete(cleanup);
+    await cleanup();
+  };
+};
+
+const cleanupMounted = async () => {
+  for (const cleanup of Array.from(mountedCleanups)) {
+    await cleanup();
+  }
+};
+
+const resetHead = () => {
+  document.title = '';
+  document.documentElement.removeAttribute('lang');
+  document.head
+    .querySelectorAll(
+      'meta[charset],meta[name="viewport"],meta[name="description"],meta[name="keywords"],meta[name="robots"],meta[property^="og:"],meta[name^="twitter:"],link[rel="canonical"]'
+    )
+    .forEach((node) => node.remove());
+};
 
 const renderClientSpace = async (pathname) => {
   localStorage.clear();
@@ -16,10 +53,11 @@ const renderClientSpace = async (pathname) => {
   const container = document.createElement('div');
   document.body.appendChild(container);
   const root = createRoot(container);
+  const helmetContext = {};
 
   await act(async () => {
     root.render(
-      <HelmetProvider>
+      <HelmetProvider context={helmetContext}>
         <MemoryRouter initialEntries={[pathname]}>
           <Routes>
             <Route
@@ -36,22 +74,32 @@ const renderClientSpace = async (pathname) => {
     );
   });
 
+  await act(async () => {
+    await Promise.resolve();
+  });
+
   return {
     container,
-    cleanup: async () => {
+    cleanup: registerCleanup(async () => {
       await act(async () => {
         root.unmount();
       });
       container.remove();
-    }
+    })
   };
 };
 
 describe('private route exposure hardening', () => {
-  afterEach(() => {
+  beforeEach(() => {
+    generalUtils.getMotionAwareScrollBehavior.mockReturnValue('auto');
+    generalUtils.loadExternalScripts.mockResolvedValue(undefined);
+  });
+
+  afterEach(async () => {
+    await cleanupMounted();
     jest.clearAllMocks();
     localStorage.clear();
-    document.head.innerHTML = '';
+    resetHead();
     document.body.innerHTML = '';
   });
 
@@ -88,7 +136,7 @@ describe('private route exposure hardening', () => {
   });
 
   it('keeps the unauthorized client space gate generic and preserves the access form', async () => {
-    const { container, cleanup } = await renderClientSpace('/proyecto/arqidia');
+    const { container } = await renderClientSpace('/proyecto/arqidia');
 
     expect(container.textContent).toContain('Espacio de cliente');
     expect(container.textContent).toContain('Ingresa tu código de acceso para continuar.');
@@ -96,18 +144,14 @@ describe('private route exposure hardening', () => {
     expect(container.textContent).not.toContain('Esta área es exclusiva para');
     expect(container.querySelector('form.access-form')).not.toBeNull();
     expect(container.querySelector('strong')).toBeNull();
-
-    await cleanup();
   });
 
   it('keeps the missing-token state generic', async () => {
-    const { container, cleanup } = await renderClientSpace('/proyecto/token-inexistente');
+    const { container } = await renderClientSpace('/proyecto/token-inexistente');
 
     expect(container.textContent).toContain('Espacio de cliente');
     expect(container.textContent).toContain('El enlace no está disponible o ya no es válido.');
     expect(container.textContent).not.toContain('Cliente no encontrado');
-
-    await cleanup();
   });
 
   it('removes sensitive console logs from AdminLeads source', () => {
