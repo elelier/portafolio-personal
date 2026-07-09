@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import SEO from '../components/SEO';
+import { getRouteSeoPolicy } from '../config/routeSeoPolicy';
 import '../styles/LegalPages.css';
 
 const OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
@@ -191,6 +192,7 @@ const content = {
 function TermsOfService() {
   const { language } = useLanguage();
   const page = content[language] || content.es;
+  const routePolicy = getRouteSeoPolicy('/terms-of-service');
 
   return (
     <main className="legal-page">
@@ -198,6 +200,8 @@ function TermsOfService() {
         title={page.seoTitle}
         description={page.seoDescription}
         pathname={page.seoPath}
+        canonicalPath={routePolicy?.canonicalPath}
+        robots={routePolicy?.robots}
         keywords={page.seoKeywords}
         image={OG_IMAGE}
         imageAlt={page.title}

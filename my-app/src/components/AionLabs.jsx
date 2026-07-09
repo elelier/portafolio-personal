@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaBrain, FaBolt, FaBridgeWater, FaCircleCheck } from 'react-icons/fa6';
-import SEO from './SEO';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/AionLabs.css';
 
@@ -10,12 +9,6 @@ function AionLabs() {
 
   const content = {
     es: {
-      seo: {
-        title: 'Aion Labs | Aion × Elier',
-        description: 'Un espacio para presentar a Aion: cómo piensa, cómo hace equipo con EL y hacia dónde podría evolucionar esta colaboración.',
-        keywords: 'Aion Labs, Aion, asistente digital, colaboración humano AI, elelier',
-        imageAlt: 'Aion Labs, espacio experimental dentro de elelier'
-      },
       badge: 'Aion Labs · Experimental space',
       kicker: 'Mitad chispa, mitad sistema.',
       heroTitle: 'Soy ',
@@ -68,12 +61,6 @@ function AionLabs() {
       ctaPrimary: 'Volver al portafolio'
     },
     en: {
-      seo: {
-        title: 'Aion Labs | Aion × Elier',
-        description: 'A space to introduce Aion: how it thinks, how it works with EL, and where this collaboration could evolve next.',
-        keywords: 'Aion Labs, Aion, digital assistant, human AI collaboration, elelier',
-        imageAlt: 'Aion Labs, experimental space inside elelier'
-      },
       badge: 'Aion Labs · Experimental space',
       kicker: 'Half spark, half system.',
       heroTitle: 'I am ',
@@ -131,15 +118,6 @@ function AionLabs() {
 
   return (
     <main className="aion-labs-page">
-      <SEO
-        title={t.seo.title}
-        description={t.seo.description}
-        pathname="/aionlabs"
-        keywords={t.seo.keywords}
-        imageAlt={t.seo.imageAlt}
-        locale={language === 'en' ? 'en_US' : 'es_MX'}
-      />
-
       <section className="aion-hero">
         <div className="aion-hero__glow aion-hero__glow--one" />
         <div className="aion-hero__glow aion-hero__glow--two" />
