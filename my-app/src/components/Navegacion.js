@@ -52,14 +52,14 @@ function Navegacion() {
       casosReales: 'Casos reales',
       portafolio: 'Carrera',
       soluciones: 'Soluciones',
-      contactame: ' Contáctame',
+      contactame: 'Hablemos de tu reto',
     },
     en: {
       sobreMi: 'About Me',
       casosReales: 'Case studies',
       portafolio: 'Career',
       soluciones: 'Solutions',
-      contactame: ' Contact Me',
+      contactame: 'Let’s talk about your challenge',
     }
   };
 

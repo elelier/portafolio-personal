@@ -56,7 +56,7 @@ describe('Navegacion', () => {
     const casesLink = findLinkByText(container, 'Casos reales');
     const aboutLink = findLinkByText(container, 'Sobre Mí');
     const solutionsLink = findLinkByText(container, 'Soluciones');
-    const contactLink = findLinkByText(container, 'Contáctame');
+    const contactLink = findLinkByText(container, 'Hablemos de tu reto');
 
     expect(casesLink).toBeTruthy();
     expect(aboutLink).toBeTruthy();
@@ -66,7 +66,7 @@ describe('Navegacion', () => {
     expect(container.textContent).toContain('Carrera');
     expect(container.textContent).toContain('Sobre Mí');
     expect(container.textContent).toContain('Soluciones');
-    expect(container.textContent).toContain('Contáctame');
+    expect(container.textContent).toContain('Hablemos de tu reto');
     expect(container.textContent).not.toContain('Habilidades');
     expect(container.textContent).not.toContain('Portafolio');
 
@@ -97,6 +97,7 @@ describe('Navegacion', () => {
     expect(casesLink).toBeTruthy();
     expect(container.textContent).toContain('Case studies');
     expect(container.textContent).toContain('Career');
+    expect(container.textContent).toContain('Let’s talk about your challenge');
     expect(container.textContent).not.toContain('Skills');
     expect(container.textContent).not.toContain('Portfolio');
 

@@ -88,15 +88,15 @@ describe('Contacto', () => {
     const { container, cleanup } = renderContacto('es');
 
     expect(container.textContent).toContain('Hablemos');
-    expect(container.textContent).toContain('Cuéntame qué quieres mejorar');
+    expect(container.textContent).toContain('Cuéntame qué proceso quieres mejorar');
     expect(container.textContent).toContain(
-      'Comparte el reto, proceso o idea que quieres mover. Te responderé personalmente para entender el contexto y ver si hace sentido trabajar juntos.'
+      'Cuéntame qué quieres automatizar, simplificar o convertir en producto. Reviso el contexto y te respondo con el siguiente paso más útil.'
     );
     expect(container.textContent).toContain('Ruta directa');
     expect(container.textContent).toContain('Escríbeme por WhatsApp');
-    expect(container.textContent).toContain('Ideal para una primera conversación rápida.');
-    expect(container.textContent).toContain('O déjame un poco de contexto');
-    expect(container.textContent).toContain('Sin diagnóstico automático ni agenda obligatoria. Empezamos por el reto.');
+    expect(container.textContent).toContain('Si prefieres, empieza con un resumen breve del reto.');
+    expect(container.textContent).toContain('O comparte un poco más de contexto');
+    expect(container.textContent).toContain('No necesitas un brief perfecto. Con el contexto suficiente para entender el reto basta.');
     expect(container.textContent).toContain('También puedes encontrarme en');
     expect(container.textContent).toContain('Monterrey, México · Trabajo remoto');
 
@@ -107,15 +107,15 @@ describe('Contacto', () => {
     const { container, cleanup } = renderContacto('en');
 
     expect(container.textContent).toContain('Let’s talk');
-    expect(container.textContent).toContain('Tell me what you want to improve');
+    expect(container.textContent).toContain('Tell me what process you want to improve');
     expect(container.textContent).toContain(
-      'Share the challenge, process or idea you want to move forward. I will reply personally to understand the context and see whether it makes sense to work together.'
+      'Share what you want to automate, simplify or turn into a product. I review the context and reply with the most useful next step.'
     );
     expect(container.textContent).toContain('Direct route');
     expect(container.textContent).toContain('Message me on WhatsApp');
-    expect(container.textContent).toContain('Best for a quick first conversation.');
-    expect(container.textContent).toContain('Or send me some context');
-    expect(container.textContent).toContain('No automatic diagnosis or mandatory scheduling. We start with the challenge.');
+    expect(container.textContent).toContain('If you prefer, start with a short summary of the challenge.');
+    expect(container.textContent).toContain('Or share a little more context');
+    expect(container.textContent).toContain('You do not need a perfect brief. Just enough context to understand the challenge.');
     expect(container.textContent).toContain('You can also find me on');
     expect(container.textContent).toContain('Monterrey, Mexico · Remote work');
 
@@ -140,7 +140,7 @@ describe('Contacto', () => {
     const { container, cleanup } = renderContacto('es');
     const name = getFieldByLabel(container, 'Tu nombre');
     const mail = getFieldByLabel(container, 'Tu correo');
-    const message = getFieldByLabel(container, '¿Qué quieres mejorar, automatizar, simplificar, digitalizar o crear?');
+    const message = getFieldByLabel(container, '¿Qué proceso quieres mejorar, automatizar, simplificar o convertir en producto?');
 
     expect(name.getAttribute('id')).toBe('contact-name');
     expect(name.getAttribute('name')).toBe('name');
@@ -166,7 +166,7 @@ describe('Contacto', () => {
     setFieldValue(getFieldByLabel(container, 'Tu nombre'), 'Ana');
     setFieldValue(getFieldByLabel(container, 'Tu correo'), 'ana@example.com');
     setFieldValue(
-      getFieldByLabel(container, '¿Qué quieres mejorar, automatizar, simplificar, digitalizar o crear?'),
+      getFieldByLabel(container, '¿Qué proceso quieres mejorar, automatizar, simplificar o convertir en producto?'),
       'Quiero simplificar un proceso interno.'
     );
 
@@ -195,7 +195,7 @@ describe('Contacto', () => {
     setFieldValue(getFieldByLabel(container, 'Tu nombre'), 'Ana');
     setFieldValue(getFieldByLabel(container, 'Tu correo'), 'ana@example.com');
     setFieldValue(
-      getFieldByLabel(container, '¿Qué quieres mejorar, automatizar, simplificar, digitalizar o crear?'),
+      getFieldByLabel(container, '¿Qué proceso quieres mejorar, automatizar, simplificar o convertir en producto?'),
       'Necesito automatizar seguimiento.'
     );
 
@@ -221,7 +221,7 @@ describe('Contacto', () => {
     setFieldValue(getFieldByLabel(container, 'Tu nombre'), 'Ana');
     setFieldValue(getFieldByLabel(container, 'Tu correo'), 'ana@example.com');
     setFieldValue(
-      getFieldByLabel(container, '¿Qué quieres mejorar, automatizar, simplificar, digitalizar o crear?'),
+      getFieldByLabel(container, '¿Qué proceso quieres mejorar, automatizar, simplificar o convertir en producto?'),
       'Quiero crear una herramienta.'
     );
 
@@ -229,7 +229,7 @@ describe('Contacto', () => {
     await act(async () => {});
 
     expect(container.querySelector('[aria-live="polite"]').textContent).toContain(
-      'Gracias, ya recibí tu mensaje. Te responderé personalmente.'
+      'Gracias, ya recibí tu mensaje. Revisaré el contexto y te responderé con el siguiente paso más útil.'
     );
 
     cleanup();
@@ -249,7 +249,7 @@ describe('Contacto', () => {
       setFieldValue(getFieldByLabel(container, 'Tu nombre'), 'Ana');
       setFieldValue(getFieldByLabel(container, 'Tu correo'), 'ana@example.com');
       setFieldValue(
-        getFieldByLabel(container, '¿Qué quieres mejorar, automatizar, simplificar, digitalizar o crear?'),
+      getFieldByLabel(container, '¿Qué proceso quieres mejorar, automatizar, simplificar o convertir en producto?'),
         'Quiero digitalizar atención.'
       );
 
@@ -286,7 +286,7 @@ describe('Contacto', () => {
 
   it('keeps the quote subject prefill', () => {
     const { container, cleanup } = renderContacto('en', '/contacto?subject=quote');
-    const message = getFieldByLabel(container, 'What do you want to improve, automate, simplify, digitize or create?');
+    const message = getFieldByLabel(container, 'What process do you want to improve, automate, simplify or turn into a product?');
 
     expect(message.value).toBe('Hi, I would like to request a quote.');
 

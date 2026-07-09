@@ -175,14 +175,14 @@ const ctaContent = {
     title: '¿Te imaginas tu proyecto en este portafolio?',
     description:
       'Trabajemos juntos para diseñar una solución a medida, desde la estrategia hasta la implementación.',
-    primary: 'Hablemos de tu proyecto',
+    primary: 'Hablemos de tu reto',
     secondary: 'Conoce cómo trabajo'
   },
   en: {
     title: 'Ready to see your project featured here?',
     description:
       'Let’s craft a tailored solution together—from strategic planning to hands-on implementation.',
-    primary: "Let's talk about your project",
+    primary: "Let’s talk about your challenge",
     secondary: 'See how I work'
   }
 };

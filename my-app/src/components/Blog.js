@@ -16,7 +16,7 @@ function Blog() {
         </p>
         <div className="cta-seccion">
           <Link to="/servicios" className="cta-button">Mis Servicios</Link>
-          <Link to="/contacto" className="cta-button">Contáctame</Link>
+          <Link to="/contacto" className="cta-button">Hablemos de tu reto</Link>
         </div>
       </div>
       <div className="articulos-list">

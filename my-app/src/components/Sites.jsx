@@ -17,12 +17,12 @@ const Sites = ({ simplified = false }) => {
     es: {
       title: "Proyectos Destacados",
       subtitle: "Explora cómo diseño experiencias digitales que impulsan resultados",
-      viewMore: "Ver más proyectos"
+      viewMore: "Ver proyectos destacados"
     },
     en: {
       title: "Featured Projects",
       subtitle: "Explore how I design digital experiences that drive results",
-      viewMore: "View more projects"
+      viewMore: "See featured projects"
     }
   };
 
