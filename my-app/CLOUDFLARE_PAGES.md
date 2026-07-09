@@ -25,6 +25,10 @@ Do not paste real secret values into this repository.
 
 Keep GitHub Pages in place as the rollback path until the Cloudflare Pages production deployment is validated on the real domain. DNS cutover remains out of scope for this change.
 
+## Deep-route rewrite note
+
+The first Cloudflare Pages smoke showed that wildcard prefix rules did not resolve the dynamic deep links. The `_redirects` contract therefore uses explicit rules and named placeholders for the React routes, while leaving prerendered routes and assets untouched.
+
 ## Smoke checklist for `*.pages.dev`
 
 1. Load `/` and confirm the home sections render normally.
