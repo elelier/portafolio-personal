@@ -1,0 +1,7 @@
+# Cloudflare Pages SPA fallback for dynamic React routes only.
+# Static prerendered routes and assets should continue serving normally.
+/proyecto/* /index.html 200
+/cotizacion/* /index.html 200
+/mockup/* /index.html 200
+/admin/* /index.html 200
+/entradas/* /index.html 200
