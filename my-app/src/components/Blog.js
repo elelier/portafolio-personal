@@ -1,22 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/components/Blog.css'; // Importa los estilos del blog desde la carpeta css dentro de components
 
 function Blog() {
+  const { language } = useLanguage();
   const articulos = [
     
   ];
+  const content = {
+    es: {
+      title: 'Blog',
+      intro: 'Bienvenido a nuestro blog, donde compartimos artículos sobre las últimas tendencias y avances en tecnología, digitalización y más.',
+      servicesCta: 'Mis Servicios',
+      contactCta: 'Hablemos de tu reto'
+    },
+    en: {
+      title: 'Blog',
+      intro: 'Welcome to the blog, where I share articles about technology, digitalization and practical product thinking.',
+      servicesCta: 'My Services',
+      contactCta: 'Let’s talk about your challenge'
+    }
+  };
+  const t = content[language] || content.es;
 
   return (
     <div className="blog">
       <div className="blog-intro">
-        <h1>Blog</h1>
+        <h1>{t.title}</h1>
         <p className="intro">
-          Bienvenido a nuestro blog, donde compartimos artículos sobre las últimas tendencias y avances en tecnología, digitalización y más.
+          {t.intro}
         </p>
         <div className="cta-seccion">
-          <Link to="/servicios" className="cta-button">Mis Servicios</Link>
-          <Link to="/contacto" className="cta-button">Hablemos de tu reto</Link>
+          <Link to="/servicios" className="cta-button">{t.servicesCta}</Link>
+          <Link to="/contacto" className="cta-button">{t.contactCta}</Link>
         </div>
       </div>
       <div className="articulos-list">
