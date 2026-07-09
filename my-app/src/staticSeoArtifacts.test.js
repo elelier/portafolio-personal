@@ -5,6 +5,14 @@ const { INDEXABLE_SITEMAP_PATHS } = require('./config/routeSeoPolicy');
 const publicDir = path.resolve(__dirname, '../public');
 const robotsPath = path.join(publicDir, 'robots.txt');
 const sitemapPath = path.join(publicDir, 'sitemap.xml');
+const redirectsPath = path.join(publicDir, '_redirects');
+const expectedDynamicRedirects = [
+  '/proyecto/* /index.html 200',
+  '/cotizacion/* /index.html 200',
+  '/mockup/* /index.html 200',
+  '/admin/* /index.html 200',
+  '/entradas/* /index.html 200',
+];
 
 function read(filePath) {
   return fs.readFileSync(filePath, 'utf8');
@@ -36,5 +44,32 @@ describe('static SEO artifacts', () => {
     expect(sitemap).not.toContain('/tarifas-2024');
     expect(sitemap).not.toContain('/hero-banner');
     expect(sitemap).not.toContain('/entradas/2408_IA_Transforma_ecommerce');
+  });
+
+  it('keeps Cloudflare Pages SPA rewrites narrowly scoped to dynamic routes', () => {
+    expect(fs.existsSync(redirectsPath)).toBe(true);
+
+    const redirects = read(redirectsPath);
+
+    expect(redirects).not.toMatch(/^\/\* \/index\.html 200$/m);
+
+    for (const rule of expectedDynamicRedirects) {
+      expect(redirects).toContain(rule);
+    }
+
+    expect(redirects).not.toContain('/portafolio/* /index.html 200');
+    expect(redirects).not.toContain('/sobre-mi/* /index.html 200');
+    expect(redirects).not.toContain('/servicios/* /index.html 200');
+    expect(redirects).not.toContain('/contacto/* /index.html 200');
+    expect(redirects).not.toContain('/blog/* /index.html 200');
+    expect(redirects).not.toContain('/aionlabs/* /index.html 200');
+    expect(redirects).not.toContain('/privacy-policy/* /index.html 200');
+    expect(redirects).not.toContain('/terms-of-service/* /index.html 200');
+
+    const robots = read(robotsPath);
+    const sitemap = read(sitemapPath);
+
+    expect(robots).toContain('Sitemap: https://elelier.com/sitemap.xml');
+    expect(sitemap).toContain('https://elelier.com/');
   });
 });
