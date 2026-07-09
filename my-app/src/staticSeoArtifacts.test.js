@@ -7,11 +7,16 @@ const robotsPath = path.join(publicDir, 'robots.txt');
 const sitemapPath = path.join(publicDir, 'sitemap.xml');
 const redirectsPath = path.join(publicDir, '_redirects');
 const expectedDynamicRedirects = [
-  '/proyecto/* /index.html 200',
-  '/cotizacion/* /index.html 200',
-  '/mockup/* /index.html 200',
-  '/admin/* /index.html 200',
-  '/entradas/* /index.html 200',
+  '/proyecto/:token /index.html 200',
+  '/proyecto/:token/ /index.html 200',
+  '/cotizacion/:id /index.html 200',
+  '/cotizacion/:id/ /index.html 200',
+  '/mockup/:id /index.html 200',
+  '/mockup/:id/ /index.html 200',
+  '/admin/leads /index.html 200',
+  '/admin/leads/ /index.html 200',
+  '/entradas/:slug /index.html 200',
+  '/entradas/:slug/ /index.html 200',
 ];
 
 function read(filePath) {
@@ -57,6 +62,11 @@ describe('static SEO artifacts', () => {
       expect(redirects).toContain(rule);
     }
 
+    expect(redirects).not.toContain('/proyecto/* /index.html 200');
+    expect(redirects).not.toContain('/cotizacion/* /index.html 200');
+    expect(redirects).not.toContain('/mockup/* /index.html 200');
+    expect(redirects).not.toContain('/admin/* /index.html 200');
+    expect(redirects).not.toContain('/entradas/* /index.html 200');
     expect(redirects).not.toContain('/portafolio/* /index.html 200');
     expect(redirects).not.toContain('/sobre-mi/* /index.html 200');
     expect(redirects).not.toContain('/servicios/* /index.html 200');
