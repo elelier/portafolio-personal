@@ -56,6 +56,7 @@ describe('Portafolio career timeline', () => {
     expect(container.textContent).not.toContain('Wonderlabs');
     expect(container.textContent).not.toContain('PepsiCo');
     expect(container.textContent).not.toContain('Freelancer');
+    expect(container.textContent).toContain('Hablemos de tu reto');
     expect(getCards(container)).toHaveLength(3);
 
     cleanup();
@@ -71,6 +72,7 @@ describe('Portafolio career timeline', () => {
     expect(container.textContent).not.toContain('Wonderlabs');
     expect(container.textContent).not.toContain('PepsiCo');
     expect(container.textContent).not.toContain('Freelancer');
+    expect(container.textContent).toContain('Let’s talk about your challenge');
 
     const cards = getCards(container);
     expect(cards).toHaveLength(3);
