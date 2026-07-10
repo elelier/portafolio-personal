@@ -8,6 +8,8 @@
 
 **Tech Stack:** React 18, React Router 6, CSS, existing Framer Motion/react-swipeable utilities, Jest/React Testing Library, Create React App.
 
+**Current status (2026-07-10):** Tasks 1–4 implemented and production build verified. Task 5 remains in progress because the in-app browser cannot reach the local dev server from this session; asset gaps are documented in `docs/superpowers/asset-audit-2026-07-10.md`.
+
 ## Global Constraints
 
 - Text must stay concise and evidence-led.
@@ -17,7 +19,7 @@
 - Preserve Spanish and English content paths.
 - Reuse local assets before adding new dependencies.
 
-### Task 1: Establish the visual-first content model
+### Task 1: Establish the visual-first content model — COMPLETE
 
 **Files:**
 - Create: `my-app/src/data/projects.js`
@@ -61,7 +63,7 @@ git add my-app/src/data/projects.js my-app/src/data/sites.js my-app/src/data/pro
 git commit -m "feat: add visual-first project content model"
 ```
 
-### Task 2: Recompose the home around visual evidence
+### Task 2: Recompose the home around visual evidence — COMPLETE
 
 **Files:**
 - Modify: `my-app/src/App.js`
@@ -111,7 +113,7 @@ git add my-app/src/App.js my-app/src/components/HeroBanner.js my-app/src/compone
 git commit -m "feat: recompose landing around visual evidence"
 ```
 
-### Task 3: Make navigation and mobile behavior coherent
+### Task 3: Make navigation and mobile behavior coherent — COMPLETE
 
 **Files:**
 - Modify: `my-app/src/components/Navegacion.js`
@@ -147,7 +149,7 @@ git add my-app/src/components/Navegacion.js my-app/src/styles/components/Navegac
 git commit -m "feat: unify desktop and mobile navigation"
 ```
 
-### Task 4: Add public catalog and project detail pages
+### Task 4: Add public catalog and project detail pages — COMPLETE
 
 **Files:**
 - Create: `my-app/src/pages/ProjectsPage.jsx`
