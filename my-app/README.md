@@ -96,7 +96,8 @@
 
 ### Herramientas de Desarrollo
 - **Git & GitHub**: Control de versiones
-- **GitHub Pages**: Alojamiento
+- **Cloudflare Pages**: Hosting productivo actual
+- **GitHub Pages**: Ruta legacy/manual de rollback
 - **NPM**: Gestión de paquetes
 - **React Scripts 5.0.1**: Herramientas de desarrollo
 
@@ -138,11 +139,11 @@
 
 ## Despliegue
 
-El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https://www.elelier.com).
+El portfolio tiene como hosting productivo actual Cloudflare Pages y está accesible en [elelier.com](https://elelier.com). GitHub Pages se conserva únicamente como ruta legacy/manual de rollback.
 
 ### Configuración de Producción
-- **Dominio Personalizado**: elelier.com configurado con CNAME
-- **HTTPS Habilitado**: SSL/TLS automático por GitHub Pages
+- **Dominio Personalizado**: `elelier.com` y `www.elelier.com` activos en Cloudflare Pages
+- **HTTPS Habilitado**: SSL/TLS automático por Cloudflare Pages
 - **Compresión de Activos**: Minificación automática de CSS/JS
 - **Caché Optimizado**: Headers de caché para recursos estáticos
 - **Analytics Configurado**: Google Tag Manager y Google Analytics 4
@@ -152,8 +153,8 @@ El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https
 ### Pipeline de Despliegue
 1. **Build Automático**: `npm run build` genera datos de cliente y construye
 2. **Optimización**: Minificación, tree-shaking y code-splitting
-3. **Deploy**: `npm run deploy` sube a GitHub Pages usando gh-pages
-4. **DNS**: Redirección automática de www.elelier.com a elelier.com
+3. **Deploy legacy/manual**: `npm run deploy` mantiene la ruta histórica de GitHub Pages con `gh-pages`
+4. **DNS**: Cloudflare Pages atiende `elelier.com` y `www.elelier.com`; una redirección `301` de `www` a apex sigue como evaluación no bloqueante
 
 ### Variables de Entorno Requeridas
 ```bash
@@ -203,7 +204,7 @@ npm test           # Ejecutar tests
 ### Producción
 ```bash
 npm run build      # Construir para producción (incluye generación de datos)
-npm run deploy     # Desplegar a GitHub Pages
+npm run deploy     # Ruta legacy/manual hacia GitHub Pages
 npm run predeploy  # Pre-construcción automática
 npm run pre-prod   # Testing local de build de producción
 ```

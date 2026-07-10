@@ -53,7 +53,8 @@
 
 ### Herramientas de Desarrollo
 - **Git & GitHub**: Control de versiones
-- **GitHub Pages**: Alojamiento
+- **Cloudflare Pages**: Hosting productivo actual
+- **GitHub Pages**: Ruta legacy/manual de rollback
 - **NPM**: Gestión de paquetes
 
 ## Características
@@ -86,7 +87,7 @@
 
 ## Despliegue
 
-El portfolio está desplegado en GitHub Pages y accesible en [elelier.com](https://www.elelier.com).
+El portfolio tiene como hosting productivo actual Cloudflare Pages y está accesible en [elelier.com](https://elelier.com). GitHub Pages se conserva únicamente como ruta legacy/manual de rollback.
 
 ### Configuración de Producción
 - Dominio personalizado configurado
