@@ -160,7 +160,7 @@ git commit -m "feat: unify desktop and mobile navigation"
 
 **Interfaces:**
 - Route `/sites` renders the public catalog.
-- Route `/proyecto/:id` renders a project detail or a localized not-found state.
+- Route `/proyectos/:id` renders a project detail or a localized not-found state.
 
 - [ ] **Step 1: Write the failing route test**
 

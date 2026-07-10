@@ -310,6 +310,37 @@
   
 }
 
+/* Visual-first navigation overrides */
+.navegacion {
+  backdrop-filter: blur(16px);
+  background-color: color-mix(in srgb, var(--color-bg) 82%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+  opacity: 1;
+}
+
+.nav-links { gap: 12px; }
+.nav-links li { margin-left: 0; }
+.nav-links a { font-size: .86rem; }
+.menu-toggle { right: 18px; }
+.nav-menu-backdrop { display: none; }
+
+@media (max-width: 830px) {
+  .nav-content { padding: 0 22px; }
+  .logo-container { left: 22px; transform: none; top: 0; }
+  .logo { font-size: 18px; }
+  .nav-links { z-index: 1000; left: auto; right: -100%; width: min(86vw, 360px); padding: 92px 28px 32px; align-items: stretch; justify-content: flex-start; gap: 0; transition: right .3s ease; box-shadow: -20px 0 50px rgba(0,0,0,.2); }
+  .nav-links.open { left: auto; right: 0; padding-top: 92px; }
+  .nav-links li { margin: 0; }
+  .nav-links a { padding: 16px 0; font-size: 1.2rem; border-bottom: 1px solid rgba(127,127,127,.2); }
+  .nav-menu-backdrop { display: block; position: fixed; inset: 0; z-index: 999; background: rgba(5, 8, 15, .55); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+  .nav-menu-backdrop.open { opacity: 1; pointer-events: auto; }
+  .nav-links .contact-button { display: flex; margin: 20px 0 0; font-size: 1rem; justify-content: center; border: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links, .nav-menu-backdrop { transition: none; }
+}
+
 
 /* CSS */
 .language-toggle {

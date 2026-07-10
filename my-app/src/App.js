@@ -21,10 +21,15 @@ import SobreMi from './components/SobreMi';
 import Tarifario from './components/Tarifario';
 import FloatingButton from './components/FloatingButton';
 import ChatModal from './components/ChatModal';
+import ResultsStrip from './components/ResultsStrip';
+import FeaturedProjects from './components/FeaturedProjects';
+import { getProjects } from './data/projects';
 import ExternalRedirect from './components/ExternalRedirect';
 import ClientSpace from './components/ClientSpace';
 import SettingsMenu from './components/SettingsMenu';
 import AdminLeads from './pages/AdminLeads';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import AionLabs from './components/AionLabs';
@@ -51,8 +56,10 @@ function App({ initialLanguage }) {
 
   const homeSections = [
     { key: 'hero', Component: HeroBanner },
-    { key: 'soluciones', Component: Soluciones },
+    { key: 'resultados', Component: ResultsStrip },
+    { key: 'proyectos', Component: () => <FeaturedProjects projects={getProjects(initialLanguage)} /> },
     { key: 'casos', Component: CasosEstudio },
+    { key: 'soluciones', Component: Soluciones },
     { key: 'testimonios', Component: Testimonios },
     { key: 'sobre-mi', Component: SobreMi },
     { key: 'portafolio', Component: Portafolio },
@@ -166,6 +173,22 @@ function App({ initialLanguage }) {
                     })}
                   />
                   <Route
+                    path="/sites"
+                    element={renderPublicAliasRoute(<ProjectsPage />, {
+                      route: '/sites',
+                      title: 'Proyectos | Elier Loya',
+                      description: 'Proyectos y productos digitales seleccionados de Elier Loya.'
+                    })}
+                  />
+                  <Route
+                    path="/proyectos/:id"
+                    element={renderPublicAliasRoute(<ProjectDetailPage />, {
+                      route: '/proyectos/:id',
+                      title: 'Proyecto | Elier Loya',
+                      description: 'Detalle visual de un proyecto digital de Elier Loya.'
+                    })}
+                  />
+                  <Route
                     path="/cotizacion/:id"
                     element={renderPrivateRoute(<ExternalRedirect />, {
                       title: 'Ruta privada | Elier Loya',
@@ -208,13 +231,6 @@ function App({ initialLanguage }) {
                       route: '/aionlabs',
                       title: getRouteSeoPolicy('/aionlabs')?.title,
                       description: getRouteSeoPolicy('/aionlabs')?.description,
-                    })}
-                  />
-                  <Route
-                    path="/sites"
-                    element={renderPrivateRoute(<InternalRoutePlaceholder />, {
-                      title: 'Vista utilitaria | Elier Loya',
-                      description: 'Vista interna con acceso controlado y sin indexacion publica.'
                     })}
                   />
                 </Routes>

@@ -33,7 +33,7 @@ Los anchors deben coincidir con las secciones visibles. Las rutas dedicadas no d
 
 ## Proyectos y páginas dedicadas
 
-El modelo de proyecto tendrá `id`, `title`, `category`, `summary`, `featuredImage`, `gallery`, `metrics`, `role`, `stack`, `url` y `status`. La home muestra una selección; `/sites` será una vista pública de catálogo; `/proyecto/:id` mostrará detalle visual. Cada galería admite 5–8 imágenes con formatos y situaciones distintas: desktop, mobile, flujo, detalle, antes/después y contexto.
+El modelo de proyecto tendrá `id`, `title`, `category`, `summary`, `featuredImage`, `gallery`, `metrics`, `role`, `stack`, `url` y `status`. La home muestra una selección; `/sites` será una vista pública de catálogo; `/proyectos/:id` mostrará detalle visual. Cada galería admite 5–8 imágenes con formatos y situaciones distintas: desktop, mobile, flujo, detalle, antes/después y contexto.
 
 Si un proyecto todavía no tiene galería completa, la interfaz conserva una sola imagen y muestra el estado sin inventar resultados.
 

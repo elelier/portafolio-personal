@@ -6,7 +6,6 @@ import '../styles/components/Navegacion.css';
 
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const { language } = useLanguage();
 
   const toggleMenu = () => {
@@ -27,41 +26,41 @@ function Navegacion() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      // Aquí nos aseguramos que al hacer clic fuera del menú, se cierre
-      if (menuOpen && !event.target.closest('.nav-content') && !event.target.closest('.menu-toggle')) {
-        closeMenu();
-      }
-
-      // Aquí cerramos el menú de settings si está abierto y se hace clic afuera
-      if (settingsOpen && !event.target.closest('.settings-menu') && !event.target.closest('.settings-toggle')) {
-        setSettingsOpen(false);
-      }
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') closeMenu();
     };
 
-    document.addEventListener('click', handleClickOutside);
-
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.classList.toggle('nav-menu-open', menuOpen);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.classList.remove('nav-menu-open');
     };
-  }, [menuOpen, settingsOpen]);
+  }, [menuOpen]);
 
   const navItems = {
     es: {
-      sobreMi: 'Sobre Mí',
+      proyectos: 'Proyectos',
+      resultados: 'Resultados',
       casosReales: 'Casos reales',
-      portafolio: 'Carrera',
-      soluciones: 'Soluciones',
+      comoTrabajo: 'Cómo trabajo',
       contactame: 'Hablemos de tu reto',
     },
     en: {
-      sobreMi: 'About Me',
+      proyectos: 'Projects',
+      resultados: 'Outcomes',
       casosReales: 'Case studies',
-      portafolio: 'Career',
-      soluciones: 'Solutions',
+      comoTrabajo: 'How I work',
       contactame: 'Let’s talk about your challenge',
     }
   };
+
+  const navLinks = [
+    ['proyectos', navItems[language].proyectos],
+    ['resultados', navItems[language].resultados],
+    ['casos-reales', navItems[language].casosReales],
+    ['como-trabajo', navItems[language].comoTrabajo],
+  ];
 
   return (
     <nav className="navegacion" role="navigation" aria-label="Navegación principal">
@@ -71,15 +70,15 @@ function Navegacion() {
             <div className="logo">Elier Loya Mata</div>
           </Link>
         </div>
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+        <button className="menu-toggle" onClick={toggleMenu} aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
           {menuOpen ? '✖' : '☰'}
         </button>
-        <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <div className={`nav-menu-backdrop ${menuOpen ? 'open' : ''}`} onClick={closeMenu} aria-hidden="true" />
+        <ul id="primary-navigation" className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{navItems[language].sobreMi}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('casos-reales')}>{navItems[language].casosReales}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('soluciones')}>{navItems[language].soluciones}</Link></li>
+          {navLinks.map(([id, label]) => (
+            <li key={id}><Link to={`/#${id}`} onClick={() => handleScrollToElement(id)}>{label}</Link></li>
+          ))}
           <li>
             <Link
               to="/"
