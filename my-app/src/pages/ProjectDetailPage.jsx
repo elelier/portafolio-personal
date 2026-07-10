@@ -15,7 +15,7 @@ function ProjectDetailPage() {
   }
 
   const related = getProjects(language).filter((candidate) => candidate.id !== project.id).slice(0, 2);
-  const gallery = project.gallery.length ? project.gallery : [project.featuredImage];
+  const gallery = project.gallery.length ? project.gallery : [];
   const copy = language === 'es'
     ? { back: 'Todos los proyectos', overview: 'En una frase', role: 'Mi papel', stack: 'Construido con', visit: 'Visitar proyecto ↗', related: 'También puedes ver' }
     : { back: 'All projects', overview: 'In one sentence', role: 'My role', stack: 'Built with', visit: 'Visit project ↗', related: 'You may also like' };
@@ -30,14 +30,14 @@ function ProjectDetailPage() {
       </header>
 
       <section className="project-gallery" aria-label={language === 'es' ? 'Galería del proyecto' : 'Project gallery'}>
-        <div className="project-gallery__main"><img src={gallery[activeImage]} alt={`${project.title} ${activeImage + 1}`} /></div>
-        <div className="project-gallery__thumbs">
+        <div className="project-gallery__main">{gallery.length ? <img src={gallery[activeImage]} alt={`${project.title} ${activeImage + 1}`} /> : <div className="project-gallery__placeholder"><strong>{project.title}</strong><span>{language === 'es' ? 'Galería visual en preparación' : 'Visual gallery in progress'}</span></div>}</div>
+        {gallery.length > 0 && <div className="project-gallery__thumbs">
           {gallery.map((image, index) => (
             <button type="button" className={index === activeImage ? 'active' : ''} onClick={() => setActiveImage(index)} key={image} aria-label={`${project.title} ${index + 1}`}>
               <img src={image} alt="" />
             </button>
           ))}
-        </div>
+        </div>}
       </section>
 
       <section className="project-detail__facts">
@@ -51,11 +51,10 @@ function ProjectDetailPage() {
 
       <section className="project-detail__related" aria-labelledby="related-projects-title">
         <h2 id="related-projects-title">{copy.related}</h2>
-        <div>{related.map((candidate) => <Link to={`/proyectos/${candidate.id}`} key={candidate.id}><img src={candidate.featuredImage} alt={candidate.title} /><span>{candidate.title} ↗</span></Link>)}</div>
+        <div>{related.map((candidate) => <Link to={`/proyectos/${candidate.id}`} key={candidate.id}>{candidate.featuredImage ? <img src={candidate.featuredImage} alt={candidate.title} /> : <div className="project-detail__related-placeholder">{candidate.title}</div>}<span>{candidate.title} ↗</span></Link>)}</div>
       </section>
     </main>
   );
 }
 
 export default ProjectDetailPage;
-

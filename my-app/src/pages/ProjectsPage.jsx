@@ -22,7 +22,7 @@ function ProjectsPage() {
       <div className="projects-page__grid">
         {projects.map((project) => (
           <Link className="project-index-card" to={`/proyectos/${project.id}`} key={project.id}>
-            <div className="project-index-card__media"><img src={project.featuredImage} alt={project.title} loading="lazy" /></div>
+            <div className="project-index-card__media">{project.featuredImage ? <img src={project.featuredImage} alt={project.title} loading="lazy" /> : <div className="project-index-card__placeholder"><span>{project.title}</span><small>{language === 'es' ? 'Imagen en preparación' : 'Image in progress'}</small></div>}</div>
             <div className="project-index-card__body">
               <span>{project.category}</span>
               <h2>{project.title}</h2>
@@ -37,4 +37,3 @@ function ProjectsPage() {
 }
 
 export default ProjectsPage;
-

@@ -1,4 +1,11 @@
 import { sitesData } from './sites';
+import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
+import elelierPreview from '../assets/images/eleliercom.png';
+
+const visualFallbacks = {
+  'diana-mtz': [arqidiaPreview, '/images/sites/cover-desktop.jpg', '/images/sites/cover-mobile.jpg'],
+  elelier: [elelierPreview, '/images/sites/elelier-full.jpg', '/images/sites/elelier-thumb.jpg'],
+};
 
 const projectContent = {
   es: {
@@ -64,13 +71,13 @@ const getLocalizedContent = (language, id) => (projectContent[language] || proje
 
 const toProject = (site, language) => {
   const copy = getLocalizedContent(language, site.id);
+  const fallbackGallery = visualFallbacks[site.id] || [];
   const gallery = [
     site.images?.desktop?.carousel,
     site.images?.desktop?.grid,
     site.images?.mobile?.carousel,
     site.images?.mobile?.grid,
-    site.fullImage,
-    site.thumbnail,
+    ...fallbackGallery,
   ].filter(Boolean).filter((image, index, images) => images.indexOf(image) === index);
 
   return {
@@ -80,7 +87,7 @@ const toProject = (site, language) => {
     summary: copy.summary,
     role: copy.role,
     metrics: copy.metrics,
-    featuredImage: site.fullImage || site.thumbnail,
+    featuredImage: gallery[0] || null,
     gallery,
   };
 };
@@ -93,4 +100,3 @@ export const projectsData = {
 export const getProjects = (language = 'es') => projectsData[language] || projectsData.es;
 
 export const getProjectById = (id, language = 'es') => getProjects(language).find((project) => project.id === id) || null;
-

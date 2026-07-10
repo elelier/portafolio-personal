@@ -57,7 +57,7 @@ function App({ initialLanguage }) {
   const homeSections = [
     { key: 'hero', Component: HeroBanner },
     { key: 'resultados', Component: ResultsStrip },
-    { key: 'proyectos', Component: () => <FeaturedProjects projects={getProjects(initialLanguage)} /> },
+    { key: 'proyectos', Component: ({ style }) => <FeaturedProjects style={style} projects={getProjects(initialLanguage)} /> },
     { key: 'casos', Component: CasosEstudio },
     { key: 'soluciones', Component: Soluciones },
     { key: 'testimonios', Component: Testimonios },

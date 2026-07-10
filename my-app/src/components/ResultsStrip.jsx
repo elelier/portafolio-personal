@@ -17,27 +17,28 @@ const results = {
   ],
 };
 
-function ResultsStrip() {
+function ResultsStrip({ style }) {
   const { language } = useLanguage();
   const items = results[language] || results.es;
 
   return (
-    <section id="resultados" className="results-strip" aria-labelledby="results-title">
-      <div className="results-strip__intro">
-        <span>{language === 'es' ? 'EVIDENCIA' : 'EVIDENCE'}</span>
-        <h2 id="results-title">{language === 'es' ? 'Resultados que se pueden ver' : 'Outcomes you can see'}</h2>
-      </div>
-      <div className="results-strip__grid">
-        {items.map((item) => (
-          <div className="result-stat" key={item.label}>
-            <strong>{item.value}</strong>
-            <span>{item.label}</span>
-          </div>
-        ))}
+    <section id="resultados" className="results-strip" style={style} aria-labelledby="results-title">
+      <div className="results-strip__inner">
+        <div className="results-strip__intro">
+          <span>{language === 'es' ? 'EVIDENCIA' : 'EVIDENCE'}</span>
+          <h2 id="results-title">{language === 'es' ? 'Resultados que se pueden ver' : 'Outcomes you can see'}</h2>
+        </div>
+        <div className="results-strip__grid">
+          {items.map((item) => (
+            <div className="result-stat" key={item.label}>
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
 export default ResultsStrip;
-
