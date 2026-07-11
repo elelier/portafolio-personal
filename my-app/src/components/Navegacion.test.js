@@ -139,4 +139,79 @@ describe('Navegacion', () => {
 
     cleanup();
   });
+
+  it('uses the decision path and groups personal context under Más sobre mí', () => {
+    const { container, cleanup } = renderNavegacion('es');
+    const links = Array.from(container.querySelectorAll('.nav-links > li > a, .nav-links > li > button'))
+      .map((element) => element.textContent.replace('⌄', '').trim())
+      .filter(Boolean);
+
+    expect(links).toEqual(['Soluciones', 'Casos reales', 'Cómo trabajo', 'Más sobre mí', 'Hablemos de tu reto']);
+    expect(container.querySelector('.nav-links .fa-home')).toBeNull();
+
+    const moreButton = container.querySelector('.nav-secondary-toggle');
+    expect(moreButton.getAttribute('aria-haspopup')).toBe('true');
+    expect(moreButton.getAttribute('aria-controls')).toBe('about-navigation');
+    expect(moreButton.getAttribute('aria-expanded')).toBe('false');
+    expect(container.querySelector('#about-navigation')).toBeTruthy();
+    expect(container.textContent).toContain('Sobre Mí');
+    expect(container.textContent).toContain('Carrera');
+
+    cleanup();
+  });
+
+  it('opens Más sobre mí with keyboard and closes it with Escape while restoring focus', () => {
+    const { container, cleanup } = renderNavegacion('es');
+    const moreButton = container.querySelector('.nav-secondary-toggle');
+
+    act(() => {
+      moreButton.focus();
+      moreButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    });
+    expect(moreButton.getAttribute('aria-expanded')).toBe('true');
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    });
+    expect(moreButton.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(moreButton);
+
+    cleanup();
+  });
+
+  it('maps Testimonios to Casos reales in the active navigation state', () => {
+    const observed = [];
+    const OriginalObserver = window.IntersectionObserver;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+      }
+
+      observe(element) {
+        observed.push({ element, observer: this });
+      }
+
+      disconnect() {
+        this.disconnected = true;
+      }
+    };
+
+    const testimonios = document.createElement('section');
+    testimonios.id = 'testimonios';
+    document.body.appendChild(testimonios);
+    const { container, cleanup } = renderNavegacion('es');
+
+    act(() => {
+      const entry = observed.find(({ element }) => element.id === 'testimonios');
+      entry.observer.callback([{ target: testimonios, isIntersecting: true }]);
+    });
+
+    const casesLink = findLinkByText(container, 'Casos reales');
+    expect(casesLink.getAttribute('aria-current')).toBe('location');
+    expect(casesLink.classList.contains('is-active')).toBe(true);
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    testimonios.remove();
+  });
 });

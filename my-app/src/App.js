@@ -54,9 +54,9 @@ function App({ initialLanguage }) {
     { key: 'soluciones', Component: Soluciones },
     { key: 'casos', Component: CasosEstudio },
     { key: 'testimonios', Component: Testimonios },
+    { key: 'servicios', Component: Servicios },
     { key: 'sobre-mi', Component: SobreMi },
     { key: 'portafolio', Component: Portafolio },
-    { key: 'servicios', Component: Servicios },
     { key: 'contacto', Component: Contacto },
   ];
 
