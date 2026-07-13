@@ -246,6 +246,47 @@ describe('Navegacion', () => {
     Object.values(sections).forEach((section) => section.remove());
   });
 
+  it('clears every active navigation state when returning from Soluciones to Hero', () => {
+    const observed = [];
+    const OriginalObserver = window.IntersectionObserver;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+      }
+
+      observe(element) {
+        observed.push({ element, observer: this });
+      }
+
+      disconnect() {}
+    };
+
+    const hero = document.createElement('header');
+    hero.id = 'hero-banner';
+    const solutions = document.createElement('section');
+    solutions.id = 'soluciones';
+    document.body.append(hero, solutions);
+
+    const { container, cleanup } = renderNavegacion('es');
+    const trigger = (id) => {
+      const entry = observed.find(({ element }) => element.id === id);
+      expect(entry).toBeTruthy();
+      act(() => entry.observer.callback([{ target: document.getElementById(id), isIntersecting: true }]));
+    };
+
+    trigger('soluciones');
+    expect(findLinkByText(container, 'Soluciones').getAttribute('aria-current')).toBe('location');
+
+    trigger('hero-banner');
+    expect(container.querySelector('[aria-current="location"]')).toBeNull();
+    expect(container.querySelector('.is-active')).toBeNull();
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    hero.remove();
+    solutions.remove();
+  });
+
   it('restores focus to the mobile menu button after Escape closes the menu', () => {
     const { container, cleanup } = renderNavegacion('es');
     const menuToggle = container.querySelector('.menu-toggle');

@@ -46,6 +46,7 @@ export const navigationConfig = {
 export const getNavigationContent = (language) => navigationConfig[language] || navigationConfig.es;
 
 export const activeSectionMap = {
+  'hero-banner': null,
   soluciones: 'soluciones',
   'casos-reales': 'casosReales',
   testimonios: 'casosReales',
