@@ -24,6 +24,7 @@ section[id] {
 }
 
 .nav-content {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,6 +61,14 @@ section[id] {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+@media (min-width: 831px) {
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .nav-links[hidden],
