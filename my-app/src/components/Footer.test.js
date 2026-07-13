@@ -110,4 +110,25 @@ describe('Footer', () => {
 
     cleanup();
   });
+
+  it('follows the landing narrative while keeping the complete footer navigation', () => {
+    const { container, cleanup } = renderFooter('es');
+    const labels = Array.from(container.querySelectorAll('.footer-links a'))
+      .map((link) => link.textContent.trim());
+
+    expect(labels.slice(0, 9)).toEqual([
+      'Inicio',
+      'Soluciones',
+      'Casos reales',
+      'Cómo trabajo',
+      'Sobre Mí',
+      'Carrera',
+      'Contacto',
+      'Privacidad',
+      'Términos'
+    ]);
+    expect(container.textContent).not.toContain('Habilidades');
+
+    cleanup();
+  });
 });

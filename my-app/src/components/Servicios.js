@@ -60,7 +60,7 @@ function Servicios({ style }) {
   const t = content[language] || content.es;
 
   return (
-    <section id="como-trabajo" className="servicios" style={{ scrollMarginTop: '96px', ...style }}>
+    <section id="como-trabajo" className="servicios" style={style}>
       <div className="servicios-shell">
         <div className="servicios-header">
           <span>{language === 'es' ? 'Método de colaboración' : 'Collaboration method'}</span>

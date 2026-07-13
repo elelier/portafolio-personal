@@ -1,95 +1,184 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
+import { activeSectionMap, getNavigationContent, observedSectionIds } from '../config/navigation';
 import '../styles/components/Navegacion.css';
 
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 830);
   const { language } = useLanguage();
+  const aboutButtonRef = useRef(null);
+  const menuToggleRef = useRef(null);
+  const content = getNavigationContent(language);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
+  const closeMenu = () => setMenuOpen(false);
 
   const handleScrollToElement = (id) => {
     const element = document.getElementById(id);
     if (element) {
       scrollIntoViewWithMotionPreference(element);
       closeMenu();
+      setAboutOpen(false);
+    }
+  };
+
+  const toggleAbout = () => setAboutOpen((current) => !current);
+
+  const handleAboutKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleAbout();
     }
   };
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 830);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const observedSections = observedSectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!observedSections.length || typeof window.IntersectionObserver === 'undefined') {
+      return undefined;
+    }
+
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+        if (visibleEntry) {
+          setActiveSection(activeSectionMap[visibleEntry.target.id] || null);
+        }
+      },
+      { rootMargin: '-80px 0px -55% 0px', threshold: [0, 0.1, 0.5, 1] }
+    );
+
+    observedSections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        if (aboutOpen) {
+          setAboutOpen(false);
+          aboutButtonRef.current?.focus();
+        } else if (menuOpen) {
+          closeMenu();
+          menuToggleRef.current?.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [aboutOpen, menuOpen]);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
-      // Aquí nos aseguramos que al hacer clic fuera del menú, se cierre
       if (menuOpen && !event.target.closest('.nav-content') && !event.target.closest('.menu-toggle')) {
         closeMenu();
       }
 
-      // Aquí cerramos el menú de settings si está abierto y se hace clic afuera
-      if (settingsOpen && !event.target.closest('.settings-menu') && !event.target.closest('.settings-toggle')) {
-        setSettingsOpen(false);
+      if (aboutOpen && !event.target.closest('.nav-secondary')) {
+        setAboutOpen(false);
       }
     };
 
     document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [menuOpen, aboutOpen]);
 
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [menuOpen, settingsOpen]);
-
-  const navItems = {
-    es: {
-      sobreMi: 'Sobre Mí',
-      casosReales: 'Casos reales',
-      portafolio: 'Carrera',
-      soluciones: 'Soluciones',
-      contactame: 'Hablemos de tu reto',
-    },
-    en: {
-      sobreMi: 'About Me',
-      casosReales: 'Case studies',
-      portafolio: 'Career',
-      soluciones: 'Solutions',
-      contactame: 'Let’s talk about your challenge',
-    }
-  };
+  const isActive = (key) => activeSection === key;
+  const isAboutActive = isActive('sobreMi') || isActive('carrera');
 
   return (
-    <nav className="navegacion" role="navigation" aria-label="Navegación principal">
+    <nav className="navegacion" role="navigation" aria-label={content.navLabel}>
       <div className="nav-content">
         <div className="logo-container">
           <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>
             <div className="logo">Elier Loya Mata</div>
           </Link>
         </div>
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+
+        <button
+          ref={menuToggleRef}
+          className="menu-toggle"
+          onClick={() => setMenuOpen((current) => !current)}
+          aria-label={menuOpen ? content.menuClose : content.menuOpen}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+        >
           {menuOpen ? '✖' : '☰'}
         </button>
-        <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <li><Link to="/" onClick={() => handleScrollToElement('hero-banner')}><i className="fas fa-home"></i></Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('sobre-mi')}>{navItems[language].sobreMi}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('casos-reales')}>{navItems[language].casosReales}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('portafolio')}>{navItems[language].portafolio}</Link></li>
-          <li><Link to="/" onClick={() => handleScrollToElement('soluciones')}>{navItems[language].soluciones}</Link></li>
+
+        <ul id="primary-navigation" hidden={isMobile && !menuOpen} className={`nav-links ${menuOpen ? 'open' : ''}`}>
+          {content.primary.map((item) => (
+            <li key={item.key}>
+              <Link
+                to="/"
+                className={isActive(item.key) ? 'is-active' : ''}
+                aria-current={isActive(item.key) ? 'location' : undefined}
+                onClick={() => handleScrollToElement(item.target)}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+
+          <li className={`nav-secondary${isAboutActive ? ' is-active' : ''}`}>
+            <button
+              ref={aboutButtonRef}
+              className="nav-secondary-toggle"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={aboutOpen}
+              aria-controls="about-navigation"
+              aria-current={isAboutActive ? 'location' : undefined}
+              onClick={toggleAbout}
+              onKeyDown={handleAboutKeyDown}
+            >
+              {content.secondaryLabel}<span aria-hidden="true">⌄</span>
+            </button>
+            <ul
+              id="about-navigation"
+              hidden={!aboutOpen}
+              aria-hidden={!aboutOpen}
+              className={`nav-secondary-menu${aboutOpen ? ' open' : ''}`}
+            >
+              {content.secondary.map((item) => (
+                <li key={item.key}>
+                  <Link
+                    to="/"
+                    className={isActive(item.key) ? 'is-active' : ''}
+                    aria-current={isActive(item.key) ? 'location' : undefined}
+                    onClick={() => handleScrollToElement(item.target)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+
           <li>
             <Link
               to="/"
-              className="contact-button"
+              className={`contact-button${isActive('contact') ? ' is-active' : ''}`}
+              aria-current={isActive('contact') ? 'location' : undefined}
               onClick={() => handleScrollToElement('contacto')}
             >
-              <div className="icon-container" style={{ display: 'inline-block' }}>
+              <span className="icon-container" aria-hidden="true">
                 <i className="fas fa-comment-dots"></i>
-              </div>
-              {navItems[language].contactame}
+              </span>
+              {content.contact}
             </Link>
           </li>
         </ul>
