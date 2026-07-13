@@ -9,8 +9,10 @@ function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 830);
   const { language } = useLanguage();
   const aboutButtonRef = useRef(null);
+  const menuToggleRef = useRef(null);
   const content = getNavigationContent(language);
 
   const closeMenu = () => setMenuOpen(false);
@@ -32,6 +34,12 @@ function Navegacion() {
       toggleAbout();
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 830);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const observedSections = observedSectionIds
@@ -64,6 +72,7 @@ function Navegacion() {
           aboutButtonRef.current?.focus();
         } else if (menuOpen) {
           closeMenu();
+          menuToggleRef.current?.focus();
         }
       }
     };
@@ -91,7 +100,7 @@ function Navegacion() {
   const isAboutActive = isActive('sobreMi') || isActive('carrera');
 
   return (
-    <nav className="navegacion" role="navigation" aria-label="Navegación principal">
+    <nav className="navegacion" role="navigation" aria-label={content.navLabel}>
       <div className="nav-content">
         <div className="logo-container">
           <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>
@@ -100,16 +109,17 @@ function Navegacion() {
         </div>
 
         <button
+          ref={menuToggleRef}
           className="menu-toggle"
           onClick={() => setMenuOpen((current) => !current)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? content.menuClose : content.menuOpen}
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
         >
           {menuOpen ? '✖' : '☰'}
         </button>
 
-        <ul id="primary-navigation" className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <ul id="primary-navigation" hidden={isMobile && !menuOpen} className={`nav-links ${menuOpen ? 'open' : ''}`}>
           {content.primary.map((item) => (
             <li key={item.key}>
               <Link
@@ -137,7 +147,12 @@ function Navegacion() {
             >
               {content.secondaryLabel}<span aria-hidden="true">⌄</span>
             </button>
-            <ul id="about-navigation" className={`nav-secondary-menu${aboutOpen ? ' open' : ''}`}>
+            <ul
+              id="about-navigation"
+              hidden={!aboutOpen}
+              aria-hidden={!aboutOpen}
+              className={`nav-secondary-menu${aboutOpen ? ' open' : ''}`}
+            >
               {content.secondary.map((item) => (
                 <li key={item.key}>
                   <Link

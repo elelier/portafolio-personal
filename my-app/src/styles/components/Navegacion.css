@@ -62,6 +62,11 @@ section[id] {
   padding: 0;
 }
 
+.nav-links[hidden],
+.nav-secondary-menu[hidden] {
+  display: none !important;
+}
+
 .nav-links li {
   position: relative;
 }

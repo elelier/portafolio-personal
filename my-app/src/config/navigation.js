@@ -11,6 +11,9 @@ export const navigationConfig = {
       { key: 'carrera', label: 'Carrera', target: 'portafolio' }
     ],
     contact: 'Hablemos de tu reto',
+    navLabel: 'Navegación principal',
+    menuOpen: 'Abrir menú',
+    menuClose: 'Cerrar menú',
     footerContact: 'Contacto',
     inicio: 'Inicio',
     privacy: 'Privacidad',
@@ -29,6 +32,9 @@ export const navigationConfig = {
       { key: 'carrera', label: 'Career', target: 'portafolio' }
     ],
     contact: "Let’s talk about your challenge",
+    navLabel: 'Main navigation',
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
     footerContact: 'Contact',
     inicio: 'Home',
     privacy: 'Privacy Policy',

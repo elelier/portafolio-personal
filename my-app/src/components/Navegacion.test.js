@@ -6,6 +6,8 @@ import { LanguageContext } from '../contexts/LanguageContext';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
+const originalInnerWidth = window.innerWidth;
+
 const renderNavegacion = (language = 'es') => {
   const container = document.createElement('div');
   document.body.appendChild(container);
@@ -34,10 +36,12 @@ const findLinkByText = (container, text) => Array.from(container.querySelectorAl
 
 describe('Navegacion', () => {
   beforeEach(() => {
+    window.innerWidth = 390;
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
   });
 
   afterEach(() => {
+    window.innerWidth = originalInnerWidth;
     jest.restoreAllMocks();
     document.body.innerHTML = '';
   });
@@ -153,7 +157,10 @@ describe('Navegacion', () => {
     expect(moreButton.getAttribute('aria-haspopup')).toBe('true');
     expect(moreButton.getAttribute('aria-controls')).toBe('about-navigation');
     expect(moreButton.getAttribute('aria-expanded')).toBe('false');
+    expect(moreButton.getAttribute('aria-label')).toBeNull();
     expect(container.querySelector('#about-navigation')).toBeTruthy();
+    expect(container.querySelector('#about-navigation').hidden).toBe(true);
+    expect(container.querySelector('.nav-links').hidden).toBe(true);
     expect(container.textContent).toContain('Sobre Mí');
     expect(container.textContent).toContain('Carrera');
 
@@ -196,22 +203,80 @@ describe('Navegacion', () => {
       }
     };
 
-    const testimonios = document.createElement('section');
-    testimonios.id = 'testimonios';
-    document.body.appendChild(testimonios);
+    const sections = ['testimonios', 'sobre-mi', 'portafolio', 'contacto'].reduce((acc, id) => {
+      const section = document.createElement('section');
+      section.id = id;
+      document.body.appendChild(section);
+      acc[id] = section;
+      return acc;
+    }, {});
     const { container, cleanup } = renderNavegacion('es');
 
-    act(() => {
-      const entry = observed.find(({ element }) => element.id === 'testimonios');
-      entry.observer.callback([{ target: testimonios, isIntersecting: true }]);
-    });
+    const trigger = (id) => {
+      const entry = observed.find(({ element }) => element.id === id);
+      expect(entry).toBeTruthy();
+      act(() => {
+        entry.observer.callback([{ target: sections[id], isIntersecting: true }]);
+      });
+    };
 
+    trigger('testimonios');
     const casesLink = findLinkByText(container, 'Casos reales');
     expect(casesLink.getAttribute('aria-current')).toBe('location');
     expect(casesLink.classList.contains('is-active')).toBe(true);
 
+    trigger('sobre-mi');
+    const aboutButton = container.querySelector('.nav-secondary-toggle');
+    const aboutLink = findLinkByText(container, 'Sobre Mí');
+    expect(aboutButton.getAttribute('aria-current')).toBe('location');
+    expect(aboutLink.getAttribute('aria-current')).toBe('location');
+
+    trigger('portafolio');
+    const careerLink = findLinkByText(container, 'Carrera');
+    expect(aboutButton.getAttribute('aria-current')).toBe('location');
+    expect(careerLink.getAttribute('aria-current')).toBe('location');
+
+    trigger('contacto');
+    const contactLink = findLinkByText(container, 'Hablemos de tu reto');
+    expect(contactLink.getAttribute('aria-current')).toBe('location');
+
     cleanup();
+    expect(observed.every(({ observer }) => observer.disconnected)).toBe(true);
     window.IntersectionObserver = OriginalObserver;
-    testimonios.remove();
+    Object.values(sections).forEach((section) => section.remove());
+  });
+
+  it('restores focus to the mobile menu button after Escape closes the menu', () => {
+    const { container, cleanup } = renderNavegacion('es');
+    const menuToggle = container.querySelector('.menu-toggle');
+    const navLinks = container.querySelector('.nav-links');
+
+    act(() => {
+      menuToggle.click();
+    });
+    expect(navLinks.hidden).toBe(false);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    });
+
+    expect(navLinks.hidden).toBe(true);
+    expect(document.activeElement).toBe(menuToggle);
+    cleanup();
+  });
+
+  it('keeps navigation labels and menu actions accessible in Spanish and English', () => {
+    ['es', 'en'].forEach((language) => {
+      const { container, cleanup } = renderNavegacion(language);
+      const nav = container.querySelector('nav');
+      const menuToggle = container.querySelector('.menu-toggle');
+
+      expect(nav.getAttribute('aria-label')).toBe(language === 'es' ? 'Navegación principal' : 'Main navigation');
+      expect(menuToggle.getAttribute('aria-label')).toBe(language === 'es' ? 'Abrir menú' : 'Open menu');
+      act(() => menuToggle.click());
+      expect(menuToggle.getAttribute('aria-label')).toBe(language === 'es' ? 'Cerrar menú' : 'Close menu');
+
+      cleanup();
+    });
   });
 });

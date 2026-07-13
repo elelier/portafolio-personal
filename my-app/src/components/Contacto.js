@@ -123,7 +123,7 @@ function Contacto({ style }) {
     <AnimatedSection
       id="contacto"
       className="contacto"
-      style={{ scrollMarginTop: '60px', ...style }}
+      style={style}
       {...(prefersReducedMotion
         ? {}
         : {
