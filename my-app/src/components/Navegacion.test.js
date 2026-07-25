@@ -216,7 +216,12 @@ describe('Navegacion', () => {
       const entry = observed.find(({ element }) => element.id === id);
       expect(entry).toBeTruthy();
       act(() => {
-        entry.observer.callback([{ target: sections[id], isIntersecting: true }]);
+        entry.observer.callback(observed.map(({ element }) => ({
+          target: element,
+          isIntersecting: element.id === id,
+          intersectionRect: { height: element.id === id ? 200 : 0 },
+          intersectionRatio: element.id === id ? 1 : 0
+        })));
       });
     };
 
@@ -228,13 +233,15 @@ describe('Navegacion', () => {
     trigger('sobre-mi');
     const aboutButton = container.querySelector('.nav-secondary-toggle');
     const aboutLink = findLinkByText(container, 'Sobre Mí');
-    expect(aboutButton.getAttribute('aria-current')).toBe('location');
+    expect(aboutButton.getAttribute('aria-current')).toBeNull();
     expect(aboutLink.getAttribute('aria-current')).toBe('location');
+    expect(container.querySelectorAll('[aria-current="location"]')).toHaveLength(1);
 
     trigger('portafolio');
     const careerLink = findLinkByText(container, 'Carrera');
-    expect(aboutButton.getAttribute('aria-current')).toBe('location');
+    expect(aboutButton.getAttribute('aria-current')).toBeNull();
     expect(careerLink.getAttribute('aria-current')).toBe('location');
+    expect(container.querySelectorAll('[aria-current="location"]')).toHaveLength(1);
 
     trigger('contacto');
     const contactLink = findLinkByText(container, 'Hablemos de tu reto');
@@ -244,6 +251,107 @@ describe('Navegacion', () => {
     expect(observed.every(({ observer }) => observer.disconnected)).toBe(true);
     window.IntersectionObserver = OriginalObserver;
     Object.values(sections).forEach((section) => section.remove());
+  });
+
+  it.each([
+    { width: 390, language: 'es', solutionsLabel: 'Soluciones', casesLabel: 'Casos reales' },
+    { width: 1200, language: 'en', solutionsLabel: 'Solutions', casesLabel: 'Case studies' }
+  ])('selects the section with the largest visible area at $width px', ({
+    width,
+    language,
+    solutionsLabel,
+    casesLabel
+  }) => {
+    const OriginalObserver = window.IntersectionObserver;
+    let observer;
+    window.innerWidth = width;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+        observer = this;
+      }
+
+      observe() {}
+      disconnect() {}
+    };
+
+    const solutions = document.createElement('section');
+    solutions.id = 'soluciones';
+    const cases = document.createElement('section');
+    cases.id = 'casos-reales';
+    document.body.append(solutions, cases);
+
+    const { container, cleanup } = renderNavegacion(language);
+    act(() => {
+      observer.callback([
+        {
+          target: solutions,
+          isIntersecting: true,
+          intersectionRect: { height: 110 },
+          intersectionRatio: 0.35
+        },
+        {
+          target: cases,
+          isIntersecting: true,
+          intersectionRect: { height: 190 },
+          intersectionRatio: 0.65
+        }
+      ]);
+    });
+
+    expect(findLinkByText(container, casesLabel).getAttribute('aria-current')).toBe('location');
+    expect(findLinkByText(container, solutionsLabel).getAttribute('aria-current')).toBeNull();
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    solutions.remove();
+    cases.remove();
+  });
+
+  it('breaks equal-visibility ties by narrative order, not observer entry order', () => {
+    const OriginalObserver = window.IntersectionObserver;
+    let observer;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+        observer = this;
+      }
+
+      observe() {}
+      disconnect() {}
+    };
+
+    const solutions = document.createElement('section');
+    solutions.id = 'soluciones';
+    const cases = document.createElement('section');
+    cases.id = 'casos-reales';
+    document.body.append(solutions, cases);
+
+    const { container, cleanup } = renderNavegacion('es');
+    act(() => {
+      observer.callback([
+        {
+          target: cases,
+          isIntersecting: true,
+          intersectionRect: { height: 150 },
+          intersectionRatio: 0.5
+        },
+        {
+          target: solutions,
+          isIntersecting: true,
+          intersectionRect: { height: 150 },
+          intersectionRatio: 0.5
+        }
+      ]);
+    });
+
+    expect(findLinkByText(container, 'Soluciones').getAttribute('aria-current')).toBe('location');
+    expect(findLinkByText(container, 'Casos reales').getAttribute('aria-current')).toBeNull();
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    solutions.remove();
+    cases.remove();
   });
 
   it('clears every active navigation state when returning from Soluciones to Hero', () => {
@@ -271,7 +379,12 @@ describe('Navegacion', () => {
     const trigger = (id) => {
       const entry = observed.find(({ element }) => element.id === id);
       expect(entry).toBeTruthy();
-      act(() => entry.observer.callback([{ target: document.getElementById(id), isIntersecting: true }]));
+      act(() => entry.observer.callback(observed.map(({ element }) => ({
+        target: element,
+        isIntersecting: element.id === id,
+        intersectionRect: { height: element.id === id ? 200 : 0 },
+        intersectionRatio: element.id === id ? 1 : 0
+      }))));
     };
 
     trigger('soluciones');
