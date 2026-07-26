@@ -5,6 +5,30 @@ import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import { activeSectionMap, getNavigationContent, observedSectionIds } from '../config/navigation';
 import '../styles/components/Navegacion.css';
 
+const sectionOrder = new Map(observedSectionIds.map((id, index) => [id, index]));
+
+const getVisibleHeight = (entry) => entry.intersectionRect?.height || 0;
+
+const getDominantVisibleEntry = (entries) => entries.reduce((dominant, entry) => {
+  if (!dominant) {
+    return entry;
+  }
+
+  const visibleHeightDifference = getVisibleHeight(entry) - getVisibleHeight(dominant);
+  if (visibleHeightDifference > 0) {
+    return entry;
+  }
+
+  if (
+    visibleHeightDifference === 0
+    && sectionOrder.get(entry.target.id) < sectionOrder.get(dominant.target.id)
+  ) {
+    return entry;
+  }
+
+  return dominant;
+}, null);
+
 function Navegacion() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -13,6 +37,7 @@ function Navegacion() {
   const { language } = useLanguage();
   const aboutButtonRef = useRef(null);
   const menuToggleRef = useRef(null);
+  const visibleSectionEntriesRef = useRef(new Map());
   const content = getNavigationContent(language);
 
   const closeMenu = () => setMenuOpen(false);
@@ -45,6 +70,7 @@ function Navegacion() {
     const observedSections = observedSectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
+    const visibleSectionEntries = visibleSectionEntriesRef.current;
 
     if (!observedSections.length || typeof window.IntersectionObserver === 'undefined') {
       return undefined;
@@ -52,16 +78,27 @@ function Navegacion() {
 
     const observer = new window.IntersectionObserver(
       (entries) => {
-        const visibleEntry = entries.find((entry) => entry.isIntersecting);
-        if (visibleEntry) {
-          setActiveSection(activeSectionMap[visibleEntry.target.id] || null);
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSectionEntries.set(entry.target.id, entry);
+          } else {
+            visibleSectionEntries.delete(entry.target.id);
+          }
+        });
+
+        const dominantEntry = getDominantVisibleEntry(
+          Array.from(visibleSectionEntries.values())
+        );
+        setActiveSection(dominantEntry ? activeSectionMap[dominantEntry.target.id] || null : null);
       },
       { rootMargin: '-80px 0px -55% 0px', threshold: [0, 0.1, 0.5, 1] }
     );
 
     observedSections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      visibleSectionEntries.clear();
+    };
   }, []);
 
   useEffect(() => {
@@ -141,7 +178,6 @@ function Navegacion() {
               aria-haspopup="true"
               aria-expanded={aboutOpen}
               aria-controls="about-navigation"
-              aria-current={isAboutActive ? 'location' : undefined}
               onClick={toggleAbout}
               onKeyDown={handleAboutKeyDown}
             >
