@@ -6,6 +6,8 @@ import { LanguageContext } from '../contexts/LanguageContext';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
+const originalInnerWidth = window.innerWidth;
+
 const renderNavegacion = (language = 'es') => {
   const container = document.createElement('div');
   document.body.appendChild(container);
@@ -34,10 +36,12 @@ const findLinkByText = (container, text) => Array.from(container.querySelectorAl
 
 describe('Navegacion', () => {
   beforeEach(() => {
+    window.innerWidth = 390;
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
   });
 
   afterEach(() => {
+    window.innerWidth = originalInnerWidth;
     jest.restoreAllMocks();
     document.body.innerHTML = '';
   });
@@ -138,5 +142,295 @@ describe('Navegacion', () => {
     expect(navLinks.classList.contains('open')).toBe(false);
 
     cleanup();
+  });
+
+  it('uses the decision path and groups personal context under Más sobre mí', () => {
+    const { container, cleanup } = renderNavegacion('es');
+    const links = Array.from(container.querySelectorAll('.nav-links > li > a, .nav-links > li > button'))
+      .map((element) => element.textContent.replace('⌄', '').trim())
+      .filter(Boolean);
+
+    expect(links).toEqual(['Soluciones', 'Casos reales', 'Cómo trabajo', 'Más sobre mí', 'Hablemos de tu reto']);
+    expect(container.querySelector('.nav-links .fa-home')).toBeNull();
+
+    const moreButton = container.querySelector('.nav-secondary-toggle');
+    expect(moreButton.getAttribute('aria-haspopup')).toBe('true');
+    expect(moreButton.getAttribute('aria-controls')).toBe('about-navigation');
+    expect(moreButton.getAttribute('aria-expanded')).toBe('false');
+    expect(moreButton.getAttribute('aria-label')).toBeNull();
+    expect(container.querySelector('#about-navigation')).toBeTruthy();
+    expect(container.querySelector('#about-navigation').hidden).toBe(true);
+    expect(container.querySelector('.nav-links').hidden).toBe(true);
+    expect(container.textContent).toContain('Sobre Mí');
+    expect(container.textContent).toContain('Carrera');
+
+    cleanup();
+  });
+
+  it('opens Más sobre mí with keyboard and closes it with Escape while restoring focus', () => {
+    const { container, cleanup } = renderNavegacion('es');
+    const moreButton = container.querySelector('.nav-secondary-toggle');
+
+    act(() => {
+      moreButton.focus();
+      moreButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    });
+    expect(moreButton.getAttribute('aria-expanded')).toBe('true');
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    });
+    expect(moreButton.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(moreButton);
+
+    cleanup();
+  });
+
+  it('maps Testimonios to Casos reales in the active navigation state', () => {
+    const observed = [];
+    const OriginalObserver = window.IntersectionObserver;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+      }
+
+      observe(element) {
+        observed.push({ element, observer: this });
+      }
+
+      disconnect() {
+        this.disconnected = true;
+      }
+    };
+
+    const sections = ['testimonios', 'sobre-mi', 'portafolio', 'contacto'].reduce((acc, id) => {
+      const section = document.createElement('section');
+      section.id = id;
+      document.body.appendChild(section);
+      acc[id] = section;
+      return acc;
+    }, {});
+    const { container, cleanup } = renderNavegacion('es');
+
+    const trigger = (id) => {
+      const entry = observed.find(({ element }) => element.id === id);
+      expect(entry).toBeTruthy();
+      act(() => {
+        entry.observer.callback(observed.map(({ element }) => ({
+          target: element,
+          isIntersecting: element.id === id,
+          intersectionRect: { height: element.id === id ? 200 : 0 },
+          intersectionRatio: element.id === id ? 1 : 0
+        })));
+      });
+    };
+
+    trigger('testimonios');
+    const casesLink = findLinkByText(container, 'Casos reales');
+    expect(casesLink.getAttribute('aria-current')).toBe('location');
+    expect(casesLink.classList.contains('is-active')).toBe(true);
+
+    trigger('sobre-mi');
+    const aboutButton = container.querySelector('.nav-secondary-toggle');
+    const aboutLink = findLinkByText(container, 'Sobre Mí');
+    expect(aboutButton.getAttribute('aria-current')).toBeNull();
+    expect(aboutLink.getAttribute('aria-current')).toBe('location');
+    expect(container.querySelectorAll('[aria-current="location"]')).toHaveLength(1);
+
+    trigger('portafolio');
+    const careerLink = findLinkByText(container, 'Carrera');
+    expect(aboutButton.getAttribute('aria-current')).toBeNull();
+    expect(careerLink.getAttribute('aria-current')).toBe('location');
+    expect(container.querySelectorAll('[aria-current="location"]')).toHaveLength(1);
+
+    trigger('contacto');
+    const contactLink = findLinkByText(container, 'Hablemos de tu reto');
+    expect(contactLink.getAttribute('aria-current')).toBe('location');
+
+    cleanup();
+    expect(observed.every(({ observer }) => observer.disconnected)).toBe(true);
+    window.IntersectionObserver = OriginalObserver;
+    Object.values(sections).forEach((section) => section.remove());
+  });
+
+  it.each([
+    { width: 390, language: 'es', solutionsLabel: 'Soluciones', casesLabel: 'Casos reales' },
+    { width: 1200, language: 'en', solutionsLabel: 'Solutions', casesLabel: 'Case studies' }
+  ])('selects the section with the largest visible area at $width px', ({
+    width,
+    language,
+    solutionsLabel,
+    casesLabel
+  }) => {
+    const OriginalObserver = window.IntersectionObserver;
+    let observer;
+    window.innerWidth = width;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+        observer = this;
+      }
+
+      observe() {}
+      disconnect() {}
+    };
+
+    const solutions = document.createElement('section');
+    solutions.id = 'soluciones';
+    const cases = document.createElement('section');
+    cases.id = 'casos-reales';
+    document.body.append(solutions, cases);
+
+    const { container, cleanup } = renderNavegacion(language);
+    act(() => {
+      observer.callback([
+        {
+          target: solutions,
+          isIntersecting: true,
+          intersectionRect: { height: 110 },
+          intersectionRatio: 0.35
+        },
+        {
+          target: cases,
+          isIntersecting: true,
+          intersectionRect: { height: 190 },
+          intersectionRatio: 0.65
+        }
+      ]);
+    });
+
+    expect(findLinkByText(container, casesLabel).getAttribute('aria-current')).toBe('location');
+    expect(findLinkByText(container, solutionsLabel).getAttribute('aria-current')).toBeNull();
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    solutions.remove();
+    cases.remove();
+  });
+
+  it('breaks equal-visibility ties by narrative order, not observer entry order', () => {
+    const OriginalObserver = window.IntersectionObserver;
+    let observer;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+        observer = this;
+      }
+
+      observe() {}
+      disconnect() {}
+    };
+
+    const solutions = document.createElement('section');
+    solutions.id = 'soluciones';
+    const cases = document.createElement('section');
+    cases.id = 'casos-reales';
+    document.body.append(solutions, cases);
+
+    const { container, cleanup } = renderNavegacion('es');
+    act(() => {
+      observer.callback([
+        {
+          target: cases,
+          isIntersecting: true,
+          intersectionRect: { height: 150 },
+          intersectionRatio: 0.5
+        },
+        {
+          target: solutions,
+          isIntersecting: true,
+          intersectionRect: { height: 150 },
+          intersectionRatio: 0.5
+        }
+      ]);
+    });
+
+    expect(findLinkByText(container, 'Soluciones').getAttribute('aria-current')).toBe('location');
+    expect(findLinkByText(container, 'Casos reales').getAttribute('aria-current')).toBeNull();
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    solutions.remove();
+    cases.remove();
+  });
+
+  it('clears every active navigation state when returning from Soluciones to Hero', () => {
+    const observed = [];
+    const OriginalObserver = window.IntersectionObserver;
+    window.IntersectionObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+      }
+
+      observe(element) {
+        observed.push({ element, observer: this });
+      }
+
+      disconnect() {}
+    };
+
+    const hero = document.createElement('header');
+    hero.id = 'hero-banner';
+    const solutions = document.createElement('section');
+    solutions.id = 'soluciones';
+    document.body.append(hero, solutions);
+
+    const { container, cleanup } = renderNavegacion('es');
+    const trigger = (id) => {
+      const entry = observed.find(({ element }) => element.id === id);
+      expect(entry).toBeTruthy();
+      act(() => entry.observer.callback(observed.map(({ element }) => ({
+        target: element,
+        isIntersecting: element.id === id,
+        intersectionRect: { height: element.id === id ? 200 : 0 },
+        intersectionRatio: element.id === id ? 1 : 0
+      }))));
+    };
+
+    trigger('soluciones');
+    expect(findLinkByText(container, 'Soluciones').getAttribute('aria-current')).toBe('location');
+
+    trigger('hero-banner');
+    expect(container.querySelector('[aria-current="location"]')).toBeNull();
+    expect(container.querySelector('.is-active')).toBeNull();
+
+    cleanup();
+    window.IntersectionObserver = OriginalObserver;
+    hero.remove();
+    solutions.remove();
+  });
+
+  it('restores focus to the mobile menu button after Escape closes the menu', () => {
+    const { container, cleanup } = renderNavegacion('es');
+    const menuToggle = container.querySelector('.menu-toggle');
+    const navLinks = container.querySelector('.nav-links');
+
+    act(() => {
+      menuToggle.click();
+    });
+    expect(navLinks.hidden).toBe(false);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    });
+
+    expect(navLinks.hidden).toBe(true);
+    expect(document.activeElement).toBe(menuToggle);
+    cleanup();
+  });
+
+  it('keeps navigation labels and menu actions accessible in Spanish and English', () => {
+    ['es', 'en'].forEach((language) => {
+      const { container, cleanup } = renderNavegacion(language);
+      const nav = container.querySelector('nav');
+      const menuToggle = container.querySelector('.menu-toggle');
+
+      expect(nav.getAttribute('aria-label')).toBe(language === 'es' ? 'Navegación principal' : 'Main navigation');
+      expect(menuToggle.getAttribute('aria-label')).toBe(language === 'es' ? 'Abrir menú' : 'Open menu');
+      act(() => menuToggle.click());
+      expect(menuToggle.getAttribute('aria-label')).toBe(language === 'es' ? 'Cerrar menú' : 'Close menu');
+
+      cleanup();
+    });
   });
 });
