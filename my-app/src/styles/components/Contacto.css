@@ -66,6 +66,39 @@
   align-items: start;
 }
 
+.contacto-auto-cta {
+  display: flex;
+  justify-content: flex-end;
+  margin: 18px 0 0;
+}
+
+.contacto-auto-cta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--ui-card-border);
+  border-radius: var(--ui-radius-pill);
+  color: var(--color-secondary);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: right;
+  text-decoration: none;
+  transition:
+    border-color var(--ui-transition),
+    color var(--ui-transition),
+    transform var(--ui-transition),
+    background-color var(--ui-transition);
+}
+
+.contacto-auto-cta a:hover {
+  border-color: var(--color-accent);
+  background: rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.08);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
 .contacto-conversation,
 .formulario-contacto {
   border: 1px solid var(--ui-card-border);
@@ -334,6 +367,14 @@
   .contacto-secondary a:hover {
     transform: none;
   }
+
+  .contacto-auto-cta a {
+    transition: none;
+  }
+
+  .contacto-auto-cta a:hover {
+    transform: none;
+  }
 }
 
 [data-theme="dark"] .contacto-whatsapp,
@@ -361,6 +402,14 @@
 
   .contacto-heading {
     gap: 14px;
+  }
+
+  .contacto-auto-cta {
+    justify-content: flex-start;
+  }
+
+  .contacto-auto-cta a {
+    text-align: left;
   }
 }
 

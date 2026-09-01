@@ -55,6 +55,10 @@ const careerContent = {
         {
           label: 'Ver LinkedIn ↗',
           href: LINKEDIN_URL
+        },
+        {
+          label: 'Cotiza tu seguro de auto ↗',
+          href: '/seguro-auto'
         }
       ],
       bullets: [
@@ -133,6 +137,10 @@ const careerContent = {
         {
           label: 'View LinkedIn ↗',
           href: LINKEDIN_URL
+        },
+        {
+          label: 'Get an auto insurance quote ↗',
+          href: '/seguro-auto'
         }
       ],
       bullets: [
