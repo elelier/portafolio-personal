@@ -185,6 +185,7 @@ describe('Portafolio career timeline', () => {
     expect(chubbLink.textContent).toBe('View LinkedIn ↗');
     expect(chubbLinks[1].getAttribute('href')).toBe('/seguro-auto');
     expect(chubbLinks[1].textContent).toBe('Get an auto insurance quote ↗');
+    expect(chubbLinks[1].className).toContain('timeline-card__link--auto-insurance');
     expect(elierLinks.map((link) => link.href)).toEqual([
       'https://elelier.com/',
       'https://linkedin.com/in/elier/'

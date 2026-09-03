@@ -246,6 +246,7 @@ function CareerCard({ entry, index, language, isExpanded, onToggle }) {
             <a
               key={link.href}
               href={link.href}
+              className={link.href === '/seguro-auto' ? 'timeline-card__link--auto-insurance' : undefined}
               target="_blank"
               rel="noopener noreferrer"
               onClick={stopPropagation}

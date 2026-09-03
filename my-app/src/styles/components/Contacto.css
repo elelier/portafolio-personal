@@ -68,34 +68,41 @@
 
 .contacto-auto-cta {
   display: flex;
-  justify-content: flex-end;
-  margin: 18px 0 0;
+  justify-content: center;
+  margin: 28px auto 0;
 }
 
 .contacto-auto-cta a {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  padding: 8px 14px;
-  border: 1px solid var(--ui-card-border);
+  justify-content: center;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 20px;
+  border: 1.5px solid var(--color-accent);
   border-radius: var(--ui-radius-pill);
-  color: var(--color-secondary);
-  font-size: 0.92rem;
+  background: linear-gradient(135deg, rgba(123, 207, 248, 0.16), rgba(0, 204, 153, 0.16));
+  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.12);
+  color: var(--color-text);
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.35;
-  text-align: right;
+  text-align: center;
   text-decoration: none;
   transition:
     border-color var(--ui-transition),
     color var(--ui-transition),
     transform var(--ui-transition),
-    background-color var(--ui-transition);
+    background var(--ui-transition),
+    box-shadow var(--ui-transition);
 }
 
 .contacto-auto-cta a:hover {
   border-color: var(--color-accent);
-  background: rgba(var(--hero-title-color-rgb, 125, 211, 252), 0.08);
-  color: var(--color-accent);
+  background: linear-gradient(135deg, rgba(123, 207, 248, 0.26), rgba(0, 204, 153, 0.26));
+  color: var(--color-text);
+  box-shadow: 0 14px 30px rgba(2, 8, 23, 0.18);
   transform: translateY(-2px);
 }
 
@@ -454,5 +461,10 @@
   .contacto-whatsapp,
   .contacto-submit {
     width: 100%;
+  }
+
+  .contacto-auto-cta a {
+    width: 100%;
+    padding-inline: 16px;
   }
 }
