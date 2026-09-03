@@ -55,6 +55,10 @@ const careerContent = {
         {
           label: 'Ver LinkedIn ↗',
           href: LINKEDIN_URL
+        },
+        {
+          label: 'Cotiza tu seguro de auto ↗',
+          href: '/seguro-auto'
         }
       ],
       bullets: [
@@ -133,6 +137,10 @@ const careerContent = {
         {
           label: 'View LinkedIn ↗',
           href: LINKEDIN_URL
+        },
+        {
+          label: 'Get an auto insurance quote ↗',
+          href: '/seguro-auto'
         }
       ],
       bullets: [
@@ -238,6 +246,7 @@ function CareerCard({ entry, index, language, isExpanded, onToggle }) {
             <a
               key={link.href}
               href={link.href}
+              className={link.href === '/seguro-auto' ? 'timeline-card__link--auto-insurance' : undefined}
               target="_blank"
               rel="noopener noreferrer"
               onClick={stopPropagation}

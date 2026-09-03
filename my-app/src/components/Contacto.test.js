@@ -122,6 +122,24 @@ describe('Contacto', () => {
     cleanup();
   });
 
+  it('renders the discreet auto insurance CTA with the local route in both languages', () => {
+    const cases = [
+      { language: 'es', label: '¿Buscas seguro de auto? Cotiza con Chubb →' },
+      { language: 'en', label: 'Looking for auto insurance? Get a quote with Chubb →' }
+    ];
+
+    for (const { language, label } of cases) {
+      const { container, cleanup } = renderContacto(language);
+      const cta = container.querySelector('.contacto-auto-cta a');
+
+      expect(cta).toBeTruthy();
+      expect(cta.textContent).toBe(label);
+      expect(cta.getAttribute('href')).toBe('/seguro-auto');
+
+      cleanup();
+    }
+  });
+
   it('keeps the published WhatsApp link', () => {
     const { container, cleanup } = renderContacto('es');
     const whatsapp = Array.from(container.querySelectorAll('a')).find((link) =>

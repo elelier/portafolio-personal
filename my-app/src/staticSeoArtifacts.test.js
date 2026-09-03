@@ -6,6 +6,8 @@ const publicDir = path.resolve(__dirname, '../public');
 const robotsPath = path.join(publicDir, 'robots.txt');
 const sitemapPath = path.join(publicDir, 'sitemap.xml');
 const redirectsPath = path.join(publicDir, '_redirects');
+const chubbAutoUrl =
+  'https://mx.omnilink.chubb.com/omnilink_vd/?utm_medium=referral&utm_source=gana%20mientras%20proteges&utm_campaign=1175804';
 const expectedDynamicRedirects = [
   '/proyecto/:token /index.html 200',
   '/proyecto/:token/ /index.html 200',
@@ -81,5 +83,12 @@ describe('static SEO artifacts', () => {
 
     expect(robots).toContain('Sitemap: https://elelier.com/sitemap.xml');
     expect(sitemap).toContain('https://elelier.com/');
+  });
+
+  it('keeps both short auto insurance paths as exact 302 redirects', () => {
+    const redirects = read(redirectsPath);
+
+    expect(redirects).toContain(`/seguro-auto ${chubbAutoUrl} 302`);
+    expect(redirects).toContain(`/seguro-auto/ ${chubbAutoUrl} 302`);
   });
 });

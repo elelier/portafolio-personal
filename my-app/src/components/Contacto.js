@@ -36,6 +36,7 @@ const texts = {
     location: 'Monterrey, México · Trabajo remoto',
     linkedin: 'LinkedIn',
     github: 'GitHub',
+    autoInsuranceCta: '¿Buscas seguro de auto? Cotiza con Chubb →',
     quotePrefill: 'Hola, me gustaría solicitar una cotización.'
   },
   en: {
@@ -59,6 +60,7 @@ const texts = {
     location: 'Monterrey, Mexico · Remote work',
     linkedin: 'LinkedIn',
     github: 'GitHub',
+    autoInsuranceCta: 'Looking for auto insurance? Get a quote with Chubb →',
     quotePrefill: 'Hi, I would like to request a quote.'
   }
 };
@@ -253,6 +255,10 @@ function Contacto({ style }) {
             </div>
           </form>
         </div>
+
+        <p className="contacto-auto-cta">
+          <a href="/seguro-auto">{t.autoInsuranceCta}</a>
+        </p>
       </div>
     </AnimatedSection>
   );

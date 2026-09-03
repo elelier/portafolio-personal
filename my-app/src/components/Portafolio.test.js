@@ -174,17 +174,36 @@ describe('Portafolio career timeline', () => {
     const { container, cleanup } = renderPortafolio('en');
     const chubbCard = getCard(container, 'CHUBB');
     const elierCard = getCard(container, 'Elier');
-    const chubbLink = chubbCard.querySelector('a');
+    const chubbLinks = Array.from(chubbCard.querySelectorAll('a'));
+    const chubbLink = chubbLinks[0];
     const elierLinks = Array.from(elierCard.querySelectorAll('a'));
 
     expect(chubbCard.textContent).toContain('Digital product');
     expect(chubbCard.textContent).toContain('Operations');
+    expect(chubbLinks).toHaveLength(2);
     expect(chubbLink.href).toBe('https://linkedin.com/in/elier/');
     expect(chubbLink.textContent).toBe('View LinkedIn ↗');
+    expect(chubbLinks[1].getAttribute('href')).toBe('/seguro-auto');
+    expect(chubbLinks[1].textContent).toBe('Get an auto insurance quote ↗');
+    expect(chubbLinks[1].className).toContain('timeline-card__link--auto-insurance');
     expect(elierLinks.map((link) => link.href)).toEqual([
       'https://elelier.com/',
       'https://linkedin.com/in/elier/'
     ]);
+
+    cleanup();
+  });
+
+  it('uses the Spanish auto insurance CTA copy and local route on CHUBB', () => {
+    const { container, cleanup } = renderPortafolio('es');
+    const chubbCard = getCard(container, 'CHUBB');
+    const autoInsuranceLink = Array.from(chubbCard.querySelectorAll('a')).find((link) =>
+      link.textContent.includes('seguro de auto')
+    );
+
+    expect(autoInsuranceLink).toBeTruthy();
+    expect(autoInsuranceLink.getAttribute('href')).toBe('/seguro-auto');
+    expect(autoInsuranceLink.textContent).toBe('Cotiza tu seguro de auto ↗');
 
     cleanup();
   });
