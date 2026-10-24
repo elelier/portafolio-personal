@@ -85,6 +85,26 @@ describe('Portafolio career timeline', () => {
     cleanup();
   });
 
+  it.each([
+    ['es', 'Ver CV en inglés (PDF) ↗', 'Ver CV en inglés (PDF, abre en una pestaña nueva)'],
+    ['en', 'View résumé in English (PDF) ↗', 'View résumé in English (PDF, opens in a new tab)']
+  ])('links to the published English CV in %s without advertising pending translations', (language, label, accessibleLabel) => {
+    const { container, cleanup } = renderPortafolio(language);
+    const link = container.querySelector('.portafolio__heading .portafolio__cv-link');
+
+    expect(link).not.toBeNull();
+    expect(link.textContent.trim()).toBe(label);
+    expect(link.getAttribute('aria-label')).toBe(accessibleLabel);
+    expect(link.getAttribute('href')).toBe('/cv');
+    expect(link.getAttribute('target')).toBe('_blank');
+    expect(link.getAttribute('rel')).toContain('noopener');
+    expect(link.getAttribute('rel')).toContain('noreferrer');
+    expect(container.querySelectorAll('a[href="/cv"]')).toHaveLength(1);
+    expect(container.querySelectorAll('a[href="/cv/es"], a[href="/cv/pt-br"]')).toHaveLength(0);
+
+    cleanup();
+  });
+
   it('starts every card collapsed and toggles details on click', () => {
     const { container, cleanup } = renderPortafolio('es');
     const card = getCard(container, 'GoFarma + Farmalisto');

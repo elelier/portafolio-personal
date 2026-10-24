@@ -373,6 +373,17 @@ const Portafolio = ({ style }) => {
             ? 'Una trayectoria construida entre operación, producto digital y soluciones que generan resultados reales.'
             : 'A career built across operations, digital product and solutions that create measurable results.'}
         </p>
+        <a
+          className="portafolio__cv-link"
+          href="/cv"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={currentLang === 'es'
+            ? 'Ver CV en inglés (PDF, abre en una pestaña nueva)'
+            : 'View résumé in English (PDF, opens in a new tab)'}
+        >
+          {currentLang === 'es' ? 'Ver CV en inglés (PDF) ↗' : 'View résumé in English (PDF) ↗'}
+        </a>
       </div>
 
       <div className="timeline" role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : 'Professional career'}>
