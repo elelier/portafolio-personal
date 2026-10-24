@@ -60,7 +60,7 @@ describe('Navegacion', () => {
     const casesLink = findLinkByText(container, 'Casos reales');
     const aboutLink = findLinkByText(container, 'Sobre Mí');
     const solutionsLink = findLinkByText(container, 'Soluciones');
-    const contactLink = findLinkByText(container, 'Hablemos de tu reto');
+    const contactLink = findLinkByText(container, 'Conversemos');
 
     expect(casesLink).toBeTruthy();
     expect(aboutLink).toBeTruthy();
@@ -70,7 +70,7 @@ describe('Navegacion', () => {
     expect(container.textContent).toContain('Carrera');
     expect(container.textContent).toContain('Sobre Mí');
     expect(container.textContent).toContain('Soluciones');
-    expect(container.textContent).toContain('Hablemos de tu reto');
+    expect(container.textContent).toContain('Conversemos');
     expect(container.textContent).not.toContain('Habilidades');
     expect(container.textContent).not.toContain('Portafolio');
 
@@ -101,7 +101,7 @@ describe('Navegacion', () => {
     expect(casesLink).toBeTruthy();
     expect(container.textContent).toContain('Case studies');
     expect(container.textContent).toContain('Career');
-    expect(container.textContent).toContain('Let’s talk about your challenge');
+    expect(container.textContent).toContain('Let’s connect');
     expect(container.textContent).not.toContain('Skills');
     expect(container.textContent).not.toContain('Portfolio');
 
@@ -150,7 +150,7 @@ describe('Navegacion', () => {
       .map((element) => element.textContent.replace('⌄', '').trim())
       .filter(Boolean);
 
-    expect(links).toEqual(['Soluciones', 'Casos reales', 'Cómo trabajo', 'Más sobre mí', 'Hablemos de tu reto']);
+    expect(links).toEqual(['Soluciones', 'Casos reales', 'Cómo trabajo', 'Más sobre mí', 'Conversemos']);
     expect(container.querySelector('.nav-links .fa-home')).toBeNull();
 
     const moreButton = container.querySelector('.nav-secondary-toggle');
@@ -244,7 +244,7 @@ describe('Navegacion', () => {
     expect(container.querySelectorAll('[aria-current="location"]')).toHaveLength(1);
 
     trigger('contacto');
-    const contactLink = findLinkByText(container, 'Hablemos de tu reto');
+    const contactLink = findLinkByText(container, 'Conversemos');
     expect(contactLink.getAttribute('aria-current')).toBe('location');
 
     cleanup();

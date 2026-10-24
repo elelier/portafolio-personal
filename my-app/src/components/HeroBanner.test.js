@@ -65,6 +65,11 @@ describe('HeroBanner', () => {
     soluciones.scrollIntoView = jest.fn();
     document.body.appendChild(soluciones);
 
+    const portafolio = document.createElement('section');
+    portafolio.id = 'portafolio';
+    portafolio.scrollIntoView = jest.fn();
+    document.body.appendChild(portafolio);
+
     const { container, cleanup } = renderHero('es');
 
     expect(container.textContent).toContain('Transformo procesos complicados en soluciones que realmente funcionan.');
@@ -74,7 +79,7 @@ describe('HeroBanner', () => {
     expect(container.textContent).not.toContain('producto digital funcional en semanas, no meses');
 
     const primaryCta = container.querySelector('.hero-button');
-    expect(primaryCta.textContent).toContain('Hablemos de tu reto');
+    expect(primaryCta.textContent).toContain('Conversemos');
     expect(primaryCta.tagName).toBe('BUTTON');
     expect(container.innerHTML).not.toContain('calendly.com');
 
@@ -85,7 +90,13 @@ describe('HeroBanner', () => {
     expect(contacto.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
 
     const secondaryCta = container.querySelector('.hero-button-secondary');
-    expect(secondaryCta.textContent).toContain('Ver casos reales');
+    expect(secondaryCta.textContent).toContain('Ver trayectoria');
+
+    act(() => {
+      secondaryCta.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(portafolio.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
 
     const scrollIndicator = container.querySelector('.scroll-indicator');
     expect(scrollIndicator.textContent).toContain('Ver soluciones');
@@ -97,6 +108,7 @@ describe('HeroBanner', () => {
     expect(soluciones.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
 
     cleanup();
+    portafolio.remove();
   });
 
   it('renders a single H1 in the hero and keeps the credential as supporting text', () => {
@@ -127,8 +139,8 @@ describe('HeroBanner', () => {
     expect(container.textContent).toContain('help teams move faster, make better decisions and solve real business problems');
     expect(container.textContent).not.toContain('working digital product in weeks, not months');
     expect(container.textContent).not.toContain('turn your business idea into a working digital product');
-    expect(container.querySelector('.hero-button').textContent).toContain('Let’s talk about your challenge');
-    expect(container.querySelector('.hero-button-secondary').textContent).toContain('Explore real projects');
+    expect(container.querySelector('.hero-button').textContent).toContain('Let’s connect');
+    expect(container.querySelector('.hero-button-secondary').textContent).toContain('View experience');
     expect(container.querySelector('.scroll-indicator').textContent).toContain('See solutions');
     expect(container.innerHTML).not.toContain('calendly.com');
 

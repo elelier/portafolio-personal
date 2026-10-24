@@ -10,7 +10,7 @@ export const navigationConfig = {
       { key: 'sobreMi', label: 'Sobre Mí', target: 'sobre-mi' },
       { key: 'carrera', label: 'Carrera', target: 'portafolio' }
     ],
-    contact: 'Hablemos de tu reto',
+    contact: 'Conversemos',
     navLabel: 'Navegación principal',
     menuOpen: 'Abrir menú',
     menuClose: 'Cerrar menú',
@@ -31,7 +31,7 @@ export const navigationConfig = {
       { key: 'sobreMi', label: 'About Me', target: 'sobre-mi' },
       { key: 'carrera', label: 'Career', target: 'portafolio' }
     ],
-    contact: "Let’s talk about your challenge",
+    contact: 'Let’s connect',
     navLabel: 'Main navigation',
     menuOpen: 'Open menu',
     menuClose: 'Close menu',
