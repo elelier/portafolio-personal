@@ -251,6 +251,32 @@
   text-align: center;
 }
 
+.contacto-location {
+  align-items: flex-start;
+}
+
+.contacto-location i {
+  flex: 0 0 20px;
+  margin-top: 3px;
+}
+
+.contacto-location__details {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.contacto-location__now {
+  font-weight: 600;
+}
+
+.contacto-location__move {
+  color: var(--color-secondary);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
 .formulario-contacto {
   display: grid;
   gap: 18px;
