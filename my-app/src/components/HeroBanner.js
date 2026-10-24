@@ -20,8 +20,8 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO de GoFarma y Digital Product Owner en CHUBB.',
         description: 'Estrategia, prototipo y métricas reales para validar, automatizar o destrabar un reto operativo con claridad y ejecución visible.',
         icon: '🧪',
-        cta: 'Hablemos de tu reto',
-        secondaryCta: 'Ver casos reales'
+        cta: 'Conversemos',
+        secondaryCta: 'Ver trayectoria'
       }
     ],
     en: [
@@ -30,8 +30,8 @@ const DynamicHeroBanner = ({ style }) => {
         subtitle: 'Ex-COO at GoFarma and Digital Product Owner at CHUBB.',
         description: 'I combine operations, product thinking and practical technology to help teams move faster, make better decisions and solve real business problems.',
         icon: '🧪',
-        cta: 'Let’s talk about your challenge',
-        secondaryCta: 'Explore real projects'
+        cta: 'Let’s connect',
+        secondaryCta: 'View experience'
       }
     ]
   }), []);
@@ -139,7 +139,7 @@ const DynamicHeroBanner = ({ style }) => {
             <button className="hero-button" onClick={() => scrollToSection('contacto')}>
               {currentContent?.cta}
             </button>
-            <button className="hero-button-secondary" onClick={() => scrollToSection('casos-reales')}>
+            <button className="hero-button-secondary" onClick={() => scrollToSection('portafolio')}>
               {currentContent?.secondaryCta}
             </button>
           </div>

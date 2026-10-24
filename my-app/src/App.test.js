@@ -82,4 +82,39 @@ describe('App public diagnosis removal', () => {
     act(() => root.unmount());
     container.remove();
   });
+
+  it('tracks hero visibility so floating controls can stay clear of hero actions', async () => {
+    const originalIntersectionObserver = window.IntersectionObserver;
+    let observeHero;
+    const observe = jest.fn();
+    const disconnect = jest.fn();
+    window.IntersectionObserver = jest.fn((callback) => {
+      observeHero = callback;
+      return { observe, disconnect };
+    });
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    await act(async () => {
+      root.render(<App initialLanguage="es" />);
+    });
+
+    const hero = container.querySelector('#hero-banner');
+    expect(window.IntersectionObserver).toHaveBeenCalledWith(expect.any(Function), { threshold: 0 });
+    expect(observe).toHaveBeenCalledWith(hero);
+
+    act(() => observeHero([{ isIntersecting: true }]));
+    expect(document.body.classList.contains('hero-section-in-view')).toBe(true);
+
+    act(() => observeHero([{ isIntersecting: false }]));
+    expect(document.body.classList.contains('hero-section-in-view')).toBe(false);
+
+    act(() => root.unmount());
+    expect(disconnect).toHaveBeenCalled();
+    expect(document.body.classList.contains('hero-section-in-view')).toBe(false);
+    container.remove();
+    window.IntersectionObserver = originalIntersectionObserver;
+  });
 });

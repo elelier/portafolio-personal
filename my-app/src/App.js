@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { HelmetProvider } from 'react-helmet-async';
@@ -40,6 +40,53 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const Blog = lazy(() => import('./components/Blog'));
+
+const HeroVisibilityObserver = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const hero = document.getElementById('hero-banner');
+    if (!hero) {
+      document.body.classList.remove('hero-section-in-view');
+      return undefined;
+    }
+
+    const syncHeroVisibility = (isVisible) => {
+      document.body.classList.toggle('hero-section-in-view', isVisible);
+    };
+
+    if (typeof window.IntersectionObserver === 'undefined') {
+      const handleViewportChange = () => {
+        const rect = hero.getBoundingClientRect();
+        syncHeroVisibility(rect.top < window.innerHeight && rect.bottom > 0);
+      };
+      handleViewportChange();
+      window.addEventListener('scroll', handleViewportChange, { passive: true });
+      window.addEventListener('resize', handleViewportChange);
+      return () => {
+        window.removeEventListener('scroll', handleViewportChange);
+        window.removeEventListener('resize', handleViewportChange);
+        document.body.classList.remove('hero-section-in-view');
+      };
+    }
+
+    const rect = hero.getBoundingClientRect();
+    syncHeroVisibility(rect.top < window.innerHeight && rect.bottom > 0);
+
+    const observer = new window.IntersectionObserver(
+      ([entry]) => syncHeroVisibility(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove('hero-section-in-view');
+    };
+  }, [pathname]);
+
+  return null;
+};
 
 function App({ initialLanguage }) {
   const homeSectionPalette = [
@@ -95,6 +142,7 @@ function App({ initialLanguage }) {
         <ThemeProvider>
           <Router>
             <div className="App">
+              <HeroVisibilityObserver />
               <SettingsMenu />
               <SEO
                 title={homeSeoPolicy?.title}
