@@ -85,6 +85,16 @@ describe('static SEO artifacts', () => {
     expect(sitemap).toContain('https://elelier.com/');
   });
 
+  it('redirects both stable CV URLs to the English PDF without exposing unfinished translations', () => {
+    const redirects = read(redirectsPath);
+    const englishCvUrl = 'https://assets.elelier.com/cv/elier-loya.pdf';
+
+    expect(redirects).toContain(`/cv ${englishCvUrl} 302`);
+    expect(redirects).toContain(`/cv/ ${englishCvUrl} 302`);
+    expect(redirects).not.toContain('/cv/es ');
+    expect(redirects).not.toContain('/cv/pt-br ');
+  });
+
   it('keeps both short auto insurance paths as exact 302 redirects', () => {
     const redirects = read(redirectsPath);
 

@@ -33,7 +33,10 @@ const texts = {
     successMessage: 'Gracias, ya recibí tu mensaje. Revisaré el contexto y te responderé con el siguiente paso más útil.',
     errorMessage: 'No pude enviar tu mensaje en este momento. Puedes escribirme por WhatsApp o correo.',
     findMeTitle: 'También puedes encontrarme en',
-    location: 'Monterrey, México · Trabajo remoto',
+    locationNow: 'MTY, MX',
+    locationMove: 'Mudanza a São Paulo, BR · 2027',
+    cvLabel: 'CV en inglés (PDF)',
+    cvAccessibleLabel: 'Ver CV en inglés (PDF, abre en una pestaña nueva)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     autoInsuranceCta: '¿Buscas seguro de auto? Cotiza con Chubb →',
@@ -57,7 +60,10 @@ const texts = {
     successMessage: "Thanks, I received your message. I'll review the context and reply with the most useful next step.",
     errorMessage: 'I could not send your message right now. You can reach me through WhatsApp or email.',
     findMeTitle: 'You can also find me on',
-    location: 'Monterrey, Mexico · Remote work',
+    locationNow: 'MTY, MX',
+    locationMove: 'Moving to São Paulo, BR · 2027',
+    cvLabel: 'English résumé (PDF)',
+    cvAccessibleLabel: 'View résumé in English (PDF, opens in a new tab)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     autoInsuranceCta: 'Looking for auto insurance? Get a quote with Chubb →',
@@ -168,7 +174,16 @@ function Contacto({ style }) {
                 </li>
                 <li className="contacto-location">
                   <i className="fas fa-location-dot" aria-hidden="true"></i>
-                  <span>{t.location}</span>
+                  <span className="contacto-location__details">
+                    <span className="contacto-location__now">{t.locationNow}</span>
+                    <span className="contacto-location__move">{t.locationMove}</span>
+                  </span>
+                </li>
+                <li>
+                  <a href="/cv" target="_blank" rel="noopener noreferrer" aria-label={t.cvAccessibleLabel}>
+                    <i className="fas fa-file-pdf" aria-hidden="true"></i>
+                    <span>{t.cvLabel}</span>
+                  </a>
                 </li>
                 <li>
                   <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">

@@ -98,7 +98,8 @@ describe('Contacto', () => {
     expect(container.textContent).toContain('O comparte un poco más de contexto');
     expect(container.textContent).toContain('No necesitas un brief perfecto. Con el contexto suficiente para entender el reto basta.');
     expect(container.textContent).toContain('También puedes encontrarme en');
-    expect(container.textContent).toContain('Monterrey, México · Trabajo remoto');
+    expect(container.textContent).toContain('MTY, MX');
+    expect(container.textContent).toContain('Mudanza a São Paulo, BR · 2027');
 
     cleanup();
   });
@@ -117,7 +118,29 @@ describe('Contacto', () => {
     expect(container.textContent).toContain('Or share a little more context');
     expect(container.textContent).toContain('You do not need a perfect brief. Just enough context to understand the challenge.');
     expect(container.textContent).toContain('You can also find me on');
-    expect(container.textContent).toContain('Monterrey, Mexico · Remote work');
+    expect(container.textContent).toContain('MTY, MX');
+    expect(container.textContent).toContain('Moving to São Paulo, BR · 2027');
+
+    cleanup();
+  });
+
+  it.each([
+    ['es', 'Mudanza a São Paulo, BR · 2027', 'CV en inglés (PDF)', 'Ver CV en inglés (PDF, abre en una pestaña nueva)'],
+    ['en', 'Moving to São Paulo, BR · 2027', 'English résumé (PDF)', 'View résumé in English (PDF, opens in a new tab)']
+  ])('shows a compact current/future location and English CV link in %s', (language, move, label, accessibleLabel) => {
+    const { container, cleanup } = renderContacto(language);
+    const location = container.querySelector('.contacto-location');
+    const cv = container.querySelector('.contacto-secondary a[href="/cv"]');
+
+    expect(location.querySelector('.contacto-location__now').textContent).toBe('MTY, MX');
+    expect(location.querySelector('.contacto-location__move').textContent).toBe(move);
+    expect(cv).not.toBeNull();
+    expect(cv.textContent).toBe(label);
+    expect(cv.getAttribute('aria-label')).toBe(accessibleLabel);
+    expect(cv.getAttribute('target')).toBe('_blank');
+    expect(cv.getAttribute('rel')).toBe('noopener noreferrer');
+    expect(container.querySelectorAll('a[href="/cv"]')).toHaveLength(1);
+    expect(container.querySelector('a[href="/cv/es"], a[href="/cv/pt-br"]')).toBeNull();
 
     cleanup();
   });
@@ -291,12 +314,10 @@ describe('Contacto', () => {
     expect(container.textContent).not.toContain('Diagnóstico');
     expect(container.textContent).not.toContain('Calendly');
     expect(container.textContent).not.toContain('Cal.com');
-    expect(container.textContent).not.toContain('View resume');
-    expect(container.textContent).not.toContain('Ver CV');
     expect(container.textContent).not.toContain('Google Maps');
     expect(html).not.toContain('calendly');
     expect(html).not.toContain('google.com/maps');
-    expect(html).not.toContain('.pdf');
+    expect(container.querySelector('a[href$=".pdf"]')).toBeNull();
     expect(html).not.toContain('diagnosis/');
 
     cleanup();

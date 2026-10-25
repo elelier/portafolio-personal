@@ -5,6 +5,10 @@
 /seguro-auto https://mx.omnilink.chubb.com/omnilink_vd/?utm_medium=referral&utm_source=gana%20mientras%20proteges&utm_campaign=1175804 302
 /seguro-auto/ https://mx.omnilink.chubb.com/omnilink_vd/?utm_medium=referral&utm_source=gana%20mientras%20proteges&utm_campaign=1175804 302
 
+# Public CV (English). ES and PT-BR versions will be added only when approved.
+/cv https://assets.elelier.com/cv/elier-loya.pdf 302
+/cv/ https://assets.elelier.com/cv/elier-loya.pdf 302
+
 # Dynamic/private SPA routes
 /proyecto/:token /index.html 200
 /proyecto/:token/ /index.html 200
