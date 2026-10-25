@@ -125,12 +125,12 @@ describe('Contacto', () => {
   });
 
   it.each([
-    ['es', 'Mudanza a São Paulo, BR · 2027', 'CV en inglés (PDF)', 'Ver CV en inglés (PDF, abre en una pestaña nueva)'],
-    ['en', 'Moving to São Paulo, BR · 2027', 'English résumé (PDF)', 'View résumé in English (PDF, opens in a new tab)']
-  ])('shows a compact current/future location and English CV link in %s', (language, move, label, accessibleLabel) => {
+    ['es', 'Mudanza a São Paulo, BR · 2027', 'CV en español (PDF)', 'Ver CV en español (PDF, abre en una pestaña nueva)', '/cv/es'],
+    ['en', 'Moving to São Paulo, BR · 2027', 'English résumé (PDF)', 'View résumé in English (PDF, opens in a new tab)', '/cv/en']
+  ])('shows a compact current/future location and localized CV link in %s', (language, move, label, accessibleLabel, cvPath) => {
     const { container, cleanup } = renderContacto(language);
     const location = container.querySelector('.contacto-location');
-    const cv = container.querySelector('.contacto-secondary a[href="/cv"]');
+    const cv = container.querySelector(`.contacto-secondary a[href="${cvPath}"]`);
 
     expect(location.querySelector('.contacto-location__now').textContent).toBe('MTY, MX');
     expect(location.querySelector('.contacto-location__move').textContent).toBe(move);
@@ -139,8 +139,9 @@ describe('Contacto', () => {
     expect(cv.getAttribute('aria-label')).toBe(accessibleLabel);
     expect(cv.getAttribute('target')).toBe('_blank');
     expect(cv.getAttribute('rel')).toBe('noopener noreferrer');
-    expect(container.querySelectorAll('a[href="/cv"]')).toHaveLength(1);
-    expect(container.querySelector('a[href="/cv/es"], a[href="/cv/pt-br"]')).toBeNull();
+    expect(container.querySelectorAll('.contacto-secondary a[href^="/cv"]')).toHaveLength(1);
+    expect(container.querySelector('a[href="/cv"]')).toBeNull();
+    expect(container.querySelector('a[href="/cv/pt-br"]')).toBeNull();
 
     cleanup();
   });

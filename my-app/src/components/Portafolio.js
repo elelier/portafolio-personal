@@ -4,12 +4,40 @@ import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Portafolio.css';
 import '../styles/components/Timeline.css';
 import { getCurrentLanguage } from './utils/languageUtils';
+import { getCvRoute } from '../config/cvRoutes';
 
 import chubbImg from '../assets/images/CHUBB.jpg';
 import elelierImg from '../assets/images/elelier.jpg';
 import farmalistoImg from '../assets/images/farmalisto.jpg';
 
 const LINKEDIN_URL = 'https://linkedin.com/in/elier/';
+
+const CV_LANGUAGE_OPTIONS = [
+  { code: 'es', label: 'ES' },
+  { code: 'en', label: 'EN' },
+  { code: 'pt-br', label: 'PT' }
+];
+
+const cvCopy = {
+  es: {
+    main: 'Ver CV en español (PDF) ↗',
+    accessible: 'Ver CV en español (PDF, abre en una pestaña nueva)',
+    languageNav: 'Versiones del CV disponibles por idioma',
+    languageLinks: {
+      en: 'Ver CV en inglés (PDF, abre en una pestaña nueva)',
+      'pt-br': 'Ver CV en portugués (PDF, abre en una pestaña nueva)'
+    }
+  },
+  en: {
+    main: 'View résumé in English (PDF) ↗',
+    accessible: 'View résumé in English (PDF, opens in a new tab)',
+    languageNav: 'Available résumé language versions',
+    languageLinks: {
+      es: 'View résumé in Spanish (PDF, opens in a new tab)',
+      'pt-br': 'View résumé in Portuguese (PDF, opens in a new tab)'
+    }
+  }
+};
 
 const careerContent = {
   es: [
@@ -351,6 +379,7 @@ const Portafolio = ({ style }) => {
 
   const projects = useMemo(() => careerContent[currentLang] || careerContent.es, [currentLang]);
   const currentCta = ctaContent[currentLang] || ctaContent.es;
+  const currentCvCopy = currentLang === 'es' ? cvCopy.es : cvCopy.en;
 
   const handleToggle = (index) => {
     setActiveIndex((current) => (current === index ? null : index));
@@ -373,17 +402,37 @@ const Portafolio = ({ style }) => {
             ? 'Una trayectoria construida entre operación, producto digital y soluciones que generan resultados reales.'
             : 'A career built across operations, digital product and solutions that create measurable results.'}
         </p>
-        <a
-          className="portafolio__cv-link"
-          href="/cv"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={currentLang === 'es'
-            ? 'Ver CV en inglés (PDF, abre en una pestaña nueva)'
-            : 'View résumé in English (PDF, opens in a new tab)'}
-        >
-          {currentLang === 'es' ? 'Ver CV en inglés (PDF) ↗' : 'View résumé in English (PDF) ↗'}
-        </a>
+        <div className="portafolio__cv-actions">
+          <a
+            className="portafolio__cv-link"
+            href={getCvRoute(currentLang)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={currentCvCopy.accessible}
+          >
+            {currentCvCopy.main}
+          </a>
+          <nav className="portafolio__cv-languages" aria-label={currentCvCopy.languageNav}>
+            {CV_LANGUAGE_OPTIONS.map(({ code, label }, index) => (
+              <React.Fragment key={code}>
+                {index > 0 && <span className="portafolio__cv-separator" aria-hidden="true">·</span>}
+                {code === currentLang ? (
+                  <span className="portafolio__cv-language portafolio__cv-language--active">{label}</span>
+                ) : (
+                  <a
+                    className="portafolio__cv-language"
+                    href={getCvRoute(code)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={currentCvCopy.languageLinks[code]}
+                  >
+                    {label}
+                  </a>
+                )}
+              </React.Fragment>
+            ))}
+          </nav>
+        </div>
       </div>
 
       <div className="timeline" role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : 'Professional career'}>

@@ -86,21 +86,36 @@ describe('Portafolio career timeline', () => {
   });
 
   it.each([
-    ['es', 'Ver CV en inglés (PDF) ↗', 'Ver CV en inglés (PDF, abre en una pestaña nueva)'],
-    ['en', 'View résumé in English (PDF) ↗', 'View résumé in English (PDF, opens in a new tab)']
-  ])('links to the published English CV in %s without advertising pending translations', (language, label, accessibleLabel) => {
+    ['es', 'Ver CV en español (PDF) ↗', 'Ver CV en español (PDF, abre en una pestaña nueva)', '/cv/es', 'ES', ['/cv/en', '/cv/pt-br']],
+    ['en', 'View résumé in English (PDF) ↗', 'View résumé in English (PDF, opens in a new tab)', '/cv/en', 'EN', ['/cv/es', '/cv/pt-br']]
+  ])('shows the localized primary CV and discreet language alternatives in %s', (language, label, accessibleLabel, cvPath, activeLanguage, otherPaths) => {
     const { container, cleanup } = renderPortafolio(language);
     const link = container.querySelector('.portafolio__heading .portafolio__cv-link');
+    const languageNav = container.querySelector('.portafolio__cv-languages');
 
     expect(link).not.toBeNull();
     expect(link.textContent.trim()).toBe(label);
     expect(link.getAttribute('aria-label')).toBe(accessibleLabel);
-    expect(link.getAttribute('href')).toBe('/cv');
+    expect(link.getAttribute('href')).toBe(cvPath);
     expect(link.getAttribute('target')).toBe('_blank');
     expect(link.getAttribute('rel')).toContain('noopener');
     expect(link.getAttribute('rel')).toContain('noreferrer');
-    expect(container.querySelectorAll('a[href="/cv"]')).toHaveLength(1);
-    expect(container.querySelectorAll('a[href="/cv/es"], a[href="/cv/pt-br"]')).toHaveLength(0);
+
+    expect(languageNav).not.toBeNull();
+    expect(languageNav.getAttribute('aria-label')).toBe(
+      language === 'es' ? 'Versiones del CV disponibles por idioma' : 'Available résumé language versions'
+    );
+    expect(Array.from(languageNav.querySelectorAll('.portafolio__cv-language')).map((item) => item.textContent)).toEqual(['ES', 'EN', 'PT']);
+    expect(languageNav.querySelector('.portafolio__cv-language--active').textContent).toBe(activeLanguage);
+    expect(languageNav.querySelectorAll('a')).toHaveLength(2);
+    for (const path of otherPaths) {
+      const alternative = languageNav.querySelector(`a[href="${path}"]`);
+      expect(alternative).not.toBeNull();
+      expect(alternative.getAttribute('target')).toBe('_blank');
+      expect(alternative.getAttribute('rel')).toBe('noopener noreferrer');
+      expect(alternative.getAttribute('aria-label')).toContain('PDF');
+    }
+    expect(container.querySelector('a[href="/cv"]')).toBeNull();
 
     cleanup();
   });

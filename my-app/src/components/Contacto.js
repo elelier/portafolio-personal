@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { usePrefersReducedMotion } from './utils/generalUtils';
+import { getCvRoute } from '../config/cvRoutes';
 import perfilImg from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/Contacto.css';
 
@@ -35,8 +36,8 @@ const texts = {
     findMeTitle: 'También puedes encontrarme en',
     locationNow: 'MTY, MX',
     locationMove: 'Mudanza a São Paulo, BR · 2027',
-    cvLabel: 'CV en inglés (PDF)',
-    cvAccessibleLabel: 'Ver CV en inglés (PDF, abre en una pestaña nueva)',
+    cvLabel: 'CV en español (PDF)',
+    cvAccessibleLabel: 'Ver CV en español (PDF, abre en una pestaña nueva)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     autoInsuranceCta: '¿Buscas seguro de auto? Cotiza con Chubb →',
@@ -180,7 +181,7 @@ function Contacto({ style }) {
                   </span>
                 </li>
                 <li>
-                  <a href="/cv" target="_blank" rel="noopener noreferrer" aria-label={t.cvAccessibleLabel}>
+                  <a href={getCvRoute(language)} target="_blank" rel="noopener noreferrer" aria-label={t.cvAccessibleLabel}>
                     <i className="fas fa-file-pdf" aria-hidden="true"></i>
                     <span>{t.cvLabel}</span>
                   </a>

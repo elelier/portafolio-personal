@@ -85,14 +85,27 @@ describe('static SEO artifacts', () => {
     expect(sitemap).toContain('https://elelier.com/');
   });
 
-  it('redirects both stable CV URLs to the English PDF without exposing unfinished translations', () => {
-    const redirects = read(redirectsPath);
+  it('redirects all localized CV routes while keeping the legacy English permalink', () => {
+    const redirectLines = read(redirectsPath).split(/\r?\n/);
     const englishCvUrl = 'https://assets.elelier.com/cv/elier-loya.pdf';
+    const spanishCvUrl = 'https://assets.elelier.com/cv/Elier_Loya_CV_ES_2026_publico.pdf';
+    const portugueseCvUrl = 'https://assets.elelier.com/cv/Elier_Loya_CV_PT_2026_publico.pdf';
+    const cvDestinations = [
+      ['/cv', englishCvUrl],
+      ['/cv/', englishCvUrl],
+      ['/cv/en', englishCvUrl],
+      ['/cv/en/', englishCvUrl],
+      ['/cv/es', spanishCvUrl],
+      ['/cv/es/', spanishCvUrl],
+      ['/cv/pt-br', portugueseCvUrl],
+      ['/cv/pt-br/', portugueseCvUrl]
+    ];
 
-    expect(redirects).toContain(`/cv ${englishCvUrl} 302`);
-    expect(redirects).toContain(`/cv/ ${englishCvUrl} 302`);
-    expect(redirects).not.toContain('/cv/es ');
-    expect(redirects).not.toContain('/cv/pt-br ');
+    for (const [route, destination] of cvDestinations) {
+      expect(redirectLines.filter((line) => line.startsWith(`${route} `))).toEqual([
+        `${route} ${destination} 302`
+      ]);
+    }
   });
 
   it('keeps both short auto insurance paths as exact 302 redirects', () => {
