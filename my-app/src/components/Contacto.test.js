@@ -8,7 +8,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const CONTACT_ENDPOINT = 'https://81ocg9.buildship.run/contact_me';
 const WHATSAPP_URL = 'https://wa.me/528117801157';
-const EMAIL = 'loya.elier@gmail.com';
+const EMAIL = 'hola@elelier.com';
 
 function createDeferred() {
   let resolve;
@@ -142,6 +142,18 @@ describe('Contacto', () => {
     expect(container.querySelectorAll('.contacto-secondary a[href^="/cv"]')).toHaveLength(1);
     expect(container.querySelector('a[href="/cv"]')).toBeNull();
     expect(container.querySelector('a[href="/cv/pt-br"]')).toBeNull();
+
+    cleanup();
+  });
+
+  it.each(['es', 'en'])('shows the professional email as the only public email in %s', (language) => {
+    const { container, cleanup } = renderContacto(language);
+    const links = Array.from(container.querySelectorAll('.contacto-secondary a[href^="mailto:"]'));
+
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute('href')).toBe('mailto:hola@elelier.com');
+    expect(links[0].textContent).toBe('hola@elelier.com');
+    expect(container.innerHTML).not.toContain('loya.elier@gmail.com');
 
     cleanup();
   });
@@ -302,7 +314,8 @@ describe('Contacto', () => {
         'No pude enviar tu mensaje en este momento. Puedes escribirme por WhatsApp o correo.'
       );
       expect(container.querySelector(`a[href="${WHATSAPP_URL}"]`)).toBeTruthy();
-      expect(container.querySelector(`a[href="mailto:${EMAIL}"]`)).toBeTruthy();
+      expect(container.querySelectorAll(`a[href="mailto:${EMAIL}"]`)).toHaveLength(2);
+      expect(container.innerHTML).not.toContain('loya.elier@gmail.com');
 
       cleanup();
     }

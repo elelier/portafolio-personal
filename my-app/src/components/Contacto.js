@@ -10,7 +10,7 @@ import perfilImg from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/Contacto.css';
 
 const CONTACT_ENDPOINT = 'https://81ocg9.buildship.run/contact_me';
-const EMAIL = 'loya.elier@gmail.com';
+const EMAIL = 'hola@elelier.com';
 const WHATSAPP_URL = 'https://wa.me/528117801157';
 const LINKEDIN_URL = 'https://linkedin.com/in/elier/';
 const GITHUB_URL = 'https://github.com/elelier';
