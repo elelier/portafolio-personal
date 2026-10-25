@@ -412,7 +412,7 @@ const Portafolio = ({ style }) => {
           >
             {currentCvCopy.main}
           </a>
-          <nav className="portafolio__cv-languages" aria-label={currentCvCopy.languageNav}>
+          <div className="portafolio__cv-languages" role="group" aria-label={currentCvCopy.languageNav}>
             {CV_LANGUAGE_OPTIONS.map(({ code, label }, index) => (
               <React.Fragment key={code}>
                 {index > 0 && <span className="portafolio__cv-separator" aria-hidden="true">·</span>}
@@ -431,7 +431,7 @@ const Portafolio = ({ style }) => {
                 )}
               </React.Fragment>
             ))}
-          </nav>
+          </div>
         </div>
       </div>
 

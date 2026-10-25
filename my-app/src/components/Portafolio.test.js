@@ -102,6 +102,7 @@ describe('Portafolio career timeline', () => {
     expect(link.getAttribute('rel')).toContain('noreferrer');
 
     expect(languageNav).not.toBeNull();
+    expect(languageNav.getAttribute('role')).toBe('group');
     expect(languageNav.getAttribute('aria-label')).toBe(
       language === 'es' ? 'Versiones del CV disponibles por idioma' : 'Available résumé language versions'
     );
