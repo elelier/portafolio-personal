@@ -1,4 +1,4 @@
-import React, { act } from 'react';
+import React from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { renderRoute } from '../seoHeadRouteTestUtils';
 import PrivacyPolicy from './PrivacyPolicy';
