@@ -87,7 +87,7 @@ describe('Portafolio career timeline', () => {
 
   it.each([
     ['es', 'Ver CV en español (PDF) ↗', 'Ver CV en español (PDF, abre en una pestaña nueva)', '/cv/es', 'ES', ['/cv/en', '/cv/pt-br']],
-    ['en', 'View résumé in English (PDF) ↗', 'View résumé in English (PDF, opens in a new tab)', '/cv/en', 'EN', ['/cv/es', '/cv/pt-br']]
+    ['en', 'View CV in English (PDF) ↗', 'View CV in English (PDF, opens in a new tab)', '/cv/en', 'EN', ['/cv/es', '/cv/pt-br']]
   ])('shows the localized primary CV and discreet language alternatives in %s', (language, label, accessibleLabel, cvPath, activeLanguage, otherPaths) => {
     const { container, cleanup } = renderPortafolio(language);
     const link = container.querySelector('.portafolio__heading .portafolio__cv-link');
@@ -104,7 +104,7 @@ describe('Portafolio career timeline', () => {
     expect(languageNav).not.toBeNull();
     expect(languageNav.getAttribute('role')).toBe('group');
     expect(languageNav.getAttribute('aria-label')).toBe(
-      language === 'es' ? 'Versiones del CV disponibles por idioma' : 'Available résumé language versions'
+      language === 'es' ? 'Versiones del CV disponibles por idioma' : 'Available CV language versions'
     );
     expect(Array.from(languageNav.querySelectorAll('.portafolio__cv-language')).map((item) => item.textContent)).toEqual(['ES', 'EN', 'PT']);
     expect(languageNav.querySelector('.portafolio__cv-language--active').textContent).toBe(activeLanguage);

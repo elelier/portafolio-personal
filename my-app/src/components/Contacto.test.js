@@ -126,7 +126,7 @@ describe('Contacto', () => {
 
   it.each([
     ['es', 'Mudanza a São Paulo, BR · 2027', 'CV en español (PDF)', 'Ver CV en español (PDF, abre en una pestaña nueva)', '/cv/es'],
-    ['en', 'Moving to São Paulo, BR · 2027', 'English résumé (PDF)', 'View résumé in English (PDF, opens in a new tab)', '/cv/en']
+    ['en', 'Moving to São Paulo, BR · 2027', 'English CV (PDF)', 'View CV in English (PDF, opens in a new tab)', '/cv/en']
   ])('shows a compact current/future location and localized CV link in %s', (language, move, label, accessibleLabel, cvPath) => {
     const { container, cleanup } = renderContacto(language);
     const location = container.querySelector('.contacto-location');

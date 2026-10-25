@@ -29,12 +29,12 @@ const cvCopy = {
     }
   },
   en: {
-    main: 'View résumé in English (PDF) ↗',
-    accessible: 'View résumé in English (PDF, opens in a new tab)',
-    languageNav: 'Available résumé language versions',
+    main: 'View CV in English (PDF) ↗',
+    accessible: 'View CV in English (PDF, opens in a new tab)',
+    languageNav: 'Available CV language versions',
     languageLinks: {
-      es: 'View résumé in Spanish (PDF, opens in a new tab)',
-      'pt-br': 'View résumé in Portuguese (PDF, opens in a new tab)'
+      es: 'View CV in Spanish (PDF, opens in a new tab)',
+      'pt-br': 'View CV in Portuguese (PDF, opens in a new tab)'
     }
   }
 };
