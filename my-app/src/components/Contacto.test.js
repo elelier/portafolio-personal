@@ -8,7 +8,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const CONTACT_ENDPOINT = 'https://81ocg9.buildship.run/contact_me';
 const WHATSAPP_URL = 'https://wa.me/528117801157';
-const EMAIL = 'loya.elier@gmail.com';
+const EMAIL = 'hola@elelier.com';
 
 function createDeferred() {
   let resolve;
@@ -125,12 +125,12 @@ describe('Contacto', () => {
   });
 
   it.each([
-    ['es', 'Mudanza a São Paulo, BR · 2027', 'CV en inglés (PDF)', 'Ver CV en inglés (PDF, abre en una pestaña nueva)'],
-    ['en', 'Moving to São Paulo, BR · 2027', 'English résumé (PDF)', 'View résumé in English (PDF, opens in a new tab)']
-  ])('shows a compact current/future location and English CV link in %s', (language, move, label, accessibleLabel) => {
+    ['es', 'Mudanza a São Paulo, BR · 2027', 'CV en español (PDF)', 'Ver CV en español (PDF, abre en una pestaña nueva)', '/cv/es'],
+    ['en', 'Moving to São Paulo, BR · 2027', 'English CV (PDF)', 'View CV in English (PDF, opens in a new tab)', '/cv/en']
+  ])('shows a compact current/future location and localized CV link in %s', (language, move, label, accessibleLabel, cvPath) => {
     const { container, cleanup } = renderContacto(language);
     const location = container.querySelector('.contacto-location');
-    const cv = container.querySelector('.contacto-secondary a[href="/cv"]');
+    const cv = container.querySelector(`.contacto-secondary a[href="${cvPath}"]`);
 
     expect(location.querySelector('.contacto-location__now').textContent).toBe('MTY, MX');
     expect(location.querySelector('.contacto-location__move').textContent).toBe(move);
@@ -139,8 +139,21 @@ describe('Contacto', () => {
     expect(cv.getAttribute('aria-label')).toBe(accessibleLabel);
     expect(cv.getAttribute('target')).toBe('_blank');
     expect(cv.getAttribute('rel')).toBe('noopener noreferrer');
-    expect(container.querySelectorAll('a[href="/cv"]')).toHaveLength(1);
-    expect(container.querySelector('a[href="/cv/es"], a[href="/cv/pt-br"]')).toBeNull();
+    expect(container.querySelectorAll('.contacto-secondary a[href^="/cv"]')).toHaveLength(1);
+    expect(container.querySelector('a[href="/cv"]')).toBeNull();
+    expect(container.querySelector('a[href="/cv/pt-br"]')).toBeNull();
+
+    cleanup();
+  });
+
+  it.each(['es', 'en'])('shows the professional email as the only public email in %s', (language) => {
+    const { container, cleanup } = renderContacto(language);
+    const links = Array.from(container.querySelectorAll('.contacto-secondary a[href^="mailto:"]'));
+
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute('href')).toBe('mailto:hola@elelier.com');
+    expect(links[0].textContent).toBe('hola@elelier.com');
+    expect(container.innerHTML).not.toContain('loya.elier@gmail.com');
 
     cleanup();
   });
@@ -301,7 +314,8 @@ describe('Contacto', () => {
         'No pude enviar tu mensaje en este momento. Puedes escribirme por WhatsApp o correo.'
       );
       expect(container.querySelector(`a[href="${WHATSAPP_URL}"]`)).toBeTruthy();
-      expect(container.querySelector(`a[href="mailto:${EMAIL}"]`)).toBeTruthy();
+      expect(container.querySelectorAll(`a[href="mailto:${EMAIL}"]`)).toHaveLength(2);
+      expect(container.innerHTML).not.toContain('loya.elier@gmail.com');
 
       cleanup();
     }

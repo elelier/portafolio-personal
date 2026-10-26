@@ -70,6 +70,19 @@
   margin-bottom: 0;
 }
 
+.legal-page__section a[href^="mailto:"] {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.legal-page__section a[href^="mailto:"]:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 @media (max-width: 768px) {
   .legal-page {
     padding: 28px 14px 56px;

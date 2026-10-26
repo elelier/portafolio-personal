@@ -5,6 +5,7 @@ import { getRouteSeoPolicy } from '../config/routeSeoPolicy';
 import '../styles/LegalPages.css';
 
 const OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
+const PRIVACY_EMAIL = 'privacidad@elelier.com';
 
 const content = {
   es: {
@@ -89,7 +90,7 @@ const content = {
         title: '11. Derechos de privacidad y ARCO',
         body: [
           'Puedes solicitar acceso, rectificación, cancelación u oposición respecto de los datos personales que hayas compartido directamente, así como pedir actualización o eliminación cuando resulte procedente, sujeto a límites legales y operativos aplicables.',
-          'Si deseas ejercer derechos ARCO o hacer una consulta de privacidad, utiliza los medios de contacto publicados en elelier.com e indica claramente tu solicitud y la información necesaria para identificar tu caso.'
+          'Si deseas ejercer derechos ARCO o hacer una consulta de privacidad, utiliza el correo de privacidad indicado en la sección de contacto de esta política e indica claramente tu solicitud y la información necesaria para identificar tu caso.'
         ]
       },
       {
@@ -107,8 +108,9 @@ const content = {
       {
         title: '14. Contacto',
         body: [
-          'Si tienes dudas sobre esta política o sobre el tratamiento de tus datos, utiliza los canales de contacto mostrados en elelier.com.'
-        ]
+          'Si tienes dudas sobre esta política, el tratamiento de tus datos o deseas ejercer tus derechos de privacidad, escribe a:'
+        ],
+        contactEmail: PRIVACY_EMAIL
       }
     ]
   },
@@ -194,7 +196,7 @@ const content = {
         title: '11. Privacy rights',
         body: [
           'You may request access to, correction, updating, deletion of, or objection to personal data you have shared directly, subject to applicable legal and operational limitations.',
-          'If you wish to exercise privacy rights, please use the contact channels listed on elelier.com and clearly identify your request and the information needed to locate your case.'
+          'If you wish to exercise privacy rights, use the privacy email address in the contact section of this policy and clearly identify your request and the information needed to locate your case.'
         ]
       },
       {
@@ -212,8 +214,9 @@ const content = {
       {
         title: '14. Contact',
         body: [
-          'If you have questions about this policy or about the handling of your data, please use the contact channels shown on elelier.com.'
-        ]
+          'For questions about this policy, the handling of your personal data, or privacy rights requests, email:'
+        ],
+        contactEmail: PRIVACY_EMAIL
       }
     ]
   }
@@ -250,6 +253,9 @@ function PrivacyPolicy() {
               {section.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
+              {section.contactEmail && (
+                <p><a href={`mailto:${section.contactEmail}`}>{section.contactEmail}</a></p>
+              )}
             </section>
           ))}
         </div>

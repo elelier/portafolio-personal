@@ -5,11 +5,12 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { usePrefersReducedMotion } from './utils/generalUtils';
+import { getCvRoute } from '../config/cvRoutes';
 import perfilImg from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/Contacto.css';
 
 const CONTACT_ENDPOINT = 'https://81ocg9.buildship.run/contact_me';
-const EMAIL = 'loya.elier@gmail.com';
+const EMAIL = 'hola@elelier.com';
 const WHATSAPP_URL = 'https://wa.me/528117801157';
 const LINKEDIN_URL = 'https://linkedin.com/in/elier/';
 const GITHUB_URL = 'https://github.com/elelier';
@@ -35,8 +36,8 @@ const texts = {
     findMeTitle: 'También puedes encontrarme en',
     locationNow: 'MTY, MX',
     locationMove: 'Mudanza a São Paulo, BR · 2027',
-    cvLabel: 'CV en inglés (PDF)',
-    cvAccessibleLabel: 'Ver CV en inglés (PDF, abre en una pestaña nueva)',
+    cvLabel: 'CV en español (PDF)',
+    cvAccessibleLabel: 'Ver CV en español (PDF, abre en una pestaña nueva)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     autoInsuranceCta: '¿Buscas seguro de auto? Cotiza con Chubb →',
@@ -62,8 +63,8 @@ const texts = {
     findMeTitle: 'You can also find me on',
     locationNow: 'MTY, MX',
     locationMove: 'Moving to São Paulo, BR · 2027',
-    cvLabel: 'English résumé (PDF)',
-    cvAccessibleLabel: 'View résumé in English (PDF, opens in a new tab)',
+    cvLabel: 'English CV (PDF)',
+    cvAccessibleLabel: 'View CV in English (PDF, opens in a new tab)',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     autoInsuranceCta: 'Looking for auto insurance? Get a quote with Chubb →',
@@ -180,7 +181,7 @@ function Contacto({ style }) {
                   </span>
                 </li>
                 <li>
-                  <a href="/cv" target="_blank" rel="noopener noreferrer" aria-label={t.cvAccessibleLabel}>
+                  <a href={getCvRoute(language)} target="_blank" rel="noopener noreferrer" aria-label={t.cvAccessibleLabel}>
                     <i className="fas fa-file-pdf" aria-hidden="true"></i>
                     <span>{t.cvLabel}</span>
                   </a>

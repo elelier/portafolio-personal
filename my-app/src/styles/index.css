@@ -5,6 +5,7 @@
   --color-primary-light: #020817;
   --color-secondary-light: #6c757d;
   --color-accent-light: #00cc99;
+  --color-accent-light-rgb: 0, 204, 153;
   --color-bg-anti-light: #020817;
   --color-bg-2-light: #e7eced;
   --color-bg-3-light: #ffffff;
@@ -43,6 +44,7 @@
   --color-primary-dark: #7dd3fc;
   --color-secondary-dark: #6c757d;
   --color-accent-dark: #7dd3fc;
+  --color-accent-dark-rgb: 125, 211, 252;
   --color-bg-anti-dark: #f6f9fc;
   --color-bg-2-dark: #6c757d;
   --color-bg-3-dark: #4b3e57;
@@ -68,6 +70,7 @@
   --color-primary: var(--color-primary-dark);
   --color-secondary: var(--color-secondary-dark);
   --color-accent: var(--color-accent-dark);
+  --color-accent-rgb: var(--color-accent-dark-rgb);
   --color-bg-anti: var(--color-bg-anti-dark);
   --color-bg-2: var(--color-bg-2-dark);
   --color-bg-3: var(--color-bg-3-dark);
@@ -97,6 +100,7 @@
   --color-primary: var(--color-primary-light);
   --color-secondary: var(--color-secondary-light);
   --color-accent: var(--color-accent-light);
+  --color-accent-rgb: var(--color-accent-light-rgb);
   --color-bg-anti: var(--color-bg-anti-light);
   --color-bg-2: var(--color-bg-2-light);
   --color-bg-3: var(--color-bg-3-light);
