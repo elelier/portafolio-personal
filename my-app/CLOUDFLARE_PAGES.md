@@ -58,6 +58,15 @@ Set these in Cloudflare Pages only if the deployed behavior requires parity with
 
 Do not paste real secret values into this repository.
 
+### Reemplazo paralelo del formulario de contacto (aún NO-GO producción)
+
+- El formulario usa BuildShip salvo que el build defina explícitamente REACT_APP_CONTACT_PROVIDER=google.
+- En Preview, Pages Function POST /api/contact reenvía a Apps Script y no modifica workers/lead-worker.js.
+- Variables públicas de Preview: REACT_APP_CONTACT_PROVIDER=google y REACT_APP_TURNSTILE_SITE_KEY.
+- Secrets de Preview: CONTACT_APPS_SCRIPT_URL, CONTACT_SHARED_SECRET y TURNSTILE_SECRET_KEY.
+- La ruta de Function está restringida mediante public/_routes.json a /api/contact; las demás rutas siguen estáticas.
+- **No establecer estas variables en Production ni desconectar BuildShip** antes de aprobar [el runbook E2E](../docs/contact-google-cutover.md).
+
 ## Post-cutover validation
 
 - Date: `2026-07-09`
