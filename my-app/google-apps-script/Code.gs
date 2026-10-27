@@ -80,24 +80,38 @@ function sendOwnerContact_(contact, to, sheetUrl) {
   var body = 'Nuevo mensaje recibido desde elelier.com\n\nNombre: ' + name +
     '\nCorreo: ' + contact.mail + '\nID: ' + contact.submissionId +
     '\nRecibido (UTC): ' + contact.createdAtUtc +
-    '\n\nMensaje:\n' + contact.message + '\n\nVer en Sheets: ' + sheetUrl;
+    '\n\nMensaje:\n' + contact.message + '\n\nVer en Sheets: ' + sheetUrl +
+    '\nPortafolio: https://elelier.com/';
   var htmlBody = contactEmailLayout_(
-    '<p style="margin:0 0 5px;color:' + CONTACT_BLUE_ + ';font-weight:bold;font-size:12px;letter-spacing:.04em;">ELELIER.COM</p>' +
-    '<h1 style="margin:0 0 8px;color:#1c3446;font-size:25px;line-height:1.25;">Nuevo contacto</h1>' +
-    '<p style="margin:0 0 20px;color:#647789;font-size:14px;">Recibiste una solicitud desde tu portafolio.</p>' +
-    '<p style="margin:0 0 7px;"><strong>Nombre:</strong> ' + htmlContact_(name) + '</p>' +
+    '<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr>' +
+    '<td width="82" valign="top" style="padding:0 16px 10px 0;">' +
+    '<img src="' + CONTACT_PHOTO_ + '" width="72" height="72" alt="Foto de Elier" ' +
+    'style="display:block;width:72px;height:72px;border-radius:50%;border:2px solid #e1edf5;"></td>' +
+    '<td valign="middle"><p style="margin:0 0 4px;font-size:12px;font-weight:bold;letter-spacing:.04em;">' +
+    '<a href="https://elelier.com/" style="color:' + CONTACT_BLUE_ + ';">ELELIER.COM</a></p>' +
+    '<h1 style="margin:0 0 6px;color:' + CONTACT_BLUE_ +
+    ';font-size:24px;line-height:1.25;">Nuevo contacto</h1>' +
+    '<p style="margin:0;font-size:13px;color:#647789;">Recibiste una solicitud desde tu portafolio.</p>' +
+    '</td></tr></table>' +
+    '<p style="margin:22px 0 7px;"><strong>Nombre:</strong> ' + htmlContact_(name) + '</p>' +
     '<p style="margin:0 0 7px;"><strong>Correo:</strong> <a style="color:' + CONTACT_BLUE_ +
     ';" href="' + htmlContact_('mailto:' + contact.mail) + '">' + htmlContact_(contact.mail) + '</a></p>' +
     contactMessageCard_('MENSAJE DEL CONTACTO', contact.message) +
     '<p style="margin:0 0 7px;color:#65798b;font-size:12px;"><strong>Recibido (UTC):</strong> ' +
     htmlContact_(contact.createdAtUtc) + '</p>' +
-    '<p style="margin:0 0 24px;color:#65798b;font-size:12px;"><strong>ID:</strong> ' +
+    '<p style="margin:0 0 18px;color:#65798b;font-size:12px;"><strong>ID:</strong> ' +
     htmlContact_(contact.submissionId) + '</p>' +
-    '<p style="margin:0;"><a href="' + htmlContact_('mailto:' + contact.mail) +
-    '" style="display:inline-block;background-color:' + CONTACT_BLUE_ +
-    ';color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:11px 18px;border-radius:6px;">Responder al contacto</a></p>' +
-    '<p style="margin:18px 0 0;font-size:13px;"><a href="' + htmlContact_(sheetUrl) +
-    '" style="color:' + CONTACT_BLUE_ + ';">Ver registro en Google Sheets</a></p>'
+    '<p style="margin:0;"><a href="' + htmlContact_(sheetUrl) +
+    '" style="display:block;background-color:#188038;color:#ffffff;text-align:center;text-decoration:none;' +
+    'font-size:16px;font-weight:bold;padding:16px 22px;border-radius:8px;">' +
+    '<span aria-hidden="true" style="font-size:21px;vertical-align:middle;margin-right:8px;">&#9638;</span>' +
+    'Abrir registro en Google Sheets</a></p>' +
+    '<p style="margin:12px 0 0;"><a href="' + htmlContact_('mailto:' + contact.mail) +
+    '" style="display:block;background-color:' + CONTACT_BLUE_ +
+    ';color:#ffffff;text-align:center;text-decoration:none;font-size:14px;font-weight:bold;' +
+    'padding:12px 18px;border-radius:8px;">Responder al contacto</a></p>' +
+    '<p style="margin:18px 0 0;font-size:12px;text-align:center;">' +
+    '<a href="https://elelier.com/" style="color:' + CONTACT_BLUE_ + ';">elelier.com</a></p>'
   );
   MailApp.sendEmail({
     to: to, subject: 'Nuevo contacto desde elelier.com — ' + name,
