@@ -35,6 +35,10 @@ Este directorio contiene el código fuente del backend Google. **No se publica a
 - No hay reintentos automáticos de correos: MailApp puede haber aceptado un envío antes de una interrupción. Revisar manualmente filas pending/failed.
 - MailApp confirma aceptación de envío, **no** entrega final al buzón; la prueba E2E verificará ambas bandejas.
 - Los emails escapan HTML de usuarios y no incluyen la URL de banner rota de BuildShip.
+- El acuse ES/EN conserva la foto de Elier, los tonos azules, el resumen del mensaje y enlaces vigentes (sitio, LinkedIn, GitHub y WhatsApp). No incluye el Calendly eliminado.
+- La notificación interna incluye respuesta directa (`Reply-To` y enlace `mailto:`), ID, fecha UTC y el enlace de la pestaña real `contact_v2`, sin depender del `gid=0` histórico.
+- Las dos plantillas usan tablas y CSS inline para clientes de correo, HTML escapado y una alternativa de texto; no incorporan píxeles de seguimiento.
+- Tras cambiar `Code.gs` en el repositorio, **actualizar también el editor y la versión desplegada** en Apps Script; modificar solo el archivo Git no altera el backend ya publicado.
 
 ## Validación local sin correo real
 
@@ -43,3 +47,5 @@ Desde la raíz del repositorio, ejecutar:
     node --test my-app/google-apps-script/Code.test.cjs
 
 El test ejecuta Code.gs con simuladores de Google, sin credenciales. La única prueba real autorizada será en **Cloudflare Preview** después de configurar Apps Script y Turnstile.
+
+Para el ajuste de diseño, repetir una petición de Preview y confirmar visualmente los dos formatos recibidos en Gmail antes de considerar un GO de Production. Mantener BuildShip activo hasta esa decisión separada.

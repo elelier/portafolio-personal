@@ -5,6 +5,8 @@ var CONTACT_HEADERS_ = [
   'internal_mail_status', 'autoreply_status', 'source'
 ];
 var CONTACT_SHEET_ = 'contact_v2';
+var CONTACT_BLUE_ = '#2e86c1';
+var CONTACT_PHOTO_ = 'https://elelier.com/static/media/profile-picture-elier2.bb22001998419d8c5a87.png';
 
 function jsonContact_(value) {
   return ContentService.createTextOutput(JSON.stringify(value))
@@ -31,6 +33,34 @@ function htmlContact_(value) {
   });
 }
 
+function contactMessageHtml_(value) {
+  return htmlContact_(value).replace(/\r\n|\r|\n/g, '<br>');
+}
+
+// Table-based structure and inline styles intentionally support restrictive mail clients.
+// All user-supplied content must be escaped before reaching this trusted HTML wrapper.
+function contactEmailLayout_(content) {
+  return '<!doctype html><html><head><meta charset="UTF-8"></head>' +
+    '<body style="margin:0;padding:0;background-color:#f3f6f9;color:#283746;font-family:Arial,Helvetica,sans-serif;">' +
+    '<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" ' +
+    'style="background-color:#f3f6f9;"><tr><td align="center" style="padding:24px 12px;">' +
+    '<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" ' +
+    'style="max-width:600px;background-color:#ffffff;border:1px solid #dfe8ef;border-radius:12px;">' +
+    '<tr><td style="background-color:' + CONTACT_BLUE_ + ';height:6px;font-size:1px;line-height:6px;">&nbsp;</td></tr>' +
+    '<tr><td style="padding:30px 28px 20px;font-size:15px;line-height:1.65;">' + content + '</td></tr>' +
+    '</table><p style="margin:20px 0 0;font-size:12px;color:#697c8b;line-height:1.5;">' +
+    '&copy; ' + new Date().getUTCFullYear() + ' Elier Loya Mata</p></td></tr></table></body></html>';
+}
+
+function contactMessageCard_(label, message) {
+  return '<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" ' +
+    'style="margin:22px 0;background-color:#f4f8fb;border-left:4px solid ' + CONTACT_BLUE_ + ';">' +
+    '<tr><td style="padding:16px 18px;word-break:break-word;">' +
+    '<p style="margin:0 0 10px;color:#566a79;font-size:12px;font-weight:bold;letter-spacing:.04em;">' +
+    htmlContact_(label) + '</p><p style="margin:0;color:#273b49;font-size:15px;line-height:1.6;">' +
+    contactMessageHtml_(message) + '</p></td></tr></table>';
+}
+
 function makeContactSheet_(spreadsheet) {
   var sheet = spreadsheet.getSheetByName(CONTACT_SHEET_);
   if (!sheet) {
@@ -45,17 +75,30 @@ function makeContactSheet_(spreadsheet) {
   return { sheet: sheet, headers: headers };
 }
 
-function sendOwnerContact_(contact, to) {
+function sendOwnerContact_(contact, to, sheetUrl) {
   var name = contact.name.replace(/[\r\n]+/g, ' ');
   var body = 'Nuevo mensaje recibido desde elelier.com\n\nNombre: ' + name +
     '\nCorreo: ' + contact.mail + '\nID: ' + contact.submissionId +
-    '\n\nMensaje:\n' + contact.message;
-  var htmlBody = '<div style="font-family:Arial,sans-serif;line-height:1.6">' +
-    '<h2>Nuevo contacto en elelier.com</h2><p><strong>Nombre:</strong> ' + htmlContact_(name) +
-    '</p><p><strong>Correo:</strong> ' + htmlContact_(contact.mail) +
-    '</p><p><strong>ID:</strong> ' + htmlContact_(contact.submissionId) +
-    '</p><p><strong>Mensaje:</strong></p><pre style="white-space:pre-wrap;font-family:inherit">' +
-    htmlContact_(contact.message) + '</pre></div>';
+    '\nRecibido (UTC): ' + contact.createdAtUtc +
+    '\n\nMensaje:\n' + contact.message + '\n\nVer en Sheets: ' + sheetUrl;
+  var htmlBody = contactEmailLayout_(
+    '<p style="margin:0 0 5px;color:' + CONTACT_BLUE_ + ';font-weight:bold;font-size:12px;letter-spacing:.04em;">ELELIER.COM</p>' +
+    '<h1 style="margin:0 0 8px;color:#1c3446;font-size:25px;line-height:1.25;">Nuevo contacto</h1>' +
+    '<p style="margin:0 0 20px;color:#647789;font-size:14px;">Recibiste una solicitud desde tu portafolio.</p>' +
+    '<p style="margin:0 0 7px;"><strong>Nombre:</strong> ' + htmlContact_(name) + '</p>' +
+    '<p style="margin:0 0 7px;"><strong>Correo:</strong> <a style="color:' + CONTACT_BLUE_ +
+    ';" href="' + htmlContact_('mailto:' + contact.mail) + '">' + htmlContact_(contact.mail) + '</a></p>' +
+    contactMessageCard_('MENSAJE DEL CONTACTO', contact.message) +
+    '<p style="margin:0 0 7px;color:#65798b;font-size:12px;"><strong>Recibido (UTC):</strong> ' +
+    htmlContact_(contact.createdAtUtc) + '</p>' +
+    '<p style="margin:0 0 24px;color:#65798b;font-size:12px;"><strong>ID:</strong> ' +
+    htmlContact_(contact.submissionId) + '</p>' +
+    '<p style="margin:0;"><a href="' + htmlContact_('mailto:' + contact.mail) +
+    '" style="display:inline-block;background-color:' + CONTACT_BLUE_ +
+    ';color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:11px 18px;border-radius:6px;">Responder al contacto</a></p>' +
+    '<p style="margin:18px 0 0;font-size:13px;"><a href="' + htmlContact_(sheetUrl) +
+    '" style="color:' + CONTACT_BLUE_ + ';">Ver registro en Google Sheets</a></p>'
+  );
   MailApp.sendEmail({
     to: to, subject: 'Nuevo contacto desde elelier.com — ' + name,
     body: body, htmlBody: htmlBody, replyTo: contact.mail, name: 'elelier.com'
@@ -69,11 +112,32 @@ function sendAutoContact_(contact) {
     ? 'Thanks for reaching out. I received your message and will review it soon.'
     : 'Gracias por escribirme. Recibí tu mensaje y revisaré el contexto para responderte.';
   var closing = english ? 'Talk soon,\nElier' : 'Seguimos en contacto,\nElier';
-  var body = greeting + contact.name + ':\n\n' + thanks + '\n\n' + closing;
-  var htmlBody = '<div style="font-family:Arial,sans-serif;line-height:1.6">' +
-    '<p>' + htmlContact_(greeting + contact.name) + ':</p><p>' +
-    htmlContact_(thanks) + '</p><p>' + htmlContact_(closing).replace(/\n/g, '<br>') +
-    '</p></div>';
+  var messageLabel = english ? 'YOUR MESSAGE' : 'TU MENSAJE';
+  var description = english ? 'Explore my work and projects:' : 'Conoce mi trabajo y proyectos:';
+  var body = greeting + contact.name + ':\n\n' + thanks + '\n\n' +
+    messageLabel + ':\n' + contact.message + '\n\n' + closing +
+    '\n\n' + description + ' https://elelier.com';
+  var htmlBody = contactEmailLayout_(
+    '<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr>' +
+    '<td width="82" valign="top" style="padding:0 16px 10px 0;">' +
+    '<img src="' + CONTACT_PHOTO_ + '" width="72" height="72" alt="' +
+    (english ? 'Photo of Elier' : 'Foto de Elier') + '" ' +
+    'style="display:block;width:72px;height:72px;border-radius:50%;border:2px solid #e1edf5;"></td>' +
+    '<td valign="middle"><h1 style="margin:0 0 6px;color:' + CONTACT_BLUE_ +
+    ';font-size:24px;line-height:1.25;">' + htmlContact_(greeting + contact.name) +
+    '</h1><p style="margin:0;font-size:13px;color:#647789;">Elier Loya Mata</p></td></tr></table>' +
+    '<p style="margin:22px 0 10px;">' + htmlContact_(thanks) + '</p>' +
+    contactMessageCard_(messageLabel, contact.message) +
+    '<p style="margin:0 0 22px;">' + contactMessageHtml_(closing) + '</p>' +
+    '<p style="margin:0 0 12px;color:#566a79;font-size:13px;">' + htmlContact_(description) + '</p>' +
+    '<p style="margin:0 0 18px;"><a href="https://elelier.com" style="color:' + CONTACT_BLUE_ +
+    ';font-weight:bold;">elelier.com</a></p>' +
+    '<p style="margin:0;font-size:13px;line-height:1.9;">' +
+    '<a href="https://linkedin.com/in/elier/" style="color:' + CONTACT_BLUE_ + ';">LinkedIn</a> &nbsp;·&nbsp; ' +
+    '<a href="https://github.com/elelier" style="color:' + CONTACT_BLUE_ + ';">GitHub</a> &nbsp;·&nbsp; ' +
+    '<a href="https://wa.me/528117801157" style="color:' + CONTACT_BLUE_ + ';">WhatsApp</a>' +
+    '</p>'
+  );
   MailApp.sendEmail({
     to: contact.mail,
     subject: english ? 'I received your message — Elier' : 'Recibí tu mensaje — Elier',
@@ -118,9 +182,10 @@ function doPost(e) {
     contact.name = contact.name.trim();
     contact.mail = contact.mail.trim();
     contact.message = contact.message.trim();
+    var receivedAtUtc = new Date().toISOString();
     var newRow = {
       submission_id: contact.submissionId,
-      created_at_utc: new Date().toISOString(),
+      created_at_utc: receivedAtUtc,
       name: safeSheetText_(contact.name),
       email: safeSheetText_(contact.mail),
       message: safeSheetText_(contact.message),
@@ -135,7 +200,10 @@ function doPost(e) {
     var internalMailSent = false;
     var autoReplySent = false;
     try {
-      sendOwnerContact_(contact, notify);
+      contact.createdAtUtc = receivedAtUtc;
+      var sheetUrl = 'https://docs.google.com/spreadsheets/d/' + encodeURIComponent(sheetId) +
+        '/edit#gid=' + sheet.getSheetId();
+      sendOwnerContact_(contact, notify, sheetUrl);
       internalMailSent = true;
     } catch (error) {
       // Persist the failure: the contact is still saved and can be recovered manually.

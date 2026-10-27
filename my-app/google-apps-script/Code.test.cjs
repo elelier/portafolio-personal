@@ -21,6 +21,7 @@ function harness({ storedRows = [], failMailTo = '', properties = {} } = {}) {
   const sheet = {
     appendRow(row) { rows.push([...row]); },
     getDataRange() { return { getValues() { return rows.map((row) => [...row]); } }; },
+    getSheetId() { return 27; },
     getRange(row, column) {
       return { setValue(value) { rows[row - 1][column - 1] = value; } };
     }
@@ -111,4 +112,58 @@ test('uses names of columns instead of inherited positional offsets', () => {
   app.submit();
   assert.equal(app.rows[1][differentOrder.indexOf('message')], 'Hola, tengo una idea.');
   assert.equal(app.rows[1][differentOrder.indexOf('internal_mail_status')], 'sent');
+});
+
+test('acknowledgement preserves the familiar visual identity and useful links without dead CTAs', () => {
+  const app = harness();
+  app.submit();
+  const acknowledgement = app.sent[1];
+  assert.match(acknowledgement.htmlBody, /#2e86c1/i);
+  assert.match(acknowledgement.htmlBody, /profile-picture-elier2\.bb22001998419d8c5a87\.png/);
+  assert.match(acknowledgement.htmlBody, /alt="[^"]*Elier[^"]*"/);
+  assert.match(acknowledgement.htmlBody, /Ana Pérez/);
+  assert.match(acknowledgement.htmlBody, /Hola, tengo una idea\./);
+  assert.match(acknowledgement.htmlBody, /https:\/\/elelier\.com/);
+  assert.match(acknowledgement.htmlBody, /https:\/\/linkedin\.com\/in\/elier\//);
+  assert.match(acknowledgement.htmlBody, /https:\/\/github\.com\/elelier/);
+  assert.match(acknowledgement.htmlBody, /https:\/\/wa\.me\/528117801157/);
+  assert.doesNotMatch(acknowledgement.htmlBody, /calendly\.com|mail-banner-1\./i);
+  assert.match(acknowledgement.body, /Hola, tengo una idea\./);
+});
+
+test('English acknowledgement uses English labels and recaps the original message', () => {
+  const app = harness();
+  app.submit({ ...CONTACT, name: 'Taylor', language: 'en', message: 'Could we collaborate?' });
+  const email = app.sent[1];
+  assert.match(email.subject, /I received your message/);
+  assert.match(email.htmlBody, /Hi Taylor/);
+  assert.match(email.htmlBody, /alt="Photo of Elier"/);
+  assert.match(email.htmlBody, /Your message/i);
+  assert.match(email.htmlBody, /Could we collaborate\?/);
+  assert.doesNotMatch(email.htmlBody, /Gracias por escribirme|Tu mensaje/);
+  assert.match(email.body, /Could we collaborate\?/);
+});
+
+test('owner notification makes replies and the actual contact_v2 tab actionable', () => {
+  const app = harness();
+  app.submit();
+  const email = app.sent[0];
+  assert.match(email.htmlBody, /mailto:ana@example\.com/);
+  assert.match(email.htmlBody, /https:\/\/docs\.google\.com\/spreadsheets\/d\/doc-id\/edit#gid=27/);
+  assert.match(email.htmlBody, /ba1b535e-df45-4098-9216-d4ea4e78d59c/);
+  assert.match(email.htmlBody, /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/);
+  assert.match(email.htmlBody, /Hola, tengo una idea\./);
+  assert.match(email.body, /https:\/\/docs\.google\.com\/spreadsheets\/d\/doc-id\/edit#gid=27/);
+  assert.doesNotMatch(email.htmlBody, /mail-banner-1\.|Avanzando con Éxito/);
+});
+
+test('both formatted emails escape malicious HTML and preserve message line breaks', () => {
+  const app = harness();
+  app.submit({ ...CONTACT, name: 'Ana <X>', message: 'Primera línea\n<script>alert("x")</script> & gracias' });
+  for (const email of app.sent) {
+    assert.doesNotMatch(email.htmlBody, /<script>|<X>/);
+    assert.match(email.htmlBody, /Ana &lt;X&gt;/);
+    assert.match(email.htmlBody, /&lt;script&gt;alert\(&quot;x&quot;\)&lt;\/script&gt; &amp; gracias/);
+    assert.match(email.htmlBody, /Primera línea<br\s*\/?>(?:\s*)?&lt;script&gt;/);
+  }
 });
