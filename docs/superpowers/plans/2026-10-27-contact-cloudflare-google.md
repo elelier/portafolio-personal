@@ -59,9 +59,9 @@
 - Consumes: JSON con `secret,name,mail,message,submissionId,language`, Script Properties `CONTACT_API_SHARED_SECRET`, `CONTACT_SPREADSHEET_ID`, `CONTACT_NOTIFY_EMAIL`.
 - Produces: ContentService JSON `{ok,submissionId,stored,internalMailSent,autoReplySent,duplicate}`; hoja `contact_v2` (8 columnas exactas en spec).
 
-- [ ] **Step 1: RED** Construir test harness Node `vm` con stubs `SpreadsheetApp`, `MailApp`, `ContentService`, `PropertiesService`, `LockService`; casos auth rechazada, schema correcto, valores con tildes, escaping HTML, duplicate, correo fallido parcial y correo fijado por property.
+- [ ] **Step 1: RED** Construir test harness Node `vm` con stubs `SpreadsheetApp`, `MailApp`, `ContentService`, `PropertiesService`, `LockService`; casos auth rechazada, schema correcto, valores con tildes, escaping HTML, neutralización de fórmulas en Sheets, duplicate, correo fallido parcial y correo fijado por property.
 - [ ] **Step 2: Verify RED** `node --test my-app/google-apps-script/Code.test.cjs`; fallos esperados por función `doPost` ausente.
-- [ ] **Step 3: GREEN** Implementar `doPost(e)`, `LockService.getScriptLock()`, chequeo de UUID, mapeo explícito de cabeceras, `appendRow`, `MailApp.sendEmail` y update de estados por fila. No importar librerías ni añadir OAuth manual.
+- [ ] **Step 3: GREEN** Implementar `doPost(e)`, `LockService.getScriptLock()`, chequeo de UUID, validación defensiva y escape de fórmulas de Sheets, mapeo explícito de cabeceras, `appendRow`, `MailApp.sendEmail` y update de estados por fila. No importar librerías ni añadir OAuth manual.
 - [ ] **Step 4: GREEN docs** Instrucciones de crear/publlicar web app como propietario, dar permisos una sola vez y configurar Properties/secret sin incluir valores reales.
 - [ ] **Step 5: Verify GREEN** `node --test my-app/google-apps-script/Code.test.cjs` sin fallos; no llamados reales a Gmail.
 - [ ] **Step 6: Commit** `feat(contact): add google apps script sheet and mail workflow`.
