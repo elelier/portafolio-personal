@@ -157,6 +157,22 @@ test('owner notification makes replies and the actual contact_v2 tab actionable'
   assert.doesNotMatch(email.htmlBody, /mail-banner-1\.|Avanzando con Éxito/);
 });
 
+test('owner email uses the visitor visual identity and a prominent accessible Sheets action', () => {
+  const app = harness();
+  app.submit();
+  const email = app.sent[0];
+  const html = email.htmlBody;
+  assert.match(html, /<img[^>]+profile-picture-elier2\.bb22001998419d8c5a87\.png[^>]+alt="Foto de Elier"/);
+  assert.match(html, /<h1[^>]*color:#2e86c1[^>]*>Nuevo contacto<\/h1>/);
+  assert.match(html, /href="https:\/\/elelier\.com\/"/);
+  assert.match(html, /href="https:\/\/docs\.google\.com\/spreadsheets\/d\/doc-id\/edit#gid=27"[^>]*background-color:#188038/);
+  assert.match(html, /&#9638;[^<]*<\/span>/);
+  assert.match(html, /font-size:16px;[^\"]*padding:16px 22px/);
+  assert.ok(html.indexOf('Abrir registro en Google Sheets') < html.indexOf('Responder al contacto'));
+  assert.match(html, /href="mailto:ana@example\.com"[^>]*background-color:#2e86c1/);
+  assert.match(email.body, /https:\/\/elelier\.com\//);
+});
+
 test('both formatted emails escape malicious HTML and preserve message line breaks', () => {
   const app = harness();
   app.submit({ ...CONTACT, name: 'Ana <X>', message: 'Primera línea\n<script>alert("x")</script> & gracias' });
