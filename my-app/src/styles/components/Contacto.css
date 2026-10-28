@@ -348,6 +348,24 @@
   opacity: 0.62;
 }
 
+.contacto-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.contacto-turnstile {
+  min-height: 65px;
+}
+
+.contacto-security-unavailable {
+  color: #dc2626;
+}
+
 .contacto-feedback {
   min-height: 28px;
   color: var(--color-text);
@@ -364,6 +382,10 @@
 
 .contacto-feedback--error {
   color: #dc2626;
+}
+
+.contacto-feedback--warning {
+  color: #b45309;
 }
 
 .contacto-feedback-links {
@@ -421,6 +443,10 @@
 
 [data-theme="dark"] .contacto-feedback--error {
   color: #fca5a5;
+}
+
+[data-theme="dark"] .contacto-feedback--warning {
+  color: #fcd34d;
 }
 
 @media (max-width: 820px) {

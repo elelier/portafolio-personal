@@ -346,3 +346,102 @@ describe('Contacto', () => {
     cleanup();
   });
 });
+
+describe('Contacto on Google Preview', () => {
+  let oldProvider;
+  let oldSiteKey;
+  let oldTurnstile;
+  let oldCryptoDescriptor;
+
+  beforeEach(() => {
+    oldProvider = process.env.REACT_APP_CONTACT_PROVIDER;
+    oldSiteKey = process.env.REACT_APP_TURNSTILE_SITE_KEY;
+    oldTurnstile = window.turnstile;
+    oldCryptoDescriptor = Object.getOwnPropertyDescriptor(window, 'crypto');
+    process.env.REACT_APP_CONTACT_PROVIDER = 'google';
+    process.env.REACT_APP_TURNSTILE_SITE_KEY = 'test-public-site-key';
+    window.turnstile = { render: jest.fn(() => 'widget-1'), reset: jest.fn(), remove: jest.fn() };
+    Object.defineProperty(window, 'crypto', { configurable: true, value: { randomUUID: () => 'ba1b535e-df45-4098-9216-d4ea4e78d59c' } });
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    if (oldProvider === undefined) delete process.env.REACT_APP_CONTACT_PROVIDER;
+    else process.env.REACT_APP_CONTACT_PROVIDER = oldProvider;
+    if (oldSiteKey === undefined) delete process.env.REACT_APP_TURNSTILE_SITE_KEY;
+    else process.env.REACT_APP_TURNSTILE_SITE_KEY = oldSiteKey;
+    window.turnstile = oldTurnstile;
+    if (oldCryptoDescriptor) Object.defineProperty(window, 'crypto', oldCryptoDescriptor);
+    else delete window.crypto;
+    jest.restoreAllMocks();
+    document.body.innerHTML = '';
+  });
+
+  function fillGoogleContact(container) {
+    setFieldValue(getFieldByLabel(container, 'Tu nombre'), 'Ana');
+    setFieldValue(getFieldByLabel(container, 'Tu correo'), 'ana@example.com');
+    setFieldValue(getFieldByLabel(container, 'Cuéntame sobre la oportunidad profesional o el reto que quieres resolver'), 'Necesito ayuda con un proceso.');
+  }
+
+  function approveCaptcha() {
+    expect(window.turnstile.render).toHaveBeenCalledTimes(1);
+    act(() => window.turnstile.render.mock.calls[0][1].callback('qa-turnstile-token'));
+  }
+
+  it('submits only to the same-origin route with UUID, language and Turnstile token', async () => {
+    global.fetch.mockImplementation(async (url, request) => {
+      const body = JSON.parse(request.body);
+      return { ok: true, status: 201, json: async () => ({ ok: true, submissionId: body.submissionId, notificationStatus: 'sent' }) };
+    });
+    const { container, cleanup } = renderContacto('es');
+    fillGoogleContact(container);
+    approveCaptcha();
+    submitForm(container);
+    await act(async () => {});
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    const [url, request] = global.fetch.mock.calls[0];
+    const body = JSON.parse(request.body);
+    expect(url).toBe('/api/contact');
+    expect(body).toMatchObject({ name: 'Ana', mail: 'ana@example.com', message: 'Necesito ayuda con un proceso.', website: '', language: 'es', turnstileToken: 'qa-turnstile-token' });
+    expect(body.submissionId).toMatch(/^[0-9a-f]{8}-[0-9a-f-]{27,}$/i);
+    expect(container.querySelector('[aria-live="polite"]').textContent).toContain('Gracias, ya recibí tu mensaje.');
+    expect(window.turnstile.reset).toHaveBeenCalledTimes(1);
+    cleanup();
+  });
+
+  it('shows a truthful partial receipt and direct contact links for HTTP 202', async () => {
+    global.fetch.mockImplementation(async (_url, request) => {
+      const body = JSON.parse(request.body);
+      return { ok: true, status: 202, json: async () => ({ ok: true, submissionId: body.submissionId, notificationStatus: 'partial' }) };
+    });
+    const { container, cleanup } = renderContacto('es');
+    fillGoogleContact(container);
+    approveCaptcha();
+    submitForm(container);
+    await act(async () => {});
+    expect(container.querySelector('[aria-live="polite"]').textContent).toContain('quedó registrado');
+    expect(container.querySelector('[aria-live="polite"] a[href^="mailto:"]')).toBeTruthy();
+    cleanup();
+  });
+
+  it('rejects a success HTTP status with invalid backend receipt and retains user fields', async () => {
+    global.fetch.mockResolvedValue({ ok: true, status: 201, json: async () => ({ ok: false }) });
+    const { container, cleanup } = renderContacto('es');
+    fillGoogleContact(container);
+    approveCaptcha();
+    submitForm(container);
+    await act(async () => {});
+    expect(container.querySelector('[aria-live="polite"]').textContent).toContain('No pude enviar tu mensaje');
+    expect(getFieldByLabel(container, 'Tu nombre').value).toBe('Ana');
+    cleanup();
+  });
+
+  it('does not send anything when security verification has not completed', () => {
+    const { container, cleanup } = renderContacto('en');
+    submitForm(container);
+    expect(global.fetch).not.toHaveBeenCalled();
+    expect(container.querySelector('[aria-live="polite"]').textContent).toContain('security verification');
+    cleanup();
+  });
+});

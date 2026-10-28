@@ -1,6 +1,6 @@
 // Contacto.js
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -10,6 +10,7 @@ import perfilImg from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/Contacto.css';
 
 const CONTACT_ENDPOINT = 'https://81ocg9.buildship.run/contact_me';
+const GOOGLE_CONTACT_ENDPOINT = '/api/contact';
 const EMAIL = 'hola@elelier.com';
 const WHATSAPP_URL = 'https://wa.me/528117801157';
 const LINKEDIN_URL = 'https://linkedin.com/in/elier/';
@@ -33,6 +34,9 @@ const texts = {
     microcopy: 'No necesitas un brief perfecto. Con el contexto suficiente para entender el reto basta.',
     successMessage: 'Gracias, ya recibí tu mensaje. Revisaré el contexto y te responderé con el siguiente paso más útil.',
     errorMessage: 'No pude enviar tu mensaje en este momento. Puedes escribirme por WhatsApp o correo.',
+    partialMessage: 'Tu mensaje quedó registrado, pero hubo un problema con la notificación por correo. Si es urgente, escríbeme directamente.',
+    securityError: 'Necesitamos completar la verificación de seguridad para enviar el mensaje.',
+    securityLabel: 'Verificación de seguridad',
     findMeTitle: 'También puedes encontrarme en',
     locationNow: 'MTY, MX',
     locationMove: 'Mudanza a São Paulo, BR · 2027',
@@ -60,6 +64,9 @@ const texts = {
     microcopy: 'You do not need a perfect brief. Just enough context to understand the challenge.',
     successMessage: "Thanks, I received your message. I'll review the context and reply with the most useful next step.",
     errorMessage: 'I could not send your message right now. You can reach me through WhatsApp or email.',
+    partialMessage: 'Your message was saved, but there was an issue with an email notification. If it is urgent, please reach out directly.',
+    securityError: 'Please complete the security verification before sending your message.',
+    securityLabel: 'Security verification',
     findMeTitle: 'You can also find me on',
     locationNow: 'MTY, MX',
     locationMove: 'Moving to São Paulo, BR · 2027',
@@ -72,18 +79,69 @@ const texts = {
   }
 };
 
+function newContactSubmissionId() {
+  if (typeof window.crypto.randomUUID === 'function') {
+    return window.crypto.randomUUID();
+  }
+  const bytes = new Uint8Array(16);
+  window.crypto.getRandomValues(bytes);
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-');
+}
+
 function Contacto({ style }) {
   const { language } = useLanguage();
   const t = texts[language] || texts.en;
   const location = useLocation();
   const prefersReducedMotion = usePrefersReducedMotion();
   const AnimatedSection = prefersReducedMotion ? 'section' : motion.section;
+  // The default remains BuildShip in every build without an explicit Preview flag.
+  const useGoogleContact = process.env.REACT_APP_CONTACT_PROVIDER === 'google';
+  const turnstileSiteKey = process.env.REACT_APP_TURNSTILE_SITE_KEY;
 
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
   const [message, setMessage] = useState('');
   const [feedback, setFeedback] = useState({ type: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileContainerRef = useRef(null);
+  const turnstileWidgetRef = useRef(null);
+  const pendingContactRef = useRef(null);
+
+  useEffect(() => {
+    if (!useGoogleContact || !turnstileSiteKey) return undefined;
+    let disposed = false;
+    const renderTurnstile = () => {
+      if (disposed || !window.turnstile || !turnstileContainerRef.current || turnstileWidgetRef.current !== null) return;
+      turnstileWidgetRef.current = window.turnstile.render(turnstileContainerRef.current, {
+        sitekey: turnstileSiteKey,
+        callback: (token) => setTurnstileToken(token),
+        'expired-callback': () => setTurnstileToken(''),
+        'error-callback': () => setTurnstileToken('')
+      });
+    };
+    let script = document.querySelector('script[data-elelier-turnstile]');
+    if (!script) {
+      script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.dataset.elelierTurnstile = 'true';
+      document.head.appendChild(script);
+    }
+    script.addEventListener('load', renderTurnstile);
+    renderTurnstile();
+    return () => {
+      disposed = true;
+      script.removeEventListener('load', renderTurnstile);
+      if (window.turnstile && turnstileWidgetRef.current !== null) {
+        window.turnstile.remove(turnstileWidgetRef.current);
+        turnstileWidgetRef.current = null;
+      }
+    };
+  }, [useGoogleContact, turnstileSiteKey]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -100,28 +158,66 @@ function Contacto({ style }) {
     }
 
     setFeedback({ type: '', message: '' });
+    if (useGoogleContact && (!turnstileSiteKey || !turnstileToken)) {
+      setFeedback({ type: 'error', message: t.securityError });
+      return;
+    }
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(CONTACT_ENDPOINT, {
+      const body = { name, mail, message };
+      if (useGoogleContact) {
+        const fingerprint = JSON.stringify({ name, mail, message });
+        const submissionId = pendingContactRef.current?.fingerprint === fingerprint
+          ? pendingContactRef.current.submissionId
+          : newContactSubmissionId();
+        pendingContactRef.current = { fingerprint, submissionId };
+        Object.assign(body, {
+          submissionId,
+          website: event.currentTarget.elements.namedItem('website')?.value || '',
+          turnstileToken,
+          language
+        });
+      }
+      const response = await fetch(useGoogleContact ? GOOGLE_CONTACT_ENDPOINT : CONTACT_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, mail, message })
+        body: JSON.stringify(body)
       });
 
       if (!response.ok) {
         throw new Error('Contact request failed');
       }
 
-      setFeedback({ type: 'success', message: t.successMessage });
+      if (useGoogleContact) {
+        const receipt = await response.json();
+        const expectedNotification = response.status === 201 ? 'sent' : 'partial';
+        if ((response.status !== 201 && response.status !== 202) || receipt.ok !== true ||
+          receipt.submissionId !== body.submissionId || receipt.notificationStatus !== expectedNotification) {
+          throw new Error('Invalid contact receipt');
+        }
+        pendingContactRef.current = null;
+        setFeedback({
+          type: response.status === 202 ? 'warning' : 'success',
+          message: response.status === 202 ? t.partialMessage : t.successMessage
+        });
+      } else {
+        setFeedback({ type: 'success', message: t.successMessage });
+      }
       setName('');
       setMail('');
       setMessage('');
     } catch (error) {
       setFeedback({ type: 'error', message: t.errorMessage });
     } finally {
+      if (useGoogleContact) {
+        setTurnstileToken('');
+        if (window.turnstile && turnstileWidgetRef.current !== null) {
+          window.turnstile.reset(turnstileWidgetRef.current);
+        }
+      }
       setIsSubmitting(false);
     }
   };
@@ -250,7 +346,22 @@ function Contacto({ style }) {
               />
             </div>
 
-            <button className="contacto-submit" type="submit" disabled={isSubmitting}>
+            {useGoogleContact && (
+              <>
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="contacto-honeypot"
+                />
+                <div className="contacto-turnstile" ref={turnstileContainerRef} aria-label={t.securityLabel} />
+                {!turnstileSiteKey && <p className="contacto-security-unavailable">{t.securityError}</p>}
+              </>
+            )}
+
+            <button className="contacto-submit" type="submit" disabled={isSubmitting || (useGoogleContact && !turnstileToken)}>
               {isSubmitting ? t.submittingButton : t.submitButton}
             </button>
 
@@ -258,7 +369,7 @@ function Contacto({ style }) {
               {feedback.message && (
                 <>
                   <p>{feedback.message}</p>
-                  {feedback.type === 'error' && (
+                  {(feedback.type === 'error' || feedback.type === 'warning') && (
                     <div className="contacto-feedback-links">
                       <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                         WhatsApp
