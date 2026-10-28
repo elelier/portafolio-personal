@@ -4,7 +4,7 @@ import { handleContact } from './contact.mjs';
 
 test('accepts saved leads with two notifications', async () => {
   const input = new Request('https://elelier.pages.dev/api/contact', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: 'Ana', mail: 'ana@example.com', message: 'Hola', submissionId: 'ba1b535e-df45-4098-9216-d4ea4e78d59c', website: '', turnstileToken: 'qa-token', language: 'es' }) });
-  const env = { CONTACT_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/test/exec', CONTACT_SHARED_SECRET: 'secret', TURNSTILE_SECRET_KEY: 'turnstile' };
+  const env = { REACT_APP_CONTACT_PROVIDER: 'google', CONTACT_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/test/exec', CONTACT_SHARED_SECRET: 'secret', TURNSTILE_SECRET_KEY: 'turnstile' };
   const calls = [];
   const response = await handleContact(input, env, async (url, options) => {
     calls.push({ url: String(url), options });
@@ -18,13 +18,24 @@ test('accepts saved leads with two notifications', async () => {
 });
 
 const data = { name: 'Ana Pérez', mail: 'ana@example.com', message: 'Proyecto de automatización', submissionId: 'ba1b535e-df45-4098-9216-d4ea4e78d59c', website: '', turnstileToken: 'qa-token', language: 'es' };
-const secrets = { CONTACT_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/test/exec', CONTACT_SHARED_SECRET: 'secret', TURNSTILE_SECRET_KEY: 'turnstile' };
+const secrets = { REACT_APP_CONTACT_PROVIDER: 'google', CONTACT_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/test/exec', CONTACT_SHARED_SECRET: 'secret', TURNSTILE_SECRET_KEY: 'turnstile' };
 const makeRequest = (payload = data, type = 'application/json') => new Request('https://elelier.pages.dev/api/contact', { method: 'POST', headers: { 'content-type': type }, body: typeof payload === 'string' ? payload : JSON.stringify(payload) });
 const accepted = { ok: true, stored: true, submissionId: data.submissionId, internalMailSent: true, autoReplySent: true };
 const stub = (upstream = accepted, verify = true) => {
   const calls = [];
   return { calls, fetch: async (url) => { calls.push(String(url)); return Response.json(String(url).includes('siteverify') ? { success: verify } : upstream); } };
 };
+
+test('does not expose the Google contact backend until the provider flag is explicitly enabled', async () => {
+  for (const provider of [undefined, 'buildship', 'GOOGLE']) {
+    const f = stub();
+    const env = { ...secrets, REACT_APP_CONTACT_PROVIDER: provider };
+    const response = await handleContact(makeRequest(), env, f.fetch);
+    assert.equal(response.status, 503);
+    assert.deepEqual(await response.json(), { ok: false, error: 'service_unavailable' });
+    assert.equal(f.calls.length, 0);
+  }
+});
 
 test('rejects wrong method, content type, JSON and oversize body without upstream calls', async () => {
   const f = stub();
