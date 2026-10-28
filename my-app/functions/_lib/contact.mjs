@@ -51,6 +51,9 @@ export async function handleContact(request, env, fetchImpl = fetch) {
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
     return json({ ok: false, error: 'unsupported_media_type' }, 415);
   }
+  if (env?.REACT_APP_CONTACT_PROVIDER !== 'google') {
+    return json({ ok: false, error: 'service_unavailable' }, 503);
+  }
   if (!env?.CONTACT_APPS_SCRIPT_URL || !env?.CONTACT_SHARED_SECRET || !env?.TURNSTILE_SECRET_KEY) {
     return json({ ok: false, error: 'service_unavailable' }, 503);
   }
