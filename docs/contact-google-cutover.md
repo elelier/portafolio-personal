@@ -1,6 +1,6 @@
 # elelier.com — QA y corte controlado de contacto
 
-**Estado:** implementación preparada para Preview; **NO-GO** para Production hasta QA E2E y aprobación explícita.
+**Estado (27 oct 2026):** QA E2E de Preview **PASS** y preflight de infraestructura productiva preparado. **NO-GO para corte** hasta autorización explícita de merge/activación y smoke test controlado. BuildShip sigue en producción.
 
 ## Fuente de verdad
 
@@ -51,18 +51,35 @@ Verificar solo:
 
 No se necesita un harness de navegador ni otra plataforma adicional para esta prueba; los casos de error técnicos los cubren Jest y node:test.
 
+## Evidencia QA Preview (27 oct 2026)
+
+- PR #58: `fa2cd5b728b5b6ecf3bbf17a18b2dac8e39c6ca5` (draft). Plantillas HTML de confirmación y aviso interno aprobadas.
+- Una prueba real desde el formulario Preview: respuesta HTTP 201; dos correos recibidos e inspeccionados visualmente (diseños, acentos, enlaces y Reply-To).
+- Google Sheets `Leads` → `contact_v2`: `submission_id=5825faf5-69eb-4247-a15b-04bde5898c12`, estados `sent/sent`. No se alteró `elelier01`.
+- Validaciones preflight: Node `17/17`, Jest `127/127`, `npm run build` PASS.
+- **No repetir** la prueba Preview sin un cambio funcional que lo justifique.
+
+## Preparación productiva (Etapa 1, sin corte)
+
+| Componente | Estado confirmado |
+| --- | --- |
+| Baseline Cloudflare Production | `main` commit `658ac4d`; deployment ID `d5baaea6-3250-4d20-b252-0453e336c85f` (`https://d5baaea6.elelier.pages.dev`) |
+| Google Apps Script | Implementación separada **Production PREP** bajo el mismo proyecto, URL `https://script.google.com/macros/s/AKfycbwPr31QbDh8jwrPAc1xpW8YH-5M7oefQvJK0FJ6LdNrn7z2AY_nReJxp4xkFe3eAyH8/exec`, **fijada en versión 4** |
+| Turnstile | Widget separado `elelier-contact-production`, modo Managed, hostname `elelier.com` (incluye `www.elelier.com` según Cloudflare) |
+| Cloudflare Production | Secrets `CONTACT_APPS_SCRIPT_URL`, `CONTACT_SHARED_SECRET`, `TURNSTILE_SECRET_KEY` y variable `REACT_APP_TURNSTILE_SITE_KEY` guardados; surten efecto en el **próximo deployment** |
+| Flag de frontend | `REACT_APP_CONTACT_PROVIDER` **ausente**, por lo tanto BuildShip sigue siendo predeterminado; **no se activó Google** |
+| Restricciones | No se hizo merge, deploy de Pages, envío de contacto productivo, modificación de BuildShip ni cambios en histórico |
+
+**Acoplamiento conocido:** las implementaciones Preview y Production de Apps Script comparten Script Properties y la pestaña `contact_v2` dentro del mismo proyecto. Son URLs/versiones distintas, pero no son proyectos ni bases de datos aislados.
+
+**Cuidado:** tras fusionar PR #58, la ruta `/api/contact` se incorpora como endpoint público de Pages y puede ser invocada directamente si se supera Turnstile, aunque el formulario aún use BuildShip. Por eso conviene fusionar y activar en una misma ventana vigilada, o añadir un gate de servidor explícito antes del merge si se requiere inactividad absoluta.
+
 ## Corte futuro (fuera de este PR)
 
 1. Revisar PR draft, Preview y las cinco evidencias anteriores.
 2. Solicitar GO explícito de Elier.
-3. **Antes de activar el proveedor**, configurar y verificar en **Production** los tres secrets
-   `CONTACT_APPS_SCRIPT_URL`, `CONTACT_SHARED_SECRET`, `TURNSTILE_SECRET_KEY` y la variable
-   pública `REACT_APP_TURNSTILE_SITE_KEY`; no asumir que los valores de Preview se heredan.
-   Autorizar el hostname `elelier.com` (y `www.elelier.com` si aplica) en la configuración
-   de Turnstile y comprobar que el endpoint y la web app de Google corresponden al entorno aprobado.
-4. Habilitar `REACT_APP_CONTACT_PROVIDER=google` en **Production** y generar un nuevo despliegue
-   controlado. Verificar que el bundle incluye la sitekey y que `/api/contact` tiene sus bindings
-   de servidor antes de permitir el envío público.
+3. Verificar nuevamente los cuatro nombres configurados en Cloudflare Production, el deployment Apps Script **v4** y el widget dedicado. Revisar el gate potencial de `/api/contact` descrito arriba.
+4. Con GO explícito para merge/activación: fusionar PR #58 sin cambios ajenos, confirmar que BuildShip sigue activo; activar `REACT_APP_CONTACT_PROVIDER=google` en Production y generar un nuevo despliegue controlado. Verificar el bundle y los bindings de `/api/contact` antes del smoke test.
 5. Confirmar una solicitud real en producción y revisar ambas bandejas.
 6. Mantener BuildShip disponible como rollback (`REACT_APP_CONTACT_PROVIDER=buildship`) hasta aprobar su retiro por separado.
 
