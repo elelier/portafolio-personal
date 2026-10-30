@@ -6,7 +6,7 @@ import '../styles/components/SettingsMenu.css';
 const SettingsMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { currentTheme, setTheme } = useContext(ThemeContext);
-  const { language, toggleLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const menuRef = useRef(null);
   const menuPanelRef = useRef(null);
   const toggleRef = useRef(null);
@@ -18,7 +18,7 @@ const SettingsMenu = () => {
       light: 'Modo claro',
       dark: 'Modo oscuro',
       system: 'Tema del sistema',
-      language: 'Cambiar idioma a English'
+      language: 'Idioma'
     },
     en: {
       open: 'Open settings',
@@ -26,7 +26,15 @@ const SettingsMenu = () => {
       light: 'Light mode',
       dark: 'Dark mode',
       system: 'System theme',
-      language: 'Switch language to Español'
+      language: 'Language'
+    },
+    'pt-br': {
+      open: 'Abrir configurações',
+      close: 'Fechar configurações',
+      light: 'Tema claro',
+      dark: 'Tema escuro',
+      system: 'Tema do sistema',
+      language: 'Idioma'
     }
   };
 
@@ -164,23 +172,27 @@ const SettingsMenu = () => {
             <span className="tooltip">{t.system}</span>
           </button>
         </div>
-        <button
-          type="button"
-          data-settings-language
-          className="settings-option language-toggle"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          aria-label={t.language}
-          onClick={toggleLanguage}
-        >
-          <img
-            src={language === 'en' ? '/assets/files/flag-us.png' : '/assets/files/flag-mx.png'}
-            alt=""
-            aria-hidden="true"
-            className="flag-image"
-          />
-          <span className="tooltip">{language === 'en' ? 'English' : 'Español'}</span>
-        </button>
+        <div className="settings-language-group" role="group" aria-label={t.language}>
+          {[
+            { code: 'es', label: 'Español', short: 'ES' },
+            { code: 'en', label: 'English', short: 'EN' },
+            { code: 'pt-br', label: 'Português (Brasil)', short: 'PT' }
+          ].map((option) => (
+            <button
+              key={option.code}
+              type="button"
+              data-settings-language={option.code}
+              className="settings-option-button language-toggle"
+              aria-pressed={language === option.code}
+              aria-label={option.label}
+              lang={option.code === 'pt-br' ? 'pt-BR' : option.code}
+              title={option.label}
+              onClick={() => setLanguage(option.code)}
+            >
+              <span aria-hidden="true">{option.short}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
