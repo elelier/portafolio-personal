@@ -22,6 +22,11 @@ jobs:
     steps:
       - name: Checkout PR
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Assert checked-out PR HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
 
       - name: Use Node 20
         uses: actions/setup-node@v4
@@ -101,6 +106,10 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Assert checked-out PR HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
       - name: Use Node 20
         uses: actions/setup-node@v4
         with:
@@ -123,6 +132,7 @@ jobs:
         env:
           NODE_PATH: /tmp/elelier-playwright/node_modules
           ELELIER_PREVIEW_URL: http://127.0.0.1:4173
+          ELELIER_QA_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           node scripts/serve-built-pages.cjs > /tmp/elelier-visual-http.log 2>&1 &
           server_pid=$!

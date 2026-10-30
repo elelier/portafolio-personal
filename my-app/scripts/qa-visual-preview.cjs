@@ -101,7 +101,7 @@ async function run() {
   } finally {
     await browser.close();
     fs.writeFileSync(path.join(OUT, 'qa-results.json'), JSON.stringify({
-      target: BASE, commit: process.env.GITHUB_SHA || 'local', createdAt: new Date().toISOString(), results,
+      target: BASE, commit: process.env.ELELIER_QA_SHA || process.env.GITHUB_SHA || 'local', createdAt: new Date().toISOString(), results,
     }, null, 2));
   }
   console.log(JSON.stringify({ total: results.length, passed: results.filter(r => r.status === 'PASS').length, failures }, null, 2));
