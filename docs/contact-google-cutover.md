@@ -1,5 +1,7 @@
 # elelier.com — QA y corte controlado de contacto
 
+> **ARCHIVO HISTÓRICO (27 de octubre de 2026; NO usar como runbook vigente).** El corte a **Cloudflare Pages Functions + Google Apps Script/Sheets** ya fue aprobado y ejecutado. Los avisos antiguos de “BuildShip productivo” y “NO-GO para corte” describen el estado anterior. Para operación actual, cambios y QA, consultar [estado canónico](contact-current-state.md). No reactivar BuildShip ni cambiar Production a partir de las instrucciones históricas siguientes.
+
 **Estado (27 oct 2026):** QA E2E de Preview **PASS** y preflight de infraestructura productiva preparado. **NO-GO para corte** hasta autorización explícita de merge/activación y smoke test controlado. BuildShip sigue en producción.
 
 ## Fuente de verdad
