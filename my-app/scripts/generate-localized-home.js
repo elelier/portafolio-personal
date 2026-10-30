@@ -59,6 +59,8 @@ function generateLocaleHtml(sourceHtml, lang, info) {
   html = setMeta(html, 'name', 'twitter:title', info.title);
   html = setMeta(html, 'name', 'twitter:description', info.description);
   html = setMeta(html, 'name', 'robots', 'index,follow');
+  // Keep the JSON-LD image stable as well as the social card image.
+  html = html.replace(/https:\/\/elelier\.com\/static\/media\/eleliercom\.[a-z0-9]+\.png/g, origin + '/images/sites/cover-desktop.jpg');
   html = html.replace(/<link\s+rel="canonical"[^>]*>/gi, '');
   html = html.replace(/<link\s+rel="alternate"\s+hreflang="[^"]+"[^>]*>/gi, '');
   const alternateTags = homePaths.map((route, i) => `<link rel="alternate" hreflang="${localeHreflang[i]}" href="${origin + route}">`).join('\n    ');
