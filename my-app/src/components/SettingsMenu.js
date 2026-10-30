@@ -187,7 +187,7 @@ const SettingsMenu = () => {
               aria-label={option.label}
               lang={option.code === 'pt-br' ? 'pt-BR' : option.code}
               title={option.label}
-              onClick={() => setLanguage(option.code)}
+              onClick={() => { setLanguage(option.code); setIsMenuOpen(false); }}
             >
               <span aria-hidden="true">{option.short}</span>
             </button>
