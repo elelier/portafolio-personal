@@ -39,6 +39,16 @@ const cvCopy = {
   }
 };
 
+cvCopy['pt-br'] = {
+  main: 'Ver currículo em português (PDF) ↗',
+  accessible: 'Ver currículo em português (PDF, abre em uma nova aba)',
+  languageNav: 'Versões disponíveis do currículo por idioma',
+  languageLinks: {
+    es: 'Ver currículo em espanhol (PDF, abre em uma nova aba)',
+    en: 'Ver currículo em inglês (PDF, abre em uma nova aba)'
+  }
+};
+
 const careerContent = {
   es: [
     {
@@ -206,6 +216,63 @@ const careerContent = {
   ]
 };
 
+careerContent['pt-br'] = [
+  {
+    id: 'gofarma-farmalisto',
+    name: 'GoFarma + Farmalisto',
+    period: '2016–2024',
+    role: 'Operações, produto digital e crescimento comercial',
+    description: 'Transformei processos complexos em operações mais precisas, rápidas e mensuráveis.',
+    bannerAlt: 'Farmalisto: operações e crescimento comercial',
+    image: farmalistoImg,
+    chips: ['99,8% de precisão de estoque', 'Pedidos em ~2 min', '−50% em reclamações e cancelamentos', '+144% em vendas', '+58% no tíquete médio'],
+    links: [{ label: 'Ver Farmalisto ↗', href: 'https://www.farmalisto.com.mx/' }],
+    bullets: [
+      'Estruturei processos de estoque, operação e fulfillment.',
+      'Padronizei fluxos para reduzir reclamações e cancelamentos.',
+      'Transformei operações e marketplaces em decisões baseadas em dados.'
+    ]
+  },
+  {
+    id: 'chubb',
+    name: 'CHUBB',
+    period: '2024–Presente',
+    role: 'Digital Product Owner',
+    description: 'Lidero iniciativas de produto e transformação digital para melhorar a experiência, as operações e a tomada de decisões.',
+    bannerAlt: 'CHUBB: produto digital',
+    image: chubbImg,
+    chips: ['Produto digital', 'Operações', 'Transformação', 'Usabilidade', 'Dados'],
+    links: [
+      { label: 'Ver LinkedIn ↗', href: LINKEDIN_URL },
+      { label: 'Cotação de seguro de carro no México ↗', href: '/seguro-auto' }
+    ],
+    bullets: [
+      'Digitalização dos processos de renovação de apólices.',
+      'Melhoria de cotações, emissão e experiência do usuário.',
+      'Uso de dados e usabilidade para priorizar decisões.'
+    ]
+  },
+  {
+    id: 'elier',
+    name: 'Elier',
+    period: '2025–Presente',
+    role: 'Produto e transformação digital',
+    description: 'Ajudo empresas e equipes a transformar desafios em soluções digitais úteis, claras e viáveis.',
+    bannerAlt: 'Elier: produto e transformação digital',
+    image: elelierImg,
+    chips: ['Automação', 'IA aplicada', 'Produto', 'Integrações', 'Consultoria'],
+    links: [
+      { label: 'Ver elelier.com ↗', href: 'https://elelier.com/' },
+      { label: 'LinkedIn ↗', href: LINKEDIN_URL }
+    ],
+    bullets: [
+      'Desenvolvimento e entrega de soluções digitais.',
+      'Automação e IA aplicada a desafios específicos.',
+      'Integração entre operações, produto e execução.'
+    ]
+  }
+];
+
 const ctaContent = {
   es: {
     title: '¿Te imaginas tu proyecto en este portafolio?',
@@ -221,6 +288,13 @@ const ctaContent = {
     primary: "Let’s talk about your challenge",
     secondary: 'See how I work'
   }
+};
+
+ctaContent['pt-br'] = {
+  title: 'Quer ver seu projeto neste portfólio?',
+  description: 'Vamos criar uma solução sob medida, da estratégia à implementação prática.',
+  primary: 'Vamos conversar sobre seu desafio',
+  secondary: 'Veja como trabalho'
 };
 
 function CareerCard({ entry, index, language, isExpanded, onToggle }) {
@@ -261,7 +335,7 @@ function CareerCard({ entry, index, language, isExpanded, onToggle }) {
           <p>{entry.description}</p>
         </div>
 
-        <div className="timeline-card__chips" aria-label={language === 'es' ? 'Logros destacados' : 'Highlighted achievements'}>
+        <div className="timeline-card__chips" aria-label={language === 'es' ? 'Logros destacados' : language === 'pt-br' ? 'Resultados em destaque' : 'Highlighted achievements'}>
           {entry.chips.map((chip) => (
             <span key={chip} className="timeline-card__chip">
               {chip}
@@ -286,7 +360,7 @@ function CareerCard({ entry, index, language, isExpanded, onToggle }) {
 
         {isExpanded && (
           <div className="timeline-card__details">
-            <h5>{language === 'es' ? 'Lo que moví' : 'What I moved'}</h5>
+            <h5>{language === 'es' ? 'Lo que moví' : language === 'pt-br' ? 'Meu impacto' : 'What I moved'}</h5>
             <ul>
               {entry.bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
@@ -299,10 +373,10 @@ function CareerCard({ entry, index, language, isExpanded, onToggle }) {
           {isExpanded
             ? language === 'es'
               ? 'Ocultar detalles ↑'
-              : 'Hide details ↑'
+              : language === 'pt-br' ? 'Ocultar detalhes ↑' : 'Hide details ↑'
             : language === 'es'
               ? 'Ver detalles ↓'
-              : 'View details ↓'}
+              : language === 'pt-br' ? 'Ver detalhes ↓' : 'View details ↓'}
         </span>
       </div>
     </article>
@@ -379,7 +453,7 @@ const Portafolio = ({ style }) => {
 
   const projects = useMemo(() => careerContent[currentLang] || careerContent.es, [currentLang]);
   const currentCta = ctaContent[currentLang] || ctaContent.es;
-  const currentCvCopy = currentLang === 'es' ? cvCopy.es : cvCopy.en;
+  const currentCvCopy = cvCopy[currentLang] || cvCopy.es;
 
   const handleToggle = (index) => {
     setActiveIndex((current) => (current === index ? null : index));
@@ -395,12 +469,12 @@ const Portafolio = ({ style }) => {
   return (
     <section id="portafolio" className="portafolio" style={style}>
       <div className="portafolio__heading">
-        <p className="portafolio__eyebrow">{currentLang === 'es' ? 'TRAYECTORIA' : 'CAREER'}</p>
-        <h2>{currentLang === 'es' ? 'Carrera profesional' : 'Professional career'}</h2>
+        <p className="portafolio__eyebrow">{currentLang === 'es' ? 'TRAYECTORIA' : currentLang === 'pt-br' ? 'TRAJETÓRIA' : 'CAREER'}</p>
+        <h2>{currentLang === 'es' ? 'Carrera profesional' : currentLang === 'pt-br' ? 'Carreira profissional' : 'Professional career'}</h2>
         <p className="introduccion">
           {currentLang === 'es'
             ? 'Una trayectoria construida entre operación, producto digital y soluciones que generan resultados reales.'
-            : 'A career built across operations, digital product and solutions that create measurable results.'}
+            : currentLang === 'pt-br' ? 'Uma trajetória entre operações, produto digital e soluções com resultados mensuráveis.' : 'A career built across operations, digital product and solutions that create measurable results.'}
         </p>
         <div className="portafolio__cv-actions">
           <a
