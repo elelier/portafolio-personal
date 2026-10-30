@@ -152,3 +152,19 @@
     right: 20px;
   }
 }
+
+
+.settings-language-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--color-bg-2);
+  padding-top: 5px;
+}
+
+.settings-language-group .language-toggle {
+  width: 40px;
+  height: 32px;
+  font-weight: 700;
+  font-size: 12px;
+}
