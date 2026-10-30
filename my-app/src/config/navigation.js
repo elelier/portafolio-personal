@@ -40,6 +40,27 @@ export const navigationConfig = {
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
     connect: 'Connect with me on:'
+  },
+  'pt-br': {
+    primary: [
+      { key: 'soluciones', label: 'Soluções', target: 'soluciones' },
+      { key: 'casosReales', label: 'Casos reais', target: 'casos-reales' },
+      { key: 'comoTrabajo', label: 'Como trabalho', target: 'como-trabajo' }
+    ],
+    secondaryLabel: 'Mais sobre mim',
+    secondary: [
+      { key: 'sobreMi', label: 'Sobre mim', target: 'sobre-mi' },
+      { key: 'carrera', label: 'Carreira', target: 'portafolio' }
+    ],
+    contact: 'Vamos conversar',
+    navLabel: 'Navegação principal',
+    menuOpen: 'Abrir menu',
+    menuClose: 'Fechar menu',
+    footerContact: 'Contato',
+    inicio: 'Início',
+    privacy: 'Privacidade',
+    terms: 'Termos de uso',
+    connect: 'Encontre-me em:'
   }
 };
 
