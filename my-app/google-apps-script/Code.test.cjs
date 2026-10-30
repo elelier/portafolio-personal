@@ -144,6 +144,17 @@ test('English acknowledgement uses English labels and recaps the original messag
   assert.match(email.body, /Could we collaborate\?/);
 });
 
+test('Portuguese acknowledgement preserves contact and localizes the auto reply', () => {
+  const app = harness();
+  const response = app.submit({ ...CONTACT, language: 'pt-br' });
+  assert.equal(response.ok, true);
+  assert.equal(response.stored, true);
+  assert.equal(app.sent.length, 2);
+  assert.match(app.sent[1].subject, /Recebi sua mensagem/);
+  assert.match(app.sent[1].body, /Obrigado por entrar em contato/);
+  assert.match(app.sent[1].body, /SUA MENSAGEM/);
+});
+
 test('owner notification makes replies and the actual contact_v2 tab actionable', () => {
   const app = harness();
   app.submit();
