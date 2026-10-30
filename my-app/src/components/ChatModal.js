@@ -258,7 +258,7 @@ const ChatModal = () => {
     window.handleBenefitClick = async (benefitText) => {
       const message = language === 'es' 
         ? `Quiero saber más sobre ${benefitText}`
-        : `Tell me more about ${benefitText}`;
+        : language === 'pt-br' ? `Quero saber mais sobre ${benefitText}` : `Tell me more about ${benefitText}`;
       
       setMessages(prev => [...prev, new UserMessage(message)]);
       await showTypingIndicator(translations[language].typing.thinking);
@@ -272,7 +272,7 @@ const ChatModal = () => {
       } else {
         response = language === 'es'
           ? `Me encantaría contarte más sobre ${benefitText}. ¿Qué te gustaría saber específicamente?`
-          : `I would love to tell you more about ${benefitText}. What would you like to know specifically?`;
+          : language === 'pt-br' ? `Posso explicar mais sobre ${benefitText}. O que você gostaria de saber?` : `I would love to tell you more about ${benefitText}. What would you like to know specifically?`;
       }
       
       setMessages(prev => [...prev, new SystemMessage(response)]);
@@ -336,7 +336,7 @@ const ChatModal = () => {
   const handleSectionRequest = async (sectionName) => {
     const message = language === 'es' 
       ? `Cuéntame sobre ${sectionName}`
-      : `Tell me about ${sectionName}`;
+      : language === 'pt-br' ? `Conte mais sobre ${sectionName}` : `Tell me about ${sectionName}`;
     
     setMessages(prev => [...prev, new UserMessage(message)]);
     await showTypingIndicator(translations[language].typing.thinking);
@@ -352,7 +352,7 @@ const ChatModal = () => {
       console.error('Error with section request:', error);
       const fallbackResponse = language === 'es'
         ? `Te cuento sobre ${sectionName}: Esta sección contiene información relevante sobre la experiencia profesional de Elier. Te recomiendo explorar el portafolio para más detalles.`
-        : `About ${sectionName}: This section contains relevant information about Elier's professional experience. I recommend exploring the portfolio for more details.`;
+        : language === 'pt-br' ? `Sobre ${sectionName}: esta seção mostra a experiência profissional de Elier. Explore o portfólio para saber mais.` : `About ${sectionName}: This section contains relevant information about Elier's professional experience. I recommend exploring the portfolio for more details.`;
       setMessages(prev => [...prev, new SystemMessage(fallbackResponse)]);
     }
   };
