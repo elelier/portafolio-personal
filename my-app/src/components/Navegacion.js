@@ -162,7 +162,7 @@ function Navegacion() {
           {content.primary.map((item) => (
             <li key={item.key}>
               <Link
-                to={homePath}
+                to={`${homePath}#${item.target}`}
                 className={isActive(item.key) ? 'is-active' : ''}
                 aria-current={isActive(item.key) ? 'location' : undefined}
                 onClick={() => handleScrollToElement(item.target)}
@@ -194,7 +194,7 @@ function Navegacion() {
               {content.secondary.map((item) => (
                 <li key={item.key}>
                   <Link
-                    to={homePath}
+                    to={`${homePath}#${item.target}`}
                     className={isActive(item.key) ? 'is-active' : ''}
                     aria-current={isActive(item.key) ? 'location' : undefined}
                     onClick={() => handleScrollToElement(item.target)}
@@ -208,7 +208,7 @@ function Navegacion() {
 
           <li>
             <Link
-              to={homePath}
+              to={`${homePath}#contacto`}
               className={`contact-button${isActive('contact') ? ' is-active' : ''}`}
               aria-current={isActive('contact') ? 'location' : undefined}
               onClick={() => handleScrollToElement('contacto')}
