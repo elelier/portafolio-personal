@@ -73,3 +73,35 @@ jobs:
           git restore src/config/hashedPasscodes.js
           git diff --check
           git status --short
+
+  visual-preview:
+    name: Responsive and language visual QA
+    if: github.head_ref == 'feat/seo-05-trilingual-routes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    defaults:
+      run:
+        working-directory: my-app
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+      - name: Install Playwright without changing lockfile
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Capture mobile/desktop, light/dark, ES/EN/PT-BR
+        run: node scripts/qa-visual-preview.cjs
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: elelier-trilingual-visual-qa
+          path: qa-visual-artifacts/
+          if-no-files-found: warn
+          retention-days: 14
