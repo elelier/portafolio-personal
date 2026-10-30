@@ -36,6 +36,9 @@ jobs:
       - name: Run tests
         run: npm test -- --runInBand --watchAll=false
 
+      - name: Test contact Cloudflare and Google contracts
+        run: node --test functions/_lib/contact.test.mjs google-apps-script/Code.test.cjs
+
       - name: Build CRA and static routes
         env:
           REACT_APP_CONTACT_PROVIDER: google
