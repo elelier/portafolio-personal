@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
 const SITE_URL = 'https://elelier.com';
-const DEFAULT_OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
+export const DEFAULT_OG_IMAGE = 'https://elelier.com/images/sites/cover-desktop.jpg';
 
 export function buildUrl(pathname = '/') {
   const sanitizedPath = `${pathname || '/'}`.split('?')[0].split('#')[0];
@@ -20,7 +20,7 @@ function SEO({
   type = 'website',
   robots = 'index,follow',
   keywords,
-  imageAlt,
+  imageAlt = 'Vista del portafolio de Elier Loya: transformación digital, operaciones y producto.',
   locale = 'es_MX'
 }) {
   const location = useLocation();
