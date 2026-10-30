@@ -1,6 +1,6 @@
 # elelier.com — Google Apps Script de contacto
 
-Este directorio contiene el código fuente del backend Google. **No se publica automáticamente**. BuildShip continúa activo hasta QA aprobado.
+Este directorio contiene el código fuente del backend Google del **flujo productivo actual**. **No se publica automáticamente**: los cambios a `Code.gs` requieren desplegar una nueva versión autorizada de Apps Script. Estado y rutas vigentes: [documento canónico](../../docs/contact-current-state.md).
 
 ## Cuenta autorizada
 
@@ -46,6 +46,6 @@ Desde la raíz del repositorio, ejecutar:
 
     node --test my-app/google-apps-script/Code.test.cjs
 
-El test ejecuta Code.gs con simuladores de Google, sin credenciales. La única prueba real autorizada será en **Cloudflare Preview** después de configurar Apps Script y Turnstile.
+El test ejecuta Code.gs con simuladores de Google, sin credenciales. Las pruebas reales adicionales requieren autorización específica y deben identificar el registro QA. El flujo actual ya fue validado durante el corte de octubre de 2026.
 
-Para el ajuste de diseño, repetir una petición de Preview y confirmar visualmente los dos formatos recibidos en Gmail antes de considerar un GO de Production. Mantener BuildShip activo hasta esa decisión separada.
+Nota histórica: la validación de plantillas precedió el corte a Google. Para cualquier cambio futuro, probar en Preview con permiso expreso y no activar un proveedor alternativo sin nueva decisión.

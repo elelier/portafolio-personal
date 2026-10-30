@@ -4,8 +4,8 @@ This document reflects the current production hosting state for `elelier.com` af
 
 ## Current status
 
-- Cloudflare Pages is the primary production hosting platform.
-- GitHub Pages remains available only as a historical/manual rollback path and is not the active primary host.
+- **Cloudflare Pages is the only approved production hosting platform.**
+- GitHub Pages is historical and is **not** an approved rollback destination. See [canonical contact status](../docs/contact-current-state.md).
 - Project name: `elelier`
 - Root directory: `my-app`
 - Build command: `npm run build`
@@ -58,14 +58,13 @@ Set these in Cloudflare Pages only if the deployed behavior requires parity with
 
 Do not paste real secret values into this repository.
 
-### Reemplazo paralelo del formulario de contacto (aún NO-GO producción)
+### Contacto vigente (Cloudflare + Google)
 
-- El formulario usa BuildShip salvo que el build defina explícitamente REACT_APP_CONTACT_PROVIDER=google.
-- En Preview, Pages Function POST /api/contact reenvía a Apps Script y no modifica workers/lead-worker.js.
-- Variables públicas de Preview: REACT_APP_CONTACT_PROVIDER=google y REACT_APP_TURNSTILE_SITE_KEY.
-- Secrets de Preview: CONTACT_APPS_SCRIPT_URL, CONTACT_SHARED_SECRET y TURNSTILE_SECRET_KEY.
-- La ruta de Function está restringida mediante public/_routes.json a /api/contact; las demás rutas siguen estáticas.
-- **No establecer estas variables en Production ni desconectar BuildShip** antes de aprobar [el runbook E2E](../docs/contact-google-cutover.md).
+- El flujo productivo aprobado utiliza `POST /api/contact` en Cloudflare Pages Functions, con validación Turnstile y almacenamiento confirmado por Google Apps Script en la pestaña `contact_v2`.
+- La Pages Function exige `REACT_APP_CONTACT_PROVIDER=google`; verificar esa variable por ambiente en Cloudflare, no asumirla de un archivo de repo.
+- Variables públicas: `REACT_APP_CONTACT_PROVIDER`, `REACT_APP_TURNSTILE_SITE_KEY`. Secrets servidor: `CONTACT_APPS_SCRIPT_URL`, `CONTACT_SHARED_SECRET`, `TURNSTILE_SECRET_KEY`; **no incluir sus valores** en documentación.
+- En Preview y Production existen widgets Turnstile separados. El hostname base de Preview `elelier.pages.dev` fue autorizado durante QA del PR #80; Production no se modificó.
+- El archivo [histórico del cutover](../docs/contact-google-cutover.md) **no** autoriza regresar a BuildShip. Ver [estado operativo canónico](../docs/contact-current-state.md).
 
 ## Post-cutover validation
 
@@ -83,19 +82,11 @@ Do not paste real secret values into this repository.
   - private/utilitarian deep routes
 - No rollback was required.
 
-## Rollback
+## Recovery / rollback (Cloudflare only)
 
-Use GitHub Pages rollback only if Cloudflare Pages fails persistently and production recovery cannot be achieved in place.
+Recovery must stay **within Cloudflare Pages**: identify the last verified healthy deployment or revert the affected change, prepare a reviewed branch/PR if code is involved, and require explicit authorization before promoting a new deployment. Verify `/`, the contact form, Turnstile, and the Google storage contract after recovery. Do **not** switch DNS to GitHub Pages or re-enable BuildShip by following an old runbook.
 
-Manual DNS rollback steps for apex:
-
-1. Restore these four GitHub Pages A records:
-   - `185.199.111.153`
-   - `185.199.110.153`
-   - `185.199.109.153`
-   - `185.199.108.153`
-2. Keep TXT records, Workers-backed forms/leads, and subdomains intact unless a separate inventory says otherwise.
-3. Do not change MX or TXT records without a validated DNS inventory.
+Historical GitHub Pages DNS recovery instructions are retired and **must not be executed**. Do not change MX/TXT records or server secrets without an explicit approved incident plan.
 
 ## Known non-blocking follow-ups
 

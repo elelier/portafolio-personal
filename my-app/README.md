@@ -97,7 +97,7 @@
 ### Herramientas de Desarrollo
 - **Git & GitHub**: Control de versiones
 - **Cloudflare Pages**: Hosting productivo actual
-- **GitHub Pages**: Ruta legacy/manual de rollback
+- **GitHub Pages**: Infraestructura histórica, **no** hosting ni rollback aprobado
 - **NPM**: Gestión de paquetes
 - **React Scripts 5.0.1**: Herramientas de desarrollo
 
@@ -139,7 +139,7 @@
 
 ## Despliegue
 
-El portfolio tiene como hosting productivo actual Cloudflare Pages y está accesible en [elelier.com](https://elelier.com). GitHub Pages se conserva únicamente como ruta legacy/manual de rollback.
+El portfolio se publica exclusivamente en **Cloudflare Pages** y está accesible en [elelier.com](https://elelier.com). GitHub Pages no forma parte del hosting ni del rollback aprobado. El contacto productivo utiliza Pages Functions + Google Apps Script/Sheets; ver [estado canónico](../docs/contact-current-state.md).
 
 ### Configuración de Producción
 - **Dominio Personalizado**: `elelier.com` y `www.elelier.com` activos en Cloudflare Pages
@@ -153,7 +153,7 @@ El portfolio tiene como hosting productivo actual Cloudflare Pages y está acces
 ### Pipeline de Despliegue
 1. **Build Automático**: `npm run build` genera datos de cliente y construye
 2. **Optimización**: Minificación, tree-shaking y code-splitting
-3. **Deploy legacy/manual**: `npm run deploy` mantiene la ruta histórica de GitHub Pages con `gh-pages`
+3. **Deploy autorizado**: revisión de PR y despliegue vía Cloudflare Pages con autorización explícita; el comando histórico `npm run deploy` **no** es el procedimiento productivo
 4. **DNS**: Cloudflare Pages atiende `elelier.com` y `www.elelier.com`; una redirección `301` de `www` a apex sigue como evaluación no bloqueante
 
 ### Variables de Entorno Requeridas
@@ -204,7 +204,7 @@ npm test           # Ejecutar tests
 ### Producción
 ```bash
 npm run build      # Construir para producción (incluye generación de datos)
-npm run deploy     # Ruta legacy/manual hacia GitHub Pages
+npm run deploy     # LEGACY/no autorizado para este proyecto; no ejecutar para Production
 npm run predeploy  # Pre-construcción automática
 npm run pre-prod   # Testing local de build de producción
 ```
