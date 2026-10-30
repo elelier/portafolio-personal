@@ -86,6 +86,44 @@ const translations = {
       nowOn: (section) => `You are now on the ${section}.`,
       close: 'You can close this window by clicking <span style="color: var(--color-accent)">X</span>, <span style="color: var(--color-accent)">here</span> or anywhere outside'
     }
+  },
+  'pt-br': {
+    title: 'Assistente com IA',
+    subtitle: 'Tecnologia aplicada a desafios reais',
+    inputPlaceholder: 'Digite uma mensagem...',
+    sendButton: 'Enviar',
+    closeButton: 'Fechar chat',
+    openButton: 'Abrir chat',
+    benefits: 'Benefícios',
+    aboutMe: 'Sobre mim',
+    skills: 'Habilidades',
+    projects: 'Projetos',
+    contact: 'Contato',
+    chatWithAI: 'Conversar com IA',
+    typing: {
+      writing: 'Escrevendo...',
+      processing: 'Processando...',
+      analyzing: 'Analisando...',
+      thinking: 'Pensando...',
+      calculating: 'Calculando...',
+      redirecting: 'Redirecionando...'
+    },
+    sections: {
+      benefits: 'Seção de benefícios',
+      aboutMe: 'Seção Sobre mim',
+      skills: 'Seção de habilidades',
+      projects: 'Seção de projetos',
+      contact: 'Seção de contato'
+    },
+    closeMessage: 'Você pode fechar esta janela clicando em X, <close_action>aqui</close_action> ou fora da janela',
+    aboutMeResponse: 'Sou Elier, especialista em produto digital, operações e transformação digital.',
+    skillsResponse: 'Trabalho com desenvolvimento digital, UX/UI, automação e análise de dados.',
+    projectsResponse: 'Desenvolvi soluções digitais para operações, comércio eletrônico e serviços.',
+    contactResponse: 'Você pode falar comigo pelo formulário ou pelas redes sociais.',
+    redirectMessages: {
+      nowOn: (section) => `Agora você está em ${section}.`,
+      close: 'Você pode fechar esta janela clicando em <span style="color: var(--color-accent)">X</span>, <span style="color: var(--color-accent)">aqui</span> ou fora da janela'
+    }
   }
 };
 
@@ -146,7 +184,7 @@ const ChatModal = () => {
       // Fallback a respuesta simple si falla Gemini
       const fallbackResponse = language === 'es' 
         ? `Gracias por tu mensaje: "${content}". Te ayudaré a explorar el portafolio de Elier.`
-        : `Thank you for your message: "${content}". I'll help you explore Elier's portfolio.`;
+        : language === 'pt-br' ? `Obrigado pela mensagem: "${content}". Vou ajudar você a conhecer o portfólio de Elier.` : `Thank you for your message: "${content}". I'll help you explore Elier's portfolio.`;
       setMessages(prev => [...prev, new SystemMessage(fallbackResponse)]);
     }
   };
@@ -194,21 +232,21 @@ const ChatModal = () => {
         const geminiStatus = await geminiService.initialize();
         const welcomeMessage = language === 'es'
           ? `¡Hola! Soy el asistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`
-          : `Hi! I'm <b>Elier Loya's</b> virtual assistant ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`;
+          : language === 'pt-br' ? `Olá! Sou o assistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ Google Gemini AI' : '🤖'}.` : `Hi! I'm <b>Elier Loya's</b> virtual assistant ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`;
         setMessages([new SystemMessage(welcomeMessage)]);
         
         // Segundo mensaje
         await showTypingIndicator(translations[language].typing.writing, 1500);
         const helpMessage = language === 'es'
           ? `Estoy aquí para ayudarte a conocer más sobre sus servicios de transformación digital, desarrollo web y análisis de datos. ¿En qué puedo ayudarte? 💻`
-          : `I'm here to help you learn more about his digital transformation, web development, and data analysis services. How can I help you? 💻`;
+          : language === 'pt-br' ? `Estou aqui para ajudar você a conhecer o trabalho de Elier com transformação digital, produto e operações. Como posso ajudar? 💻` : `I'm here to help you learn more about his digital transformation, web development, and data analysis services. How can I help you? 💻`;
         setMessages(prev => [...prev, new SystemMessage(helpMessage)]);
 
         // Tercer mensaje con opciones de navegación
         await showTypingIndicator(translations[language].typing.writing, 1000);
         const quickOptions = language === 'es'
           ? `Puedes usar los botones de abajo para navegación rápida o simplemente escríbeme lo que necesitas saber:`
-          : `You can use the buttons below for quick navigation or just write me what you need to know:`;
+          : language === 'pt-br' ? `Use os botões abaixo para navegar ou escreva o que você quer saber:` : `You can use the buttons below for quick navigation or just write me what you need to know:`;
         setMessages(prev => [...prev, new SystemMessage(quickOptions)]);
       }
     };
