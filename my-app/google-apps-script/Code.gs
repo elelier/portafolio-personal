@@ -127,7 +127,7 @@ function sendAutoContact_(contact) {
     ? 'Thanks for reaching out. I received your message and will review it soon.'
     : portuguese ? 'Obrigado por entrar em contato. Recebi sua mensagem e vou responder em breve.'
     : 'Gracias por escribirme. Recibí tu mensaje y revisaré el contexto para responderte.';
-  var closing = english ? 'Talk soon,\nElier' : 'Seguimos en contacto,\nElier';
+  var closing = portuguese ? 'Até breve,\nElier' : english ? 'Talk soon,\nElier' : 'Seguimos en contacto,\nElier';
   var messageLabel = portuguese ? 'SUA MENSAGEM' : english ? 'YOUR MESSAGE' : 'TU MENSAJE';
   var description = portuguese ? 'Conheça meu trabalho e projetos:' : english ? 'Explore my work and projects:' : 'Conoce mi trabajo y proyectos:';
   var body = greeting + contact.name + ':\n\n' + thanks + '\n\n' +
