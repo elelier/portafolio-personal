@@ -91,11 +91,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.19.0'
-      - name: Install Playwright without changing lockfile
-        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Install isolated Playwright runner
+        run: npm install --prefix /tmp/elelier-playwright --no-save --no-package-lock --ignore-scripts playwright@1.56.1
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        run: /tmp/elelier-playwright/node_modules/.bin/playwright install --with-deps chromium
       - name: Capture mobile/desktop, light/dark, ES/EN/PT-BR
+        env:
+          NODE_PATH: /tmp/elelier-playwright/node_modules
         run: node scripts/qa-visual-preview.cjs
       - name: Upload screenshots and results
         if: always()
