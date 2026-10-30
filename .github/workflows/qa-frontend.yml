@@ -1,0 +1,49 @@
+name: Frontend QA
+
+on:
+  pull_request:
+    paths:
+      - 'my-app/**'
+      - '.github/workflows/qa-frontend.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: my-app
+    env:
+      CI: 'true'
+      REACT_APP_CONTACT_PROVIDER: google
+      REACT_APP_TURNSTILE_SITE_KEY: qa-placeholder
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+          cache-dependency-path: my-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run tests
+        run: npm test -- --runInBand --watchAll=false
+
+      - name: Build CRA and static routes
+        run: npm run build
+
+      - name: Restore generated passcodes and inspect diff
+        if: always()
+        run: |
+          git restore src/config/hashedPasscodes.js
+          git diff --check
+          git status --short
