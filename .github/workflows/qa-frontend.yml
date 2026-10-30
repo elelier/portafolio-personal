@@ -56,6 +56,17 @@ jobs:
           grep -Fq '<loc>https://elelier.com/en/</loc>' build/sitemap.xml
           grep -Fq '<loc>https://elelier.com/pt-br/</loc>' build/sitemap.xml
 
+      - name: Smoke test public Cloudflare branch Preview (read-only)
+        env:
+          PREVIEW_BASE: https://feat-seo-05-trilingual-route.elelier.pages.dev
+        run: |
+          curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors "$PREVIEW_BASE/en/" -o /tmp/preview-en.html
+          curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors "$PREVIEW_BASE/pt-br/" -o /tmp/preview-pt.html
+          grep -Fq '<html lang="en"' /tmp/preview-en.html
+          grep -Fq '<html lang="pt-BR"' /tmp/preview-pt.html
+          grep -Fq 'https://elelier.com/en/' /tmp/preview-en.html
+          grep -Fq 'https://elelier.com/pt-br/' /tmp/preview-pt.html
+
       - name: Restore generated passcodes and inspect diff
         if: always()
         run: |
