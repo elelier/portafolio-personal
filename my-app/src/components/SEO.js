@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { HOME_PATHS, LANGUAGE_TAGS } from '../i18n/locales';
 
 const SITE_URL = 'https://elelier.com';
 const DEFAULT_OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
@@ -29,7 +30,7 @@ function SEO({
 
   return (
     <Helmet>
-      <html lang={locale.startsWith('es') ? 'es' : 'en'} />
+      <html lang={locale.startsWith('es') ? LANGUAGE_TAGS.es : locale.startsWith('pt') ? LANGUAGE_TAGS['pt-br'] : LANGUAGE_TAGS.en} />
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,6 +39,10 @@ function SEO({
       <meta name="robots" content={robots} />
 
       <link rel="canonical" href={canonicalUrl} />
+      {Object.values(HOME_PATHS).includes(canonicalPath || currentPath) ? Object.entries(HOME_PATHS).map(([lang, route]) => (
+        <link key={lang} rel="alternate" hrefLang={lang === 'pt-br' ? 'pt-BR' : lang} href={buildUrl(route)} />
+      )) : null}
+      {Object.values(HOME_PATHS).includes(canonicalPath || currentPath) ? <link rel="alternate" hrefLang="x-default" href={buildUrl('/')} /> : null}
 
       <meta property="og:locale" content={locale} />
       <meta property="og:type" content={type} />
