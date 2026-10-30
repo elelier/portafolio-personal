@@ -43,6 +43,23 @@ if (process.env.NODE_ENV === 'development') {
 
 const Blog = lazy(() => import('./components/Blog'));
 
+const SCROLL_TO_TOP_LABELS = Object.freeze({
+  es: 'Volver arriba',
+  en: 'Back to top',
+  'pt-br': 'Voltar ao topo',
+});
+
+function LocalizedScrollToTop({ onClick }) {
+  const { language } = useLanguage();
+  return (
+    <FloatingButton
+      icon={<FaArrowUp />}
+      onClick={onClick}
+      ariaLabel={SCROLL_TO_TOP_LABELS[language] || SCROLL_TO_TOP_LABELS.es}
+    />
+  );
+}
+
 function HomeSeo() {
   const { language } = useLanguage();
   const location = useLocation();
@@ -298,7 +315,7 @@ function App({ initialLanguage }) {
                 </Routes>
               </Suspense>
               <Footer />
-              <FloatingButton icon={<FaArrowUp />} onClick={scrollToTop} ariaLabel="Volver arriba" />
+              <LocalizedScrollToTop onClick={scrollToTop} />
               <ChatModal />
             </div>
           </ThemeProvider>
