@@ -1,5 +1,8 @@
 # Elier Portfolio
 
+> **Inventario del sistema de contacto (29/oct/2026):** [fuente de verdad y frontera con Core DB](docs/SOURCE_OF_TRUTH_CONTACT_AND_CORE_DB.md). La bandera real de Cloudflare Production debe confirmarse antes de afirmar qué proveedor ejecuta el formulario; no confundir el Worker histórico de leads con el formulario actual ni con Core DB.
+
+
 **Elier Portfolio** es un sitio web profesional que muestra mi experiencia en transformación digital, e-commerce y optimización de operaciones. Construido con tecnologías modernas y enfocado en la experiencia del usuario.
 
 ## Tabla de Contenidos
