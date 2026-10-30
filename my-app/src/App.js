@@ -4,7 +4,7 @@ import { useLanguage } from './contexts/LanguageContext';
 import { HOME_COPY, OG_LOCALES, homePathFor, isLocalizedHome } from './i18n/locales';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { HelmetProvider } from 'react-helmet-async';
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 import './styles/App.css';
 import './styles/components/UxSmallFixes.css';
@@ -50,6 +50,27 @@ function HomeSeo() {
   const copy = HOME_COPY[language] || HOME_COPY.es;
   return <SEO title={copy.title} description={copy.description} pathname={homePathFor(language)} locale={OG_LOCALES[language]} />;
 }
+
+const LocalizedHashScroll = () => {
+  const { pathname, hash } = useLocation();
+  const previousPathRef = useRef(null);
+
+  useEffect(() => {
+    const changedPath = previousPathRef.current !== pathname;
+    previousPathRef.current = pathname;
+    if (!hash || !changedPath) return undefined;
+    const sectionId = decodeURIComponent(hash.slice(1));
+    const frame = window.requestAnimationFrame(() => {
+      const section = document.getElementById(sectionId);
+      if (section && typeof section.scrollIntoView === 'function') {
+        section.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, hash]);
+
+  return null;
+};
 
 const HeroVisibilityObserver = () => {
   const { pathname } = useLocation();
@@ -152,6 +173,7 @@ function App({ initialLanguage }) {
           <ThemeProvider>
             <div className="App">
               <HeroVisibilityObserver />
+              <LocalizedHashScroll />
               <SettingsMenu />
               <HomeSeo />
               <Navegacion />
