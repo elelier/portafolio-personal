@@ -77,6 +77,41 @@ const content = {
       },
     ],
   },
+  'pt-br': {
+    eyebrow: 'Depoimentos',
+    title: 'O que dizem sobre trabalhar comigo',
+    description: 'Três recomendações reais de pessoas que trabalharam diretamente comigo.',
+    linkedinLabel: 'Ver no LinkedIn',
+    items: [
+      {
+        name: 'Edgar E. Tienda Delgado',
+        relationship: 'Trabalhou com Elier na PepsiCo',
+        date: '2012-2016',
+        quote: 'Elier se destacou por sua objetividade, comprometimento, foco em melhoria contínua e excelente análise de dados. É um líder dedicado, que trabalha com as equipes para otimizar processos e entregar resultados.',
+        link: 'https://www.linkedin.com/in/edgar-tienda/?locale=en',
+        initials: 'ET',
+        photo: edgarPhoto,
+      },
+      {
+        name: 'Gloria Higuera',
+        relationship: 'Trabalhou com Elier na GoFarma e Farmalisto',
+        date: '2016-2024',
+        quote: 'Elier tem uma capacidade admirável de aprender por conta própria e está sempre buscando formas de melhorar e automatizar processos. É uma pessoa confiável, guiada por princípios e valores em qualquer circunstância.',
+        link: 'https://www.linkedin.com/in/gloriahiguera/',
+        initials: 'GH',
+        photo: gloriaPhoto,
+      },
+      {
+        name: 'Ilse Jasso',
+        relationship: 'Marketing OneClicTrip',
+        date: '2025-2026',
+        quote: 'Você não se preocupa apenas em deixar algo bonito; procura entender o problema, pensar nas pessoas que vão usar a solução e construir algo que realmente funcione. A OneClicTrip tem hoje muito mais direção graças a você.',
+        link: 'https://www.linkedin.com/in/ilse-jasso/en/',
+        initials: 'IJ',
+        photo: ilsePhoto,
+      },
+    ],
+  },
 };
 
 function Testimonios({ style }) {

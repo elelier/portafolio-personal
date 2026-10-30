@@ -75,6 +75,37 @@ const content = {
         url: 'https://www.oneclictrip.com/'
       }
     ]
+  },
+  'pt-br': {
+    eyebrow: 'Casos reais',
+    title: 'De um desafio concreto a algo que funciona',
+    description: 'Estratégia, tecnologia e operações conectadas para gerar resultados mensuráveis.',
+    cta: 'Conte qual desafio você quer resolver →',
+    labels: { challenge: 'Desafio', built: 'Solução', result: 'Resultado' },
+    cases: [
+      {
+        category: 'Arquitetura · Presença e captação',
+        title: 'Arqidia',
+        preview: arqidiaPreview,
+        previewAlt: 'Prévia visual do site da Arqidia',
+        challenge: 'Ganhar visibilidade e organizar sua oferta digital.',
+        built: 'Site sob medida, portfólio, SEO técnico e análise de dados.',
+        result: 'Presença digital estruturada e fluxo de contatos mais claro.',
+        linkText: 'Ver projeto',
+        url: 'https://arqidia.mx/'
+      },
+      {
+        category: 'Viagens personalizadas · Captação e operações',
+        title: 'OneClicTrip',
+        preview: oneClicTripPreview,
+        previewAlt: 'Prévia visual do site OneClicTrip',
+        challenge: 'Orçamentos e pagamentos dispersos, sem controle centralizado.',
+        built: 'Plataforma sob medida com integração ao WhatsApp e Mercado Pago.',
+        result: 'Operação centralizada e vendas efetivas.',
+        linkText: 'Ver projeto',
+        url: 'https://www.oneclictrip.com/'
+      }
+    ]
   }
 };
 

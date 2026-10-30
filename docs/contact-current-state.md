@@ -1,6 +1,6 @@
 # elelier.com — Estado operativo del formulario de contacto
 
-> **Fuente canónica de operación · revisada el 29 de octubre de 2026.** Este documento describe el flujo aprobado y distingue el estado productivo de la implementación en revisión. Los registros de corte anteriores se conservan como evidencia histórica, no como instrucciones vigentes. No sustituye la verificación periódica de Cloudflare, Google y GitHub.
+> **Fuente canónica de operación · revisada el 30 de octubre de 2026.** Este documento describe el flujo aprobado y distingue el estado productivo de la implementación en revisión. Los registros de corte anteriores se conservan como evidencia histórica, no como instrucciones vigentes. No sustituye la verificación periódica de Cloudflare, Google y GitHub.
 
 ## Arquitectura y propietarios
 
@@ -33,6 +33,23 @@ El recibo incluye un `submissionId` que debe coincidir con la solicitud, y un `n
 - **Estado de despliegue al documentar:** PR #80 en **draft**, con pruebas en Preview y recepción observada de `generate_lead` y `contact_click` en GA4. **Eso no implica que esta instrumentación ya esté publicada en Production.** La activación como evento clave en GA4 debe verificarse por separado.
 
 Evidencias: [PR #80 — QA independiente](https://github.com/elelier/portafolio-personal/pull/80#issuecomment-6504595786) y [issue #65 — aceptación](https://github.com/elelier/portafolio-personal/issues/65#issuecomment-6504595315).
+
+## Identidad de deployments Google Apps Script (reconciliación 30/oct/2026)
+
+**Identificación verificable; no confundir la etiqueta visible con el destino.** Google Apps Script utiliza **un solo proyecto** `elelier-contact-google-preview` ejecutado como `loya.elier@gmail.com`, con dos implementaciones web activas. Durante la auditoría inicial de PR #84 ambas estaban mal etiquetadas como Preview; la identidad de Production se reconstruyó desde el [corte histórico del 27/oct](contact-google-cutover.md) y se contrastó con el ID/versionado vigente de la consola. La descripción de Production se corrigió al promoverla con GO expreso el 30/oct/2026; el ID sigue siendo la fuente de identificación.
+
+| Ambiente de Apps Script | ID exacto del deployment web activo | Versión constatada el 30/oct | Observación |
+| --- | --- | --- | --- |
+| **Production** | `AKfycbwPr31QbDh8jwrPAc1xpW8YH-5M7oefQvJK0FJ6LdNrn7z2AY_nReJxp4xkFe3eAyH8` | **v6**, promovida desde v4 el 30/oct/2026 | GO expreso de Elier; se eligió la versión inmutable v6 ya validada en Preview sobre el mismo deployment de Production. Conservó ID, URL `/exec`, ejecutor `loya.elier@gmail.com` y acceso `Cualquiera`. Descripción actual: `elelier.com — Production — SEO-05 PT-BR — PR #84 — 30/oct/2026`. |
+| **Preview SEO-05 — PR #84** | `AKfycbw0_G12EHqA1rGFKjpIJL9Oef2boiVA3CF5SYdcWZeetZbz3L58p_KSG9ZmevzBJy-w` | **v6**, actualizada 30/oct/2026 | Conservó ID/URL `/exec` y permisos. Descripción diferenciada: `SEO-05 PT-BR Preview QA — PR #84 — versionado; NO Production`. Versión anterior del deployment web: v4. |
+
+Estos IDs identifican endpoints, **no son secretos de autenticación**; no publicar el secreto compartido ni Script Properties. En Google, guardar el editor de código (HEAD) no cambia por sí solo una versión fija de Production. La promoción autorizada **v4 → v6** se hizo con **Administrar las implementaciones → Editar Production por ID exacto → versión existente 6 → Implementar**; Google mostró `Se actualizó correctamente la implementación` y la consola se reabrió para cotejar la versión, el ID, la URL y los permisos. **Los dos endpoints comparten Script Properties y la misma hoja `Leads/contact_v2`**: nunca tratar Preview como aislado en datos.
+
+**Postflight de promoción Production — 30/oct/2026:** **PASS de configuración/versionado.** Production quedó v6 en su URL preexistente `https://script.google.com/macros/s/AKfycbwPr31QbDh8jwrPAc1xpW8YH-5M7oefQvJK0FJ6LdNrn7z2AY_nReJxp4xkFe3eAyH8/exec`; Preview permaneció v6 con su ID distinto. No se modificaron el código HEAD, Script Properties, secretos, hojas, Cloudflare Pages Production ni Elelier Core DB. El PR #84 sigue draft, sin merge. **No se ejecutó un POST E2E en Production**, por lo que la entrega productiva real del contacto PT-BR no está validada; el E2E descrito a continuación corresponde exclusivamente a Pages Preview.
+
+**E2E Preview completado el 30/oct/2026 (con límite HTTP):** `CONTACT_APPS_SCRIPT_URL` de Pages Preview permanece cifrado y no puede cotejarse literalmente con el ID del deployment desde el dashboard. Durante la fase de QA, después de actualizar **solamente Apps Script Preview v6** (antes de la promoción Production documentada arriba), se envió **un único** contacto `QA SEO05 PTBR PR84` desde `/pt-br/` de Pages Preview; la UI mostró éxito localizado, la hoja `Leads/contact_v2` registró **una fila** (n.º 7, `2026-10-30T17:08:32.817Z`) y ambos estados de envío quedaron `sent`. Gmail confirmó **recepción** de la notificación en `loya.elier@gmail.com` y **envío** de acuse portugués a `hola@elelier.com`. Esto corrobora el flujo funcional, pero **no se capturó directamente el código HTTP/JSON exacto ni se verificó recepción final en la bandeja `hola@`**. No repetir el envío con el mismo identificador sólo para obtener esas métricas. Véase el [runbook y evidencia detallada PR #84](qa-seo05-ptbr-apps-script-preview.md).
+
+**Gate permanente para cualquier cambio Apps Script:** contrastar ID activo contra esta tabla e historial, revisar versiones de **ambos** deployments antes/después y preservar URL/permisos/Script Properties. No publicar usando sólo el nombre visible. Si el destino de Pages Preview no está probado, realizar únicamente una prueba controlada aprobada y revisar el resultado antes de más cambios. No eliminar registros QA sin una orden separada.
 
 ## Ambientes y operación
 

@@ -26,6 +26,13 @@ const stub = (upstream = accepted, verify = true) => {
   return { calls, fetch: async (url) => { calls.push(String(url)); return Response.json(String(url).includes('siteverify') ? { success: verify } : upstream); } };
 };
 
+test('accepts Portuguese locale without changing storage contract', async () => {
+  const f = stub();
+  const response = await handleContact(makeRequest({ ...data, language: 'pt-br' }), secrets, f.fetch);
+  assert.equal(response.status, 201);
+  assert.equal(f.calls.length, 2);
+});
+
 test('does not expose the Google contact backend until the provider flag is explicitly enabled', async () => {
   for (const provider of [undefined, 'buildship', 'GOOGLE']) {
     const f = stub();

@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import { getNavigationContent } from '../config/navigation';
+import { homePathFor } from '../i18n/locales';
 import '../styles/components/Footer.css';
 
 function Footer() {
   const { language } = useLanguage();
 
   const footerLinks = getNavigationContent(language);
+  const homePath = homePathFor(language);
 
   const handleScrollToElement = (id) => {
     const element = document.getElementById(id);
@@ -21,14 +23,14 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-links">
-          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>{footerLinks.inicio}</Link>
+          <Link to={homePath} onClick={() => handleScrollToElement('hero-banner')}>{footerLinks.inicio}</Link>
           {footerLinks.primary.map((item) => (
-            <Link key={item.key} to="/" onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
+            <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
           {footerLinks.secondary.map((item) => (
-            <Link key={item.key} to="/" onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
+            <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
-          <Link to="/" onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
+          <Link to={`${homePath}#contacto`} onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
           <Link to="/privacy-policy">{footerLinks.privacy}</Link>
           <Link to="/terms-of-service">{footerLinks.terms}</Link>
         </div>

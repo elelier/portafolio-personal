@@ -130,6 +130,64 @@ function SobreMi({ style }) {
         ),
       },
     ],
+    'pt-br': [
+      {
+        title: 'Resultados',
+        image: personal_story,
+        alt: 'Elier Loya',
+        subtitle: 'De operações na PepsiCo à cofundação de uma startup com 99,8% de precisão de estoque.',
+        content: (
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={personal_story} alt="Elier Loya" width={500} height={500} effect="blur" placeholderSrc={personal_story} className="optimized-image" />
+            </div>
+            <div className="text-content">
+              <p>Combino experiência operacional, visão de produto e execução técnica para simplificar desafios complexos.</p>
+              <p>Se você tem uma ideia a validar, um processo travado ou uma automação que pode melhorar receita, custo ou velocidade, transformo isso em escopo, protótipo e métricas.</p>
+              <p><strong>Se o projeto está travado, vamos destravá-lo com foco.</strong></p>
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: 'Números concretos',
+        image: professional,
+        alt: 'Resultados profissionais',
+        subtitle: 'Mais de dez anos transformando operações, produtos digitais e canais comerciais.',
+        content: (
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={professional} alt="Resultados profissionais" width={500} height={500} effect="blur" placeholderSrc={professional} className="optimized-image" />
+            </div>
+            <div className="text-content">
+              <h3>Mais de dez anos em operações</h3>
+              <p>Experiência em logística, e-commerce, marketplaces, produto digital e automação de processos.</p>
+              <h3>99,8% de precisão de estoque</h3>
+              <p>Modelo operacional da GoFarma com foco em controle, agilidade e confiabilidade.</p>
+              <h3>144% de crescimento em marketplaces</h3>
+              <p>Expansão digital da Farmalisto com otimização de canais e operações.</p>
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: 'Minha abordagem',
+        image: tech_vision,
+        alt: 'Minha abordagem',
+        subtitle: 'A solução certa começa ao entender o que está limitando o negócio.',
+        content: (
+          <div className="content-container">
+            <div className="image-container">
+              <LazyLoadImage src={tech_vision} alt="Minha abordagem" width={500} height={500} effect="blur" placeholderSrc={tech_vision} className="optimized-image" />
+            </div>
+            <div className="text-content">
+              <p>Aprendi que boas soluções não começam pela tecnologia, mas pela compreensão do desafio real do negócio.</p>
+              <p>Por isso, conecto operações, produto e execução antes de propor a construção de uma solução.</p>
+            </div>
+          </div>
+        ),
+      },
+    ],
   }), []);
 
   useEffect(() => {
@@ -194,7 +252,7 @@ function SobreMi({ style }) {
   return (
     <section id="sobre-mi" className="sobre-mi" style={style} {...swipeHandlers}>
       <div className="contenido-sobre-mi">
-        <h2>{language === 'es' ? 'SOBRE MÍ' : 'ABOUT ME'}</h2>
+        <h2>{language === 'es' ? 'SOBRE MÍ' : language === 'pt-br' ? 'SOBRE MIM' : 'ABOUT ME'}</h2>
 
         <div className="tabs">
           <button className="nav-arrow left" onClick={() => handleManualChange((currentSection - 1 + sections[language].length) % sections[language].length)}>&lt;</button>
@@ -210,8 +268,8 @@ function SobreMi({ style }) {
           {sections[language][currentSection].content}
         </div>
         <div className="cta-seccion-sobre-mi">
-          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Conoce cómo trabajo' : 'See how I work'}</button>
-          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Hablemos de tu reto' : 'Let’s talk about your challenge'}</button>
+          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Conoce cómo trabajo' : language === 'pt-br' ? 'Veja como trabalho' : 'See how I work'}</button>
+          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Hablemos de tu reto' : language === 'pt-br' ? 'Vamos conversar sobre seu desafio' : 'Let’s talk about your challenge'}</button>
         </div>
         <div className="horizontal-scroll-indicator">
           {sections[language].map((_, index) => (

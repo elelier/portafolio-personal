@@ -33,10 +33,20 @@ const DynamicHeroBanner = ({ style }) => {
         cta: 'Let’s connect',
         secondaryCta: 'View experience'
       }
+    ],
+    'pt-br': [
+      {
+        title: 'Transformo processos complexos em soluções que realmente funcionam.',
+        subtitle: 'Ex-COO da GoFarma e Digital Product Owner na CHUBB.',
+        description: 'Uno operações, pensamento de produto e tecnologia prática para resolver desafios reais, com clareza e resultados verificáveis.',
+        icon: '🧪',
+        cta: 'Vamos conversar',
+        secondaryCta: 'Ver minha trajetória'
+      }
     ]
   }), []);
 
-  const scrollHintText = useMemo(() => ({ es: 'Ver soluciones', en: 'See solutions' }), []);
+  const scrollHintText = useMemo(() => ({ es: 'Ver soluciones', en: 'See solutions', 'pt-br': 'Ver soluções' }), []);
   const currentHeroContent = useMemo(() => heroContent[language], [heroContent, language]);
   const currentContent = currentHeroContent[currentIndex];
 
@@ -130,12 +140,12 @@ const DynamicHeroBanner = ({ style }) => {
 
         <div className="info-container">
           <span className="hero-eyebrow">
-            {language === 'es' ? 'Producto digital · Operaciones · IA aplicada' : 'Digital product · Operations · Applied AI'}
+            {language === 'es' ? 'Producto digital · Operaciones · IA aplicada' : language === 'pt-br' ? 'Produto digital · Operações · IA aplicada' : 'Digital product · Operations · Applied AI'}
           </span>
           <h1 className="hero-title shiny">{currentContent?.title}</h1>
           <p className="hero-subtitle">{currentContent?.subtitle}</p>
           <p className="hero-description">{currentContent?.description}</p>
-          <div className="hero-actions" aria-label="Acciones principales">
+          <div className="hero-actions" aria-label={language === 'pt-br' ? 'Ações principais' : language === 'en' ? 'Primary actions' : 'Acciones principales'}>
             <button className="hero-button" onClick={() => scrollToSection('contacto')}>
               {currentContent?.cta}
             </button>

@@ -9,7 +9,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const renderSettingsMenu = ({
   language = 'es',
   currentTheme = 'dark',
-  toggleLanguage = jest.fn(),
+  setLanguage = jest.fn(),
   setTheme = jest.fn()
 } = {}) => {
   const container = document.createElement('div');
@@ -18,7 +18,7 @@ const renderSettingsMenu = ({
 
   act(() => {
     root.render(
-      <LanguageContext.Provider value={{ language, toggleLanguage }}>
+      <LanguageContext.Provider value={{ language, setLanguage }}>
         <ThemeContext.Provider value={{ currentTheme, setTheme }}>
           <SettingsMenu />
         </ThemeContext.Provider>
@@ -28,7 +28,7 @@ const renderSettingsMenu = ({
 
   return {
     container,
-    toggleLanguage,
+    setLanguage,
     setTheme,
     cleanup: () => {
       act(() => root.unmount());
@@ -72,11 +72,11 @@ describe('SettingsMenu', () => {
     expect(container.querySelector('[data-settings-theme="dark"]').getAttribute('aria-label')).toBe('Modo oscuro');
     expect(container.querySelector('[data-settings-theme="system"]').getAttribute('aria-label')).toBe('Tema del sistema');
 
-    const languageButton = container.querySelector('[data-settings-language]');
-    expect(languageButton.tagName).toBe('BUTTON');
-    expect(languageButton.getAttribute('type')).toBe('button');
-    expect(languageButton.getAttribute('aria-label')).toBe('Cambiar idioma a English');
-    expect(languageButton.querySelector('img').getAttribute('aria-hidden')).toBe('true');
+    const languageButtons = container.querySelectorAll('[data-settings-language]');
+    expect(languageButtons).toHaveLength(3);
+    expect(languageButtons[0].getAttribute('aria-pressed')).toBe('true');
+    expect(languageButtons[1].getAttribute('aria-label')).toBe('English');
+    expect(languageButtons[2].getAttribute('aria-label')).toBe('Português (Brasil)');
 
     cleanup();
   });
@@ -118,17 +118,33 @@ describe('SettingsMenu', () => {
   });
 
   it('switches language with an accessible destination label in English', () => {
-    const { container, cleanup, toggleLanguage } = renderSettingsMenu({ language: 'en', currentTheme: 'light' });
+    const { container, cleanup, setLanguage } = renderSettingsMenu({ language: 'en', currentTheme: 'light' });
 
-    const languageButton = container.querySelector('[data-settings-language]');
-    expect(languageButton.getAttribute('aria-label')).toBe('Switch language to Español');
+    const languageButton = container.querySelector('[data-settings-language="pt-br"]');
+    expect(languageButton.getAttribute('aria-label')).toBe('Português (Brasil)');
 
     act(() => {
       languageButton.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
-    expect(toggleLanguage).toHaveBeenCalled();
+    expect(setLanguage).toHaveBeenCalledWith('pt-br');
 
+    cleanup();
+  });
+
+  it('returns keyboard focus to the settings toggle when a language closes the menu', () => {
+    const { container, cleanup } = renderSettingsMenu({ language: 'pt-br' });
+    const toggle = container.querySelector('.settings-toggle');
+
+    act(() => toggle.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    const english = container.querySelector('[data-settings-language="en"]');
+    english.focus();
+    expect(document.activeElement).toBe(english);
+
+    act(() => english.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+
+    expect(container.querySelector('#settings-menu').getAttribute('aria-hidden')).toBe('true');
+    expect(document.activeElement).toBe(toggle);
     cleanup();
   });
 });

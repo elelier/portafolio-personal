@@ -19,7 +19,7 @@ function validContact_(value) {
   if (!value.name.trim() || value.name.length > 255 || !value.message.trim() || value.message.length > 500) return false;
   if (value.mail.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.mail.trim())) return false;
   if (typeof value.submissionId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value.submissionId)) return false;
-  return value.language === 'es' || value.language === 'en';
+  return value.language === 'es' || value.language === 'en' || value.language === 'pt-br';
 }
 
 function safeSheetText_(value) {
@@ -121,13 +121,15 @@ function sendOwnerContact_(contact, to, sheetUrl) {
 
 function sendAutoContact_(contact) {
   var english = contact.language === 'en';
-  var greeting = english ? 'Hi ' : 'Hola ';
+  var portuguese = contact.language === 'pt-br';
+  var greeting = portuguese ? 'Olá ' : english ? 'Hi ' : 'Hola ';
   var thanks = english
     ? 'Thanks for reaching out. I received your message and will review it soon.'
+    : portuguese ? 'Obrigado por entrar em contato. Recebi sua mensagem e vou responder em breve.'
     : 'Gracias por escribirme. Recibí tu mensaje y revisaré el contexto para responderte.';
-  var closing = english ? 'Talk soon,\nElier' : 'Seguimos en contacto,\nElier';
-  var messageLabel = english ? 'YOUR MESSAGE' : 'TU MENSAJE';
-  var description = english ? 'Explore my work and projects:' : 'Conoce mi trabajo y proyectos:';
+  var closing = portuguese ? 'Até breve,\nElier' : english ? 'Talk soon,\nElier' : 'Seguimos en contacto,\nElier';
+  var messageLabel = portuguese ? 'SUA MENSAGEM' : english ? 'YOUR MESSAGE' : 'TU MENSAJE';
+  var description = portuguese ? 'Conheça meu trabalho e projetos:' : english ? 'Explore my work and projects:' : 'Conoce mi trabajo y proyectos:';
   var body = greeting + contact.name + ':\n\n' + thanks + '\n\n' +
     messageLabel + ':\n' + contact.message + '\n\n' + closing +
     '\n\n' + description + ' https://elelier.com';
@@ -154,7 +156,7 @@ function sendAutoContact_(contact) {
   );
   MailApp.sendEmail({
     to: contact.mail,
-    subject: english ? 'I received your message — Elier' : 'Recibí tu mensaje — Elier',
+    subject: portuguese ? 'Recebi sua mensagem — Elier' : english ? 'I received your message — Elier' : 'Recibí tu mensaje — Elier',
     body: body, htmlBody: htmlBody, replyTo: 'hola@elelier.com', name: 'Elier'
   });
 }
