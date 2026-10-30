@@ -28,7 +28,7 @@ function Footer() {
             <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
           {footerLinks.secondary.map((item) => (
-            <Link key={item.key} to={homePath} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
+            <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
           <Link to={`${homePath}#contacto`} onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
           <Link to="/privacy-policy">{footerLinks.privacy}</Link>
