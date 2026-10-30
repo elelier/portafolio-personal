@@ -1,5 +1,8 @@
 # elelier.com — QA y corte controlado de contacto
 
+> **Aviso de vigencia (29/oct/2026):** este runbook preserva **el estado y la evidencia de Preview del 27/oct**, anteriores a la integración del PR #58 a `main`. La activación Google en Production fue aprobada posteriormente por el stakeholder, pero no se releyó el flag ni el deployment efectivo en esta reconciliación. Las expresiones «BuildShip sigue en producción» y «NO-GO para corte» que aparecen debajo se refieren al **snapshot histórico del 27/oct**, no son una afirmación de estado actual. Para el inventario vigente y pruebas pendientes, ver [fuente de verdad](SOURCE_OF_TRUTH_CONTACT_AND_CORE_DB.md).
+
+
 **Estado (27 oct 2026):** QA E2E de Preview **PASS** y preflight de infraestructura productiva preparado. **NO-GO para corte** hasta autorización explícita de merge/activación y smoke test controlado. BuildShip sigue en producción.
 
 ## Fuente de verdad
