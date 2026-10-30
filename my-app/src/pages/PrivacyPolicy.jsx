@@ -4,7 +4,7 @@ import SEO from '../components/SEO';
 import { getRouteSeoPolicy } from '../config/routeSeoPolicy';
 import '../styles/LegalPages.css';
 
-const OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
+const OG_IMAGE = 'https://elelier.com/images/sites/cover-desktop.jpg';
 const PRIVACY_EMAIL = 'privacidad@elelier.com';
 
 const content = {
