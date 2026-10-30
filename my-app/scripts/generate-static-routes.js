@@ -26,12 +26,12 @@ const staticRoutes = [
 const nonPublicRoutes = new Set(['hero-banner', 'tarifas-2024', 'sites', 'client-demo', 'gracias-agenda']);
 const indexableRoutes = {
   'privacy-policy': {
-    title: 'Política de privacidad | Elier Loya',
-    description: 'Política de privacidad de elelier.com y sus canales de contacto.',
+    title: 'Política de Privacidad | Elier Loya',
+    description: 'Política de privacidad de elelier.com sobre datos personales, cookies, Google Analytics 4, Google Tag Manager, formularios de contacto y derechos de privacidad.',
   },
   'terms-of-service': {
-    title: 'Condiciones del servicio | Elier Loya',
-    description: 'Condiciones de uso de elelier.com.',
+    title: 'Condiciones del Servicio | Elier Loya',
+    description: 'Condiciones del servicio y términos de uso aplicables a elelier.com, su contenido, formularios y posibles contrataciones.',
   },
 };
 const origin = 'https://elelier.com';
