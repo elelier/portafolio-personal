@@ -187,7 +187,11 @@ const SettingsMenu = () => {
               aria-label={option.label}
               lang={option.code === 'pt-br' ? 'pt-BR' : option.code}
               title={option.label}
-              onClick={() => { setLanguage(option.code); setIsMenuOpen(false); }}
+              onClick={() => {
+                setLanguage(option.code);
+                setIsMenuOpen(false);
+                toggleRef.current?.focus();
+              }}
             >
               <span aria-hidden="true">{option.short}</span>
             </button>

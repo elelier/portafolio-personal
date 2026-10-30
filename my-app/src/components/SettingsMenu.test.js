@@ -131,4 +131,20 @@ describe('SettingsMenu', () => {
 
     cleanup();
   });
+
+  it('returns keyboard focus to the settings toggle when a language closes the menu', () => {
+    const { container, cleanup } = renderSettingsMenu({ language: 'pt-br' });
+    const toggle = container.querySelector('.settings-toggle');
+
+    act(() => toggle.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    const english = container.querySelector('[data-settings-language="en"]');
+    english.focus();
+    expect(document.activeElement).toBe(english);
+
+    act(() => english.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+
+    expect(container.querySelector('#settings-menu').getAttribute('aria-hidden')).toBe('true');
+    expect(document.activeElement).toBe(toggle);
+    cleanup();
+  });
 });

@@ -10,6 +10,17 @@ const source = path.join(outputDir, 'index.html');
 const origin = 'https://elelier.com';
 
 const localized = {
+  es: {
+    tag: 'es-MX',
+    ogLocale: 'es_MX',
+    title: 'Transformo procesos complicados en soluciones que realmente funcionan. | Elier Loya',
+    description: 'Transformo procesos complicados en soluciones que realmente funcionan. Especialista en operaciones, producto digital e IA aplicada.',
+    headline: 'Transformo procesos complicados en soluciones que realmente funcionan.',
+    introduction: 'Combino operaciones, producto digital e inteligencia artificial aplicada para resolver retos reales de negocios.',
+    sections: ['Productos digitales y sitios web', 'Automatización y mejora de procesos', 'Proyectos reales y trayectoria profesional'],
+    contact: 'Contactar a Elier',
+    mainLabel: 'Presentación del portafolio',
+  },
   en: {
     tag: 'en',
     ogLocale: 'en_US',
@@ -19,6 +30,7 @@ const localized = {
     introduction: 'I combine operations, digital product and applied AI to solve real business challenges.',
     sections: ['Digital products and websites', 'Automation and process improvement', 'Real projects and professional experience'],
     contact: 'Contact Elier',
+    mainLabel: 'Portfolio introduction',
   },
   'pt-br': {
     tag: 'pt-BR',
@@ -29,6 +41,7 @@ const localized = {
     introduction: 'Uno operações, produto digital e IA aplicada para resolver desafios reais dos negócios.',
     sections: ['Produtos digitais e sites', 'Automação e melhoria de processos', 'Projetos reais e trajetória profissional'],
     contact: 'Entre em contato com Elier',
+    mainLabel: 'Apresentação do portfólio',
   }
 };
 
@@ -40,13 +53,13 @@ function escapeHtml(text) {
 }
 
 function setMeta(html, attribute, key, value) {
-  const tag = `<meta ${attribute}="${key}" content="${escapeHtml(value)}">`;
+  const tag = `<meta ${attribute}="${key}" content="${escapeHtml(value)}" data-rh="true">`;
   const pattern = new RegExp(`<meta\\s+${attribute}="${key}"\\s+content="[^"]*"\\s*\\/?>`, 'i');
   return pattern.test(html) ? html.replace(pattern, tag) : html.replace('</head>', `    ${tag}\n</head>`);
 }
 
 function generateLocaleHtml(sourceHtml, lang, info) {
-  const canonical = origin + (lang === 'en' ? '/en/' : '/pt-br/');
+  const canonical = origin + ({ es: '/', en: '/en/', 'pt-br': '/pt-br/' })[lang];
   let html = sourceHtml.replace(/<html lang="[^"]*"/i, `<html lang="${info.tag}"`);
   html = html.replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(info.title)}</title>`);
   html = setMeta(html, 'name', 'description', info.description);
@@ -63,9 +76,14 @@ function generateLocaleHtml(sourceHtml, lang, info) {
   html = html.replace(/https:\/\/elelier\.com\/static\/media\/eleliercom\.[a-z0-9]+\.png/g, origin + '/images/sites/cover-desktop.jpg');
   html = html.replace(/<link\s+rel="canonical"[^>]*>/gi, '');
   html = html.replace(/<link\s+rel="alternate"\s+hreflang="[^"]+"[^>]*>/gi, '');
-  const alternateTags = homePaths.map((route, i) => `<link rel="alternate" hreflang="${localeHreflang[i]}" href="${origin + route}">`).join('\n    ');
-  html = html.replace('</head>', `    <link rel="canonical" href="${canonical}">\n    ${alternateTags}\n    <link rel="alternate" hreflang="x-default" href="${origin}/">\n</head>`);
-  const preview = `<main lang="${info.tag}" aria-label="Portfolio introduction">
+  // Helmet's client-side head reconciliation only removes tags marked data-rh.
+  // Without this ownership marker, static metadata remains after a locale switch.
+  html = html.replace(/<meta\b[^>]*>/gi, (tag) =>
+    tag.includes('data-rh=') ? tag : tag.replace(/\s*\/?\>$/, (end) => ` data-rh="true"${end}`)
+  );
+  const alternateTags = homePaths.map((route, i) => `<link rel="alternate" hreflang="${localeHreflang[i]}" href="${origin + route}" data-rh="true">`).join('\n    ');
+  html = html.replace('</head>', `    <link rel="canonical" href="${canonical}" data-rh="true">\n    ${alternateTags}\n    <link rel="alternate" hreflang="x-default" href="${origin}/" data-rh="true">\n</head>`);
+  const preview = `<main lang="${info.tag}" aria-label="${escapeHtml(info.mainLabel)}">
       <h1>${escapeHtml(info.headline)}</h1>
       <p>${escapeHtml(info.introduction)}</p>
       <ul>${info.sections.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
@@ -80,8 +98,8 @@ function generateLocaleHtml(sourceHtml, lang, info) {
 if (!fs.existsSync(source)) throw new Error(`Missing build/index.html: ${source}`);
 const sourceHtml = fs.readFileSync(source, 'utf8');
 for (const [lang, info] of Object.entries(localized)) {
-  const directory = path.join(outputDir, lang);
+  const directory = lang === 'es' ? outputDir : path.join(outputDir, lang);
   fs.mkdirSync(directory, { recursive: true });
   fs.writeFileSync(path.join(directory, 'index.html'), generateLocaleHtml(sourceHtml, lang, info));
 }
-console.log('Generated localized homepage HTML for en and pt-br.');
+console.log('Generated localized homepage HTML for es, en and pt-br.');

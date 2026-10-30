@@ -47,23 +47,37 @@ jobs:
 
       - name: Verify real localized build outputs
         run: |
+          test -s build/index.html
           test -s build/en/index.html
           test -s build/pt-br/index.html
+          grep -Fq '<html lang="es-MX"' build/index.html
           grep -Fq '<html lang="en"' build/en/index.html
           grep -Fq '<html lang="pt-BR"' build/pt-br/index.html
+          grep -Fq 'rel="canonical" href="https://elelier.com/"' build/index.html
           grep -Fq 'https://elelier.com/en/' build/en/index.html
           grep -Fq 'https://elelier.com/pt-br/' build/pt-br/index.html
           grep -Fq '<loc>https://elelier.com/en/</loc>' build/sitemap.xml
           grep -Fq '<loc>https://elelier.com/pt-br/</loc>' build/sitemap.xml
 
-      - name: Smoke test public Cloudflare branch Preview (read-only)
-        env:
-          PREVIEW_BASE: https://feat-seo-05-trilingual-route.elelier.pages.dev
+      - name: Verify local build HTTP server contract
+        run: node --test scripts/serve-built-pages.test.cjs
+
+      - name: Smoke test exact checked-out build over HTTP (read-only)
         run: |
-          curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors "$PREVIEW_BASE/en/" -o /tmp/preview-en.html
-          curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors "$PREVIEW_BASE/pt-br/" -o /tmp/preview-pt.html
+          node scripts/serve-built-pages.cjs > /tmp/elelier-qa-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if curl --fail --silent http://127.0.0.1:4173/ -o /tmp/preview-es.html; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --show-error http://127.0.0.1:4173/ -o /tmp/preview-es.html
+          curl --fail --silent --show-error http://127.0.0.1:4173/en/ -o /tmp/preview-en.html
+          curl --fail --silent --show-error http://127.0.0.1:4173/pt-br/ -o /tmp/preview-pt.html
+          grep -Fq '<html lang="es-MX"' /tmp/preview-es.html
           grep -Fq '<html lang="en"' /tmp/preview-en.html
           grep -Fq '<html lang="pt-BR"' /tmp/preview-pt.html
+          grep -Fq 'rel="canonical" href="https://elelier.com/"' /tmp/preview-es.html
           grep -Fq 'https://elelier.com/en/' /tmp/preview-en.html
           grep -Fq 'https://elelier.com/pt-br/' /tmp/preview-pt.html
 
@@ -91,6 +105,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.19.0'
+          cache: npm
+          cache-dependency-path: my-app/package-lock.json
+      - name: Install app dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build exact checked-out commit
+        env:
+          CI: 'true'
+          REACT_APP_CONTACT_PROVIDER: google
+          REACT_APP_TURNSTILE_SITE_KEY: qa-placeholder
+        run: npm run build
       - name: Install isolated Playwright runner
         run: npm install --prefix /tmp/elelier-playwright --no-save --no-package-lock --ignore-scripts playwright@1.56.1
       - name: Install Chromium
@@ -98,7 +122,17 @@ jobs:
       - name: Capture mobile/desktop, light/dark, ES/EN/PT-BR
         env:
           NODE_PATH: /tmp/elelier-playwright/node_modules
-        run: node scripts/qa-visual-preview.cjs
+          ELELIER_PREVIEW_URL: http://127.0.0.1:4173
+        run: |
+          node scripts/serve-built-pages.cjs > /tmp/elelier-visual-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if curl --fail --silent http://127.0.0.1:4173/ -o /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --show-error http://127.0.0.1:4173/ -o /dev/null
+          node scripts/qa-visual-preview.cjs
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4

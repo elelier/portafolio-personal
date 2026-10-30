@@ -4,7 +4,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('playwright');
 
-const BASE = (process.env.ELELIER_PREVIEW_URL || 'https://feat-seo-05-trilingual-route.elelier.pages.dev').replace(/\/$/, '');
+// Default to the checked-out build served locally; remote Preview is opt-in only.
+const BASE = (process.env.ELELIER_PREVIEW_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
 const OUT = process.env.ELELIER_VISUAL_ARTIFACTS || path.resolve(__dirname, '../../qa-visual-artifacts');
 const cases = [
   { locale: 'es', route: '/', expectedLang: 'es-MX', headline: 'Transformo procesos complicados', contact: 'Enviar mensaje' },
@@ -40,6 +41,12 @@ async function run() {
             assert.equal(await page.locator('#contacto button[type="submit"]').count(), 1, `${name}: form submit control`);
             assert.match(await page.locator('#contacto').innerText(), new RegExp(item.contact, 'i'), `${name}: contact label`);
             assert.match(await page.locator('#hero-banner').innerText(), new RegExp(item.headline, 'i'), `${name}: headline`);
+            await page.waitForFunction((canonical) =>
+              document.head.querySelectorAll('link[rel="canonical"]').length === 1 &&
+              document.head.querySelector('link[rel="canonical"]')?.href === canonical,
+              'https://elelier.com' + item.route);
+            assert.equal(await page.locator('link[rel="alternate"][hreflang]').count(), 4, `${name}: hreflang count`);
+            assert.equal(await page.locator('meta[property="og:url"]').count(), 1, `${name}: og:url count`);
             await page.locator('.settings-toggle').click();
             await page.locator('[data-settings-theme="' + theme + '"]').click();
             assert.equal(await page.locator('[data-settings-theme="' + theme + '"]').getAttribute('aria-pressed'), 'true', `${name}: theme toggle`);
@@ -74,6 +81,12 @@ async function run() {
       await page.locator('.settings-toggle').click();
       await page.locator('[data-settings-language="en"]').click();
       await page.waitForURL('**/en/#casos-reales');
+      assert.equal(await page.locator('.settings-toggle').evaluate((el) => el === document.activeElement), true,
+        'locale-switch: focus returns to settings toggle');
+      await page.waitForFunction(() =>
+        document.head.querySelectorAll('link[rel="canonical"]').length === 1 &&
+        document.head.querySelector('link[rel="canonical"]')?.href === 'https://elelier.com/en/');
+      assert.equal(await page.locator('meta[property="og:url"]').count(), 1, 'locale-switch: og:url remains unique');
       assert.equal(await page.locator('html').getAttribute('lang'), 'en');
       await page.goBack();
       await page.waitForURL('**/pt-br/#casos-reales');
