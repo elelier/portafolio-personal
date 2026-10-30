@@ -40,8 +40,8 @@ describe('SEO static route generation', () => {
   });
 
   it.each([
-    ['privacy-policy', 'Política de privacidad | Elier Loya'],
-    ['terms-of-service', 'Condiciones del servicio | Elier Loya'],
+    ['privacy-policy', 'Política de Privacidad | Elier Loya'],
+    ['terms-of-service', 'Condiciones del Servicio | Elier Loya'],
   ])('provides legal route %s with an indexable canonical and unique title', (route, title) => {
     const html = read(route);
     expect(html).toContain(`<title>${title}</title>`);
