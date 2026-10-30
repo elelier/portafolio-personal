@@ -19,7 +19,7 @@ function validContact_(value) {
   if (!value.name.trim() || value.name.length > 255 || !value.message.trim() || value.message.length > 500) return false;
   if (value.mail.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.mail.trim())) return false;
   if (typeof value.submissionId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value.submissionId)) return false;
-  return value.language === 'es' || value.language === 'en';
+  return value.language === 'es' || value.language === 'en' || value.language === 'pt-br';
 }
 
 function safeSheetText_(value) {
