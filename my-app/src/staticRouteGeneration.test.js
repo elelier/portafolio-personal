@@ -34,6 +34,7 @@ describe('SEO static route generation', () => {
     expect(fs.existsSync(path.join(publicDir, imageRelativePath))).toBe(true);
     expect(html).toContain(`<meta property="og:image" content="${imageUrl}">`);
     expect(html).toContain(`<meta name="twitter:image" content="${imageUrl}">`);
+    expect(html).toContain('<meta name="twitter:image:alt" content="Vista del portafolio de Elier Loya: transformación digital, operaciones y producto.">');
     expect(html).toContain('<link rel="canonical" href="https://elelier.com/">');
     expect(html).toContain('href="/favicon.ico"');
     expect(html).not.toContain('static/media/eleliercom.');
