@@ -54,6 +54,8 @@ function generateLocaleHtml(sourceHtml, lang, info) {
   html = setMeta(html, 'property', 'og:description', info.description);
   html = setMeta(html, 'property', 'og:url', canonical);
   html = setMeta(html, 'property', 'og:locale', info.ogLocale);
+  html = setMeta(html, 'property', 'og:image', origin + '/images/sites/cover-desktop.jpg');
+  html = setMeta(html, 'name', 'twitter:image', origin + '/images/sites/cover-desktop.jpg');
   html = setMeta(html, 'name', 'twitter:title', info.title);
   html = setMeta(html, 'name', 'twitter:description', info.description);
   html = setMeta(html, 'name', 'robots', 'index,follow');
