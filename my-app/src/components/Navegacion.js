@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import { activeSectionMap, getNavigationContent, observedSectionIds } from '../config/navigation';
+import { homePathFor } from '../i18n/locales';
 import '../styles/components/Navegacion.css';
 
 const sectionOrder = new Map(observedSectionIds.map((id, index) => [id, index]));
@@ -39,6 +40,7 @@ function Navegacion() {
   const menuToggleRef = useRef(null);
   const visibleSectionEntriesRef = useRef(new Map());
   const content = getNavigationContent(language);
+  const homePath = homePathFor(language);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -140,7 +142,7 @@ function Navegacion() {
     <nav className="navegacion" role="navigation" aria-label={content.navLabel}>
       <div className="nav-content">
         <div className="logo-container">
-          <Link to="/" onClick={() => handleScrollToElement('hero-banner')}>
+          <Link to={homePath} onClick={() => handleScrollToElement('hero-banner')}>
             <div className="logo">Elier Loya Mata</div>
           </Link>
         </div>
@@ -160,7 +162,7 @@ function Navegacion() {
           {content.primary.map((item) => (
             <li key={item.key}>
               <Link
-                to="/"
+                to={homePath}
                 className={isActive(item.key) ? 'is-active' : ''}
                 aria-current={isActive(item.key) ? 'location' : undefined}
                 onClick={() => handleScrollToElement(item.target)}
@@ -192,7 +194,7 @@ function Navegacion() {
               {content.secondary.map((item) => (
                 <li key={item.key}>
                   <Link
-                    to="/"
+                    to={homePath}
                     className={isActive(item.key) ? 'is-active' : ''}
                     aria-current={isActive(item.key) ? 'location' : undefined}
                     onClick={() => handleScrollToElement(item.target)}
@@ -206,7 +208,7 @@ function Navegacion() {
 
           <li>
             <Link
-              to="/"
+              to={homePath}
               className={`contact-button${isActive('contact') ? ' is-active' : ''}`}
               aria-current={isActive('contact') ? 'location' : undefined}
               onClick={() => handleScrollToElement('contacto')}
