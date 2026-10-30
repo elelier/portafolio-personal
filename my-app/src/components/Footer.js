@@ -25,12 +25,12 @@ function Footer() {
         <div className="footer-links">
           <Link to={homePath} onClick={() => handleScrollToElement('hero-banner')}>{footerLinks.inicio}</Link>
           {footerLinks.primary.map((item) => (
-            <Link key={item.key} to={homePath} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
+            <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
           {footerLinks.secondary.map((item) => (
             <Link key={item.key} to={homePath} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
-          <Link to={homePath} onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
+          <Link to={`${homePath}#contacto`} onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
           <Link to="/privacy-policy">{footerLinks.privacy}</Link>
           <Link to="/terms-of-service">{footerLinks.terms}</Link>
         </div>
