@@ -1,6 +1,6 @@
 # elelier.com — Estado operativo del formulario de contacto
 
-> **Fuente canónica de operación · revisada el 29 de octubre de 2026.** Este documento describe el flujo aprobado y distingue el estado productivo de la implementación en revisión. Los registros de corte anteriores se conservan como evidencia histórica, no como instrucciones vigentes. No sustituye la verificación periódica de Cloudflare, Google y GitHub.
+> **Fuente canónica de operación · revisada el 30 de octubre de 2026.** Este documento describe el flujo aprobado y distingue el estado productivo de la implementación en revisión. Los registros de corte anteriores se conservan como evidencia histórica, no como instrucciones vigentes. No sustituye la verificación periódica de Cloudflare, Google y GitHub.
 
 ## Arquitectura y propietarios
 
@@ -33,6 +33,21 @@ El recibo incluye un `submissionId` que debe coincidir con la solicitud, y un `n
 - **Estado de despliegue al documentar:** PR #80 en **draft**, con pruebas en Preview y recepción observada de `generate_lead` y `contact_click` en GA4. **Eso no implica que esta instrumentación ya esté publicada en Production.** La activación como evento clave en GA4 debe verificarse por separado.
 
 Evidencias: [PR #80 — QA independiente](https://github.com/elelier/portafolio-personal/pull/80#issuecomment-6504595786) y [issue #65 — aceptación](https://github.com/elelier/portafolio-personal/issues/65#issuecomment-6504595315).
+
+## Identidad de deployments Google Apps Script (reconciliación 30/oct/2026)
+
+**Identificación verificable; no confundir la etiqueta visible con el destino.** Google Apps Script utiliza **un solo proyecto** `elelier-contact-google-preview` ejecutado como `loya.elier@gmail.com`, con dos implementaciones web activas. Durante la auditoría de PR #84 ambas estaban mal etiquetadas como Preview; la identidad de Production se reconstruyó desde el [corte histórico del 27/oct](contact-google-cutover.md) y se contrastó con el ID/versionado vigente de la consola.
+
+| Ambiente de Apps Script | ID exacto del deployment web activo | Versión constatada el 30/oct | Observación |
+| --- | --- | --- | --- |
+| **Production — NO TOCAR** | `AKfycbwPr31QbDh8jwrPAc1xpW8YH-5M7oefQvJK0FJ6LdNrn7z2AY_nReJxp4xkFe3eAyH8` | **v4**, sin cambios | ID citado en el corte histórico y confirmado activo v4 después de actualizar Preview. Su descripción visible sigue siendo ambigua: **el ID manda**. |
+| **Preview SEO-05 — PR #84** | `AKfycbw0_G12EHqA1rGFKjpIJL9Oef2boiVA3CF5SYdcWZeetZbz3L58p_KSG9ZmevzBJy-w` | **v6**, actualizada 30/oct/2026 | Conservó ID/URL `/exec` y permisos. Descripción diferenciada: `SEO-05 PT-BR Preview QA — PR #84 — versionado; NO Production`. Versión anterior del deployment web: v4. |
+
+Estos IDs identifican endpoints, **no son secretos de autenticación**; no publicar el secreto compartido ni Script Properties. En Google, guardar el editor de código (HEAD) no cambia la versión v4 fija de Production. **Los dos endpoints comparten Script Properties y la misma hoja `Leads/contact_v2`**: nunca tratar Preview como aislado en datos.
+
+**Verificación de enrutamiento Cloudflare pendiente:** `CONTACT_APPS_SCRIPT_URL` de Pages Preview se muestra cifrado y su valor no es recuperable en el dashboard. La publicación del deployment Preview v6 no prueba por sí sola que Pages Preview lo invoque. Se requiere un solo E2E identificado y verificación de respuesta/filas/correos antes de declarar PASS, sin rotar secretos ni alterar Production. Véase [runbook PR #84](qa-seo05-ptbr-apps-script-preview.md) y [evidencia de QA](https://github.com/elelier/portafolio-personal/pull/84#issuecomment-6528261137).
+
+**Gate permanente para cualquier cambio Apps Script:** contrastar ID activo contra esta tabla e historial, revisar versiones de **ambos** deployments antes/después y preservar URL/permisos/Script Properties. No publicar usando sólo el nombre visible. Si el destino de Pages Preview no está probado, realizar únicamente una prueba controlada aprobada y revisar el resultado antes de más cambios. No eliminar registros QA sin una orden separada.
 
 ## Ambientes y operación
 
