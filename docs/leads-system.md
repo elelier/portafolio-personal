@@ -1,5 +1,8 @@
 # Sistema de Leads
 
+> **Estado documental — 29/oct/2026:** este runbook describe el **Worker histórico de leads** (`workers/lead-worker.js`), separado de `Contacto.js` y de la ruta Google/BuildShip. Que el código exista no confirma que el Worker esté desplegado o reciba tráfico hoy. La referencia a `LeadQualifier.jsx` y la redirección de calificación HIGH es histórica y **no está acreditada por el árbol actual de `my-app/src/components`**; no utilizar este documento como fuente de verdad del formulario principal. Ver [reconciliación actual](SOURCE_OF_TRUTH_CONTACT_AND_CORE_DB.md).
+
+
 Este documento detalla la arquitectura, endpoints, configuración y solución de problemas del sistema de captura de leads.
 
 ## Arquitectura
