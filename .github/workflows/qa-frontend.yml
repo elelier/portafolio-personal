@@ -18,8 +18,6 @@ jobs:
         working-directory: my-app
     env:
       CI: 'true'
-      REACT_APP_CONTACT_PROVIDER: google
-      REACT_APP_TURNSTILE_SITE_KEY: qa-placeholder
 
     steps:
       - name: Checkout PR
@@ -39,6 +37,9 @@ jobs:
         run: npm test -- --runInBand --watchAll=false
 
       - name: Build CRA and static routes
+        env:
+          REACT_APP_CONTACT_PROVIDER: google
+          REACT_APP_TURNSTILE_SITE_KEY: qa-placeholder
         run: npm run build
 
       - name: Restore generated passcodes and inspect diff
