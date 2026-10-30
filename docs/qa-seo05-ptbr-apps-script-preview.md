@@ -1,7 +1,7 @@
 # SEO-05 — Runbook de corte y prueba PT-BR exclusivamente en Preview
 
 **Referencia:** PR [#84](https://github.com/elelier/portafolio-personal/pull/84), rama `feat/seo-05-trilingual-routes`.
-**Fecha:** 30/10/2026. **Estado actualizado:** Apps Script Preview v6 publicado con URL e ID conservados; Production v4 verificado intacto. **E2E PT-BR aún pendiente.** No es un GO de Production.
+**Fecha:** 30/10/2026. **Estado actualizado:** Apps Script Preview v6 publicado con URL e ID conservados; Production v4 intacto. **E2E PT-BR completado con 1 envío, 1 fila y 2 mensajes aceptados.** El código HTTP exacto no quedó capturado en Network. **No es un GO de Production.**
 
 ## Topología y aislamiento
 
@@ -33,6 +33,17 @@
 - No transmitir nombre/correo/mensaje/ID a GA4. No reintentar un POST sin investigar, por la idempotencia y posible correo duplicado.
 - Si responde `400` `invalid_contact`, verificar que ambos componentes Cloudflare Function y Apps Script en Preview admiten `pt-br`. Si responde `502`, leer logs **sin exponer secretos** y evitar reenvío indiscriminado.
 
+## Evidencia de ejecución real — 30/oct/2026
+
+- **Origen:** `https://feat-seo-05-trilingual-route.elelier.pages.dev/pt-br/#contacto` (Cloudflare Pages Preview). **Una sola pulsación** de `Enviar mensagem` con el contacto QA autorizado; no se realizó reintento.
+- **Datos:** `QA SEO05 PTBR PR84` / `hola@elelier.com` / `Teste QA autorizado do formulário em português brasileiro. Não tratar como oportunidade comercial.`
+- **Frontend:** tras el envío mostró el mensaje localizado `Obrigado! Recebi sua mensagem. Vou analisar o contexto e responder com o próximo passo mais útil.`; los tres campos se reiniciaron. Turnstile mostró estado válido.
+- **Persistencia:** archivo Google `Leads`, pestaña `contact_v2`, **fila 7**, `created_at_utc=2026-10-30T17:08:32.817Z` y **una sola coincidencia** de ese nombre dentro de `A1:M1000`. `internal_mail_status=sent`, `autoreply_status=sent`, `source=elelier.com`. El identificador interno de envío coincide entre la fila y el cuerpo del aviso al propietario; no se reproduce en esta documentación.
+- **Notificación interna:** Gmail `loya.elier@gmail.com` mostró el correo **recibido** `Nuevo contacto desde elelier.com — QA SEO05 PTBR PR84` a las `17:08:33 UTC`, con nombre, email, mensaje e ID coincidentes. [Abrir evidencia en Gmail](https://mail.google.com/mail/u/?authuser=loya.elier%40gmail.com#all/1a18dc8dcf095e80).
+- **Acuse PT-BR:** Gmail mostró mensaje **enviando a** `hola@elelier.com` con asunto `Recebi sua mensagem — Elier`, saludo `Olá QA SEO05 PTBR PR84` y contenido portugués correcto, a las `17:08:33 UTC`. [Abrir evidencia en Gmail](https://mail.google.com/mail/u/?authuser=loya.elier%40gmail.com#all/1a18dc8db16c6ee4). **Limitación:** se verificó envío en Gmail y estado `sent` de Apps Script, no lectura/recepción final en una sesión independiente de `hola@elelier.com`.
+- **HTTP:** la petición fue ejecutada y la UI alcanzó éxito con persistencia y notificaciones comprobadas. **El status HTTP exacto (`201` o `202`), el JSON de respuesta y cabeceras no se capturaron directamente** durante esta única solicitud; no declararlos probados. No se repetirá el POST para obtenerlos sin nueva autorización. Según el contrato documentado, la UI de éxito requiere un recibo aceptado, pero esto es evidencia indirecta.
+- **Enrutamiento:** el E2E de `pt-br` corroboró funcionalidad de la ruta Cloudflare Preview y del backend con soporte portugués. El valor cifrado de `CONTACT_APPS_SCRIPT_URL` no pudo compararse literalmente con el ID de Apps Script Preview; mantener esa limitación explícita y el gate de identidad para futuros cambios.
+
 ## Rollback
 
 Si hay problemas, volver a **editar el deployment Preview** y elegir su **versión anterior** (manteniendo su URL). **No tocar Production v4.** Dejar constancia en PR #84 del resultado, timestamp, versión de Preview y si hubo registro de prueba; los registros QA se eliminan sólo mediante acción administrativa autorizada.
@@ -44,7 +55,8 @@ La CI `visual-preview` del PR #84 genera capturas de hero/contacto para ES, EN y
 ## Criterios de aceptación
 
 - [x] Preview v6 publicado; **Production v4 sin cambios**, constatado en Apps Script tras recarga.
-- [ ] `POST /api/contact` real completado una vez, registro almacenado y correos observados.
-- [ ] Respuesta visible localizada y sin duplicados.
+- [x] Un único `POST /api/contact` real iniciado, registro almacenado y ambos correos aceptados/observados en Gmail.
+- [x] Respuesta visible localizada; una sola fila QA (sin duplicados observados).
+- [ ] Captura directa del código HTTP exacto y JSON del `POST` (no quedó disponible tras el único envío; **no reintentar sin autorización**).
 - [x] 24 capturas hero/contacto revisadas; CI visual 13/13 PASS y ancla PT-BR inspeccionada en Chrome escritorio/móvil.
-- [ ] PR #84 permanece draft; no merge ni deploy productivo sin autorización separada.
+- [x] PR #84 permanece draft; no merge ni deploy productivo sin autorización separada.
