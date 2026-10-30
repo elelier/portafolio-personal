@@ -7,7 +7,7 @@ import { readHeadState, renderRoute } from './seoHeadRouteTestUtils';
 
 describe('route SEO policy', () => {
   it('keeps the sitemap limited to the approved indexable paths', () => {
-    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/privacy-policy', '/terms-of-service']);
+    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy', '/terms-of-service']);
     expect(getRouteSeoPolicy('/portafolio')).toMatchObject({
       canonicalPath: '/',
       robots: 'noindex,follow',
