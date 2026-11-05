@@ -1,5 +1,7 @@
 import React, { act } from 'react';
 import { createRoot } from 'react-dom/client';
+import fs from 'fs';
+import path from 'path';
 import SettingsMenu from './SettingsMenu';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -128,6 +130,29 @@ describe('SettingsMenu', () => {
     });
 
     expect(setLanguage).toHaveBeenCalledWith('pt-br');
+
+    cleanup();
+  });
+
+  it.each([
+    ['es', '/assets/files/flag-mx.png', 'Español'],
+    ['en', '/assets/files/flag-us.png', 'English'],
+    ['pt-br', '/assets/files/flag-br.svg', 'Português (Brasil)']
+  ])('shows the local circular flag for %s without duplicating its accessible label', (lang, expectedSrc, label) => {
+    const { container, cleanup } = renderSettingsMenu({ language: lang });
+
+    act(() => container.querySelector('.settings-toggle').click());
+
+    const button = container.querySelector(`[data-settings-language="${lang}"]`);
+    const image = button.querySelector('img.flag-image');
+    expect(image).not.toBeNull();
+    expect(image.getAttribute('src')).toBe(expectedSrc);
+    expect(image.getAttribute('alt')).toBe('');
+    expect(image.getAttribute('aria-hidden')).toBe('true');
+    expect(button.getAttribute('aria-label')).toBe(label);
+    expect(button.getAttribute('aria-pressed')).toBe('true');
+    expect(button.textContent).toBe('');
+    expect(fs.existsSync(path.resolve(__dirname, '../../public' + expectedSrc))).toBe(true);
 
     cleanup();
   });

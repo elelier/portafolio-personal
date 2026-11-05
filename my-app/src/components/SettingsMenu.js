@@ -174,9 +174,9 @@ const SettingsMenu = () => {
         </div>
         <div className="settings-language-group" role="group" aria-label={t.language}>
           {[
-            { code: 'es', label: 'Español', short: 'ES' },
-            { code: 'en', label: 'English', short: 'EN' },
-            { code: 'pt-br', label: 'Português (Brasil)', short: 'PT' }
+            { code: 'es', label: 'Español', flag: '/assets/files/flag-mx.png' },
+            { code: 'en', label: 'English', flag: '/assets/files/flag-us.png' },
+            { code: 'pt-br', label: 'Português (Brasil)', flag: '/assets/files/flag-br.svg' }
           ].map((option) => (
             <button
               key={option.code}
@@ -193,7 +193,7 @@ const SettingsMenu = () => {
                 toggleRef.current?.focus();
               }}
             >
-              <span aria-hidden="true">{option.short}</span>
+              <img src={option.flag} alt="" aria-hidden="true" className="flag-image" />
             </button>
           ))}
         </div>

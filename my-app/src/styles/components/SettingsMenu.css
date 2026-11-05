@@ -111,8 +111,11 @@
 }
 
 .flag-image {
+  display: block;
   width: 24px;
   height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .tooltip {
