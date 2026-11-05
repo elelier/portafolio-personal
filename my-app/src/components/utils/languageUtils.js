@@ -11,16 +11,14 @@ export function getTranslation(key, language) {
 }
 
 export function getCurrentLanguage() {
-  const storedLang = localStorage.getItem('language');
-  if (storedLang) {
-    return storedLang;
+  // The URL wins over saved preferences and browser preferences.
+  if (typeof window !== 'undefined') {
+    const path = window.location.pathname;
+    if (path === '/en' || path.startsWith('/en/')) return 'en';
+    if (path === '/pt-br' || path.startsWith('/pt-br/')) return 'pt-br';
+    if (path === '/') return 'es';
   }
-  // Verifica el idioma del navegador, si es 'es-XX' o 'es', usa español.
-  const browserLang = navigator.language || navigator.userLanguage; 
-  if (browserLang.startsWith('es')) {
-    return 'es';
-  }
-  return 'es'; // Default general a español
+  return 'es';
 }
 
 export function changeLanguage(newLanguage) {

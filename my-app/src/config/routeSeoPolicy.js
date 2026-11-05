@@ -1,4 +1,4 @@
-export const INDEXABLE_SITEMAP_PATHS = ['/', '/privacy-policy', '/terms-of-service'];
+export const INDEXABLE_SITEMAP_PATHS = ['/', '/en/', '/pt-br/', '/privacy-policy', '/terms-of-service'];
 
 export const ROUTE_SEO_POLICY = {
   '/': {

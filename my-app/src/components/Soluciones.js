@@ -69,6 +69,39 @@ const content = {
         support: 'No AI for display: a concrete function, clear context and a verifiable improvement.'
       }
     ]
+  },
+  'pt-br': {
+    eyebrow: 'Soluções sob medida',
+    title: 'Como posso ajudar você',
+    intro: 'Não começo pela tecnologia. Começo pelo ponto em que sua operação, presença digital ou experiência do cliente deixou de ser simples.',
+    closing: 'Cada projeto começa com um objetivo claro, entregas visíveis e critérios de sucesso definidos antes da construção.',
+    cta: 'Conte o que você quer melhorar →',
+    solutions: [
+      {
+        category: 'Presença que converte',
+        title: 'Sites e experiências digitais',
+        description: 'Sites, landing pages, reformulações e e-commerce que comunicam melhor sua proposta de valor e facilitam o próximo passo.',
+        support: 'Pode incluir UX/UI, desenvolvimento, SEO técnico e análise de dados.'
+      },
+      {
+        category: 'Processos com menos atrito',
+        title: 'Automações e integrações',
+        description: 'Formulários, ferramentas de orçamento e fluxos integrados a CRM, WhatsApp, Mercado Pago ou marketplaces para reduzir trabalho manual.',
+        support: 'A meta não é conectar ferramentas, mas eliminar etapas que não deveriam depender de uma pessoa.'
+      },
+      {
+        category: 'Ferramentas que as pessoas usam',
+        title: 'MVPs e produtos sob medida',
+        description: 'Painéis, ferramentas internas e produtos com escopo definido para validar ideias ou organizar operações que precisam de uma solução própria.',
+        support: 'Construímos o necessário para testar, operar e aprender antes de ampliar.'
+      },
+      {
+        category: 'IA com função real',
+        title: 'IA aplicada às operações',
+        description: 'Chatbots, assistentes e agentes para responder, classificar, resumir ou acionar a próxima etapa de um processo definido.',
+        support: 'Nada de IA como vitrine: uma função concreta, contexto claro e melhoria verificável.'
+      }
+    ]
   }
 };
 

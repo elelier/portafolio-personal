@@ -1,0 +1,153 @@
+name: Frontend QA
+
+on:
+  pull_request:
+    paths:
+      - 'my-app/**'
+      - '.github/workflows/qa-frontend.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: my-app
+    env:
+      CI: 'true'
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Assert checked-out PR HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+          cache-dependency-path: my-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run tests
+        run: npm test -- --runInBand --watchAll=false
+
+      - name: Test contact Cloudflare and Google contracts
+        run: node --test functions/_lib/contact.test.mjs google-apps-script/Code.test.cjs
+
+      - name: Build CRA and static routes
+        env:
+          REACT_APP_CONTACT_PROVIDER: google
+          REACT_APP_TURNSTILE_SITE_KEY: qa-placeholder
+        run: npm run build
+
+      - name: Verify real localized build outputs
+        run: |
+          test -s build/index.html
+          test -s build/en/index.html
+          test -s build/pt-br/index.html
+          grep -Fq '<html lang="es-MX"' build/index.html
+          grep -Fq '<html lang="en"' build/en/index.html
+          grep -Fq '<html lang="pt-BR"' build/pt-br/index.html
+          grep -Fq 'rel="canonical" href="https://elelier.com/"' build/index.html
+          grep -Fq 'https://elelier.com/en/' build/en/index.html
+          grep -Fq 'https://elelier.com/pt-br/' build/pt-br/index.html
+          grep -Fq '<loc>https://elelier.com/en/</loc>' build/sitemap.xml
+          grep -Fq '<loc>https://elelier.com/pt-br/</loc>' build/sitemap.xml
+
+      - name: Verify local build HTTP server contract
+        run: node --test scripts/serve-built-pages.test.cjs
+
+      - name: Smoke test exact checked-out build over HTTP (read-only)
+        run: |
+          node scripts/serve-built-pages.cjs > /tmp/elelier-qa-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if curl --fail --silent http://127.0.0.1:4173/ -o /tmp/preview-es.html; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --show-error http://127.0.0.1:4173/ -o /tmp/preview-es.html
+          curl --fail --silent --show-error http://127.0.0.1:4173/en/ -o /tmp/preview-en.html
+          curl --fail --silent --show-error http://127.0.0.1:4173/pt-br/ -o /tmp/preview-pt.html
+          grep -Fq '<html lang="es-MX"' /tmp/preview-es.html
+          grep -Fq '<html lang="en"' /tmp/preview-en.html
+          grep -Fq '<html lang="pt-BR"' /tmp/preview-pt.html
+          grep -Fq 'rel="canonical" href="https://elelier.com/"' /tmp/preview-es.html
+          grep -Fq 'https://elelier.com/en/' /tmp/preview-en.html
+          grep -Fq 'https://elelier.com/pt-br/' /tmp/preview-pt.html
+
+      - name: Restore generated passcodes and inspect diff
+        if: always()
+        run: |
+          git restore src/config/hashedPasscodes.js
+          git diff --check
+          git status --short
+
+  visual-preview:
+    name: Responsive and language visual QA
+    if: github.head_ref == 'feat/seo-05-trilingual-routes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    defaults:
+      run:
+        working-directory: my-app
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Assert checked-out PR HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+          cache-dependency-path: my-app/package-lock.json
+      - name: Install app dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build exact checked-out commit
+        env:
+          CI: 'true'
+          REACT_APP_CONTACT_PROVIDER: google
+          REACT_APP_TURNSTILE_SITE_KEY: qa-placeholder
+        run: npm run build
+      - name: Install isolated Playwright runner
+        run: npm install --prefix /tmp/elelier-playwright --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Install Chromium
+        run: /tmp/elelier-playwright/node_modules/.bin/playwright install --with-deps chromium
+      - name: Capture mobile/desktop, light/dark, ES/EN/PT-BR
+        env:
+          NODE_PATH: /tmp/elelier-playwright/node_modules
+          ELELIER_PREVIEW_URL: http://127.0.0.1:4173
+          ELELIER_QA_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          node scripts/serve-built-pages.cjs > /tmp/elelier-visual-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if curl --fail --silent http://127.0.0.1:4173/ -o /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --show-error http://127.0.0.1:4173/ -o /dev/null
+          node scripts/qa-visual-preview.cjs
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: elelier-trilingual-visual-qa
+          path: qa-visual-artifacts/
+          if-no-files-found: warn
+          retention-days: 14

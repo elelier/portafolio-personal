@@ -76,6 +76,35 @@ const texts = {
     github: 'GitHub',
     autoInsuranceCta: 'Looking for auto insurance? Get a quote with Chubb →',
     quotePrefill: 'Hi, I would like to request a quote.'
+  },
+  'pt-br': {
+    eyebrow: 'Vamos conversar',
+    title: 'Vamos falar sobre sua próxima oportunidade ou desafio',
+    description: 'Tem uma oportunidade profissional, parceria ou processo que precisa melhorar? Compartilhe o contexto e responderei com o próximo passo mais útil.',
+    directLabel: 'Contato direto',
+    whatsappButton: 'Fale comigo pelo WhatsApp',
+    whatsappHelper: 'Se preferir, comece com um resumo breve do desafio.',
+    formTitle: 'Ou compartilhe um pouco mais de contexto',
+    nameLabel: 'Seu nome',
+    emailLabel: 'Seu e-mail',
+    messageLabel: 'Conte sobre a oportunidade profissional ou o desafio que deseja resolver',
+    submitButton: 'Enviar mensagem',
+    submittingButton: 'Enviando mensagem…',
+    microcopy: 'Você não precisa de uma descrição perfeita. Basta o contexto necessário para entender o desafio.',
+    successMessage: 'Obrigado! Recebi sua mensagem. Vou analisar o contexto e responder com o próximo passo mais útil.',
+    errorMessage: 'Não foi possível enviar sua mensagem agora. Entre em contato pelo WhatsApp ou e-mail.',
+    partialMessage: 'Sua mensagem foi registrada, mas houve um problema na notificação por e-mail. Se for urgente, fale comigo diretamente.',
+    securityError: 'Conclua a verificação de segurança antes de enviar a mensagem.',
+    securityLabel: 'Verificação de segurança',
+    findMeTitle: 'Você também me encontra em',
+    locationNow: 'Monterrey, México',
+    locationMove: 'Mudança para São Paulo, Brasil · 2027',
+    cvLabel: 'Currículo em português (PDF)',
+    cvAccessibleLabel: 'Ver currículo em português (PDF, abre em uma nova aba)',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    autoInsuranceCta: 'Procura seguro de carro no México? Faça uma cotação com a Chubb →',
+    quotePrefill: 'Olá, gostaria de solicitar uma cotação.'
   }
 };
 

@@ -54,6 +54,30 @@ function Servicios({ style }) {
       ],
       cta: 'Let’s talk about your challenge',
       ctaHelper: 'I do not take unfocused projects; I do take problems we can move quickly.'
+    },
+    'pt-br': {
+      heading: 'Como trabalho',
+      intro: 'Trabalho melhor com desafios bem delimitados, métricas claras e entregas visíveis.',
+      blocks: [
+        {
+          title: '1. Entendemos o desafio',
+          items: ['Conversa inicial para entender o contexto', 'Desafio, urgência e restrições bem definidos', 'Transformar uma ideia vaga em oportunidade viável']
+        },
+        {
+          title: '2. Escopo definido',
+          items: ['Proposta com entregas concretas', 'Preço transparente antes de começar', 'Critérios de sucesso desde o início']
+        },
+        {
+          title: '3. Iterações a cada duas semanas',
+          items: ['Avanços visíveis, sem promessas intermináveis', 'Feedback rápido e ajuste de prioridades', 'Documentação leve para garantir continuidade']
+        },
+        {
+          title: 'Projetos ideais',
+          items: ['Validação de ideias', 'Automações pontuais', 'Melhorias de desempenho', 'MVPs com escopo claro', 'Processos travados por complexidade técnica ou estratégica']
+        }
+      ],
+      cta: 'Vamos conversar sobre seu desafio',
+      ctaHelper: 'Não assumo projetos sem foco; assumo problemas que podemos resolver com agilidade.'
     }
   };
 
@@ -63,7 +87,7 @@ function Servicios({ style }) {
     <section id="como-trabajo" className="servicios" style={style}>
       <div className="servicios-shell">
         <div className="servicios-header">
-          <span>{language === 'es' ? 'Método de colaboración' : 'Collaboration method'}</span>
+          <span>{language === 'es' ? 'Método de colaboración' : language === 'pt-br' ? 'Método de colaboração' : 'Collaboration method'}</span>
           <h2>{t.heading}</h2>
           <p>{t.intro}</p>
         </div>

@@ -1,17 +1,22 @@
 import React, { act } from 'react';
 import { createRoot } from 'react-dom/client';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { LanguageProvider, useLanguage } from './LanguageContext';
 import { ThemeContext } from './ThemeContext';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const LangHarness = () => {
-  const { toggleLanguage } = useLanguage();
+  const { toggleLanguage, setLanguage, language } = useLanguage();
+  const location = useLocation();
 
   return (
-    <button type="button" onClick={toggleLanguage}>
-      Toggle language
-    </button>
+    <div>
+      <button type="button" onClick={toggleLanguage}>Toggle language</button>
+      <button type="button" onClick={() => setLanguage('pt-br')}>Português</button>
+      <span data-testid="language">{language}</span>
+      <span data-testid="path">{location.pathname}</span>
+    </div>
   );
 };
 
@@ -38,9 +43,9 @@ describe('LanguageContext', () => {
     act(() => {
       root.render(
         <ThemeContext.Provider value={{ currentTheme: 'dark', setTheme: jest.fn() }}>
-          <LanguageProvider>
-            <LangHarness />
-          </LanguageProvider>
+          <MemoryRouter initialEntries={['/']}>
+            <LanguageProvider><LangHarness /></LanguageProvider>
+          </MemoryRouter>
         </ThemeContext.Provider>
       );
     });
@@ -53,6 +58,11 @@ describe('LanguageContext', () => {
     });
 
     expect(document.documentElement.lang).toBe('en');
+    expect(container.querySelector('[data-testid="path"]').textContent).toBe('/en/');
+
+    act(() => container.querySelectorAll('button')[1].click());
+    expect(document.documentElement.lang).toBe('pt-BR');
+    expect(container.querySelector('[data-testid="path"]').textContent).toBe('/pt-br/');
 
     act(() => root.unmount());
     container.remove();

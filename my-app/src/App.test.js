@@ -17,7 +17,6 @@ jest.mock('./components/Contacto', () => () => <section id="contacto" />);
 jest.mock('./components/Navegacion', () => () => null);
 jest.mock('./components/Footer', () => () => null);
 jest.mock('./components/SettingsMenu', () => () => null);
-jest.mock('./components/FloatingButton', () => () => null);
 jest.mock('./components/ChatModal', () => () => null);
 
 describe('App public diagnosis removal', () => {
@@ -36,6 +35,31 @@ describe('App public diagnosis removal', () => {
 
   it('does not expose the public gracias-agenda route', () => {
     expect(appSource).not.toContain('/gracias-agenda');
+  });
+
+  it.each([
+    ['/', 'Volver arriba'],
+    ['/en/', 'Back to top'],
+    ['/pt-br/', 'Voltar ao topo'],
+  ])('labels the scroll-to-top button in the language of %s', async (route, expectedLabel) => {
+    const originalUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    window.history.replaceState({}, '', route);
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    try {
+      await act(async () => {
+        root.render(<App initialLanguage="es" />);
+      });
+      const button = container.querySelector('button.floating-button');
+      expect(button).not.toBeNull();
+      expect(button.getAttribute('aria-label')).toBe(expectedLabel);
+    } finally {
+      act(() => root.unmount());
+      container.remove();
+      window.history.replaceState({}, '', originalUrl);
+    }
   });
 
   it('renders the landing sections in the approved narrative order', () => {
@@ -116,5 +140,36 @@ describe('App public diagnosis removal', () => {
     expect(document.body.classList.contains('hero-section-in-view')).toBe(false);
     container.remove();
     window.IntersectionObserver = originalIntersectionObserver;
+  });
+
+  it.each([
+    ['/', '/privacy-policy', 'Política de Privacidad', 'es-MX'],
+    ['/en/', '/en/privacy-policy', 'Privacy Policy', 'en'],
+    ['/pt-br/', '/pt-br/privacy-policy', 'Política de Privacidade', 'pt-BR'],
+  ])('opens legal content in the correct language and at the top from %s', async (homePath, legalPath, title, htmlLang) => {
+    const previousUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    const originalScrollTo = window.scrollTo;
+    window.scrollTo = jest.fn();
+    window.history.replaceState({}, '', `${homePath}#contacto`);
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    try {
+      await act(async () => root.render(<App initialLanguage="es" />));
+      window.scrollTo.mockClear();
+      await act(async () => {
+        window.history.pushState({}, '', legalPath);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      });
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
+      expect(container.querySelector('.legal-page h1')?.textContent).toBe(title);
+      expect(document.documentElement.lang).toBe(htmlLang);
+    } finally {
+      await act(async () => root.unmount());
+      container.remove();
+      window.scrollTo = originalScrollTo;
+      window.history.replaceState({}, '', previousUrl);
+    }
   });
 });

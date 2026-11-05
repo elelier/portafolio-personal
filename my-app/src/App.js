@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { useLanguage } from './contexts/LanguageContext';
+import { HOME_COPY, OG_LOCALES, homePathFor, isLocalizedHome } from './i18n/locales';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { HelmetProvider } from 'react-helmet-async';
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 import './styles/App.css';
 import './styles/components/UxSmallFixes.css';
@@ -40,6 +42,57 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const Blog = lazy(() => import('./components/Blog'));
+
+const SCROLL_TO_TOP_LABELS = Object.freeze({
+  es: 'Volver arriba',
+  en: 'Back to top',
+  'pt-br': 'Voltar ao topo',
+});
+
+function LocalizedScrollToTop({ onClick }) {
+  const { language } = useLanguage();
+  return (
+    <FloatingButton
+      icon={<FaArrowUp />}
+      onClick={onClick}
+      ariaLabel={SCROLL_TO_TOP_LABELS[language] || SCROLL_TO_TOP_LABELS.es}
+    />
+  );
+}
+
+function HomeSeo() {
+  const { language } = useLanguage();
+  const location = useLocation();
+  if (!isLocalizedHome(location.pathname)) return null;
+  const copy = HOME_COPY[language] || HOME_COPY.es;
+  return <SEO title={copy.title} description={copy.description} pathname={homePathFor(language)} locale={OG_LOCALES[language]} />;
+}
+
+const LocalizedHashScroll = () => {
+  const { pathname, hash } = useLocation();
+  const previousPathRef = useRef(null);
+
+  useEffect(() => {
+    const previousPath = previousPathRef.current;
+    const changedPath = previousPath !== pathname;
+    previousPathRef.current = pathname;
+    if (!changedPath || previousPath === null) return undefined;
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return undefined;
+    }
+    const sectionId = decodeURIComponent(hash.slice(1));
+    const frame = window.requestAnimationFrame(() => {
+      const section = document.getElementById(sectionId);
+      if (section && typeof section.scrollIntoView === 'function') {
+        section.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, hash]);
+
+  return null;
+};
 
 const HeroVisibilityObserver = () => {
   const { pathname } = useLocation();
@@ -111,7 +164,6 @@ function App({ initialLanguage }) {
     '--section-bg-start': homeSectionPalette[index % homeSectionPalette.length],
     '--section-bg-end': homeSectionPalette[(index + 1) % homeSectionPalette.length],
   });
-  const homeSeoPolicy = getRouteSeoPolicy('/');
 
   useEffect(() => {
     initializeTheme();
@@ -138,20 +190,20 @@ function App({ initialLanguage }) {
 
   return (
     <HelmetProvider>
-      <LanguageProvider initialLanguage={initialLanguage}>
-        <ThemeProvider>
-          <Router>
+      <Router>
+        <LanguageProvider>
+          <ThemeProvider>
             <div className="App">
               <HeroVisibilityObserver />
+              <LocalizedHashScroll />
               <SettingsMenu />
-              <SEO
-                title={homeSeoPolicy?.title}
-                description={homeSeoPolicy?.description}
-              />
+              <HomeSeo />
               <Navegacion />
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                  <Route path="/" element={<>{homeSections.map(({ key, Component }, index) => (<Component key={key} style={getSectionTransitionStyle(index)} />))}</>} />
+                  {['/', '/en/', '/pt-br/'].map((route) => (
+                    <Route key={route} path={route} element={<>{homeSections.map(({ key, Component }, index) => (<Component key={key} style={getSectionTransitionStyle(index)} />))}</>} />
+                  ))}
                   <Route
                     path="/tarifas-2024"
                     element={renderPrivateRoute(<Tarifario />, {
@@ -248,8 +300,12 @@ function App({ initialLanguage }) {
                       description: 'Panel interno con acceso controlado y sin indexacion publica.'
                     })}
                   />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                  <Route path="/terms-of-service" element={<TermsOfService />} />
+                  {['', '/en', '/pt-br'].map((prefix) => (
+                    <React.Fragment key={`legal-${prefix}`}>
+                      <Route path={`${prefix}/privacy-policy`} element={<PrivacyPolicy />} />
+                      <Route path={`${prefix}/terms-of-service`} element={<TermsOfService />} />
+                    </React.Fragment>
+                  ))}
                   <Route
                     path="/aionlabs"
                     element={renderPublicAliasRoute(<AionLabs />, {
@@ -268,12 +324,12 @@ function App({ initialLanguage }) {
                 </Routes>
               </Suspense>
               <Footer />
-              <FloatingButton icon={<FaArrowUp />} onClick={scrollToTop} ariaLabel="Volver arriba" />
+              <LocalizedScrollToTop onClick={scrollToTop} />
               <ChatModal />
             </div>
-          </Router>
-        </ThemeProvider>
-      </LanguageProvider>
+          </ThemeProvider>
+        </LanguageProvider>
+      </Router>
     </HelmetProvider>
   );
 }

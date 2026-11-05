@@ -42,7 +42,7 @@ function cleanPayload(input) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return null;
   if (typeof input.submissionId !== 'string' || !UUID.test(input.submissionId)) return null;
   if (input.website !== '' || typeof input.turnstileToken !== 'string' || !input.turnstileToken || input.turnstileToken.length > 2048) return null;
-  if (input.language !== 'es' && input.language !== 'en') return null;
+  if (!['es', 'en', 'pt-br'].includes(input.language)) return null;
   return { name, mail, message, submissionId: input.submissionId, language: input.language };
 }
 

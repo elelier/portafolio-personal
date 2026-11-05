@@ -85,6 +85,13 @@ describe('Portafolio career timeline', () => {
     cleanup();
   });
 
+  it('labels the Portuguese career timeline for assistive technology', () => {
+    const { container, cleanup } = renderPortafolio('pt-br');
+    expect(container.querySelector('[role="list"].timeline')?.getAttribute('aria-label'))
+      .toBe('Carreira profissional');
+    cleanup();
+  });
+
   it.each([
     ['es', 'Ver CV en español (PDF) ↗', 'Ver CV en español (PDF, abre en una pestaña nueva)', '/cv/es', 'ES', ['/cv/en', '/cv/pt-br']],
     ['en', 'View CV in English (PDF) ↗', 'View CV in English (PDF, opens in a new tab)', '/cv/en', 'EN', ['/cv/es', '/cv/pt-br']]

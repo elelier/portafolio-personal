@@ -184,8 +184,8 @@ const renderRouteTree = async (pathname) => {
   await act(async () => {
     root.render(
       <HelmetProvider>
-        <LanguageProvider>
-          <MemoryRouter initialEntries={[pathname]}>
+        <MemoryRouter initialEntries={[pathname]}>
+          <LanguageProvider>
             <Routes>
               <Route
                 path="*"
@@ -200,8 +200,8 @@ const renderRouteTree = async (pathname) => {
                 }
               />
             </Routes>
-          </MemoryRouter>
-        </LanguageProvider>
+          </LanguageProvider>
+        </MemoryRouter>
       </HelmetProvider>
     );
   });
