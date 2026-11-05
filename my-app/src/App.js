@@ -73,9 +73,14 @@ const LocalizedHashScroll = () => {
   const previousPathRef = useRef(null);
 
   useEffect(() => {
-    const changedPath = previousPathRef.current !== pathname;
+    const previousPath = previousPathRef.current;
+    const changedPath = previousPath !== pathname;
     previousPathRef.current = pathname;
-    if (!hash || !changedPath) return undefined;
+    if (!changedPath || previousPath === null) return undefined;
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return undefined;
+    }
     const sectionId = decodeURIComponent(hash.slice(1));
     const frame = window.requestAnimationFrame(() => {
       const section = document.getElementById(sectionId);
@@ -295,8 +300,12 @@ function App({ initialLanguage }) {
                       description: 'Panel interno con acceso controlado y sin indexacion publica.'
                     })}
                   />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                  <Route path="/terms-of-service" element={<TermsOfService />} />
+                  {['', '/en', '/pt-br'].map((prefix) => (
+                    <React.Fragment key={`legal-${prefix}`}>
+                      <Route path={`${prefix}/privacy-policy`} element={<PrivacyPolicy />} />
+                      <Route path={`${prefix}/terms-of-service`} element={<TermsOfService />} />
+                    </React.Fragment>
+                  ))}
                   <Route
                     path="/aionlabs"
                     element={renderPublicAliasRoute(<AionLabs />, {

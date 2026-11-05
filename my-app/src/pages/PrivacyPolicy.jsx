@@ -1,10 +1,12 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import SEO from '../components/SEO';
+import SEO, { DEFAULT_OG_IMAGE } from '../components/SEO';
 import { getRouteSeoPolicy } from '../config/routeSeoPolicy';
+import { OG_LOCALES } from '../i18n/locales';
+import { privacyPtBr } from '../i18n/legalPtBr';
 import '../styles/LegalPages.css';
 
-const OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
 const PRIVACY_EMAIL = 'privacidad@elelier.com';
 
 const content = {
@@ -221,9 +223,11 @@ const content = {
     ]
   }
 };
+content['pt-br'] = privacyPtBr;
 
 function PrivacyPolicy() {
   const { language } = useLanguage();
+  const { pathname } = useLocation();
   const page = content[language] || content.es;
   const routePolicy = getRouteSeoPolicy('/privacy-policy');
 
@@ -232,13 +236,13 @@ function PrivacyPolicy() {
       <SEO
         title={page.seoTitle}
         description={page.seoDescription}
-        pathname={page.seoPath}
-        canonicalPath={routePolicy?.canonicalPath}
-        robots={routePolicy?.robots}
+        pathname={pathname}
+        canonicalPath={language === 'es' ? routePolicy?.canonicalPath : pathname}
+        robots={language === 'es' ? routePolicy?.robots : 'noindex,follow'}
         keywords={page.seoKeywords}
-        image={OG_IMAGE}
+        image={DEFAULT_OG_IMAGE}
         imageAlt={page.title}
-        locale={language === 'en' ? 'en_US' : 'es_MX'}
+        locale={OG_LOCALES[language]}
       />
       <div className="legal-page__container">
         <span className="legal-page__eyebrow">{page.eyebrow}</span>

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { HOME_PATHS, LANGUAGE_TAGS } from '../i18n/locales';
 
 const SITE_URL = 'https://elelier.com';
-const DEFAULT_OG_IMAGE = 'https://elelier.com/static/media/eleliercom.ced5bb90383175580555.png';
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/sites/cover-desktop.jpg`;
 
 export function buildUrl(pathname = '/') {
   const sanitizedPath = `${pathname || '/'}`.split('?')[0].split('#')[0];

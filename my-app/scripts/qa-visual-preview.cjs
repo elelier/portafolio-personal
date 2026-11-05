@@ -98,6 +98,41 @@ async function run() {
     } finally {
       await context.close();
     }
+
+    // Verify that legal links retain locale, render at the top, and have safe SEO metadata.
+    const legalRoutes = [
+      { locale: 'es', home: '/', tag: 'es-MX', prefix: '', privacy: 'Política de Privacidad', terms: 'Condiciones del Servicio' },
+      { locale: 'en', home: '/en/', tag: 'en', prefix: '/en', privacy: 'Privacy Policy', terms: 'Terms of Service' },
+      { locale: 'pt-br', home: '/pt-br/', tag: 'pt-BR', prefix: '/pt-br', privacy: 'Política de Privacidade', terms: 'Termos de Serviço' },
+    ];
+    for (const item of legalRoutes) {
+      for (const [suffix, heading] of [['privacy-policy', item.privacy], ['terms-of-service', item.terms]]) {
+        const name = `legal-${item.locale}-${suffix}`;
+        const page = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+        try {
+          await page.goto(BASE + item.home, { waitUntil: 'domcontentloaded' });
+          await page.locator('#contacto').waitFor();
+          await page.locator(`.footer-links a[href="${item.prefix}/${suffix}"]`).click();
+          await page.waitForURL(`**${item.prefix}/${suffix}`);
+          await page.locator('.legal-page h1').waitFor();
+          await page.waitForFunction(() => window.scrollY <= 4);
+          assert.equal(await page.locator('.legal-page h1').innerText(), heading, `${name}: heading`);
+          assert.equal(await page.locator('html').getAttribute('lang'), item.tag, `${name}: language`);
+          assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'),
+            item.locale === 'es' ? 'index,follow' : 'noindex,follow', `${name}: robots`);
+          assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),
+            `https://elelier.com${item.prefix}/${suffix}`, `${name}: canonical`);
+          assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'),
+            'https://elelier.com/images/sites/cover-desktop.jpg', `${name}: social image`);
+          results.push({ name, status: 'PASS' });
+        } catch (error) {
+          failures.push({ name, message: String(error.message).slice(0, 500) });
+          results.push({ name, status: 'FAIL', message: String(error.message).slice(0, 500) });
+        } finally {
+          await page.close();
+        }
+      }
+    }
   } finally {
     await browser.close();
     fs.writeFileSync(path.join(OUT, 'qa-results.json'), JSON.stringify({

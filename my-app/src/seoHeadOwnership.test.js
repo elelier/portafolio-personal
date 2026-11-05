@@ -17,7 +17,7 @@ it('owns the statically generated SEO head, leaving no conflicting tags after a 
   const container = document.createElement('div');
   document.body.appendChild(container);
   const root = createRoot(container);
-  const tracked = 'link[rel="canonical"],link[rel="alternate"],meta[name="description"],meta[property="og:url"],meta[property="og:locale"]';
+  const tracked = 'link[rel="canonical"],link[rel="alternate"],meta[name="description"],meta[property="og:url"],meta[property="og:locale"],meta[property="og:image"],meta[name="twitter:image"]';
 
   try {
     fs.copyFileSync(path.resolve(__dirname, '../public/index.html'), path.join(dir, 'index.html'));
@@ -53,6 +53,12 @@ it('owns the statically generated SEO head, leaving no conflicting tags after a 
       .toEqual(['https://elelier.com/en/']);
     expect([...document.head.querySelectorAll('meta[property="og:locale"]')].map((tag) => tag.content))
       .toEqual(['en_US']);
+    const stableSocialImage = 'https://elelier.com/images/sites/cover-desktop.jpg';
+    expect([...document.head.querySelectorAll('meta[property="og:image"]')].map((tag) => tag.content))
+      .toEqual([stableSocialImage]);
+    expect([...document.head.querySelectorAll('meta[name="twitter:image"]')].map((tag) => tag.content))
+      .toEqual([stableSocialImage]);
+    expect(fs.existsSync(path.resolve(__dirname, '../public/images/sites/cover-desktop.jpg'))).toBe(true);
     expect([...document.head.querySelectorAll('meta[name="description"]')].map((tag) => tag.content))
       .toEqual([HOME_COPY.en.description]);
     expect(document.head.querySelectorAll('link[rel="alternate"][hreflang]')).toHaveLength(4);

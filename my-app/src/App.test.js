@@ -141,4 +141,35 @@ describe('App public diagnosis removal', () => {
     container.remove();
     window.IntersectionObserver = originalIntersectionObserver;
   });
+
+  it.each([
+    ['/', '/privacy-policy', 'Política de Privacidad', 'es-MX'],
+    ['/en/', '/en/privacy-policy', 'Privacy Policy', 'en'],
+    ['/pt-br/', '/pt-br/privacy-policy', 'Política de Privacidade', 'pt-BR'],
+  ])('opens legal content in the correct language and at the top from %s', async (homePath, legalPath, title, htmlLang) => {
+    const previousUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    const originalScrollTo = window.scrollTo;
+    window.scrollTo = jest.fn();
+    window.history.replaceState({}, '', `${homePath}#contacto`);
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    try {
+      await act(async () => root.render(<App initialLanguage="es" />));
+      window.scrollTo.mockClear();
+      await act(async () => {
+        window.history.pushState({}, '', legalPath);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      });
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
+      expect(container.querySelector('.legal-page h1')?.textContent).toBe(title);
+      expect(document.documentElement.lang).toBe(htmlLang);
+    } finally {
+      await act(async () => root.unmount());
+      container.remove();
+      window.scrollTo = originalScrollTo;
+      window.history.replaceState({}, '', previousUrl);
+    }
+  });
 });

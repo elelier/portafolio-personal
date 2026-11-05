@@ -509,7 +509,7 @@ const Portafolio = ({ style }) => {
         </div>
       </div>
 
-      <div className="timeline" role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : 'Professional career'}>
+      <div className="timeline" role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : currentLang === 'pt-br' ? 'Carreira profissional' : 'Professional career'}>
         {projects.map((project, idx) => (
           <div key={project.id} className="timeline__row" role="listitem">
             <span className="timeline__node" aria-hidden="true" />

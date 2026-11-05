@@ -131,4 +131,16 @@ describe('Footer', () => {
 
     cleanup();
   });
+
+  it.each([
+    ['es', '/privacy-policy', '/terms-of-service'],
+    ['en', '/en/privacy-policy', '/en/terms-of-service'],
+    ['pt-br', '/pt-br/privacy-policy', '/pt-br/terms-of-service'],
+  ])('keeps both legal destinations in the %s route namespace', (language, privacyPath, termsPath) => {
+    const { container, cleanup } = renderFooter(language);
+    const links = Array.from(container.querySelectorAll('.footer-links a')).map((link) => link.getAttribute('href'));
+    expect(links).toContain(privacyPath);
+    expect(links).toContain(termsPath);
+    cleanup();
+  });
 });

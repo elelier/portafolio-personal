@@ -8,11 +8,12 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 describe('PrivacyPolicy contact channels', () => {
   it.each([
     ['es', '14. Contacto', 'Si tienes dudas sobre esta política'],
-    ['en', '14. Contact', 'For questions about this policy']
+    ['en', '14. Contact', 'For questions about this policy'],
+    ['pt-br', '14. Contato', 'Se você tiver dúvidas sobre esta política'],
   ])('provides a dedicated privacy mailto link in %s', async (language, heading, copy) => {
     const cleanup = await renderRoute({
-      pathname: '/privacy-policy',
-      routePath: '/privacy-policy',
+      pathname: language === 'es' ? '/privacy-policy' : `/${language}/privacy-policy`,
+      routePath: language === 'es' ? '/privacy-policy' : `/${language}/privacy-policy`,
       element: (
         <LanguageContext.Provider value={{ language }}>
           <PrivacyPolicy />
@@ -30,6 +31,12 @@ describe('PrivacyPolicy contact channels', () => {
     expect(emailLinks[0].getAttribute('href')).toBe('mailto:privacidad@elelier.com');
     expect(emailLinks[0].textContent).toBe('privacidad@elelier.com');
     expect(document.querySelector('.legal-page').textContent).not.toContain('loya.elier@gmail.com');
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href'))
+      .toBe(`https://elelier.com${language === 'es' ? '/privacy-policy' : `/${language}/privacy-policy`}`);
+    expect(document.head.querySelector('meta[name="robots"]')?.getAttribute('content'))
+      .toBe(language === 'es' ? 'index,follow' : 'noindex,follow');
+    expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content'))
+      .toBe('https://elelier.com/images/sites/cover-desktop.jpg');
 
     await cleanup();
   });

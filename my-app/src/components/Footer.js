@@ -31,8 +31,8 @@ function Footer() {
             <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
           <Link to={`${homePath}#contacto`} onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
-          <Link to="/privacy-policy">{footerLinks.privacy}</Link>
-          <Link to="/terms-of-service">{footerLinks.terms}</Link>
+          <Link to={`${homePath}privacy-policy`}>{footerLinks.privacy}</Link>
+          <Link to={`${homePath}terms-of-service`}>{footerLinks.terms}</Link>
         </div>
         <div className="footer-social">
           <p>{footerLinks.connect}</p>

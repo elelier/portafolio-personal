@@ -39,6 +39,24 @@ test('serves the ES/EN/PT-BR HTML and assets from this checkout over HTTP', asyn
       assert.equal(asset.status, 200, `${route}: JS entry HTTP`);
       assert.match(asset.headers.get('content-type'), /text\/javascript/, `${route}: JS MIME`);
     }
+
+    for (const [route, htmlLang, title] of [
+      ['/en/privacy-policy/', 'en', 'Privacy Policy'],
+      ['/en/terms-of-service/', 'en', 'Terms of Service'],
+      ['/pt-br/privacy-policy/', 'pt-BR', 'Política de Privacidade'],
+      ['/pt-br/terms-of-service/', 'pt-BR', 'Termos de Serviço'],
+    ]) {
+      const response = await fetch(`http://127.0.0.1:${port}${route}`);
+      assert.equal(response.status, 200, `${route}: HTTP`);
+      const html = await response.text();
+      assert.ok(html.includes(`<html lang="${htmlLang}"`), `${route}: locale`);
+      assert.ok(html.includes(`<title>${title} | Elier Loya</title>`), `${route}: title`);
+      assert.ok(html.includes('name="robots" content="noindex,follow"'), `${route}: noindex`);
+    }
+
+    const imageResponse = await fetch(`http://127.0.0.1:${port}/images/sites/cover-desktop.jpg`);
+    assert.equal(imageResponse.status, 200, 'social image HTTP');
+    assert.match(imageResponse.headers.get('content-type'), /image\/jpeg/, 'social image MIME');
   } finally {
     server.kill();
   }

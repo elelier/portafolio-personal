@@ -46,4 +46,32 @@ describe('trilingual public routes and initial HTML', () => {
       fs.rmSync(dir, { recursive: true, force: true });
     }
   });
+
+  it('serves localized legal URLs directly with intentional noindex metadata', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'elelier-legal-'));
+    try {
+      fs.copyFileSync(path.resolve(__dirname, '../public/index.html'), path.join(dir, 'index.html'));
+      const result = spawnSync(process.execPath, [path.resolve(__dirname, '../scripts/generate-static-routes.js')], {
+        env: { ...process.env, STATIC_ROUTE_BUILD_DIR: dir },
+        encoding: 'utf8',
+      });
+      expect(result.status).toBe(0);
+      for (const [lang, tag, name, pathSuffix] of [
+        ['en', 'en', 'Privacy Policy', 'privacy-policy'],
+        ['en', 'en', 'Terms of Service', 'terms-of-service'],
+        ['pt-br', 'pt-BR', 'Política de Privacidade', 'privacy-policy'],
+        ['pt-br', 'pt-BR', 'Termos de Serviço', 'terms-of-service'],
+      ]) {
+        const html = fs.readFileSync(path.join(dir, lang, pathSuffix, 'index.html'), 'utf8');
+        const document = new DOMParser().parseFromString(html, 'text/html');
+        expect(document.documentElement.lang).toBe(tag);
+        expect(document.title).toContain(name);
+        expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex,follow');
+        expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href'))
+          .toBe(`https://elelier.com/${lang}/${pathSuffix}`);
+      }
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });
