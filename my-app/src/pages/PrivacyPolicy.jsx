@@ -237,7 +237,7 @@ function PrivacyPolicy() {
         title={page.seoTitle}
         description={page.seoDescription}
         pathname={pathname}
-        canonicalPath={language === 'es' ? routePolicy?.canonicalPath : pathname}
+        canonicalPath={language === 'es' ? routePolicy?.canonicalPath : pathname.replace(/\/$/, '')}
         robots={language === 'es' ? routePolicy?.robots : 'noindex,follow'}
         keywords={page.seoKeywords}
         image={DEFAULT_OG_IMAGE}

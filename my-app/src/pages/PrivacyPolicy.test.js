@@ -40,4 +40,19 @@ describe('PrivacyPolicy contact channels', () => {
 
     await cleanup();
   });
+
+  it('uses a stable canonical even for a direct localized URL with a trailing slash', async () => {
+    const cleanup = await renderRoute({
+      pathname: '/en/privacy-policy/',
+      routePath: '/en/privacy-policy',
+      element: (
+        <LanguageContext.Provider value={{ language: 'en' }}>
+          <PrivacyPolicy />
+        </LanguageContext.Provider>
+      ),
+    });
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href'))
+      .toBe('https://elelier.com/en/privacy-policy');
+    await cleanup();
+  });
 });

@@ -13,12 +13,13 @@ Alcance: cambios exclusivamente en `elelier/portafolio-personal`, rama del PR #8
 
 - Las páginas legales españolas conservan `index,follow`, sus URLs y su lugar en el sitemap.
 - Las versiones legales EN/PT-BR tienen URL y canonical propios, pero `noindex,follow` por ahora: sus títulos y enlaces funcionan con JavaScript, y las páginas legales no están completamente prerenderizadas antes de hidratarse. Por esta razón tampoco se agregan al sitemap ni al grupo `hreflang` de la portada.
+- El canonical se normaliza sin barra final incluso si el visitante abre directamente la variante con `/` al final.
 - El generador crea archivos HTML para las cuatro URLs nuevas, con `lang`, título, canonical y `robots=noindex,follow`, evitando depender del fallback 404 en el acceso directo.
 - Si se decide indexar las políticas traducidas, realizar primero una iteración independiente de prerenderizado completo y revisión del contenido legal.
 
 ## Validación
 
-- `npm test -- --runInBand --watchAll=false`: 37 suites y 153 pruebas PASS.
+- `npm test -- --runInBand --watchAll=false`: 37 suites y 155 pruebas PASS.
 - `npm run build`: PASS; 13 rutas estáticas previas y cuatro legales localizadas generadas.
 - `node --test scripts/serve-built-pages.test.cjs`: PASS, incluido acceso HTTP directo a los cuatro documentos y MIME JPEG de la imagen social.
 - `git diff --check`: PASS.

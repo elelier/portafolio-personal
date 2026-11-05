@@ -9,10 +9,11 @@ it.each([
   ['es', '/terms-of-service', 'Condiciones del Servicio', 'index,follow'],
   ['en', '/en/terms-of-service', 'Terms of Service', 'noindex,follow'],
   ['pt-br', '/pt-br/terms-of-service', 'Termos de Serviço', 'noindex,follow'],
+  ['pt-br', '/pt-br/terms-of-service/', 'Termos de Serviço', 'noindex,follow'],
 ])('renders the %s terms with a consistent canonical and language', async (language, pathname, heading, robots) => {
   const cleanup = await renderRoute({
     pathname,
-    routePath: pathname,
+    routePath: pathname.replace(/\/$/, ''),
     element: (
       <LanguageContext.Provider value={{ language }}>
         <TermsOfService />
@@ -22,7 +23,7 @@ it.each([
 
   expect(document.querySelector('.legal-page h1')?.textContent).toBe(heading);
   expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href'))
-    .toBe(`https://elelier.com${pathname}`);
+    .toBe(`https://elelier.com${pathname.replace(/\/$/, '')}`);
   expect(document.head.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe(robots);
   expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content'))
     .toBe('https://elelier.com/images/sites/cover-desktop.jpg');
