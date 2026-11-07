@@ -1,4 +1,4 @@
-export const INDEXABLE_SITEMAP_PATHS = ['/', '/en/', '/pt-br/', '/privacy-policy', '/terms-of-service'];
+export const INDEXABLE_SITEMAP_PATHS = ['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/'];
 
 export const ROUTE_SEO_POLICY = {
   '/': {
@@ -50,12 +50,12 @@ export const ROUTE_SEO_POLICY = {
   },
   '/privacy-policy': {
     title: 'Política de Privacidad | Elier Loya',
-    canonicalPath: '/privacy-policy',
+    canonicalPath: '/privacy-policy/',
     robots: 'index,follow',
   },
   '/terms-of-service': {
     title: 'Condiciones del Servicio | Elier Loya',
-    canonicalPath: '/terms-of-service',
+    canonicalPath: '/terms-of-service/',
     robots: 'index,follow',
   },
   '/tarifas-2024': {

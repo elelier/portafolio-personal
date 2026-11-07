@@ -22,6 +22,41 @@ const staticRoutes = [
   'client-demo',
 ];
 
+const spanishLegalMetadata = {
+  'privacy-policy': {
+    title: 'Política de Privacidad | Elier Loya',
+    description: 'Política de privacidad de elelier.com sobre datos personales, cookies, Google Analytics 4, Google Tag Manager, formularios de contacto y derechos de privacidad.',
+  },
+  'terms-of-service': {
+    title: 'Condiciones del Servicio | Elier Loya',
+    description: 'Condiciones del servicio y términos de uso aplicables a elelier.com, su contenido, formularios y posibles contrataciones.',
+  },
+};
+
+function replaceOrInsertHeadTag(html, pattern, markup) {
+  return pattern.test(html)
+    ? html.replace(pattern, markup)
+    : html.replace('</head>', `    ${markup}\n</head>`);
+}
+
+function buildSpanishLegalHtml(sourceHtml, route) {
+  const { title, description } = spanishLegalMetadata[route];
+  const canonical = `https://elelier.com/${route}/`;
+  const headTags = [
+    [/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/i, `<meta name="description" content="${description}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:title["'])[^>]*>/i, `<meta property="og:title" content="${title}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:description["'])[^>]*>/i, `<meta property="og:description" content="${description}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*>/i, `<meta property="og:url" content="${canonical}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i, '<meta name="robots" content="index,follow" data-rh="true">'],
+    [/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i, `<link rel="canonical" href="${canonical}" data-rh="true">`],
+  ];
+
+  return headTags.reduce(
+    (html, [pattern, markup]) => replaceOrInsertHeadTag(html, pattern, markup),
+    sourceHtml.replace(/<title>[^<]*<\/title>/i, `<title>${title}</title>`)
+  );
+}
+
 // Translated legal pages serve real direct URLs, but remain out of the sitemap
 // until their complete pre-rendered content is available to search crawlers.
 const localizedLegalRoutes = [
@@ -55,7 +90,9 @@ const indexHtml = fs.readFileSync(indexPath, 'utf8');
 for (const route of staticRoutes) {
   const routeDir = path.join(buildDir, route);
   fs.mkdirSync(routeDir, { recursive: true });
-  fs.writeFileSync(path.join(routeDir, 'index.html'), indexHtml);
+  fs.writeFileSync(path.join(routeDir, 'index.html'), spanishLegalMetadata[route]
+    ? buildSpanishLegalHtml(indexHtml, route)
+    : indexHtml);
 }
 
 for (const route of localizedLegalRoutes) {

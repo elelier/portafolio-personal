@@ -32,7 +32,7 @@ describe('PrivacyPolicy contact channels', () => {
     expect(emailLinks[0].textContent).toBe('privacidad@elelier.com');
     expect(document.querySelector('.legal-page').textContent).not.toContain('loya.elier@gmail.com');
     expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href'))
-      .toBe(`https://elelier.com${language === 'es' ? '/privacy-policy' : `/${language}/privacy-policy`}`);
+      .toBe(`https://elelier.com${language === 'es' ? '/privacy-policy/' : `/${language}/privacy-policy`}`);
     expect(document.head.querySelector('meta[name="robots"]')?.getAttribute('content'))
       .toBe(language === 'es' ? 'index,follow' : 'noindex,follow');
     expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content'))

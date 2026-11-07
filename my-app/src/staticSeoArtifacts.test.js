@@ -42,6 +42,11 @@ describe('static SEO artifacts', () => {
     expect(sitemap).not.toContain('https://www.elelier.com');
     expect(sitemap).not.toContain('<lastmod>');
     expect(extractSitemapPaths(sitemap)).toEqual(INDEXABLE_SITEMAP_PATHS);
+    expect(extractSitemapPaths(sitemap)).toEqual([
+      '/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/',
+    ]);
+    expect(sitemap).not.toContain('<loc>https://elelier.com/privacy-policy</loc>');
+    expect(sitemap).not.toContain('<loc>https://elelier.com/terms-of-service</loc>');
     expect(sitemap).not.toContain('/proyecto/');
     expect(sitemap).not.toContain('/admin/leads');
     expect(sitemap).not.toContain('/client-demo');
