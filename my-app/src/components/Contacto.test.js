@@ -352,15 +352,18 @@ describe('Contacto on Google Preview', () => {
   let oldSiteKey;
   let oldTurnstile;
   let oldCryptoDescriptor;
+  let oldGtag;
 
   beforeEach(() => {
     oldProvider = process.env.REACT_APP_CONTACT_PROVIDER;
     oldSiteKey = process.env.REACT_APP_TURNSTILE_SITE_KEY;
     oldTurnstile = window.turnstile;
+    oldGtag = window.gtag;
     oldCryptoDescriptor = Object.getOwnPropertyDescriptor(window, 'crypto');
     process.env.REACT_APP_CONTACT_PROVIDER = 'google';
     process.env.REACT_APP_TURNSTILE_SITE_KEY = 'test-public-site-key';
     window.turnstile = { render: jest.fn(() => 'widget-1'), reset: jest.fn(), remove: jest.fn() };
+    window.gtag = jest.fn();
     Object.defineProperty(window, 'crypto', { configurable: true, value: { randomUUID: () => 'ba1b535e-df45-4098-9216-d4ea4e78d59c' } });
     global.fetch = jest.fn();
   });
@@ -371,6 +374,8 @@ describe('Contacto on Google Preview', () => {
     if (oldSiteKey === undefined) delete process.env.REACT_APP_TURNSTILE_SITE_KEY;
     else process.env.REACT_APP_TURNSTILE_SITE_KEY = oldSiteKey;
     window.turnstile = oldTurnstile;
+    if (oldGtag === undefined) delete window.gtag;
+    else window.gtag = oldGtag;
     if (oldCryptoDescriptor) Object.defineProperty(window, 'crypto', oldCryptoDescriptor);
     else delete window.crypto;
     jest.restoreAllMocks();
@@ -407,6 +412,15 @@ describe('Contacto on Google Preview', () => {
     expect(body.submissionId).toMatch(/^[0-9a-f]{8}-[0-9a-f-]{27,}$/i);
     expect(container.querySelector('[aria-live="polite"]').textContent).toContain('Gracias, ya recibí tu mensaje.');
     expect(window.turnstile.reset).toHaveBeenCalledTimes(1);
+    expect(window.gtag).toHaveBeenCalledTimes(1);
+    expect(window.gtag).toHaveBeenCalledWith('event', 'generate_lead', {
+      send_to: 'G-J0EFBPH9P1',
+      method: 'form',
+      form_id: 'contact_main',
+      language: 'es',
+      notification_status: 'sent'
+    });
+    expect(JSON.stringify(window.gtag.mock.calls)).not.toMatch(/Ana|ana@example\.com|Necesito ayuda|ba1b535e|qa-turnstile-token/);
     cleanup();
   });
 
@@ -422,6 +436,24 @@ describe('Contacto on Google Preview', () => {
     await act(async () => {});
     expect(container.querySelector('[aria-live="polite"]').textContent).toContain('quedó registrado');
     expect(container.querySelector('[aria-live="polite"] a[href^="mailto:"]')).toBeTruthy();
+    expect(window.gtag).toHaveBeenCalledTimes(1);
+    expect(window.gtag).toHaveBeenCalledWith('event', 'generate_lead', {
+      send_to: 'G-J0EFBPH9P1',
+      method: 'form',
+      form_id: 'contact_main',
+      language: 'es',
+      notification_status: 'partial'
+    });
+    const fallbackWhatsapp = container.querySelector('.contacto-feedback-links a[href^="https://wa.me/"]');
+    fallbackWhatsapp.addEventListener('click', (event) => event.preventDefault(), { once: true });
+    act(() => fallbackWhatsapp.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true })));
+    expect(window.gtag).toHaveBeenCalledTimes(2);
+    expect(window.gtag).toHaveBeenNthCalledWith(2, 'event', 'contact_click', {
+      send_to: 'G-J0EFBPH9P1',
+      method: 'whatsapp',
+      placement: 'contact_fallback',
+      language: 'es'
+    });
     cleanup();
   });
 
@@ -434,6 +466,7 @@ describe('Contacto on Google Preview', () => {
     await act(async () => {});
     expect(container.querySelector('[aria-live="polite"]').textContent).toContain('No pude enviar tu mensaje');
     expect(getFieldByLabel(container, 'Tu nombre').value).toBe('Ana');
+    expect(window.gtag).not.toHaveBeenCalled();
     cleanup();
   });
 
@@ -441,7 +474,96 @@ describe('Contacto on Google Preview', () => {
     const { container, cleanup } = renderContacto('en');
     submitForm(container);
     expect(global.fetch).not.toHaveBeenCalled();
+    expect(window.gtag).not.toHaveBeenCalled();
     expect(container.querySelector('[aria-live="polite"]').textContent).toContain('security verification');
+    cleanup();
+  });
+
+  it.each([
+    ['HTTP 400', () => Promise.resolve({ ok: false, status: 400 })],
+    ['HTTP 503', () => Promise.resolve({ ok: false, status: 503 })],
+    ['network error', () => Promise.reject(new Error('network'))],
+    ['wrong submission id', () => Promise.resolve({
+      ok: true, status: 201, json: async () => ({ ok: true, submissionId: 'wrong-id', notificationStatus: 'sent' })
+    })]
+  ])('never emits a lead for %s', async (_name, createResponse) => {
+    global.fetch.mockImplementation(createResponse);
+    const { container, cleanup } = renderContacto('es');
+    fillGoogleContact(container);
+    approveCaptcha();
+    submitForm(container);
+    await act(async () => {});
+
+    expect(window.gtag).not.toHaveBeenCalled();
+    expect(container.querySelector('[aria-live="polite"]').textContent).toContain('No pude enviar tu mensaje');
+    cleanup();
+  });
+
+  it('blocks a second in-flight submit and does not emit a lead twice', async () => {
+    const pending = createDeferred();
+    global.fetch.mockReturnValue(pending.promise);
+    const { container, cleanup } = renderContacto('es');
+    fillGoogleContact(container);
+    approveCaptcha();
+
+    submitForm(container);
+    submitForm(container);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(window.gtag).not.toHaveBeenCalled();
+
+    const sent = JSON.parse(global.fetch.mock.calls[0][1].body);
+    await act(async () => {
+      pending.resolve({
+        ok: true, status: 201,
+        json: async () => ({ ok: true, submissionId: sent.submissionId, notificationStatus: 'sent' })
+      });
+      await pending.promise;
+    });
+    expect(window.gtag).toHaveBeenCalledTimes(1);
+    cleanup();
+
+    const next = renderContacto('es');
+    expect(window.gtag).toHaveBeenCalledTimes(1); // Refresh/remount never replays a lead.
+    next.cleanup();
+  });
+
+  it('tracks direct contact clicks as auxiliary events, never as generated leads', () => {
+    const { container, cleanup } = renderContacto('en');
+    const whatsapp = container.querySelector('.contacto-whatsapp');
+    const email = container.querySelector('.contacto-secondary a[href^="mailto:"]');
+    for (const link of [whatsapp, email]) {
+      link.addEventListener('click', (event) => event.preventDefault(), { once: true });
+      act(() => link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true })));
+    }
+
+    expect(window.gtag).toHaveBeenCalledTimes(2);
+    expect(window.gtag).toHaveBeenNthCalledWith(1, 'event', 'contact_click', {
+      send_to: 'G-J0EFBPH9P1', method: 'whatsapp',
+      placement: 'contact_primary', language: 'en'
+    });
+    expect(window.gtag).toHaveBeenNthCalledWith(2, 'event', 'contact_click', {
+      send_to: 'G-J0EFBPH9P1', method: 'email',
+      placement: 'contact_secondary', language: 'en'
+    });
+    expect(JSON.stringify(window.gtag.mock.calls)).not.toContain('generate_lead');
+    cleanup();
+  });
+
+  it('does not turn a stored contact into a UI error if analytics is blocked', async () => {
+    window.gtag.mockImplementation(() => { throw new Error('analytics blocked'); });
+    global.fetch.mockImplementation(async (_url, request) => {
+      const body = JSON.parse(request.body);
+      return { ok: true, status: 201, json: async () => ({
+        ok: true, submissionId: body.submissionId, notificationStatus: 'sent'
+      }) };
+    });
+    const { container, cleanup } = renderContacto('es');
+    fillGoogleContact(container);
+    approveCaptcha();
+    submitForm(container);
+    await act(async () => {});
+
+    expect(container.querySelector('[aria-live="polite"]').textContent).toContain('Gracias, ya recibí tu mensaje.');
     cleanup();
   });
 });

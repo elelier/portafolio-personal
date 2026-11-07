@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { usePrefersReducedMotion } from './utils/generalUtils';
 import { getCvRoute } from '../config/cvRoutes';
+import { trackDirectContactClick, trackStoredContactLead } from './utils/contactAnalytics';
 import perfilImg from '../assets/images/profile-picture-elier2.png';
 import '../styles/components/Contacto.css';
 
@@ -139,6 +140,8 @@ function Contacto({ style }) {
   const turnstileContainerRef = useRef(null);
   const turnstileWidgetRef = useRef(null);
   const pendingContactRef = useRef(null);
+  const submittingRef = useRef(false);
+  const trackedSubmissionIdsRef = useRef(new Set());
 
   useEffect(() => {
     if (!useGoogleContact || !turnstileSiteKey) return undefined;
@@ -182,7 +185,7 @@ function Contacto({ style }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (isSubmitting) {
+    if (isSubmitting || submittingRef.current) {
       return;
     }
 
@@ -191,6 +194,7 @@ function Contacto({ style }) {
       setFeedback({ type: 'error', message: t.securityError });
       return;
     }
+    submittingRef.current = true;
     setIsSubmitting(true);
 
     try {
@@ -227,6 +231,10 @@ function Contacto({ style }) {
           receipt.submissionId !== body.submissionId || receipt.notificationStatus !== expectedNotification) {
           throw new Error('Invalid contact receipt');
         }
+        if (!trackedSubmissionIdsRef.current.has(body.submissionId) &&
+            trackStoredContactLead(receipt.notificationStatus, language)) {
+          trackedSubmissionIdsRef.current.add(body.submissionId);
+        }
         pendingContactRef.current = null;
         setFeedback({
           type: response.status === 202 ? 'warning' : 'success',
@@ -247,6 +255,7 @@ function Contacto({ style }) {
           window.turnstile.reset(turnstileWidgetRef.current);
         }
       }
+      submittingRef.current = false;
       setIsSubmitting(false);
     }
   };
@@ -281,7 +290,8 @@ function Contacto({ style }) {
               <img src={perfilImg} alt="Elier Loya" className="contacto-imagen" />
               <div>
                 <p className="contacto-route-label">{t.directLabel}</p>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="contacto-whatsapp">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="contacto-whatsapp"
+                  onClick={() => trackDirectContactClick('whatsapp', 'contact_primary', language)}>
                   <i className="fab fa-whatsapp" aria-hidden="true"></i>
                   <span>{t.whatsappButton}</span>
                 </a>
@@ -293,7 +303,8 @@ function Contacto({ style }) {
               <h3>{t.findMeTitle}</h3>
               <ul>
                 <li>
-                  <a href={`mailto:${EMAIL}`}>
+                  <a href={`mailto:${EMAIL}`}
+                    onClick={() => trackDirectContactClick('email', 'contact_secondary', language)}>
                     <i className="fas fa-envelope" aria-hidden="true"></i>
                     <span>{EMAIL}</span>
                   </a>
@@ -400,10 +411,12 @@ function Contacto({ style }) {
                   <p>{feedback.message}</p>
                   {(feedback.type === 'error' || feedback.type === 'warning') && (
                     <div className="contacto-feedback-links">
-                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                        onClick={() => trackDirectContactClick('whatsapp', 'contact_fallback', language)}>
                         WhatsApp
                       </a>
-                      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                      <a href={`mailto:${EMAIL}`}
+                        onClick={() => trackDirectContactClick('email', 'contact_fallback', language)}>{EMAIL}</a>
                     </div>
                   )}
                 </>
