@@ -8,7 +8,7 @@ const outputDir = process.env.STATIC_ROUTE_BUILD_DIR
   : path.resolve(__dirname, '..', 'build');
 const source = path.join(outputDir, 'index.html');
 const origin = 'https://elelier.com';
-const socialImage = origin + '/images/social/elier-loya-og-2026.jpg';
+const socialImage = origin + '/images/social/elier-loya-og-2026-v2.jpg';
 
 const localized = {
   es: {
