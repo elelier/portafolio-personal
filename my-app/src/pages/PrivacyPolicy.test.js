@@ -36,7 +36,7 @@ describe('PrivacyPolicy contact channels', () => {
     expect(document.head.querySelector('meta[name="robots"]')?.getAttribute('content'))
       .toBe(language === 'es' ? 'index,follow' : 'noindex,follow');
     expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content'))
-      .toBe('https://elelier.com/images/sites/cover-desktop.jpg');
+      .toBe('https://elelier.com/images/social/elier-loya-og-2026.jpg');
 
     await cleanup();
   });

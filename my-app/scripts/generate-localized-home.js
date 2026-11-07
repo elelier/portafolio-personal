@@ -8,6 +8,7 @@ const outputDir = process.env.STATIC_ROUTE_BUILD_DIR
   : path.resolve(__dirname, '..', 'build');
 const source = path.join(outputDir, 'index.html');
 const origin = 'https://elelier.com';
+const socialImage = origin + '/images/social/elier-loya-og-2026.jpg';
 
 const localized = {
   es: {
@@ -67,13 +68,13 @@ function generateLocaleHtml(sourceHtml, lang, info) {
   html = setMeta(html, 'property', 'og:description', info.description);
   html = setMeta(html, 'property', 'og:url', canonical);
   html = setMeta(html, 'property', 'og:locale', info.ogLocale);
-  html = setMeta(html, 'property', 'og:image', origin + '/images/sites/cover-desktop.jpg');
-  html = setMeta(html, 'name', 'twitter:image', origin + '/images/sites/cover-desktop.jpg');
+  html = setMeta(html, 'property', 'og:image', socialImage);
+  html = setMeta(html, 'name', 'twitter:image', socialImage);
   html = setMeta(html, 'name', 'twitter:title', info.title);
   html = setMeta(html, 'name', 'twitter:description', info.description);
   html = setMeta(html, 'name', 'robots', 'index,follow');
   // Keep the JSON-LD image stable as well as the social card image.
-  html = html.replace(/https:\/\/elelier\.com\/static\/media\/eleliercom\.[a-z0-9]+\.png/g, origin + '/images/sites/cover-desktop.jpg');
+  html = html.replace(/https:\/\/elelier\.com\/static\/media\/eleliercom\.[a-z0-9]+\.png/g, socialImage);
   html = html.replace(/<link\s+rel="canonical"[^>]*>/gi, '');
   html = html.replace(/<link\s+rel="alternate"\s+hreflang="[^"]+"[^>]*>/gi, '');
   // Helmet's client-side head reconciliation only removes tags marked data-rh.
