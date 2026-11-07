@@ -7,13 +7,17 @@ import { readHeadState, renderRoute } from './seoHeadRouteTestUtils';
 
 describe('route SEO policy', () => {
   it('keeps the sitemap limited to the approved indexable paths', () => {
-    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy', '/terms-of-service']);
+    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/']);
     expect(getRouteSeoPolicy('/portafolio')).toMatchObject({
       canonicalPath: '/',
       robots: 'noindex,follow',
     });
     expect(getRouteSeoPolicy('/privacy-policy')).toMatchObject({
-      canonicalPath: '/privacy-policy',
+      canonicalPath: '/privacy-policy/',
+      robots: 'index,follow',
+    });
+    expect(getRouteSeoPolicy('/terms-of-service')).toMatchObject({
+      canonicalPath: '/terms-of-service/',
       robots: 'index,follow',
     });
   });
@@ -60,7 +64,7 @@ describe('route SEO policy', () => {
           title={title}
           description={`${route} page`}
           pathname={route}
-          canonicalPath={route}
+          canonicalPath={getRouteSeoPolicy(route)?.canonicalPath}
           robots={robots}
         />
       ),
@@ -70,7 +74,7 @@ describe('route SEO policy', () => {
       expect(readHeadState()).toEqual({
         title,
         robots,
-        canonical: `https://elelier.com${route}`,
+        canonical: `https://elelier.com${route}/`,
       });
     } finally {
       await cleanup();

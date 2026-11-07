@@ -23,7 +23,7 @@ it.each([
 
   expect(document.querySelector('.legal-page h1')?.textContent).toBe(heading);
   expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href'))
-    .toBe(`https://elelier.com${pathname.replace(/\/$/, '')}`);
+    .toBe(`https://elelier.com${language === 'es' ? '/terms-of-service/' : pathname.replace(/\/$/, '')}`);
   expect(document.head.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe(robots);
   expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content'))
     .toBe('https://elelier.com/images/social/elier-loya-og-2026-v2.jpg');

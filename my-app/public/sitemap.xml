@@ -16,12 +16,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://elelier.com/privacy-policy</loc>
+    <loc>https://elelier.com/privacy-policy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://elelier.com/terms-of-service</loc>
+    <loc>https://elelier.com/terms-of-service/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>

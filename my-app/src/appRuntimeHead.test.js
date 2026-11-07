@@ -72,14 +72,14 @@ const routeCases = {
   '/privacy-policy': {
     title: 'Política de Privacidad | Elier Loya',
     robots: 'index,follow',
-    canonical: 'https://elelier.com/privacy-policy',
+    canonical: 'https://elelier.com/privacy-policy/',
     visibleText: 'Política de Privacidad',
     element: <PrivacyPolicy />,
   },
   '/terms-of-service': {
     title: 'Condiciones del Servicio | Elier Loya',
     robots: 'index,follow',
-    canonical: 'https://elelier.com/terms-of-service',
+    canonical: 'https://elelier.com/terms-of-service/',
     visibleText: 'Condiciones del Servicio',
     element: <TermsOfService />,
   },
