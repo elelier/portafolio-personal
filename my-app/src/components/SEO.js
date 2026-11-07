@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { HOME_PATHS, LANGUAGE_TAGS } from '../i18n/locales';
 
 const SITE_URL = 'https://elelier.com';
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/social/elier-loya-og-2026.jpg`;
-const DEFAULT_OG_IMAGE_ALT = 'Elier Loya: Digital Transformation, Operations and Applied AI, sobre un fondo azul estrellado con formas abstractas.';
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/social/elier-loya-og-2026-v2.jpg`;
+const DEFAULT_OG_IMAGE_ALT = 'Elier Loya y sus especialidades Digital Transformation, Operations y Applied AI, en letras grandes sobre fondo azul estrellado con ondas abstractas.';
 
 export function buildUrl(pathname = '/') {
   const sanitizedPath = `${pathname || '/'}`.split('?')[0].split('#')[0];
