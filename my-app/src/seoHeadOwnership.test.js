@@ -53,12 +53,12 @@ it('owns the statically generated SEO head, leaving no conflicting tags after a 
       .toEqual(['https://elelier.com/en/']);
     expect([...document.head.querySelectorAll('meta[property="og:locale"]')].map((tag) => tag.content))
       .toEqual(['en_US']);
-    const stableSocialImage = 'https://elelier.com/images/sites/cover-desktop.jpg';
+    const stableSocialImage = 'https://elelier.com/images/social/elier-loya-og-2026.jpg';
     expect([...document.head.querySelectorAll('meta[property="og:image"]')].map((tag) => tag.content))
       .toEqual([stableSocialImage]);
     expect([...document.head.querySelectorAll('meta[name="twitter:image"]')].map((tag) => tag.content))
       .toEqual([stableSocialImage]);
-    expect(fs.existsSync(path.resolve(__dirname, '../public/images/sites/cover-desktop.jpg'))).toBe(true);
+    expect(fs.existsSync(path.resolve(__dirname, '../public/images/social/elier-loya-og-2026.jpg'))).toBe(true);
     expect([...document.head.querySelectorAll('meta[name="description"]')].map((tag) => tag.content))
       .toEqual([HOME_COPY.en.description]);
     expect(document.head.querySelectorAll('link[rel="alternate"][hreflang]')).toHaveLength(4);

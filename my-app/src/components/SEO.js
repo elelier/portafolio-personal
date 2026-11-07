@@ -4,7 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { HOME_PATHS, LANGUAGE_TAGS } from '../i18n/locales';
 
 const SITE_URL = 'https://elelier.com';
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/sites/cover-desktop.jpg`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/social/elier-loya-og-2026.jpg`;
+const DEFAULT_OG_IMAGE_ALT = 'Elier Loya: Digital Transformation, Operations and Applied AI, sobre un fondo azul estrellado con formas abstractas.';
 
 export function buildUrl(pathname = '/') {
   const sanitizedPath = `${pathname || '/'}`.split('?')[0].split('#')[0];
@@ -21,7 +22,7 @@ function SEO({
   type = 'website',
   robots = 'index,follow',
   keywords,
-  imageAlt,
+  imageAlt = image === DEFAULT_OG_IMAGE ? DEFAULT_OG_IMAGE_ALT : undefined,
   locale = 'es_MX'
 }) {
   const location = useLocation();
