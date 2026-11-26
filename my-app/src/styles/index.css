@@ -3,16 +3,16 @@
   --color-bg-light: #c5e6f6;
   --color-text-light: #020817;
   --color-primary-light: #020817;
-  --color-secondary-light: #6c757d;
-  --color-accent-light: #00cc99;
-  --color-accent-light-rgb: 0, 204, 153;
+  --color-secondary-light: #4b5563;
+  --color-accent-light: #065f46;
+  --color-accent-light-rgb: 6, 95, 70;
   --color-bg-anti-light: #020817;
   --color-bg-2-light: #e7eced;
   --color-bg-3-light: #ffffff;
   --color-bg-solid-light: #ffffff;
-  --hero-title-color-light: #7dd3fc;
-  --hero-title-color-2-light: #00cc99;
-  --hero-title-color-light-rgb: 125, 211, 252;
+  --hero-title-color-light: #075985;
+  --hero-title-color-2-light: #065f46;
+  --hero-title-color-light-rgb: 7, 89, 133;
   --color-shadow-light: linear-gradient(rgba(167, 155, 155, 0.5), rgba(126, 219, 231, 0.7));
   
   --chatbot-chat-widget-bg-color-light:#f6f9fc;
@@ -42,12 +42,12 @@
   --color-bg-dark: #020817;
   --color-text-dark: #f6f9fc;
   --color-primary-dark: #7dd3fc;
-  --color-secondary-dark: #6c757d;
+  --color-secondary-dark: #a3adb8;
   --color-accent-dark: #7dd3fc;
   --color-accent-dark-rgb: 125, 211, 252;
   --color-bg-anti-dark: #f6f9fc;
   --color-bg-2-dark: #6c757d;
-  --color-bg-3-dark: #4b3e57;
+  --color-bg-3-dark: #3a3148;
   --color-bg-solid-dark: #121212;
   --hero-title-color-dark: #7dd3fc;
   --hero-title-color-dark-rgb: 125, 211, 252;

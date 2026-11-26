@@ -21,6 +21,45 @@
   }
 }
 
+/* Fondo alterno de secciones: oscuro en tema oscuro (antes gris medio,
+ * que dejaba títulos claros sobre fondo claro). */
+:root,
+[data-theme="dark"] {
+  --section-bg-alt: #1e293b;
+}
+
+[data-theme="light"] {
+  --section-bg-alt: #e7eced;
+}
+
+/* CTA de Carrera con el mismo estilo de tarjeta y botones que el resto */
+.App .portafolio-cta {
+  border: 1px solid var(--ui-card-border);
+  background: var(--color-bg-solid);
+  box-shadow: var(--ui-card-shadow);
+  backdrop-filter: none;
+}
+
+.App .portafolio-cta h3 {
+  color: var(--hero-title-color-2);
+}
+
+.App .portafolio-cta p {
+  color: var(--color-secondary);
+}
+
+.App .portafolio-cta-buttons .cta-button-primary {
+  background: var(--hero-title-color-2);
+  color: var(--color-bg-solid);
+  box-shadow: none;
+}
+
+.App .portafolio-cta-buttons .cta-button-secondary {
+  border: 1px solid var(--ui-card-border);
+  color: var(--color-text);
+  box-shadow: none;
+}
+
 /* Puntos del carrusel: solo existen en móvil. */
 .swipe-dots {
   display: none;
@@ -865,4 +904,11 @@
     padding: 10px 18px;
     font-size: 0.9rem;
   }
+}
+
+/* En tema claro el botón de seguro tiene fondo oscuro: texto blanco */
+[data-theme="light"] .App .timeline-card__links a.timeline-card__link--auto-insurance,
+[data-theme="light"] .App .timeline-card__links a.timeline-card__link--auto-insurance:hover,
+[data-theme="light"] .App .timeline-card__links a.timeline-card__link--auto-insurance:focus-visible {
+  color: #ffffff;
 }

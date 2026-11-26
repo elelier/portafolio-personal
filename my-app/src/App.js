@@ -140,7 +140,7 @@ function App({ initialLanguage }) {
     'var(--color-bg)',
     'var(--color-bg-3)',
     'var(--color-bg)',
-    'var(--color-bg-2)',
+    'var(--section-bg-alt)',
   ];
 
   const homeSections = [
