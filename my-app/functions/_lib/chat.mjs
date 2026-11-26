@@ -1,5 +1,6 @@
-// Proxy del chatbot: la API key de Gemini vive solo en el servidor (secret de Cloudflare Pages).
-export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
+// Chatbot vía Cloudflare Workers AI (binding `AI` de Pages). No hay API keys:
+// el binding usa la cuenta de Cloudflare y su cuota gratuita diaria de Neurons.
+export const DEFAULT_CHAT_MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
 const MAX_BODY_BYTES = 8192;
 const MAX_MESSAGE_CHARS = 500;
@@ -18,7 +19,7 @@ CONTEXTO:
 INSTRUCCIONES:
 - Respuestas MUY CORTAS (máximo 40 palabras), directas y amables.
 - No inventes resultados, clientes, disponibilidad ni datos personales. Si no sabes algo, sugiere usar el formulario de contacto.
-- Si preguntan qué modelo usas: "Uso Google Gemini para darte respuestas".
+- Si preguntan qué modelo usas: "Uso un modelo de IA abierto (Gemma) en Cloudflare".
 - Responde en español a menos que te escriban en otro idioma.`,
   en: `You are the virtual assistant for Elier Loya's professional portfolio (elelier.com).
 
@@ -30,7 +31,7 @@ CONTEXT:
 INSTRUCTIONS:
 - VERY SHORT answers (max 50 words), direct and friendly.
 - Do not invent results, clients, availability or personal details. If unsure, suggest the contact form.
-- If asked which model you use: "I use Google Gemini to answer you".
+- If asked which model you use: "I use an open AI model (Gemma) on Cloudflare".
 - Reply in English unless written to in another language.`,
   'pt-br': `Você é o assistente do portfólio profissional de Elier Loya (elelier.com). Ele atua em operações, produto digital, transformação digital, automação e IA aplicada. Responda em português brasileiro, de forma curta (no máximo 50 palavras), clara e prática. Não invente resultados, disponibilidade, clientes ou informações pessoais. Quando não souber, oriente o visitante a usar o formulário de contato.`
 };
@@ -55,29 +56,35 @@ function cleanPayload(input) {
   for (const item of rawHistory) {
     if (!item || typeof item.text !== 'string') return null;
     const text = item.text.trim().slice(0, 1000);
-    if (text) history.push({ role: item.isUser === true ? 'user' : 'model', text });
+    if (text) history.push({ role: item.isUser === true ? 'user' : 'assistant', text });
   }
   return { message, language, history };
 }
 
-function toContents(history, message) {
-  const contents = [];
+function toMessages(language, history, message) {
+  const turns = [];
   for (const { role, text } of history) {
-    const last = contents[contents.length - 1];
-    // Gemini prefiere turnos alternados: unimos mensajes consecutivos del mismo rol.
-    if (last && last.role === role) last.parts[0].text += `\n${text}`;
-    else contents.push({ role, parts: [{ text }] });
+    const last = turns[turns.length - 1];
+    // Turnos alternados: unimos mensajes consecutivos del mismo rol.
+    if (last && last.role === role) last.content += `\n${text}`;
+    else turns.push({ role, content: text });
   }
   // La conversación debe empezar con un turno del usuario.
-  while (contents.length && contents[0].role !== 'user') contents.shift();
-  const last = contents[contents.length - 1];
-  if (last && last.role === 'user') last.parts[0].text += `\n${message}`;
-  else contents.push({ role: 'user', parts: [{ text: message }] });
-  return contents;
+  while (turns.length && turns[0].role !== 'user') turns.shift();
+  const last = turns[turns.length - 1];
+  if (last && last.role === 'user') last.content += `\n${message}`;
+  else turns.push({ role: 'user', content: message });
+  return [{ role: 'system', content: SYSTEM_PROMPTS[language] }, ...turns];
 }
 
-export async function handleChat(request, env, fetchImpl = fetch) {
-  const available = Boolean(env?.GEMINI_API_KEY);
+function extractText(result) {
+  if (typeof result?.response === 'string') return result.response.trim();
+  const content = result?.choices?.[0]?.message?.content;
+  return typeof content === 'string' ? content.trim() : '';
+}
+
+export async function handleChat(request, env) {
+  const available = typeof env?.AI?.run === 'function';
   if (request.method === 'GET') return json({ ok: true, available }, 200);
   if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405);
   if (!originAllowed(request)) return json({ ok: false, error: 'forbidden_origin' }, 403);
@@ -100,30 +107,23 @@ export async function handleChat(request, env, fetchImpl = fetch) {
   const payload = cleanPayload(input);
   if (!payload) return json({ ok: false, error: 'invalid_message' }, 400);
 
-  const model = env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL;
+  const model = env.CHAT_MODEL || DEFAULT_CHAT_MODEL;
   try {
-    const response = await fetchImpl(
-      `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    const result = await env.AI.run(
+      model,
       {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: SYSTEM_PROMPTS[payload.language] }] },
-          contents: toContents(payload.history, payload.message),
-          generationConfig: { temperature: 0.7, maxOutputTokens: 300 }
-        }),
-        signal: AbortSignal.timeout(15000)
-      }
+        messages: toMessages(payload.language, payload.history, payload.message),
+        max_tokens: 300,
+        temperature: 0.7,
+        chat_template_kwargs: { enable_thinking: false }
+      },
+      { rejectIfBusy: true }
     );
-    if (!response.ok) return json({ ok: false, error: 'upstream_failure' }, 502);
-    const result = await response.json();
-    const text = result?.candidates?.[0]?.content?.parts
-      ?.map((part) => (typeof part?.text === 'string' ? part.text : ''))
-      .join('')
-      .trim();
+    const text = extractText(result);
     if (!text) return json({ ok: false, error: 'empty_response' }, 502);
     return json({ ok: true, text }, 200);
   } catch {
+    // Incluye cuota diaria agotada o falta de capacidad: el cliente usa respuestas locales.
     return json({ ok: false, error: 'upstream_failure' }, 502);
   }
 }

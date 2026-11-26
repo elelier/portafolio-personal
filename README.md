@@ -105,7 +105,7 @@ Para el formulario productivo Cloudflare + Google y el contrato de analítica, c
 # .env.example
 REACT_APP_API_URL=your_api_url
 REACT_APP_ANALYTICS_ID=your_analytics_id
-# GEMINI_API_KEY va como secret de Cloudflare Pages (servidor), no en el build
+# El chatbot usa el binding de Workers AI `AI` en Cloudflare Pages: sin API key
 ```
 
 ### Datos Sensibles y Configuración

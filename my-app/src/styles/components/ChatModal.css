@@ -215,7 +215,7 @@
   transform: translateY(-1px);
 }
 
-/* Estilos para mensajes de Gemini AI */
+/* Estilos para mensajes generados por IA */
 .message.system.gemini-powered {
   background: linear-gradient(135deg, var(--chatbot-chat-widget-system-message-bg-color), rgba(66, 133, 244, 0.1));
   border-left: 3px solid #4285f4;
@@ -223,7 +223,7 @@
 }
 
 .message.system.gemini-powered::after {
-  content: "⚡ Gemini AI";
+  content: "⚡ IA";
   position: absolute;
   top: -8px;
   right: 8px;

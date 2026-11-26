@@ -231,8 +231,8 @@ const ChatModal = () => {
         await showTypingIndicator(translations[language].typing.writing, 1000);
         const geminiStatus = await geminiService.initialize();
         const welcomeMessage = language === 'es'
-          ? `¡Hola! Soy el asistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`
-          : language === 'pt-br' ? `Olá! Sou o assistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ Google Gemini AI' : '🤖'}.` : `Hi! I'm <b>Elier Loya's</b> virtual assistant ${geminiStatus ? '⚡ Powered by Google Gemini AI' : '🤖'}.`;
+          ? `¡Hola! Soy el asistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ con IA' : '🤖'}.`
+          : language === 'pt-br' ? `Olá! Sou o assistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ com IA' : '🤖'}.` : `Hi! I'm <b>Elier Loya's</b> virtual assistant ${geminiStatus ? '⚡ AI-powered' : '🤖'}.`;
         setMessages([new SystemMessage(welcomeMessage)]);
         
         // Segundo mensaje

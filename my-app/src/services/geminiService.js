@@ -1,5 +1,5 @@
-// Cliente del chatbot. La llamada a Gemini ocurre en la Pages Function /api/chat,
-// así que la API key nunca llega al navegador.
+// Cliente del chatbot. La llamada al modelo (Workers AI) ocurre en la Pages Function /api/chat,
+// así que no hay credenciales en el navegador.
 const CHAT_ENDPOINT = '/api/chat';
 
 // ChatModal pinta los mensajes como HTML: escapamos la respuesta del modelo.

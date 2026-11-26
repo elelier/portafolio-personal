@@ -26,7 +26,7 @@
 │   └── assets/            # Recursos estáticos públicos
 ├── src/
 │   ├── components/        # Componentes React
-│   │   ├── ChatModal.js   # Chatbot con IA (Gemini)
+│   │   ├── ChatModal.js   # Chatbot con IA (Workers AI vía /api/chat)
 │   │   ├── entradas/      # Componentes del blog
 │   │   ├── hooks/         # Hooks personalizados
 │   │   └── utils/         # Funciones de utilidad
@@ -48,7 +48,6 @@
 │   │   ├── components/    # Estilos por componente
 │   │   └── shared/        # Estilos compartidos
 │   ├── utils/             # Utilidades JavaScript
-│   ├── debug-gemini.js    # Herramientas de debug IA (dev)
 │   └── assets/            # Recursos multimedia
 ├── scripts/               # Scripts de automatización
 │   ├── process-images.js  # Optimización de imágenes
@@ -82,7 +81,7 @@
 - **React Use Gesture**: Interacciones gestuales
 
 ### Inteligencia Artificial
-- **Google Gemini AI**: Chatbot conversacional inteligente
+- **Cloudflare Workers AI** (Gemma 4): Chatbot conversacional vía Pages Function
 - **Rate Limiting**: Control de spam y seguridad
 - **Memoria Conversacional**: Contexto persistente
 - **Sanitización de Mensajes**: Seguridad de entrada
@@ -121,8 +120,8 @@
 - **Accesibilidad**: ARIA labels y semántica HTML5
 
 ### Integración de IA
-- **Chatbot Inteligente con Google Gemini AI**:
-  - 🧠 **Motor de IA**: Google Gemini 1.5 Flash
+- **Chatbot Inteligente con Cloudflare Workers AI**:
+  - 🧠 **Motor de IA**: Gemma 4 26B en Workers AI (`/api/chat`), cuota gratuita diaria
   - 🗣️ **Conversación Natural**: Respuestas contextuales inteligentes
   - 🌐 **Soporte Bilingüe**: Español e inglés automático
   - 💾 **Memoria Conversacional**: Mantiene contexto de la conversación
@@ -158,7 +157,7 @@ El portfolio se publica exclusivamente en **Cloudflare Pages** y está accesible
 
 ### Variables de Entorno Requeridas
 ```bash
-GEMINI_API_KEY=...  # Secret de Cloudflare Pages (servidor), nunca REACT_APP_*
+# Chatbot: binding de Workers AI `AI` en Cloudflare Pages (sin API key). Ver CLOUDFLARE_PAGES.md
 ```
 
 ### Monitoreo y Analytics
