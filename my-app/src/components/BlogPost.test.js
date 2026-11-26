@@ -17,7 +17,7 @@ const posts = [
     es: {
       title: 'Primer artículo',
       summary: 'Resumen del primero.',
-      body: 'Un párrafo con **negritas**.\n\n## Un subtítulo\n\n- uno\n- dos',
+      body: 'Un párrafo con **negritas**.\n\n## Un subtítulo\n\n- uno\n- dos\n\n![Una vaca](/images/blog/vaca.webp "Pie de foto")',
     },
   },
   {
@@ -87,6 +87,8 @@ describe('blog posts', () => {
     expect(container.querySelector('.entrada-contenido h2').textContent).toBe('Un subtítulo');
     expect(container.querySelectorAll('.entrada-contenido li')).toHaveLength(2);
     expect(container.querySelector('.entrada-contenido strong').textContent).toBe('negritas');
+    expect(container.querySelector('figure img').getAttribute('src')).toBe('/images/blog/vaca.webp');
+    expect(container.querySelector('figcaption').textContent).toBe('Pie de foto');
     cleanup();
   });
 

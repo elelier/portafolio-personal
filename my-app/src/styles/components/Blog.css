@@ -288,3 +288,21 @@
     margin: 0 16px;
   }
 }
+
+.entrada-figura {
+  margin: 28px 0;
+}
+
+.entrada-figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.entrada-figura figcaption {
+  margin-top: 8px;
+  color: #777;
+  font-size: 0.9em;
+  text-align: center;
+}
