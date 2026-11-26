@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import { activeSectionMap, getNavigationContent, observedSectionIds } from '../config/navigation';
 import { homePathFor } from '../i18n/locales';
+import { blogPath } from '../data/blogPosts';
 import '../styles/components/Navegacion.css';
 
 const sectionOrder = new Map(observedSectionIds.map((id, index) => [id, index]));
@@ -194,10 +195,17 @@ function Navegacion() {
               {content.secondary.map((item) => (
                 <li key={item.key}>
                   <Link
-                    to={`${homePath}#${item.target}`}
+                    to={item.page === 'blog' ? blogPath(language) : `${homePath}#${item.target}`}
                     className={isActive(item.key) ? 'is-active' : ''}
                     aria-current={isActive(item.key) ? 'location' : undefined}
-                    onClick={() => handleScrollToElement(item.target)}
+                    onClick={() => {
+                      if (item.page) {
+                        setAboutOpen(false);
+                        setMenuOpen(false);
+                      } else {
+                        handleScrollToElement(item.target);
+                      }
+                    }}
                   >
                     {item.label}
                   </Link>

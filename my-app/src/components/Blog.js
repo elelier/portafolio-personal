@@ -1,101 +1,94 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import '../styles/components/Blog.css'; // Importa los estilos del blog desde la carpeta css dentro de components
+import { homePathFor } from '../i18n/locales';
+import {
+  blogPath,
+  formatPostDate,
+  getPostCopy,
+  getPublishedPosts,
+  postContentLanguage,
+  readingMinutes,
+} from '../data/blogPosts';
+import { getBlogCopy } from './blog/blogCopy';
+import '../styles/components/Blog.css';
 
-function Blog() {
-  const { language } = useLanguage();
-  const articulos = [
-    
-  ];
-  const content = {
-    es: {
-      title: 'Blog',
-      intro: 'Bienvenido a nuestro blog, donde compartimos artículos sobre las últimas tendencias y avances en tecnología, digitalización y más.',
-      servicesCta: 'Mis Servicios',
-      contactCta: 'Hablemos de tu reto'
-    },
-    en: {
-      title: 'Blog',
-      intro: 'Welcome to the blog, where I share articles about technology, digitalization and practical product thinking.',
-      servicesCta: 'My Services',
-      contactCta: 'Let’s talk about your challenge'
-    }
-  };
-  const t = content[language] || content.es;
+function BlogCard({ post, language, t, featured = false }) {
+  const copy = getPostCopy(post, language);
+  const contentLang = postContentLanguage(post, language);
+  const href = blogPath(language, post.slug);
+  const titleId = `blog-card-${post.slug}`;
 
   return (
-    <div className="blog">
-      <div className="blog-intro">
-        <h1>{t.title}</h1>
-        <p className="intro">
-          {t.intro}
+    <article className={`blog-card${featured ? ' blog-card--featured' : ''}`} aria-labelledby={titleId}>
+      {post.cover && (
+        <div className="blog-card__media">
+          <img src={post.cover} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" />
+        </div>
+      )}
+      <div className="blog-card__body">
+        <p className="blog-card__meta">
+          {featured && <span className="blog-card__badge">{t.featured}</span>}
+          <time dateTime={post.date}>{formatPostDate(post.date, language)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{t.minutes(readingMinutes(post, language))}</span>
+          {contentLang !== language && <span className="blog-card__lang">{t.onlySpanish}</span>}
         </p>
-        <div className="cta-seccion">
-          <Link to="/servicios" className="cta-button">{t.servicesCta}</Link>
-          <Link to="/contacto" className="cta-button">{t.contactCta}</Link>
+        <h2 className="blog-card__title" id={titleId} lang={contentLang === language ? undefined : contentLang}>
+          <Link to={href} className="blog-card__link">{copy.title}</Link>
+        </h2>
+        <p className="blog-card__summary" lang={contentLang === language ? undefined : contentLang}>{copy.summary}</p>
+        {(copy.tags || post.tags)?.length > 0 && (
+          <ul className="blog-tags" aria-label="Tags">
+            {(copy.tags || post.tags).map((tag) => <li key={tag}>{tag}</li>)}
+          </ul>
+        )}
+        <div className="blog-card__footer">
+          <span className="blog-card__cta" aria-hidden="true">{t.readArticle} →</span>
+          {post.product && (
+            <a className="blog-card__app" href={post.product.url} target="_blank" rel="noopener noreferrer">
+              {post.product.icon && <img src={post.product.icon} alt="" width="20" height="20" />}
+              {post.product.url.replace(/^https?:\/\//, '').replace(/\/$/, '')} <span aria-hidden="true">↗</span>
+            </a>
+          )}
         </div>
       </div>
-      <div className="articulos-list">
-        {articulos.map((articulo, index) => (
-          <div key={index} className="articulo">
-            <img src={articulo.imagen} alt={`Imagen de ${articulo.titulo}`} className="articulo-imagen" />
-            <div className="articulo-contenido">
-              <h2>{articulo.titulo}</h2>
-              <div className="etiquetas">
-                {articulo.etiquetas.map((etiqueta, i) => (
-                  <span key={i} className="etiqueta">{etiqueta}</span>
-                ))}
-              </div>
-              <p className="fecha">{articulo.fecha}</p>
-              <p>{articulo.resumen}</p>
-              <Link to={articulo.link} className="leer-mas">Leer más</Link>
+    </article>
+  );
+}
+
+function Blog({ posts }) {
+  const { language } = useLanguage();
+  const t = getBlogCopy(language);
+  const home = homePathFor(language);
+  const [featured, ...rest] = getPublishedPosts(posts);
+
+  return (
+    <main className="blog-page">
+      <header className="blog-hero">
+        <p className="blog-eyebrow">{t.eyebrow}</p>
+        <h1>{t.title}</h1>
+        <p className="blog-hero__intro">{t.intro}</p>
+        <div className="blog-hero__actions">
+          <Link to={`${home}#contacto`} className="blog-button blog-button--primary">{t.contactCta}</Link>
+          <Link to={`${home}#como-trabajo`} className="blog-button">{t.howIWorkCta}</Link>
+        </div>
+      </header>
+
+      {!featured ? (
+        <p className="blog-empty">{t.empty}</p>
+      ) : (
+        <section className="blog-list" aria-label={t.eyebrow}>
+          <BlogCard post={featured} language={language} t={t} featured />
+          {rest.length > 0 && (
+            <div className="blog-grid">
+              {rest.map((post) => <BlogCard key={post.slug} post={post} language={language} t={t} />)}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          )}
+        </section>
+      )}
+    </main>
   );
 }
 
 export default Blog;
-/* {
-      titulo: "Cómo la IA está Transformando el E-commerce",
-      fecha: "15 de Mayo, 2024",
-      resumen: "Exploramos las diversas formas en que la Inteligencia Artificial está revolucionando la industria del comercio electrónico, desde la personalización hasta la optimización de inventarios.",
-      link: "/entradas/entrada1", // Enlace a la entrada
-      etiquetas: ["IA", "E-commerce", "Tecnología"],
-      imagen: "https://via.placeholder.com/400x250?text=IA+en+E-commerce"
-    },
-    {
-      titulo: "5 Estrategias Clave para la Transformación Digital en 2024",
-      fecha: "3 de Abril, 2024",
-      resumen: "Analizamos las tendencias más importantes en transformación digital y cómo las empresas pueden implementarlas para mantenerse competitivas.",
-      link: "/entradas/entrada2", // Enlace a otra entrada de blog
-      etiquetas: ["Transformación Digital", "Estrategias", "2024"],
-      imagen: "https://via.placeholder.com/400x250?text=Transformación+Digital"
-    },
-    {
-      titulo: "Optimización de la Cadena de Suministro con Machine Learning",
-      fecha: "20 de Marzo, 2024",
-      resumen: "Descubre cómo el aprendizaje automático está mejorando la eficiencia y reduciendo costos en la gestión de la cadena de suministro.",
-      link: "/entradas/entrada3", // Enlace a otra entrada de blog
-      etiquetas: ["Machine Learning", "Cadena de Suministro", "Optimización"],
-      imagen: "https://via.placeholder.com/400x250?text=Machine+Learning"
-    },
-    {
-      titulo: "Innovaciones en Salud Digital: Lo Que Nos Traerá el Futuro",
-      fecha: "12 de Febrero, 2024",
-      resumen: "Explora las últimas innovaciones en tecnología de salud digital y cómo están cambiando la manera en que se brinda atención médica.",
-      link: "/entradas/entrada4", // Enlace a otra entrada de blog
-      etiquetas: ["Salud Digital", "Innovaciones", "Tecnología"],
-      imagen: "https://via.placeholder.com/400x250?text=Salud+Digital"
-    },
-    {
-      titulo: "Automatización en el Logística: Más Allá del Simple Transporte",
-      fecha: "5 de Enero, 2024",
-      resumen: "Analizamos cómo la automatización está revolucionando la logística, desde el almacenamiento hasta la entrega final.",
-      link: "/entradas/entrada5", // Enlace a otra entrada de blog
-      etiquetas: ["Automatización", "Logística", "Transporte"],
-      imagen: "https://via.placeholder.com/400x250?text=Automatización+Logística"
-    } */
