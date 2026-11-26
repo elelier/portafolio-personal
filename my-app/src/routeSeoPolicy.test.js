@@ -7,7 +7,7 @@ import { readHeadState, renderRoute } from './seoHeadRouteTestUtils';
 
 describe('route SEO policy', () => {
   it('keeps the sitemap limited to the approved indexable paths', () => {
-    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/', '/blog/', '/blog/app-rancho-de-mi-papa/', '/en/blog/app-rancho-de-mi-papa/', '/pt-br/blog/app-rancho-de-mi-papa/']);
+    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/', '/blog/', '/blog/app-rancho-de-mi-papa/', '/en/blog/app-rancho-de-mi-papa/', '/pt-br/blog/app-rancho-de-mi-papa/', '/blog/vender-mis-cosas-con-mi-propia-app/', '/en/blog/vender-mis-cosas-con-mi-propia-app/', '/pt-br/blog/vender-mis-cosas-con-mi-propia-app/']);
     expect(getRouteSeoPolicy('/portafolio')).toMatchObject({
       canonicalPath: '/',
       robots: 'noindex,follow',

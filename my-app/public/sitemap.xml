@@ -45,4 +45,19 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://elelier.com/blog/vender-mis-cosas-con-mi-propia-app/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://elelier.com/en/blog/vender-mis-cosas-con-mi-propia-app/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://elelier.com/pt-br/blog/vender-mis-cosas-con-mi-propia-app/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

@@ -71,7 +71,14 @@ const isPhoneShot = (src) => /\/app-[^/]+$/.test(src);
 function Figure({ item }) {
   return (
     <figure className={`entrada-figura${isPhoneShot(item.src) ? ' entrada-figura--celular' : ''}`}>
-      <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+      {isPhoneShot(item.src) ? (
+        // Las capturas se pueden abrir a tamaño completo para leer los detalles.
+        <a href={item.src} target="_blank" rel="noopener noreferrer" className="entrada-figura__ampliar">
+          <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+        </a>
+      ) : (
+        <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+      )}
       {item.caption && <figcaption>{item.caption}</figcaption>}
     </figure>
   );
