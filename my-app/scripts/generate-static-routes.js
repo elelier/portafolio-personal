@@ -100,7 +100,7 @@ function escapeAttr(value) {
   return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 }
 
-function buildBlogHtml(sourceHtml, { title, description, canonical, url = canonical, image, imageAlt, type, robots = 'index,follow', lang }) {
+function buildBlogHtml(sourceHtml, { title, description, canonical, url = canonical, image, imageAlt, type, robots = 'index,follow', lang, alternates = [] }) {
   const t = escapeAttr(title);
   const d = escapeAttr(description);
   const tags = [
@@ -119,7 +119,11 @@ function buildBlogHtml(sourceHtml, { title, description, canonical, url = canoni
       [/<meta\b(?=[^>]*\bname=["']twitter:image["'])[^>]*>/i, `<meta name="twitter:image" content="${image}" data-rh="true">`]
     );
   }
-  const base = sourceHtml.replace(/<title>[^<]*<\/title>/i, `<title>${t}</title>`);
+  const hreflang = alternates
+    .map(([code, href]) => `    <link rel="alternate" hreflang="${code}" href="${href}" data-rh="true">`)
+    .join('\n');
+  const titled = sourceHtml.replace(/<title>[^<]*<\/title>/i, `<title>${t}</title>`);
+  const base = hreflang ? titled.replace('</head>', `${hreflang}\n</head>`) : titled;
   return tags.reduce(
     (html, [pattern, markup]) => replaceOrInsertHeadTag(html, pattern, markup),
     lang ? base.replace(/<html lang="[^"]*"/i, `<html lang="${lang}"`) : base
@@ -171,20 +175,28 @@ for (const { prefix, lang, robots } of blogLocales) {
     lang,
   }));
   for (const post of publishedPosts) {
+    const translated = !prefix || Boolean(post[prefix]);
     const copy = (prefix && post[prefix]) || post.es;
+    const ownUrl = `${urlBase}${post.slug}/`;
+    const esUrl = `https://elelier.com/blog/${post.slug}/`;
+    const alternates = [['es', esUrl]];
+    if (post.en) alternates.push(['en', `https://elelier.com/en/blog/${post.slug}/`]);
+    if (post['pt-br']) alternates.push(['pt-BR', `https://elelier.com/pt-br/blog/${post.slug}/`]);
+    if (alternates.length > 1) alternates.push(['x-default', esUrl]);
     const routeDir = path.join(listDir, post.slug);
     fs.mkdirSync(routeDir, { recursive: true });
     const image = post.ogImage || post.cover;
     fs.writeFileSync(path.join(routeDir, 'index.html'), buildBlogHtml(indexHtml, {
       title: `${copy.title} | Elier Loya`,
       description: copy.summary,
-      canonical: `https://elelier.com/blog/${post.slug}/`,
-      url: `${urlBase}${post.slug}/`,
+      canonical: translated ? ownUrl : esUrl,
+      url: ownUrl,
       image: image ? `https://elelier.com${image}` : undefined,
       imageAlt: copy.title,
       type: 'article',
-      robots,
+      robots: translated ? 'index,follow' : 'noindex,follow',
       lang,
+      alternates,
     }));
   }
 }

@@ -6,6 +6,8 @@ export const INDEXABLE_SITEMAP_PATHS = [
   '/terms-of-service/',
   '/blog/',
   '/blog/app-rancho-de-mi-papa/',
+  '/en/blog/app-rancho-de-mi-papa/',
+  '/pt-br/blog/app-rancho-de-mi-papa/',
 ];
 
 export const ROUTE_SEO_POLICY = {

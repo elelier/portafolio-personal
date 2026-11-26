@@ -37,6 +37,8 @@ describe('static SEO artifacts', () => {
     const paths = extractSitemapPaths(read(sitemapPath));
     getPublishedPosts().forEach((post) => {
       expect(paths).toContain(`/blog/${post.slug}/`);
+      if (post.en) expect(paths).toContain(`/en/blog/${post.slug}/`);
+      if (post['pt-br']) expect(paths).toContain(`/pt-br/blog/${post.slug}/`);
     });
   });
 
@@ -53,6 +55,7 @@ describe('static SEO artifacts', () => {
     expect(extractSitemapPaths(sitemap)).toEqual([
       '/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/',
       '/blog/', '/blog/app-rancho-de-mi-papa/',
+      '/en/blog/app-rancho-de-mi-papa/', '/pt-br/blog/app-rancho-de-mi-papa/',
     ]);
     expect(sitemap).not.toContain('<loc>https://elelier.com/privacy-policy</loc>');
     expect(sitemap).not.toContain('<loc>https://elelier.com/terms-of-service</loc>');

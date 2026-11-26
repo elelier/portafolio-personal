@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
 import { homePathFor, OG_LOCALES } from '../i18n/locales';
 import RouteSEO from './RouteSEO';
@@ -12,6 +13,7 @@ import {
   getPostCopy,
   getPublishedPosts,
   postContentLanguage,
+  postLanguages,
   readingMinutes,
 } from '../data/blogPosts';
 import '../styles/components/Blog.css';
@@ -82,7 +84,9 @@ function BlogPost({ posts }) {
     .filter((block) => block.type === 'images')
     .flatMap((block) => block.items)
     .find((item) => item.src === post.cover);
-  const canonicalPath = blogPath('es', post.slug);
+  const translated = contentLang === language;
+  const canonicalPath = blogPath(translated ? language : 'es', post.slug);
+  const alternates = postLanguages(post);
   const url = `https://elelier.com${blogPath(language, post.slug)}`;
   const more = getPublishedPosts(posts).filter((p) => p.slug !== post.slug).slice(0, 2);
   const home = homePathFor(language);
@@ -97,19 +101,28 @@ function BlogPost({ posts }) {
         title={`${copy.title} | Elier Loya`}
         description={copy.summary}
         pathname={canonicalPath}
-        robots={language === 'es' ? 'index,follow' : 'noindex,follow'}
+        robots={translated ? 'index,follow' : 'noindex,follow'}
         type="article"
         locale={OG_LOCALES[language]}
         image={post.ogImage || post.cover ? `https://elelier.com${post.ogImage || post.cover}` : undefined}
         imageAlt={post.ogImage || post.cover ? copy.title : undefined}
       />
 
+      {alternates.length > 1 && (
+        <Helmet>
+          {alternates.map((lang) => (
+            <link key={lang} rel="alternate" hrefLang={lang === 'es' ? 'es' : lang === 'en' ? 'en' : 'pt-BR'} href={`https://elelier.com${blogPath(lang, post.slug)}`} />
+          ))}
+          <link rel="alternate" hrefLang="x-default" href={`https://elelier.com${blogPath('es', post.slug)}`} />
+        </Helmet>
+      )}
+
       <article ref={articleRef} className="post" lang={contentLang === language ? undefined : contentLang}>
         <header className="post-header">
           <Link to={blogPath(language)} className="post-back" lang={language}>← {t.back}</Link>
-          {post.tags?.length > 0 && (
+          {(copy.tags || post.tags)?.length > 0 && (
             <ul className="blog-tags" aria-label="Tags">
-              {post.tags.map((tag) => <li key={tag}>{tag}</li>)}
+              {(copy.tags || post.tags).map((tag) => <li key={tag}>{tag}</li>)}
             </ul>
           )}
           <h1>{copy.title}</h1>

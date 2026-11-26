@@ -38,9 +38,9 @@ function BlogCard({ post, language, t, featured = false }) {
           <Link to={href} className="blog-card__link">{copy.title}</Link>
         </h2>
         <p className="blog-card__summary" lang={contentLang === language ? undefined : contentLang}>{copy.summary}</p>
-        {post.tags?.length > 0 && (
+        {(copy.tags || post.tags)?.length > 0 && (
           <ul className="blog-tags" aria-label="Tags">
-            {post.tags.map((tag) => <li key={tag}>{tag}</li>)}
+            {(copy.tags || post.tags).map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
         )}
         <span className="blog-card__cta" aria-hidden="true">{t.readArticle} →</span>
