@@ -306,3 +306,11 @@
   font-size: 0.9em;
   text-align: center;
 }
+
+/* Capturas de celular: angostas y centradas */
+.entrada-figura img[src*="/app-"] {
+  max-width: 300px;
+  margin: 0 auto;
+  border: 1px solid #e3e3e3;
+  border-radius: 20px;
+}
