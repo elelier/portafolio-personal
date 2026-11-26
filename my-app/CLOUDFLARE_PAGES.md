@@ -60,7 +60,7 @@ Do not paste real secret values into this repository.
 ### Chatbot (Gemini vía Pages Function)
 
 - El chat llama a `POST /api/chat` (`functions/api/chat.js`); la Function llama a Gemini y la API key **nunca** llega al navegador.
-- Secret servidor: `GEMINI_API_KEY` (tipo *Secret*, Production y Preview). Opcional: `GEMINI_MODEL` (por defecto `gemini-3.5-flash-lite`).
+- Secret servidor: `GEMINI_API_KEY` (tipo *Secret*, Production y Preview). Opcional: `GEMINI_MODEL` (por defecto `gemini-3.8-flash`).
 - `REACT_APP_GEMINI_API_KEY` quedó obsoleta: eliminarla de Cloudflare y **rotar** la key que estuvo expuesta en el bundle.
 - `GET /api/chat` responde `{ ok, available }` para que el chat sepa si hay IA o usa respuestas locales.
 

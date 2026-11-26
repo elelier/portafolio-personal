@@ -31,8 +31,8 @@ test('relays a message to Gemini with the key only in a server-side header', asy
 
 test('allows overriding the model with GEMINI_MODEL', async () => {
   const f = stub();
-  await handleChat(makeRequest({ message: 'Hi', language: 'en' }), { ...env, GEMINI_MODEL: 'gemini-3.8-flash' }, f.fetch);
-  assert.ok(f.calls[0].url.includes('/models/gemini-3.8-flash:generateContent'));
+  await handleChat(makeRequest({ message: 'Hi', language: 'en' }), { ...env, GEMINI_MODEL: 'gemini-3.5-flash-lite' }, f.fetch);
+  assert.ok(f.calls[0].url.includes('/models/gemini-3.5-flash-lite:generateContent'));
 });
 
 test('builds alternating turns from recent history, starting with the user', async () => {

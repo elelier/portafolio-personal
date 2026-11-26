@@ -1,5 +1,5 @@
 // Proxy del chatbot: la API key de Gemini vive solo en el servidor (secret de Cloudflare Pages).
-export const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash-lite';
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
 
 const MAX_BODY_BYTES = 8192;
 const MAX_MESSAGE_CHARS = 500;
