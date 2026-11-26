@@ -81,6 +81,55 @@ function buildLegalHtml(sourceHtml, { locale, tag, path: route, title }) {
     .replace('</head>', `    <meta name="robots" content="noindex,follow" data-rh="true">\n    <link rel="canonical" href="${canonical}" data-rh="true">\n</head>`);
 }
 
+// Blog: /blog y cada artículo publicado llevan sus propias meta etiquetas en el HTML
+// estático, para que buscadores y vistas previas al compartir (WhatsApp, LinkedIn) las vean.
+function loadPublishedPosts() {
+  const babel = require('@babel/core');
+  const source = fs.readFileSync(path.resolve(__dirname, '..', 'src', 'data', 'blogPosts.js'), 'utf8');
+  const { code } = babel.transformSync(source, {
+    babelrc: false,
+    configFile: false,
+    presets: [[require.resolve('@babel/preset-env'), { targets: { node: 'current' } }]],
+  });
+  const mod = { exports: {} };
+  new Function('module', 'exports', 'require', code)(mod, mod.exports, require);
+  return mod.exports.getPublishedPosts();
+}
+
+function escapeAttr(value) {
+  return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
+function buildBlogHtml(sourceHtml, { title, description, canonical, url = canonical, image, imageAlt, type, robots = 'index,follow', lang, alternates = [] }) {
+  const t = escapeAttr(title);
+  const d = escapeAttr(description);
+  const tags = [
+    [/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/i, `<meta name="description" content="${d}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:title["'])[^>]*>/i, `<meta property="og:title" content="${t}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:description["'])[^>]*>/i, `<meta property="og:description" content="${d}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*>/i, `<meta property="og:url" content="${url}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:type["'])[^>]*>/i, `<meta property="og:type" content="${type}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i, `<meta name="robots" content="${robots}" data-rh="true">`],
+    [/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i, `<link rel="canonical" href="${canonical}" data-rh="true">`],
+  ];
+  if (image) {
+    tags.push(
+      [/<meta\b(?=[^>]*\bproperty=["']og:image["'])[^>]*>/i, `<meta property="og:image" content="${image}" data-rh="true">`],
+      [/<meta\b(?=[^>]*\bproperty=["']og:image:alt["'])[^>]*>/i, `<meta property="og:image:alt" content="${escapeAttr(imageAlt || title)}" data-rh="true">`],
+      [/<meta\b(?=[^>]*\bname=["']twitter:image["'])[^>]*>/i, `<meta name="twitter:image" content="${image}" data-rh="true">`]
+    );
+  }
+  const hreflang = alternates
+    .map(([code, href]) => `    <link rel="alternate" hreflang="${code}" href="${href}" data-rh="true">`)
+    .join('\n');
+  const titled = sourceHtml.replace(/<title>[^<]*<\/title>/i, `<title>${t}</title>`);
+  const base = hreflang ? titled.replace('</head>', `${hreflang}\n</head>`) : titled;
+  return tags.reduce(
+    (html, [pattern, markup]) => replaceOrInsertHeadTag(html, pattern, markup),
+    lang ? base.replace(/<html lang="[^"]*"/i, `<html lang="${lang}"`) : base
+  );
+}
+
 if (!fs.existsSync(indexPath)) {
   throw new Error(`Missing build/index.html at ${indexPath}`);
 }
@@ -101,9 +150,60 @@ for (const route of localizedLegalRoutes) {
   fs.writeFileSync(path.join(routeDir, 'index.html'), buildLegalHtml(indexHtml, route));
 }
 
+const publishedPosts = loadPublishedPosts();
+const blogLocales = [
+  { prefix: '', lang: null, robots: 'index,follow' },
+  { prefix: 'en', lang: 'en', robots: 'noindex,follow' },
+  { prefix: 'pt-br', lang: 'pt-BR', robots: 'noindex,follow' },
+];
+const blogDescriptions = {
+  '': 'Cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.',
+  en: 'How I think when a process gets stuck, how I decide what is worth building, and what I learn when someone uses what I made.',
+  'pt-br': 'Como penso quando um processo trava, como decido o que vale a pena construir e o que aprendo quando alguém usa o que eu fiz.',
+};
+for (const { prefix, lang, robots } of blogLocales) {
+  const urlBase = prefix ? `https://elelier.com/${prefix}/blog/` : 'https://elelier.com/blog/';
+  const listDir = path.join(buildDir, prefix, 'blog');
+  fs.mkdirSync(listDir, { recursive: true });
+  fs.writeFileSync(path.join(listDir, 'index.html'), buildBlogHtml(indexHtml, {
+    title: 'Blog | Elier Loya',
+    description: blogDescriptions[prefix],
+    canonical: 'https://elelier.com/blog/',
+    url: urlBase,
+    type: 'website',
+    robots,
+    lang,
+  }));
+  for (const post of publishedPosts) {
+    const translated = !prefix || Boolean(post[prefix]);
+    const copy = (prefix && post[prefix]) || post.es;
+    const ownUrl = `${urlBase}${post.slug}/`;
+    const esUrl = `https://elelier.com/blog/${post.slug}/`;
+    const alternates = [['es', esUrl]];
+    if (post.en) alternates.push(['en', `https://elelier.com/en/blog/${post.slug}/`]);
+    if (post['pt-br']) alternates.push(['pt-BR', `https://elelier.com/pt-br/blog/${post.slug}/`]);
+    if (alternates.length > 1) alternates.push(['x-default', esUrl]);
+    const routeDir = path.join(listDir, post.slug);
+    fs.mkdirSync(routeDir, { recursive: true });
+    const image = post.ogImage || post.cover;
+    fs.writeFileSync(path.join(routeDir, 'index.html'), buildBlogHtml(indexHtml, {
+      title: `${copy.title} | Elier Loya`,
+      description: copy.summary,
+      canonical: translated ? ownUrl : esUrl,
+      url: ownUrl,
+      image: image ? `https://elelier.com${image}` : undefined,
+      imageAlt: copy.title,
+      type: 'article',
+      robots: translated ? 'index,follow' : 'noindex,follow',
+      lang,
+      alternates,
+    }));
+  }
+}
+
 const root404Path = path.join(buildDir, '404.html');
 if (!fs.existsSync(root404Path)) {
   fs.writeFileSync(root404Path, indexHtml);
 }
 
-console.log(`Generated static route entries for ${staticRoutes.length} legacy routes and ${localizedLegalRoutes.length} localized legal routes.`);
+console.log(`Generated static route entries for ${staticRoutes.length} legacy routes, ${localizedLegalRoutes.length} localized legal routes and ${publishedPosts.length} blog posts.`);

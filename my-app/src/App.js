@@ -38,6 +38,7 @@ import { getRouteSeoPolicy } from './config/routeSeoPolicy';
 import './styles/components/SectionFit.css';
 
 const Blog = lazy(() => import('./components/Blog'));
+const BlogPost = lazy(() => import('./components/BlogPost'));
 
 const SCROLL_TO_TOP_LABELS = Object.freeze({
   es: 'Volver arriba',
@@ -244,6 +245,21 @@ function App({ initialLanguage }) {
                       description: getRouteSeoPolicy('/blog')?.description,
                     })}
                   />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+                  {[['/en', 'en_US'], ['/pt-br', 'pt_BR']].map(([prefix, locale]) => (
+                    <React.Fragment key={`blog-${prefix}`}>
+                      <Route
+                        path={`${prefix}/blog`}
+                        element={renderPublicAliasRoute(<Blog />, {
+                          route: '/blog',
+                          pathname: '/blog/',
+                          robots: 'noindex,follow',
+                          locale,
+                        })}
+                      />
+                      <Route path={`${prefix}/blog/:slug`} element={<BlogPost />} />
+                    </React.Fragment>
+                  ))}
                   <Route
                     path="/entradas/2408_IA_Transforma_ecommerce"
                     element={renderPrivateRoute(<InternalRoutePlaceholder />, {

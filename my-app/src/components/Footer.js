@@ -1,3 +1,4 @@
+import { blogPath } from '../data/blogPosts';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -27,9 +28,11 @@ function Footer() {
           {footerLinks.primary.map((item) => (
             <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
           ))}
-          {footerLinks.secondary.map((item) => (
+          {footerLinks.secondary.map((item) => (item.page === 'blog' ? (
+            <Link key={item.key} to={blogPath(language)}>{item.label}</Link>
+          ) : (
             <Link key={item.key} to={`${homePath}#${item.target}`} onClick={() => handleScrollToElement(item.target)}>{item.label}</Link>
-          ))}
+          )))}
           <Link to={`${homePath}#contacto`} onClick={() => handleScrollToElement('contacto')}>{footerLinks.footerContact}</Link>
           <Link to={`${homePath}privacy-policy`}>{footerLinks.privacy}</Link>
           <Link to={`${homePath}terms-of-service`}>{footerLinks.terms}</Link>
