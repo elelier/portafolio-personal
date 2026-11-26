@@ -13,7 +13,7 @@ export function slugifyHeading(text) {
 }
 
 // Convierte el texto de un artículo (formato en src/data/blogPosts.js) en bloques.
-// Las imágenes seguidas se agrupan para mostrarse lado a lado en pantallas grandes.
+// Varias imágenes en líneas seguidas (sin línea en blanco entre ellas) se muestran lado a lado.
 export function parseBlogBody(body = '') {
   const blocks = [];
   String(body)
@@ -22,12 +22,13 @@ export function parseBlogBody(body = '') {
     .forEach((raw) => {
       const lines = raw.split('\n').map((line) => line.trim()).filter(Boolean);
       if (lines.length === 0) return;
-      const image = lines.length === 1 && lines[0].match(IMAGE_RE);
-      if (image) {
-        const figure = { alt: image[1], src: image[2], caption: image[3] || '' };
-        const last = blocks[blocks.length - 1];
-        if (last && last.type === 'images') last.items.push(figure);
-        else blocks.push({ type: 'images', items: [figure] });
+      const images = lines.map((line) => line.match(IMAGE_RE));
+      if (images.every(Boolean)) {
+        // Una imagen sola va sola; varias imágenes en líneas seguidas (sin línea en blanco) forman un grupo.
+        blocks.push({
+          type: 'images',
+          items: images.map((m) => ({ alt: m[1], src: m[2], caption: m[3] || '' })),
+        });
       } else if (lines[0].startsWith('## ')) {
         const text = lines.join(' ').slice(3);
         blocks.push({ type: 'h2', text, id: slugifyHeading(text) });

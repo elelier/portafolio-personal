@@ -24,8 +24,8 @@ const posts = [
         'Un párrafo con **negritas**.',
         '## Un subtítulo',
         '- uno\n- dos',
-        '![Galería](/images/blog/app-galeria.webp "Galería")',
-        '![Compartir](/images/blog/app-compartir.webp "Compartir")',
+        '![Galería](/images/blog/app-galeria.webp "Galería")\n![Compartir](/images/blog/app-compartir.webp "Compartir")',
+        '![Sola](/images/blog/potrero.webp "Sola")',
         '## Otro subtítulo',
         'Cierre.',
       ].join('\n\n'),
@@ -122,15 +122,15 @@ describe('blog', () => {
     const { container, cleanup } = render('/blog/primero');
     expect(container.querySelector('h1').textContent).toBe('Primer artículo');
     expect(container.querySelector('.post-cover img').getAttribute('src')).toBe('/images/blog/portada.webp');
-    expect(container.querySelectorAll('.post-content img[src="/images/blog/portada.webp"]')).toHaveLength(0);
+    expect(container.querySelectorAll('.post img[src="/images/blog/portada.webp"]')).toHaveLength(1);
     expect(container.querySelector('.post-cover figcaption').textContent).toBe('Pie');
     const toc = [...container.querySelectorAll('.post-toc a')].map((a) => a.getAttribute('href'));
     expect(toc).toEqual(['#un-subtitulo', '#otro-subtitulo']);
     expect(container.querySelector('#un-subtitulo').tagName).toBe('H2');
     expect(container.querySelectorAll('.entrada-galeria--2 figure')).toHaveLength(2);
     expect(container.querySelector('.entrada-figura--celular')).not.toBeNull();
-    expect(container.querySelector('.post-content strong').textContent).toBe('negritas');
-    expect(container.querySelectorAll('.post-content > ul li')).toHaveLength(2);
+    expect(container.querySelector('.post > p strong').textContent).toBe('negritas');
+    expect(container.querySelectorAll('.post > ul li')).toHaveLength(2);
     expect(container.textContent).toContain('min de lectura');
     cleanup();
   });
@@ -154,6 +154,7 @@ describe('blog', () => {
     expect(blogPath('es')).toBe('/blog/');
     expect(blogPath('pt-br', 'x')).toBe('/pt-br/blog/x/');
     expect(readingMinutes(posts[0])).toBe(1);
-    expect(parseBlogBody('![a](/x.webp)\n\n![b](/y.webp)')).toHaveLength(1);
+    expect(parseBlogBody('![a](/x.webp)\n\n![b](/y.webp)')).toHaveLength(2);
+    expect(parseBlogBody('![a](/x.webp)\n![b](/y.webp)')).toHaveLength(1);
   });
 });

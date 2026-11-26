@@ -133,50 +133,47 @@ function BlogPost({ posts }) {
           </figure>
         )}
 
-        <div className={`post-layout${headings.length > 1 ? ' post-layout--toc' : ''}`}>
-          {headings.length > 1 && (
-            <nav className="post-toc" aria-label={t.toc} lang={language}>
-              <p>{t.toc}</p>
-              <ol>
-                {headings.map((h) => (
-                  <li key={h.id}><a href={`#${h.id}`} lang={contentLang}>{h.text}</a></li>
+        {headings.length > 1 && (
+          <nav className="post-toc" aria-label={t.toc} lang={language}>
+            <p>{t.toc}</p>
+            <ol>
+              {headings.map((h) => (
+                <li key={h.id}><a href={`#${h.id}`} lang={contentLang}>{h.text}</a></li>
+              ))}
+            </ol>
+          </nav>
+        )}
+
+        <BlogBody body={copy.body} skipSrc={post.cover} />
+
+        <footer className="post-footer" lang={language}>
+          <div className="post-author">
+            <img src="/images/blog/autor-elier.webp" alt="" width="56" height="56" loading="lazy" />
+            <div>
+              <p className="post-author__name">Elier Loya</p>
+              <p className="post-author__role">{t.authorRole}</p>
+            </div>
+          </div>
+          <div className="post-end">
+            <h2>{t.endTitle}</h2>
+            <p>{t.endText}</p>
+            <div className="post-end__actions">
+              <Link to={`${home}#contacto`} className="blog-button blog-button--primary">{t.contactCta}</Link>
+              <ShareButton title={copy.title} url={url} t={t} />
+            </div>
+          </div>
+          {more.length > 0 && (
+            <nav className="post-more" aria-label={t.more}>
+              <h2>{t.more}</h2>
+              <ul>
+                {more.map((p) => (
+                  <li key={p.slug}><Link to={blogPath(language, p.slug)}>{getPostCopy(p, language).title}</Link></li>
                 ))}
-              </ol>
+              </ul>
             </nav>
           )}
-          <div className="post-content">
-            <BlogBody body={copy.body} skipSrc={post.cover} />
-
-            <footer className="post-footer" lang={language}>
-              <div className="post-author">
-                <img src="/images/blog/autor-elier.webp" alt="" width="56" height="56" loading="lazy" />
-                <div>
-                  <p className="post-author__name">Elier Loya</p>
-                  <p className="post-author__role">{t.authorRole}</p>
-                </div>
-              </div>
-              <div className="post-end">
-                <h2>{t.endTitle}</h2>
-                <p>{t.endText}</p>
-                <div className="post-end__actions">
-                  <Link to={`${home}#contacto`} className="blog-button blog-button--primary">{t.contactCta}</Link>
-                  <ShareButton title={copy.title} url={url} t={t} />
-                </div>
-              </div>
-              {more.length > 0 && (
-                <nav className="post-more" aria-label={t.more}>
-                  <h2>{t.more}</h2>
-                  <ul>
-                    {more.map((p) => (
-                      <li key={p.slug}><Link to={blogPath(language, p.slug)}>{getPostCopy(p, language).title}</Link></li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
-              <Link to={blogPath(language)} className="post-back">← {t.back}</Link>
-            </footer>
-          </div>
-        </div>
+          <Link to={blogPath(language)} className="post-back">← {t.back}</Link>
+        </footer>
       </article>
     </main>
   );

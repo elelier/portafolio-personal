@@ -6,6 +6,7 @@
 //   "- elemento"     -> lista (líneas consecutivas)
 //   "> cita"         -> cita
 //   ![texto alternativo](/images/blog/foto.webp "Pie de foto")  -> imagen (sola en su párrafo)
+//   varias imágenes en líneas seguidas, sin línea en blanco -> se muestran lado a lado
 //   **negritas**     -> negritas dentro del texto
 //
 // `draft: true` oculta el post del listado y de su URL pública.
@@ -69,7 +70,6 @@ Lo que más me gusta es que la usa a su manera. Cada vaca tiene su galería: le 
 Y cuando alguien le pregunta por un animal, ya no tiene que mandar la foto y luego escribir los datos aparte. Escoge la foto, marca qué datos quiere que vayan con ella (nombre, sexo, edad, raza, peso) y la app arma la imagen, lista para mandarla por donde quiera.
 
 ![Pantalla para compartir una foto en MiRancho, con casillas para elegir qué datos van en la imagen](/images/blog/rancho/app-compartir.webp "Él decide qué datos acompañan la foto. Datos de ejemplo.")
-
 ![Foto de una vaca con su nombre, sexo, edad, raza y peso escritos en la parte de abajo](/images/blog/rancho/foto-compartida-canela.webp "Lo que recibe quien pregunta por Canela. Datos de ejemplo.")
 
 Y cuando una vaca fue montada, lo anota ahí mismo, en el corral, en lugar de esperar a llegar a la libreta.
