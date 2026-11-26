@@ -19,6 +19,14 @@ export const LanguageProvider = ({ children }) => {
   }, [language]);
 
   const setLanguage = (nextLanguage) => {
+    // In the blog, switching language keeps the reader on the same list or article.
+    const blogMatch = location.pathname.match(/^(?:\/en|\/pt-br)?(\/blog(?:\/.*)?)$/i);
+    if (blogMatch) {
+      const prefix = nextLanguage === 'es' ? '' : `/${nextLanguage}`;
+      const rest = blogMatch[1].endsWith('/') ? blogMatch[1] : `${blogMatch[1]}/`;
+      navigate(`${prefix}${rest}`);
+      return;
+    }
     const target = homePathFor(nextLanguage);
     // Preserve the section hash only when switching between equivalent home pages.
     navigate(target + (isLocalizedHome(location.pathname) ? location.hash : ''));

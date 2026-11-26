@@ -7,7 +7,7 @@ import { readHeadState, renderRoute } from './seoHeadRouteTestUtils';
 
 describe('route SEO policy', () => {
   it('keeps the sitemap limited to the approved indexable paths', () => {
-    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/']);
+    expect(INDEXABLE_SITEMAP_PATHS).toEqual(['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/', '/blog/', '/blog/app-rancho-de-mi-papa/', '/en/blog/app-rancho-de-mi-papa/', '/pt-br/blog/app-rancho-de-mi-papa/']);
     expect(getRouteSeoPolicy('/portafolio')).toMatchObject({
       canonicalPath: '/',
       robots: 'noindex,follow',
@@ -27,7 +27,6 @@ describe('route SEO policy', () => {
     ['/sobre-mi', 'Sobre Mí | Elier Loya'],
     ['/servicios', 'Cómo trabajo | Elier Loya'],
     ['/contacto', 'Contacto | Elier Loya'],
-    ['/blog', 'Blog | Elier Loya'],
     ['/aionlabs', 'Aion Labs | Aion × Elier'],
   ])('renders %s as a noindex alias with canonical home', async (route, title) => {
     const cleanup = await renderRoute({
