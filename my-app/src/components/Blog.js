@@ -46,6 +46,11 @@ function Blog({ posts }) {
             const copy = getPostCopy(post, language);
             return (
               <article key={post.slug} className="articulo">
+                {post.cover && (
+                  <Link to={`/blog/${post.slug}`} tabIndex={-1} aria-hidden="true">
+                    <img src={post.cover} alt="" className="articulo-imagen" loading="lazy" />
+                  </Link>
+                )}
                 <div className="articulo-contenido">
                   <h2>
                     <Link to={`/blog/${post.slug}`}>{copy.title}</Link>

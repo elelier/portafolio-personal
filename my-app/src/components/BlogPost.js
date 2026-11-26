@@ -31,6 +31,8 @@ function BlogPost({ posts }) {
         pathname={`/blog/${post.slug}`}
         robots="index,follow"
         type="article"
+        image={post.cover ? `https://elelier.com${post.cover}` : undefined}
+        imageAlt={post.cover ? copy.title : undefined}
       />
       <header className="entrada-header">
         <Link to="/blog" className="entrada-volver">← {labels.back}</Link>
