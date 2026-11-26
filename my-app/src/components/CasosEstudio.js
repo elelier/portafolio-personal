@@ -7,9 +7,12 @@ import { blogPath } from '../data/blogPosts';
 import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
 import oneClicTripPreview from '../assets/images/casos-oneclictrip-preview.jpg';
 import miRanchoPreview from '../assets/images/casos-mirancho-preview.jpg';
+import sevaPreview from '../assets/images/casos-seva-preview.jpg';
 
 const MIRANCHO_URL = 'https://mirancho.elelier.com/';
 const MIRANCHO_ARTICLE_SLUG = 'app-rancho-de-mi-papa';
+const SEVA_URL = 'https://seva.elelier.com/';
+const SEVA_ARTICLE_SLUG = 'vender-mis-cosas-con-mi-propia-app';
 
 const content = {
   es: {
@@ -35,6 +38,19 @@ const content = {
         articleText: 'Leer artículo',
         articleSlug: MIRANCHO_ARTICLE_SLUG,
         url: MIRANCHO_URL
+      },
+      {
+        category: 'Mudanza · App propia (piloto)',
+        title: 'SeVa',
+        preview: sevaPreview,
+        previewAlt: "Pantallas de SeVa: el catálogo privado de un invitado y la ficha de un objeto con los botones Me interesa, Preguntar y Apartar",
+        challenge: 'Vender, regalar y apartar cosas por la mudanza.',
+        built: 'Catálogo privado por invitación con apartados, ventas y entregas.',
+        result: 'Amigos apartan desde el celular y yo sé qué falta entregar.',
+        linkText: 'Probar la app',
+        articleText: 'Leer artículo',
+        articleSlug: SEVA_ARTICLE_SLUG,
+        url: SEVA_URL
       },
       {
         category: 'Arquitectura · Presencia y captación',
@@ -85,6 +101,19 @@ const content = {
         url: MIRANCHO_URL
       },
       {
+        category: 'Moving · In-house app (pilot)',
+        title: 'SeVa',
+        preview: sevaPreview,
+        previewAlt: "SeVa screens: a guest's private catalog and an item card with the I'm interested, Ask and Reserve buttons",
+        challenge: 'Selling, gifting and reserving our things before the move.',
+        built: 'Invite-only catalog with reservations, sales and handoffs.',
+        result: "Friends reserve from their phones; I know what's left to hand over.",
+        linkText: 'Try the app',
+        articleText: 'Read the article',
+        articleSlug: SEVA_ARTICLE_SLUG,
+        url: SEVA_URL
+      },
+      {
         category: 'Architecture · Presence and lead generation',
         title: 'Arqidia',
         preview: arqidiaPreview,
@@ -127,6 +156,19 @@ const content = {
         articleText: 'Ler artigo',
         articleSlug: MIRANCHO_ARTICLE_SLUG,
         url: MIRANCHO_URL
+      },
+      {
+        category: 'Mudança · App próprio (piloto)',
+        title: 'SeVa',
+        preview: sevaPreview,
+        previewAlt: "Telas do SeVa: o catálogo privado de um convidado e a ficha de um objeto com os botões Tenho interesse, Perguntar e Reservar",
+        challenge: 'Vender, doar e reservar coisas na mudança.',
+        built: 'Catálogo privado por convite com reservas, vendas e entregas.',
+        result: 'Amigos reservam pelo celular e eu sei o que falta entregar.',
+        linkText: 'Testar o app',
+        articleText: 'Ler artigo',
+        articleSlug: SEVA_ARTICLE_SLUG,
+        url: SEVA_URL
       },
       {
         category: 'Arquitetura · Presença e captação',
