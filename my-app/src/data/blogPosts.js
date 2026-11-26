@@ -22,6 +22,8 @@ const blogPosts = [
     tags: ['Producto', 'MiRancho', 'Historias'],
     cover: '/images/blog/rancho/portada-papa-corral.webp',
     ogImage: '/images/blog/rancho/portada-og.jpg',
+    // App de la que habla el post: se muestra como tarjeta arriba, botón al final y enlace en el listado.
+    product: { name: 'MiRancho', url: 'https://mirancho.elelier.com/', icon: '/images/blog/mirancho-icon.svg' },
     es: {
       title: 'Lo que cambió cuando diseñé una app para el rancho de mi papá',
       summary:
@@ -42,7 +44,7 @@ La libreta funciona. No necesita señal, no se le acaba la pila y él sabe exact
 
 Mi papá está todo el tiempo afuera. En el potrero, en el corral, recorriendo un cerco. Un día me di cuenta de algo muy simple: el celular siempre lo trae en la bolsa. La libreta, no.
 
-Ahí se me ocurrió. Si lo único que siempre lo acompaña es el teléfono, ahí también podía vivir lo que hoy vive en la libreta. No para cambiar su forma de trabajar, sino para que la información estuviera con él en el momento en que la necesita.
+Ahí se me ocurrió. Si lo único que siempre lo acompaña es el teléfono, ahí también podía vivir lo que hoy vive en la libreta. No para cambiar su forma de trabajar, sino para que la información estuviera con él en el momento en que la necesita. Así nació [MiRancho](https://mirancho.elelier.com/).
 
 ## Cambiar la pluma por los dedos
 
@@ -65,7 +67,7 @@ Nada de eso estaba en mi plan original. Todo salió de verlo usar la app, no de 
 
 ## Cómo la usa hoy
 
-Lo que más me gusta es que la usa a su manera. Cada vaca tiene su galería: le toma fotos ahí mismo en el corral, o sube las que ya traía en el celular, y escoge cuál es la principal. Poco a poco se ha ido armando una colección de su hato.
+Lo que más me gusta es que la usa a su manera. Cada vaca tiene su galería: le toma fotos ahí mismo en el corral, o sube las que ya traía en el celular, y escoge cuál es la principal. Poco a poco se ha ido armando una colección de su hato. Si quieres ver cómo se ve, la app está en [mirancho.elelier.com](https://mirancho.elelier.com/).
 
 ![Galería de fotos de una vaca en MiRancho, con botones para tomar foto o subirla de la galería](/images/blog/rancho/app-galeria.webp "La galería de cada animal: tomar foto, subir las que ya tienes y elegir la principal. Datos de ejemplo.")
 
@@ -86,7 +88,7 @@ Quería que resolviera un problema real de mi papá, de una forma sencilla y has
 
 De ahí me quedó una forma de trabajar que hoy aplico en todo. Antes de diseñar, veo dónde vive de verdad la información. Muchas veces no está en el sistema: está en una libreta, en la memoria de alguien o en un chat. Y la pregunta útil no es «¿cómo la meto al sistema?», sino «¿qué trae esta persona consigo cuando pasan las cosas?».
 
-Si en tu operación también hay una libreta que no siempre está donde pasan las cosas, cuéntame dónde se está atorando. Me encantaría escucharte.`,
+Si tienes ganado y quieres probarla, MiRancho está abierta en [mirancho.elelier.com](https://mirancho.elelier.com/). Y si en tu operación también hay una libreta que no siempre está donde pasan las cosas, cuéntame dónde se está atorando. Me encantaría escucharte.`,
     },
     en: {
       title: 'What changed when I designed an app for my dad’s ranch',
@@ -109,7 +111,7 @@ The notebook works. It doesn't need signal, its battery never dies, and he knows
 
 My dad is outside all the time. In the pasture, in the corral, riding a fence line. One day I noticed something very simple: he always has his phone in his pocket. The notebook, not so much.
 
-That's when it clicked. If the one thing that always goes with him is his phone, then what lives in the notebook today could live there too. Not to change the way he works, but so the information is with him at the moment he needs it.
+That's when it clicked. If the one thing that always goes with him is his phone, then what lives in the notebook today could live there too. Not to change the way he works, but so the information is with him at the moment he needs it. That's how [MiRancho](https://mirancho.elelier.com/) was born.
 
 ## Trading the pen for his fingers
 
@@ -132,7 +134,7 @@ None of that was in my original plan. All of it came from watching him use the a
 
 ## How he uses it today
 
-What I like most is that he uses it his own way. Every cow has its own gallery: he takes photos right there in the corral, or uploads the ones he already had on his phone, and picks the main one. Little by little he has been building a collection of his herd.
+What I like most is that he uses it his own way. Every cow has its own gallery: he takes photos right there in the corral, or uploads the ones he already had on his phone, and picks the main one. Little by little he has been building a collection of his herd. If you want to see what it looks like, the app is at [mirancho.elelier.com](https://mirancho.elelier.com/).
 
 ![Photo gallery of a cow in MiRancho, with buttons to take a photo or upload one from the phone](/images/blog/rancho/app-galeria.webp "Each animal's gallery: take a photo, upload the ones you already have and pick the main one. Sample data.")
 
@@ -153,7 +155,7 @@ I wanted it to solve a real problem for my dad, in a simple and even fun way. An
 
 It left me with a way of working I now apply to everything. Before designing anything, I look at where the information really lives. Often it isn't in the system: it's in a notebook, in someone's memory or in a chat. And the useful question isn't "how do I get it into the system?" but "what does this person carry with them when things happen?"
 
-If your operation also has a notebook that isn't always where things happen, tell me where things are getting stuck. I'd love to hear from you.`,
+If you raise cattle and want to try it, MiRancho is open at [mirancho.elelier.com](https://mirancho.elelier.com/) (it's in Spanish). And if your operation also has a notebook that isn't always where things happen, tell me where things are getting stuck. I'd love to hear from you.`,
     },
     'pt-br': {
       title: 'O que mudou quando desenhei um app para a fazenda do meu pai',
@@ -176,7 +178,7 @@ O caderninho funciona. Não precisa de sinal, não fica sem bateria e ele sabe e
 
 Meu pai está o tempo todo lá fora. No pasto, no curral, percorrendo uma cerca. Um dia percebi algo muito simples: o celular ele sempre leva no bolso. O caderninho, não.
 
-Foi aí que me veio a ideia. Se a única coisa que sempre o acompanha é o celular, ali também podia viver o que hoje vive no caderninho. Não para mudar o jeito dele de trabalhar, mas para que a informação estivesse com ele no momento em que ele precisa.
+Foi aí que me veio a ideia. Se a única coisa que sempre o acompanha é o celular, ali também podia viver o que hoje vive no caderninho. Não para mudar o jeito dele de trabalhar, mas para que a informação estivesse com ele no momento em que ele precisa. Foi assim que nasceu o [MiRancho](https://mirancho.elelier.com/).
 
 ## Trocar a caneta pelos dedos
 
@@ -199,7 +201,7 @@ Nada disso estava no meu plano original. Tudo saiu de ver ele usando o app, não
 
 ## Como ele usa hoje
 
-O que eu mais gosto é que ele usa do jeito dele. Cada vaca tem sua galeria: ele tira fotos ali mesmo no curral, ou sobe as que já tinha no celular, e escolhe qual é a principal. Aos poucos ele foi montando uma coleção do rebanho.
+O que eu mais gosto é que ele usa do jeito dele. Cada vaca tem sua galeria: ele tira fotos ali mesmo no curral, ou sobe as que já tinha no celular, e escolhe qual é a principal. Aos poucos ele foi montando uma coleção do rebanho. Se quiser ver como fica, o app está em [mirancho.elelier.com](https://mirancho.elelier.com/).
 
 ![Galeria de fotos de uma vaca no MiRancho, com botões para tirar foto ou enviar da galeria](/images/blog/rancho/app-galeria.webp "A galeria de cada animal: tirar foto, enviar as que você já tem e escolher a principal. Dados de exemplo.")
 
@@ -220,7 +222,7 @@ Eu queria que resolvesse um problema real do meu pai, de um jeito simples e até
 
 Daí ficou para mim um jeito de trabalhar que hoje aplico em tudo. Antes de desenhar, eu vejo onde a informação vive de verdade. Muitas vezes ela não está no sistema: está num caderninho, na memória de alguém ou num chat. E a pergunta útil não é «como coloco isso no sistema?», mas «o que essa pessoa leva consigo quando as coisas acontecem?».
 
-Se na sua operação também existe um caderninho que nem sempre está onde as coisas acontecem, me conte onde o seu processo está travando. Vou adorar ouvir você.`,
+Se você cria gado e quer experimentar, o MiRancho está aberto em [mirancho.elelier.com](https://mirancho.elelier.com/) (em espanhol). E se na sua operação também existe um caderninho que nem sempre está onde as coisas acontecem, me conte onde o seu processo está travando. Vou adorar ouvir você.`,
     },
   },
   // {

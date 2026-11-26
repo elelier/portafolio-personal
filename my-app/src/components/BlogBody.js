@@ -47,10 +47,23 @@ export function getBlogHeadings(body) {
   return parseBlogBody(body).filter((block) => block.type === 'h2');
 }
 
-function renderInline(text) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part
-  );
+// Negritas (**texto**) y enlaces ([texto](https://...)). Los enlaces externos abren en otra pestaña.
+const INLINE_PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)\s]+\))/g;
+
+export function renderInline(text) {
+  return text.split(INLINE_PATTERN).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>;
+    const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+    if (link) {
+      const external = /^https?:\/\//.test(link[2]);
+      return (
+        <a key={i} href={link[2]} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+          {link[1]}
+        </a>
+      );
+    }
+    return part;
+  });
 }
 
 const isPhoneShot = (src) => /\/app-[^/]+$/.test(src);

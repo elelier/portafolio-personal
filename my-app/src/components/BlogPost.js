@@ -6,6 +6,7 @@ import { homePathFor, OG_LOCALES } from '../i18n/locales';
 import RouteSEO from './RouteSEO';
 import BlogBody, { getBlogHeadings, parseBlogBody } from './BlogBody';
 import { getBlogCopy } from './blog/blogCopy';
+import ProductCallout from './blog/ProductCallout';
 import {
   blogPath,
   formatPostDate,
@@ -139,6 +140,8 @@ function BlogPost({ posts }) {
           )}
         </header>
 
+        {post.product && <ProductCallout product={post.product} t={t} language={language} />}
+
         {post.cover && (
           <figure className="post-cover">
             <img src={post.cover} alt={coverInBody?.alt || ''} decoding="async" fetchpriority="high" />
@@ -172,6 +175,11 @@ function BlogPost({ posts }) {
             <p>{t.endText}</p>
             <div className="post-end__actions">
               <Link to={`${home}#contacto`} className="blog-button blog-button--primary">{t.contactCta}</Link>
+              {post.product && (
+                <a href={post.product.url} target="_blank" rel="noopener noreferrer" className="blog-button blog-button--app">
+                  {t.openApp(post.product.name)} <span aria-hidden="true">↗</span>
+                </a>
+              )}
               <ShareButton title={copy.title} url={url} t={t} />
             </div>
           </div>

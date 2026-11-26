@@ -16,12 +16,13 @@ const posts = [
     date: '2026-12-01',
     tags: ['Producto'],
     cover: '/images/blog/portada.webp',
+    product: { name: 'MiApp', url: 'https://miapp.example.com/', icon: '/images/blog/icono.svg' },
     es: {
       title: 'Primer artículo',
       summary: 'Resumen del primero.',
       body: [
         '![Portada](/images/blog/portada.webp "Pie")',
-        'Un párrafo con **negritas**.',
+        'Un párrafo con **negritas** y [un enlace](https://miapp.example.com/).',
         '## Un subtítulo',
         '- uno\n- dos',
         '![Galería](/images/blog/app-galeria.webp "Galería")\n![Compartir](/images/blog/app-compartir.webp "Compartir")',
@@ -86,7 +87,9 @@ describe('blog', () => {
   it('makes each card a single link to its article', () => {
     const { container, cleanup } = render('/blog');
     const cards = [...container.querySelectorAll('.blog-card')];
-    cards.forEach((card) => expect(card.querySelectorAll('a')).toHaveLength(1));
+    cards.forEach((card) => expect(card.querySelectorAll('a.blog-card__link')).toHaveLength(1));
+    const withApp = container.querySelector('a.blog-card__link[href="/blog/primero/"]').closest('.blog-card');
+    expect(withApp.querySelector('a.blog-card__app').getAttribute('href')).toBe('https://miapp.example.com/');
     expect(container.querySelector('a.blog-card__link[href="/blog/primero/"]')).not.toBeNull();
     cleanup();
   });
@@ -132,6 +135,18 @@ describe('blog', () => {
     expect(container.querySelector('.post > p strong').textContent).toBe('negritas');
     expect(container.querySelectorAll('.post > ul li')).toHaveLength(2);
     expect(container.textContent).toContain('min de lectura');
+    cleanup();
+  });
+
+  it('links to the app of the article from the top card, the text and the closing actions', () => {
+    const { container, cleanup } = render('/blog/primero/');
+    const callout = container.querySelector('.post-app');
+    expect(callout).not.toBeNull();
+    expect(callout.textContent).toContain('MiApp');
+    expect(callout.querySelector('a').getAttribute('href')).toBe('https://miapp.example.com/');
+    const inline = [...container.querySelectorAll('.post > p a')].find((a) => a.textContent === 'un enlace');
+    expect(inline.getAttribute('target')).toBe('_blank');
+    expect(container.querySelector('.post-end a.blog-button--app').textContent).toContain('Abrir MiApp');
     cleanup();
   });
 

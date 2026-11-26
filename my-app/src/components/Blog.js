@@ -43,7 +43,15 @@ function BlogCard({ post, language, t, featured = false }) {
             {(copy.tags || post.tags).map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
         )}
-        <span className="blog-card__cta" aria-hidden="true">{t.readArticle} →</span>
+        <div className="blog-card__footer">
+          <span className="blog-card__cta" aria-hidden="true">{t.readArticle} →</span>
+          {post.product && (
+            <a className="blog-card__app" href={post.product.url} target="_blank" rel="noopener noreferrer">
+              {post.product.icon && <img src={post.product.icon} alt="" width="20" height="20" />}
+              {post.product.url.replace(/^https?:\/\//, '').replace(/\/$/, '')} <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );

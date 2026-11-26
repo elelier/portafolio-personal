@@ -260,11 +260,45 @@
   line-height: 1.6;
 }
 
-.blog-card__cta {
+.blog-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
   margin-top: auto;
   padding-top: 4px;
+}
+
+.blog-card__cta {
   color: var(--blog-accent);
   font-weight: 800;
+}
+
+/* Enlace a la app: queda por encima del enlace que cubre la tarjeta */
+.blog-card__app {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--blog-line);
+  border-radius: var(--ui-radius-pill, 999px);
+  background: var(--blog-surface);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.blog-card__app img {
+  border-radius: 6px;
+}
+
+.blog-card__app:hover {
+  border-color: #2a7a4d;
 }
 
 @media (min-width: 900px) {
@@ -391,6 +425,83 @@
   border-left: 4px solid var(--blog-accent);
   border-radius: 8px;
   background: var(--blog-subtle);
+}
+
+/* App del artículo: tarjeta "Pruébala" bajo el encabezado */
+.post-app {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px 18px;
+  margin: 0 0 clamp(28px, 4vw, 40px);
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--blog-accent) 45%, var(--blog-line));
+  border-radius: var(--blog-radius);
+  background: color-mix(in srgb, var(--blog-accent) 8%, var(--blog-surface));
+  box-shadow: var(--ui-card-shadow, none);
+}
+
+.post-app__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+}
+
+.post-app__text p {
+  margin: 0;
+}
+
+.post-app__eyebrow {
+  color: var(--blog-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-app__lead {
+  margin-top: 2px !important;
+  line-height: 1.45;
+}
+
+.blog-button--app {
+  border-color: #1f5c3a;
+  background: #1f5c3a;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.blog-button--app:hover {
+  border-color: #2a7a4d;
+  background: #2a7a4d;
+}
+
+@media (max-width: 560px) {
+  .post-app {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .post-app__button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+/* Enlaces dentro del texto */
+.post > p a,
+.post > ul a,
+.post > blockquote a {
+  color: var(--blog-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.post > p a:hover,
+.post > ul a:hover,
+.post > blockquote a:hover {
+  text-decoration-thickness: 3px;
 }
 
 /* Portada: ancha y centrada en el mismo eje */
