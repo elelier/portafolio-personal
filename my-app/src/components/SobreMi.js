@@ -252,7 +252,10 @@ function SobreMi({ style }) {
   return (
     <section id="sobre-mi" className="sobre-mi" style={style} {...swipeHandlers}>
       <div className="contenido-sobre-mi">
-        <h2>{language === 'es' ? 'SOBRE MÍ' : language === 'pt-br' ? 'SOBRE MIM' : 'ABOUT ME'}</h2>
+        <div className="sobre-mi-header">
+          <span>{language === 'es' ? 'Quién soy' : language === 'pt-br' ? 'Quem sou' : 'Who I am'}</span>
+          <h2>{language === 'es' ? 'Sobre mí' : language === 'pt-br' ? 'Sobre mim' : 'About me'}</h2>
+        </div>
 
         <div className="tabs">
           <button className="nav-arrow left" onClick={() => handleManualChange((currentSection - 1 + sections[language].length) % sections[language].length)}>&lt;</button>
@@ -264,12 +267,12 @@ function SobreMi({ style }) {
           <button className="nav-arrow right" onClick={() => handleManualChange((currentSection + 1) % sections[language].length)}>&gt;</button>
         </div>
         <div className="section-content">
-          <div className="sub-title-container shinyy">{sections[language][currentSection].subtitle}</div>
+          <div className="sub-title-container">{sections[language][currentSection].subtitle}</div>
           {sections[language][currentSection].content}
         </div>
         <div className="cta-seccion-sobre-mi">
-          <button onClick={scrollToServicios} className="cta-button-2">{language === 'es' ? 'Conoce cómo trabajo' : language === 'pt-br' ? 'Veja como trabalho' : 'See how I work'}</button>
-          <button onClick={scrollToContacto} className="cta-button-2">{language === 'es' ? 'Hablemos de tu reto' : language === 'pt-br' ? 'Vamos conversar sobre seu desafio' : 'Let’s talk about your challenge'}</button>
+          <button onClick={scrollToServicios} className="sobre-mi-cta sobre-mi-cta--secondary">{language === 'es' ? 'Conoce cómo trabajo' : language === 'pt-br' ? 'Veja como trabalho' : 'See how I work'}</button>
+          <button onClick={scrollToContacto} className="sobre-mi-cta">{language === 'es' ? 'Hablemos de tu reto' : language === 'pt-br' ? 'Vamos conversar sobre seu desafio' : 'Let’s talk about your challenge'}</button>
         </div>
         <div className="horizontal-scroll-indicator">
           {sections[language].map((_, index) => (

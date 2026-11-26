@@ -54,8 +54,13 @@ export const SECTION_LANDING_GAP = 16;
 export function getSectionScrollTop(element) {
     const nav = document.querySelector('.navegacion');
     const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+    const rect = element.getBoundingClientRect();
+    const sectionTop = rect.top + window.scrollY;
+    // Si la sección completa cabe bajo el menú, se muestra entera (de borde a borde).
+    if (rect.height <= window.innerHeight - navHeight + 1) {
+        return Math.max(0, Math.round(sectionTop - navHeight));
+    }
     const paddingTop = parseFloat(window.getComputedStyle(element).paddingTop) || 0;
-    const sectionTop = element.getBoundingClientRect().top + window.scrollY;
     return Math.max(0, Math.round(sectionTop + paddingTop - navHeight - SECTION_LANDING_GAP));
 }
 
