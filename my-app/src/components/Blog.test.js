@@ -40,7 +40,7 @@ describe('Blog', () => {
 
     expect(container.textContent).toContain('Blog');
     expect(container.textContent).toContain(
-      'Bienvenido a nuestro blog, donde compartimos artículos sobre las últimas tendencias y avances en tecnología, digitalización y más.'
+      'Escribo para quien tiene un problema real que resolver: cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.'
     );
     expect(container.textContent).toContain('Mis Servicios');
     expect(container.textContent).toContain('Hablemos de tu reto');
@@ -55,7 +55,7 @@ describe('Blog', () => {
 
     expect(container.textContent).toContain('Blog');
     expect(container.textContent).toContain(
-      'Welcome to the blog, where I share articles about technology, digitalization and practical product thinking.'
+      'Notes for people with a real problem to solve: how I think when a process gets stuck, how I decide what is worth building, and what I learn when someone uses what I made.'
     );
     expect(container.textContent).toContain('My Services');
     expect(container.textContent).toContain('Let’s talk about your challenge');

@@ -37,7 +37,7 @@ export const ROUTE_SEO_POLICY = {
   '/blog': {
     title: 'Blog | Elier Loya',
     description:
-      'Blog profesional de elelier.com con artículos y actualizaciones de tecnología, digitalización y más.',
+      'Cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.',
     canonicalPath: '/',
     robots: 'noindex,follow',
   },

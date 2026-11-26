@@ -7,7 +7,7 @@ import '../styles/components/Blog.css';
 const content = {
   es: {
     title: 'Blog',
-    intro: 'Bienvenido a nuestro blog, donde compartimos artículos sobre las últimas tendencias y avances en tecnología, digitalización y más.',
+    intro: 'Escribo para quien tiene un problema real que resolver: cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.',
     servicesCta: 'Mis Servicios',
     contactCta: 'Hablemos de tu reto',
     readMore: 'Leer artículo',
@@ -15,7 +15,7 @@ const content = {
   },
   en: {
     title: 'Blog',
-    intro: 'Welcome to the blog, where I share articles about technology, digitalization and practical product thinking.',
+    intro: 'Notes for people with a real problem to solve: how I think when a process gets stuck, how I decide what is worth building, and what I learn when someone uses what I made.',
     servicesCta: 'My Services',
     contactCta: 'Let’s talk about your challenge',
     readMore: 'Read article',
