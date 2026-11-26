@@ -17,6 +17,319 @@
 
 const blogPosts = [
   {
+    slug: 'vender-mis-cosas-con-mi-propia-app',
+    date: '2026-11-26',
+    tags: ['Producto', 'SeVa', 'Historias'],
+    cover: '/images/blog/seva/portada.webp',
+    ogImage: '/images/blog/seva/portada-og.jpg',
+    product: { name: 'SeVa', url: 'https://seva-7x5.pages.dev/', icon: '/images/blog/seva-icon.png' },
+    es: {
+      title: 'Lo que aprendí cuando me tocó vender mis cosas con mi propia app',
+      summary:
+        'Ilse y yo nos mudamos a São Paulo. De pronto cada mueble del departamento era una decisión pendiente. Así nació SeVa, y así descubrí lo que no sabía de mi propio producto.',
+      body: `![Portada de SeVa: catálogo privado con acceso por invitación, con cajas de mudanza, libros, una taza y una guitarra](/images/blog/seva/portada.webp "SeVa: objetos con historia para vender, regalar o apartar entre familia y amigos.")
+
+Ilse y yo nos vamos a vivir a São Paulo. Cuando esa posibilidad empezó a convertirse en un plan real, con fechas, presupuestos y pendientes, cambió algo que no esperaba: la manera en que veía nuestro departamento.
+
+Los muebles, los electrodomésticos, los escritorios, las sillas, las mesas, el refrigerador, mi monitor ultrawide de 34 pulgadas y un montón de cosas pequeñas que fuimos comprando con los años. Antes eran simplemente nuestra casa. De repente, cada una era una pregunta: ¿nos la llevamos?, ¿la vendemos?, ¿la regalamos?, ¿la guardamos?
+
+No estábamos desocupando un departamento. Estábamos organizando una transición de vida, con muchas decisiones al mismo tiempo. Y yo no quería que darle salida a todo se convirtiera en otro trabajo de tiempo completo.
+
+## El problema no era encontrar compradores
+
+Cuando piensas en vender tus cosas, lo primero que imaginas es el anuncio: la foto, el precio, alguien que pregunta. Pero ese es el momento fácil.
+
+Lo cansado es todo lo demás. Las fotos dispersas en el celular. Escribir la misma descripción otra vez. Contestar las mismas preguntas. Acordarte de quién preguntó primero. Llevar en la cabeza qué sigue disponible, qué ya está apartado y qué falta entregar.
+
+El problema no era conseguir a alguien interesado. Era administrar el proceso completo sin perder el control.
+
+Como ingeniero tengo esa manía de buscar cómo simplificar las cosas. Y como me encanta hacer productos digitales, vi la oportunidad de construir algo que yo mismo iba a usar. Así nació [SeVa](https://seva-7x5.pages.dev): un lugar para tomar fotos de tus cosas, darle a cada una su ficha, compartirlas con gente de confianza y saber en todo momento quién está interesado, qué está apartado, qué se vendió y qué falta entregar.
+
+La idea de fondo es sencilla: que las cosas que ya no necesitamos encuentren una nueva vida con alguien más.
+
+## Por qué no quise hacer otro marketplace
+
+No estaba buscando venderle a miles de desconocidos. Quería ofrecer nuestras cosas a gente cercana, y a quien llegara por medio de alguien de confianza.
+
+Hay una diferencia grande entre publicar algo en internet para que cualquiera lo encuentre y abrirle una parte de tu vida a un círculo conocido. Cuando vendes las cosas de tu casa también cuentas, sin querer, qué tienes, cómo son tus espacios, dónde vives y a qué hora estás.
+
+Por eso la privacidad fue una decisión de producto desde el principio: en SeVa entras por invitación.
+
+Esa decisión además me quitó de encima problemas que no tenía. Entre conocidos no necesito construir pagos, reputación ni protección al comprador. La confianza ya existe; la app solo tiene que ordenar lo que pasa alrededor de ella.
+
+![Pantalla de invitación privada de SeVa que pide el nombre antes de entrar al catálogo](/images/blog/seva/app-invitacion.webp "La puerta de entrada: una invitación, tu nombre y listo.")
+![El catálogo de SeVa visto por un invitado: tarjetas con foto, nombre, precio y disponibilidad de cada objeto](/images/blog/seva/app-catalogo-invitado.webp "Nuestro catálogo, como lo ve alguien invitado.")
+
+## Cuando el desarrollador se convirtió en vendedor
+
+Mientras construía SeVa, mi cabeza estaba en lo obvio: capturar objetos, organizarlos, publicarlos. Si eso funcionaba, pensaba, lo demás era detalle.
+
+Luego empecé a usarla para vender nuestras cosas de verdad, y el detalle resultó ser casi todo.
+
+Hubo un momento que recuerdo muy bien. Teníamos varios objetos apartados. Cerré algunos de esos apartados como ventas hechas. Después me di cuenta de que esos mismos objetos seguían publicados. Y disponibles.
+
+Vendidos para mí, disponibles para cualquiera que abriera el catálogo.
+
+Si alguien ya compró algo, ¿por qué otra persona todavía puede pensar que se lo puede llevar? Es justo el tipo de confusión que SeVa existe para evitar, y la estaba causando SeVa. Eso me obligó a revisar desde la base cómo se relacionaban los apartados, las ventas y el inventario.
+
+![Bandeja de solicitudes en SeVa con dos apartados confirmados pendientes de cerrar o liberar](/images/blog/seva/app-solicitudes.webp "Apartados confirmados, esperando a que los cierre o los libere. Nombres ocultos.")
+
+Casi enseguida apareció otro hueco. Vender algo no es lo mismo que haberlo cobrado. Hay ventas con el pago pendiente, ventas ya pagadas y ventas con un abono. Para la app, todo era «vendido». Para mí, como vendedor, eran tres situaciones muy distintas.
+
+![Pantalla de ventas y cobros en SeVa con filtros de sin revisar, pendientes y cobradas](/images/blog/seva/app-ventas-cobros.webp "Hoy la venta y el cobro se ven por separado. Datos sensibles ocultos.")
+
+Son cosas que parecen pequeñas mientras diseñas. Dejan de serlo en cuanto la usas. Ahí SeVa dejó de ser un proyecto de desarrollo y se volvió un producto que tenía que contestar bien a situaciones reales.
+
+## Lo que cambió por usarla yo
+
+Usarla me cambió la lista de prioridades. Algunas cosas ya están en la app; otras siguen en camino o falta validarlas:
+
+- **Separar lo disponible de lo vendido**, para que nadie se ilusione con algo que ya tiene dueño.
+- **Distinguir la venta del cobro**, para saber qué ya está pagado y qué no.
+- **Precios visibles en las tarjetas**, sin tener que abrir cada objeto.
+- **No perder tu lugar** cuando regresas de ver un objeto al catálogo.
+- **Captura rápida.** Cuando tienes decenas de cosas por registrar, no quieres llenar veinte campos por cada una. Tomas las fotos, guardas y sigues. Los detalles pueden esperar.
+
+![Ficha de un florero en SeVa con fotos, precio, unidades disponibles y los botones Me interesa, Preguntar y Apartar](/images/blog/seva/app-ficha-objeto.webp "La ficha de cada objeto, desde el lado del invitado.")
+
+Hubo otra lección menos técnica y más incómoda. Algunas pantallas que ya había aprobado en el prototipo, cuando llegaron a la app real, no se parecían lo suficiente a lo que había diseñado. Funcionaban, pero no se sentían bien. Una app que funciona no es lo mismo que una app agradable de usar, y tuve que cambiar la forma en que revisaba que la experiencia fuera la que imaginé.
+
+Si tuviera que resumir todo en una frase: **dejé de pensar en funcionalidades y empecé a revisar recorridos completos.** Desde que alguien ve un objeto hasta que se lo lleva a su casa, ya pagado.
+
+## No todo necesita otro botón
+
+Hay algo que tengo cada vez más claro: no quiero que SeVa reemplace todas las conversaciones entre personas.
+
+Una app puede ayudarte a ordenar el inventario, registrar solicitudes, recordar compromisos y saber qué está pendiente. Pero ponerse de acuerdo sobre una entrega muchas veces se resuelve mejor con un mensaje. No todo necesita un botón más, una automatización o un flujo de diez pasos.
+
+Mi objetivo no es que la gente pase el mayor tiempo posible dentro de SeVa. Es que resuelva lo que necesita con la menor fricción, y luego se vaya a vivir su vida.
+
+## Lo que sigue
+
+Hoy SeVa es una app web donde puedes armar catálogos de tus cosas, compartirlos, recibir preguntas y solicitudes de apartado y llevar la salida de cada objeto. Tiene usuarios con permisos, fotos, colaboración y pruebas automáticas. También tiene problemas que sigo resolviendo, y no la voy a presentar como algo terminado.
+
+![Pantalla de inicio de SeVa con publicadas, por revisar, apartados, preguntas y los objetos que se están moviendo](/images/blog/seva/app-inicio.webp "El inicio: lo importante de la venta, de un vistazo.")
+
+Primero quiero que resuelva bien nuestro caso: una mudanza con decenas de objetos y gente interesada. Después me gustaría probarla con otras personas que estén en algo parecido: una mudanza, una venta de garaje o simplemente las ganas de liberar espacio. No quiero convertirla antes de tiempo en otro marketplace gigante. Prefiero que crezca a partir de necesidades reales.
+
+## Lo que sí nos vamos a llevar
+
+La mudanza me ha hecho ver cuántas cosas acumulamos sin darnos cuenta. Unas tienen una función, otras tienen recuerdos, y otras siguen con nosotros solo porque nunca nos detuvimos a decidir qué hacer con ellas.
+
+Mi monitor, por ejemplo. Lo he usado varios años y ha estado ahí en muchos proyectos. Venderlo no es vender un aparato: es soltar algo que ha sido parte de mi rutina y de mi espacio de trabajo.
+
+Irnos a Brasil es mucho más que cambiar de país. Ilse y yo queremos más libertad, conocer lugares, estar cerca de la naturaleza, aprender y disfrutar el tiempo con quienes queremos. Y eso me hace preguntarme cuánto necesitamos de verdad para vivir bien.
+
+Todavía no sabemos todo lo que nos vamos a llevar. Pero me gusta pensar que esta mudanza es una oportunidad para elegir con más conciencia qué conservar. Los objetos pueden acompañarnos durante una etapa de la vida sin tener que acompañarnos en todas las siguientes.
+
+Si estás por mudarte o quieres liberar espacio y te late probarla, SeVa está en [seva-7x5.pages.dev](https://seva-7x5.pages.dev). Y si en tu operación hay un proceso que se ve sencillo en el diagrama pero se complica en cuanto alguien lo usa de verdad, cuéntame dónde se está atorando. Me encantaría escucharte.`,
+    },
+    en: {
+      title: 'What I learned when I had to sell my things with my own app',
+      tags: ['Product', 'SeVa', 'Stories'],
+      summary:
+        'Ilse and I are moving to São Paulo. Suddenly every piece of furniture in our apartment was a pending decision. That’s how SeVa was born, and how I found out what I didn’t know about my own product.',
+      body: `![SeVa cover: a private catalog with invite-only access, with moving boxes, books, a mug and a guitar](/images/blog/seva/portada.webp "SeVa: things with a story to sell, give away or set aside among family and friends.")
+
+Ilse and I are moving to São Paulo. When that possibility started turning into a real plan, with dates, budgets and to-dos, something changed that I didn't expect: the way I looked at our apartment.
+
+The furniture, the appliances, the desks, the chairs, the tables, the fridge, my 34-inch ultrawide monitor and a pile of small things we bought over the years. Before, they were simply our home. Suddenly, each one was a question: do we take it?, sell it?, give it away?, store it?
+
+We weren't just emptying an apartment. We were organizing a life transition, with many decisions at once. And I didn't want getting rid of everything to become another full-time job.
+
+## The problem wasn't finding buyers
+
+When you think about selling your stuff, the first thing you picture is the listing: the photo, the price, someone asking about it. But that's the easy part.
+
+What wears you out is everything else. Photos scattered across your phone. Writing the same description again. Answering the same questions. Remembering who asked first. Keeping track in your head of what's still available, what's on hold and what still needs to be handed over.
+
+The problem wasn't getting someone interested. It was managing the whole process without losing control.
+
+As an engineer, I have this habit of looking for ways to simplify things. And since I love building digital products, I saw the chance to build something I'd use myself. That's how [SeVa](https://seva-7x5.pages.dev) was born: a place to take photos of your things, give each one its own page, share them with people you trust and always know who's interested, what's on hold, what's sold and what still needs to be delivered.
+
+The idea underneath is simple: that the things we no longer need find a new life with someone else.
+
+## Why I didn't want another marketplace
+
+I wasn't trying to sell to thousands of strangers. I wanted to offer our things to people close to us, and to whoever came through someone we trust.
+
+There's a big difference between posting something online for anyone to find and opening part of your life to a known circle. When you sell the things in your home, you also reveal, without meaning to, what you own, what your place looks like, where you live and when you're home.
+
+That's why privacy was a product decision from the start: you get into SeVa by invitation.
+
+That decision also spared me problems I didn't have. Among people who know each other, I don't need to build payments, reputation or buyer protection. The trust already exists; the app just has to organize what happens around it.
+
+![SeVa's private invitation screen asking for your name before entering the catalog](/images/blog/seva/app-invitacion.webp "The front door: an invitation, your name, and you're in.")
+![The SeVa catalog as a guest sees it: cards with each item's photo, name, price and availability](/images/blog/seva/app-catalogo-invitado.webp "Our catalog, as an invited guest sees it.")
+
+## When the developer became the seller
+
+While I was building SeVa, my head was on the obvious: capturing items, organizing them, publishing them. If that worked, I thought, the rest was detail.
+
+Then I started using it to actually sell our things, and the detail turned out to be almost everything.
+
+There's one moment I remember well. We had several items on hold. I closed some of those holds as completed sales. Later I noticed those same items were still published. And available.
+
+Sold for me, available for anyone who opened the catalog.
+
+If someone already bought something, why can another person still think they can take it home? That's exactly the kind of confusion SeVa exists to prevent, and SeVa was causing it. It forced me to rethink, from the ground up, how holds, sales and inventory relate to each other.
+
+![SeVa's requests inbox with two confirmed holds waiting to be closed or released](/images/blog/seva/app-solicitudes.webp "Confirmed holds, waiting for me to close or release them. Names hidden.")
+
+Right after that, another gap showed up. Selling something isn't the same as getting paid for it. There are sales with payment pending, sales already paid and sales with a partial payment. For the app, it was all "sold". For me, as the seller, those were three very different situations.
+
+![SeVa's sales and payments screen with filters for unreviewed, pending and paid](/images/blog/seva/app-ventas-cobros.webp "Today, the sale and the payment are shown separately. Sensitive data hidden.")
+
+These things seem small while you're designing. They stop being small the moment you use the product. That's when SeVa stopped being a development project and became a product that had to respond correctly to real situations.
+
+## What changed because I used it myself
+
+Using it changed my list of priorities. Some of these are already in the app; others are on the way or still need validation:
+
+- **Separating what's available from what's sold**, so nobody gets their hopes up about something that already has an owner.
+- **Telling the sale apart from the payment**, to know what's paid and what isn't.
+- **Prices visible on the cards**, without opening each item.
+- **Not losing your place** when you go back from an item to the catalog.
+- **Quick capture.** When you have dozens of things to register, you don't want to fill twenty fields for each one. Take the photos, save, keep going. The details can wait.
+
+![A vase's page in SeVa with photos, price, available units and the buttons I'm interested, Ask and Hold](/images/blog/seva/app-ficha-objeto.webp "Each item's page, from the guest's side.")
+
+There was another lesson, less technical and more uncomfortable. Some screens I had already approved in the prototype didn't look close enough to my design once they reached the real app. They worked, but they didn't feel right. An app that works isn't the same as an app that's pleasant to use, and I had to change how I checked that the experience was the one I had imagined.
+
+If I had to sum it all up in one sentence: **I stopped thinking in features and started reviewing complete journeys.** From the moment someone sees an item until they take it home, already paid for.
+
+## Not everything needs another button
+
+There's something I'm more and more sure about: I don't want SeVa to replace every conversation between people.
+
+An app can help you organize inventory, log requests, remember commitments and know what's pending. But agreeing on a pickup is often better solved with a message. Not everything needs one more button, an automation or a ten-step flow.
+
+My goal isn't for people to spend as much time as possible inside SeVa. It's for them to get what they need done with the least friction, and then go live their lives.
+
+## What's next
+
+Today SeVa is a web app where you can build catalogs of your things, share them, receive questions and hold requests, and track where each item ends up. It has users with permissions, photos, collaboration and automated tests. It also has problems I'm still solving, and I won't present it as something finished.
+
+![SeVa's home screen with published items, items to review, holds, questions and what's moving](/images/blog/seva/app-inicio.webp "Home: what matters in your sale, at a glance.")
+
+First, I want it to solve our own case well: a move with dozens of items and interested people. After that, I'd like to try it with other people going through something similar: a move, a garage sale or simply the urge to free up space. I don't want to turn it into another giant marketplace too soon. I'd rather it grow from real needs.
+
+## What we will take with us
+
+The move has made me see how many things we accumulate without noticing. Some have a purpose, some carry memories, and some are still with us only because we never stopped to decide what to do with them.
+
+My monitor, for example. I've used it for years and it's been there for many projects. Selling it isn't selling a device: it's letting go of something that has been part of my routine and my workspace.
+
+Moving to Brazil is much more than changing countries. Ilse and I want more freedom, to discover places, to be close to nature, to learn and to enjoy time with the people we love. And that makes me ask how much we really need to live well.
+
+We still don't know everything we'll take. But I like to think of this move as a chance to choose more consciously what to keep. Objects can be with us for one stage of life without having to come along for all the next ones.
+
+If you're about to move or want to free up space and feel like trying it, SeVa is at [seva-7x5.pages.dev](https://seva-7x5.pages.dev). And if your operation has a process that looks simple on the diagram but gets complicated as soon as someone actually uses it, tell me where it's getting stuck. I'd love to hear from you.`,
+    },
+    'pt-br': {
+      title: 'O que aprendi quando tive que vender minhas coisas com meu próprio app',
+      tags: ['Produto', 'SeVa', 'Histórias'],
+      summary:
+        'Eu e a Ilse vamos nos mudar para São Paulo. De repente, cada móvel do apartamento virou uma decisão pendente. Assim nasceu o SeVa, e assim descobri o que eu não sabia sobre o meu próprio produto.',
+      body: `![Capa do SeVa: catálogo privado com acesso por convite, com caixas de mudança, livros, uma caneca e uma guitarra](/images/blog/seva/portada.webp "SeVa: objetos com história para vender, doar ou reservar entre família e amigos.")
+
+Eu e a Ilse vamos morar em São Paulo. Quando essa possibilidade começou a virar um plano de verdade, com datas, orçamentos e pendências, mudou algo que eu não esperava: o jeito como eu olhava para o nosso apartamento.
+
+Os móveis, os eletrodomésticos, as escrivaninhas, as cadeiras, as mesas, a geladeira, meu monitor ultrawide de 34 polegadas e um monte de coisas pequenas que fomos comprando ao longo dos anos. Antes, eram simplesmente a nossa casa. De repente, cada uma virou uma pergunta: levamos?, vendemos?, doamos?, guardamos?
+
+A gente não estava só esvaziando um apartamento. Estávamos organizando uma transição de vida, com muitas decisões ao mesmo tempo. E eu não queria que dar destino a tudo virasse mais um trabalho em tempo integral.
+
+## O problema não era encontrar compradores
+
+Quando você pensa em vender suas coisas, a primeira coisa que imagina é o anúncio: a foto, o preço, alguém perguntando. Mas essa é a parte fácil.
+
+O que cansa é todo o resto. As fotos espalhadas no celular. Escrever a mesma descrição de novo. Responder às mesmas perguntas. Lembrar quem perguntou primeiro. Guardar de cabeça o que ainda está disponível, o que já está reservado e o que falta entregar.
+
+O problema não era conseguir alguém interessado. Era administrar o processo inteiro sem perder o controle.
+
+Como engenheiro, tenho essa mania de procurar como simplificar as coisas. E como adoro criar produtos digitais, vi a oportunidade de construir algo que eu mesmo ia usar. Assim nasceu o [SeVa](https://seva-7x5.pages.dev): um lugar para fotografar suas coisas, dar a cada uma a sua ficha, compartilhá-las com pessoas de confiança e saber o tempo todo quem está interessado, o que está reservado, o que foi vendido e o que falta entregar.
+
+A ideia de fundo é simples: que as coisas de que não precisamos mais encontrem uma nova vida com outra pessoa.
+
+## Por que eu não quis fazer mais um marketplace
+
+Eu não estava tentando vender para milhares de desconhecidos. Queria oferecer nossas coisas para pessoas próximas e para quem chegasse por meio de alguém de confiança.
+
+Existe uma grande diferença entre publicar algo na internet para qualquer um encontrar e abrir uma parte da sua vida para um círculo conhecido. Quando você vende as coisas da sua casa, também conta, sem querer, o que você tem, como são os seus espaços, onde você mora e a que horas está em casa.
+
+Por isso a privacidade foi uma decisão de produto desde o começo: no SeVa, você entra por convite.
+
+Essa decisão ainda me livrou de problemas que eu não tinha. Entre conhecidos, não preciso construir pagamentos, reputação nem proteção ao comprador. A confiança já existe; o app só precisa organizar o que acontece em volta dela.
+
+![Tela de convite privado do SeVa pedindo o nome antes de entrar no catálogo](/images/blog/seva/app-invitacion.webp "A porta de entrada: um convite, seu nome e pronto.")
+![O catálogo do SeVa visto por um convidado: cards com foto, nome, preço e disponibilidade de cada objeto](/images/blog/seva/app-catalogo-invitado.webp "Nosso catálogo, como um convidado o vê.")
+
+## Quando o desenvolvedor virou vendedor
+
+Enquanto construía o SeVa, minha cabeça estava no óbvio: cadastrar objetos, organizá-los, publicá-los. Se isso funcionasse, eu pensava, o resto era detalhe.
+
+Depois comecei a usá-lo para vender nossas coisas de verdade, e o detalhe acabou sendo quase tudo.
+
+Teve um momento de que me lembro bem. Tínhamos vários objetos reservados. Fechei algumas dessas reservas como vendas concluídas. Depois percebi que esses mesmos objetos continuavam publicados. E disponíveis.
+
+Vendidos para mim, disponíveis para qualquer um que abrisse o catálogo.
+
+Se alguém já comprou algo, por que outra pessoa ainda pode achar que pode levar? É exatamente o tipo de confusão que o SeVa existe para evitar, e quem estava causando era o próprio SeVa. Isso me obrigou a revisar desde a base como se relacionavam as reservas, as vendas e o inventário.
+
+![Caixa de solicitações do SeVa com duas reservas confirmadas esperando para serem fechadas ou liberadas](/images/blog/seva/app-solicitudes.webp "Reservas confirmadas, esperando que eu as feche ou libere. Nomes ocultos.")
+
+Logo em seguida apareceu outra lacuna. Vender algo não é o mesmo que ter recebido por ele. Há vendas com pagamento pendente, vendas já pagas e vendas com um sinal. Para o app, tudo era "vendido". Para mim, como vendedor, eram três situações muito diferentes.
+
+![Tela de vendas e cobranças do SeVa com filtros de não revisadas, pendentes e recebidas](/images/blog/seva/app-ventas-cobros.webp "Hoje a venda e o pagamento aparecem separados. Dados sensíveis ocultos.")
+
+São coisas que parecem pequenas enquanto você desenha. Deixam de ser assim que você usa. Foi aí que o SeVa deixou de ser um projeto de desenvolvimento e virou um produto que precisava responder bem a situações reais.
+
+## O que mudou por eu mesmo usar
+
+Usar o app mudou minha lista de prioridades. Algumas coisas já estão nele; outras ainda estão a caminho ou falta validar:
+
+- **Separar o disponível do vendido**, para ninguém se animar com algo que já tem dono.
+- **Distinguir a venda do pagamento**, para saber o que já foi pago e o que não.
+- **Preços visíveis nos cards**, sem precisar abrir cada objeto.
+- **Não perder o lugar** quando você volta de um objeto para o catálogo.
+- **Cadastro rápido.** Quando você tem dezenas de coisas para registrar, não quer preencher vinte campos para cada uma. Tira as fotos, salva e segue. Os detalhes podem esperar.
+
+![Ficha de um vaso no SeVa com fotos, preço, unidades disponíveis e os botões Tenho interesse, Perguntar e Reservar](/images/blog/seva/app-ficha-objeto.webp "A ficha de cada objeto, do lado do convidado.")
+
+Teve outra lição, menos técnica e mais incômoda. Algumas telas que eu já tinha aprovado no protótipo, quando chegaram ao app real, não se pareciam o suficiente com o que eu tinha desenhado. Funcionavam, mas não pareciam certas. Um app que funciona não é o mesmo que um app agradável de usar, e tive que mudar o jeito como eu conferia se a experiência era a que eu tinha imaginado.
+
+Se eu tivesse que resumir tudo em uma frase: **parei de pensar em funcionalidades e comecei a revisar jornadas completas.** Desde que alguém vê um objeto até levá-lo para casa, já pago.
+
+## Nem tudo precisa de mais um botão
+
+Tem uma coisa que está cada vez mais clara para mim: não quero que o SeVa substitua todas as conversas entre as pessoas.
+
+Um app pode ajudar a organizar o inventário, registrar solicitações, lembrar compromissos e saber o que está pendente. Mas combinar uma entrega muitas vezes se resolve melhor com uma mensagem. Nem tudo precisa de mais um botão, uma automação ou um fluxo de dez passos.
+
+Meu objetivo não é que as pessoas passem o maior tempo possível dentro do SeVa. É que resolvam o que precisam com o mínimo de atrito, e depois vão viver a vida.
+
+## O que vem pela frente
+
+Hoje o SeVa é um app web onde você pode montar catálogos das suas coisas, compartilhá-los, receber perguntas e pedidos de reserva e acompanhar o destino de cada objeto. Tem usuários com permissões, fotos, colaboração e testes automatizados. Também tem problemas que continuo resolvendo, e não vou apresentá-lo como algo pronto.
+
+![Tela inicial do SeVa com publicados, a revisar, reservas, perguntas e os objetos que estão se movendo](/images/blog/seva/app-inicio.webp "O início: o que importa da sua venda, num relance.")
+
+Primeiro quero que ele resolva bem o nosso caso: uma mudança com dezenas de objetos e pessoas interessadas. Depois, gostaria de testá-lo com outras pessoas passando por algo parecido: uma mudança, um bazar de garagem ou simplesmente a vontade de liberar espaço. Não quero transformá-lo cedo demais em mais um marketplace gigante. Prefiro que cresça a partir de necessidades reais.
+
+## O que, sim, vamos levar
+
+A mudança me fez ver quantas coisas acumulamos sem perceber. Umas têm uma função, outras têm lembranças, e outras continuam com a gente só porque nunca paramos para decidir o que fazer com elas.
+
+Meu monitor, por exemplo. Uso há vários anos e ele esteve presente em muitos projetos. Vendê-lo não é vender um aparelho: é soltar algo que fez parte da minha rotina e do meu espaço de trabalho.
+
+Ir para o Brasil é muito mais do que mudar de país. Eu e a Ilse queremos mais liberdade, conhecer lugares, ficar perto da natureza, aprender e aproveitar o tempo com quem a gente ama. E isso me faz perguntar quanto realmente precisamos para viver bem.
+
+Ainda não sabemos tudo o que vamos levar. Mas gosto de pensar que esta mudança é uma oportunidade de escolher com mais consciência o que guardar. Os objetos podem nos acompanhar durante uma etapa da vida sem precisar nos acompanhar em todas as seguintes.
+
+Se você está prestes a se mudar ou quer liberar espaço e tem vontade de testar, o SeVa está em [seva-7x5.pages.dev](https://seva-7x5.pages.dev). E se na sua operação existe um processo que parece simples no diagrama mas se complica assim que alguém o usa de verdade, me conta onde ele está travando. Vou adorar te ouvir.`,
+    },
+  },
+  {
     slug: 'app-rancho-de-mi-papa',
     date: '2026-11-26',
     tags: ['Producto', 'MiRancho', 'Historias'],

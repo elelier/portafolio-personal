@@ -56,6 +56,8 @@ describe('static SEO artifacts', () => {
       '/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/',
       '/blog/', '/blog/app-rancho-de-mi-papa/',
       '/en/blog/app-rancho-de-mi-papa/', '/pt-br/blog/app-rancho-de-mi-papa/',
+      '/blog/vender-mis-cosas-con-mi-propia-app/', '/en/blog/vender-mis-cosas-con-mi-propia-app/',
+      '/pt-br/blog/vender-mis-cosas-con-mi-propia-app/',
     ]);
     expect(sitemap).not.toContain('<loc>https://elelier.com/privacy-policy</loc>');
     expect(sitemap).not.toContain('<loc>https://elelier.com/terms-of-service</loc>');

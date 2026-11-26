@@ -8,6 +8,9 @@ export const INDEXABLE_SITEMAP_PATHS = [
   '/blog/app-rancho-de-mi-papa/',
   '/en/blog/app-rancho-de-mi-papa/',
   '/pt-br/blog/app-rancho-de-mi-papa/',
+  '/blog/vender-mis-cosas-con-mi-propia-app/',
+  '/en/blog/vender-mis-cosas-con-mi-propia-app/',
+  '/pt-br/blog/vender-mis-cosas-con-mi-propia-app/',
 ];
 
 export const ROUTE_SEO_POLICY = {
