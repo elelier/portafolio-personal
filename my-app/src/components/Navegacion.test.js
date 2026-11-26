@@ -34,10 +34,21 @@ const renderNavegacion = (language = 'es') => {
 
 const findLinkByText = (container, text) => Array.from(container.querySelectorAll('a')).find((link) => link.textContent.includes(text));
 
+// La navegación lleva el contenido de la sección (sin su padding) justo bajo el menú fijo.
+const placeSection = (target, top = 1000) => {
+  target.style.paddingTop = '86px';
+  target.dataset.top = String(top);
+  target.getBoundingClientRect = () => ({ top, bottom: top + 500, height: 500, left: 0, right: 0, width: 0, x: 0, y: top });
+};
+const expectScrolledTo = (target) => {
+  expect(window.scrollTo).toHaveBeenCalledWith({ top: Number(target.dataset.top) + 86 - 16, behavior: 'smooth' });
+};
+
 describe('Navegacion', () => {
   beforeEach(() => {
     window.innerWidth = 390;
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    window.scrollTo = jest.fn();
   });
 
   afterEach(() => {
@@ -47,10 +58,10 @@ describe('Navegacion', () => {
   });
 
   it('shows Casos reales in Spanish and keeps the existing destinations working', () => {
-    const targets = ['sobre-mi', 'casos-reales', 'soluciones', 'contacto'].reduce((acc, id) => {
+    const targets = ['sobre-mi', 'casos-reales', 'soluciones', 'contacto'].reduce((acc, id, index) => {
       const target = document.createElement('section');
       target.id = id;
-      target.scrollIntoView = jest.fn();
+      placeSection(target, 1000 * (index + 1));
       document.body.appendChild(target);
       acc[id] = target;
       return acc;
@@ -81,10 +92,10 @@ describe('Navegacion', () => {
       contactLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
-    expect(targets['casos-reales'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
-    expect(targets['sobre-mi'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
-    expect(targets['soluciones'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
-    expect(targets['contacto'].scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    expectScrolledTo(targets['casos-reales']);
+    expectScrolledTo(targets['sobre-mi']);
+    expectScrolledTo(targets['soluciones']);
+    expectScrolledTo(targets['contacto']);
 
     cleanup();
   });
@@ -92,7 +103,7 @@ describe('Navegacion', () => {
   it('shows Case studies in English and scrolls to the cases section', () => {
     const target = document.createElement('section');
     target.id = 'casos-reales';
-    target.scrollIntoView = jest.fn();
+    placeSection(target);
     document.body.appendChild(target);
 
     const { container, cleanup } = renderNavegacion('en');
@@ -109,7 +120,7 @@ describe('Navegacion', () => {
       casesLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
-    expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    expectScrolledTo(target);
 
     cleanup();
   });
@@ -117,7 +128,7 @@ describe('Navegacion', () => {
   it('closes the mobile menu after selecting Casos reales', () => {
     const target = document.createElement('section');
     target.id = 'casos-reales';
-    target.scrollIntoView = jest.fn();
+    placeSection(target);
     document.body.appendChild(target);
 
     const { container, cleanup } = renderNavegacion('es');
@@ -138,7 +149,7 @@ describe('Navegacion', () => {
       casesLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
-    expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    expectScrolledTo(target);
     expect(navLinks.classList.contains('open')).toBe(false);
 
     cleanup();

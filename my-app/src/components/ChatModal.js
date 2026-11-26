@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
+import { scrollIntoViewWithMotionPreference, scrollToSectionElement } from './utils/generalUtils';
 import { FaLightbulb, FaChartLine, FaCogs, FaUserAlt, FaBriefcase, FaEnvelope, FaTimes, FaPaperPlane, FaRobot } from 'react-icons/fa';
 import { getNavigationContent } from '../config/navigation';
 import { homePathFor, isLocalizedHome } from '../i18n/locales';
@@ -282,7 +282,7 @@ const ChatModal = () => {
     const section = isLocalizedHome(location.pathname) ? document.getElementById(target) : null;
     if (section) {
       window.history.replaceState(null, '', `${homePath}#${target}`);
-      scrollIntoViewWithMotionPreference(section, { block: 'start' });
+      scrollToSectionElement(section);
     } else {
       navigate(`${homePath}#${target}`);
     }
