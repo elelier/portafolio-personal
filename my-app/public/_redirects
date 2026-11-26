@@ -27,10 +27,6 @@
 /admin/leads /index.html 200
 /admin/leads/ /index.html 200
 
-# Blog articles (SPA, rendered from src/data/blogPosts.js)
-/blog/:slug /index.html 200
-/blog/:slug/ /index.html 200
-
 # Private editorial route
 /entradas/:slug /index.html 200
 /entradas/:slug/ /index.html 200

@@ -115,6 +115,28 @@ export function getPostCopy(post, language = 'es') {
   return post[language] || post.es;
 }
 
+export const BLOG_LOCALE_PREFIX = { es: '', en: '/en', 'pt-br': '/pt-br' };
+
+// Rutas del blog por idioma: /blog/, /en/blog/, /pt-br/blog/ (y /<slug>/ para cada artículo).
+export function blogPath(language = 'es', slug) {
+  const prefix = BLOG_LOCALE_PREFIX[language] ?? '';
+  return slug ? `${prefix}/blog/${slug}/` : `${prefix}/blog/`;
+}
+
+// Idioma en que está escrito el texto que se va a mostrar (puede caer a español).
+export function postContentLanguage(post, language = 'es') {
+  return post[language] ? language : 'es';
+}
+
+export function readingMinutes(post, language = 'es') {
+  const copy = getPostCopy(post, language);
+  const words = String(copy.body || '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
 export function formatPostDate(isoDate, language = 'es') {
   const tag = { es: 'es-MX', en: 'en-US', 'pt-br': 'pt-BR' }[language] || 'es-MX';
   const date = new Date(`${isoDate}T12:00:00Z`);

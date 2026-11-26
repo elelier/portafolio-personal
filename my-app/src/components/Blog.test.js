@@ -42,9 +42,9 @@ describe('Blog', () => {
     expect(container.textContent).toContain(
       'Escribo para quien tiene un problema real que resolver: cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.'
     );
-    expect(container.textContent).toContain('Mis Servicios');
+    expect(container.textContent).toContain('Cómo trabajo');
     expect(container.textContent).toContain('Hablemos de tu reto');
-    expect(container.textContent).not.toContain('My Services');
+    expect(container.textContent).not.toContain('How I work');
     expect(container.textContent).not.toContain('Let’s talk about your challenge');
 
     cleanup();
@@ -57,9 +57,9 @@ describe('Blog', () => {
     expect(container.textContent).toContain(
       'Notes for people with a real problem to solve: how I think when a process gets stuck, how I decide what is worth building, and what I learn when someone uses what I made.'
     );
-    expect(container.textContent).toContain('My Services');
+    expect(container.textContent).toContain('How I work');
     expect(container.textContent).toContain('Let’s talk about your challenge');
-    expect(container.textContent).not.toContain('Mis Servicios');
+    expect(container.textContent).not.toContain('Cómo trabajo');
     expect(container.textContent).not.toContain('Hablemos de tu reto');
 
     cleanup();

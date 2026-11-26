@@ -1,4 +1,4 @@
 // ARCHIVO GENERADO AUTOMÁTICAMENTE - NO EDITAR MANUALMENTE
-// Generado el: 2026-11-26T12:18:51.453Z
+// Generado el: 2026-11-26T12:33:17.903Z
 
 export const hashedPasscodes = {};

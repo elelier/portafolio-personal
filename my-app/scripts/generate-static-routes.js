@@ -100,16 +100,16 @@ function escapeAttr(value) {
   return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 }
 
-function buildBlogHtml(sourceHtml, { title, description, canonical, image, imageAlt, type }) {
+function buildBlogHtml(sourceHtml, { title, description, canonical, url = canonical, image, imageAlt, type, robots = 'index,follow', lang }) {
   const t = escapeAttr(title);
   const d = escapeAttr(description);
   const tags = [
     [/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/i, `<meta name="description" content="${d}" data-rh="true">`],
     [/<meta\b(?=[^>]*\bproperty=["']og:title["'])[^>]*>/i, `<meta property="og:title" content="${t}" data-rh="true">`],
     [/<meta\b(?=[^>]*\bproperty=["']og:description["'])[^>]*>/i, `<meta property="og:description" content="${d}" data-rh="true">`],
-    [/<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*>/i, `<meta property="og:url" content="${canonical}" data-rh="true">`],
+    [/<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*>/i, `<meta property="og:url" content="${url}" data-rh="true">`],
     [/<meta\b(?=[^>]*\bproperty=["']og:type["'])[^>]*>/i, `<meta property="og:type" content="${type}" data-rh="true">`],
-    [/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i, '<meta name="robots" content="index,follow" data-rh="true">'],
+    [/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i, `<meta name="robots" content="${robots}" data-rh="true">`],
     [/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i, `<link rel="canonical" href="${canonical}" data-rh="true">`],
   ];
   if (image) {
@@ -119,9 +119,10 @@ function buildBlogHtml(sourceHtml, { title, description, canonical, image, image
       [/<meta\b(?=[^>]*\bname=["']twitter:image["'])[^>]*>/i, `<meta name="twitter:image" content="${image}" data-rh="true">`]
     );
   }
+  const base = sourceHtml.replace(/<title>[^<]*<\/title>/i, `<title>${t}</title>`);
   return tags.reduce(
     (html, [pattern, markup]) => replaceOrInsertHeadTag(html, pattern, markup),
-    sourceHtml.replace(/<title>[^<]*<\/title>/i, `<title>${t}</title>`)
+    lang ? base.replace(/<html lang="[^"]*"/i, `<html lang="${lang}"`) : base
   );
 }
 
@@ -146,25 +147,46 @@ for (const route of localizedLegalRoutes) {
 }
 
 const publishedPosts = loadPublishedPosts();
-fs.writeFileSync(path.join(buildDir, 'blog', 'index.html'), buildBlogHtml(indexHtml, {
-  title: 'Blog | Elier Loya',
-  description: 'Cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.',
-  canonical: 'https://elelier.com/blog/',
-  type: 'website',
-}));
-for (const post of publishedPosts) {
-  const copy = post.es;
-  const routeDir = path.join(buildDir, 'blog', post.slug);
-  fs.mkdirSync(routeDir, { recursive: true });
-  const image = post.ogImage || post.cover;
-  fs.writeFileSync(path.join(routeDir, 'index.html'), buildBlogHtml(indexHtml, {
-    title: `${copy.title} | Elier Loya`,
-    description: copy.summary,
-    canonical: `https://elelier.com/blog/${post.slug}/`,
-    image: image ? `https://elelier.com${image}` : undefined,
-    imageAlt: copy.title,
-    type: 'article',
+const blogLocales = [
+  { prefix: '', lang: null, robots: 'index,follow' },
+  { prefix: 'en', lang: 'en', robots: 'noindex,follow' },
+  { prefix: 'pt-br', lang: 'pt-BR', robots: 'noindex,follow' },
+];
+const blogDescriptions = {
+  '': 'Cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.',
+  en: 'How I think when a process gets stuck, how I decide what is worth building, and what I learn when someone uses what I made.',
+  'pt-br': 'Como penso quando um processo trava, como decido o que vale a pena construir e o que aprendo quando alguém usa o que eu fiz.',
+};
+for (const { prefix, lang, robots } of blogLocales) {
+  const urlBase = prefix ? `https://elelier.com/${prefix}/blog/` : 'https://elelier.com/blog/';
+  const listDir = path.join(buildDir, prefix, 'blog');
+  fs.mkdirSync(listDir, { recursive: true });
+  fs.writeFileSync(path.join(listDir, 'index.html'), buildBlogHtml(indexHtml, {
+    title: 'Blog | Elier Loya',
+    description: blogDescriptions[prefix],
+    canonical: 'https://elelier.com/blog/',
+    url: urlBase,
+    type: 'website',
+    robots,
+    lang,
   }));
+  for (const post of publishedPosts) {
+    const copy = (prefix && post[prefix]) || post.es;
+    const routeDir = path.join(listDir, post.slug);
+    fs.mkdirSync(routeDir, { recursive: true });
+    const image = post.ogImage || post.cover;
+    fs.writeFileSync(path.join(routeDir, 'index.html'), buildBlogHtml(indexHtml, {
+      title: `${copy.title} | Elier Loya`,
+      description: copy.summary,
+      canonical: `https://elelier.com/blog/${post.slug}/`,
+      url: `${urlBase}${post.slug}/`,
+      image: image ? `https://elelier.com${image}` : undefined,
+      imageAlt: copy.title,
+      type: 'article',
+      robots,
+      lang,
+    }));
+  }
 }
 
 const root404Path = path.join(buildDir, '404.html');

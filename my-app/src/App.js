@@ -252,6 +252,20 @@ function App({ initialLanguage }) {
                     })}
                   />
                   <Route path="/blog/:slug" element={<BlogPost />} />
+                  {[['/en', 'en_US'], ['/pt-br', 'pt_BR']].map(([prefix, locale]) => (
+                    <React.Fragment key={`blog-${prefix}`}>
+                      <Route
+                        path={`${prefix}/blog`}
+                        element={renderPublicAliasRoute(<Blog />, {
+                          route: '/blog',
+                          pathname: '/blog/',
+                          robots: 'noindex,follow',
+                          locale,
+                        })}
+                      />
+                      <Route path={`${prefix}/blog/:slug`} element={<BlogPost />} />
+                    </React.Fragment>
+                  ))}
                   <Route
                     path="/entradas/2408_IA_Transforma_ecommerce"
                     element={renderPrivateRoute(<InternalRoutePlaceholder />, {

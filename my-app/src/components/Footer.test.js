@@ -116,7 +116,7 @@ describe('Footer', () => {
     const labels = Array.from(container.querySelectorAll('.footer-links a'))
       .map((link) => link.textContent.trim());
 
-    expect(labels.slice(0, 9)).toEqual([
+    expect(labels.slice(0, 10)).toEqual([
       'Inicio',
       'Soluciones',
       'Casos reales',
@@ -124,6 +124,7 @@ describe('Footer', () => {
       'Sobre Mí',
       'Carrera',
       'Contacto',
+      'Blog',
       'Privacidad',
       'Términos'
     ]);
