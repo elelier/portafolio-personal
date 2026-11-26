@@ -77,7 +77,7 @@ const BLOG_COPY = {
     spanishNotice: 'Por enquanto, este artigo está disponível apenas em espanhol.',
     authorRole: 'Engenheiro industrial e de sistemas. Transformo processos complexos em soluções que realmente funcionam.',
     endTitle: 'Você se reconheceu nesta história?',
-    endText: 'Me conte onde seu processo está travando e vamos olhar juntos.',
+    endText: 'Me conta onde seu processo está travando e a gente olha junto.',
     more: 'Continue lendo',
     progress: 'Progresso de leitura',
   },

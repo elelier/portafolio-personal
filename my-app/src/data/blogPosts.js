@@ -22,11 +22,20 @@ const blogPosts = [
     tags: ['Producto', 'SeVa', 'Historias'],
     cover: '/images/blog/seva/portada.webp',
     ogImage: '/images/blog/seva/portada-og.jpg',
-    product: { name: 'SeVa', url: 'https://seva-7x5.pages.dev/', icon: '/images/blog/seva-icon.png' },
+    product: {
+      name: 'SeVa',
+      url: 'https://seva.elelier.com/',
+      icon: '/images/blog/seva-icon.png',
+      tryText: {
+        es: 'SeVa ya está en línea. Entra con tu cuenta de Google y crea tu propio catálogo; tú decides a quién invitas.',
+        en: 'SeVa is live. Sign in with Google and create your own catalog; you decide who gets an invite.',
+        'pt-br': 'O SeVa já está no ar. Entre com sua conta Google e crie seu próprio catálogo; você decide quem convidar.',
+      },
+    },
     es: {
       title: 'Lo que aprendí cuando me tocó vender mis cosas con mi propia app',
       summary:
-        'Ilse y yo nos mudamos a São Paulo. De pronto cada mueble del departamento era una decisión pendiente. Así nació SeVa, y así descubrí lo que no sabía de mi propio producto.',
+        'Ilse y yo nos vamos a mudar a São Paulo. De pronto cada mueble del departamento era una decisión pendiente. Así nació SeVa, y así descubrí lo que no sabía de mi propio producto.',
       body: `![Portada de SeVa: catálogo privado con acceso por invitación, con cajas de mudanza, libros, una taza y una guitarra](/images/blog/seva/portada.webp "SeVa: objetos con historia para vender, regalar o apartar entre familia y amigos.")
 
 Ilse y yo nos vamos a vivir a São Paulo. Cuando esa posibilidad empezó a convertirse en un plan real, con fechas, presupuestos y pendientes, cambió algo que no esperaba: la manera en que veía nuestro departamento.
@@ -43,7 +52,7 @@ Lo cansado es todo lo demás. Las fotos dispersas en el celular. Escribir la mis
 
 El problema no era conseguir a alguien interesado. Era administrar el proceso completo sin perder el control.
 
-Como ingeniero tengo esa manía de buscar cómo simplificar las cosas. Y como me encanta hacer productos digitales, vi la oportunidad de construir algo que yo mismo iba a usar. Así nació [SeVa](https://seva-7x5.pages.dev): un lugar para tomar fotos de tus cosas, darle a cada una su ficha, compartirlas con gente de confianza y saber en todo momento quién está interesado, qué está apartado, qué se vendió y qué falta entregar.
+Como ingeniero tengo esa manía de buscar cómo simplificar las cosas. Y como me encanta hacer productos digitales, vi la oportunidad de construir algo que yo mismo iba a usar. Así nació [SeVa](https://seva.elelier.com): un lugar para tomar fotos de tus cosas, darle a cada una su ficha, compartirlas con gente de confianza y saber en todo momento quién está interesado, qué está apartado, qué se vendió y qué falta entregar.
 
 La idea de fondo es sencilla: que las cosas que ya no necesitamos encuentren una nueva vida con alguien más.
 
@@ -90,7 +99,7 @@ Usarla me cambió la lista de prioridades. Algunas cosas ya están en la app; ot
 - **No perder tu lugar** cuando regresas de ver un objeto al catálogo.
 - **Captura rápida.** Cuando tienes decenas de cosas por registrar, no quieres llenar veinte campos por cada una. Tomas las fotos, guardas y sigues. Los detalles pueden esperar.
 
-![Ficha de un florero en SeVa con fotos, precio, unidades disponibles y los botones Me interesa, Preguntar y Apartar](/images/blog/seva/app-ficha-objeto.webp "La ficha de cada objeto, desde el lado del invitado.")
+![Ficha de un florero en SeVa con fotos, precio, unidades disponibles y los botones Me interesa, Preguntar y Apartar](/images/blog/seva/app-ficha-objeto-recorte.webp "La ficha de cada objeto, desde el lado del invitado.")
 
 Hubo otra lección menos técnica y más incómoda. Algunas pantallas que ya había aprobado en el prototipo, cuando llegaron a la app real, no se parecían lo suficiente a lo que había diseñado. Funcionaban, pero no se sentían bien. Una app que funciona no es lo mismo que una app agradable de usar, y tuve que cambiar la forma en que revisaba que la experiencia fuera la que imaginé.
 
@@ -122,7 +131,7 @@ Irnos a Brasil es mucho más que cambiar de país. Ilse y yo queremos más liber
 
 Todavía no sabemos todo lo que nos vamos a llevar. Pero me gusta pensar que esta mudanza es una oportunidad para elegir con más conciencia qué conservar. Los objetos pueden acompañarnos durante una etapa de la vida sin tener que acompañarnos en todas las siguientes.
 
-Si estás por mudarte o quieres liberar espacio y te late probarla, SeVa está en [seva-7x5.pages.dev](https://seva-7x5.pages.dev). Y si en tu operación hay un proceso que se ve sencillo en el diagrama pero se complica en cuanto alguien lo usa de verdad, cuéntame dónde se está atorando. Me encantaría escucharte.`,
+Si estás por mudarte o quieres liberar espacio y te late probarla, SeVa está en [seva.elelier.com](https://seva.elelier.com). Y si en tu operación hay un proceso que se ve sencillo en el diagrama pero se complica en cuanto alguien lo usa de verdad, cuéntame dónde se está atorando. Me encantaría escucharte.`,
     },
     en: {
       title: 'What I learned when I had to sell my things with my own app',
@@ -133,7 +142,7 @@ Si estás por mudarte o quieres liberar espacio y te late probarla, SeVa está e
 
 Ilse and I are moving to São Paulo. When that possibility started turning into a real plan, with dates, budgets and to-dos, something changed that I didn't expect: the way I looked at our apartment.
 
-The furniture, the appliances, the desks, the chairs, the tables, the fridge, my 34-inch ultrawide monitor and a pile of small things we bought over the years. Before, they were simply our home. Suddenly, each one was a question: do we take it?, sell it?, give it away?, store it?
+The furniture, the appliances, the desks, the chairs, the tables, the fridge, my 34-inch ultrawide monitor and a pile of small things we bought over the years. Before, they were simply our home. Suddenly, each one was a question: do we take it, sell it, give it away or store it?
 
 We weren't just emptying an apartment. We were organizing a life transition, with many decisions at once. And I didn't want getting rid of everything to become another full-time job.
 
@@ -145,7 +154,7 @@ What wears you out is everything else. Photos scattered across your phone. Writi
 
 The problem wasn't getting someone interested. It was managing the whole process without losing control.
 
-As an engineer, I have this habit of looking for ways to simplify things. And since I love building digital products, I saw the chance to build something I'd use myself. That's how [SeVa](https://seva-7x5.pages.dev) was born: a place to take photos of your things, give each one its own page, share them with people you trust and always know who's interested, what's on hold, what's sold and what still needs to be delivered.
+As an engineer, I have this habit of looking for ways to simplify things. And since I love building digital products, I saw the chance to build something I'd use myself. That's how [SeVa](https://seva.elelier.com) was born: a place to take photos of your things, give each one its own page, share them with people you trust and always know who's interested, what's on hold, what's sold and what still needs to be delivered.
 
 The idea underneath is simple: that the things we no longer need find a new life with someone else.
 
@@ -170,7 +179,7 @@ Then I started using it to actually sell our things, and the detail turned out t
 
 There's one moment I remember well. We had several items on hold. I closed some of those holds as completed sales. Later I noticed those same items were still published. And available.
 
-Sold for me, available for anyone who opened the catalog.
+Sold, as far as I knew. Available for anyone who opened the catalog.
 
 If someone already bought something, why can another person still think they can take it home? That's exactly the kind of confusion SeVa exists to prevent, and SeVa was causing it. It forced me to rethink, from the ground up, how holds, sales and inventory relate to each other.
 
@@ -192,7 +201,7 @@ Using it changed my list of priorities. Some of these are already in the app; ot
 - **Not losing your place** when you go back from an item to the catalog.
 - **Quick capture.** When you have dozens of things to register, you don't want to fill twenty fields for each one. Take the photos, save, keep going. The details can wait.
 
-![A vase's page in SeVa with photos, price, available units and the buttons I'm interested, Ask and Hold](/images/blog/seva/app-ficha-objeto.webp "Each item's page, from the guest's side.")
+![A vase's page in SeVa with photos, price, available units and the buttons I'm interested, Ask and Hold](/images/blog/seva/app-ficha-objeto-recorte.webp "Each item's page, from the guest's side.")
 
 There was another lesson, less technical and more uncomfortable. Some screens I had already approved in the prototype didn't look close enough to my design once they reached the real app. They worked, but they didn't feel right. An app that works isn't the same as an app that's pleasant to use, and I had to change how I checked that the experience was the one I had imagined.
 
@@ -224,7 +233,7 @@ Moving to Brazil is much more than changing countries. Ilse and I want more free
 
 We still don't know everything we'll take. But I like to think of this move as a chance to choose more consciously what to keep. Objects can be with us for one stage of life without having to come along for all the next ones.
 
-If you're about to move or want to free up space and feel like trying it, SeVa is at [seva-7x5.pages.dev](https://seva-7x5.pages.dev). And if your operation has a process that looks simple on the diagram but gets complicated as soon as someone actually uses it, tell me where it's getting stuck. I'd love to hear from you.`,
+If you're about to move or want to free up space and feel like trying it, SeVa is at [seva.elelier.com](https://seva.elelier.com). And if your operation has a process that looks simple on the diagram but gets complicated as soon as someone actually uses it, tell me where it's getting stuck. I'd love to hear from you.`,
     },
     'pt-br': {
       title: 'O que aprendi quando tive que vender minhas coisas com meu próprio app',
@@ -247,7 +256,7 @@ O que cansa é todo o resto. As fotos espalhadas no celular. Escrever a mesma de
 
 O problema não era conseguir alguém interessado. Era administrar o processo inteiro sem perder o controle.
 
-Como engenheiro, tenho essa mania de procurar como simplificar as coisas. E como adoro criar produtos digitais, vi a oportunidade de construir algo que eu mesmo ia usar. Assim nasceu o [SeVa](https://seva-7x5.pages.dev): um lugar para fotografar suas coisas, dar a cada uma a sua ficha, compartilhá-las com pessoas de confiança e saber o tempo todo quem está interessado, o que está reservado, o que foi vendido e o que falta entregar.
+Como engenheiro, tenho essa mania de procurar como simplificar as coisas. E como adoro criar produtos digitais, vi a oportunidade de construir algo que eu mesmo ia usar. Assim nasceu o [SeVa](https://seva.elelier.com): um lugar para fotografar suas coisas, dar a cada uma a sua ficha, compartilhá-las com pessoas de confiança e saber o tempo todo quem está interessado, o que está reservado, o que foi vendido e o que falta entregar.
 
 A ideia de fundo é simples: que as coisas de que não precisamos mais encontrem uma nova vida com outra pessoa.
 
@@ -294,7 +303,7 @@ Usar o app mudou minha lista de prioridades. Algumas coisas já estão nele; out
 - **Não perder o lugar** quando você volta de um objeto para o catálogo.
 - **Cadastro rápido.** Quando você tem dezenas de coisas para registrar, não quer preencher vinte campos para cada uma. Tira as fotos, salva e segue. Os detalhes podem esperar.
 
-![Ficha de um vaso no SeVa com fotos, preço, unidades disponíveis e os botões Tenho interesse, Perguntar e Reservar](/images/blog/seva/app-ficha-objeto.webp "A ficha de cada objeto, do lado do convidado.")
+![Ficha de um vaso no SeVa com fotos, preço, unidades disponíveis e os botões Tenho interesse, Perguntar e Reservar](/images/blog/seva/app-ficha-objeto-recorte.webp "A ficha de cada objeto, do lado do convidado.")
 
 Teve outra lição, menos técnica e mais incômoda. Algumas telas que eu já tinha aprovado no protótipo, quando chegaram ao app real, não se pareciam o suficiente com o que eu tinha desenhado. Funcionavam, mas não pareciam certas. Um app que funciona não é o mesmo que um app agradável de usar, e tive que mudar o jeito como eu conferia se a experiência era a que eu tinha imaginado.
 
@@ -306,7 +315,7 @@ Tem uma coisa que está cada vez mais clara para mim: não quero que o SeVa subs
 
 Um app pode ajudar a organizar o inventário, registrar solicitações, lembrar compromissos e saber o que está pendente. Mas combinar uma entrega muitas vezes se resolve melhor com uma mensagem. Nem tudo precisa de mais um botão, uma automação ou um fluxo de dez passos.
 
-Meu objetivo não é que as pessoas passem o maior tempo possível dentro do SeVa. É que resolvam o que precisam com o mínimo de atrito, e depois vão viver a vida.
+Meu objetivo não é que as pessoas passem o maior tempo possível dentro do SeVa. É que resolvam o que precisam com o mínimo de atrito, e depois sigam com a vida.
 
 ## O que vem pela frente
 
@@ -316,7 +325,7 @@ Hoje o SeVa é um app web onde você pode montar catálogos das suas coisas, com
 
 Primeiro quero que ele resolva bem o nosso caso: uma mudança com dezenas de objetos e pessoas interessadas. Depois, gostaria de testá-lo com outras pessoas passando por algo parecido: uma mudança, um bazar de garagem ou simplesmente a vontade de liberar espaço. Não quero transformá-lo cedo demais em mais um marketplace gigante. Prefiro que cresça a partir de necessidades reais.
 
-## O que, sim, vamos levar
+## O que a gente vai levar
 
 A mudança me fez ver quantas coisas acumulamos sem perceber. Umas têm uma função, outras têm lembranças, e outras continuam com a gente só porque nunca paramos para decidir o que fazer com elas.
 
@@ -326,7 +335,7 @@ Ir para o Brasil é muito mais do que mudar de país. Eu e a Ilse queremos mais 
 
 Ainda não sabemos tudo o que vamos levar. Mas gosto de pensar que esta mudança é uma oportunidade de escolher com mais consciência o que guardar. Os objetos podem nos acompanhar durante uma etapa da vida sem precisar nos acompanhar em todas as seguintes.
 
-Se você está prestes a se mudar ou quer liberar espaço e tem vontade de testar, o SeVa está em [seva-7x5.pages.dev](https://seva-7x5.pages.dev). E se na sua operação existe um processo que parece simples no diagrama mas se complica assim que alguém o usa de verdade, me conta onde ele está travando. Vou adorar te ouvir.`,
+Se você está prestes a se mudar ou quer liberar espaço e tem vontade de testar, o SeVa está em [seva.elelier.com](https://seva.elelier.com). E se na sua operação existe um processo que parece simples no diagrama mas se complica assim que alguém o usa de verdade, me conta onde ele está travando. Vou adorar te ouvir.`,
     },
   },
   {

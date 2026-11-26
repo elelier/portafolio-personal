@@ -88,6 +88,16 @@
   background: color-mix(in srgb, var(--blog-accent) 85%, #fff);
 }
 
+/* En tema claro el acento es verde oscuro: el texto va en blanco para cumplir AA. */
+[data-theme="light"] .blog-button--primary,
+[data-theme="light"] .blog-card__badge {
+  color: #fff;
+}
+
+[data-theme="light"] .blog-button--primary:hover {
+  background: color-mix(in srgb, var(--blog-accent) 85%, #000);
+}
+
 .blog-page a:focus-visible,
 .post-page a:focus-visible,
 .post-page button:focus-visible {
@@ -650,6 +660,17 @@
   border: 1px solid var(--blog-line);
   border-radius: 28px;
   box-shadow: var(--ui-card-shadow);
+}
+
+/* Recorte de una pantalla (no la pantalla completa): ancho natural, sin forzar la altura */
+.entrada-figura--celular img[src*="-recorte"] {
+  width: min(100%, 390px);
+  height: auto;
+}
+
+.entrada-figura__ampliar {
+  display: block;
+  cursor: zoom-in;
 }
 
 .post > .entrada-figura--celular {
