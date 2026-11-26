@@ -1,134 +1,91 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
-import { FaRocket, FaUserAlt, FaCogs, FaCode, FaEnvelope, FaTimes, FaPaperPlane, FaRobot } from 'react-icons/fa';
+import { FaLightbulb, FaChartLine, FaCogs, FaUserAlt, FaBriefcase, FaEnvelope, FaTimes, FaPaperPlane, FaRobot } from 'react-icons/fa';
+import { getNavigationContent } from '../config/navigation';
+import { homePathFor, isLocalizedHome } from '../i18n/locales';
 import { SystemMessage, UserMessage } from '../utils/MessageSystem';
 import { getBenefitResponse } from '../utils/benefitResponses';
 import TypingIndicator from './TypingIndicator';
 import ChatOptionButton from './ChatOptionButton';
-import geminiService from '../services/geminiService';
+import geminiService, { CONTACT_EMAIL } from '../services/geminiService';
 import securityService from '../services/securityService';
 import '../styles/components/ChatModal.css';
 
+
+// Accesos rápidos: mismas secciones (id y nombre) que la navegación del sitio.
+const SECTION_SHORTCUTS = [
+  { key: 'soluciones', icon: FaLightbulb, color: 'blue' },
+  { key: 'casosReales', icon: FaChartLine, color: 'cyan' },
+  { key: 'comoTrabajo', icon: FaCogs, color: 'yellow' },
+  { key: 'sobreMi', icon: FaUserAlt, color: 'orange' },
+  { key: 'carrera', icon: FaBriefcase, color: 'purple' },
+  { key: 'contact', icon: FaEnvelope, color: 'green' }
+];
+
+export const getSectionShortcuts = (language) => {
+  const nav = getNavigationContent(language);
+  const items = Object.fromEntries([...nav.primary, ...nav.secondary].map((item) => [item.key, item]));
+  items.contact = { key: 'contact', label: nav.footerContact, target: 'contacto' };
+  return SECTION_SHORTCUTS.map((shortcut) => ({ ...shortcut, label: items[shortcut.key].label, target: items[shortcut.key].target }));
+};
+
 const translations = {
   es: {
-    title: "Chatbots con IA",
-    subtitle: "Potencia tu Negocio 24/7",
-    inputPlaceholder: "Escribe un mensaje...",
-    sendButton: "Enviar",
-    closeButton: "Cerrar chat",
-    openButton: "Abrir chat",
-    benefits: "Beneficios",
-    aboutMe: "Sobre mí",
-    skills: "Habilidades",
-    projects: "Proyectos",
-    contact: "Contacto",
-    chatWithAI: "Chat con IA",
-    typing: {
-      writing: "Escribiendo...",
-      processing: "Procesando...",
-      analyzing: "Analizando...",
-      thinking: "Pensando...",
-      calculating: "Calculando...",
-      redirecting: "Redirigiendo..."
-    },
-    sections: {
-      benefits: "la sección de Beneficios",
-      aboutMe: "la sección Sobre Mí",
-      skills: "la sección de Habilidades",
-      projects: "la sección de Proyectos",
-      contact: "la sección de Contacto"
-    },
-    closeMessage: "Puedes cerrar esta ventana haciendo clic en X, <close_action>aquí</close_action> o en cualquier lugar fuera",
-    aboutMeResponse: 'Soy un desarrollador web con experiencia en tecnologías como React, Node.js y MongoDB.',
-    skillsResponse: 'Tengo habilidades en desarrollo web, diseño UX/UI y resolución de problemas.',
-    projectsResponse: 'He trabajado en proyectos de e-commerce, aplicaciones móviles y sitios web institucionales.',
-    contactResponse: 'Puedes contactarme a través de mi sitio web o redes sociales.',
-    redirectMessages: {
-      nowOn: (section) => `Ahora estás en ${section}.`,
-      close: 'Puedes cerrar esta ventana haciendo clic en <span style="color: var(--color-accent)">X</span>, <span style="color: var(--color-accent)">aquí</span> o en cualquier lugar fuera'
-    }
+    title: 'Asistente con IA',
+    subtitle: 'Pregúntame sobre el trabajo de Elier',
+    inputPlaceholder: 'Escribe un mensaje...',
+    sendButton: 'Enviar',
+    closeButton: 'Cerrar chat',
+    openButton: 'Abrir chat',
+    goTo: (label) => `Ir a ${label}`,
+    typing: { writing: 'Escribiendo...', thinking: 'Pensando...' },
+    welcome: (ai) => `¡Hola! Soy el asistente virtual de <b>Elier Loya</b> ${ai ? '⚡ con IA' : '🤖'}.`,
+    help: 'Elier transforma procesos complicados en soluciones que realmente funcionan: diagnóstico operativo, diseño de producto e implementación. ¿Qué te gustaría saber? 💡',
+    quickOptions: 'Usa los botones de abajo para ir a una sección del sitio o escríbeme tu pregunta:',
+    navigated: (label) => `✨ Te llevé a <b>${label}</b>.`,
+    contactNote: `Escríbele a <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> o usa el formulario.`
   },
   en: {
-    title: "AI Chatbots",
-    subtitle: "Power Your Business 24/7",
-    inputPlaceholder: "Type a message...",
-    sendButton: "Send",
-    closeButton: "Close chat",
-    openButton: "Open chat",
-    benefits: "Benefits",
-    aboutMe: "About me",
-    skills: "Skills",
-    projects: "Projects",
-    contact: "Contact",
-    chatWithAI: "Chat with AI",
-    typing: {
-      writing: "Writing...",
-      processing: "Processing...",
-      analyzing: "Analyzing...",
-      thinking: "Thinking...",
-      calculating: "Calculating...",
-      redirecting: "Redirecting..."
-    },
-    sections: {
-      benefits: "Benefits section",
-      aboutMe: "About Me section",
-      skills: "Skills section",
-      projects: "Projects section",
-      contact: "Contact section"
-    },
-    closeMessage: "You can close this window by clicking X, <close_action>here</close_action> or anywhere outside",
-    aboutMeResponse: 'I am a web developer with experience in technologies like React, Node.js, and MongoDB.',
-    skillsResponse: 'I have skills in web development, UX/UI design, and problem-solving.',
-    projectsResponse: 'I have worked on e-commerce projects, mobile applications, and institutional websites.',
-    contactResponse: 'You can contact me through my website or social networks.',
-    redirectMessages: {
-      nowOn: (section) => `You are now on the ${section}.`,
-      close: 'You can close this window by clicking <span style="color: var(--color-accent)">X</span>, <span style="color: var(--color-accent)">here</span> or anywhere outside'
-    }
+    title: 'AI assistant',
+    subtitle: "Ask me about Elier's work",
+    inputPlaceholder: 'Type a message...',
+    sendButton: 'Send',
+    closeButton: 'Close chat',
+    openButton: 'Open chat',
+    goTo: (label) => `Go to ${label}`,
+    typing: { writing: 'Writing...', thinking: 'Thinking...' },
+    welcome: (ai) => `Hi! I'm <b>Elier Loya's</b> virtual assistant ${ai ? '⚡ AI-powered' : '🤖'}.`,
+    help: 'Elier turns complex processes into solutions that actually work: operational diagnosis, product design and implementation. What would you like to know? 💡',
+    quickOptions: 'Use the buttons below to jump to a section of the site, or type your question:',
+    navigated: (label) => `✨ I took you to <b>${label}</b>.`,
+    contactNote: `Email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> or use the form.`
   },
   'pt-br': {
     title: 'Assistente com IA',
-    subtitle: 'Tecnologia aplicada a desafios reais',
+    subtitle: 'Pergunte sobre o trabalho de Elier',
     inputPlaceholder: 'Digite uma mensagem...',
     sendButton: 'Enviar',
     closeButton: 'Fechar chat',
     openButton: 'Abrir chat',
-    benefits: 'Benefícios',
-    aboutMe: 'Sobre mim',
-    skills: 'Habilidades',
-    projects: 'Projetos',
-    contact: 'Contato',
-    chatWithAI: 'Conversar com IA',
-    typing: {
-      writing: 'Escrevendo...',
-      processing: 'Processando...',
-      analyzing: 'Analisando...',
-      thinking: 'Pensando...',
-      calculating: 'Calculando...',
-      redirecting: 'Redirecionando...'
-    },
-    sections: {
-      benefits: 'Seção de benefícios',
-      aboutMe: 'Seção Sobre mim',
-      skills: 'Seção de habilidades',
-      projects: 'Seção de projetos',
-      contact: 'Seção de contato'
-    },
-    closeMessage: 'Você pode fechar esta janela clicando em X, <close_action>aqui</close_action> ou fora da janela',
-    aboutMeResponse: 'Sou Elier, especialista em produto digital, operações e transformação digital.',
-    skillsResponse: 'Trabalho com desenvolvimento digital, UX/UI, automação e análise de dados.',
-    projectsResponse: 'Desenvolvi soluções digitais para operações, comércio eletrônico e serviços.',
-    contactResponse: 'Você pode falar comigo pelo formulário ou pelas redes sociais.',
-    redirectMessages: {
-      nowOn: (section) => `Agora você está em ${section}.`,
-      close: 'Você pode fechar esta janela clicando em <span style="color: var(--color-accent)">X</span>, <span style="color: var(--color-accent)">aqui</span> ou fora da janela'
-    }
+    goTo: (label) => `Ir para ${label}`,
+    typing: { writing: 'Escrevendo...', thinking: 'Pensando...' },
+    welcome: (ai) => `Olá! Sou o assistente virtual de <b>Elier Loya</b> ${ai ? '⚡ com IA' : '🤖'}.`,
+    help: 'Elier transforma processos complexos em soluções que realmente funcionam: diagnóstico operacional, design de produto e implementação. O que você quer saber? 💡',
+    quickOptions: 'Use os botões abaixo para ir a uma seção do site ou escreva sua pergunta:',
+    navigated: (label) => `✨ Levei você para <b>${label}</b>.`,
+    contactNote: `Escreva para <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> ou use o formulário.`
   }
 };
 
+const getTranslations = (language) => translations[language] || translations.es;
+
 const ChatModal = () => {
   const { language } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const t = getTranslations(language);
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -168,7 +125,7 @@ const ChatModal = () => {
     setMessages(prev => [...prev, new UserMessage(sanitizedContent)]);
     
     // Mostrar indicador de typing
-    await showTypingIndicator(translations[language].typing.thinking);
+    await showTypingIndicator(t.typing.thinking);
     
     try {
       // Intentar obtener respuesta de Gemini AI
@@ -179,13 +136,8 @@ const ChatModal = () => {
         systemMessage.isGeminiPowered = true;
       }
       setMessages(prev => [...prev, systemMessage]);
-    } catch (error) {
-      console.error('Error with Gemini AI:', error);
-      // Fallback a respuesta simple si falla Gemini
-      const fallbackResponse = language === 'es' 
-        ? `Gracias por tu mensaje: "${content}". Te ayudaré a explorar el portafolio de Elier.`
-        : language === 'pt-br' ? `Obrigado pela mensagem: "${content}". Vou ajudar você a conhecer o portfólio de Elier.` : `Thank you for your message: "${content}". I'll help you explore Elier's portfolio.`;
-      setMessages(prev => [...prev, new SystemMessage(fallbackResponse)]);
+    } catch {
+      setMessages(prev => [...prev, new SystemMessage(geminiService.getFallbackResponse(sanitizedContent, language, messages))]);
     }
   };
 
@@ -228,25 +180,15 @@ const ChatModal = () => {
     const initializeChat = async () => {
       if (isOpen && messages.length === 0) {
         // Primer mensaje
-        await showTypingIndicator(translations[language].typing.writing, 1000);
+        await showTypingIndicator(getTranslations(language).typing.writing, 1000);
         const geminiStatus = await geminiService.initialize();
-        const welcomeMessage = language === 'es'
-          ? `¡Hola! Soy el asistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ con IA' : '🤖'}.`
-          : language === 'pt-br' ? `Olá! Sou o assistente virtual de <b>Elier Loya</b> ${geminiStatus ? '⚡ com IA' : '🤖'}.` : `Hi! I'm <b>Elier Loya's</b> virtual assistant ${geminiStatus ? '⚡ AI-powered' : '🤖'}.`;
-        setMessages([new SystemMessage(welcomeMessage)]);
-        
-        // Segundo mensaje
-        await showTypingIndicator(translations[language].typing.writing, 1500);
-        const helpMessage = language === 'es'
-          ? `Estoy aquí para ayudarte a conocer más sobre sus servicios de transformación digital, desarrollo web y análisis de datos. ¿En qué puedo ayudarte? 💻`
-          : language === 'pt-br' ? `Estou aqui para ajudar você a conhecer o trabalho de Elier com transformação digital, produto e operações. Como posso ajudar? 💻` : `I'm here to help you learn more about his digital transformation, web development, and data analysis services. How can I help you? 💻`;
-        setMessages(prev => [...prev, new SystemMessage(helpMessage)]);
+        setMessages([new SystemMessage(getTranslations(language).welcome(geminiStatus))]);
 
-        // Tercer mensaje con opciones de navegación
-        await showTypingIndicator(translations[language].typing.writing, 1000);
-        const quickOptions = language === 'es'
-          ? `Puedes usar los botones de abajo para navegación rápida o simplemente escríbeme lo que necesitas saber:`
-          : language === 'pt-br' ? `Use os botões abaixo para navegar ou escreva o que você quer saber:` : `You can use the buttons below for quick navigation or just write me what you need to know:`;
+        await showTypingIndicator(getTranslations(language).typing.writing, 1500);
+        setMessages(prev => [...prev, new SystemMessage(getTranslations(language).help)]);
+
+        await showTypingIndicator(getTranslations(language).typing.writing, 1000);
+        const quickOptions = getTranslations(language).quickOptions;
         setMessages(prev => [...prev, new SystemMessage(quickOptions)]);
       }
     };
@@ -261,7 +203,7 @@ const ChatModal = () => {
         : language === 'pt-br' ? `Quero saber mais sobre ${benefitText}` : `Tell me more about ${benefitText}`;
       
       setMessages(prev => [...prev, new UserMessage(message)]);
-      await showTypingIndicator(translations[language].typing.thinking);
+      await showTypingIndicator(getTranslations(language).typing.thinking);
 
       const benefitResponse = getBenefitResponse(benefitText, language);
       let response = '';
@@ -333,27 +275,16 @@ const ChatModal = () => {
     };
   }, [isOpen]);
 
-  const handleSectionRequest = async (sectionName) => {
-    const message = language === 'es' 
-      ? `Cuéntame sobre ${sectionName}`
-      : language === 'pt-br' ? `Conte mais sobre ${sectionName}` : `Tell me about ${sectionName}`;
-    
-    setMessages(prev => [...prev, new UserMessage(message)]);
-    await showTypingIndicator(translations[language].typing.thinking);
-    
-    try {
-      const response = await geminiService.sendMessage(message, language, messages);
-      const systemMessage = new SystemMessage(response);
-      if (geminiService.isGeminiAvailable()) {
-        systemMessage.isGeminiPowered = true;
-      }
-      setMessages(prev => [...prev, systemMessage]);
-    } catch (error) {
-      console.error('Error with section request:', error);
-      const fallbackResponse = language === 'es'
-        ? `Te cuento sobre ${sectionName}: Esta sección contiene información relevante sobre la experiencia profesional de Elier. Te recomiendo explorar el portafolio para más detalles.`
-        : language === 'pt-br' ? `Sobre ${sectionName}: esta seção mostra a experiência profissional de Elier. Explore o portfólio para saber mais.` : `About ${sectionName}: This section contains relevant information about Elier's professional experience. I recommend exploring the portfolio for more details.`;
-      setMessages(prev => [...prev, new SystemMessage(fallbackResponse)]);
+  const goToSection = ({ label, target }) => {
+    const homePath = homePathFor(language);
+    setMessages(prev => [...prev, new UserMessage(t.goTo(label)), new SystemMessage(target === 'contacto' ? `${t.navigated(label)} ${t.contactNote}` : t.navigated(label))]);
+    setIsOpen(false);
+    const section = isLocalizedHome(location.pathname) ? document.getElementById(target) : null;
+    if (section) {
+      window.history.replaceState(null, '', `${homePath}#${target}`);
+      scrollIntoViewWithMotionPreference(section, { block: 'start' });
+    } else {
+      navigate(`${homePath}#${target}`);
     }
   };
 
@@ -362,7 +293,7 @@ const ChatModal = () => {
       <button 
         className="chat-button"
         onClick={toggleChat}
-        aria-label={isOpen ? translations[language].closeButton : translations[language].openButton}
+        aria-label={isOpen ? t.closeButton : t.openButton}
       >
         <FaRobot />
       </button>
@@ -375,14 +306,14 @@ const ChatModal = () => {
                 <FaRobot className="header-icon" />
               </div>
               <div className="header-text">
-                <h3>{translations[language].title}</h3>
-                <p>{translations[language].subtitle}</p>
+                <h3>{t.title}</h3>
+                <p>{t.subtitle}</p>
               </div>
             </div>
             <button
               onClick={toggleChat}
               className="close-button"
-              aria-label={translations[language].closeButton}
+              aria-label={t.closeButton}
             >
               <FaTimes />
             </button>
@@ -406,43 +337,22 @@ const ChatModal = () => {
 
           <div className="chat-bottom-container">
             <div className="chat-options-grid">
-              <ChatOptionButton
-                icon={FaUserAlt}
-                label={translations[language].sections.aboutMe}
-                color="blue"
-                onClick={() => handleSectionRequest(translations[language].aboutMe)}
-              />
-              <ChatOptionButton
-                icon={FaRocket}
-                label={translations[language].sections.benefits}
-                color="cyan"
-                onClick={() => handleSectionRequest(translations[language].benefits)}
-              />
-              <ChatOptionButton
-                icon={FaCogs}
-                label={translations[language].sections.skills}
-                color="yellow"
-                onClick={() => handleSectionRequest(translations[language].skills)}
-              />
-              <ChatOptionButton
-                icon={FaCode}
-                label={translations[language].sections.projects}
-                color="orange"
-                onClick={() => handleSectionRequest(translations[language].projects)}
-              />
-              <ChatOptionButton
-                icon={FaEnvelope}
-                label={translations[language].sections.contact}
-                color="purple"
-                onClick={() => handleSectionRequest(translations[language].contact)}
-              />
+              {getSectionShortcuts(language).map((shortcut) => (
+                <ChatOptionButton
+                  key={shortcut.key}
+                  icon={shortcut.icon}
+                  label={shortcut.label}
+                  color={shortcut.color}
+                  onClick={() => goToSection(shortcut)}
+                />
+              ))}
             </div>
 
             <div className="chat-input-container">
               <input
                 type="text"
                 className="chat-input"
-                placeholder={translations[language].inputPlaceholder}
+                placeholder={t.inputPlaceholder}
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -450,7 +360,7 @@ const ChatModal = () => {
               <button 
                 className="send-button" 
                 onClick={handleSendMessage}
-                aria-label={translations[language].sendButton}
+                aria-label={t.sendButton}
               >
                 <FaPaperPlane />
               </button>

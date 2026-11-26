@@ -40,3 +40,25 @@ describe('geminiService (cliente de /api/chat)', () => {
     expect(global.fetch).toHaveBeenCalledWith('/api/chat', expect.objectContaining({ method: 'GET' }));
   });
 });
+
+describe('respuestas de contacto', () => {
+  afterEach(() => {
+    delete global.fetch;
+  });
+
+  it.each([
+    ['es', '¿Cuál es su correo?'],
+    ['en', 'What is his email?'],
+    ['pt-br', 'Qual é o e-mail de contato?']
+  ])('sin IA da hola@elelier.com (%s)', async (language, question) => {
+    global.fetch = jest.fn().mockRejectedValue(new Error('offline'));
+    const text = await geminiService.sendMessage(question, language, []);
+    expect(text).toContain('mailto:hola@elelier.com');
+  });
+
+  it('enlaza el correo oficial cuando la IA lo menciona, sin permitir HTML del modelo', async () => {
+    global.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true, text: 'Escribe a hola@elelier.com <img src=x>' }) });
+    const text = await geminiService.sendMessage('correo', 'es', []);
+    expect(text).toBe('Escribe a <a href="mailto:hola@elelier.com">hola@elelier.com</a> &lt;img src=x&gt;');
+  });
+});

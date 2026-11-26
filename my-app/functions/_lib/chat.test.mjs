@@ -125,3 +125,14 @@ test('public/_routes.json sends /api/chat to Pages Functions', async () => {
   assert.ok(routes.include.includes('/api/chat'));
   assert.ok(routes.include.includes('/api/contact'));
 });
+
+test('system prompts give the official email and current sections in all three languages', async () => {
+  for (const [language, sections] of [['es', 'Casos reales'], ['en', 'Case studies'], ['pt-br', 'Casos reais']]) {
+    const ai = aiStub();
+    await handleChat(makeRequest({ message: 'contacto', language }), ai.env);
+    const prompt = ai.calls[0].input.messages[0].content;
+    assert.match(prompt, /hola@elelier\.com/);
+    assert.match(prompt, new RegExp(sections));
+    assert.doesNotMatch(prompt, /MongoDB|Full Stack/);
+  }
+});
