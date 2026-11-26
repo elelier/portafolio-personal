@@ -25,13 +25,13 @@ function BlogPost({ posts }) {
   return (
     <article className="entrada">
       <RouteSEO
-        route={`/blog/${post.slug}`}
+        route={`/blog/${post.slug}/`}
         title={`${copy.title} | Elier Loya`}
         description={copy.summary}
-        pathname={`/blog/${post.slug}`}
+        pathname={`/blog/${post.slug}/`}
         robots="index,follow"
         type="article"
-        image={post.cover ? `https://elelier.com${post.cover}` : undefined}
+        image={post.ogImage || post.cover ? `https://elelier.com${post.ogImage || post.cover}` : undefined}
         imageAlt={post.cover ? copy.title : undefined}
       />
       <header className="entrada-header">

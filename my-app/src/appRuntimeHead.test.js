@@ -145,8 +145,8 @@ const routeCases = {
   },
   '/blog': {
     title: 'Blog | Elier Loya',
-    robots: 'noindex,follow',
-    canonical: 'https://elelier.com/',
+    robots: 'index,follow',
+    canonical: 'https://elelier.com/blog/',
     visibleText: 'Blog',
     element: (
       <>

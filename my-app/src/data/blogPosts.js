@@ -9,14 +9,16 @@
 //   **negritas**     -> negritas dentro del texto
 //
 // `draft: true` oculta el post del listado y de su URL pública.
+// `cover` es la imagen del listado; `ogImage` (1200×630 jpg) es la que se ve al compartir el enlace.
+// Al publicar uno nuevo, agrega `/blog/<slug>/` a INDEXABLE_SITEMAP_PATHS y a public/sitemap.xml.
 
 const blogPosts = [
   {
     slug: 'app-rancho-de-mi-papa',
-    date: '2026-12-01',
+    date: '2026-11-26',
     tags: ['Producto', 'MiRancho', 'Historias'],
     cover: '/images/blog/rancho/portada-papa-corral.webp',
-    draft: true,
+    ogImage: '/images/blog/rancho/portada-og.jpg',
     es: {
       title: 'Lo que cambió cuando diseñé una app para el rancho de mi papá',
       summary:

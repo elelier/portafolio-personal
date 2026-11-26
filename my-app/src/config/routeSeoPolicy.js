@@ -1,4 +1,12 @@
-export const INDEXABLE_SITEMAP_PATHS = ['/', '/en/', '/pt-br/', '/privacy-policy/', '/terms-of-service/'];
+export const INDEXABLE_SITEMAP_PATHS = [
+  '/',
+  '/en/',
+  '/pt-br/',
+  '/privacy-policy/',
+  '/terms-of-service/',
+  '/blog/',
+  '/blog/app-rancho-de-mi-papa/',
+];
 
 export const ROUTE_SEO_POLICY = {
   '/': {
@@ -38,8 +46,8 @@ export const ROUTE_SEO_POLICY = {
     title: 'Blog | Elier Loya',
     description:
       'Cómo pienso cuando un proceso se atora, cómo decido qué vale la pena construir y qué aprendo cuando alguien usa lo que hice.',
-    canonicalPath: '/',
-    robots: 'noindex,follow',
+    canonicalPath: '/blog/',
+    robots: 'index,follow',
   },
   '/aionlabs': {
     title: 'Aion Labs | Aion × Elier',
