@@ -51,12 +51,18 @@ Accepted behavior for closed/private/deep routes is a safe redirect to home or a
 
 Set these in Cloudflare Pages only if the deployed behavior requires parity with the current app:
 
-- `REACT_APP_GEMINI_API_KEY` (optional)
 - `REACT_APP_PASSCODE_ARQIDIA`
 - `REACT_APP_PASSCODE_HQCONTROL`
 - `REACT_APP_PASSCODE_ANDAMIOS`
 
 Do not paste real secret values into this repository.
+
+### Chatbot (Gemini vía Pages Function)
+
+- El chat llama a `POST /api/chat` (`functions/api/chat.js`); la Function llama a Gemini y la API key **nunca** llega al navegador.
+- Secret servidor: `GEMINI_API_KEY` (tipo *Secret*, Production y Preview). Opcional: `GEMINI_MODEL` (por defecto `gemini-3.5-flash-lite`).
+- `REACT_APP_GEMINI_API_KEY` quedó obsoleta: eliminarla de Cloudflare y **rotar** la key que estuvo expuesta en el bundle.
+- `GET /api/chat` responde `{ ok, available }` para que el chat sepa si hay IA o usa respuestas locales.
 
 ### Contacto vigente (Cloudflare + Google)
 

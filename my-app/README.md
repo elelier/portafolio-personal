@@ -158,7 +158,7 @@ El portfolio se publica exclusivamente en **Cloudflare Pages** y está accesible
 
 ### Variables de Entorno Requeridas
 ```bash
-REACT_APP_GEMINI_API_KEY=your_gemini_api_key_here  # Para producción
+GEMINI_API_KEY=...  # Secret de Cloudflare Pages (servidor), nunca REACT_APP_*
 ```
 
 ### Monitoreo y Analytics

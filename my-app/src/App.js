@@ -35,11 +35,6 @@ import InternalRoutePlaceholder from './components/InternalRoutePlaceholder';
 import { initializeTheme } from './components/utils/themeUtils';
 import { getMotionAwareScrollBehavior, loadExternalScripts } from './components/utils/generalUtils';
 import { getRouteSeoPolicy } from './config/routeSeoPolicy';
-import './utils/testGemini';
-
-if (process.env.NODE_ENV === 'development') {
-  import('./debug-gemini');
-}
 
 const Blog = lazy(() => import('./components/Blog'));
 
