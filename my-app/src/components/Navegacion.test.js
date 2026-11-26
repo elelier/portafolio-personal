@@ -34,11 +34,11 @@ const renderNavegacion = (language = 'es') => {
 
 const findLinkByText = (container, text) => Array.from(container.querySelectorAll('a')).find((link) => link.textContent.includes(text));
 
-// La navegación lleva el contenido de la sección (sin su padding) justo bajo el menú fijo.
+// En una sección más alta que la pantalla, la navegación lleva su contenido (sin su padding) justo bajo el menú fijo.
 const placeSection = (target, top = 1000) => {
   target.style.paddingTop = '86px';
   target.dataset.top = String(top);
-  target.getBoundingClientRect = () => ({ top, bottom: top + 500, height: 500, left: 0, right: 0, width: 0, x: 0, y: top });
+  target.getBoundingClientRect = () => ({ top, bottom: top + 1500, height: 1500, left: 0, right: 0, width: 0, x: 0, y: top });
 };
 const expectScrolledTo = (target) => {
   expect(window.scrollTo).toHaveBeenCalledWith({ top: Number(target.dataset.top) + 86 - 16, behavior: 'smooth' });
