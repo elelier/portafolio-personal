@@ -1,0 +1,518 @@
+/*
+ * SectionFit: cada sección de la home cabe en una pantalla.
+ * Se carga después de los estilos de cada componente y solo ajusta
+ * espaciado, densidad y acomodo; no cambia contenido.
+ *
+ * - Escritorio (>= 1024px): cada sección ocupa como mínimo la pantalla
+ *   visible bajo la barra de navegación, con el contenido centrado, y el
+ *   desplazamiento se acomoda suavemente al inicio de cada sección.
+ * - Móvil (< 768px): las rejillas de tarjetas pasan a carruseles
+ *   horizontales con "asomo" de la siguiente tarjeta.
+ */
+
+:root {
+  --nav-h: 60px;
+  --section-screen: calc(100vh - var(--nav-h));
+}
+
+@supports (height: 100svh) {
+  :root {
+    --section-screen: calc(100svh - var(--nav-h));
+  }
+}
+
+/* Al navegar a una sección, el título queda justo bajo la barra. */
+.App section[id] {
+  scroll-margin-top: var(--nav-h);
+}
+
+/* ---------------------------------------------------------------------
+ * Escritorio y laptop
+ * ------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .App #soluciones,
+  .App #casos-reales,
+  .App #testimonios,
+  .App #como-trabajo,
+  .App #sobre-mi,
+  .App #portafolio,
+  .App #contacto {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--section-screen);
+    padding-top: clamp(20px, 3.2vh, 40px);
+    padding-bottom: clamp(20px, 3.2vh, 40px);
+    scroll-snap-align: start;
+  }
+
+  /* Encabezados compactos y consistentes */
+  .App .soluciones-header,
+  .App .casos-estudio__header,
+  .App .testimonios__header,
+  .App .servicios-header {
+    margin-bottom: clamp(16px, 2.6vh, 28px);
+  }
+
+  .App .soluciones-header h2,
+  .App .casos-estudio__header h2,
+  .App .testimonios__header h2,
+  .App .servicios-header h2 {
+    font-size: clamp(1.9rem, 2.6vw + 0.6vh, 2.7rem);
+    margin-bottom: 8px;
+  }
+
+  .App .soluciones-header p,
+  .App .casos-estudio__header p,
+  .App .testimonios__header p,
+  .App .servicios-header p {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  /* Soluciones: 4 columnas */
+  .App .soluciones-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .App .soluciones-card {
+    padding: 20px;
+  }
+
+  .App .soluciones-card__meta {
+    margin-bottom: 10px;
+  }
+
+  .App .soluciones-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .App .soluciones-card__description {
+    font-size: 0.92rem;
+  }
+
+  .App .soluciones-card__support {
+    font-size: 0.86rem;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .App .soluciones-footer {
+    margin-top: clamp(16px, 2.6vh, 28px);
+    gap: 12px;
+  }
+
+  .App .soluciones-footer p {
+    font-size: 0.95rem;
+  }
+
+  /* Casos reales: imagen a la izquierda, texto a la derecha */
+  .App .casos-estudio__grid {
+    max-width: 1200px;
+    width: 100%;
+    gap: 18px;
+  }
+
+  .App .caso-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: 18px;
+    row-gap: 8px;
+    padding: 16px;
+  }
+
+  .App .caso-card__preview {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 220px;
+  }
+
+  .App .caso-card > :not(.caso-card__preview) {
+    grid-column: 2;
+  }
+
+  .App .caso-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .App .caso-card__blocks {
+    gap: 6px;
+  }
+
+  .App .caso-card__blocks p {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+  }
+
+  .App .casos-estudio__cta {
+    margin-top: clamp(16px, 2.6vh, 28px);
+  }
+
+  /* Cómo trabajo: CTA en una sola franja */
+  .App .servicio-card {
+    gap: 12px;
+  }
+
+  .App .servicio-cta.global-cta {
+    margin-top: clamp(16px, 2.6vh, 28px);
+    padding: 16px 22px;
+    max-width: 900px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .App .servicio-cta .cta-helper-text {
+    text-align: left;
+  }
+
+  /* Sobre mí */
+  .App .sobre-mi h2 {
+    margin: 0 0 8px;
+    font-size: clamp(2rem, 2.6vw + 0.6vh, 2.7rem);
+  }
+
+  .App .sobre-mi .tabs {
+    margin: 0 auto 4px;
+    padding: 0.45rem;
+  }
+
+  .App .sobre-mi .tab-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .App .sobre-mi .sub-title-container {
+    margin: 12px auto;
+    font-size: 1.35rem;
+  }
+
+  .App .sobre-mi .contenido-sobre-mi {
+    min-height: 0;
+    padding-bottom: 0;
+  }
+
+  .App .sobre-mi .section-content {
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .App .sobre-mi .image-container img {
+    max-height: min(46vh, 420px);
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  .App .sobre-mi .cta-seccion-sobre-mi {
+    margin-bottom: 0;
+  }
+
+  .App .sobre-mi .horizontal-scroll-indicator {
+    margin-top: 10px;
+  }
+
+  /* Carrera */
+  .App .portafolio .timeline {
+    padding-top: 20px;
+  }
+
+  .App .portafolio .timeline-card {
+    min-height: 0;
+  }
+
+  .App .portafolio .timeline-card__banner {
+    height: clamp(64px, 9vh, 88px);
+  }
+
+  .App .portafolio-cta {
+    margin-top: clamp(12px, 2vh, 20px);
+  }
+
+  /* Contacto */
+  .App .contacto-heading {
+    margin-bottom: clamp(16px, 2.4vh, 24px);
+    align-items: end;
+  }
+
+  .App .contacto-heading h2 {
+    font-size: clamp(1.9rem, 2.4vw + 0.6vh, 2.6rem);
+    line-height: 1.08;
+  }
+
+  .App .contacto textarea {
+    min-height: 0;
+    height: clamp(90px, 14vh, 140px);
+  }
+}
+
+/* Laptops bajas (p. ej. 1366x768): un poco más densas */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .App .soluciones-card__support {
+    display: none;
+  }
+
+  .App .soluciones-header p,
+  .App .casos-estudio__header p,
+  .App .servicios-header p,
+  .App .testimonios__header p {
+    display: none;
+  }
+
+  .App .testimonios__quote {
+    font-size: 0.92rem;
+  }
+}
+
+/* ---------------------------------------------------------------------
+ * Móvil: carruseles horizontales
+ * ------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .App #soluciones,
+  .App #casos-reales,
+  .App #testimonios,
+  .App #como-trabajo,
+  .App #portafolio,
+  .App #contacto {
+    padding-top: 28px;
+    padding-bottom: 32px;
+  }
+
+  .App #sobre-mi {
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+
+  .App .soluciones-header,
+  .App .casos-estudio__header,
+  .App .testimonios__header,
+  .App .servicios-header {
+    margin-bottom: 14px;
+  }
+
+  .App .soluciones-header h2,
+  .App .casos-estudio__header h2,
+  .App .testimonios__header h2,
+  .App .servicios-header h2 {
+    font-size: 1.7rem;
+    line-height: 1.12;
+  }
+
+  .App .soluciones-header p,
+  .App .casos-estudio__header p,
+  .App .testimonios__header p,
+  .App .servicios-header p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  /* Rejillas -> carrusel con scroll-snap */
+  .App .soluciones-grid,
+  .App .casos-estudio__grid,
+  .App .testimonios__grid,
+  .App .servicios-grid,
+  .App .portafolio .timeline {
+    display: flex;
+    gap: 12px;
+    max-width: none;
+    margin-left: -14px;
+    margin-right: -14px;
+    padding: 4px 14px 10px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 14px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .App .soluciones-grid::-webkit-scrollbar,
+  .App .casos-estudio__grid::-webkit-scrollbar,
+  .App .testimonios__grid::-webkit-scrollbar,
+  .App .servicios-grid::-webkit-scrollbar,
+  .App .portafolio .timeline::-webkit-scrollbar {
+    display: none;
+  }
+
+  .App .soluciones-card,
+  .App .caso-card,
+  .App .testimonios__card,
+  .App .servicio-card,
+  .App .portafolio .timeline__row {
+    flex: 0 0 84%;
+    max-width: 340px;
+    scroll-snap-align: start;
+    animation: none;
+  }
+
+  .App .soluciones-card:hover,
+  .App .caso-card:hover,
+  .App .servicio-card:hover {
+    transform: none;
+  }
+
+  .App .soluciones-card {
+    padding: 16px;
+  }
+
+  .App .soluciones-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .App .soluciones-footer {
+    margin-top: 14px;
+    gap: 12px;
+  }
+
+  .App .caso-card {
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .App .caso-card h3 {
+    font-size: 1.35rem;
+  }
+
+  .App .caso-card__preview {
+    aspect-ratio: 2 / 1;
+  }
+
+  .App .caso-card__blocks {
+    gap: 6px;
+  }
+
+  .App .caso-card__blocks p {
+    padding: 6px 10px;
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .App .casos-estudio__cta {
+    margin-top: 14px;
+  }
+
+  .App .testimonios__quote {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .App .testimonios__divider {
+    margin: 12px 0;
+  }
+
+  .App .servicio-card {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .App .servicio-cta.global-cta {
+    margin-top: 14px;
+    padding: 16px;
+  }
+
+  /* Carrera: tarjetas en carrusel, sin línea vertical */
+  .App .portafolio .timeline {
+    padding-top: 12px;
+  }
+
+  .App .portafolio .timeline::before,
+  .App .portafolio .timeline__node {
+    display: none;
+  }
+
+  .App .portafolio .timeline__row {
+    display: block;
+    margin: 0;
+  }
+
+  .App .portafolio .timeline-card__banner {
+    height: 76px;
+  }
+
+  .App .portafolio__heading h2,
+  .App .portafolio h2 {
+    font-size: 1.7rem;
+    margin: 0;
+  }
+
+  .App .portafolio .introduccion {
+    font-size: 0.9rem;
+    padding: 0;
+  }
+
+  .App .portafolio__cv-actions {
+    margin-top: 10px;
+  }
+
+  .App .portafolio-cta {
+    margin-top: 12px;
+    padding: 14px;
+  }
+
+  .App .portafolio-cta h3 {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .App .portafolio-cta p {
+    font-size: 0.84rem;
+    margin-bottom: 10px;
+  }
+
+  .App .portafolio-cta-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Sobre mí: foto contenida */
+  .App .sobre-mi h2 {
+    margin: 0 0 6px;
+    font-size: 1.9rem;
+  }
+
+  .App .sobre-mi .sub-title-container {
+    margin: 10px 0;
+    font-size: 1.05rem;
+  }
+
+  .App .sobre-mi .image-container,
+  .App .sobre-mi .image-container img {
+    max-width: 168px !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .App .sobre-mi .content-container {
+    gap: 0.6rem;
+  }
+
+  /* Contacto */
+  .App .contacto-heading {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .App .contacto-heading h2 {
+    font-size: 1.7rem;
+    line-height: 1.12;
+  }
+
+  .App .contacto-heading > p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+}

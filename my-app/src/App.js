@@ -35,6 +35,7 @@ import InternalRoutePlaceholder from './components/InternalRoutePlaceholder';
 import { initializeTheme } from './components/utils/themeUtils';
 import { getMotionAwareScrollBehavior, loadExternalScripts } from './components/utils/generalUtils';
 import { getRouteSeoPolicy } from './config/routeSeoPolicy';
+import './styles/components/SectionFit.css';
 
 const Blog = lazy(() => import('./components/Blog'));
 
