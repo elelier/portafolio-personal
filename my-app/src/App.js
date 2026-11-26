@@ -42,6 +42,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const Blog = lazy(() => import('./components/Blog'));
+const BlogPost = lazy(() => import('./components/BlogPost'));
 
 const SCROLL_TO_TOP_LABELS = Object.freeze({
   es: 'Volver arriba',
@@ -250,6 +251,7 @@ function App({ initialLanguage }) {
                       description: getRouteSeoPolicy('/blog')?.description,
                     })}
                   />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route
                     path="/entradas/2408_IA_Transforma_ecommerce"
                     element={renderPrivateRoute(<InternalRoutePlaceholder />, {
