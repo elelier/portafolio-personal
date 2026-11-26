@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
+import { scrollToSectionElement } from './utils/generalUtils';
 import { activeSectionMap, getNavigationContent, observedSectionIds } from '../config/navigation';
 import { homePathFor } from '../i18n/locales';
 import '../styles/components/Navegacion.css';
@@ -47,7 +47,7 @@ function Navegacion() {
   const handleScrollToElement = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      scrollIntoViewWithMotionPreference(element);
+      scrollToSectionElement(element);
       closeMenu();
       setAboutOpen(false);
     }

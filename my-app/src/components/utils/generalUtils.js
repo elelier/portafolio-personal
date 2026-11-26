@@ -48,11 +48,30 @@ export function scrollIntoViewWithMotionPreference(element, options = {}) {
     element.scrollIntoView({ ...options, behavior });
 }
 
-export function scrollToSection(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        scrollIntoViewWithMotionPreference(element);
+// Lleva el contenido de una sección (no su padding superior) justo debajo del menú fijo.
+export const SECTION_LANDING_GAP = 16;
+
+export function getSectionScrollTop(element) {
+    const nav = document.querySelector('.navegacion');
+    const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+    const paddingTop = parseFloat(window.getComputedStyle(element).paddingTop) || 0;
+    const sectionTop = element.getBoundingClientRect().top + window.scrollY;
+    return Math.max(0, Math.round(sectionTop + paddingTop - navHeight - SECTION_LANDING_GAP));
+}
+
+export function scrollToSectionElement(element, options = {}) {
+    if (!element) {
+        return;
     }
+    if (element.id === 'hero-banner') {
+        window.scrollTo({ top: 0, behavior: options.behavior || getMotionAwareScrollBehavior() });
+        return;
+    }
+    window.scrollTo({ top: getSectionScrollTop(element), behavior: options.behavior || getMotionAwareScrollBehavior() });
+}
+
+export function scrollToSection(id) {
+    scrollToSectionElement(document.getElementById(id));
 }
 
 export function loadScript(src) {
