@@ -35,6 +35,7 @@ import InternalRoutePlaceholder from './components/InternalRoutePlaceholder';
 import { initializeTheme } from './components/utils/themeUtils';
 import { getMotionAwareScrollBehavior, loadExternalScripts, scrollToSectionElement } from './components/utils/generalUtils';
 import { getRouteSeoPolicy } from './config/routeSeoPolicy';
+import './styles/components/SectionFit.css';
 
 const Blog = lazy(() => import('./components/Blog'));
 const BlogPost = lazy(() => import('./components/BlogPost'));
@@ -140,7 +141,7 @@ function App({ initialLanguage }) {
     'var(--color-bg)',
     'var(--color-bg-3)',
     'var(--color-bg)',
-    'var(--color-bg-2)',
+    'var(--section-bg-alt)',
   ];
 
   const homeSections = [

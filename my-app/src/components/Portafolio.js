@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import SwipeDots from './SwipeDots';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Portafolio.css';
@@ -117,6 +118,10 @@ const careerContent = {
       chips: ['Automatización', 'IA aplicada', 'Producto', 'Integraciones', 'Consultoría'],
       links: [
         {
+          label: 'Usa MiRancho360 ↗',
+          href: 'https://mirancho.elelier.com/'
+        },
+        {
           label: 'Ver elelier.com ↗',
           href: 'https://elelier.com/'
         },
@@ -199,6 +204,10 @@ const careerContent = {
       chips: ['Automation', 'Applied AI', 'Product', 'Integrations', 'Consulting'],
       links: [
         {
+          label: 'Try MiRancho360 ↗',
+          href: 'https://mirancho.elelier.com/'
+        },
+        {
           label: 'View elelier.com ↗',
           href: 'https://elelier.com/'
         },
@@ -262,6 +271,7 @@ careerContent['pt-br'] = [
     image: elelierImg,
     chips: ['Automação', 'IA aplicada', 'Produto', 'Integrações', 'Consultoria'],
     links: [
+      { label: 'Use o MiRancho360 ↗', href: 'https://mirancho.elelier.com/' },
       { label: 'Ver elelier.com ↗', href: 'https://elelier.com/' },
       { label: 'LinkedIn ↗', href: LINKEDIN_URL }
     ],
@@ -385,6 +395,7 @@ function CareerCard({ entry, index, language, isExpanded, onToggle }) {
 
 const Portafolio = ({ style }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const timelineRef = useRef(null);
   const { language } = useLanguage();
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
 
@@ -509,7 +520,7 @@ const Portafolio = ({ style }) => {
         </div>
       </div>
 
-      <div className="timeline" role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : currentLang === 'pt-br' ? 'Carreira profissional' : 'Professional career'}>
+      <div className="timeline" ref={timelineRef} role="list" aria-label={currentLang === 'es' ? 'Carrera profesional' : currentLang === 'pt-br' ? 'Carreira profissional' : 'Professional career'}>
         {projects.map((project, idx) => (
           <div key={project.id} className="timeline__row" role="listitem">
             <span className="timeline__node" aria-hidden="true" />
@@ -523,6 +534,7 @@ const Portafolio = ({ style }) => {
           </div>
         ))}
       </div>
+      <SwipeDots targetRef={timelineRef} count={projects.length} />
 
       <div className="portafolio-cta">
         <h3>{currentCta.title}</h3>
