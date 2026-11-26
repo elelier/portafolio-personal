@@ -118,6 +118,10 @@ const careerContent = {
       chips: ['Automatización', 'IA aplicada', 'Producto', 'Integraciones', 'Consultoría'],
       links: [
         {
+          label: 'Usa MiRancho360 ↗',
+          href: 'https://mirancho.elelier.com/'
+        },
+        {
           label: 'Ver elelier.com ↗',
           href: 'https://elelier.com/'
         },
@@ -200,6 +204,10 @@ const careerContent = {
       chips: ['Automation', 'Applied AI', 'Product', 'Integrations', 'Consulting'],
       links: [
         {
+          label: 'Try MiRancho360 ↗',
+          href: 'https://mirancho.elelier.com/'
+        },
+        {
           label: 'View elelier.com ↗',
           href: 'https://elelier.com/'
         },
@@ -263,6 +271,7 @@ careerContent['pt-br'] = [
     image: elelierImg,
     chips: ['Automação', 'IA aplicada', 'Produto', 'Integrações', 'Consultoria'],
     links: [
+      { label: 'Use o MiRancho360 ↗', href: 'https://mirancho.elelier.com/' },
       { label: 'Ver elelier.com ↗', href: 'https://elelier.com/' },
       { label: 'LinkedIn ↗', href: LINKEDIN_URL }
     ],

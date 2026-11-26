@@ -28,7 +28,8 @@ const content = {
         category: 'Herramientas que sí se usan',
         title: 'MVPs y producto a medida',
         description: 'Paneles, herramientas internas y productos acotados para validar una idea o darle estructura a una operación que ya pide algo propio.',
-        support: 'Construimos lo necesario para probar, operar y aprender antes de hacer algo más grande.'
+        support: 'Construimos lo necesario para probar, operar y aprender antes de hacer algo más grande.',
+        example: { label: 'Ejemplo real: MiRancho360 ↗', url: 'https://mirancho.elelier.com/' }
       },
       {
         category: 'IA con una tarea real',
@@ -61,7 +62,8 @@ const content = {
         category: 'Tools people actually use',
         title: 'MVPs and tailored products',
         description: 'Dashboards, internal tools and scoped products to validate an idea or give structure to an operation that needs something of its own.',
-        support: 'We build what is needed to test, operate and learn before making something larger.'
+        support: 'We build what is needed to test, operate and learn before making something larger.',
+        example: { label: 'Real example: MiRancho360 ↗', url: 'https://mirancho.elelier.com/' }
       },
       {
         category: 'AI with a real job',
@@ -94,7 +96,8 @@ const content = {
         category: 'Ferramentas que as pessoas usam',
         title: 'MVPs e produtos sob medida',
         description: 'Painéis, ferramentas internas e produtos com escopo definido para validar ideias ou organizar operações que precisam de uma solução própria.',
-        support: 'Construímos o necessário para testar, operar e aprender antes de ampliar.'
+        support: 'Construímos o necessário para testar, operar e aprender antes de ampliar.',
+        example: { label: 'Exemplo real: MiRancho360 ↗', url: 'https://mirancho.elelier.com/' }
       },
       {
         category: 'IA com função real',
@@ -133,6 +136,11 @@ function Soluciones({ style }) {
             <h3>{solution.title}</h3>
             <p className="soluciones-card__description">{solution.description}</p>
             <p className="soluciones-card__support">{solution.support}</p>
+            {solution.example && (
+              <a className="soluciones-card__example" href={solution.example.url} target="_blank" rel="noopener noreferrer">
+                {solution.example.label}
+              </a>
+            )}
           </article>
         ))}
       </div>

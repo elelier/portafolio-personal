@@ -5,6 +5,9 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
 import oneClicTripPreview from '../assets/images/casos-oneclictrip-preview.jpg';
+import miRanchoPreview from '../assets/images/casos-mirancho-preview.jpg';
+
+const MIRANCHO_URL = 'https://mirancho.elelier.com/';
 
 const content = {
   es: {
@@ -18,6 +21,17 @@ const content = {
       result: 'Resultado'
     },
     cases: [
+      {
+        category: 'Ganadería · App móvil propia',
+        title: 'MiRancho360',
+        preview: miRanchoPreview,
+        previewAlt: 'Pantallas de la app MiRancho360 sobre una foto de un corral',
+        challenge: 'El rancho llevaba todo en libreta y memoria.',
+        built: 'App móvil que funciona sin señal, con letra e iconos grandes, galería y fotos para compartir.',
+        result: 'El ranchero registra y comparte su hato desde el corral.',
+        linkText: 'Probar la app',
+        url: MIRANCHO_URL
+      },
       {
         category: 'Arquitectura · Presencia y captación',
         title: 'Arqidia',
@@ -54,6 +68,17 @@ const content = {
     },
     cases: [
       {
+        category: 'Livestock · In-house mobile app',
+        title: 'MiRancho360',
+        preview: miRanchoPreview,
+        previewAlt: 'MiRancho360 app screens over a photo of a corral',
+        challenge: 'The ranch kept everything in a notebook and in memory.',
+        built: 'Mobile app that works offline, with large type and icons, a gallery and shareable photos.',
+        result: 'The rancher records and shares the herd right from the corral.',
+        linkText: 'Try the app',
+        url: MIRANCHO_URL
+      },
+      {
         category: 'Architecture · Presence and lead generation',
         title: 'Arqidia',
         preview: arqidiaPreview,
@@ -84,6 +109,17 @@ const content = {
     cta: 'Conte qual desafio você quer resolver →',
     labels: { challenge: 'Desafio', built: 'Solução', result: 'Resultado' },
     cases: [
+      {
+        category: 'Pecuária · App móvel próprio',
+        title: 'MiRancho360',
+        preview: miRanchoPreview,
+        previewAlt: 'Telas do app MiRancho360 sobre uma foto de um curral',
+        challenge: 'O rancho controlava tudo em caderno e de memória.',
+        built: 'App móvel que funciona sem sinal, com letras e ícones grandes, galeria e fotos para compartilhar.',
+        result: 'O pecuarista registra e compartilha o rebanho direto do curral.',
+        linkText: 'Testar o app',
+        url: MIRANCHO_URL
+      },
       {
         category: 'Arquitetura · Presença e captação',
         title: 'Arqidia',

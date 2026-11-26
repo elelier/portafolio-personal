@@ -181,13 +181,14 @@ describe('Portafolio career timeline', () => {
     const card = getCard(container, 'Elier');
     const links = Array.from(card.querySelectorAll('a'));
 
-    expect(links).toHaveLength(2);
-    expect(links[0].href).toBe('https://elelier.com/');
-    expect(links[1].href).toBe('https://linkedin.com/in/elier/');
-    expect(links[0].target).toBe('_blank');
-    expect(links[1].target).toBe('_blank');
-    expect(links[0].rel).toContain('noopener');
-    expect(links[1].rel).toContain('noopener');
+    expect(links).toHaveLength(3);
+    expect(links[0].href).toBe('https://mirancho.elelier.com/');
+    expect(links[1].href).toBe('https://elelier.com/');
+    expect(links[2].href).toBe('https://linkedin.com/in/elier/');
+    links.forEach((link) => {
+      expect(link.target).toBe('_blank');
+      expect(link.rel).toContain('noopener');
+    });
 
     act(() => {
       links[0].dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -230,6 +231,7 @@ describe('Portafolio career timeline', () => {
     expect(chubbLinks[1].textContent).toBe('Get an auto insurance quote ↗');
     expect(chubbLinks[1].className).toContain('timeline-card__link--auto-insurance');
     expect(elierLinks.map((link) => link.href)).toEqual([
+      'https://mirancho.elelier.com/',
       'https://elelier.com/',
       'https://linkedin.com/in/elier/'
     ]);
