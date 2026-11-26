@@ -29,7 +29,7 @@ const content = {
         title: 'MVPs y producto a medida',
         description: 'Paneles, herramientas internas y productos acotados para validar una idea o darle estructura a una operación que ya pide algo propio.',
         support: 'Construimos lo necesario para probar, operar y aprender antes de hacer algo más grande.',
-        example: { label: 'Ejemplo real: MiRancho360 ↗', url: 'https://mirancho.elelier.com/' }
+        example: { label: 'Ejemplo real: MiRancho ↗', url: 'https://mirancho.elelier.com/' }
       },
       {
         category: 'IA con una tarea real',
@@ -63,7 +63,7 @@ const content = {
         title: 'MVPs and tailored products',
         description: 'Dashboards, internal tools and scoped products to validate an idea or give structure to an operation that needs something of its own.',
         support: 'We build what is needed to test, operate and learn before making something larger.',
-        example: { label: 'Real example: MiRancho360 ↗', url: 'https://mirancho.elelier.com/' }
+        example: { label: 'Real example: MiRancho ↗', url: 'https://mirancho.elelier.com/' }
       },
       {
         category: 'AI with a real job',
@@ -97,7 +97,7 @@ const content = {
         title: 'MVPs e produtos sob medida',
         description: 'Painéis, ferramentas internas e produtos com escopo definido para validar ideias ou organizar operações que precisam de uma solução própria.',
         support: 'Construímos o necessário para testar, operar e aprender antes de ampliar.',
-        example: { label: 'Exemplo real: MiRancho360 ↗', url: 'https://mirancho.elelier.com/' }
+        example: { label: 'Exemplo real: MiRancho ↗', url: 'https://mirancho.elelier.com/' }
       },
       {
         category: 'IA com função real',

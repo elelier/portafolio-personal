@@ -17,7 +17,7 @@ SOBRE ELIER:
 - Frase: "Transformo procesos complicados en soluciones que realmente funcionan."
 - Especialista en operaciones, producto digital, automatización e IA aplicada. Ha sido líder, emprendedor y constructor de productos.
 - Ofrece diagnóstico operativo, diseño de producto e implementación. También está abierto a roles de liderazgo.
-- Proyectos propios: MiRancho360 (app para gestionar un rancho), SeVa (piloto), MonterreyRespira (calidad del aire en Monterrey) y Space People Counter.
+- Proyectos propios: MiRancho (app para gestionar un rancho), SeVa (piloto), MonterreyRespira (calidad del aire en Monterrey) y Space People Counter.
 
 SECCIONES DEL SITIO: Soluciones, Casos reales, Cómo trabajo, Sobre mí, Carrera y Contacto. Los botones bajo el chat llevan a cada una.
 
@@ -35,7 +35,7 @@ ABOUT ELIER:
 - Tagline: "I turn complex processes into solutions that actually work."
 - Specialist in operations, digital product, automation and applied AI. He has been a leader, founder and product builder.
 - Offers operational diagnosis, product design and implementation. Also open to leadership roles.
-- Own projects: MiRancho360 (ranch management app), SeVa (pilot), MonterreyRespira (air quality in Monterrey) and Space People Counter.
+- Own projects: MiRancho (ranch management app), SeVa (pilot), MonterreyRespira (air quality in Monterrey) and Space People Counter.
 
 SITE SECTIONS: Solutions, Case studies, How I work, About Me, Career and Contact. The buttons under the chat jump to each one.
 
@@ -53,7 +53,7 @@ SOBRE ELIER:
 - Frase: "Transformo processos complexos em soluções que realmente funcionam."
 - Especialista em operações, produto digital, automação e IA aplicada. Já foi líder, empreendedor e construtor de produtos.
 - Oferece diagnóstico operacional, design de produto e implementação. Também está aberto a cargos de liderança.
-- Projetos próprios: MiRancho360 (app para gestão de um rancho), SeVa (piloto), MonterreyRespira (qualidade do ar em Monterrey) e Space People Counter.
+- Projetos próprios: MiRancho (app para gestão de um rancho), SeVa (piloto), MonterreyRespira (qualidade do ar em Monterrey) e Space People Counter.
 
 SEÇÕES DO SITE: Soluções, Casos reais, Como trabalho, Sobre mim, Carreira e Contato. Os botões abaixo do chat levam a cada uma.
 

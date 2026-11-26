@@ -91,13 +91,13 @@ describe('CasosEstudio', () => {
     cleanup();
   });
 
-  it('renders descriptive static previews for every case, MiRancho360 first', () => {
+  it('renders descriptive static previews for every case, MiRancho first', () => {
     const { container, cleanup } = renderCasosEstudio('es');
 
     const previews = Array.from(container.querySelectorAll('.caso-card__preview img'));
 
     expect(previews).toHaveLength(3);
-    expect(previews[0].getAttribute('alt')).toBe('Pantallas de la app MiRancho360 sobre una foto de un corral');
+    expect(previews[0].getAttribute('alt')).toBe('Pantallas de la app MiRancho sobre una foto de un corral');
     expect(previews[1].getAttribute('alt')).toBe('Preview visual del sitio Arqidia');
     expect(previews[2].getAttribute('alt')).toBe('Preview visual del sitio OneClicTrip');
     expect(previews[0].getAttribute('src')).toContain('mirancho');
@@ -108,16 +108,20 @@ describe('CasosEstudio', () => {
   });
 
   it.each([
-    ['es', 'Probar la app'],
-    ['en', 'Try the app'],
-    ['pt-br', 'Testar o app'],
-  ])('links the MiRancho360 case to the live app in %s', (language, linkText) => {
+    ['es', 'Probar la app', 'Leer artículo', '/blog/app-rancho-de-mi-papa/'],
+    ['en', 'Try the app', 'Read the article', '/en/blog/app-rancho-de-mi-papa/'],
+    ['pt-br', 'Testar o app', 'Ler artigo', '/pt-br/blog/app-rancho-de-mi-papa/'],
+  ])('links the MiRancho case to the live app and the article in %s', (language, appText, articleText, articlePath) => {
     const { container, cleanup } = renderCasosEstudio(language);
-    const link = container.querySelector('.caso-card .caso-card__link');
+    const card = container.querySelector('.caso-card');
+    const [appLink, articleLink] = Array.from(card.querySelectorAll('.caso-card__links a'));
 
-    expect(link.getAttribute('href')).toBe('https://mirancho.elelier.com/');
-    expect(link.textContent).toBe(linkText);
-    expect(link.getAttribute('rel')).toContain('noopener');
+    expect(card.querySelector('h3').textContent).toBe('MiRancho');
+    expect(appLink.getAttribute('href')).toBe('https://mirancho.elelier.com/');
+    expect(appLink.textContent).toBe(appText);
+    expect(appLink.getAttribute('rel')).toContain('noopener');
+    expect(articleLink.getAttribute('href')).toBe(articlePath);
+    expect(articleLink.textContent).toBe(articleText);
 
     cleanup();
   });
