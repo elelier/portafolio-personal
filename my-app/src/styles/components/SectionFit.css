@@ -428,16 +428,16 @@
     font-size: 0.95rem;
   }
 
-  /* Casos reales: tres tarjetas en una fila */
+  /* Casos reales: cuatro tarjetas en una fila */
   .App .casos-estudio__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 1200px;
     width: 100%;
     gap: 16px;
   }
 
   .App .caso-card {
-    gap: 8px;
+    gap: 7px;
     padding: 14px;
   }
 
@@ -450,7 +450,7 @@
   }
 
   .App .caso-card h3 {
-    font-size: 1.4rem;
+    font-size: 1.32rem;
   }
 
   .App .caso-card__blocks {
@@ -465,6 +465,20 @@
 
   .App .casos-estudio__cta {
     margin-top: clamp(16px, 2.6vh, 28px);
+  }
+
+  /* Con cuatro tarjetas: título en una línea, enlaces alineados abajo */
+  .App .casos-estudio__header {
+    max-width: 1000px;
+  }
+
+  .App .casos-estudio .caso-card__links {
+    margin-top: auto;
+    gap: 4px 14px;
+  }
+
+  .App .casos-estudio .caso-card__link {
+    font-size: 0.92rem;
   }
 
   /* Cómo trabajo: CTA en una sola franja */
