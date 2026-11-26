@@ -8,7 +8,8 @@ export const navigationConfig = {
     secondaryLabel: 'Más sobre mí',
     secondary: [
       { key: 'sobreMi', label: 'Sobre Mí', target: 'sobre-mi' },
-      { key: 'carrera', label: 'Carrera', target: 'portafolio' }
+      { key: 'carrera', label: 'Carrera', target: 'portafolio' },
+      { key: 'blog', label: 'Blog', page: 'blog' }
     ],
     contact: 'Conversemos',
     navLabel: 'Navegación principal',
@@ -29,7 +30,8 @@ export const navigationConfig = {
     secondaryLabel: 'More about me',
     secondary: [
       { key: 'sobreMi', label: 'About Me', target: 'sobre-mi' },
-      { key: 'carrera', label: 'Career', target: 'portafolio' }
+      { key: 'carrera', label: 'Career', target: 'portafolio' },
+      { key: 'blog', label: 'Blog', page: 'blog' }
     ],
     contact: 'Let’s connect',
     navLabel: 'Main navigation',
@@ -50,7 +52,8 @@ export const navigationConfig = {
     secondaryLabel: 'Mais sobre mim',
     secondary: [
       { key: 'sobreMi', label: 'Sobre mim', target: 'sobre-mi' },
-      { key: 'carrera', label: 'Carreira', target: 'portafolio' }
+      { key: 'carrera', label: 'Carreira', target: 'portafolio' },
+      { key: 'blog', label: 'Blog', page: 'blog' }
     ],
     contact: 'Vamos conversar',
     navLabel: 'Navegação principal',

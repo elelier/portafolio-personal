@@ -123,8 +123,8 @@ describe('Footer', () => {
       'Cómo trabajo',
       'Sobre Mí',
       'Carrera',
-      'Contacto',
       'Blog',
+      'Contacto',
       'Privacidad',
       'Términos'
     ]);
