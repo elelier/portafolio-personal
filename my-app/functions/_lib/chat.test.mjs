@@ -118,3 +118,10 @@ test('maps quota, capacity and empty responses to 502 without leaking details', 
     assert.ok(!JSON.stringify(await response.json()).includes('allocation'));
   }
 });
+
+test('public/_routes.json sends /api/chat to Pages Functions', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const routes = JSON.parse(await readFile(new URL('../../public/_routes.json', import.meta.url), 'utf8'));
+  assert.ok(routes.include.includes('/api/chat'));
+  assert.ok(routes.include.includes('/api/contact'));
+});
