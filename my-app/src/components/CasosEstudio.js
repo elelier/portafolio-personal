@@ -3,11 +3,13 @@ import SwipeDots from './SwipeDots';
 import '../styles/components/CasosEstudio.css';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
+import { blogPath } from '../data/blogPosts';
 import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
 import oneClicTripPreview from '../assets/images/casos-oneclictrip-preview.jpg';
 import miRanchoPreview from '../assets/images/casos-mirancho-preview.jpg';
 
 const MIRANCHO_URL = 'https://mirancho.elelier.com/';
+const MIRANCHO_ARTICLE_SLUG = 'app-rancho-de-mi-papa';
 
 const content = {
   es: {
@@ -23,13 +25,15 @@ const content = {
     cases: [
       {
         category: 'Ganadería · App móvil propia',
-        title: 'MiRancho360',
+        title: 'MiRancho',
         preview: miRanchoPreview,
-        previewAlt: 'Pantallas de la app MiRancho360 sobre una foto de un corral',
+        previewAlt: 'Pantallas de la app MiRancho sobre una foto de un corral',
         challenge: 'El rancho llevaba todo en libreta y memoria.',
         built: 'App móvil que funciona sin señal, con letra e iconos grandes, galería y fotos para compartir.',
         result: 'El ranchero registra y comparte su hato desde el corral.',
         linkText: 'Probar la app',
+        articleText: 'Leer artículo',
+        articleSlug: MIRANCHO_ARTICLE_SLUG,
         url: MIRANCHO_URL
       },
       {
@@ -69,13 +73,15 @@ const content = {
     cases: [
       {
         category: 'Livestock · In-house mobile app',
-        title: 'MiRancho360',
+        title: 'MiRancho',
         preview: miRanchoPreview,
-        previewAlt: 'MiRancho360 app screens over a photo of a corral',
+        previewAlt: 'MiRancho app screens over a photo of a corral',
         challenge: 'The ranch kept everything in a notebook and in memory.',
         built: 'Mobile app that works offline, with large type and icons, a gallery and shareable photos.',
         result: 'The rancher records and shares the herd right from the corral.',
         linkText: 'Try the app',
+        articleText: 'Read the article',
+        articleSlug: MIRANCHO_ARTICLE_SLUG,
         url: MIRANCHO_URL
       },
       {
@@ -111,13 +117,15 @@ const content = {
     cases: [
       {
         category: 'Pecuária · App móvel próprio',
-        title: 'MiRancho360',
+        title: 'MiRancho',
         preview: miRanchoPreview,
-        previewAlt: 'Telas do app MiRancho360 sobre uma foto de um curral',
+        previewAlt: 'Telas do app MiRancho sobre uma foto de um curral',
         challenge: 'O rancho controlava tudo em caderno e de memória.',
         built: 'App móvel que funciona sem sinal, com letras e ícones grandes, galeria e fotos para compartilhar.',
         result: 'O pecuarista registra e compartilha o rebanho direto do curral.',
         linkText: 'Testar o app',
+        articleText: 'Ler artigo',
+        articleSlug: MIRANCHO_ARTICLE_SLUG,
         url: MIRANCHO_URL
       },
       {
@@ -177,9 +185,16 @@ function CasosEstudio({ style }) {
               <p><strong>{t.labels.built}</strong>{caseStudy.built}</p>
               <p className="caso-card__result"><strong>{t.labels.result}</strong>{caseStudy.result}</p>
             </div>
-            <a href={caseStudy.url} target="_blank" rel="noopener noreferrer" className="caso-card__link">
-              {caseStudy.linkText}
-            </a>
+            <div className="caso-card__links">
+              <a href={caseStudy.url} target="_blank" rel="noopener noreferrer" className="caso-card__link">
+                {caseStudy.linkText}
+              </a>
+              {caseStudy.articleSlug && (
+                <a href={blogPath(language, caseStudy.articleSlug)} className="caso-card__link caso-card__link--article">
+                  {caseStudy.articleText}
+                </a>
+              )}
+            </div>
             {caseStudy.transparency && <p className="caso-card__transparency">{caseStudy.transparency}</p>}
           </article>
         ))}

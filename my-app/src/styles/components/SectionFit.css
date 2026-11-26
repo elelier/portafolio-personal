@@ -925,3 +925,20 @@
 .App .soluciones-card__example:focus-visible {
   text-decoration: underline;
 }
+
+/* Casos reales: varias acciones por tarjeta (p. ej. probar la app y leer el artículo) */
+.App .caso-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  margin-top: 2px;
+}
+
+.App .caso-card__links .caso-card__link {
+  margin-top: 0;
+}
+
+.App .caso-card__link--article::after {
+  content: " →";
+}
