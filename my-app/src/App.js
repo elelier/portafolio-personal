@@ -33,13 +33,8 @@ import AionLabs from './components/AionLabs';
 import PrivateRouteSEO from './components/PrivateRouteSEO';
 import InternalRoutePlaceholder from './components/InternalRoutePlaceholder';
 import { initializeTheme } from './components/utils/themeUtils';
-import { getMotionAwareScrollBehavior, loadExternalScripts } from './components/utils/generalUtils';
+import { getMotionAwareScrollBehavior, loadExternalScripts, scrollToSectionElement } from './components/utils/generalUtils';
 import { getRouteSeoPolicy } from './config/routeSeoPolicy';
-import './utils/testGemini';
-
-if (process.env.NODE_ENV === 'development') {
-  import('./debug-gemini');
-}
 
 const Blog = lazy(() => import('./components/Blog'));
 const BlogPost = lazy(() => import('./components/BlogPost'));
@@ -85,9 +80,7 @@ const LocalizedHashScroll = () => {
     const sectionId = decodeURIComponent(hash.slice(1));
     const frame = window.requestAnimationFrame(() => {
       const section = document.getElementById(sectionId);
-      if (section && typeof section.scrollIntoView === 'function') {
-        section.scrollIntoView({ behavior: 'auto', block: 'start' });
-      }
+      if (section) scrollToSectionElement(section, { behavior: 'auto' });
     });
     return () => window.cancelAnimationFrame(frame);
   }, [pathname, hash]);

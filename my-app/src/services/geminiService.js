@@ -1,229 +1,121 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+// Cliente del chatbot. La llamada al modelo (Workers AI) ocurre en la Pages Function /api/chat,
+// así que no hay credenciales en el navegador.
+const CHAT_ENDPOINT = '/api/chat';
+export const CONTACT_EMAIL = 'hola@elelier.com';
+
+// ChatModal pinta los mensajes como HTML: escapamos la respuesta del modelo.
+const escapeHtml = (text) => text
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;')
+  .replace(/\n/g, '<br>');
 
 class GeminiService {
   constructor() {
-    // Para GitHub Pages, usaremos variables de entorno del build
-    this.apiKey = process.env.REACT_APP_GEMINI_API_KEY;
-    this.genAI = null;
-    this.model = null;
-    this.isInitialized = false;
-      // Debug logs (solo en desarrollo)
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🔧 GeminiService constructor - API Key present:', !!this.apiKey);
-      // NUNCA loggear la API key real
-    }
-  }  async initialize() {
-    if (this.isInitialized) return true;
-    
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🚀 Initializing GeminiService...');
-    }
-    
-    try {
-      if (!this.apiKey) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('❌ Gemini API key not found. Using fallback responses.');
-        }
-        return false;
-      }
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('✅ API Key found, creating GoogleGenerativeAI instance...');
-      }
-      this.genAI = new GoogleGenerativeAI(this.apiKey);      this.model = this.genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash",
-        generationConfig: {
-          temperature: 0.7,
-          topK: 1,
-          topP: 1,
-          maxOutputTokens: 150, // Reducido para respuestas más cortas
-        },      });
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('✅ Gemini model initialized successfully');
-      }
-      this.isInitialized = true;
-      return true;
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('❌ Error initializing Gemini:', error);
-      }
-      return false;
-    }
+    this.availability = null;
+    this.lastResponseFromAI = false;
   }
-  getSystemPrompt(language = 'es') {
-    const prompts = {      es: `Eres un asistente virtual para el portafolio profesional de Elier Loya.
 
-INFORMACIÓN EXACTA:
-- Nombre: Elier Loya (NO Rico Vázquez ni Loya Mata)
-- Especialista en transformación digital, e-commerce y optimización de operaciones
-- Desarrollador Full Stack con React, Node.js, MongoDB y TypeScript
-- Experiencia: +3 años en desarrollo web y análisis de datos
-- Proyectos: Tiendas online, dashboards analíticos, sistemas de automatización
-- Contacto: Formulario en el sitio web y LinkedIn
-- Sitio web: elelier.com
+  async initialize() {
+    if (this.availability) return this.availability;
+    this.availability = fetch(CHAT_ENDPOINT, { method: 'GET', headers: { accept: 'application/json' } })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => data?.available === true)
+      .catch(() => false);
+    const available = await this.availability;
+    if (!available) this.availability = null; // reintentar en la siguiente apertura
+    return available;
+  }
 
-INSTRUCCIONES CRÍTICAS:
-- Respuestas MUY CORTAS (máximo 40 palabras)
-- Mantén memoria perfecta de la conversación
-- Cuenta preguntas SOLO del usuario actual (no mensajes del bot)
-- Si preguntan cuántas preguntas han hecho, responde solo el número + "preguntas"
-- Si preguntan sobre mi nombre, confirma: "Soy el asistente de Elier Loya"
-- Usa información específica y correcta
-- Sé directo y preciso
-
-Responde en español a menos que te escriban en inglés.`,
-      
-      en: `You are a virtual assistant for Elier Loya Mata's professional portfolio.
-
-KEY INFORMATION:
-- Elier specializes in digital transformation, e-commerce, and operations optimization
-- Experience in web development, React, Node.js, data analysis, and automation
-- Offers consulting, web development, and data analysis services
-- Portfolio includes e-commerce projects, analytical dashboards, and automation
-- You use Google Gemini AI to generate intelligent responses
-
-CRITICAL INSTRUCTIONS:
-- VERY SHORT RESPONSES: Maximum 50 words, preferably 30-40 words
-- Be direct and concise, don't repeat previously given information
-- Maintain context from previous conversation
-- If asked about which model you use, respond: "I use Google Gemini AI to give you intelligent responses"
-- If asked about availability: "Yes, Elier is available for projects. What type of project do you have in mind?"
-- Professional but friendly tone
-- Don't introduce yourself in every response
-
-Respond in English unless written to in Spanish.`,
-      'pt-br': `Você é o assistente do portfólio profissional de Elier Loya. Ele atua em operações, produto digital, transformação digital, automação e IA aplicada. Responda em português brasileiro, de forma curta, clara e prática. Não invente resultados, disponibilidade, clientes ou informações pessoais. Quando não souber, oriente o visitante a usar o formulário de contato.`
-    };
-    
-    return prompts[language] || prompts.es;
-  }  async sendMessage(message, language = 'es', conversationHistory = []) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('💬 SendMessage called with:', { message, language, isInitialized: this.isInitialized });
-    }
-    
+  async sendMessage(message, language = 'es', conversationHistory = []) {
+    this.lastResponseFromAI = false;
     try {
-      await this.initialize();      if (!this.isInitialized) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('⚠️ Gemini not initialized, using fallback');
-        }
-        return this.getFallbackResponse(message, language, conversationHistory);
+      // Los mensajes del chat son { type: 'user' | 'system', content }; el contenido del bot puede traer HTML.
+      const history = conversationHistory
+        .filter((msg) => msg && typeof msg.content === 'string')
+        .map((msg) => ({ text: msg.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(), isUser: msg.type === 'user' }))
+        .filter((msg) => msg.text)
+        .slice(-6);
+      const response = await fetch(CHAT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ message, language, history })
+      });
+      const data = response.ok ? await response.json() : null;
+      if (data?.ok && typeof data.text === 'string' && data.text.trim()) {
+        this.lastResponseFromAI = true;
+        // Escapamos y luego enlazamos solo el correo oficial.
+        return escapeHtml(data.text.trim()).split(CONTACT_EMAIL).join(`<a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`);
       }
+    } catch {
+      // Sin conexión o función no disponible: usamos respuestas locales.
+    }
+    return this.getFallbackResponse(message, language, conversationHistory);
+  }
 
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🧠 Sending message to Gemini AI...');
-      }
-      const systemPrompt = this.getSystemPrompt(language);
-        // Construir el contexto de conversación más efectivo
-      let conversationContext = systemPrompt + "\n\n";
-        // Agregar historial reciente (últimos 6 mensajes para mejor contexto)
-      const recentHistory = conversationHistory.slice(-6);
-      let userQuestionCount = 0;
-      
-      // Contar preguntas del historial
-      recentHistory.forEach(msg => {
-        if (msg.isUser) userQuestionCount++;
-      });
-      
-      // Agregar el mensaje actual al conteo
-      userQuestionCount++;
-      
-      if (recentHistory.length > 0) {
-        conversationContext += "CONVERSACIÓN ANTERIOR:\n";
-        recentHistory.forEach(msg => {
-          const role = msg.isUser ? 'Usuario' : 'Asistente';
-          conversationContext += `${role}: ${msg.text}\n`;
-        });
-        conversationContext += `\nNOTA IMPORTANTE: Incluyendo el mensaje actual, el usuario ha hecho ${userQuestionCount} preguntas en total.\n\n`;
-      } else {
-        conversationContext += `NOTA IMPORTANTE: Esta es la primera pregunta (1) del usuario.\n\n`;
-      }
-      
-      conversationContext += `MENSAJE ACTUAL:\nUsuario: ${message}\nAsistente:`;      const result = await this.model.generateContent(conversationContext);
-      const response = await result.response;
-      const text = response.text();
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('✅ Gemini response received:', text.substring(0, 100) + '...');
-      }
-      return text;
-        } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('❌ Error sending message to Gemini:', error);
-      }
-      return this.getFallbackResponse(message, language, conversationHistory);
-    }
-  }  getFallbackResponse(message, language = 'es', conversationHistory = []) {
-    // Contar preguntas del usuario incluyendo la actual
+  getFallbackResponse(message, language = 'es', conversationHistory = []) {
     let userQuestionCount = 1; // La pregunta actual
-    if (conversationHistory) {
-      conversationHistory.forEach(msg => {
-        if (msg.isUser) userQuestionCount++;
-      });
-    }
-    
+    (conversationHistory || []).forEach((msg) => {
+      if (msg && msg.type === 'user') userQuestionCount++;
+    });
+    const mail = `<a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`;
+
     const fallbacks = {
       es: {
-        greeting: "¡Hola! Soy el asistente de Elier Loya. ¿En qué puedo ayudarte?",
-        services: "Elier ofrece desarrollo web, e-commerce y análisis de datos. ¿Qué te interesa?",
-        portfolio: "Elier tiene proyectos de tiendas online y dashboards. Explora la sección de proyectos.",
-        contact: "Contacta a Elier por el formulario del sitio web o LinkedIn.",
-        model: "Uso Google Gemini AI para darte respuestas inteligentes.",
-        availability: "Sí, Elier está disponible para proyectos. ¿Qué tipo necesitas?",
-        name: "Soy el asistente de Elier Loya, especialista en transformación digital.",
+        contact: `Puedes escribirle a Elier a ${mail} o usar el formulario de contacto del sitio.`,
+        greeting: '¡Hola! Soy el asistente de Elier Loya. ¿En qué te ayudo?',
+        services: 'Elier ofrece diagnóstico operativo, diseño de producto e implementación, con automatización e IA aplicada. ¿Qué proceso quieres mejorar?',
+        portfolio: 'Mira la sección Casos reales. Algunos proyectos: MiRancho360, SeVa, MonterreyRespira y Space People Counter.',
+        model: 'Soy el asistente virtual del portafolio de Elier.',
+        availability: `Elier está abierto a proyectos y a roles de liderazgo. Escríbele a ${mail}.`,
+        name: 'Soy el asistente de Elier Loya.',
         questions: `Has hecho ${userQuestionCount} preguntas.`,
-        default: "¿En qué más puedo ayudarte sobre Elier y sus servicios?"
+        default: `Puedo contarte sobre los servicios, casos reales o cómo trabaja Elier. Para algo más específico, escríbele a ${mail}.`
       },
       en: {
-        greeting: "Hello! I'm Elier Loya's assistant. How can I help you?",
-        services: "Elier offers web development, e-commerce and data analysis. What interests you?",
-        portfolio: "Elier has online store and dashboard projects. Explore the projects section.",
-        contact: "Contact Elier through the website contact form or LinkedIn.",
-        model: "I use Google Gemini AI to give you intelligent responses.",
-        availability: "Yes, Elier is available for projects. What type do you need?",
-        name: "I'm Elier Loya's assistant, specialist in digital transformation.",
+        contact: `You can email Elier at ${mail} or use the contact form on the site.`,
+        greeting: "Hi! I'm Elier Loya's assistant. How can I help?",
+        services: 'Elier offers operational diagnosis, product design and implementation, with automation and applied AI. Which process do you want to improve?',
+        portfolio: 'Check the Case studies section. Some projects: MiRancho360, SeVa, MonterreyRespira and Space People Counter.',
+        model: "I'm the virtual assistant for Elier's portfolio.",
+        availability: `Elier is open to projects and leadership roles. Email ${mail}.`,
+        name: "I'm Elier Loya's assistant.",
         questions: `You have asked ${userQuestionCount} questions.`,
-        default: "What else can I help you with about Elier and his services?"
+        default: `I can tell you about Elier's services, case studies or how he works. For anything specific, email ${mail}.`
       },
       'pt-br': {
-        greeting: "Olá! Sou o assistente de Elier. Como posso ajudar?",
-        services: "Elier trabalha com produto digital, operações, automação e IA aplicada.",
-        portfolio: "Veja os projetos e resultados reais apresentados neste portfólio.",
-        contact: "Entre em contato pelo formulário do site ou pelo LinkedIn.",
-        model: "Sou o assistente virtual do portfólio de Elier.",
-        availability: "Entre em contato para conversar sobre uma oportunidade ou projeto.",
-        name: "Sou o assistente de Elier Loya.",
+        contact: `Você pode escrever para Elier em ${mail} ou usar o formulário de contato do site.`,
+        greeting: 'Olá! Sou o assistente de Elier Loya. Como posso ajudar?',
+        services: 'Elier oferece diagnóstico operacional, design de produto e implementação, com automação e IA aplicada. Que processo você quer melhorar?',
+        portfolio: 'Veja a seção Casos reais. Alguns projetos: MiRancho360, SeVa, MonterreyRespira e Space People Counter.',
+        model: 'Sou o assistente virtual do portfólio de Elier.',
+        availability: `Elier está aberto a projetos e a cargos de liderança. Escreva para ${mail}.`,
+        name: 'Sou o assistente de Elier Loya.',
         questions: `Você fez ${userQuestionCount} perguntas.`,
-        default: "Como posso ajudar você a conhecer o trabalho de Elier?"
+        default: `Posso contar sobre os serviços, casos reais ou como Elier trabalha. Para algo específico, escreva para ${mail}.`
       }
     };
 
     const responses = fallbacks[language] || fallbacks.es;
-    const lowerMessage = message.toLowerCase();
-    
-    if (lowerMessage.includes('cuántas') || lowerMessage.includes('cuantas') || lowerMessage.includes('how many') || lowerMessage.includes('preguntas') || lowerMessage.includes('questions')) {
-      return responses.questions;
-    } else if (lowerMessage.includes('hola') || lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return responses.greeting;
-    } else if (lowerMessage.includes('nombre') || lowerMessage.includes('name') || lowerMessage.includes('llama') || lowerMessage.includes('called')) {
-      return responses.name;
-    } else if (lowerMessage.includes('modelo') || lowerMessage.includes('model') || lowerMessage.includes('ai') || lowerMessage.includes('ia')) {
-      return responses.model;
-    } else if (lowerMessage.includes('disponible') || lowerMessage.includes('available') || lowerMessage.includes('trabajar') || lowerMessage.includes('work')) {
-      return responses.availability;
-    } else if (lowerMessage.includes('servicio') || lowerMessage.includes('service')) {
-      return responses.services;
-    } else if (lowerMessage.includes('proyecto') || lowerMessage.includes('project') || lowerMessage.includes('portafolio') || lowerMessage.includes('portfolio')) {
-      return responses.portfolio;
-    } else if (lowerMessage.includes('contacto') || lowerMessage.includes('contact')) {
-      return responses.contact;
-    } else {
-      return responses.default;
-    }
+    const text = message.toLowerCase();
+    const has = (pattern) => pattern.test(text);
+
+    if (has(/correo|e-?mail|\bmail\b|contact|contat|escribir|escrever|whatsapp|tel[eé]fono|telefone/)) return responses.contact;
+    if (has(/cu[aá]ntas|how many|quantas|preguntas|questions|perguntas/)) return responses.questions;
+    if (has(/disponib|available|contrat|hire|trabajar con|work with|trabalhar/)) return responses.availability;
+    if (has(/servicio|service|servi[cç]o|ofrece|offer|oferece/)) return responses.services;
+    if (has(/proyecto|project|projeto|portafolio|portfolio|portf[oó]lio|caso/)) return responses.portfolio;
+    if (has(/modelo|model|\bia\b|\bai\b|gemini|gemma/)) return responses.model;
+    if (has(/nombre|name|nome|llamas|called|chama/)) return responses.name;
+    if (has(/\bhola\b|\bhello\b|\bhi\b|\bol[aá]\b|\boi\b/)) return responses.greeting;
+    return responses.default;
   }
+
   // Método para verificar si Gemini está disponible
   isGeminiAvailable() {
-    return this.isInitialized && this.apiKey;
+    return this.lastResponseFromAI;
   }
 }
 

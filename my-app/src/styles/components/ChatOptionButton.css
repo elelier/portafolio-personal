@@ -14,8 +14,8 @@
 }
 
 .chat-option-button {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -106,9 +106,23 @@
 }
 
 .button-icon {
-  font-size: 2.2rem;
-  width: 2.2rem;
-  height: 2.2rem;
+  font-size: 1.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.chat-option-button.green {
+  color: #10b981;
+}
+
+.chat-option-button.green:hover {
+  background-color: #10b981;
+  color: white;
+}
+
+.chat-option-button.green .option-tooltip {
+  background-color: #10b981;
+  color: white;
 }
 
 .option-tooltip {

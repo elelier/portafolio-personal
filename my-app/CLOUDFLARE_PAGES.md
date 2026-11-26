@@ -51,12 +51,19 @@ Accepted behavior for closed/private/deep routes is a safe redirect to home or a
 
 Set these in Cloudflare Pages only if the deployed behavior requires parity with the current app:
 
-- `REACT_APP_GEMINI_API_KEY` (optional)
 - `REACT_APP_PASSCODE_ARQIDIA`
 - `REACT_APP_PASSCODE_HQCONTROL`
 - `REACT_APP_PASSCODE_ANDAMIOS`
 
 Do not paste real secret values into this repository.
+
+### Chatbot (Workers AI vía Pages Function)
+
+- El chat llama a `POST /api/chat` (`functions/api/chat.js`); la Function usa Cloudflare Workers AI con el binding `AI`. No hay API keys.
+- Configuración: Pages > Settings > Bindings > Add > **Workers AI**, nombre `AI`, en Production y Preview; luego redeploy. Opcional: variable `CHAT_MODEL` (por defecto `@cf/google/gemma-4-26b-a4b-it`).
+- Costo: la cuota gratuita es de 10,000 Neurons/día (se reinicia 00:00 UTC). Cada respuesta usa ~10 Neurons, unas ~1,000 respuestas/día. En el plan Workers Free, al agotarse la cuota el chat cae a respuestas locales; nunca cobra.
+- `REACT_APP_GEMINI_API_KEY` quedó obsoleta: eliminarla de Cloudflare y **revocar** la key de Gemini que estuvo expuesta en el bundle.
+- `GET /api/chat` responde `{ ok, available }` para que el chat sepa si hay IA o usa respuestas locales.
 
 ### Contacto vigente (Cloudflare + Google)
 
