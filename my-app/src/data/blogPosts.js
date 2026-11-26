@@ -60,11 +60,19 @@ Nada de eso estaba en mi plan original. Todo salió de verlo usar la app, no de 
 
 ## Cómo la usa hoy
 
-Lo que más me gusta es que la usa a su manera. Le toma fotos a sus animales y lleva su colección: cada vaca tiene su ficha con sus fotos, su potrero y su historia. Desde ahí puede compartir una foto cuando alguien le pregunta por un animal. Y cuando una vaca fue montada, lo anota ahí mismo, en el corral, en lugar de esperar a llegar a la libreta.
+Lo que más me gusta es que la usa a su manera. Cada vaca tiene su galería: le toma fotos ahí mismo en el corral, o sube las que ya traía en el celular, y escoge cuál es la principal. Poco a poco se ha ido armando una colección de su hato.
+
+![Galería de fotos de una vaca en MiRancho, con botones para tomar foto o subirla de la galería](/images/blog/rancho/app-galeria.webp "La galería de cada animal: tomar foto, subir las que ya tienes y elegir la principal. Datos de ejemplo.")
+
+Y cuando alguien le pregunta por un animal, ya no tiene que mandar la foto y luego escribir los datos aparte. Escoge la foto, marca qué datos quiere que vayan con ella (nombre, sexo, edad, raza, peso) y la app arma la imagen, lista para mandarla por donde quiera.
+
+![Pantalla para compartir una foto en MiRancho, con casillas para elegir qué datos van en la imagen](/images/blog/rancho/app-compartir.webp "Él decide qué datos acompañan la foto. Datos de ejemplo.")
+
+![Foto de una vaca con su nombre, sexo, edad, raza y peso escritos en la parte de abajo](/images/blog/rancho/foto-compartida-canela.webp "Lo que recibe quien pregunta por Canela. Datos de ejemplo.")
+
+Y cuando una vaca fue montada, lo anota ahí mismo, en el corral, en lugar de esperar a llegar a la libreta.
 
 ![Ficha de una vaca en MiRancho con su foto, su corral, su estado de preñez y su peso](/images/blog/rancho/app-ficha.webp "La ficha de cada animal: fotos, lugar, reproducción y peso. Datos de ejemplo.")
-
-![Lista de lugares del rancho en MiRancho: corral, potrero, gallinero y chiquero con sus animales](/images/blog/rancho/app-lugares.webp "Cada corral y potrero con sus animales. Datos de ejemplo.")
 
 ## Lo que me importa de esto
 

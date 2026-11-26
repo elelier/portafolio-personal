@@ -364,3 +364,8 @@
     padding-top: 100px;
   }
 }
+
+.entrada-figura img[src*="/foto-compartida"] {
+  max-width: 420px;
+  margin: 0 auto;
+}
