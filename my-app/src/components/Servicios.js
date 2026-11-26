@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import SwipeDots from './SwipeDots';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Servicios.css';
 
 function Servicios({ style }) {
   const { language } = useLanguage();
+  const gridRef = useRef(null);
 
   const content = {
     es: {
@@ -91,7 +93,7 @@ function Servicios({ style }) {
           <h2>{t.heading}</h2>
           <p>{t.intro}</p>
         </div>
-      <div className="servicios-grid">
+      <div className="servicios-grid" ref={gridRef}>
         {t.blocks.map((block, idx) => (
           <article key={idx} className="servicio-card">
             <div className="servicio-card__index">{String(idx + 1).padStart(2, '0')}</div>
@@ -102,6 +104,7 @@ function Servicios({ style }) {
           </article>
         ))}
       </div>
+      <SwipeDots targetRef={gridRef} count={t.blocks.length} />
       <div className="servicio-cta global-cta">
         <button className="cta-button-3" onClick={() => scrollIntoViewWithMotionPreference(document.getElementById('contacto'))}>{t.cta}</button>
         <div className="cta-helper-text">{t.ctaHelper}</div>

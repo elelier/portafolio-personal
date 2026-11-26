@@ -21,6 +21,11 @@
   }
 }
 
+/* Puntos del carrusel: solo existen en móvil. */
+.swipe-dots {
+  display: none;
+}
+
 /* Al navegar a una sección, el título queda justo bajo la barra. */
 .App section[id] {
   scroll-margin-top: var(--nav-h);
@@ -563,18 +568,22 @@
     line-height: 1.45;
   }
 
-  /* Rejillas -> carrusel con scroll-snap */
+  /* Rejillas -> carrusel a todo lo ancho, una tarjeta completa a la vez */
   .App .soluciones-grid,
   .App .casos-estudio__grid,
   .App .testimonios__grid,
   .App .servicios-grid,
   .App .portafolio .timeline {
+    box-sizing: border-box;
     display: flex;
-    gap: 12px;
+    align-items: stretch;
+    align-self: stretch;
+    gap: 14px;
+    width: 100vw;
     max-width: none;
-    margin-left: -14px;
-    margin-right: -14px;
-    padding: 4px 14px 10px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 4px 14px 6px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
@@ -596,10 +605,72 @@
   .App .testimonios__card,
   .App .servicio-card,
   .App .portafolio .timeline__row {
-    flex: 0 0 84%;
-    max-width: 340px;
+    box-sizing: border-box;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: none;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     animation: none;
+  }
+
+  .App .swipe-dots {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 6px;
+  }
+
+  .App .swipe-dots__dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .App .swipe-dots__dot::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-secondary);
+    opacity: 0.45;
+    transition: width var(--ui-transition), opacity var(--ui-transition), background-color var(--ui-transition);
+  }
+
+  .App .swipe-dots__dot--active::before {
+    width: 20px;
+    background: var(--hero-title-color-2);
+    opacity: 1;
+  }
+
+  .App .swipe-dots__dot:focus-visible {
+    outline: 2px solid var(--ui-focus-ring);
+    outline-offset: 1px;
+    border-radius: 999px;
+  }
+
+  /* Carrera: encabezado alineado a la izquierda como las demás secciones */
+  .App .portafolio__heading,
+  .App .portafolio__heading h2,
+  .App .portafolio .introduccion,
+  .App .portafolio .introduccion p {
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .App .portafolio__heading {
+    align-self: stretch;
+  }
+
+  .App .portafolio__cv-actions {
+    align-items: flex-start;
   }
 
   .App .soluciones-card:hover,

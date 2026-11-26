@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import SwipeDots from './SwipeDots';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
 import '../styles/components/Soluciones.css';
@@ -108,6 +109,7 @@ const content = {
 function Soluciones({ style }) {
   const { language } = useLanguage();
   const t = content[language] || content.es;
+  const gridRef = useRef(null);
 
   const scrollToContacto = () => {
     scrollIntoViewWithMotionPreference(document.getElementById('contacto'));
@@ -121,7 +123,7 @@ function Soluciones({ style }) {
         <p>{t.intro}</p>
       </div>
 
-      <div className="soluciones-grid">
+      <div className="soluciones-grid" ref={gridRef}>
         {t.solutions.map((solution, index) => (
           <article className="soluciones-card" key={solution.title}>
             <div className="soluciones-card__meta">
@@ -134,6 +136,8 @@ function Soluciones({ style }) {
           </article>
         ))}
       </div>
+
+      <SwipeDots targetRef={gridRef} count={t.solutions.length} />
 
       <div className="soluciones-footer">
         <p>{t.closing}</p>

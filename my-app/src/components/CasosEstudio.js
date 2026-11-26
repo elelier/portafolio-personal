@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import SwipeDots from './SwipeDots';
 import '../styles/components/CasosEstudio.css';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollIntoViewWithMotionPreference } from './utils/generalUtils';
@@ -112,6 +113,7 @@ const content = {
 function CasosEstudio({ style }) {
   const { language } = useLanguage();
   const t = content[language] || content.es;
+  const gridRef = useRef(null);
 
   const scrollToContacto = () => {
     scrollIntoViewWithMotionPreference(document.getElementById('contacto'));
@@ -124,7 +126,7 @@ function CasosEstudio({ style }) {
         <h2>{t.title}</h2>
         <p>{t.description}</p>
       </div>
-      <div className="casos-estudio__grid">
+      <div className="casos-estudio__grid" ref={gridRef}>
         {t.cases.map((caseStudy) => (
           <article className="caso-card" key={caseStudy.title}>
             <div className="caso-card__preview">
@@ -146,6 +148,7 @@ function CasosEstudio({ style }) {
           </article>
         ))}
       </div>
+      <SwipeDots targetRef={gridRef} count={t.cases.length} />
       <button className="casos-estudio__cta" onClick={scrollToContacto}>
         {t.cta}
       </button>

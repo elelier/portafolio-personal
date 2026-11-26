@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import SwipeDots from './SwipeDots';
 import { FiExternalLink } from 'react-icons/fi';
 import { useLanguage } from '../contexts/LanguageContext';
 import edgarPhoto from '../assets/images/testimonios/edgar.jpg';
@@ -117,6 +118,7 @@ const content = {
 function Testimonios({ style }) {
   const { language } = useLanguage();
   const t = content[language] || content.es;
+  const gridRef = useRef(null);
 
   return (
     <section id="testimonios" data-testid="testimonios" className="testimonios" style={style}>
@@ -126,7 +128,7 @@ function Testimonios({ style }) {
           <h2>{t.title}</h2>
           <p>{t.description}</p>
         </header>
-        <div className="testimonios__grid">
+        <div className="testimonios__grid" ref={gridRef}>
           {t.items.map((item) => (
             <article className="testimonios__card" key={item.name}>
               <p className="testimonios__quote-mark" aria-hidden="true">“</p>
@@ -156,6 +158,7 @@ function Testimonios({ style }) {
             </article>
           ))}
         </div>
+        <SwipeDots targetRef={gridRef} count={t.items.length} />
       </div>
     </section>
   );
