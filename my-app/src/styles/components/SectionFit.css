@@ -1030,7 +1030,7 @@
     }
 
     .App .casos-estudio .caso-card__links {
-      align-self: end;
+      align-self: start;
       margin-top: 0;
     }
   }
