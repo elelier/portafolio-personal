@@ -91,20 +91,22 @@ describe('CasosEstudio', () => {
     cleanup();
   });
 
-  it('renders descriptive static previews for every case, MiRancho and SeVa first', () => {
+  it('renders descriptive static previews for every case, own apps first', () => {
     const { container, cleanup } = renderCasosEstudio('es');
 
     const previews = Array.from(container.querySelectorAll('.caso-card__preview img'));
 
-    expect(previews).toHaveLength(4);
+    expect(previews).toHaveLength(5);
     expect(previews[0].getAttribute('alt')).toBe('Pantallas de la app MiRancho sobre una foto de un corral');
     expect(previews[1].getAttribute('alt')).toContain('Pantallas de SeVa');
-    expect(previews[2].getAttribute('alt')).toBe('Preview visual del sitio Arqidia');
-    expect(previews[3].getAttribute('alt')).toBe('Preview visual del sitio OneClicTrip');
+    expect(previews[2].getAttribute('alt')).toContain('Pantalla de MonterreyRespira');
+    expect(previews[3].getAttribute('alt')).toBe('Preview visual del sitio Arqidia');
+    expect(previews[4].getAttribute('alt')).toBe('Preview visual del sitio OneClicTrip');
     expect(previews[0].getAttribute('src')).toContain('mirancho');
     expect(previews[1].getAttribute('src')).toContain('seva');
-    expect(previews[2].getAttribute('src')).toContain('arqidia');
-    expect(previews[3].getAttribute('src')).toContain('oneclictrip');
+    expect(previews[2].getAttribute('src')).toContain('mtyrespira');
+    expect(previews[3].getAttribute('src')).toContain('arqidia');
+    expect(previews[4].getAttribute('src')).toContain('oneclictrip');
 
     cleanup();
   });
@@ -143,6 +145,24 @@ describe('CasosEstudio', () => {
     expect(appLink.getAttribute('rel')).toContain('noopener');
     expect(articleLink.getAttribute('href')).toBe(articlePath);
     expect(articleLink.textContent).toBe(articleText);
+
+    cleanup();
+  });
+
+  it.each([
+    ['es', 'Probar la app'],
+    ['en', 'Try the app'],
+    ['pt-br', 'Testar o app'],
+  ])('links the MonterreyRespira case only to the live app in %s', (language, appText) => {
+    const { container, cleanup } = renderCasosEstudio(language);
+    const card = container.querySelectorAll('.caso-card')[2];
+    const links = Array.from(card.querySelectorAll('.caso-card__links a'));
+
+    expect(card.querySelector('h3').textContent).toBe('MonterreyRespira');
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute('href')).toBe('https://mtyrespira.elelier.com/');
+    expect(links[0].textContent).toBe(appText);
+    expect(links[0].getAttribute('rel')).toContain('noopener');
 
     cleanup();
   });
