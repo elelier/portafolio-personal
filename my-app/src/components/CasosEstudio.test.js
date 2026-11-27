@@ -75,10 +75,27 @@ describe('CasosEstudio', () => {
 
     expect(container.textContent).toContain('From a concrete challenge to something that works');
     expect(container.textContent).toContain('Strategy, technology and operations aligned to generate measurable results.');
-    expect(container.textContent).toContain('Architecture · Presence and lead generation');
-    expect(container.textContent).toContain('Custom travel · Lead generation and operations');
+    expect(container.textContent).toContain('Architecture');
+    expect(container.textContent).toContain('Custom travel');
     expect(container.textContent).toContain('Gain visibility and organize its digital offer.');
     expect(container.textContent).toContain('Centralized operations and real sales.');
+
+    cleanup();
+  });
+
+  it('shows own apps as large cards and client work as compact cards, with status and tags', () => {
+    const { container, cleanup } = renderCasosEstudio('es');
+    const cards = Array.from(container.querySelectorAll('.caso-card'));
+
+    expect(cards.map((card) => card.classList.contains('caso-card--own'))).toEqual([true, true, true, false, false]);
+    expect(cards.map((card) => card.querySelector('.caso-card__status').textContent)).toEqual([
+      'En uso', 'Piloto', 'Pública', 'Cliente', 'Cliente'
+    ]);
+    expect(cards[0].querySelector('.caso-card__result').textContent).toContain('El ranchero registra y comparte su hato desde el corral.');
+    expect(Array.from(cards[0].querySelectorAll('.caso-card__tags li')).map((tag) => tag.textContent)).toEqual([
+      'Funciona sin señal', 'Letra grande', 'Fotos para compartir'
+    ]);
+    expect(cards[0].querySelector('.caso-card__tags').getAttribute('aria-label')).toBe('Construcción');
 
     cleanup();
   });
