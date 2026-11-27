@@ -29,12 +29,14 @@ const content = {
     },
     cases: [
       {
-        category: 'Ganadería · App móvil propia',
+        category: 'Ganadería',
         title: 'MiRancho',
+        kind: 'own',
+        status: 'En uso',
         preview: miRanchoPreview,
         previewAlt: 'Pantallas de la app MiRancho sobre una foto de un corral',
         challenge: 'El rancho llevaba todo en libreta y memoria.',
-        built: 'App móvil que funciona sin señal, con letra e iconos grandes, galería y fotos para compartir.',
+        tags: ['Funciona sin señal', 'Letra grande', 'Fotos para compartir'],
         result: 'El ranchero registra y comparte su hato desde el corral.',
         linkText: 'Probar la app',
         articleText: 'Leer artículo',
@@ -42,12 +44,14 @@ const content = {
         url: MIRANCHO_URL
       },
       {
-        category: 'Mudanza · App propia (piloto)',
+        category: 'Mudanza',
         title: 'SeVa',
+        kind: 'own',
+        status: 'Piloto',
         preview: sevaPreview,
         previewAlt: "Pantallas de SeVa: el catálogo privado de un invitado y la ficha de un objeto con los botones Me interesa, Preguntar y Apartar",
         challenge: 'Vender, regalar y apartar cosas por la mudanza.',
-        built: 'Catálogo privado por invitación con apartados, ventas y entregas.',
+        tags: ['Catálogo por invitación', 'Apartados', 'Ventas y entregas'],
         result: 'Amigos apartan desde el celular y yo sé qué falta entregar.',
         linkText: 'Probar la app',
         articleText: 'Leer artículo',
@@ -55,34 +59,40 @@ const content = {
         url: SEVA_URL
       },
       {
-        category: 'Ciudad · App pública propia',
+        category: 'Ciudad',
         title: 'MonterreyRespira',
+        kind: 'own',
+        status: 'Pública',
         preview: mtyRespiraPreview,
         previewAlt: 'Pantalla de MonterreyRespira con la lectura de calidad del aire de Monterrey, su AQI y el clima de contexto',
         challenge: 'Saber cómo está el aire de tu municipio sin pelearte con el mapa oficial.',
-        built: 'Sitio con lectura por municipio, mapa metropolitano, historial y recomendaciones.',
+        tags: ['Lectura por municipio', 'Mapa metropolitano', 'Historial'],
         result: 'Cualquiera consulta el aire de su zona desde el celular.',
         linkText: 'Probar la app',
         url: MTYRESPIRA_URL
       },
       {
-        category: 'Arquitectura · Presencia y captación',
+        category: 'Arquitectura',
         title: 'Arqidia',
+        kind: 'client',
+        status: 'Cliente',
         preview: arqidiaPreview,
         previewAlt: 'Preview visual del sitio Arqidia',
         challenge: 'Ganar visibilidad y organizar su oferta digital.',
-        built: 'Sitio web a medida, portafolio, SEO técnico y analítica.',
+        tags: ['Sitio a medida', 'SEO técnico', 'Analítica'],
         result: 'Presencia digital sólida y flujo de consultas.',
         linkText: 'Ver proyecto',
         url: 'https://arqidia.mx/'
       },
       {
-        category: 'Viajes a medida · Captación y operación',
+        category: 'Viajes a medida',
         title: 'OneClicTrip',
+        kind: 'client',
+        status: 'Cliente',
         preview: oneClicTripPreview,
         previewAlt: 'Preview visual del sitio OneClicTrip',
         challenge: 'Cotizaciones y pagos dispersos sin control.',
-        built: 'Plataforma a medida, WhatsApp y Mercado Pago integrados.',
+        tags: ['Plataforma a medida', 'WhatsApp', 'Mercado Pago'],
         result: 'Operación centralizada y ventas reales.',
         linkText: 'Ver proyecto',
         url: 'https://www.oneclictrip.com/'
@@ -101,12 +111,14 @@ const content = {
     },
     cases: [
       {
-        category: 'Livestock · In-house mobile app',
+        category: 'Livestock',
         title: 'MiRancho',
+        kind: 'own',
+        status: 'In use',
         preview: miRanchoPreview,
         previewAlt: 'MiRancho app screens over a photo of a corral',
         challenge: 'The ranch kept everything in a notebook and in memory.',
-        built: 'Mobile app that works offline, with large type and icons, a gallery and shareable photos.',
+        tags: ['Works offline', 'Large type', 'Shareable photos'],
         result: 'The rancher records and shares the herd right from the corral.',
         linkText: 'Try the app',
         articleText: 'Read the article',
@@ -114,12 +126,14 @@ const content = {
         url: MIRANCHO_URL
       },
       {
-        category: 'Moving · In-house app (pilot)',
+        category: 'Moving',
         title: 'SeVa',
+        kind: 'own',
+        status: 'Pilot',
         preview: sevaPreview,
         previewAlt: "SeVa screens: a guest's private catalog and an item card with the I'm interested, Ask and Reserve buttons",
         challenge: 'Selling, gifting and reserving our things before the move.',
-        built: 'Invite-only catalog with reservations, sales and handoffs.',
+        tags: ['Invite-only catalog', 'Holds', 'Sales and handoffs'],
         result: "Friends reserve from their phones; I know what's left to hand over.",
         linkText: 'Try the app',
         articleText: 'Read the article',
@@ -127,34 +141,40 @@ const content = {
         url: SEVA_URL
       },
       {
-        category: 'City · Public in-house app',
+        category: 'City',
         title: 'MonterreyRespira',
+        kind: 'own',
+        status: 'Public',
         preview: mtyRespiraPreview,
         previewAlt: 'MonterreyRespira screen showing the air quality reading for Monterrey, its AQI and the weather context',
         challenge: 'Knowing how clean the air is where you live without fighting the official map.',
-        built: 'Site with readings by municipality, a metro map, history and recommendations.',
+        tags: ['By municipality', 'Metro map', 'History'],
         result: 'Anyone can check the air in their area from their phone.',
         linkText: 'Try the app',
         url: MTYRESPIRA_URL
       },
       {
-        category: 'Architecture · Presence and lead generation',
+        category: 'Architecture',
         title: 'Arqidia',
+        kind: 'client',
+        status: 'Client',
         preview: arqidiaPreview,
         previewAlt: 'Preview visual del sitio Arqidia',
         challenge: 'Gain visibility and organize its digital offer.',
-        built: 'Custom website, portfolio, technical SEO and analytics.',
+        tags: ['Custom website', 'Technical SEO', 'Analytics'],
         result: 'A solid digital presence and clearer inquiry flow.',
         linkText: 'View project',
         url: 'https://arqidia.mx/'
       },
       {
-        category: 'Custom travel · Lead generation and operations',
+        category: 'Custom travel',
         title: 'OneClicTrip',
+        kind: 'client',
+        status: 'Client',
         preview: oneClicTripPreview,
         previewAlt: 'Preview visual del sitio OneClicTrip',
         challenge: 'Quotes and payments scattered without control.',
-        built: 'Custom platform with WhatsApp and Mercado Pago integration.',
+        tags: ['Custom platform', 'WhatsApp', 'Mercado Pago'],
         result: 'Centralized operations and real sales.',
         linkText: 'View project',
         url: 'https://www.oneclictrip.com/'
@@ -169,12 +189,14 @@ const content = {
     labels: { challenge: 'Desafio', built: 'Solução', result: 'Resultado' },
     cases: [
       {
-        category: 'Pecuária · App móvel próprio',
+        category: 'Pecuária',
         title: 'MiRancho',
+        kind: 'own',
+        status: 'Em uso',
         preview: miRanchoPreview,
         previewAlt: 'Telas do app MiRancho sobre uma foto de um curral',
         challenge: 'O rancho controlava tudo em caderno e de memória.',
-        built: 'App móvel que funciona sem sinal, com letras e ícones grandes, galeria e fotos para compartilhar.',
+        tags: ['Funciona sem sinal', 'Letra grande', 'Fotos para compartilhar'],
         result: 'O pecuarista registra e compartilha o rebanho direto do curral.',
         linkText: 'Testar o app',
         articleText: 'Ler artigo',
@@ -182,12 +204,14 @@ const content = {
         url: MIRANCHO_URL
       },
       {
-        category: 'Mudança · App próprio (piloto)',
+        category: 'Mudança',
         title: 'SeVa',
+        kind: 'own',
+        status: 'Piloto',
         preview: sevaPreview,
         previewAlt: "Telas do SeVa: o catálogo privado de um convidado e a ficha de um objeto com os botões Tenho interesse, Perguntar e Reservar",
         challenge: 'Vender, doar e reservar coisas na mudança.',
-        built: 'Catálogo privado por convite com reservas, vendas e entregas.',
+        tags: ['Catálogo por convite', 'Reservas', 'Vendas e entregas'],
         result: 'Amigos reservam pelo celular e eu sei o que falta entregar.',
         linkText: 'Testar o app',
         articleText: 'Ler artigo',
@@ -195,34 +219,40 @@ const content = {
         url: SEVA_URL
       },
       {
-        category: 'Cidade · App público próprio',
+        category: 'Cidade',
         title: 'MonterreyRespira',
+        kind: 'own',
+        status: 'Público',
         preview: mtyRespiraPreview,
         previewAlt: 'Tela do MonterreyRespira com a leitura da qualidade do ar de Monterrey, o AQI e o clima de contexto',
         challenge: 'Saber como está o ar do seu município sem brigar com o mapa oficial.',
-        built: 'Site com leitura por município, mapa metropolitano, histórico e recomendações.',
+        tags: ['Por município', 'Mapa metropolitano', 'Histórico'],
         result: 'Qualquer pessoa consulta o ar da sua região pelo celular.',
         linkText: 'Testar o app',
         url: MTYRESPIRA_URL
       },
       {
-        category: 'Arquitetura · Presença e captação',
+        category: 'Arquitetura',
         title: 'Arqidia',
+        kind: 'client',
+        status: 'Cliente',
         preview: arqidiaPreview,
         previewAlt: 'Prévia visual do site da Arqidia',
         challenge: 'Ganhar visibilidade e organizar sua oferta digital.',
-        built: 'Site sob medida, portfólio, SEO técnico e análise de dados.',
+        tags: ['Site sob medida', 'SEO técnico', 'Análise de dados'],
         result: 'Presença digital estruturada e fluxo de contatos mais claro.',
         linkText: 'Ver projeto',
         url: 'https://arqidia.mx/'
       },
       {
-        category: 'Viagens personalizadas · Captação e operações',
+        category: 'Viagens personalizadas',
         title: 'OneClicTrip',
+        kind: 'client',
+        status: 'Cliente',
         preview: oneClicTripPreview,
         previewAlt: 'Prévia visual do site OneClicTrip',
         challenge: 'Orçamentos e pagamentos dispersos, sem controle centralizado.',
-        built: 'Plataforma sob medida com integração ao WhatsApp e Mercado Pago.',
+        tags: ['Plataforma sob medida', 'WhatsApp', 'Mercado Pago'],
         result: 'Operação centralizada e vendas efetivas.',
         linkText: 'Ver projeto',
         url: 'https://www.oneclictrip.com/'
@@ -249,30 +279,37 @@ function CasosEstudio({ style }) {
       </div>
       <div className="casos-estudio__grid" ref={gridRef}>
         {t.cases.map((caseStudy) => (
-          <article className="caso-card" key={caseStudy.title}>
+          <article className={`caso-card caso-card--${caseStudy.kind}`} data-case={caseStudy.title.toLowerCase()} key={caseStudy.title}>
             <div className="caso-card__preview">
               <img src={caseStudy.preview} alt={caseStudy.previewAlt} loading="lazy" />
             </div>
-            <p className="caso-card__category">{caseStudy.category}</p>
-            <div className="caso-card__title-row">
-              <h3>{caseStudy.title}</h3>
-            </div>
-            <div className="caso-card__blocks">
-              <p><strong>{t.labels.challenge}</strong>{caseStudy.challenge}</p>
-              <p><strong>{t.labels.built}</strong>{caseStudy.built}</p>
-              <p className="caso-card__result"><strong>{t.labels.result}</strong>{caseStudy.result}</p>
-            </div>
-            <div className="caso-card__links">
-              <a href={caseStudy.url} target="_blank" rel="noopener noreferrer" className="caso-card__link">
-                {caseStudy.linkText}
-              </a>
-              {caseStudy.articleSlug && (
-                <a href={blogPath(language, caseStudy.articleSlug)} className="caso-card__link caso-card__link--article">
-                  {caseStudy.articleText}
+            <div className="caso-card__body">
+              <p className="caso-card__meta">
+                <span className="caso-card__category">{caseStudy.category}</span>
+                <span className={`caso-card__status caso-card__status--${caseStudy.kind}`}>{caseStudy.status}</span>
+              </p>
+              <div className="caso-card__title-row">
+                <h3>{caseStudy.title}</h3>
+              </div>
+              <p className="caso-card__result">
+                <span className="caso-card__sr-only">{t.labels.result}: </span>
+                {caseStudy.result}
+              </p>
+              <p className="caso-card__challenge"><strong>{t.labels.challenge}:</strong> {caseStudy.challenge}</p>
+              <ul className="caso-card__tags" aria-label={t.labels.built}>
+                {caseStudy.tags.map((tag) => <li key={tag}>{tag}</li>)}
+              </ul>
+              <div className="caso-card__links">
+                <a href={caseStudy.url} target="_blank" rel="noopener noreferrer" className="caso-card__link">
+                  {caseStudy.linkText}
                 </a>
-              )}
+                {caseStudy.articleSlug && (
+                  <a href={blogPath(language, caseStudy.articleSlug)} className="caso-card__link caso-card__link--article">
+                    {caseStudy.articleText}
+                  </a>
+                )}
+              </div>
             </div>
-            {caseStudy.transparency && <p className="caso-card__transparency">{caseStudy.transparency}</p>}
           </article>
         ))}
       </div>
