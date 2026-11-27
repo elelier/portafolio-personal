@@ -291,10 +291,33 @@
   inset: 0;
 }
 
-/* Encuadre: en estas capturas lo importante está a la izquierda */
-.caso-card--client .caso-card__preview img,
+/* Encuadre de cada captura: se centra en lo que importa para que el
+ * recorte no corte pantallas ni textos, sea cual sea el tamaño. */
+.caso-card[data-case="mirancho"] .caso-card__preview img {
+  object-position: 78% 42%;
+}
+
+.caso-card[data-case="seva"] .caso-card__preview img {
+  object-position: 96% 40%;
+}
+
+.caso-card[data-case="arqidia"] .caso-card__preview img {
+  object-position: 0% 40%;
+}
+
+.caso-card[data-case="oneclictrip"] .caso-card__preview img {
+  object-position: 0% 62%;
+}
+
+/* MonterreyRespira es una captura panorámica del tablero: se muestra
+ * completa sobre el mismo color de fondo de la app, así nunca se corta. */
+.caso-card[data-case="monterreyrespira"] .caso-card__preview {
+  background: #182120;
+}
+
 .caso-card[data-case="monterreyrespira"] .caso-card__preview img {
-  object-position: left top;
+  object-fit: contain;
+  object-position: center;
 }
 
 .caso-card--client .caso-card__body {
