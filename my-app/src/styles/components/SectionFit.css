@@ -428,12 +428,27 @@
     font-size: 0.95rem;
   }
 
-  /* Casos reales: cuatro tarjetas en una fila */
+  /* Casos reales: cuatro tarjetas a la vista; la quinta se alcanza
+   * deslizando (con puntos). Desde 1280px caben las cinco en una fila. */
   .App .casos-estudio__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 3 * 16px) / 4);
     max-width: 1200px;
     width: 100%;
     gap: 16px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .App .casos-estudio__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .App .casos-estudio .caso-card {
+    scroll-snap-align: start;
   }
 
   .App .caso-card {
@@ -555,6 +570,21 @@
   }
 }
 
+/* Casos reales: las cinco tarjetas en una sola fila */
+@media (min-width: 1280px) {
+  .App .casos-estudio__grid {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    max-width: 1320px;
+    overflow: visible;
+  }
+
+  .App .casos-estudio__header {
+    max-width: 1100px;
+  }
+}
+
 /* Laptops bajas (p. ej. 1366x768): un poco más densas */
 @media (min-width: 1024px) and (max-height: 820px) {
   .App .soluciones-card__support {
@@ -670,40 +700,6 @@
     justify-content: center;
     gap: 2px;
     margin-top: 6px;
-  }
-
-  .App .swipe-dots__dot {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .App .swipe-dots__dot::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--color-secondary);
-    opacity: 0.45;
-    transition: width var(--ui-transition), opacity var(--ui-transition), background-color var(--ui-transition);
-  }
-
-  .App .swipe-dots__dot--active::before {
-    width: 20px;
-    background: var(--hero-title-color-2);
-    opacity: 1;
-  }
-
-  .App .swipe-dots__dot:focus-visible {
-    outline: 2px solid var(--ui-focus-ring);
-    outline-offset: 1px;
-    border-radius: 999px;
   }
 
   /* Carrera: encabezado alineado a la izquierda como las demás secciones */
@@ -955,4 +951,53 @@
 
 .App .caso-card__link--article::after {
   content: " →";
+}
+
+/* Puntos del carrusel: aspecto (solo se muestran donde .swipe-dots es visible) */
+.App .swipe-dots__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.App .swipe-dots__dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  opacity: 0.45;
+  transition: width var(--ui-transition), opacity var(--ui-transition), background-color var(--ui-transition);
+}
+
+.App .swipe-dots__dot--active::before {
+  width: 20px;
+  background: var(--hero-title-color-2);
+  opacity: 1;
+}
+
+.App .swipe-dots__dot:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 1px;
+  border-radius: 999px;
+}
+
+/* Laptops de 1024 a 1279px: Casos reales muestra puntos para llegar a la quinta tarjeta */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .App .casos-estudio .swipe-dots {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 4px;
+  }
+
+  .App .casos-estudio__cta {
+    margin-top: clamp(8px, 1.4vh, 16px);
+  }
 }

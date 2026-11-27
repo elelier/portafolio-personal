@@ -8,11 +8,13 @@ import arqidiaPreview from '../assets/images/casos-arqidia-preview.jpg';
 import oneClicTripPreview from '../assets/images/casos-oneclictrip-preview.jpg';
 import miRanchoPreview from '../assets/images/casos-mirancho-preview.jpg';
 import sevaPreview from '../assets/images/casos-seva-preview.jpg';
+import mtyRespiraPreview from '../assets/images/casos-mtyrespira-preview.jpg';
 
 const MIRANCHO_URL = 'https://mirancho.elelier.com/';
 const MIRANCHO_ARTICLE_SLUG = 'app-rancho-de-mi-papa';
 const SEVA_URL = 'https://seva.elelier.com/';
 const SEVA_ARTICLE_SLUG = 'vender-mis-cosas-con-mi-propia-app';
+const MTYRESPIRA_URL = 'https://mtyrespira.elelier.com/';
 
 const content = {
   es: {
@@ -51,6 +53,17 @@ const content = {
         articleText: 'Leer artículo',
         articleSlug: SEVA_ARTICLE_SLUG,
         url: SEVA_URL
+      },
+      {
+        category: 'Ciudad · App pública propia',
+        title: 'MonterreyRespira',
+        preview: mtyRespiraPreview,
+        previewAlt: 'Pantalla de MonterreyRespira con la lectura de calidad del aire de Monterrey, su AQI y el clima de contexto',
+        challenge: 'Saber cómo está el aire de tu municipio sin pelearte con el mapa oficial.',
+        built: 'Sitio con lectura por municipio, mapa metropolitano, historial y recomendaciones.',
+        result: 'Cualquiera consulta el aire de su zona desde el celular.',
+        linkText: 'Probar la app',
+        url: MTYRESPIRA_URL
       },
       {
         category: 'Arquitectura · Presencia y captación',
@@ -114,6 +127,17 @@ const content = {
         url: SEVA_URL
       },
       {
+        category: 'City · Public in-house app',
+        title: 'MonterreyRespira',
+        preview: mtyRespiraPreview,
+        previewAlt: 'MonterreyRespira screen showing the air quality reading for Monterrey, its AQI and the weather context',
+        challenge: 'Knowing how clean the air is where you live without fighting the official map.',
+        built: 'Site with readings by municipality, a metro map, history and recommendations.',
+        result: 'Anyone can check the air in their area from their phone.',
+        linkText: 'Try the app',
+        url: MTYRESPIRA_URL
+      },
+      {
         category: 'Architecture · Presence and lead generation',
         title: 'Arqidia',
         preview: arqidiaPreview,
@@ -169,6 +193,17 @@ const content = {
         articleText: 'Ler artigo',
         articleSlug: SEVA_ARTICLE_SLUG,
         url: SEVA_URL
+      },
+      {
+        category: 'Cidade · App público próprio',
+        title: 'MonterreyRespira',
+        preview: mtyRespiraPreview,
+        previewAlt: 'Tela do MonterreyRespira com a leitura da qualidade do ar de Monterrey, o AQI e o clima de contexto',
+        challenge: 'Saber como está o ar do seu município sem brigar com o mapa oficial.',
+        built: 'Site com leitura por município, mapa metropolitano, histórico e recomendações.',
+        result: 'Qualquer pessoa consulta o ar da sua região pelo celular.',
+        linkText: 'Testar o app',
+        url: MTYRESPIRA_URL
       },
       {
         category: 'Arquitetura · Presença e captação',

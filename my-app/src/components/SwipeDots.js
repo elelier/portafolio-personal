@@ -34,7 +34,10 @@ function SwipeDots({ targetRef, count }) {
           closest = index;
         }
       });
-      setActive(closest);
+      // Si se ven varias tarjetas a la vez, al llegar al final marca la última.
+      const atEnd = track.scrollWidth - track.clientWidth > 1
+        && track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      setActive(atEnd ? cards.length - 1 : closest);
     };
     const onScroll = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
